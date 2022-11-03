@@ -1,0 +1,225 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2019-05-21 09:43+0530\n"
+"PO-Revision-Date: 2019-05-21 09:44+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-wishlist-webtoffee-settings.php:19
+msgid "WebToffee Wishlist"
+msgstr "WebToffee Wishlist"
+
+#: admin/class-wishlist-webtoffee-settings.php:35 wishlist-webtoffee.php:102
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: admin/class-wishlist-webtoffee-settings.php:41
+msgid "Activation"
+msgstr "Aktywacja"
+
+#: admin/class-wishlist-webtoffee-settings.php:42
+msgid "Enable / Disable"
+msgstr "Włączanie/wyłączanie"
+
+#: admin/class-wishlist-webtoffee-settings.php:49
+msgid "Wishlist page title"
+msgstr "Tytuł strony w liście życzeń"
+
+#: admin/class-wishlist-webtoffee-settings.php:50
+msgid "Wishlist Title in My accounts"
+msgstr "Lista życzeń Tytuł na Moich kontach"
+
+#: admin/class-wishlist-webtoffee-settings.php:52
+msgid "Wishlist"
+msgstr "Lista życzeń"
+
+#: admin/class-wishlist-webtoffee-settings.php:57
+msgid "My Account tab text"
+msgstr "Tekst karty Moje konto"
+
+#: admin/class-wishlist-webtoffee-settings.php:58
+msgid "My Account Tab Text for wishlist listing page."
+msgstr "Karta Moje konto Tekst na stronie z listą życzeń."
+
+#: admin/class-wishlist-webtoffee-settings.php:61
+#: admin/class-wishlist-webtoffee-settings.php:69
+#: public/partials/wishlist-account-view.php:68
+msgid "My Wishlist"
+msgstr "Obserwowane"
+
+#: admin/class-wishlist-webtoffee-settings.php:66
+msgid "Wishlist content title"
+msgstr "Tytuł zawartości listy życzeń"
+
+#: admin/class-wishlist-webtoffee-settings.php:67
+msgid "Wishlist Text in My accounts"
+msgstr "Lista życzeń Tekst na moich kontach"
+
+#: admin/class-wishlist-webtoffee-settings.php:74
+msgid "Wishlist button position"
+msgstr "Pozycja przycisku Lista życzeń"
+
+#: admin/class-wishlist-webtoffee-settings.php:79
+msgid "Right of 'Add to Cart'"
+msgstr "Prawo od „Dodaj do koszyka”"
+
+#: admin/class-wishlist-webtoffee-settings.php:80
+msgid "Left of 'Add to Cart'"
+msgstr "Po lewej stronie „Dodaj do koszyka”"
+
+#: admin/wishlist-webtoffee-admin-table.php:17
+msgid "product"
+msgstr "produkt"
+
+#: admin/wishlist-webtoffee-admin-table.php:18
+msgid "products"
+msgstr "produkty"
+
+#: admin/wishlist-webtoffee-admin-table.php:44
+msgid "User"
+msgstr "Użytkownik"
+
+#: admin/wishlist-webtoffee-admin-table.php:45
+msgid "No of Items"
+msgstr "Liczba elementów"
+
+#: admin/wishlist-webtoffee-admin-table.php:46
+msgid "Last Updated"
+msgstr "Ostatnio zaktualizowany"
+
+#: admin/wishlist-webtoffee-admin-table.php:165
+msgid "Manage Wishlist"
+msgstr "Zarządzaj listą życzeń"
+
+#: includes/class-wishlist-singlepage.php:27
+msgid "Remove from Wishlist"
+msgstr "Usuń z Listy Życzeń"
+
+#: includes/class-wishlist-singlepage.php:30
+#: includes/class-wishlist-singlepage.php:50
+msgid "Add to Wishlist"
+msgstr "Dodaj do obserwowanych"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:19
+msgid "I couldn't understand how to make it work"
+msgstr "Nie mogłem zrozumieć, jak to działa"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:21
+msgid "Would you like us to assist you?"
+msgstr "Czy chcesz, abyśmy Ci pomogli?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:25
+msgid "I found a better plugin"
+msgstr "Znalazłem lepszą wtyczkę"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:27
+msgid "Which plugin?"
+msgstr "Która wtyczka?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:31
+msgid "The plugin is great, but I need specific feature that you don't support"
+msgstr ""
+"Wtyczka jest świetna, ale potrzebuję konkretnej funkcji, której nie wspierasz"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:33
+msgid "Could you tell us more about that feature?"
+msgstr "Czy możesz nam powiedzieć więcej o tej funkcji?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:37
+msgid "The plugin is not working"
+msgstr "Wtyczka nie działa"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:39
+msgid "Could you tell us a bit more whats not working?"
+msgstr "Czy możesz nam powiedzieć trochę więcej, co nie działa?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:43
+msgid "It's not what I was looking for"
+msgstr "Nie tego szukałem"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:49
+msgid "The plugin didn't work as expected"
+msgstr "Wtyczka nie działała zgodnie z oczekiwaniami"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:51
+msgid "What did you expect?"
+msgstr "Czego się spodziewałeś?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:55
+msgid "Other"
+msgstr "Inne"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:57
+msgid "Could you tell us a bit more?"
+msgstr "Czy możesz nam powiedzieć trochę więcej?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:75
+msgid "If you have a moment, please let us know why you are deactivating:"
+msgstr "Jeśli masz chwilę, daj nam znać, dlaczego się dezaktywujesz:"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:87
+msgid "I rather wouldn't say"
+msgstr "Raczej nie powiedziałbym"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:88
+msgid "Submit & Deactivate"
+msgstr "Wyślij i dezaktywuj"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:89
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: public/partials/wishlist-account-view-frontend.php:19
+msgid "Image"
+msgstr "Obraz"
+
+#: public/partials/wishlist-account-view-frontend.php:20
+msgid "Name"
+msgstr "Nazwa"
+
+#: public/partials/wishlist-account-view-frontend.php:21
+msgid "Price"
+msgstr "Cena"
+
+#: public/partials/wishlist-account-view-frontend.php:22
+msgid "Stock"
+msgstr "Stan"
+
+#: public/partials/wishlist-account-view-frontend.php:42
+msgid "In Stock"
+msgstr "W magazynie"
+
+#: public/partials/wishlist-account-view-frontend.php:45
+msgid "Out of Stock"
+msgstr "Brak w magazynie"
+
+#: public/partials/wishlist-account-view-frontend.php:56
+msgid "Add to cart"
+msgstr "Dodaj do koszyka"
+
+#: public/partials/wishlist-account-view-frontend.php:67
+msgid "Remove From List"
+msgstr "Usuń z listy"
+
+#: public/partials/wishlist-account-view-frontend.php:74
+msgid "No Wishlists yet!"
+msgstr "Brak list życzeń"
+
+#: wishlist-webtoffee.php:103
+msgid "Support"
+msgstr "Wsparcie"
+
+#: wishlist-webtoffee.php:104
+msgid "Review"
+msgstr "Opinia"

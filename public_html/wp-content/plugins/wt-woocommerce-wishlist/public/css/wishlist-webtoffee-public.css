@@ -1,0 +1,67 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+.wt-wishlist-button, .wt-wishlist-button:hover {
+    margin: 0 7px;
+}
+.entry-summary .cart {
+    display: flex;
+    align-items: center;
+}
+.single_variation_wrap{
+    display: inline-block;
+}
+.icon_above_image{
+    position: absolute;
+    z-index: 10;
+    margin: 0;
+    right: 7px;
+}
+
+.wishlist_text_icon_image{
+    width:auto !important; 
+    display:inline-flex !important; 
+}
+
+.single_product_div{
+    padding-bottom: 15px;
+}
+
+.single_product_button_div{
+    padding-bottom: 0px;
+    padding-left: 15px;
+}
+.icon_after_add_to_cart, .icon_above_image{
+    padding: 11px 0px;
+}
+
+.wt_frontend_wishlist_table{ 
+    border: 1px solid #C4C4C4 !important; 
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100%;
+}
+.wt_frontend_wishlist_table td .variation dt{
+    float: left;
+    padding-right: 5px;
+}
+.remove_wishlist_single img{
+    max-width: none;
+}
+
+.eh_msg_div{ 
+    position:fixed; 
+    width:300px; 
+    padding:15px; 
+    color:#fff; 
+    right:60px; 
+    top:0px; 
+    opacity:0; 
+    box-shadow:0px 2px 2px #333; 
+    border-radius:5px; 
+    z-index:1000000000;
+}
+.wt_frontend_wishlist_table td{
+    vertical-align: inherit !important;
+}
