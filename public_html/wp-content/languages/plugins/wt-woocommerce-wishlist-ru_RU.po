@@ -1,0 +1,228 @@
+# Translation of Plugins - Wishlist for WooCommerce - Stable (latest release) in Russian
+# This file is distributed under the same license as the Plugins - Wishlist for WooCommerce - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2019-07-22 16:46:46+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - Wishlist for WooCommerce - Stable (latest release)\n"
+
+#: admin/views/wishlist-table-settings-page.php:85
+#: public/partials/wishlist-account-view-frontend.php:82
+msgid "Add to cart"
+msgstr "В корзину"
+
+#: admin/wishlist-webtoffee-admin-table.php:168
+msgid "Manage Wishlist"
+msgstr "Управление списком желаний"
+
+#. Author of the plugin
+msgid "WebToffee"
+msgstr "WebToffee"
+
+#: admin/class-wishlist-webtoffee-settings.php:79
+msgid "Right of 'Add to Cart'"
+msgstr "Слева от кнопки “Добавить в корзину”"
+
+#: admin/class-wishlist-webtoffee-settings.php:80
+msgid "Left of 'Add to Cart'"
+msgstr "Справа от кнопки “Добавить в корзину”"
+
+#: public/partials/wishlist-account-view-frontend.php:67
+msgid "In Stock"
+msgstr "В наличии"
+
+#: public/partials/wishlist-account-view-frontend.php:71
+msgid "Out of Stock"
+msgstr "Нет в наличии"
+
+#: admin/class-wishlist-webtoffee-settings.php:41
+msgid "Activation"
+msgstr "Активация"
+
+#: admin/class-wishlist-webtoffee-settings.php:42
+msgid "Enable / Disable"
+msgstr "Включить / Выключить"
+
+#: admin/class-wishlist-webtoffee-settings.php:49
+msgid "Wishlist page title"
+msgstr "Заголовок страницы"
+
+#: admin/class-wishlist-webtoffee-settings.php:57
+msgid "My Account tab text"
+msgstr "Название пункта меню"
+
+#: admin/class-wishlist-webtoffee-settings.php:58
+msgid "My Account Tab Text for wishlist listing page."
+msgstr "Название в меню навигации “Моего аккаунта”."
+
+#: admin/class-wishlist-webtoffee-settings.php:66
+msgid "Wishlist content title"
+msgstr "Заголовок контента"
+
+#: admin/class-wishlist-webtoffee-settings.php:74
+msgid "Wishlist button position"
+msgstr "Положение кнопки"
+
+#: wishlist-webtoffee.php:110
+msgid "Support"
+msgstr "Поддержка"
+
+#: wishlist-webtoffee.php:111
+msgid "Review"
+msgstr "Отзыв"
+
+#. Plugin Name of the plugin
+msgid "Wishlist for WooCommerce"
+msgstr "Список желаний для WooCommerce"
+
+#. Description of the plugin
+msgid "Manage WooCommerce Wishlist"
+msgstr "Список желаний для WooCommerce"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:19
+msgid "I couldn't understand how to make it work"
+msgstr "Я не мог понять, как заставить это работать"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:21
+msgid "Would you like us to assist you?"
+msgstr "Хотите, чтобы мы помогли вам?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:25
+msgid "I found a better plugin"
+msgstr "Я нашел лучший плагин"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:27
+msgid "Which plugin?"
+msgstr "Какой плагин?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:31
+msgid "The plugin is great, but I need specific feature that you don't support"
+msgstr "Плагин отличный, но мне нужна особая функция, которую у вас нет"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:33
+msgid "Could you tell us more about that feature?"
+msgstr "Не могли бы вы рассказать нам больше об этой функции?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:37
+msgid "The plugin is not working"
+msgstr "Плагин не работает"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:39
+msgid "Could you tell us a bit more whats not working?"
+msgstr "Не могли бы вы рассказать нам немного больше, что не работает?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:43
+msgid "It's not what I was looking for"
+msgstr "Это не то, что я искал"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:49
+msgid "The plugin didn't work as expected"
+msgstr "Плагин не работал как ожидалось"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:51
+msgid "What did you expect?"
+msgstr "Что вы ожидали?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:55
+msgid "Other"
+msgstr "Другое"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:57
+msgid "Could you tell us a bit more?"
+msgstr "Не могли бы вы рассказать нам немного больше?"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:75
+msgid "If you have a moment, please let us know why you are deactivating:"
+msgstr "Если у вас есть минутка, сообщите нам, почему вы деактивируете:"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:87
+msgid "I rather wouldn't say"
+msgstr "Я бы не сказал"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:88
+msgid "Submit & Deactivate"
+msgstr "Отправить и деактивировать"
+
+#: includes/class-wt-wishlist-uninstall-feedback.php:89
+msgid "Cancel"
+msgstr "Отмена"
+
+#: admin/class-wishlist-webtoffee-settings.php:50
+msgid "Wishlist Title in My accounts"
+msgstr "Заголовок  в разделе Мой аккаунт"
+
+#: admin/class-wishlist-webtoffee-settings.php:67
+msgid "Wishlist Text in My accounts"
+msgstr "Заголовок контента на странице “Список желаний”"
+
+#: admin/class-wishlist-webtoffee-settings.php:35 wishlist-webtoffee.php:109
+msgid "Settings"
+msgstr "Настройки"
+
+#: admin/wishlist-webtoffee-admin-table.php:17
+msgid "product"
+msgstr "товар"
+
+#: admin/wishlist-webtoffee-admin-table.php:18
+msgid "products"
+msgstr "товары"
+
+#: admin/wishlist-webtoffee-admin-table.php:44
+msgid "User"
+msgstr "Пользователь"
+
+#: admin/wishlist-webtoffee-admin-table.php:45
+msgid "No of Items"
+msgstr "Количество"
+
+#: admin/wishlist-webtoffee-admin-table.php:46
+msgid "Last Updated"
+msgstr "Последнее обновление"
+
+#: admin/views/wishlist-button-style-settings-page.php:61
+msgid "Add to Wishlist"
+msgstr "Добавить в список желаний"
+
+#: admin/class-wishlist-webtoffee-settings.php:61
+#: admin/class-wishlist-webtoffee-settings.php:69
+#: includes/class-wishlist-webtoffee-activator.php:61
+#: public/partials/wishlist-account-view.php:58
+msgid "My Wishlist"
+msgstr "Избранное"
+
+#: public/partials/wishlist-account-view-frontend.php:23
+msgid "Stock"
+msgstr "Запасы"
+
+#: public/partials/wishlist-account-view-frontend.php:93
+msgid "No Wishlists yet!"
+msgstr "Список желаний пуст!"
+
+#: admin/class-wishlist-webtoffee-settings.php:52
+msgid "Wishlist"
+msgstr "Список желаний"
+
+#: admin/class-wishlist-webtoffee-settings.php:19
+msgid "WebToffee Wishlist"
+msgstr "WebToffee Список желаний"
+
+#. Author URI of the plugin
+msgid "https://www.webtoffee.com/"
+msgstr "https://www.webtoffee.com/"
+
+#: public/partials/wishlist-account-view-frontend.php:20
+msgid "Product name"
+msgstr "Название"
+
+#: public/partials/wishlist-account-view-frontend.php:21
+msgid "Unit price"
+msgstr "Стоимость"
+
+#: public/partials/wishlist-account-view-frontend.php:15
+msgid "Add all to cart"
+msgstr "Добавить все в корзину"

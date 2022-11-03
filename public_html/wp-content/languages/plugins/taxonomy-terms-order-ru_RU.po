@@ -1,0 +1,157 @@
+# Translation of Plugins - Category Order and Taxonomy Terms Order - Stable (latest release) in Russian
+# This file is distributed under the same license as the Plugins - Category Order and Taxonomy Terms Order - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2022-02-16 09:03:44+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - Category Order and Taxonomy Terms Order - Stable (latest release)\n"
+
+#. Author URI of the plugin
+msgid "https://www.nsp-code.com"
+msgstr "https://www.nsp-code.com"
+
+#. Plugin URI of the plugin
+msgid "http://www.nsp-code.com"
+msgstr "http://www.nsp-code.com"
+
+#. Author of the plugin
+msgid "Nsp-Code"
+msgstr "Nsp-Code "
+
+#: taxonomy-terms-order.php:81
+msgid "Taxonomy Terms Order"
+msgstr "Сортировка списка элементов"
+
+#. Plugin Name of the plugin
+msgid "Category Order and Taxonomy Terms Order"
+msgstr "Сортировка категорий и таксономия(иерархия) элементов "
+
+#: include/options.php:56 include/options.php:67
+msgid "Auto Sort Description"
+msgstr "Автоматическая сортировка описаний"
+
+#: include/options.php:61
+msgid "Admin Sort"
+msgstr "Администраторская сортировка"
+
+#: include/options.php:56 include/options.php:67
+msgid "Additional description and details at "
+msgstr "Дополнительное описание и детали"
+
+#: include/options.php:56
+msgid "global setting"
+msgstr "общие настройки"
+
+#: include/options.php:67
+msgid "This will change the order of terms within the admin interface"
+msgstr "Это изменит порядок элементов в интерфейсе администратора"
+
+#: include/options.php:78
+msgid "Save Settings"
+msgstr "Сохранить настройки"
+
+#: include/options.php:53 include/options.php:64
+msgid "OFF"
+msgstr "ВЫКЛ"
+
+#: include/options.php:54 include/options.php:65
+msgid "ON"
+msgstr "ВКЛ"
+
+#: include/options.php:50
+msgid "Auto Sort"
+msgstr "Автоматическая сортировка"
+
+#: include/options.php:43
+msgid "Administrator"
+msgstr "Администратор"
+
+#: include/options.php:42
+msgid "Editor"
+msgstr "Редактор"
+
+#: include/options.php:41
+msgid "Author"
+msgstr "Автор"
+
+#: include/options.php:39
+msgid "Subscriber"
+msgstr "Подписчик"
+
+#: include/options.php:40
+msgid "Contributor"
+msgstr "Разработчик"
+
+#: include/options.php:36
+msgid "Minimum Level to use this plugin"
+msgstr "Минимальный уровень для использования этого плагина"
+
+#: include/options.php:31
+msgid "General"
+msgstr "Главное"
+
+#: include/options.php:25
+msgid "General Settings"
+msgstr "Общие настройки"
+
+#: include/interface.php:201
+msgid "Items Order Updated"
+msgstr "Элементы заказа обновлены"
+
+#: include/options.php:17
+msgid "Settings Saved"
+msgstr "Настройки сохранены"
+
+#: include/interface.php:156
+msgid "Update"
+msgstr "Обновить"
+
+#: include/interface.php:104
+msgid "Total Posts"
+msgstr "Всего сообщений"
+
+#: include/interface.php:46
+msgid "This plugin can't work without javascript, because it's use drag and drop and AJAX."
+msgstr "Этот плагин не может работать без javascript, потому что он использует перетаскивание и AJAX."
+
+#: include/functions.php:57
+msgid "plugin which allow to custom sort all posts, pages, custom post types"
+msgstr "плагин, который позволяет вручную сортировать все сообщения, страницы, типы сообщений"
+
+#: include/interface.php:100
+msgid "Taxonomies"
+msgstr "Сортировка"
+
+#: include/functions.php:56
+msgid "plugin which allow to custom sort categories and custom taxonomies terms per post basis"
+msgstr "Плагин, который позволяет вручную настраивать сортировку категорий и вручную настраивать порядок пользовательских элементов для каждых основных постов"
+
+#: include/functions.php:56 include/functions.php:57
+msgid "Check our"
+msgstr "Проверьте наш"
+
+#: include/interface.php:104
+msgid "Taxonomy Title"
+msgstr "Заголовок таксономии"
+
+#: include/interface.php:38 taxonomy-terms-order.php:116
+#: taxonomy-terms-order.php:118 taxonomy-terms-order.php:120
+msgid "Taxonomy Order"
+msgstr "Порядок таксономии"
+
+#: include/functions.php:55
+msgid "Did you know there is available an advanced version of this plug-in?"
+msgstr "Знаете ли вы, что есть расширенная версия этого плагина?"
+
+#: include/functions.php:54
+msgid "Did you find this plugin useful? Please support our work with a donation or write an article about this plugin in your blog with a link to our site"
+msgstr "Считаете этот плагин полезным? Пожалуйста, поддержите нашу работу пожертвованием или напишите статью об этом плагине в своем блоге со ссылкой на наш сайт"
+
+#: include/functions.php:55
+msgid "Read more"
+msgstr "Подробнее"

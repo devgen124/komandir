@@ -1,0 +1,276 @@
+# Translation of Plugins - Checkout Field Manager (Checkout Manager) for WooCommerce - Stable (latest release) in Russian
+# This file is distributed under the same license as the Plugins - Checkout Field Manager (Checkout Manager) for WooCommerce - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2019-09-23 12:02:35+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"X-Generator: GlotPress/4.0.0-alpha.1\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - Checkout Field Manager (Checkout Manager) for WooCommerce - Stable (latest release)\n"
+
+#: includes/view/backend/meta-boxes/html-order-uploads.php:6
+#: templates/order/order-upload-files.php:15
+msgid "Filename"
+msgstr "Имя файла"
+
+#: includes/controller/class-wooccm-advanced.php:66
+#: includes/controller/class-wooccm-checkout.php:216
+#: includes/controller/class-wooccm-checkout.php:228
+#: includes/controller/class-wooccm-checkout.php:240
+#: includes/controller/class-wooccm-email.php:39
+#: includes/controller/class-wooccm-email.php:71
+#: includes/controller/class-wooccm-order.php:190
+#: includes/controller/class-wooccm-order.php:218
+#: includes/view/backend/pages/modals/parts/info.php:55
+#: includes/view/backend/pages/modals/parts/panel-general.php:119
+#: includes/view/backend/pages/parts/loop.php:42
+#: includes/view/backend/pages/parts/loop.php:60
+#: includes/view/backend/pages/parts/loop.php:117
+msgid "No"
+msgstr "Нет"
+
+#: includes/view/backend/pages/modals/parts/main.php:48
+msgid "Close"
+msgstr "Закрыть"
+
+#: includes/view/backend/pages/modals/parts/main.php:42
+msgid "Save"
+msgstr "Сохранить"
+
+#: includes/class-wooccm.php:102
+#: includes/view/backend/pages/modals/parts/panel-general.php:99
+#: includes/view/backend/pages/modals/parts/panel-general.php:115
+#: includes/view/backend/pages/modals/parts/panel-general.php:167
+#: includes/view/backend/pages/modals/parts/panel-options.php:24
+msgid "Default"
+msgstr "По умолчанию"
+
+#: includes/controller/class-wooccm-advanced.php:90
+#: includes/view/backend/pages/advanced.php:2
+msgid "Advanced"
+msgstr "Дополнительно"
+
+#: includes/view/backend/pages/parts/loop.php:49
+msgid "Wide"
+msgstr "На всю ширину"
+
+#: includes/view/backend/pages/shipping.php:3
+msgid "Shipping fields"
+msgstr "Поля доставки"
+
+#: includes/view/backend/pages/billing.php:3
+msgid "Billing fields"
+msgstr "Поля платежного адреса"
+
+#: includes/class-wooccm-upload.php:121
+#: includes/controller/class-wooccm-order.php:77
+msgid "No uploads were recognised. Files were not uploaded."
+msgstr "Загрузка не распознана. Файлы не были загружены"
+
+#: includes/view/backend/meta-boxes/html-order-uploads.php:7
+#: templates/order/order-upload-files.php:16
+msgid "Dimensions"
+msgstr "Размеры"
+
+#: includes/view/backend/meta-boxes/html-order-uploads.php:5
+msgid "Image"
+msgstr "Изображение"
+
+#: includes/view/backend/pages/parts/loop.php:19
+msgid "ID"
+msgstr "ID"
+
+#: includes/class-wooccm.php:88 includes/class-wooccm.php:121
+msgid "Saving, please wait..."
+msgstr "Сохранение, подождите..."
+
+#: includes/controller/class-wooccm-field-additional.php:152
+msgid "Generic"
+msgstr "Общее"
+
+#: includes/controller/class-wooccm-field-additional.php:152
+msgid "ID: %s | Field Type: %s"
+msgstr "ID: %s | Тип поля: %s"
+
+#: includes/view/frontend/class-wooccm-fields-filters.php:31
+msgid "required"
+msgstr "необходимо"
+
+#: includes/view/backend/pages/modals/parts/panel-general.php:37
+msgid "Picker Type"
+msgstr "Тип выбора"
+
+#: includes/view/backend/pages/modals/parts/info.php:17
+msgid "Conditional"
+msgstr "Условная логика"
+
+#: includes/class-wooccm.php:101 includes/view/backend/pages/parts/loop.php:11
+msgid "Clear"
+msgstr "Очистить"
+
+#: includes/view/backend/pages/parts/loop.php:10
+msgid "Position"
+msgstr "Расположение"
+
+#: includes/view/backend/pages/modals/parts/panel-filter.php:33
+msgid "More"
+msgstr "Больше"
+
+#: includes/view/backend/pages/modals/parts/panel-general.php:40
+msgid "Iris"
+msgstr "Iris"
+
+#: includes/view/backend/pages/modals/parts/panel-general.php:39
+msgid "Farbtastic"
+msgstr "Farbtastic"
+
+#: includes/controller/class-wooccm-advanced.php:65
+#: includes/controller/class-wooccm-checkout.php:215
+#: includes/controller/class-wooccm-checkout.php:227
+#: includes/controller/class-wooccm-checkout.php:239
+#: includes/controller/class-wooccm-email.php:38
+#: includes/controller/class-wooccm-email.php:70
+#: includes/controller/class-wooccm-order.php:189
+#: includes/controller/class-wooccm-order.php:217
+#: includes/view/backend/pages/modals/parts/info.php:54
+#: includes/view/backend/pages/modals/parts/panel-general.php:118
+#: includes/view/backend/pages/parts/loop.php:40
+#: includes/view/backend/pages/parts/loop.php:58
+#: includes/view/backend/pages/parts/loop.php:88
+#: includes/view/backend/pages/parts/loop.php:90
+#: includes/view/backend/pages/parts/loop.php:97
+#: includes/view/backend/pages/parts/loop.php:99
+#: includes/view/backend/pages/parts/loop.php:106
+#: includes/view/backend/pages/parts/loop.php:108
+#: includes/view/backend/pages/parts/loop.php:115
+#: includes/view/frontend/class-wooccm-fields-handler.php:68
+msgid "Yes"
+msgstr "Да"
+
+#: includes/view/backend/pages/modals/parts/panel-general.php:48
+msgid "My Field Name"
+msgstr "Название поля"
+
+#: includes/view/backend/pages/parts/loop.php:51
+msgid "Right"
+msgstr "Справа"
+
+#: includes/view/backend/pages/parts/loop.php:50
+msgid "Left"
+msgstr "Слева"
+
+#: includes/class-wooccm-notices.php:126
+#: includes/view/backend/pages/parts/header.php:6
+#: includes/view/backend/pages/parts/tabs.php:3
+msgid "Documentation"
+msgstr "Документацию к плагину"
+
+#: includes/view/backend/meta-boxes/html-order-uploads.php:55
+#: templates/order/order-upload-files.php:62
+msgid "Upload Files"
+msgstr "Загрузить файлы"
+
+#: includes/view/backend/meta-boxes/html-order-uploads.php:39
+msgid "Download"
+msgstr "Скачать"
+
+#: includes/controller/class-wooccm-advanced.php:71
+msgid "Custom CSS"
+msgstr "Пользовательский CSS"
+
+#: includes/view/backend/meta-boxes/html-order-uploads.php:58
+#: templates/order/order-upload-files.php:65
+msgid "Save Changes"
+msgstr "Сохранить"
+
+#: includes/controller/class-wooccm-field-additional.php:123
+#: includes/controller/class-wooccm-field-additional.php:210
+#: includes/view/backend/pages/additional.php:2
+#: includes/view/frontend/class-wooccm-fields-i18n.php:24
+#: includes/view/frontend/class-wooccm-fields-i18n.php:42
+msgid "Additional"
+msgstr "Дополнительно"
+
+#: includes/controller/class-wooccm-field-shipping.php:33
+#: includes/view/backend/pages/shipping.php:2
+#: includes/view/frontend/class-wooccm-fields-i18n.php:21
+#: includes/view/frontend/class-wooccm-fields-i18n.php:39
+msgid "Shipping"
+msgstr "Адрес доставки"
+
+#: includes/controller/class-wooccm-field-billing.php:57
+#: includes/view/backend/pages/billing.php:2
+#: includes/view/frontend/class-wooccm-fields-i18n.php:18
+#: includes/view/frontend/class-wooccm-fields-i18n.php:36
+msgid "Billing"
+msgstr "Платежный адрес"
+
+#: includes/view/backend/pages/modals/parts/tabs.php:3
+msgid "General"
+msgstr "Общие"
+
+#: includes/class-wooccm.php:90 includes/class-wooccm.php:123
+msgid "Deleted successfully."
+msgstr "Успешно удалено."
+
+#: includes/view/backend/meta-boxes/html-order-uploads.php:40
+#: includes/view/backend/pages/parts/loop.php:127
+#: templates/order/order-upload-files.php:47
+msgid "Delete"
+msgstr "Удалить"
+
+#: includes/view/backend/pages/modals/parts/panel-general.php:4
+#: includes/view/backend/pages/modals/parts/panel-price.php:10
+msgid "Name"
+msgstr "Название"
+
+#: includes/view/backend/pages/modals/parts/panel-general.php:105
+msgid "Link"
+msgstr "Ссылки"
+
+#: includes/view/backend/meta-boxes/html-order-uploads.php:8
+#: templates/order/order-upload-files.php:17
+msgid "Extension"
+msgstr "Расширение"
+
+#: templates/order/order-upload-files.php:18
+msgid "Actions"
+msgstr "Действия"
+
+#: includes/view/frontend/class-wooccm-fields-additional.php:55
+msgid "%s is a required field."
+msgstr "%s обязательное поле."
+
+#: includes/class-wooccm-notices.php:123 includes/class-wooccm-notices.php:161
+msgid "Settings"
+msgstr "Настройки"
+
+#: includes/view/backend/pages/parts/actions.php:3
+msgid "+ Add New Field"
+msgstr "+ Добавить новое поле"
+
+#: includes/view/backend/pages/parts/loop.php:9
+msgid "Required"
+msgstr "Обязательно"
+
+#: includes/view/backend/pages/modals/parts/panel-general.php:53
+#: includes/view/backend/pages/parts/loop.php:14
+msgid "Placeholder"
+msgstr "Заполнитель"
+
+#: includes/view/backend/pages/modals/parts/panel-general.php:47
+#: includes/view/backend/pages/modals/parts/panel-options.php:13
+#: includes/view/backend/pages/parts/loop.php:13
+msgid "Label"
+msgstr "Надпись"
+
+#: includes/view/backend/pages/modals/parts/panel-general.php:181
+msgid "Country"
+msgstr "Страна"
+
+#: includes/view/backend/pages/additional.php:3
+msgid "Additional fields"
+msgstr "Дополнительные поля"
