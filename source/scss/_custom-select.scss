@@ -1,0 +1,87 @@
+.custom-select {
+    --margin: 10px;
+    --field-height: 30px;
+    --width: 300px;
+    --border: 1px solid var(--gray);
+
+    position: relative;
+    max-width: var(--width);
+    font-size: 14px;
+
+    select {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+    }
+
+    &--open .custom-select__panel {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &.has-placeholder .custom-select__opener {
+        color: var(--gray-light);
+    }
+}
+
+.custom-select__panel {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    z-index: 10;
+    border: var(--border);
+
+    &.is-above {
+        bottom: 100%;
+        top: auto;
+    }
+}
+
+.custom-select__opener {
+    min-height: var(--field-height);
+    padding: 5px 20px 5px 10px;
+    position: relative;
+    border: var(--border);
+    cursor: pointer;
+    color: $accent-color;
+
+    &::after {
+        content: "";
+    }
+}
+
+.custom-select__option {
+    padding: 5px;
+    cursor: pointer;
+
+    &[data-value="placeholder"] {
+        display: none;
+    }
+
+    &:hover,
+    &--selected {
+        background-color: var(--gray);
+    }
+}
+
+.custom-select__option-icon {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.2em;
+}
+
+.custom-select__opener-label button {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+}
+
+.custom-select__optgroup::before {
+    content: attr(data-label);
+    display: block;
+}

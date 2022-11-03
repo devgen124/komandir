@@ -1,0 +1,254 @@
+
+
+.login-send-code {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-send-code {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        margin-bottom: 17px;
+    }
+}
+
+.alter-text {
+    margin: 0 0 12px;
+    color: #7E7E7E;
+}
+
+.form-send-code-submit {
+    margin-bottom: 25px;
+}
+
+.custom-popup-submit {
+    &.loading {
+        background-color: transparent;
+        background-image: linear-gradient(to right bottom, $accent-color-alter 25%, $accent-color 25%, $accent-color 50%, $accent-color-alter 50%, $accent-color-alter 75%, $accent-color 75%, $accent-color);
+        background-size: 100px 100px;
+        animation: move 4s linear infinite;
+    }
+}
+
+.custom-popup-form-label {
+    position: relative;
+
+    &:not(:last-of-type) {
+        margin-bottom: 15px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        border: none;
+        transition: opacity 0.3s;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
+
+.input-tip {
+    width: 20px;
+    height: 20px;
+    background: url("../images/question.svg") center no-repeat;
+}
+
+.show-pass {
+    width: 22px;
+    height: 15px;
+    background: url("../images/eye.svg") center no-repeat;
+}
+
+.login-pass-link {
+    align-self: flex-start;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1;
+    color: $accent-color;
+    background: #EFF4F4;
+    border-radius: 3px;
+
+    &:visited {
+        color: $accent-color;
+    }
+
+    &::before {
+        content: "";
+        margin-right: 10px;
+        width: 22px;
+        height: 11px;
+        background: url("../images/key.svg") center no-repeat;
+    }
+}
+
+.policy-text {
+    margin: 21px 0 0;
+    font-size: 12px;
+    line-height: 1;
+    color: #7E7E7E;
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+.login-pass {
+    position: relative;
+}
+
+.form-pass {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-popup-backlink {
+    position: absolute;
+    width: 44px;
+    height: 32px;
+    border: none;
+    background: #F2F2F2 url("../images/backlink.svg") center no-repeat;
+    border-radius: 3px;
+
+    +h2 {
+        padding-left: 57px;
+    }
+}
+
+.recover-link {
+    margin: 39px 0 26px;
+    font-size: 14px;
+    color: $accent-color;
+    transition: 0.3s;
+
+    &:visited {
+        color: $accent-color;
+    }
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.login-sms {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-sms {
+    display: flex;
+    flex-wrap: wrap;
+
+    .custom-popup-form-label {
+        width: calc(100% - 70px);
+    }
+}
+
+.form-sms-submit {
+    margin-left: 10px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 3px;
+    position: relative;
+    background-color: $accent-color;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: url("../images/forwardlink.svg") center no-repeat;
+        z-index: 1;
+    }
+}
+
+.counter-block {
+    margin: 21px 0 26px;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    color: #7E7E7E;
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        color: $accent-color;
+
+        &.loading::after {
+            content: "";
+            margin-left: 5px;
+            width: 28px;
+            height: 28px;
+            background: url("../images/loader.svg") no-repeat center;
+        }
+
+    }
+}
+
+.login-profile {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-profile-pass-row {
+    margin: 15px 0;
+    display: flex;
+
+    .custom-popup-form-label {
+        margin-bottom: 0;
+        width: calc(50% - 9px);
+
+        &:not(:last-of-type) {
+            margin-right: 18px;
+        }
+    }
+}
+
+.form-profile {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-body-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1100;
+}
+
+.popup-inner-overlay {
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(#fff, 0.2);
+}
+
+.custom-popup-warning {
+    width: 100%;
+    padding: 0.5em 0;
+    color: red;
+}

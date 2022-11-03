@@ -1,0 +1,39 @@
+.custom-popup-cf {
+  max-width: 500px;
+
+  h2,
+  h2 + p {
+    text-align: center;
+  }
+
+  label {
+    display: block;
+
+    &:not(:first-of-type) {
+      margin-top: 17px;
+    }
+
+    span {
+      display: block;
+
+      input {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+  .wpcf7-submit {
+    width: 100%;
+    margin-top: 17px;
+  }
+
+  .wpcf7-spinner {
+    display: none;
+  }
+}
+
+.wpcf7 form.sent .wpcf7-response-output {
+  border: none;
+  color: $accent-color;
+}

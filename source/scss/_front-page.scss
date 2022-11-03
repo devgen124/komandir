@@ -1,0 +1,116 @@
+.top-container {
+  @include media-breakpoint-down(sm) {
+    width: calc(100% + 2 * var(--bs-gutter-x, 0.75rem));
+    // width: calc(100% + 1.5rem);
+    margin-right: calc(-1 * var(--bs-gutter-x, 0.75rem));
+    margin-left: calc(-1 * var(--bs-gutter-x, 0.75rem));
+  }
+}
+
+.supercategories-sidebar {
+  width: 282px;
+  margin-right: 28px;
+
+  &-list {
+    li {
+      margin-bottom: 7px;
+    }
+
+    li a {
+      padding: 8px 20px;
+      display: flex;
+      color: $black-alter-color;
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 700;
+      transition: 0.3s;
+
+      span {
+        margin-right: 14px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+      }
+
+      svg {
+        fill: #989898;
+        transition: 0.3s;
+      }
+
+      &:hover {
+        color: $accent-color;
+        background-color: rgba(239, 244, 244, 0.5);
+
+        svg {
+          fill: $accent-color;
+        }
+      }
+    }
+  }
+}
+
+// promo slider - Master Slider customization
+
+.promo-slider {
+  @include media-breakpoint-down(sm) {
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+  }
+
+  .ms-skin-default {
+    .ms-nav-prev,
+    .ms-nav-next {
+      width: 30px;
+      height: 30px;
+      background-color: $white;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: 0.3s;
+
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+
+    .ms-nav-prev {
+      background-image:  url("../images/arrow-left.svg");
+
+      &:hover {
+        background-image: url("../images/arrow-left-hover.svg");
+      }
+    }
+
+    .ms-nav-next {
+      background-image: url("../images/arrow-right.svg");
+
+      &:hover {
+        background-image: url("../images/arrow-right-hover.svg");
+      }
+    }
+
+    .ms-bullet {
+      width: 10px;
+      height: 10px;
+      background: #c4c4c4;
+      border-radius: 50%;
+
+      &-selected {
+        background: $black-alter-color;
+      }
+
+      &:hover {
+        background: $accent-color;
+      }
+    }
+  }
+}
+
+.site-main-top {
+  margin-bottom: 93px;
+
+  @include media-breakpoint-down(md) {
+    padding-top: 30px;
+    margin-bottom: 51px;
+  }
+}

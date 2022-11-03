@@ -1,0 +1,49 @@
+.shops-page-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+    gap: 100px;
+  }
+}
+
+.map-container {
+  height: 390px;
+  background-color: #F3F3F3;
+
+  @include media-breakpoint-up(md) {
+    order: 1;
+    flex: 1 1 50%;
+    height: 450px;
+  }
+}
+
+.shops-content {
+  @include media-breakpoint-up(md) {
+    order: 2;
+    flex: 1 1 50%;
+  }
+
+  h2 {
+    margin-bottom: 42px;
+    font-size: 24px;
+  }
+}
+
+.shops-title {
+  margin-bottom: 23px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: #cdcdcd solid underline;
+  text-underline-position: under;
+}
+
+.shops-text {
+  margin-bottom: 46px;
+  font-size: 14px;
+}
+
+.shops-after-text {
+  font-size: 14px;
+}

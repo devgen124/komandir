@@ -1,0 +1,14 @@
+@mixin hide-scroll() {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin hover-color-inherit() {
+    &:hover {
+        color: inherit;
+    }
+}

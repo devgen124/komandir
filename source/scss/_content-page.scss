@@ -1,0 +1,38 @@
+.content-page {
+  h2 {
+    margin: 0 0 1em;
+    font: 700 24px/1.4 $font-family-main;
+
+    &:not(:first-of-type) {
+      margin-top: 2em;
+    }
+  }
+
+  h3 {
+    margin: 0 0 1em;
+    font: 700 16px/33px $font-family-main;
+
+    &:not(:first-of-type) {
+      margin-top: 2em;
+    }
+  }
+
+  ul {
+    margin-bottom: 1.5em;
+    padding-left: 1em;
+  }
+
+  li {
+    list-style: disc;
+
+    &::marker {
+      color: $accent-color;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+    color: $accent-color-hover;
+    transition: 0.3s;
+  }
+}

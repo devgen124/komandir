@@ -1,0 +1,28 @@
+// import { Fancybox, Carousel, Panzoom } from "@fancyapps/ui";
+import ajax_wishlist from './ajax_wishlist.js';
+import CatalogMobileSlider from './catalog_mobile_slide.js';
+import customizeSelects from './custom_select.js';
+import initSidebarToggler from './filters_mobile.js';
+import initGridSwitcher from './grid-switcher.js';
+import initAttrMobileToggler from './attributes-list-mobile.js';
+import initQuantityCounter from './quantity-counter.js';
+import initPopups from './popup.js';
+import phoneMask from './phone-mask.js';
+import initPassViewSwitcher from './pass-view-switcher.js';
+import mobileSideMenu from './mobile_menu.js';
+import mobileSearch from './mobile_search.js';
+import modalInit from './modal.js';
+
+ajax_wishlist();
+new CatalogMobileSlider();
+customizeSelects();
+initSidebarToggler();
+initGridSwitcher();
+initAttrMobileToggler();
+initQuantityCounter();
+initPopups();
+phoneMask();
+initPassViewSwitcher(document);
+mobileSideMenu();
+mobileSearch();
+modalInit();

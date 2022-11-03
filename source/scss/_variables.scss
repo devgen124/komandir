@@ -1,0 +1,20 @@
+
+
+//font
+
+$font-family-main:      "PT Sans", #{inspect($font-family-sans-serif)};
+$font-family-secondary: "PT Sans Narrow", #{inspect($font-family-main)};
+
+//colors
+
+$grey-icon-color:           #bbb;
+$grey-main-color:           #707070;
+$black-alter-color:         #262626;
+$middle-menu-icon-color:    #818181;
+$footer-color:              #e9e9e9;
+
+$placeholder-text-color:    #aeaeae;
+
+$accent-color:              #00a9b4;
+$accent-color-hover:        darken($accent-color, 7%);
+$accent-color-alter:        #aae4e8;

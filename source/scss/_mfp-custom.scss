@@ -1,0 +1,72 @@
+@keyframes move {
+  0% {
+      background-position: 0 0;
+  }
+
+  100% {
+      background-position: 100px 100px;
+  }
+}
+
+.mfp-bg {
+  opacity: 0.4;
+}
+
+.custom-popup {
+  position: relative;
+  background: #FFF;
+  padding: 33px 25px;
+  width: auto;
+  max-width: 320px;
+  margin: 20px auto;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+
+  &--wide {
+      max-width: 450px;
+  }
+
+  h2 {
+      margin-bottom: 38px;
+      font-size: 24px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"] {
+      padding: 20px 15px;
+      font-size: 14px;
+      line-height: 1;
+
+      background: #FFFFFF;
+      border: 1px solid #BFBFBF;
+      border-radius: 3px;
+
+      &::placeholder {
+          color: #7E7E7E;
+      }
+
+      &:focus {
+          border-color: #7E7E7E;
+      }
+
+      &.invalid {
+          border-color: red;
+          color: red;
+      }
+  }
+
+  input[type="submit"],
+  button[type="submit"] {
+    display: block;
+    padding: 19px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    background-color: $accent-color;
+    border: none;
+    border-radius: 3px;
+  }
+}

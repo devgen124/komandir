@@ -1,0 +1,26 @@
+.wpcf7-form {
+  input {
+    &[type="text"],
+    &[type="email"],
+    &[type="number"] {
+      padding: 7px;
+      background: $white;
+      color: $black-alter-color;
+      border: 1px solid #bfbfbf;
+      border-radius: 3px;
+    }
+  }
+
+  .wpcf7-acceptance {
+    a {
+      position: relative;
+      box-shadow: 0 1px #b9b9b9;
+      transition: 0.3s;
+
+      &:hover {
+        color: $accent-color;
+        box-shadow: 0 1px $accent-color;
+      }
+    }
+  }
+}

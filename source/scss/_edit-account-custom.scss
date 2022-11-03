@@ -1,0 +1,92 @@
+.woocommerce-edit-account-wrapper {
+    @include media-breakpoint-up(sm) {
+        max-width: 395px;
+    }
+}
+
+.edit-account-fieldset {
+    margin-bottom: 35px;
+}
+
+.edit-account-row {
+    display: flex;
+
+    .edit-account-label {
+        width: calc(100% - 10px);
+
+        &:first-of-type {
+            margin-right: 20px;
+        }
+    }
+
+}
+
+.edit-account-label {
+    margin-bottom: 20px;
+    display: block;
+    position: relative;
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"] {
+        width: 100%;
+        padding: 20px 15px;
+        font-size: 14px;
+        line-height: 1;
+
+        background: #FFFFFF;
+        border: 1px solid #BFBFBF;
+        border-radius: 3px;
+
+        &::placeholder {
+            color: #7E7E7E;
+        }
+
+        &:focus {
+            border-color: #7E7E7E;
+        }
+
+        &.invalid {
+            border-color: red;
+            color: red;
+        }
+    }
+
+    .show-pass {
+        width: 22px;
+        height: 15px;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        border: none;
+        transition: opacity 0.3s;
+
+        &:hover {
+            opacity: 0.7;
+        }
+        background: url("../images/eye.svg") center no-repeat;
+    }
+}
+
+a.button.edit-account-button,
+button.button.edit-account-button {
+    width: 100%;
+    display: block;
+    padding: 19px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    background-color: $accent-color;
+    border: none;
+    border-radius: 3px;
+    transition: 0.3s;
+
+    &:hover {
+        color: #fff;
+        background-color: $accent-color-hover;
+    }
+}
