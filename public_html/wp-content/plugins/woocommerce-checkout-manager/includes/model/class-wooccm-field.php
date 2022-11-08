@@ -242,7 +242,7 @@ class WOOCCM_Field extends WOOCCM_Model {
 		 */
 		$form_action = WOOCCM_Field_Helpers::get_form_action();
 
-		if ( ! $form_action && $this->prefix !== 'additional' ) {
+		if ( $form_action !== 'account' && $this->prefix !== 'additional' ) {
 
 			$prefix = sprintf( '%s_', $this->prefix );
 
