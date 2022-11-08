@@ -95,6 +95,23 @@ class Menu {
 
     $this->registerMailPoetMenu();
 
+    // @ToDo Remove Beta once Automation is no longer beta.
+    $this->wp->addAction('admin_head', function () {
+      echo '<style>
+#adminmenu .toplevel_page_mailpoet-newsletters a[href="admin.php?page=mailpoet-automation"] {
+  display: flex;
+  gap: 8px;
+}
+.mailpoet-beta-badge {
+  background: #F0F0F1;
+  border-radius: 50px;
+  padding: 0 12px;
+  color: #1D2327;
+  font-weight: normal;
+}
+</style>';
+    });
+
     if (!self::isOnMailPoetAdminPage()) {
       return;
     }
@@ -149,7 +166,7 @@ class Menu {
     $newslettersPage = $this->wp->addSubmenuPage(
       self::MAIN_PAGE_SLUG,
       $this->setPageTitle(__('Emails', 'mailpoet')),
-      __('Emails', 'mailpoet'),
+      esc_html__('Emails', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_EMAILS,
       self::MAIN_PAGE_SLUG,
       [
@@ -174,7 +191,7 @@ class Menu {
     $this->wp->addSubmenuPage(
       true,
       $this->setPageTitle(__('Newsletter', 'mailpoet')),
-      __('Newsletter Editor', 'mailpoet'),
+      esc_html__('Newsletter Editor', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_EMAILS,
       'mailpoet-newsletter-editor',
       [
@@ -183,11 +200,13 @@ class Menu {
       ]
     );
 
+    $this->registerAutomationMenu();
+
     // Forms page
     $formsPage = $this->wp->addSubmenuPage(
       self::MAIN_PAGE_SLUG,
       $this->setPageTitle(__('Forms', 'mailpoet')),
-      __('Forms', 'mailpoet'),
+      esc_html__('Forms', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_FORMS,
       'mailpoet-forms',
       [
@@ -212,7 +231,7 @@ class Menu {
     $formEditorPage = $this->wp->addSubmenuPage(
       true,
       $this->setPageTitle(__('Form Editor', 'mailpoet')),
-      __('Form Editor', 'mailpoet'),
+      esc_html__('Form Editor', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_FORMS,
       'mailpoet-form-editor',
       [
@@ -223,7 +242,7 @@ class Menu {
 
     // add body class for form editor page
     $this->wp->addAction('load-' . $formEditorPage, function() {
-      $this->wp->addAction('admin_body_class', function ($classes) {
+      $this->wp->addFilter('admin_body_class', function ($classes) {
         return ltrim($classes . ' block-editor-page');
       });
     });
@@ -232,7 +251,7 @@ class Menu {
     $formTemplateSelectionEditorPage = $this->wp->addSubmenuPage(
       true,
       $this->setPageTitle(__('Select Form Template', 'mailpoet')),
-      __('Select Form Template', 'mailpoet'),
+      esc_html__('Select Form Template', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_FORMS,
       'mailpoet-form-editor-template-selection',
       [
@@ -243,7 +262,7 @@ class Menu {
 
     // add body class for form editor page
     $this->wp->addAction('load-' . $formTemplateSelectionEditorPage, function() {
-      $this->wp->addAction('admin_body_class', function ($classes) {
+      $this->wp->addFilter('admin_body_class', function ($classes) {
         return ltrim($classes . ' block-editor-page');
       });
     });
@@ -253,7 +272,7 @@ class Menu {
     $subscribersPage = $this->wp->addSubmenuPage(
       self::MAIN_PAGE_SLUG,
       $this->setPageTitle(__('Subscribers', 'mailpoet')),
-      __('Subscribers', 'mailpoet'),
+      esc_html__('Subscribers', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_SUBSCRIBERS,
       'mailpoet-subscribers',
       [
@@ -278,7 +297,7 @@ class Menu {
     $this->wp->addSubmenuPage(
       'admin.php?page=mailpoet-subscribers',
       $this->setPageTitle(__('Import', 'mailpoet')),
-      __('Import', 'mailpoet'),
+      esc_html__('Import', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_SUBSCRIBERS,
       'mailpoet-import',
       [
@@ -291,7 +310,7 @@ class Menu {
     $this->wp->addSubmenuPage(
       true,
       $this->setPageTitle(__('Export', 'mailpoet')),
-      __('Export', 'mailpoet'),
+      esc_html__('Export', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_SUBSCRIBERS,
       'mailpoet-export',
       [
@@ -304,7 +323,7 @@ class Menu {
     $segmentsPage = $this->wp->addSubmenuPage(
       self::MAIN_PAGE_SLUG,
       $this->setPageTitle(__('Lists', 'mailpoet')),
-      __('Lists', 'mailpoet'),
+      esc_html__('Lists', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_SEGMENTS,
       'mailpoet-segments',
       [
@@ -329,7 +348,7 @@ class Menu {
     $this->wp->addSubmenuPage(
       self::MAIN_PAGE_SLUG,
       $this->setPageTitle(__('Settings', 'mailpoet')),
-      __('Settings', 'mailpoet'),
+      esc_html__('Settings', 'mailpoet'),
       AccessControl::PERMISSION_MANAGE_SETTINGS,
       'mailpoet-settings',
       [
@@ -342,7 +361,7 @@ class Menu {
     $this->wp->addSubmenuPage(
       self::MAIN_PAGE_SLUG,
       $this->setPageTitle(__('Help', 'mailpoet')),
-      __('Help', 'mailpoet'),
+      esc_html__('Help', 'mailpoet'),
       AccessControl::PERMISSION_ACCESS_PLUGIN_ADMIN,
       'mailpoet-help',
       [
@@ -356,7 +375,7 @@ class Menu {
     $this->wp->addSubmenuPage(
       License::getLicense() ? true : self::MAIN_PAGE_SLUG,
       $this->setPageTitle(__('Upgrade', 'mailpoet')),
-      __('Upgrade', 'mailpoet'),
+      esc_html__('Upgrade', 'mailpoet'),
       AccessControl::PERMISSION_ACCESS_PLUGIN_ADMIN,
       'mailpoet-upgrade',
       [
@@ -369,7 +388,7 @@ class Menu {
     $this->wp->addSubmenuPage(
       true,
       $this->setPageTitle(__('Welcome Wizard', 'mailpoet')),
-      __('Welcome Wizard', 'mailpoet'),
+      esc_html__('Welcome Wizard', 'mailpoet'),
       AccessControl::PERMISSION_ACCESS_PLUGIN_ADMIN,
       'mailpoet-welcome-wizard',
       [
@@ -382,7 +401,7 @@ class Menu {
     $this->wp->addSubmenuPage(
       true,
       $this->setPageTitle(__('WooCommerce Setup', 'mailpoet')),
-      __('WooCommerce Setup', 'mailpoet'),
+      esc_html__('WooCommerce Setup', 'mailpoet'),
       AccessControl::PERMISSION_ACCESS_PLUGIN_ADMIN,
       'mailpoet-woocommerce-setup',
       [
@@ -394,7 +413,7 @@ class Menu {
     // Experimental page
     $this->wp->addSubmenuPage(
       true,
-      $this->setPageTitle('Experimental Features'),
+      $this->setPageTitle(__('Experimental Features', 'mailpoet')),
       '',
       AccessControl::PERMISSION_MANAGE_FEATURES,
       'mailpoet-experimental',
@@ -404,51 +423,62 @@ class Menu {
     // display loggs page
     $this->wp->addSubmenuPage(
       true,
-      $this->setPageTitle('Logs'),
+      $this->setPageTitle(__('Logs', 'mailpoet')),
       '',
       AccessControl::PERMISSION_ACCESS_PLUGIN_ADMIN,
       'mailpoet-logs',
       [$this, 'logs']
     );
 
-    // Automation
-    if ($this->featuresController->isSupported(FeaturesController::AUTOMATION)) {
-      $this->wp->addSubmenuPage(
-        self::MAIN_PAGE_SLUG,
-        $this->setPageTitle('Automation'),
-        'Automation',
-        AccessControl::PERMISSION_MANAGE_EMAILS,
-        'mailpoet-automation',
-        [$this, 'automation']
-      );
+  }
 
-      // Automation editor
-      $automationEditorPage = $this->wp->addSubmenuPage(
-        true,
-        $this->setPageTitle('Automation Editor'),
-        'Automation Editor',
-        AccessControl::PERMISSION_MANAGE_AUTOMATIONS,
-        'mailpoet-automation-editor',
-        [$this, 'automationEditor']
-      );
+  private function registerAutomationMenu() {
 
-      // Automation templates
-      $this->wp->addSubmenuPage(
-        true,
-        $this->setPageTitle('Automation Templates'),
-        'Automation Templates',
-        AccessControl::PERMISSION_MANAGE_AUTOMATIONS,
-        'mailpoet-automation-templates',
-        [$this, 'automationTemplates']
-      );
-
-      // add body class for automation editor page
-      $this->wp->addAction('load-' . $automationEditorPage, function() {
-        $this->wp->addAction('admin_body_class', function ($classes) {
-          return ltrim($classes . ' site-editor-php');
-        });
-      });
+    if (!$this->featuresController->isSupported(FeaturesController::AUTOMATION)) {
+      return;
     }
+
+    $automationPage = $this->wp->addSubmenuPage(
+      self::MAIN_PAGE_SLUG,
+      $this->setPageTitle(__('Automations', 'mailpoet')),
+      // @ToDo Remove Beta once Automation is no longer beta.
+      '<span>' . esc_html__('Automations', 'mailpoet') . '</span><span class="mailpoet-beta-badge">Beta</span>',
+      AccessControl::PERMISSION_MANAGE_EMAILS,
+      'mailpoet-automation',
+      [$this, 'automation']
+    );
+
+    // Automation editor
+    $automationEditorPage = $this->wp->addSubmenuPage(
+      true,
+      $this->setPageTitle(__('Automation Editor', 'mailpoet')),
+      esc_html__('Automation Editor', 'mailpoet'),
+      AccessControl::PERMISSION_MANAGE_AUTOMATIONS,
+      'mailpoet-automation-editor',
+      [$this, 'automationEditor']
+    );
+
+    // Automation templates
+    $this->wp->addSubmenuPage(
+      true,
+      $this->setPageTitle(__('Automation Templates', 'mailpoet')),
+      esc_html__('Automation Templates', 'mailpoet'),
+      AccessControl::PERMISSION_MANAGE_AUTOMATIONS,
+      'mailpoet-automation-templates',
+      [$this, 'automationTemplates']
+    );
+
+    // add body class for automation editor page
+    $this->wp->addAction('load-' . $automationPage, function() {
+      $this->wp->addFilter('admin_body_class', function ($classes) {
+        return ltrim($classes . ' mailpoet-automation-is-onboarding');
+      });
+    });
+    $this->wp->addAction('load-' . $automationEditorPage, function() {
+      $this->wp->addFilter('admin_body_class', function ($classes) {
+        return ltrim($classes . ' site-editor-php');
+      });
+    });
   }
 
   public function disableWPEmojis() {
@@ -537,6 +567,20 @@ class Menu {
       '%s - %s',
       __('MailPoet', 'mailpoet'),
       $title
+    );
+  }
+
+  public static function isOnMailPoetAutomationPage(): bool {
+    $screenId = isset($_REQUEST['page']) ? sanitize_text_field(wp_unslash($_REQUEST['page'])) : '';
+    $automationPages = [
+        'mailpoet-automation',
+        'mailpoet-automation-templates',
+        'mailpoet-automation-editor',
+      ];
+    return in_array(
+      $screenId,
+      $automationPages,
+      true
     );
   }
 

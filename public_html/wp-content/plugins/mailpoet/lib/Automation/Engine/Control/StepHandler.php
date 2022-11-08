@@ -9,19 +9,22 @@ use Exception;
 use MailPoet\Automation\Engine\Control\Steps\ActionStepRunner;
 use MailPoet\Automation\Engine\Data\Step;
 use MailPoet\Automation\Engine\Data\StepRunArgs;
+use MailPoet\Automation\Engine\Data\StepValidationArgs;
 use MailPoet\Automation\Engine\Data\SubjectEntry;
+use MailPoet\Automation\Engine\Data\Workflow;
 use MailPoet\Automation\Engine\Data\WorkflowRun;
 use MailPoet\Automation\Engine\Data\WorkflowRunLog;
 use MailPoet\Automation\Engine\Exceptions;
 use MailPoet\Automation\Engine\Exceptions\InvalidStateException;
 use MailPoet\Automation\Engine\Hooks;
+use MailPoet\Automation\Engine\Integration\Action;
+use MailPoet\Automation\Engine\Integration\Payload;
+use MailPoet\Automation\Engine\Integration\Subject;
+use MailPoet\Automation\Engine\Registry;
 use MailPoet\Automation\Engine\Storage\WorkflowRunLogStorage;
 use MailPoet\Automation\Engine\Storage\WorkflowRunStorage;
 use MailPoet\Automation\Engine\Storage\WorkflowStorage;
 use MailPoet\Automation\Engine\WordPress;
-use MailPoet\Automation\Engine\Workflows\Action;
-use MailPoet\Automation\Engine\Workflows\Payload;
-use MailPoet\Automation\Engine\Workflows\Subject;
 use Throwable;
 
 class StepHandler {
@@ -44,13 +47,16 @@ class StepHandler {
   private $workflowStorage;
 
   /** @var array<string, StepRunner> */
-  private $stepRunners;
+  private $stepRunners = [];
 
   /** @var WorkflowRunLogStorage */
   private $workflowRunLogStorage;
 
   /** @var Hooks */
   private $hooks;
+
+  /** @var Registry */
+  private $registry;
 
   public function __construct(
     ActionScheduler $actionScheduler,
@@ -60,7 +66,8 @@ class StepHandler {
     WordPress $wordPress,
     WorkflowRunStorage $workflowRunStorage,
     WorkflowRunLogStorage $workflowRunLogStorage,
-    WorkflowStorage $workflowStorage
+    WorkflowStorage $workflowStorage,
+    Registry $registry
   ) {
     $this->actionScheduler = $actionScheduler;
     $this->actionStepRunner = $actionStepRunner;
@@ -70,6 +77,7 @@ class StepHandler {
     $this->workflowRunStorage = $workflowRunStorage;
     $this->workflowRunLogStorage = $workflowRunLogStorage;
     $this->workflowStorage = $workflowStorage;
+    $this->registry = $registry;
   }
 
   public function initialize(): void {
@@ -80,6 +88,17 @@ class StepHandler {
 
   public function addStepRunner(string $stepType, StepRunner $stepRunner): void {
     $this->stepRunners[$stepType] = $stepRunner;
+  }
+
+  public function getStepRunners(): array {
+    return $this->stepRunners;
+  }
+
+  /**
+   * @param array<string, StepRunner> $stepRunners
+   */
+  public function setStepRunners(array $stepRunners): void {
+    $this->stepRunners = $stepRunners;
   }
 
   /** @param mixed $args */
@@ -94,12 +113,15 @@ class StepHandler {
     try {
       $this->handleStep($args);
     } catch (Throwable $e) {
-      $this->workflowRunStorage->updateStatus((int)$args['workflow_run_id'], WorkflowRun::STATUS_FAILED);
+      $status = $e instanceof InvalidStateException && $e->getErrorCode() === 'mailpoet_automation_workflow_not_active' ? WorkflowRun::STATUS_CANCELLED : WorkflowRun::STATUS_FAILED;
+      $this->workflowRunStorage->updateStatus((int)$args['workflow_run_id'], $status);
+      $this->postProcessWorkflowRun((int)$args['workflow_run_id']);
       if (!$e instanceof Exception) {
         throw new Exception($e->getMessage(), intval($e->getCode()), $e);
       }
       throw $e;
     }
+    $this->postProcessWorkflowRun((int)$args['workflow_run_id']);
   }
 
   private function handleStep(array $args): void {
@@ -119,6 +141,9 @@ class StepHandler {
     if (!$workflow) {
       throw Exceptions::workflowVersionNotFound($workflowRun->getWorkflowId(), $workflowRun->getVersionId());
     }
+    if (!in_array($workflow->getStatus(), [Workflow::STATUS_ACTIVE, Workflow::STATUS_DEACTIVATING], true)) {
+      throw Exceptions::workflowNotActive($workflowRun->getWorkflowId());
+    }
 
     // complete workflow run
     if (!$stepId) {
@@ -126,19 +151,22 @@ class StepHandler {
       return;
     }
 
-    $step = $workflow->getStep($stepId);
-    if (!$step) {
+    $stepData = $workflow->getStep($stepId);
+    if (!$stepData) {
       throw Exceptions::workflowStepNotFound($stepId);
     }
-
-    $stepType = $step->getType();
+    $step = $this->registry->getStep($stepData->getKey());
+    $stepType = $stepData->getType();
     if (isset($this->stepRunners[$stepType])) {
-      $log = new WorkflowRunLog($workflowRun->getId(), $step->getId());
+      $log = new WorkflowRunLog($workflowRun->getId(), $stepData->getId());
       try {
         $requiredSubjects = $step instanceof Action ? $step->getSubjectKeys() : [];
         $subjectEntries = $this->getSubjectEntries($workflowRun, $requiredSubjects);
-        $args = new StepRunArgs($workflow, $workflowRun, $step, $subjectEntries);
-        $this->stepRunners[$stepType]->run($args);
+        $args = new StepRunArgs($workflow, $workflowRun, $stepData, $subjectEntries);
+        $validationArgs = new StepValidationArgs($workflow, $stepData, array_map(function (SubjectEntry $entry) {
+          return $entry->getSubject();
+        }, $subjectEntries));
+        $this->stepRunners[$stepType]->run($args, $validationArgs);
         $log->markCompletedSuccessfully();
       } catch (Throwable $e) {
         $log->markFailed();
@@ -156,7 +184,7 @@ class StepHandler {
       throw new InvalidStateException();
     }
 
-    $nextStep = $step->getNextSteps()[0] ?? null;
+    $nextStep = $stepData->getNextSteps()[0] ?? null;
     $nextStepArgs = [
       [
         'workflow_run_id' => $workflowRunId,
@@ -198,5 +226,29 @@ class StepHandler {
       }
     }
     return $subjectEntries;
+  }
+
+  private function postProcessWorkflowRun(int $workflowRunId): void {
+    $workflowRun = $this->workflowRunStorage->getWorkflowRun($workflowRunId);
+    if (!$workflowRun) {
+      return;
+    }
+    $workflow = $this->workflowStorage->getWorkflow($workflowRun->getWorkflowId());
+    if (!$workflow) {
+      return;
+    }
+    $this->postProcessWorkflow($workflow);
+  }
+
+  private function postProcessWorkflow(Workflow $workflow): void {
+    if ($workflow->getStatus() === Workflow::STATUS_DEACTIVATING) {
+      $activeRuns = $this->workflowRunStorage->getCountForWorkflow($workflow, WorkflowRun::STATUS_RUNNING);
+
+      // Set a deactivating Workflow to draft once all workflow runs are finished.
+      if ($activeRuns === 0) {
+        $workflow->setStatus(Workflow::STATUS_DRAFT);
+        $this->workflowStorage->updateWorkflow($workflow);
+      }
+    }
   }
 }

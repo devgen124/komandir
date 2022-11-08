@@ -171,8 +171,8 @@ class Sending {
   }
 
   public function save() {
-    $this->task->save();
     $this->queue->save();
+    $this->task->save();
     $errors = $this->getErrors();
     if ($errors) {
       $loggerFactory = LoggerFactory::getInstance();
@@ -197,6 +197,7 @@ class Sending {
   public function getSendingQueueEntity(): SendingQueueEntity {
     $sendingQueuesRepository = ContainerWrapper::getInstance()->get(SendingQueuesRepository::class);
     $sendingQueueEntity = $sendingQueuesRepository->findOneById($this->queue->id);
+    $sendingQueuesRepository->refresh($sendingQueueEntity);
 
     return $sendingQueueEntity;
   }

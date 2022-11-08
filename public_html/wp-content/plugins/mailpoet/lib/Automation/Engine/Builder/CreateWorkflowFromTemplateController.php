@@ -6,11 +6,11 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Automation\Engine\Data\Workflow;
+use MailPoet\Automation\Engine\Exceptions;
 use MailPoet\Automation\Engine\Exceptions\InvalidStateException;
 use MailPoet\Automation\Engine\Storage\WorkflowStorage;
 use MailPoet\Automation\Engine\Storage\WorkflowTemplateStorage;
 use MailPoet\Automation\Engine\Validation\WorkflowValidator;
-use MailPoet\UnexpectedValueException;
 
 class CreateWorkflowFromTemplateController {
   /** @var WorkflowStorage */
@@ -35,7 +35,7 @@ class CreateWorkflowFromTemplateController {
   public function createWorkflow(string $slug): Workflow {
     $template = $this->templateStorage->getTemplateBySlug($slug);
     if (!$template) {
-      throw UnexpectedValueException::create()->withMessage('Template not found.');
+      throw Exceptions::workflowTemplateNotFound($slug);
     }
 
     $workflow = $template->getWorkflow();
@@ -43,7 +43,7 @@ class CreateWorkflowFromTemplateController {
     $workflowId = $this->storage->createWorkflow($workflow);
     $savedWorkflow = $this->storage->getWorkflow($workflowId);
     if (!$savedWorkflow) {
-      throw new InvalidStateException('Workflow not found.');
+      throw new InvalidStateException('Automation not found.');
     }
     return $savedWorkflow;
   }

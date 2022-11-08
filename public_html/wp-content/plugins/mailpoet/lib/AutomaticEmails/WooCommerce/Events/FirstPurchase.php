@@ -78,9 +78,28 @@ class FirstPurchase {
       'title' => __('First Purchase', 'mailpoet'),
       'description' => __('Let MailPoet send an email to customers who make their first purchase.', 'mailpoet'),
       'listingScheduleDisplayText' => __('Email sent when a customer makes their first purchase.', 'mailpoet'),
+      'afterDelayText' => __('after the first purchase', 'mailpoet'),
       'badge' => [
         'text' => __('Must-have', 'mailpoet'),
         'style' => 'red',
+      ],
+      'timeDelayValues' => [
+        'immediate' => [
+          'text' => __('immediately', 'mailpoet'),
+          'displayAfterTimeNumberField' => false,
+        ],
+        'hours' => [
+          'text' => __('hour(s)', 'mailpoet'),
+          'displayAfterTimeNumberField' => true,
+        ],
+        'days' => [
+          'text' => __('day(s)', 'mailpoet'),
+          'displayAfterTimeNumberField' => true,
+        ],
+        'weeks' => [
+          'text' => __('week(s)', 'mailpoet'),
+          'displayAfterTimeNumberField' => true,
+        ],
       ],
       'shortcodes' => [
         [
@@ -191,7 +210,7 @@ class FirstPurchase {
         'subscriber_id' => $subscriber->getId(),
       ]
     );
-    $this->scheduler->scheduleAutomaticEmail(WooCommerce::SLUG, self::SLUG, $checkEmailWasNotScheduled, $subscriber->getId(), $meta);
+    $this->scheduler->scheduleAutomaticEmail(WooCommerce::SLUG, self::SLUG, $checkEmailWasNotScheduled, $subscriber, $meta);
   }
 
   public function getCustomerOrderCount($customerEmail) {

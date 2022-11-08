@@ -76,6 +76,8 @@ class CronWorkerRunner {
       foreach ($dueTasks as $task) {
         $this->prepareTask($worker, $task);
       }
+      // Re-fetch running tasks so that we can process tasks that were just prepared
+      $runningTasks = $this->getRunningTasks($worker);
       foreach ($runningTasks as $task) {
         $this->processTask($worker, $task);
       }

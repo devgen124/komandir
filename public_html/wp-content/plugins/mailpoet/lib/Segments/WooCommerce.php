@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Config\Env;
+use MailPoet\Config\SubscriberChangesNotifier;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\SubscriberSegmentEntity;
 use MailPoet\Models\ModelValidator;
@@ -57,6 +58,9 @@ class WooCommerce {
   /** @var Connection */
   private $connection;
 
+  /** @var SubscriberChangesNotifier */
+  private $subscriberChangesNotifier;
+
   public function __construct(
     SettingsController $settings,
     WPFunctions $wp,
@@ -67,7 +71,8 @@ class WooCommerce {
     SubscriberSaveController $subscriberSaveController,
     WP $wpSegment,
     EntityManager $entityManager,
-    Connection $connection
+    Connection $connection,
+    SubscriberChangesNotifier $subscriberChangesNotifier
   ) {
     $this->settings = $settings;
     $this->wp = $wp;
@@ -79,6 +84,7 @@ class WooCommerce {
     $this->woocommerceHelper = $woocommerceHelper;
     $this->entityManager = $entityManager;
     $this->connection = $connection;
+    $this->subscriberChangesNotifier = $subscriberChangesNotifier;
   }
 
   public function shouldShowWooCommerceSegment(): bool {
@@ -315,6 +321,8 @@ class WooCommerce {
       $subscribersValues[] = "(1, {$email}, '{$status}', '{$now}', '{$now}', '{$source}')";
     }
 
+    // Save timestamp about changes before insert
+    $this->subscriberChangesNotifier->subscribersBatchUpdate();
     // Update existing subscribers
     $this->connection->executeQuery('
       UPDATE ' . $subscribersTable . ' mps
@@ -322,6 +330,8 @@ class WooCommerce {
       WHERE mps.email IN (:emails)
     ', ['emails' => $emails], ['emails' => Connection::PARAM_STR_ARRAY]);
 
+    // Save timestamp about new subscribers before insert
+    $this->subscriberChangesNotifier->subscribersBatchCreate();
     // Insert new subscribers
     $this->connection->executeQuery('
       INSERT IGNORE INTO ' . $subscribersTable . ' (`is_woocommerce_user`, `email`, `status`, `created_at`, `last_subscribed_at`, `source`) VALUES
@@ -341,18 +351,43 @@ class WooCommerce {
     }
     $subscribersTable = $this->entityManager->getClassMetadata(SubscriberEntity::class)->getTableName();
 
-    $metaKeys = [
-      '_billing_first_name',
-      '_billing_last_name',
-    ];
-    $metaData = $this->connection->executeQuery("
-      SELECT post_id, meta_key, meta_value
-      FROM {$wpdb->postmeta}
-      WHERE meta_key IN (:metaKeys) AND post_id IN (:postIds)
-    ",
-      ['metaKeys' => $metaKeys, 'postIds' => array_values($orders)],
-      ['metaKeys' => Connection::PARAM_STR_ARRAY, 'postIds' => Connection::PARAM_INT_ARRAY]
-    )->fetchAllAssociative();
+    if ($this->woocommerceHelper->isWooCommerceCustomOrdersTableEnabled()) {
+      $addressesTableName = $this->woocommerceHelper->getAddressesTableName();
+      $metaData = [];
+      $results = $this->connection->executeQuery("
+        SELECT order_id, first_name, last_name
+        FROM {$addressesTableName}
+        WHERE order_id IN (:orderIds) and address_type = 'billing'",
+        ['orderIds' => array_values($orders)],
+        ['orderIds' => Connection::PARAM_INT_ARRAY]
+      )->fetchAllAssociative();
+
+      // format data in the same format that is used when querying wp_postmeta (see below).
+      foreach ($results as $result) {
+        $firstNameData['post_id'] = $result['order_id'];
+        $firstNameData['meta_key'] = '_billing_first_name';
+        $firstNameData['meta_value'] = $result['first_name'];
+        $metaData[] = $firstNameData;
+
+        $lastNameData['post_id'] = $result['order_id'];
+        $lastNameData['meta_key'] = '_billing_last_name';
+        $lastNameData['meta_value'] = $result['last_name'];
+        $metaData[] = $lastNameData;
+      }
+    } else {
+      $metaKeys = [
+        '_billing_first_name',
+        '_billing_last_name',
+      ];
+      $metaData = $this->connection->executeQuery("
+        SELECT post_id, meta_key, meta_value
+        FROM {$wpdb->postmeta}
+        WHERE meta_key IN ('_billing_first_name', '_billing_last_name') AND post_id IN (:postIds)
+      ",
+        ['metaKeys' => $metaKeys, 'postIds' => array_values($orders)],
+        ['metaKeys' => Connection::PARAM_STR_ARRAY, 'postIds' => Connection::PARAM_INT_ARRAY]
+      )->fetchAllAssociative();
+    }
 
     $subscribersData = [];
     foreach ($orders as $email => $postId) {

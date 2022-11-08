@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Automation\Engine\Data\Field;
 use MailPoet\Automation\Engine\Data\Subject as SubjectData;
-use MailPoet\Automation\Engine\Workflows\Payload;
-use MailPoet\Automation\Engine\Workflows\Subject;
+use MailPoet\Automation\Engine\Integration\Payload;
+use MailPoet\Automation\Engine\Integration\Subject;
 use MailPoet\Automation\Integrations\MailPoet\Payloads\SubscriberPayload;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\NotFoundException;
@@ -85,7 +85,6 @@ class SubscriberSubject implements Subject {
           SubscriberEntity::STATUS_SUBSCRIBED => __('Subscribed', 'mailpoet'),
           SubscriberEntity::STATUS_UNCONFIRMED => __('Unconfirmed', 'mailpoet'),
           SubscriberEntity::STATUS_UNSUBSCRIBED => __('Unsubscribed', 'mailpoet'),
-          SubscriberEntity::STATUS_INACTIVE => __('Inactive', 'mailpoet'),
           SubscriberEntity::STATUS_BOUNCED => __('Bounced', 'mailpoet'),
         ]
       ),

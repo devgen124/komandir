@@ -8,9 +8,9 @@ if (!defined('ABSPATH')) exit;
 use MailPoet\Automation\Engine\Data\Subject as SubjectData;
 use MailPoet\Automation\Engine\Data\SubjectEntry;
 use MailPoet\Automation\Engine\Exceptions;
+use MailPoet\Automation\Engine\Integration\Payload;
+use MailPoet\Automation\Engine\Integration\Subject;
 use MailPoet\Automation\Engine\Registry;
-use MailPoet\Automation\Engine\Workflows\Payload;
-use MailPoet\Automation\Engine\Workflows\Subject;
 
 class SubjectLoader {
   /** @var Registry */

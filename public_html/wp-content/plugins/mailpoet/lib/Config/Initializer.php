@@ -15,6 +15,7 @@ use MailPoet\Cron\CronTrigger;
 use MailPoet\Cron\DaemonActionSchedulerRunner;
 use MailPoet\Features\FeaturesController;
 use MailPoet\InvalidStateException;
+use MailPoet\Migrator\Cli as MigratorCli;
 use MailPoet\PostEditorBlocks\PostEditorBlock;
 use MailPoet\PostEditorBlocks\WooCommerceBlocksIntegration;
 use MailPoet\Router;
@@ -49,6 +50,9 @@ class Initializer {
 
   /** @var SettingsController */
   private $settings;
+
+  /** @var MigratorCli */
+  private $migratorCli;
 
   /** @var Router\Router */
   private $router;
@@ -125,6 +129,7 @@ class Initializer {
     RestApi $restApi,
     Activator $activator,
     SettingsController $settings,
+    MigratorCli $migratorCli,
     Router\Router $router,
     Hooks $hooks,
     Changelog $changelog,
@@ -154,6 +159,7 @@ class Initializer {
     $this->restApi = $restApi;
     $this->activator = $activator;
     $this->settings = $settings;
+    $this->migratorCli = $migratorCli;
     $this->router = $router;
     $this->hooks = $hooks;
     $this->changelog = $changelog;
@@ -289,6 +295,7 @@ class Initializer {
 
   public function initialize() {
     try {
+      $this->migratorCli->initialize();
       $this->maybeDbUpdate();
       $this->setupInstaller();
       $this->setupUpdater();
@@ -476,7 +483,7 @@ class Initializer {
 
   private function setupWoocommerceBlocksIntegration() {
     $wcEnabled = $this->wcHelper->isWooCommerceActive();
-    $wcBlocksEnabled = $this->wcHelper->isWooCommerceBlocksActive('6.3.0-dev');
+    $wcBlocksEnabled = $this->wcHelper->isWooCommerceBlocksActive('8.0.0');
     if ($wcEnabled && $wcBlocksEnabled) {
       $this->woocommerceBlocksIntegration->init();
     }

@@ -12,6 +12,8 @@ use MailPoet\Automation\Engine\Validation\WorkflowGraph\WorkflowNode;
 use MailPoet\Automation\Engine\Validation\WorkflowGraph\WorkflowNodeVisitor;
 
 class TriggersUnderRootRule implements WorkflowNodeVisitor {
+  public const RULE_ID = 'triggers-under-root';
+
   /** @var array<string, Step> $triggersMap */
   private $triggersMap = [];
 
@@ -33,7 +35,7 @@ class TriggersUnderRootRule implements WorkflowNodeVisitor {
     foreach ($step->getNextSteps() as $nextStep) {
       $nextStepId = $nextStep->getId();
       if (isset($this->triggersMap[$nextStepId])) {
-        throw Exceptions::workflowStructureNotValid(__('Trigger must be a direct descendant of workflow root', 'mailpoet'));
+        throw Exceptions::workflowStructureNotValid(__('Trigger must be a direct descendant of automation root', 'mailpoet'), self::RULE_ID);
       }
     }
   }

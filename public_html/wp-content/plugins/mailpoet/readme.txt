@@ -3,7 +3,7 @@ Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.6
 Tested up to: 6.0
-Stable tag: 3.100.2
+Stable tag: 3.103.0
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -93,7 +93,7 @@ Or if you opt for a MailPoet plan, you’ll get access to the MailPoet Sending S
 
 A free Starter plan is available for those who have 1,000 subscribers or less and would like to use the MailPoet Sending Service. And our paid plans offer features and functionality for those with larger lists who are looking to grow their business using email marketing.
 
-Take a look at [our pricing page](http://www.mailpoet.com/pricing) for full details on what’s included in each plan.
+Take a look at [our pricing page](https://www.mailpoet.com/pricing) for full details on what’s included in each plan.
 
 = Before you install =
 
@@ -218,6 +218,38 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 3.103.0 - 2022-11-07 =
+* Added: deleteList and updateList API methods (https://github.com/mailpoet/mailpoet/tree/trunk/doc);
+* Added: forms can be configured to show on product pages;
+* Improved: more explanatory automatic emails setup;
+* Improved: consistent case in the form editor labels;
+* Improved: long sign-up button text will wrap to a new line;
+* Improved: confirmation emails can now be personalized;
+* Fixed: MailPoet key validation can fail, if the site URL is configured with uppercase letters;
+* Fixed: required questions in onboarding can be skipped;
+* Declare MailPoet as compatible with the upcoming WooCommerce High Performance Order Storage.
+
+= 3.102.1 - 2022-11-03 =
+* Fixed: missing 'CheckoutSchema' class error in WooCommerce blocks integration;
+* Fixed: "Class 'Normalizer' not found" error in WP 6.1 when intl extension is missing.
+
+= 3.102.0 - 2022-11-01 =
+* Added: new subscribers hooks (https://github.com/mailpoet/mailpoet/pull/4443);
+* Improved: limit cron runs when execution limit exception is thrown;
+* Improved: list(s) are replaced with the site title on the subscription confirmation page.
+
+= 3.101.1 - 2022-10-24 =
+* Improved: simplified privacy and data sharing section in onboarding;
+* Improved: don't require any newsletter settings when saving a draft;
+* Fixed: an error in the checkout, when the shop has multiple automatic emails set up.
+
+= 3.101.0 - 2022-10-17 =
+* Added: new API method getSubscribersCount;
+* Added: new API method getSubscribers;
+* Improved: cron-related tasks;
+* Improved: confirm leaving Settings page when leaving without saving;
+* Improved: messaging when verifying an API key.
 
 = 3.100.2 - 2022-10-10 =
 * Fixed: scheduled newsletters not sending.
