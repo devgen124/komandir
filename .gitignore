@@ -40,4 +40,5 @@ __MACOSX/
 
 # wordpress
 
+public_html/wp-admin/*
 public_html/wp-content/uploads/*
