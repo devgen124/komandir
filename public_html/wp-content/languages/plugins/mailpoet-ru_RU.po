@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-10-10 16:09:13+0000\n"
+"PO-Revision-Date: 2022-11-07 23:57:23+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -9,100 +9,272 @@ msgstr ""
 "Language: ru\n"
 "Project-Id-Version: MailPoet - MailPoet\n"
 
+#: lib/Config/Menu.php:460 lib/Config/Menu.php:461
+msgid "Automation Templates"
+msgstr ""
+
+#: lib/Config/Menu.php:450 lib/Config/Menu.php:451
+msgid "Automation Editor"
+msgstr ""
+
+#: lib/Config/Menu.php:413
+msgid "Experimental Features"
+msgstr ""
+
+#: lib/Automation/Integrations/MailPoet/Actions/SendEmailAction.php:94
+msgid "Automation email not found."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:114
+msgid "This value is not an UUID."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:112
+msgid "This value is not an IP address."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:110
+msgid "This value is not an email address."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:108
+msgid "This value is not a date."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:106
+msgid "This value is not a hex formatted color."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:104
+msgid "This value is not matching the correct times."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:102
+msgid "This value does not match the expected format."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:100
+msgid "This value is not well formed."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:98
+msgid "This value is too long."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:96
+msgid "This value is not long enough."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:94
+msgid "This value is out of bounds."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:92
+msgid "Please remove duplicate items."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:90
+msgid "Please remove some items."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:88
+msgid "Please add more items."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:86
+msgid "This field is not well formed."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:78
+msgid "This is a required field."
+msgstr "Это обязательное поле."
+
+#: lib/Automation/Engine/Validation/WorkflowRules/TriggerNeedsToBeFollowedByActionRule.php:24
+#: lib/Automation/Engine/Validation/WorkflowRules/TriggerNeedsToBeFollowedByActionRule.php:31
+msgid "A trigger needs to be followed by an action."
+msgstr ""
+
+#: lib/Automation/Engine/Validation/WorkflowRules/AtLeastOneTriggerRule.php:31
+msgid "There must be at least one trigger in the workflow."
+msgstr ""
+
+#. translators: %1$s is the ID of the workflow.
+#: lib/Automation/Engine/Exceptions.php:81
+msgid "Workflow with ID \"%1$s\" in no longer active."
+msgstr ""
+
+#: views/woocommerce_setup_translations.html:7
+msgid "Collect more precise email and site engagement, and e-commerce metrics by enabling cookie tracking. [link]Learn more[/link]."
+msgstr ""
+
+#: assets/dist/js/marketing_optin_block/block.json
+msgctxt "block title"
+msgid "MailPoet Marketing Opt-in"
+msgstr "Маркетинговое подтверждение MailPoet"
+
+#: lib/Config/Menu.php:439 lib/Config/Menu.php:441
+msgid "Automations"
+msgstr "Автоматизации"
+
+#: lib/Automation/Integrations/MailPoet/Triggers/UserRegistrationTrigger.php:44
+msgid "WordPress user registers"
+msgstr "Регистрируется пользователь WordPress"
+
+#. translators: %s is the ID of email.
+#: lib/Automation/Integrations/MailPoet/Actions/SendEmailAction.php:100
+#: lib/Automation/Integrations/MailPoet/Actions/SendEmailAction.php:173
+msgid "Automation email with ID '%s' not found."
+msgstr "Электронное письмо автоматизации с идентификатором '%s' не найдено."
+
+#: lib/Automation/Integrations/Core/Actions/DelayAction.php:52
+msgid "A delay can't be longer than two years"
+msgstr "Задержка не может быть больше 2 лет"
+
+#: lib/Automation/Integrations/Core/Actions/DelayAction.php:48
+msgid "A delay must have a positive value"
+msgstr "Задержка должна иметь положительное значение"
+
+#: lib/Automation/Integrations/Core/Actions/DelayAction.php:30
+msgctxt "noun"
+msgid "Delay"
+msgstr "Задержка"
+
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:134
+msgid "Some steps are not valid"
+msgstr "Некоторые шаги недействительны"
+
+#: lib/Automation/Engine/Exceptions/Exception.php:27
+#: lib/Automation/Engine/Validation/WorkflowRules/ValidStepRule.php:66
+msgid "Unknown error."
+msgstr "Неизвестная ошибка."
+
+#. translators: %d is the ID of the workflow template.
+#: lib/Automation/Engine/Exceptions.php:229
+msgid "Workflow template with ID '%d' not found."
+msgstr "Шаблон рабочего процесса с идентификатором '%d' не найден. "
+
+#. translators: %d is the ID of the workflow.
+#: lib/Automation/Engine/Exceptions.php:222
+msgid "Can't delete workflow with ID '%d' because it was not trashed."
+msgstr "Невозможно удалить рабочий процесс с идентификатором '%d', поскольку он не был перемещён в корзину."
+
+#: lib/Automation/Engine/Exceptions.php:211
+msgid "Step with ID '%1$s' is missing required subjects with keys: %2$s"
+msgstr "В шаге с идентификатором '%1$s' отсутствуют необходимые предметы с ключами: %2$s"
+
+#. translators: %s is a detailed information
+#: lib/Automation/Engine/Exceptions.php:201
+msgid "Workflow validation failed: %s"
+msgstr "Проверка рабочего процесса не удалась: %s"
+
+#: lib/API/JSON/v1/Services.php:115 lib/API/JSON/v1/Services.php:181
+msgid "Your Premium key has been successfully validated, but is not valid for MailPoet Sending Service"
+msgstr "Ваш ключ Premium успешно прошёл проверку, но он не подходит для сервиса рассылки MailPoet"
+
+#: views/welcome_wizard.html:36
+msgid "Enable better-looking Google fonts in emails and show contextual help articles in MailPoet?"
+msgstr "Включить более красивые шрифты Google в электронных письмах и показывать контекстные справочные статьи в MailPoet?"
+
+#: views/welcome_wizard.html:34
+msgid "If enabled, we may load the Google Fonts library and [link]other 3rd-party libraries we use[/link]."
+msgstr "Если включено, мы можем загружать библиотеку шрифтов Google и [link]другие сторонние библиотеки[/link]."
+
+#: views/welcome_wizard.html:32
+msgid "Get improved features and fixes faster by sharing with us [link]non-sensitive data about how you use MailPoet[/link]. No personal data is tracked or stored."
+msgstr "Получите расширенные функции и быстрое устранение неполадок, поделившись с нами [link]неконфиденциальными данными о том, как вы используете MailPoet[/link]. Личные данные не отслеживаются и не сохраняются."
+
+#: views/welcome_wizard.html:31
+msgid "Help improve MailPoet"
+msgstr "Помогите улучшить MailPoet"
+
+#: views/welcome_wizard.html:30
+msgid "Privacy and data sharing"
+msgstr "Конфиденциальность и обмен данными"
+
 #: views/form/editor.html:219
 msgid "Add New Tag"
 msgstr "Добавить новую метку"
 
 #: lib/Util/Notices/BlackFridayNotice.php:36
 msgid "Save 40% on all annual plans until 2 pm UTC, October 7. Terms & conditions apply."
-msgstr ""
+msgstr "Сэкономьте 40% на всех годовых планах до 14:00 UTC, 7 октября. Применяются положения и условия."
 
 #: lib/Util/Notices/BlackFridayNotice.php:35
 msgid "Get ready for Black Friday with 40% off MailPoet plans"
-msgstr ""
+msgstr "Подготовьтесь к \"черной пятнице\" с 40% скидкой на тарифные планы MailPoet"
 
-#: lib/Automation/Integrations/MailPoet/Triggers/SomeoneSubscribesTrigger.php:34
+#: lib/Automation/Integrations/MailPoet/Triggers/SomeoneSubscribesTrigger.php:35
 msgid "Someone subscribes"
-msgstr ""
+msgstr "Кто-то подписывается"
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:36
 msgid "MailPoet subscriber"
-msgstr ""
+msgstr "Подписчик MailPoet"
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SegmentSubject.php:35
 msgid "MailPoet segment"
-msgstr ""
+msgstr "Сегмент MailPoet"
 
-#: lib/Automation/Engine/Validation/WorkflowRules/TriggersUnderRootRule.php:33
+#: lib/Automation/Engine/Validation/WorkflowRules/TriggersUnderRootRule.php:35
 msgid "Trigger must be a direct descendant of workflow root"
-msgstr ""
+msgstr "Триггер должен быть прямым потомком корня рабочего процесса"
 
-#: lib/Automation/Engine/Validation/WorkflowRules/NoUnreachableStepsRule.php:24
+#: lib/Automation/Engine/Validation/WorkflowRules/NoUnreachableStepsRule.php:26
 msgid "Unreachable steps found in workflow graph"
-msgstr ""
+msgstr "В графе рабочего процесса обнаружены недоступные шаги"
 
-#: lib/Automation/Engine/Validation/WorkflowRules/NoSplitRule.php:17
+#: lib/Automation/Engine/Validation/WorkflowRules/NoSplitRule.php:19
 msgid "Path split found in workflow graph"
-msgstr ""
+msgstr "Разделение пути найдено в графе рабочего процесса"
 
-#: lib/Automation/Engine/Validation/WorkflowRules/NoJoinRule.php:25
+#: lib/Automation/Engine/Validation/WorkflowRules/NoJoinRule.php:27
 msgid "Path join found in workflow graph"
-msgstr ""
+msgstr "Совмещение пути найдено в графе рабочего процесса"
 
-#: lib/Automation/Engine/Validation/WorkflowRules/NoDuplicateEdgesRule.php:18
+#: lib/Automation/Engine/Validation/WorkflowRules/NoDuplicateEdgesRule.php:20
 msgid "Duplicate next step definition found"
-msgstr ""
+msgstr "Найдено дублирующее определение следующего шага"
 
-#: lib/Automation/Engine/Validation/WorkflowRules/NoCycleRule.php:28
+#: lib/Automation/Engine/Validation/WorkflowRules/NoCycleRule.php:30
 msgid "Cycle found in workflow graph"
-msgstr ""
+msgstr "Цикл найден в графе рабочего процесса"
 
-#. translators: %1$s is the ID of the step, %2$s is its index in the steps
-#. object.
-#: lib/Automation/Engine/Validation/WorkflowRules/ConsistentStepMapRule.php:16
+#: lib/Automation/Engine/Validation/WorkflowRules/ConsistentStepMapRule.php:18
 msgid "Step with ID '%1$s' stored under a mismatched index '%2$s'."
-msgstr ""
+msgstr "Шаг с идентификатором '%1$s' хранится под несовпадающим индексом '%2$s'."
 
-#. translators: %1$s is ID of the step not found, %2$s is ID of the step that
-#. references it
 #: lib/Automation/Engine/Validation/WorkflowGraph/WorkflowWalker.php:75
 msgid "Step with ID '%1$s' not found (referenced from '%2$s')"
-msgstr ""
+msgstr "Шаг с идентификатором '%1$s' не найден (ссылка с '%2$s')"
 
 #: lib/Automation/Engine/Validation/WorkflowGraph/WorkflowWalker.php:18
 msgid "Workflow must contain a 'root' step"
-msgstr ""
+msgstr "Рабочий процесс должен содержать \"корневой\" шаг"
 
-#. translators: %1$s is the key of the step, %2$s is the type of the step,
-#. %3\$s is its ID.
-#: lib/Automation/Engine/Exceptions.php:191
+#: lib/Automation/Engine/Exceptions.php:189
 msgid "Modification of step '%1$s' of type '%2$s' with ID '%3$s' is not supported when the related plugin is not active."
-msgstr ""
+msgstr "Модификация шага '%1$s' типа '%2$s' с ID '%3$s' не поддерживается, если связанный плагин не активен."
 
 #. translators: %s is a detailed information
-#: lib/Automation/Engine/Exceptions.php:182
+#: lib/Automation/Engine/Exceptions.php:179
 msgid "Invalid workflow structure: %s"
-msgstr ""
+msgstr "Недопустимая структура рабочего процесса: %s"
 
-#. translators: %1$s is the class of the payloads, %2$d is workflow run ID.
-#: lib/Automation/Engine/Exceptions.php:168
+#: lib/Automation/Engine/Exceptions.php:165
 msgid "Multiple payloads of class '%1$s' found for workflow run with ID '%2$d'."
-msgstr ""
+msgstr "Найдено несколько полезных нагрузок класса '%1$s' для рабочего процесса, запущенного с идентификатором '%2$d'."
 
-#. translators: %1$s is the class of the payload, %2$d is workflow run ID.
-#: lib/Automation/Engine/Exceptions.php:159
+#: lib/Automation/Engine/Exceptions.php:156
 msgid "Payload of class '%1$s' not found for workflow run with ID '%2$d'."
-msgstr ""
+msgstr "Не найдена полезная нагрузка класса '%1$s' для рабочего процесса, запущенного с ID '%2$d'."
 
-#. translators: %1$s is the key of the subject, %2$d is workflow run ID.
-#: lib/Automation/Engine/Exceptions.php:150
+#: lib/Automation/Engine/Exceptions.php:147
 msgid "Multiple subjects with key '%1$s' found for workflow run with ID '%2$d', only one expected."
-msgstr ""
+msgstr "Найдено несколько тем с ключом '%1$s' для выполнения рабочего процесса с ID '%2$d', ожидается только один."
 
-#. translators: %1$s is the key of the subject, %2$d is workflow run ID.
-#: lib/Automation/Engine/Exceptions.php:141
+#: lib/Automation/Engine/Exceptions.php:138
 msgid "Subject data for subject with key '%1$s' not found for workflow run with ID '%2$d'."
-msgstr ""
+msgstr "Данные темы с ключом '%1$s' не найдены для рабочего процесса с ID '%2$d'."
 
 #: views/subscribers/importExport/import.html:139
 msgid "Pick a tag or create a new one to assign to these subscribers."
@@ -120,7 +292,7 @@ msgstr "Адрес электронной почты не авторизован
 msgid "Please select a list with subscribers."
 msgstr "Пожалуйста, выберите список с подписчиками."
 
-#: lib/Automation/Engine/Control/RootStep.php:14
+#: lib/Automation/Engine/Control/RootStep.php:15
 msgid "Root step"
 msgstr "Начальный шаг"
 
@@ -137,12 +309,12 @@ msgid "Tutorial"
 msgstr "Руководство"
 
 #. translators: %d is the ID of the segment
-#: lib/API/MP/v1/Subscribers.php:347
+#: lib/API/MP/v1/Subscribers.php:398
 msgid "Can't unsubscribe from a list with ID %d."
 msgstr "Невозможно удалить из списка с ID %d."
 
 #. translators: %s is an error message
-#: lib/API/MP/v1/Subscribers.php:144
+#: lib/API/MP/v1/Subscribers.php:152
 msgid "Failed to save subscriber custom fields: %s"
 msgstr "Не удалось сохранить пользовательские поля подписчика: %s"
 
@@ -238,62 +410,62 @@ msgid "Segment with ID '%d' not found."
 msgstr "Сегмент с ID '%d' не найден."
 
 #. translators: %1$s is the name of the key, %2$s the arguments.
-#: lib/Automation/Engine/Exceptions.php:133
+#: lib/Automation/Engine/Exceptions.php:130
 msgid "Subject with key \"%1$s\" and args \"%2$s\" failed to load."
 msgstr "Не удалось загрузить тему с ключом \"%1$s\" и аргументами \"%2$s\"."
 
 #. translators: %s is the class name of the subject not found.
-#: lib/Automation/Engine/Exceptions.php:126
+#: lib/Automation/Engine/Exceptions.php:123
 msgid "Subject of class '%s' not found."
 msgstr "Не найдена тема класса '%s'."
 
 #. translators: %s is the key of the subject not found.
-#: lib/Automation/Engine/Exceptions.php:119
+#: lib/Automation/Engine/Exceptions.php:116
 msgid "Subject with key '%s' not found."
 msgstr "Не найдена тема с ключом '%s'."
 
 #. translators: %1$d is the ID of the workflow run, %2$s its current status.
-#: lib/Automation/Engine/Exceptions.php:112
+#: lib/Automation/Engine/Exceptions.php:109
 msgid "Workflow run with ID \"%1$d\" is not running. Status: %2$s"
 msgstr "Рабочий процесс с ID \"%1$d\" не выполняется. Статус: %2$s"
 
 #. translators: %1$s is the key, %2$d is the workflow ID.
-#: lib/Automation/Engine/Exceptions.php:105
+#: lib/Automation/Engine/Exceptions.php:102
 msgid "Workflow trigger with key \"%1$s\" not found in workflow ID \"%2$d\"."
 msgstr "Триггер рабочего процесса с ключом \"%1$s\" не найден в ID рабочего процесса \"%2$d\"."
 
 #. translators: %s is the key of the workflow step.
-#: lib/Automation/Engine/Exceptions.php:98
+#: lib/Automation/Engine/Exceptions.php:95
 msgid "Workflow step with key '%s' not found."
 msgstr "Этап рабочего процесса с ключем '%s' не найден."
 
 #. translators: %d is the ID of the workflow run.
-#: lib/Automation/Engine/Exceptions.php:91
+#: lib/Automation/Engine/Exceptions.php:88
 msgid "Workflow run with ID '%d' not found."
 msgstr "Запуск рабочего процесса с ID '%d' не найден."
 
 #. translators: %1$s is the ID of the workflow, %2$s the version.
-#: lib/Automation/Engine/Exceptions.php:84
+#: lib/Automation/Engine/Exceptions.php:74
 msgid "Workflow with ID \"%1$s\" in version \"%2$s\" not found."
 msgstr "Рабочий процесс с ID \"%1$s\" в версии \"%2$s\" не найден."
 
 #. translators: %d is the ID of the workflow.
-#: lib/Automation/Engine/Exceptions.php:77
+#: lib/Automation/Engine/Exceptions.php:67
 msgid "Workflow with ID '%d' not found."
 msgstr "Рабочий процесс с ID '%d' не найден."
 
 #. translators: %s is the mentioned JSON string.
-#: lib/Automation/Engine/Exceptions.php:70
+#: lib/Automation/Engine/Exceptions.php:60
 msgid "JSON string '%s' doesn't encode an object."
 msgstr "Строка JSON '%s' не кодирует объект."
 
 #. translators: %s is the error message.
-#: lib/Automation/Engine/Exceptions.php:50
+#: lib/Automation/Engine/Exceptions.php:53
 msgid "Database error: %s"
 msgstr "Ошибка базы данных: %s"
 
 #. translators: %s is the error message.
-#: lib/Automation/Engine/Exceptions.php:43
+#: lib/Automation/Engine/Exceptions.php:46
 msgid "Migration failed: %s"
 msgstr "Миграция не удалась: %s"
 
@@ -303,42 +475,42 @@ msgid "Invalid status: %s"
 msgstr "Неверный статус: %s"
 
 #. translators: %s is the error message
-#: lib/API/MP/v1/Subscribers.php:269
+#: lib/API/MP/v1/Subscribers.php:320
 msgid "Subscriber added to lists, but confirmation email failed to send: %s"
 msgstr "Подписчик добавлен в списки, но не удалось отправить письмо с подтверждением: %s"
 
 #. translators: %s is a comma-separated list of errors
-#: lib/API/MP/v1/Subscribers.php:252
+#: lib/API/MP/v1/Subscribers.php:303
 msgid "Subscriber added, but welcome email failed to send: %s"
 msgstr "Подписчик добавлен, но не удалось отправить приветственное письмо: %s"
 
 #. translators: %s is the error message
-#: lib/API/MP/v1/Subscribers.php:191
+#: lib/API/MP/v1/Subscribers.php:199
 msgid "Failed to save a status of a subscriber : %s"
 msgstr "Не удалось сохранить статус подписчика: %s"
 
 #. translators: %d is the ID of the segment
-#: lib/API/MP/v1/Subscribers.php:344
+#: lib/API/MP/v1/Subscribers.php:395
 msgid "Can't subscribe to a list with ID %d."
 msgstr "Невозможно подписаться на список с ID %d."
 
 #. translators: %d is the ID of the segment
-#: lib/API/MP/v1/Subscribers.php:334
+#: lib/API/MP/v1/Subscribers.php:385
 msgid "Can't subscribe to a WooCommerce Customers list with ID %d."
 msgstr "Невозможно добавить в список клиентов WooCommerce с ID %d."
 
 #. translators: %d is the ID of the segment
-#: lib/API/MP/v1/Subscribers.php:324
+#: lib/API/MP/v1/Subscribers.php:375
 msgid "Can't subscribe to a WordPress Users list with ID %d."
 msgstr "Невозможно добавить в список пользователей WordPress с ID %d."
 
 #. translators: %d is the ID of the segment
-#: lib/API/MP/v1/Subscribers.php:337
+#: lib/API/MP/v1/Subscribers.php:388
 msgid "Can't unsubscribe from a WooCommerce Customers list with ID %d."
 msgstr "Невозможно удалить из списка клиентов WooCommerce  с ID %d."
 
 #. translators: %d is the ID of the segment
-#: lib/API/MP/v1/Subscribers.php:327
+#: lib/API/MP/v1/Subscribers.php:378
 msgid "Can't unsubscribe from a WordPress Users list with ID %d."
 msgstr "Невозможно удалить из списка пользователей WordPress с ID %d."
 
@@ -391,21 +563,21 @@ msgstr "Версия"
 msgid "WP Cron / Action Scheduler Status"
 msgstr "WP Cron / Статус планировщика действий"
 
-#: lib/Subscribers/SubscriberListingRepository.php:312
+#: lib/Subscribers/SubscriberListingRepository.php:318
 msgid "All Tags"
 msgstr "Все метки"
 
 #. translators: %s is the error message
 #. translators: %s is an error message.
-#: lib/API/MP/v1/Segments.php:49 lib/API/MP/v1/Subscribers.php:134
+#: lib/API/MP/v1/Segments.php:49 lib/API/MP/v1/Subscribers.php:142
 msgid "Failed to add subscriber: %s"
 msgstr "Не удалось добавить подписчика: %s"
 
-#: lib/Config/Hooks.php:433
+#: lib/Config/Hooks.php:439
 msgid "View MailPoet settings"
 msgstr "Просмотр настроек MailPoet"
 
-#: lib/Automation/Engine/Exceptions.php:175
+#: lib/Automation/Engine/Exceptions.php:172
 msgid "Workflow structure modification not supported."
 msgstr "Изменение структуры рабочего процесса не поддерживается."
 
@@ -444,16 +616,12 @@ msgstr "Авторизация электронного адреса: [senderEma
 msgid "Email with type 'automation' expected, '%s' given."
 msgstr "Ожидается письмо с типом 'automation', получено '%s'."
 
-#: lib/Automation/Integrations/MailPoet/Actions/SendEmailAction.php:61
-#: lib/Automation/Integrations/MailPoet/Actions/SendEmailAction.php:73
+#: lib/Automation/Integrations/MailPoet/Actions/SendEmailAction.php:59
+#: lib/Automation/Integrations/MailPoet/Actions/SendEmailAction.php:69
 msgid "Send email"
 msgstr "Отправить письмо"
 
-#: lib/Automation/Integrations/Core/Actions/DelayAction.php:29
-msgid "Delay"
-msgstr "Задержка"
-
-#: lib/AdminPages/Pages/AutomationEditor.php:53
+#: lib/AdminPages/Pages/AutomationEditor.php:67
 msgid "Workflow not found."
 msgstr "Рабочий процесс не найден."
 
@@ -515,7 +683,7 @@ msgstr "В настоящее время ваша подписка [link]ожи�
 
 #. translators: %1$s is the current parameter and %2$s a comma-separated list
 #. of the allowed types.
-#: lib/Validator/Validator.php:193
+#: lib/Validator/Validator.php:205
 msgid "%1$s is not of type %2$s."
 msgstr "%1$s не принадлежит к типу %2$s."
 
@@ -526,10 +694,6 @@ msgstr "Необработано"
 #: lib/Newsletter/Sending/ScheduledTaskSubscribersListingRepository.php:58
 msgid "Failed"
 msgstr "Ошибка"
-
-#: lib/Automation/Integrations/MailPoet/Triggers/UserRegistrationTrigger.php:43
-msgid "Subscribed to segment"
-msgstr "Подписан на сегмент"
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:77
 msgid "Subscriber status"
@@ -869,18 +1033,10 @@ msgstr "Показывать форму каждый"
 msgid "You have sent more emails this month than your MailPoet plan includes (%1$s), and sending has been temporarily paused. To continue sending with MailPoet Sending Service please [link]upgrade your plan[/link], or wait until sending is automatically resumed on <b>%2$s</b>."
 msgstr "В этом месяце вы отправили больше писем, чем включает ваш план MailPoet (%1$s), и отправка временно приостановлена. Чтобы продолжить отправку с помощью службы отправки MailPoet, [link]обновите свой тарифный план[/link] или дождитесь автоматического возобновления отправки <b>%2$s</b>."
 
-#: lib/Config/Menu.php:355 lib/Config/Menu.php:356 views/newsletters.html:409
-#: views/segments.html:246 views/subscribers/subscribers.html:136
+#: views/newsletters.html:409 views/segments.html:246
+#: views/subscribers/subscribers.html:136 lib/Config/Menu.php:374
 msgid "Upgrade"
 msgstr "Усовершенствовать"
-
-#: lib/Automation/Engine/Exceptions.php:63
-msgid "No JSON body passed."
-msgstr "Не передано тело JSON."
-
-#: lib/Automation/Engine/Exceptions.php:57
-msgid "Method not allowed."
-msgstr "Метод не разрешен."
 
 #: views/newsletters.html:209 views/segments.html:251
 #: views/subscribers/subscribers.html:142
@@ -1004,7 +1160,7 @@ msgstr "Эта рассылка деактивирована."
 msgid "Your current MailPoet plan does not support advanced segments. Please [link]upgrade to a MailPoet Premium plan[/link] to reactivate this segment."
 msgstr "Ваш текущий план MailPoet не поддерживает расширенные сегменты. Пожалуйста, [link]обновите до плана MailPoet Premium[/link], чтобы снова активировать этот сегмент."
 
-#: lib/API/MP/v1/Subscribers.php:283
+#: lib/API/MP/v1/Subscribers.php:334
 msgid "A subscriber is required."
 msgstr "Требуется подписчик."
 
@@ -1103,21 +1259,9 @@ msgstr "ниже чем"
 msgid "higher than"
 msgstr "выше чем"
 
-#: lib/PostEditorBlocks/WooCommerceBlocksIntegration.php:126
+#: lib/PostEditorBlocks/WooCommerceBlocksIntegration.php:122
 msgid "Subscribe to marketing opt-in."
 msgstr "Подпишитесь на маркетинговое подтверждение."
-
-#: lib/PostEditorBlocks/MarketingOptinBlock.php:101
-msgid "Enable opt-in for Checkout"
-msgstr "Включите подтверждение для оплаты"
-
-#: lib/PostEditorBlocks/MarketingOptinBlock.php:100
-msgid "MailPoet marketing opt-in would be shown here if enabled. You can enable from the settings page."
-msgstr "Маркетинговое подтверждение MailPoet будет отображаться здесь, если оно включено. Вы можете включить его на странице настроек."
-
-#: lib/PostEditorBlocks/MarketingOptinBlock.php:99
-msgid "Marketing opt-in"
-msgstr "Маркетинговое подтверждение"
 
 #: views/newsletters.html:90
 msgid "Re-engagement Emails"
@@ -1171,8 +1315,8 @@ msgstr ""
 msgid "Confirm interest before deactivation"
 msgstr "Подтверждение заинтересованности перед деактивацией"
 
-#: lib/Newsletter/NewsletterValidator.php:71 views/newsletter/editor.html:387
-#: views/newsletters.html:426
+#: views/newsletter/editor.html:387 views/newsletters.html:427
+#: lib/Newsletter/NewsletterValidator.php:71
 msgid "A re-engagement email must include a link with [link:subscription_re_engage_url] shortcode."
 msgstr "Письмо с повторным привлечением должно содержать короткий код [link:subscription_re_engage_url]."
 
@@ -1204,11 +1348,11 @@ msgstr "Поблагодарите своих подписчиков, актив
 msgid "Re-engagement page"
 msgstr "Страница повторного привлечения"
 
-#: views/newsletters.html:430
+#: views/newsletters.html:431
 msgid "An email can only be scheduled up to 5 years in the future. Please choose a shorter period."
 msgstr "Электронное письмо можно запланировать только на 5 лет вперед. Пожалуйста, укажите период короче."
 
-#: views/newsletters.html:424
+#: views/newsletters.html:425
 msgid "Re-engagement emails are disabled because [link]open and click tracking[/link] is disabled."
 msgstr "Письма с повторным привлечением отключены, потому что отключено [link]отслеживание открытий и кликов[/link]."
 
@@ -1216,11 +1360,11 @@ msgstr "Письма с повторным привлечением отключ
 msgid "%1$dth"
 msgstr "%1$d-й"
 
-#: lib/Subscription/Pages.php:448
+#: lib/Subscription/Pages.php:439
 msgid "We appreciate your continued interest in our updates. Expect to hear from us again soon!"
 msgstr "Мы ценим то, что вы проявляете интерес к обновлениям. Надеемся скоро услышать что-то от вас!"
 
-#: lib/Subscription/Pages.php:396
+#: lib/Subscription/Pages.php:387
 msgid "Thank you for letting us know!"
 msgstr "Спасибо, что дали нам знать!"
 
@@ -1336,6 +1480,10 @@ msgstr "Адреса в именах не допускаются, пожалуй
 #: lib/Config/Shortcodes.php:106
 msgid "Please note that mailpoet_archive_email_subject no longer runs and that the list of parameters of the new filter is different."
 msgstr "Обратите внимание, что mailpoet_archive_email_subject больше не работает, а список параметров нового фильтра отличается."
+
+#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:161
+msgid "Please note that mailpoet_sending_newsletter_render_after no longer runs and that the list of parameters of the new filter is different."
+msgstr "Обратите внимание, что mailpoet_sending_newsletter_render_after больше не работает, а список параметров нового фильтра отличается."
 
 #: views/subscribers/subscribers.html:50
 msgctxt "when was the last time the subscriber engaged with the website?"
@@ -1465,42 +1613,42 @@ msgctxt "Button in WooCommerce settings page"
 msgid "Customize with MailPoet"
 msgstr "Настроить с MailPoet"
 
-#: views/welcome_wizard.html:50
+#: views/welcome_wizard.html:42
 msgctxt "A form field label"
 msgid "From Name"
 msgstr "Имя отправителя"
 
-#: views/welcome_wizard.html:49
+#: views/welcome_wizard.html:41
 msgctxt "A form field label"
 msgid "Reply-to Address"
 msgstr "Адрес Reply-to"
 
-#: views/welcome_wizard.html:48
+#: views/welcome_wizard.html:40
 msgctxt "A form field label"
 msgid "From Address"
 msgstr "Адрес отправителя"
 
-#: views/welcome_wizard.html:47
+#: views/welcome_wizard.html:39
 msgctxt "A label on a skip button"
 msgid "Finish later"
 msgstr "Завершить позже"
 
-#: views/welcome_wizard.html:46
+#: views/welcome_wizard.html:38
 msgctxt "A label on a skip button"
 msgid "Skip"
 msgstr "Пропустить"
 
-#: views/welcome_wizard.html:52
+#: views/welcome_wizard.html:44
 msgctxt "A label on a button"
 msgid "Continue"
 msgstr "Продолжить"
 
-#: views/welcome_wizard.html:51
+#: views/welcome_wizard.html:43
 msgctxt "A label on a button"
 msgid "Next"
 msgstr "Далее"
 
-#: views/welcome_wizard.html:45
+#: views/welcome_wizard.html:37
 msgctxt "A label on a button"
 msgid "See video guide"
 msgstr "Просмотреть видео урок"
@@ -2082,8 +2230,8 @@ msgctxt "select color"
 msgid "Select"
 msgstr "Список"
 
-#: lib/Newsletter/NewsletterValidator.php:88 views/newsletter/editor.html:390
-#: views/newsletters.html:428
+#: views/newsletter/editor.html:390 views/newsletters.html:429
+#: lib/Newsletter/NewsletterValidator.php:88
 msgctxt "(Please reuse the current translation used for the string “Automatic Latest Content”) This Error message is displayed when a user tries to send a “Post Notification” email without any “Automatic Latest Content” widget inside"
 msgid "Please add an “Automatic Latest Content” widget to the email from the right sidebar."
 msgstr "Пожалуйста, добавьте виджет «Автоматическое последнее содержание» к письму из правой боковой колонки."
@@ -2711,7 +2859,7 @@ msgctxt "status when a newsletter has been sent"
 msgid "Sent"
 msgstr "Отправленные"
 
-#: lib/Form/Widget.php:153 views/form/editor.html:217 views/forms.html:77
+#: views/form/editor.html:217 views/forms.html:77 lib/Form/Widget.php:153
 msgctxt "fallback for forms without a name in a form list"
 msgid "no name"
 msgstr "без имени"
@@ -2856,6 +3004,31 @@ msgctxt "Form label"
 msgid "Save 10%"
 msgstr "Сэкономить 10%"
 
+#: lib/Form/Templates/Templates/Template1BelowPages.php:60
+#: lib/Form/Templates/Templates/Template1FixedBar.php:101
+#: lib/Form/Templates/Templates/Template1Popup.php:63
+#: lib/Form/Templates/Templates/Template1SlideIn.php:63
+#: lib/Form/Templates/Templates/Template1Widget.php:63
+#: lib/Form/Templates/Templates/Template3BelowPages.php:88
+#: lib/Form/Templates/Templates/Template3FixedBar.php:91
+#: lib/Form/Templates/Templates/Template3Popup.php:70
+#: lib/Form/Templates/Templates/Template3SlideIn.php:70
+#: lib/Form/Templates/Templates/Template3Widget.php:70
+#: lib/Form/Templates/Templates/Template4BelowPages.php:90
+#: lib/Form/Templates/Templates/Template4FixedBar.php:90
+#: lib/Form/Templates/Templates/Template4Popup.php:106
+#: lib/Form/Templates/Templates/Template4SlideIn.php:106
+#: lib/Form/Templates/Templates/Template4Widget.php:69
+#: lib/Form/Templates/Templates/Template6BelowPages.php:75
+#: lib/Form/Templates/Templates/Template6FixedBar.php:76
+#: lib/Form/Templates/Templates/Template6Popup.php:56
+#: lib/Form/Templates/Templates/Template6SlideIn.php:56
+#: lib/Form/Templates/Templates/Template6Widget.php:56
+#: lib/Form/Templates/Templates/Template7BelowPages.php:103
+#: lib/Form/Templates/Templates/Template7FixedBar.php:87
+#: lib/Form/Templates/Templates/Template7Popup.php:95
+#: lib/Form/Templates/Templates/Template7SlideIn.php:95
+#: lib/Form/Templates/Templates/Template7Widget.php:70
 #: lib/Form/Templates/Templates/Template10BelowPages.php:84
 #: lib/Form/Templates/Templates/Template10FixedBar.php:154
 #: lib/Form/Templates/Templates/Template10Popup.php:93
@@ -2891,31 +3064,6 @@ msgstr "Сэкономить 10%"
 #: lib/Form/Templates/Templates/Template18Popup.php:128
 #: lib/Form/Templates/Templates/Template18SlideIn.php:128
 #: lib/Form/Templates/Templates/Template18Widget.php:114
-#: lib/Form/Templates/Templates/Template1BelowPages.php:60
-#: lib/Form/Templates/Templates/Template1FixedBar.php:101
-#: lib/Form/Templates/Templates/Template1Popup.php:63
-#: lib/Form/Templates/Templates/Template1SlideIn.php:63
-#: lib/Form/Templates/Templates/Template1Widget.php:63
-#: lib/Form/Templates/Templates/Template3BelowPages.php:88
-#: lib/Form/Templates/Templates/Template3FixedBar.php:91
-#: lib/Form/Templates/Templates/Template3Popup.php:70
-#: lib/Form/Templates/Templates/Template3SlideIn.php:70
-#: lib/Form/Templates/Templates/Template3Widget.php:70
-#: lib/Form/Templates/Templates/Template4BelowPages.php:90
-#: lib/Form/Templates/Templates/Template4FixedBar.php:90
-#: lib/Form/Templates/Templates/Template4Popup.php:106
-#: lib/Form/Templates/Templates/Template4SlideIn.php:106
-#: lib/Form/Templates/Templates/Template4Widget.php:69
-#: lib/Form/Templates/Templates/Template6BelowPages.php:75
-#: lib/Form/Templates/Templates/Template6FixedBar.php:76
-#: lib/Form/Templates/Templates/Template6Popup.php:56
-#: lib/Form/Templates/Templates/Template6SlideIn.php:56
-#: lib/Form/Templates/Templates/Template6Widget.php:56
-#: lib/Form/Templates/Templates/Template7BelowPages.php:103
-#: lib/Form/Templates/Templates/Template7FixedBar.php:87
-#: lib/Form/Templates/Templates/Template7Popup.php:95
-#: lib/Form/Templates/Templates/Template7SlideIn.php:95
-#: lib/Form/Templates/Templates/Template7Widget.php:70
 msgctxt "Form label"
 msgid "Email Address"
 msgstr "Email адрес"
@@ -3132,6 +3280,20 @@ msgctxt "Text in a web form."
 msgid "LET’S KEEP IN TOUCH!"
 msgstr "ДАВАЙТЕ ОСТАВАТЬСЯ НА СВЯЗИ!"
 
+#: lib/Form/Templates/Templates/Template1FixedBar.php:67
+#: lib/Form/Templates/Templates/Template1Popup.php:104
+#: lib/Form/Templates/Templates/Template1SlideIn.php:104
+#: lib/Form/Templates/Templates/Template1Widget.php:104
+#: lib/Form/Templates/Templates/Template3BelowPages.php:150
+#: lib/Form/Templates/Templates/Template3FixedBar.php:68
+#: lib/Form/Templates/Templates/Template3Popup.php:111
+#: lib/Form/Templates/Templates/Template3SlideIn.php:111
+#: lib/Form/Templates/Templates/Template3Widget.php:111
+#: lib/Form/Templates/Templates/Template4BelowPages.php:67
+#: lib/Form/Templates/Templates/Template4FixedBar.php:67
+#: lib/Form/Templates/Templates/Template4Popup.php:147
+#: lib/Form/Templates/Templates/Template4SlideIn.php:147
+#: lib/Form/Templates/Templates/Template4Widget.php:110
 #: lib/Form/Templates/Templates/Template10BelowPages.php:163
 #: lib/Form/Templates/Templates/Template10Popup.php:134
 #: lib/Form/Templates/Templates/Template10SlideIn.php:131
@@ -3166,20 +3328,6 @@ msgstr "ДАВАЙТЕ ОСТАВАТЬСЯ НА СВЯЗИ!"
 #: lib/Form/Templates/Templates/Template18Popup.php:168
 #: lib/Form/Templates/Templates/Template18SlideIn.php:168
 #: lib/Form/Templates/Templates/Template18Widget.php:154
-#: lib/Form/Templates/Templates/Template1FixedBar.php:67
-#: lib/Form/Templates/Templates/Template1Popup.php:104
-#: lib/Form/Templates/Templates/Template1SlideIn.php:104
-#: lib/Form/Templates/Templates/Template1Widget.php:104
-#: lib/Form/Templates/Templates/Template3BelowPages.php:150
-#: lib/Form/Templates/Templates/Template3FixedBar.php:68
-#: lib/Form/Templates/Templates/Template3Popup.php:111
-#: lib/Form/Templates/Templates/Template3SlideIn.php:111
-#: lib/Form/Templates/Templates/Template3Widget.php:111
-#: lib/Form/Templates/Templates/Template4BelowPages.php:67
-#: lib/Form/Templates/Templates/Template4FixedBar.php:67
-#: lib/Form/Templates/Templates/Template4Popup.php:147
-#: lib/Form/Templates/Templates/Template4SlideIn.php:147
-#: lib/Form/Templates/Templates/Template4Widget.php:110
 msgctxt "Text in a web form."
 msgid "We don’t spam! Read our [link]privacy policy[/link] for more info."
 msgstr "Мы не спамим! Прочтите нашу [link]политику конфиденциальности[/link], чтобы узнать больше."
@@ -3403,22 +3551,22 @@ msgctxt "default email opt-in message displayed on checkout page for ecommerce w
 msgid "Yes, I would like to be added to your mailing list"
 msgstr "Да, пожалуйста, добавьте меня в свой список рассылки"
 
-#: lib/Config/Menu.php:316
+#: lib/Config/Menu.php:335
 msgctxt "segments per page (screen options)"
 msgid "Number of segments per page"
 msgstr "Количество сегментов на странице"
 
-#: lib/Config/Menu.php:265
+#: lib/Config/Menu.php:284
 msgctxt "subscribers per page (screen options)"
 msgid "Number of subscribers per page"
 msgstr "Количество подписчиков на странице"
 
-#: lib/Config/Menu.php:199
+#: lib/Config/Menu.php:218
 msgctxt "forms per page (screen options)"
 msgid "Number of forms per page"
 msgstr "Количество форм на странице"
 
-#: lib/Config/Menu.php:161
+#: lib/Config/Menu.php:178
 msgctxt "newsletters per page (screen options)"
 msgid "Number of newsletters per page"
 msgstr "Количество рассылок на странице"
@@ -3440,8 +3588,8 @@ msgstr "30 минут после загрузки последней стран�
 
 #: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:57
 msgctxt "Description of Abandoned Shopping Cart email"
-msgid "Email sent when a customer abandons his cart."
-msgstr "Письмо отправляется, если пользователь забросил корзину."
+msgid "Send the email when a customer abandons their cart."
+msgstr ""
 
 #: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:55
 msgctxt "This is the name of a type of automatic email for ecommerce. Those emails are sent automatically when a customer adds product to his shopping cart but never complete the checkout process."
@@ -3454,7 +3602,7 @@ msgid "You need to have WooCommerce active to access the MailPoet email customiz
 msgstr "Вам необходимо активировать WooCommerce для доступа к настройщику писем MailPoet  для WooCommerce."
 
 #. translators: %s is the code.
-#: lib/API/JSON/v1/Services.php:291
+#: lib/API/JSON/v1/Services.php:295
 msgctxt "Error code (inside parentheses)"
 msgid "code: %s"
 msgstr "код: %s"
@@ -3477,10 +3625,6 @@ msgstr "Сегмент нельзя удалить, поскольку он ис
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
 
-#: views/woocommerce_setup_translations.html:7
-msgid "Do you want to enable cookie tracking on your website? MailPoet will use cookies to provide you with more precise statistics. [link]Learn more[/link]."
-msgstr "Хотите ли вы включить отслеживание файлов cookie на вашем сайте? MailPoet будет использовать cookies для предоставления более точной статистики. [link]Узнать больше[/link]."
-
 #: views/woocommerce_setup_translations.html:5
 msgid "MailPoet will import all your WooCommerce customers. Do you want to import your WooCommerce customers as subscribed? [link]Learn more[/link]."
 msgstr "MailPoet импортирует всех ваших клиентов WooCommerce. Хотите ли вы импортировать клиентов WooCommerce как подписчиков? [link]Узнать больше[/link]."
@@ -3489,75 +3633,15 @@ msgstr "MailPoet импортирует всех ваших клиентов Woo
 msgid "MailPoet Premium comes with powerful features for WooCommerce. Please complete this one-step setup to be ready to start using them."
 msgstr "MailPoet Premium предоставляет сильный функционал для WooCommerce. Пожалуйста, пройдите установку из одного шага для начала использования."
 
-#: views/welcome_wizard.html:44
-msgid "Read more about what we collect."
-msgstr "Узнать о том, какую информацию мы собираем."
-
-#: views/welcome_wizard.html:43
-msgid "Open and click rates"
-msgstr "Рейтинги открытия и нажатий"
-
-#: views/welcome_wizard.html:42
-msgid "Content of your emails"
-msgstr "Содержимое ваших писем"
-
-#: views/welcome_wizard.html:41
-msgid "Login and passwords"
-msgstr "Логины и пароли"
-
-#: views/welcome_wizard.html:40
-msgid "Email addresses"
-msgstr "Адреса электронной почты"
-
-#: views/welcome_wizard.html:39
-msgid "Any personal data"
-msgstr "Любые персональные данные"
-
-#: views/welcome_wizard.html:38
-msgid "Gathering usage data allows us to make MailPoet better — the way you use MailPoet will be considered as we evaluate new features, judge the quality of an update, or determine if an improvement makes sense."
-msgstr "Сбор пользовательской информации позволяет нам улучшать MailPoet. То, как вы используете MailPoet, повлияет на разработку новых функций, позволит оценить качество обновлений или определить необходимость улучшения."
-
-#: views/welcome_wizard.html:37
-msgid "Read more about libraries we use."
-msgstr "Узнать о том, какие библиотеки мы используем."
-
-#: views/welcome_wizard.html:36
-msgid "Do you want to enable loading 3rd-party libraries, like Google Fonts (used in Form Editor) and HelpScout (used for support)?"
-msgstr "Хотите включить загрузку сторонних библиотек, например, Google Fonts (используются в редакторе форм) и HelpScout (используется для поддержки)?"
-
-#: views/welcome_wizard.html:35
-msgid "Important"
-msgstr "Важно"
-
-#: views/welcome_wizard.html:34
-msgid "This needs to be enabled if you want to be able to contact support."
-msgstr "Должно быть включено, если вы хотите связаться с поддежкой."
-
-#: views/welcome_wizard.html:33
+#: views/welcome_wizard.html:33 views/welcome_wizard.html:35
 msgid "Note"
 msgstr "Примечание"
 
-#: views/welcome_wizard.html:32
-msgid "This requires loading 3rd-party libraries enabled."
-msgstr "Требует влюченной загрузки сторонних библиотек."
-
-#: views/welcome_wizard.html:31
-msgid "Do you want to share anonymous data and help us improve the plugin? We appreciate your help!"
-msgstr "Хотите поделиться анонимными данными и помочь нам улучшить плагин? Мы очень ценим вашу помощь!"
-
-#: views/welcome_wizard.html:30
-msgid "Data we don’t gather:"
-msgstr "Мы не собираем данные:"
-
 #: views/welcome_wizard.html:29
-msgid "Help MailPoet improve with anonymous usage tracking."
-msgstr "Помогите MailPoet в развитии с помощью анонимного отслеживания действий."
-
-#: views/welcome_wizard.html:28
 msgid "Who is the sender of the emails you’ll be creating with MailPoet?"
 msgstr "Кто отправитель писем, созданных с помощью MailPoet?"
 
-#: views/welcome_wizard.html:27
+#: views/welcome_wizard.html:28
 msgid "Welcome! Let’s get you started on the right foot."
 msgstr "Добро пожаловать! Начнем с правой ноги."
 
@@ -4373,10 +4457,6 @@ msgstr "Загрузить плагин MailPoet Premium"
 msgid "MailPoet Premium is not installed."
 msgstr "MailPoet Премиум не установлен."
 
-#: views/settings.html:192
-msgid "MailPoet Premium is active"
-msgstr "MailPoet Премиум активирован"
-
 #: views/settings.html:190
 msgid "This website is on an Intranet. Activating MailPoet will not be possible."
 msgstr "Этот сайт расположен во внутренней сети. Активация MailPoet невозможна."
@@ -5029,10 +5109,6 @@ msgstr "Восстановить и включить"
 msgid "Trash and disable"
 msgstr "Переместить в корзину и отключить"
 
-#: views/segments.html:81
-msgid "Delete permanently"
-msgstr "Удалить полностью"
-
 #: views/segments.html:74
 msgid "New Segment"
 msgstr "Новый сегмент"
@@ -5056,10 +5132,6 @@ msgstr "Читать далее"
 #: views/segments.html:68
 msgid "Force Sync"
 msgstr "Синхронизировать"
-
-#: views/segments.html:67
-msgid "Update"
-msgstr "Обновить"
 
 #: views/segments.html:66
 msgid "List \"%1$s\" has been duplicated."
@@ -5138,43 +5210,43 @@ msgstr "Изображение дятла"
 msgid "Image bird feeder"
 msgstr "Изображение кормушки для птиц"
 
-#: views/newsletters.html:423
+#: views/newsletters.html:424
 msgid "Edit WooCommerce settings"
 msgstr "Редактировать настройки WooCommerce"
 
-#: views/newsletters.html:422
+#: views/newsletters.html:423
 msgid "WooCommerce emails won’t be sent to new customers because the opt-in on checkout is disabled. Enable it so they can immediately get your emails after their first purchase."
 msgstr "Письма WooCommerce не будут отсылаться новым клиентам из-за отключенного подтверждения при оплате. Включите подтверждение, чтобы клиенты могли получать письма незамедлительно после первой покупки."
 
-#: views/newsletters.html:421
+#: views/newsletters.html:422
 msgid "Sent to %1$d customers"
 msgstr "Отправлено %1$d пользователям"
 
-#: views/newsletters.html:420
+#: views/newsletters.html:421
 msgid "You need to configure email options before this email can be sent."
 msgstr "Вам следует настроить почтовые опции перед отправкой этого письма."
 
-#: views/newsletters.html:419
+#: views/newsletters.html:420
 msgid "Your %1s Automatic Email could not be activated, please check the settings."
 msgstr "Ваше автоматическое письмо %1s невозможно активировать, пожалуйста, проверьте настройки."
 
-#: views/newsletters.html:418
+#: views/newsletters.html:419
 msgid "Your %1s Automatic Email is now activated!"
 msgstr "Ваше автоматическое письмо %1s активировано!"
 
-#: views/newsletters.html:417
+#: views/newsletters.html:418
 msgid "Send this %1s Automatic Email when..."
 msgstr "Отправить это автоматическое письмо %1s, когда..."
 
-#: views/newsletters.html:416
+#: views/newsletters.html:417
 msgid "Select %1s events conditions"
 msgstr "Выберите условия событий %1s"
 
-#: views/newsletters.html:415 views/subscribers/subscribers.html:121
+#: views/newsletters.html:416 views/subscribers/subscribers.html:121
 msgid "Tip:"
 msgstr "Совет:"
 
-#: views/newsletters.html:414
+#: views/newsletters.html:415
 msgid "Automatic Email"
 msgstr "Автоматическая рассылка"
 
@@ -5738,16 +5810,25 @@ msgid "Revenues generated by customers who made a purchase within two weeks afte
 msgstr "Выручка, полученная от клиентов, совершивших покупку в течение двух недель после нажатия на это письмо. Это сумма заказа, включая доставку и налоги."
 
 #: views/newsletters.html:182
-msgid "Under 1% is excellent.\\nBetween 1 and 3% is good.\\nOver 3% is bad."
-msgstr "Менее 1% — превосходно.\\nОт 1 до 3% — хорошо.\\nСвыше 3% — плохо."
+msgid ""
+"Under 1% is excellent.\n"
+"Between 1 and 3% is good.\n"
+"Over 3% is bad."
+msgstr "Менее 1% — превосходно. От 1 до 3% — хорошо. Свыше 3% — плохо."
 
 #: views/newsletters.html:181
-msgid "Above 3% is excellent.\\nBetween 1 and 3% is good.\\nUnder 1% is bad."
-msgstr "Свыше 3% — превосходно.\\nОт 1 до 3% — хорошо.\\nМенее 1% — плохо."
+msgid ""
+"Above 3% is excellent.\n"
+"Between 1 and 3% is good.\n"
+"Under 1% is bad."
+msgstr "Свыше 3% — превосходно. От 1 до 3% — хорошо. Менее 1% — плохо."
 
 #: views/newsletters.html:180
-msgid "Above 30% is excellent.\\nBetween 10 and 30% is good.\\nUnder 10% is bad."
-msgstr "Свыше 30% — превосходно.\\nОт 10 до 30% — хорошо.\\nМенее 10% — плохо."
+msgid ""
+"Above 30% is excellent.\n"
+"Between 10 and 30% is good.\n"
+"Under 10% is bad."
+msgstr "Свыше 30% — превосходно. От 10 до 30% — хорошо. Менее 10% — плохо."
 
 #: views/newsletters.html:178
 msgid "Bad"
@@ -5762,7 +5843,7 @@ msgstr "Доход от клиентов, щелкнувших на этом э�
 msgid "Something to improve."
 msgstr "Есть место для улучшения."
 
-#: lib/Twig/Functions.php:293 views/newsletters.html:169
+#: views/newsletters.html:169 lib/Twig/Functions.php:293
 msgid "Average"
 msgstr "В среднем"
 
@@ -5771,13 +5852,13 @@ msgstr "В среднем"
 msgid "Good stuff."
 msgstr "Хороший материал."
 
-#: lib/Twig/Functions.php:291 views/newsletters.html:167
-#: views/segments.html:231 views/subscribers/subscribers.html:152
+#: views/newsletters.html:167 views/segments.html:231
+#: views/subscribers/subscribers.html:152 lib/Twig/Functions.php:291
 msgid "Good"
 msgstr "Хорошо"
 
-#: lib/Twig/Functions.php:289 views/newsletters.html:165
-#: views/segments.html:228 views/subscribers/subscribers.html:149
+#: views/newsletters.html:165 views/segments.html:228
+#: views/subscribers/subscribers.html:149 lib/Twig/Functions.php:289
 msgid "Excellent"
 msgstr "Превосходно"
 
@@ -5857,9 +5938,9 @@ msgstr "История"
 msgid "Statistics"
 msgstr "Статистика"
 
-#: lib/Automation/Integrations/MailPoet/Actions/SendEmailAction.php:66
 #: views/newsletters.html:131 views/newsletters.html:199
 #: views/newsletters.html:268
+#: lib/Automation/Integrations/MailPoet/Actions/SendEmailAction.php:70
 msgid "Subject"
 msgstr "Тема"
 
@@ -6969,17 +7050,17 @@ msgstr "Письмо невозможно отправить в связи с т
 msgid "Enter an email address to send the preview newsletter to."
 msgstr "Введите адрес электронной почты для предварительного просмотра рассылки."
 
-#: views/newsletter/editor.html:389 views/newsletters.html:429
+#: views/newsletter/editor.html:389 views/newsletters.html:430
 msgid "This email has already been sent. It can be edited, but not sent again. Duplicate this email if you want to send it again."
 msgstr "Это письмо отправлено. Его можно отредактировать, но невозможно отправить заново. Продублируйте это письмо, чтобы отправить его еще раз."
 
-#: lib/Newsletter/NewsletterValidator.php:52 views/newsletter/editor.html:388
-#: views/newsletters.html:427
+#: views/newsletter/editor.html:388 views/newsletters.html:428
+#: lib/Newsletter/NewsletterValidator.php:52
 msgid "Poet, please add prose to your masterpiece before you send it to your followers."
 msgstr "Поэт, добавь прозы в свой шедевр перед отправкой подписчикам."
 
-#: lib/Newsletter/NewsletterValidator.php:47 views/newsletter/editor.html:386
-#: views/newsletters.html:425
+#: views/newsletter/editor.html:386 views/newsletters.html:426
+#: lib/Newsletter/NewsletterValidator.php:47
 msgid "All emails must include an \"Unsubscribe\" link. Add a footer widget to your email to continue."
 msgstr "Письма должны содержать ссылку \"Отписаться\". Для продолжения добавьте в подвал вашего письма виджет."
 
@@ -7047,7 +7128,7 @@ msgstr "Создано"
 msgid "Message"
 msgstr "Сообщение"
 
-#: views/logs.html:21
+#: views/logs.html:21 lib/Config/Menu.php:423
 msgid "Logs"
 msgstr "Журналы"
 
@@ -7133,7 +7214,7 @@ msgstr "Значение должно быть верным числом."
 msgid "This value should be a valid url."
 msgstr "Значение должно быть верным url."
 
-#: lib/Form/Block/BlockRendererHelper.php:37 views/layout.html:289
+#: views/layout.html:289 lib/Form/Block/BlockRendererHelper.php:37
 msgid "This value should be a valid email."
 msgstr "Значение должно быть верным адресом электронной почты."
 
@@ -7295,9 +7376,8 @@ msgstr "Во время запроса произошла ошибка, запр
 
 #. translators: %d is the error code.
 #. translators: %d will be replaced by an error code
-#. translators: %d will be replaced by an error code
-#: lib/Services/Bridge/API.php:212 lib/Services/Bridge/API.php:270
-#: lib/Services/Bridge/API.php:314 views/layout.html:125
+#: views/layout.html:125 lib/Services/Bridge/API.php:212
+#: lib/Services/Bridge/API.php:270 lib/Services/Bridge/API.php:314
 msgid "An error has happened while performing a request, the server has responded with response code %d"
 msgstr "Во время запроса произошла ошибка, сервер вернул код ответа %d"
 
@@ -7449,7 +7529,6 @@ msgid "Duplicate"
 msgstr "Скопировать"
 
 #: views/forms.html:89 views/newsletters.html:150 views/segments.html:75
-#: views/subscribers/subscribers.html:43
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -7552,7 +7631,6 @@ msgid "Delete Permanently"
 msgstr "Удалить полностью"
 
 #: views/forms.html:59 views/newsletters.html:111 views/segments.html:80
-#: views/subscribers/subscribers.html:44
 msgid "Restore"
 msgstr "Восстановить"
 
@@ -7634,7 +7712,6 @@ msgstr "Готово"
 
 #: views/forms.html:45 views/logs.html:25 views/newsletters.html:96
 #: views/segments.html:37 views/segments.html:170
-#: views/subscribers/subscribers.html:27
 msgid "Search"
 msgstr "Поиск"
 
@@ -8155,10 +8232,6 @@ msgstr "MailPoet требуется верия PHP 7.2 или новее (рек
 msgid "MailPoet plugin requires WordPress version 5.6 or newer. Please read our [link]instructions[/link] on how to resolve this issue."
 msgstr "Для работы плагина необходим Wordpress версии 5.6 или новее. Пожалуйста, прочтите нашу [link]инструкцию[/link], чтобы решить эту проблему."
 
-#: lib/WooCommerce/TransactionalEmails.php:48
-msgid "New Order: #{order_number}"
-msgstr "Новый заказ: #{order_number}"
-
 #: lib/WP/Notice.php:42
 msgid "MailPoet Error:"
 msgstr "Ошибка MailPoet:"
@@ -8211,20 +8284,20 @@ msgid "Congrats! You’re progressing well so far. Complete your upgrade thanks 
 msgstr "Поздравляем! У вас хорошо получается. Завершите свое обновление согласно этого   [link]списка[/link]."
 
 #. translators: %1$d is the amount of hours.
-#: lib/Twig/Functions.php:197 views/settings.html:265
+#: views/settings.html:265 lib/Twig/Functions.php:197
 msgid "every %1$d hours"
 msgstr "каждые %1$d часов"
 
-#: lib/Twig/Functions.php:195 views/settings.html:264
+#: views/settings.html:264 lib/Twig/Functions.php:195
 msgid "every hour"
 msgstr "каждый час"
 
 #. translators: %1$d is the amount of minutes.
-#: lib/Twig/Functions.php:194 views/settings.html:263
+#: views/settings.html:263 lib/Twig/Functions.php:194
 msgid "every %1$d minutes"
 msgstr "каждые %1$d минут"
 
-#: lib/Twig/Functions.php:192 views/settings.html:262
+#: views/settings.html:262 lib/Twig/Functions.php:192
 msgid "every minute"
 msgstr "каждую минуту"
 
@@ -8243,37 +8316,37 @@ msgstr "%d минут"
 msgid "%d hours"
 msgstr "%d часов"
 
-#: lib/Subscription/Pages.php:470
+#: lib/Subscription/Pages.php:461
 msgid "Link to subscription management page is only available to mailing lists subscribers."
 msgstr "Ссылка на страницу управления подпиской доступна только для подписчиков."
 
-#: lib/Subscription/Pages.php:438
+#: lib/Subscription/Pages.php:429
 msgid "Accidentally unsubscribed?"
 msgstr "Случайно отписались?"
 
-#: lib/Subscription/Pages.php:422
+#: lib/Subscription/Pages.php:413
 msgid "Subscription management form is only available to mailing lists subscribers."
 msgstr "Форма управления подпиской доступна только для подписчиков."
 
-#: lib/Subscription/Pages.php:408
+#: lib/Subscription/Pages.php:399
 msgid "Yup, we've added you to our email list. You'll hear from us shortly."
 msgstr "Да, мы добавили вас в наш список рассылки. Мы свяжемся с вами в скором времени."
 
-#: lib/Subscription/Pages.php:402
+#: lib/Subscription/Pages.php:393
 msgid "Confirm you want to unsubscribe"
 msgstr "Подтвердите, что хотите отписаться"
 
-#: lib/Subscription/Pages.php:390
+#: lib/Subscription/Pages.php:381
 msgid "You are now unsubscribed."
 msgstr "Вы отписались только что."
 
-#: lib/Subscription/Pages.php:370
+#: lib/Subscription/Pages.php:361
 msgid "You are now subscribed!"
 msgstr "Вы теперь подписаны!"
 
-#. translators: %s is a comma-separated list of segment names.
-#: lib/Subscription/Pages.php:361 lib/Subscription/Pages.php:374
-msgid "You have subscribed to: %s"
+#. translators: %s is the website title or website name.
+#: lib/Subscription/Pages.php:365
+msgid "You have subscribed to %s"
 msgstr "Вы подписались на: %s"
 
 #: lib/Subscription/Pages.php:300
@@ -8300,11 +8373,11 @@ msgstr "[link]Измените вашу учетную запись[/link], чт
 msgid "Need to change your email address? Unsubscribe using the form below, then simply sign up again."
 msgstr "Хотите сменить адрес электронной почты? Отпишитесь здесь, потом подпишитесь заново."
 
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:87 views/layout.html:150
-#: views/newsletter/templates/components/save.hbs:4
+#: views/layout.html:150 views/newsletter/templates/components/save.hbs:4
 #: views/newsletter/templates/components/save.hbs:22
 #: views/newsletter/templates/components/save.hbs:27 views/segments.html:82
 #: views/subscribers/subscribers.html:129
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:87
 msgid "Save"
 msgstr "Сохранить"
 
@@ -8371,40 +8444,40 @@ msgstr "Вам необходимо дождаться %s перед повто�
 msgid "Please leave the first field empty."
 msgstr "Пожалуйста, оставьте первое поле пустым."
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:86
-#: lib/Subscribers/SubscriberListingRepository.php:225
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:202
 #: views/segments.html:57 views/subscribers/subscribers.html:73
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:86
+#: lib/Subscribers/SubscriberListingRepository.php:231
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:202
 msgid "Bounced"
 msgstr "Отклонено"
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:85
-#: lib/Subscribers/SubscriberListingRepository.php:220
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:214
 #: views/segments.html:56 views/subscribers/importExport/import.html:131
 #: views/subscribers/subscribers.html:72
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:85
+#: lib/Subscribers/SubscriberListingRepository.php:226
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:214
 msgid "Inactive"
 msgstr "Неактивный"
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:84
-#: lib/Subscribers/SubscriberListingRepository.php:215
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:194
 #: views/segments.html:55 views/subscribers/importExport/import.html:130
 #: views/subscribers/subscribers.html:71
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:84
+#: lib/Subscribers/SubscriberListingRepository.php:221
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:194
 msgid "Unsubscribed"
 msgstr "Отписано"
 
+#: views/segments.html:54 views/subscribers/subscribers.html:69
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:83
-#: lib/Subscribers/SubscriberListingRepository.php:210 views/segments.html:54
-#: views/subscribers/subscribers.html:69
+#: lib/Subscribers/SubscriberListingRepository.php:216
 msgid "Unconfirmed"
 msgstr "Неподтверждено"
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:82
-#: lib/Subscribers/SubscriberListingRepository.php:205
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:186
 #: views/segments.html:53 views/subscribers/importExport/import.html:129
 #: views/subscribers/subscribers.html:70
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:82
+#: lib/Subscribers/SubscriberListingRepository.php:211
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:186
 msgid "Subscribed"
 msgstr "Подписано"
 
@@ -8413,10 +8486,10 @@ msgstr "Подписано"
 msgid "New subscriber to %s"
 msgstr "Новый подписчик на %s"
 
+#: views/segments.html:225 views/subscribers/subscribers.html:146
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewsletterClicksExporter.php:28
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewsletterOpensExporter.php:24
 #: lib/Subscribers/ImportExport/PersonalDataExporters/SubscriberExporter.php:142
-#: views/segments.html:225 views/subscribers/subscribers.html:146
 msgid "Unknown"
 msgstr "Неизвестно"
 
@@ -8456,10 +8529,11 @@ msgstr "IP подтверждения"
 msgid "Subscribed IP"
 msgstr "IP подписки"
 
+#: views/forms.html:62 views/help.html:51 views/layout.html:160
+#: views/newsletters.html:132 views/subscribers/subscribers.html:68
+#: views/subscribers/subscribers.html:86
 #: lib/Subscribers/ImportExport/PersonalDataExporters/SubscriberExporter.php:74
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:182 views/forms.html:62
-#: views/help.html:51 views/layout.html:160 views/newsletters.html:132
-#: views/subscribers/subscribers.html:68 views/subscribers/subscribers.html:86
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:182
 msgid "Status"
 msgstr "Статус"
 
@@ -8487,7 +8561,6 @@ msgstr "Отправленные письма MailPoet"
 msgid "Email preview"
 msgstr "Предварительный просмотр письма"
 
-#: lib/Subscribers/ImportExport/PersonalDataExporters/NewslettersExporter.php:92
 #: views/form/templatesLegacy/settings/date_default.hbs:20
 #: views/form/templatesLegacy/settings/label_within.hbs:8
 #: views/form/templatesLegacy/settings/required.hbs:17
@@ -8510,6 +8583,7 @@ msgstr "Предварительный просмотр письма"
 #: views/newsletter/templates/blocks/products/settingsDisplayOptions.hbs:174
 #: views/newsletter/templates/blocks/products/settingsDisplayOptions.hbs:218
 #: views/settings.html:87 views/subscribers/importExport/import.html:111
+#: lib/Subscribers/ImportExport/PersonalDataExporters/NewslettersExporter.php:92
 msgid "No"
 msgstr "Нет"
 
@@ -8517,9 +8591,9 @@ msgstr "Нет"
 msgid "Opened at"
 msgstr "Открыто"
 
+#: views/subscribers/subscribers.html:115
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewslettersExporter.php:82
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewslettersExporter.php:91
-#: views/subscribers/subscribers.html:115
 msgid "Opened"
 msgstr "Открыто"
 
@@ -8539,20 +8613,20 @@ msgstr "URL"
 msgid "Timestamp of the click event"
 msgstr "Время события клика"
 
+#: views/settings.html:108
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewsletterClicksExporter.php:13
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewsletterOpensExporter.php:13
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewslettersExporter.php:71
-#: views/settings.html:108
 msgid "Email subject"
 msgstr "Тема письма"
 
-#: lib/Subscribers/ImportExport/ImportExportRepository.php:184
+#: lib/Subscribers/ImportExport/ImportExportRepository.php:194
 msgid "Not In Segment"
 msgstr "Не в сегменте"
 
+#: views/subscribers/importExport/import.html:55
 #: lib/Subscribers/ImportExport/ImportExportFactory.php:152
 #: lib/Subscribers/ImportExport/ImportExportFactory.php:153
-#: views/subscribers/importExport/import.html:55
 msgid "User fields"
 msgstr "Пользовательские поля"
 
@@ -8634,7 +8708,7 @@ msgstr "Не найдено действительных подписчиков.
 msgid "Missing or invalid import data."
 msgstr "Отсутствуют или неверные данные импорта."
 
-#: lib/Subscribers/ImportExport/Export/Export.php:68 views/segments.html:52
+#: views/segments.html:52 lib/Subscribers/ImportExport/Export/Export.php:68
 msgid "List"
 msgstr "Список"
 
@@ -8699,7 +8773,7 @@ msgstr "Неверное действие конечной точки маршр
 msgid "Invalid router endpoint"
 msgstr "Неверная конечная точка маршрутизатора"
 
-#: lib/PostEditorBlocks/SubscriptionFormBlock.php:61 views/form/iframe.html:46
+#: views/form/iframe.html:46 lib/PostEditorBlocks/SubscriptionFormBlock.php:61
 msgid "MailPoet Subscription Form"
 msgstr "Форма подписки MailPoet"
 
@@ -8711,9 +8785,9 @@ msgstr "Выберите форму MailPoet"
 msgid "View in your browser"
 msgstr "Просмотреть в вашем браузере"
 
+#: views/newsletter/editor.html:1340
 #: lib/Config/PopulatorData/Templates/ConfirmInterestBeforeDeactivation.php:163
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:102
-#: views/newsletter/editor.html:1340
 msgid "Manage subscription"
 msgstr "Управлять подпиской"
 
@@ -8721,10 +8795,10 @@ msgstr "Управлять подпиской"
 msgid "Edit subscription page link"
 msgstr "Редактировать ссылку на страницу подписки"
 
-#: lib/Newsletter/Shortcodes/ShortcodesHelper.php:88
 #: views/newsletter/templates/blocks/footer/settings.hbs:29
 #: views/newsletter/templates/blocks/header/settings.hbs:30
 #: views/newsletter/templates/components/sidebar/styles.hbs:113
+#: lib/Newsletter/Shortcodes/ShortcodesHelper.php:88
 msgid "Links"
 msgstr "Ссылки"
 
@@ -8748,9 +8822,9 @@ msgstr "Текущий день месяца в порядковом, то ес�
 msgid "Current day of the month number"
 msgstr "Текущий день и число месяца"
 
-#: lib/Newsletter/Shortcodes/ShortcodesHelper.php:62 views/form/editor.html:139
+#: views/form/editor.html:139
 #: views/form/templatesLegacy/settings/field_form.hbs:41
-#: views/newsletters.html:392
+#: views/newsletters.html:392 lib/Newsletter/Shortcodes/ShortcodesHelper.php:62
 msgid "Date"
 msgstr "Дата"
 
@@ -8766,7 +8840,7 @@ msgstr "Заголовок последней статьи"
 msgid "Total Number of Posts or Pages"
 msgstr "Общее число публикаций или страниц"
 
-#: lib/Newsletter/Shortcodes/ShortcodesHelper.php:48 views/newsletters.html:86
+#: views/newsletters.html:86 lib/Newsletter/Shortcodes/ShortcodesHelper.php:48
 msgid "Post Notifications"
 msgstr "Уведомления публикаций"
 
@@ -8792,11 +8866,11 @@ msgstr "Фамилия"
 msgid "First Name"
 msgstr "Имя"
 
+#: views/newsletters.html:380 views/segments.html:114
+#: views/subscribers/subscribers.html:85
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:20
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:117
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:118
-#: views/newsletters.html:380 views/segments.html:114
-#: views/subscribers/subscribers.html:85
 msgid "Subscriber"
 msgstr "Подписчик"
 
@@ -8804,15 +8878,15 @@ msgstr "Подписчик"
 msgid "Not active"
 msgstr "Неактивные"
 
-#: lib/Newsletter/Listing/NewsletterListingRepository.php:160
 #: views/forms.html:63 views/newsletters.html:156
+#: lib/Newsletter/Listing/NewsletterListingRepository.php:160
 msgid "Active"
 msgstr "Активные"
 
+#: views/layout.html:182
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:132
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:147
 #: lib/Newsletter/Sending/ScheduledTaskSubscribersListingRepository.php:53
-#: views/layout.html:182
 msgid "Sent"
 msgstr "Отправленные"
 
@@ -8821,14 +8895,14 @@ msgstr "Отправленные"
 msgid "Sending"
 msgstr "Рассылаются "
 
-#: lib/Newsletter/Listing/NewsletterListingRepository.php:122
 #: views/newsletter/templates/blocks/posts/settingsSelection.hbs:11
+#: lib/Newsletter/Listing/NewsletterListingRepository.php:122
 msgid "Scheduled"
 msgstr "Запланированные"
 
-#: lib/Newsletter/Listing/NewsletterListingRepository.php:117
 #: views/newsletter/templates/blocks/posts/settingsSelection.hbs:12
 #: views/newsletter/templates/blocks/products/settingsSelection.hbs:9
+#: lib/Newsletter/Listing/NewsletterListingRepository.php:117
 msgid "Draft"
 msgstr "Черновые"
 
@@ -8839,13 +8913,13 @@ msgstr "Щелкните здесь для просмотра медиа."
 #. translators: %s is the number of subscribers without a segment.
 #. translators: %s is the number of subscribers without a list.
 #: lib/Models/Subscriber.php:172
-#: lib/Subscribers/SubscriberListingRepository.php:255
+#: lib/Subscribers/SubscriberListingRepository.php:261
 msgid "Subscribers without a list (%s)"
 msgstr "Подписчики без списка (%s)"
 
 #: lib/Models/Subscriber.php:163
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:62
-#: lib/Subscribers/SubscriberListingRepository.php:269
+#: lib/Subscribers/SubscriberListingRepository.php:275
 msgid "All Lists"
 msgstr "Все списки"
 
@@ -8869,8 +8943,8 @@ msgstr "Клиенты WooCommerce"
 msgid "This list contains all of your WordPress users."
 msgstr "В этом списке присутствуют все ваши пользователи WordPress."
 
-#: lib/Models/Segment.php:140 lib/Segments/SegmentsRepository.php:57
-#: views/subscribers/subscribers.html:110
+#: views/subscribers/subscribers.html:110 lib/Models/Segment.php:140
+#: lib/Segments/SegmentsRepository.php:57
 msgid "WordPress Users"
 msgstr "Пользователи WordPress"
 
@@ -8887,17 +8961,17 @@ msgid "This is an empty email without any content and it cannot be sent. Please 
 msgstr "Это пустое письмо без содержимого и его невозможно отослать. Пожалуйста, отредактируйте [link]письмо[/link]."
 
 #. translators: %1$s is the name of the database column.
-#: lib/Models/Model.php:244
 #: views/subscribers/importExport/import/step_data_manipulation.html:17
+#: lib/Models/Model.php:244
 msgid "Another record already exists. Please specify a different \"%1$s\"."
 msgstr "Еще одна запись уже существует. Пожалуйста, укажите иную \"%1$s\"."
 
-#: lib/Models/CustomField.php:29 lib/Models/Newsletter.php:65
 #: views/form/templatesLegacy/settings/field_form.hbs:16
+#: lib/Models/CustomField.php:29 lib/Models/Newsletter.php:65
 msgid "Please specify a type."
 msgstr "Пожалуйста, укажите тип."
 
-#: lib/Util/Notices/UnauthorizedEmailNotice.php:78 views/newsletters.html:344
+#: views/newsletters.html:344 lib/Util/Notices/UnauthorizedEmailNotice.php:78
 msgid "Resume sending"
 msgstr "Возобновить рассылку"
 
@@ -8937,11 +9011,11 @@ msgstr "%s вернул неизвестную ошибку."
 msgid "Unsupported Amazon SES region"
 msgstr "Неподдерживаемый регион Amazon SES"
 
-#: lib/Mailer/MailerLog.php:106
+#: lib/Mailer/MailerLog.php:105
 msgid "Sending frequency limit has been reached."
 msgstr "Достигнут предел частоты отправок."
 
-#: lib/Mailer/MailerLog.php:98
+#: lib/Mailer/MailerLog.php:97
 msgid "Sending is waiting to be retried."
 msgstr "Отправка в ожидании повтора."
 
@@ -9018,12 +9092,12 @@ msgstr "Пожалуйста, оставьте это поле пустым."
 msgid "Sample page to preview your form"
 msgstr "Простая страница для предварительного просмотра формы"
 
+#: views/forms.html:92 views/newsletters.html:148 views/segments.html:76
+#: views/subscribers/subscribers.html:45
 #: lib/Form/Listing/FormListingRepository.php:36
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:174
 #: lib/Segments/SegmentListingRepository.php:99
-#: lib/Subscribers/SubscriberListingRepository.php:230 views/forms.html:92
-#: views/newsletters.html:148 views/segments.html:76
-#: views/subscribers/subscribers.html:45
+#: lib/Subscribers/SubscriberListingRepository.php:236
 msgid "Trash"
 msgstr "Корзина"
 
@@ -9031,13 +9105,15 @@ msgstr "Корзина"
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:106
 #: lib/Newsletter/Sending/ScheduledTaskSubscribersListingRepository.php:48
 #: lib/Segments/SegmentListingRepository.php:94
-#: lib/Subscribers/SubscriberListingRepository.php:200
+#: lib/Subscribers/SubscriberListingRepository.php:206
 msgid "All"
 msgstr "Все"
 
+#. translators: %s is the original workflow name.
 #. translators: %s is name of the form which has been duplicated.
 #. translators: %s is the subject of the mail which has been copied.
 #. translators: %s is the name of the segment
+#: lib/Automation/Engine/Builder/DuplicateWorkflowController.php:52
 #: lib/Form/FormSaveController.php:28
 #: lib/Newsletter/NewsletterSaveController.php:175
 #: lib/Segments/SegmentSaveController.php:46
@@ -9055,63 +9131,63 @@ msgstr "Вы успешно подписались на нашу рассылк�
 msgid "Check your inbox or spam folder to confirm your subscription."
 msgstr "Проверьте ваш почтовый ящик или спам, чтобы подтвердить свою подписку."
 
-#: lib/Form/Block/Date.php:121 views/layout.html:204
-#: views/subscribers/importExport/import.html:70
+#: views/layout.html:204 views/subscribers/importExport/import.html:70
+#: lib/Form/Block/Date.php:121
 msgid "December"
 msgstr "Декабрь"
 
-#: lib/Form/Block/Date.php:121 views/layout.html:203
-#: views/subscribers/importExport/import.html:69
+#: views/layout.html:203 views/subscribers/importExport/import.html:69
+#: lib/Form/Block/Date.php:121
 msgid "November"
 msgstr "Ноябрь"
 
-#: lib/Form/Block/Date.php:121 views/layout.html:202
-#: views/subscribers/importExport/import.html:68
+#: views/layout.html:202 views/subscribers/importExport/import.html:68
+#: lib/Form/Block/Date.php:121
 msgid "October"
 msgstr "Октябрь"
 
-#: lib/Form/Block/Date.php:120 views/layout.html:201
-#: views/subscribers/importExport/import.html:67
+#: views/layout.html:201 views/subscribers/importExport/import.html:67
+#: lib/Form/Block/Date.php:120
 msgid "September"
 msgstr "Сентябрь"
 
-#: lib/Form/Block/Date.php:120 views/layout.html:200
-#: views/subscribers/importExport/import.html:66
+#: views/layout.html:200 views/subscribers/importExport/import.html:66
+#: lib/Form/Block/Date.php:120
 msgid "August"
 msgstr "Август"
 
-#: lib/Form/Block/Date.php:120 views/layout.html:199
-#: views/subscribers/importExport/import.html:65
+#: views/layout.html:199 views/subscribers/importExport/import.html:65
+#: lib/Form/Block/Date.php:120
 msgid "July"
 msgstr "Июль"
 
-#: lib/Form/Block/Date.php:120 views/layout.html:198
-#: views/subscribers/importExport/import.html:64
+#: views/layout.html:198 views/subscribers/importExport/import.html:64
+#: lib/Form/Block/Date.php:120
 msgid "June"
 msgstr "Июнь"
 
-#: lib/Form/Block/Date.php:120 views/layout.html:197 views/layout.html:209
-#: views/subscribers/importExport/import.html:63
+#: views/layout.html:197 views/layout.html:209
+#: views/subscribers/importExport/import.html:63 lib/Form/Block/Date.php:120
 msgid "May"
 msgstr "Май"
 
-#: lib/Form/Block/Date.php:119 views/layout.html:196
-#: views/subscribers/importExport/import.html:62
+#: views/layout.html:196 views/subscribers/importExport/import.html:62
+#: lib/Form/Block/Date.php:119
 msgid "April"
 msgstr "Апрель"
 
-#: lib/Form/Block/Date.php:119 views/layout.html:195
-#: views/subscribers/importExport/import.html:61
+#: views/layout.html:195 views/subscribers/importExport/import.html:61
+#: lib/Form/Block/Date.php:119
 msgid "March"
 msgstr "Март"
 
-#: lib/Form/Block/Date.php:119 views/layout.html:194
-#: views/subscribers/importExport/import.html:60
+#: views/layout.html:194 views/subscribers/importExport/import.html:60
+#: lib/Form/Block/Date.php:119
 msgid "February"
 msgstr "Февраль"
 
-#: lib/Form/Block/Date.php:119 views/layout.html:193
-#: views/subscribers/importExport/import.html:59
+#: views/layout.html:193 views/subscribers/importExport/import.html:59
+#: lib/Form/Block/Date.php:119
 msgid "January"
 msgstr "Январь"
 
@@ -9127,11 +9203,11 @@ msgstr "Год, месяц"
 msgid "Year, month, day"
 msgstr "Год, месяц, день"
 
-#: lib/Form/Block/Date.php:89 lib/Form/Block/Date.php:105
-#: lib/Form/Block/Date.php:182
-#: lib/Newsletter/Shortcodes/ShortcodesHelper.php:84 views/form/editor.html:145
+#: views/form/editor.html:145
 #: views/form/templatesLegacy/blocks/date_years.hbs:5
-#: views/subscribers/subscribers.html:123
+#: views/subscribers/subscribers.html:123 lib/Form/Block/Date.php:89
+#: lib/Form/Block/Date.php:105 lib/Form/Block/Date.php:182
+#: lib/Newsletter/Shortcodes/ShortcodesHelper.php:84
 msgid "Year"
 msgstr "Год"
 
@@ -9139,10 +9215,10 @@ msgstr "Год"
 msgid "Please select a year"
 msgstr "Пожалуйста, выберите год"
 
-#: lib/Form/Block/Date.php:80 lib/Form/Block/Date.php:147
 #: views/form/editor.html:144
 #: views/form/templatesLegacy/blocks/date_months.hbs:3
-#: views/subscribers/subscribers.html:124
+#: views/subscribers/subscribers.html:124 lib/Form/Block/Date.php:80
+#: lib/Form/Block/Date.php:147
 msgid "Month"
 msgstr "Месяц"
 
@@ -9150,9 +9226,9 @@ msgstr "Месяц"
 msgid "Please select a month"
 msgstr "Пожалуйста, выберите месяц"
 
-#: lib/Form/Block/Date.php:71 lib/Form/Block/Date.php:213
 #: views/form/editor.html:143 views/form/templatesLegacy/blocks/date_days.hbs:3
-#: views/subscribers/subscribers.html:125
+#: views/subscribers/subscribers.html:125 lib/Form/Block/Date.php:71
+#: lib/Form/Block/Date.php:213
 msgid "Day"
 msgstr "День"
 
@@ -9245,16 +9321,16 @@ msgstr "Управлять ссылкой на подписку"
 msgid "Unsubscribe link"
 msgstr "Ссылка Отписаться"
 
-#: lib/Cron/Workers/StatsNotifications/AutomatedEmails.php:106
 #: views/emails/statsNotificationAutomatedEmails.html:27
+#: lib/Cron/Workers/StatsNotifications/AutomatedEmails.php:106
 msgid "Your monthly stats are in!"
 msgstr "Ваша месячная статистика готова!"
 
-#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:264
+#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:274
 msgid "There was an error processing your newsletter during sending. If possible, please contact us and report this issue."
 msgstr "Во время отправки вашей рассылки произошла ошибка обработки. По возможности свяжитесь с нами и сообщите о проблеме."
 
-#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:184
+#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:194
 msgid "No subject"
 msgstr "Без темы"
 
@@ -9304,7 +9380,7 @@ msgstr "[link1]Зарегистрируйте[/link1] вашу копию пла
 msgid "Your newsletters are awesome! Don't forget to [link]upgrade your MailPoet email plan[/link] by %s to keep sending them to your subscribers."
 msgstr "Ваши рассылки прекрасны! Не забудьте [link]продлить ваш план MailPoet[/link] %s, чтобы и далее иметь возможность делать рассылки вашим подписчикам."
 
-#: lib/Config/ServicesChecker.php:51 views/layout.html:187
+#: views/layout.html:187 lib/Config/ServicesChecker.php:51
 msgid "Purchase a key"
 msgstr "Купить ключ"
 
@@ -9312,7 +9388,7 @@ msgstr "Купить ключ"
 msgid "Your key to send with MailPoet is invalid."
 msgstr "Ваш ключ для рассылки с MailPoet некорректен."
 
-#: lib/Config/ServicesChecker.php:45 views/layout.html:185
+#: views/layout.html:185 lib/Config/ServicesChecker.php:45
 msgid "All sending is currently paused!"
 msgstr "Все рассылки приостановлены на текущий момент!"
 
@@ -9798,8 +9874,8 @@ msgstr ""
 msgid "You can change a layout's background color by clicking on the settings icon on the right edge of the Designer. Simply hover over this area to see the Settings (gear) icon."
 msgstr "Вы можете менять цвет фона макета с помощью щелчка на иконке настроек в правой стороне дизайнера. Просто переместите указатель мыши над этой областью, чтобы отобразить иконку настроек (шестеренка)."
 
-#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:183
 #: lib/Config/PopulatorData/Templates/NewsletterBlank12Column.php:183
+#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:183
 msgid "... a 2-column layout."
 msgstr "...  2-столбцовый макет."
 
@@ -9819,8 +9895,8 @@ msgstr ""
 "<li>3 столбца</li>\n"
 "</ul>"
 
-#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:164
 #: lib/Config/PopulatorData/Templates/NewsletterBlank12Column.php:164
+#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:164
 msgid "This template has..."
 msgstr "У этого шаблона есть..."
 
@@ -9846,13 +9922,13 @@ msgstr ""
 
 #: lib/Config/PopulatorData/Templates/ConfirmInterestBeforeDeactivation.php:85
 #: lib/Config/PopulatorData/Templates/ConfirmInterestOrUnsubscribe.php:85
-#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:114
+#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:114
 #: lib/Config/PopulatorData/Templates/NewsletterBlank12Column.php:114
 #: lib/Config/PopulatorData/Templates/NewsletterBlank13Column.php:114
-#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:114
+#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:114
 #: lib/Config/PopulatorData/Templates/SimpleText.php:73
-#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:114
 #: lib/Config/PopulatorData/Templates/WelcomeBlank1Column.php:114
+#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:114
 msgid "Fake logo"
 msgstr "Ложный логотип"
 
@@ -9897,31 +9973,31 @@ msgstr "Мейкап блог"
 msgid "Buy now"
 msgstr "Купить сейчас"
 
+#: views/newsletter/editor.html:1203 views/newsletter/editor.html:1205
+#: views/newsletter/editor.html:1258 views/newsletter/editor.html:1260
+#: views/newsletter/editor.html:1387 views/newsletter/editor.html:1389
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1337
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1340
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1397
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1400
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1519
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1522
-#: views/newsletter/editor.html:1203 views/newsletter/editor.html:1205
-#: views/newsletter/editor.html:1258 views/newsletter/editor.html:1260
-#: views/newsletter/editor.html:1387 views/newsletter/editor.html:1389
 msgid "Read more"
 msgstr "Читать далее"
 
-#: lib/Config/PopulatorData/Templates/KidsClothing.php:1295
-#: lib/Config/PopulatorData/Templates/PostNotificationsBlank1Column.php:169
 #: views/newsletter/editor.html:1201 views/newsletter/editor.html:1256
 #: views/newsletter/editor.html:1385
+#: lib/Config/PopulatorData/Templates/KidsClothing.php:1295
+#: lib/Config/PopulatorData/Templates/PostNotificationsBlank1Column.php:169
 msgid "Categories:"
 msgstr "Рубрики:"
 
+#: views/newsletter/editor.html:1199 views/newsletter/editor.html:1254
+#: views/newsletter/editor.html:1383
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1292
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1352
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1473
 #: lib/Config/PopulatorData/Templates/PostNotificationsBlank1Column.php:167
-#: views/newsletter/editor.html:1199 views/newsletter/editor.html:1254
-#: views/newsletter/editor.html:1383
 msgid "Author:"
 msgstr "Автор:"
 
@@ -10007,10 +10083,10 @@ msgstr "Цветы (с купоном)"
 
 #: lib/Config/PopulatorData/Templates/Fitness.php:1192
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1656
-#: lib/WooCommerce/TransactionalEmails.php:60
 msgid "A note has been added to your order"
 msgstr "Заметка добавлена к вашему заказу"
 
+#: views/newsletter/editor.html:1523
 #: lib/Config/PopulatorData/Templates/Avocado.php:1012
 #: lib/Config/PopulatorData/Templates/Birds.php:209
 #: lib/Config/PopulatorData/Templates/Birds.php:1730
@@ -10066,10 +10142,10 @@ msgstr "Заметка добавлена к вашему заказу"
 #: lib/Config/PopulatorData/Templates/Motor.php:1188
 #: lib/Config/PopulatorData/Templates/Music.php:1461
 #: lib/Config/PopulatorData/Templates/NewsDay.php:1073
-#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:62
+#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:62
 #: lib/Config/PopulatorData/Templates/NewsletterBlank12Column.php:62
 #: lib/Config/PopulatorData/Templates/NewsletterBlank13Column.php:62
-#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:62
+#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:62
 #: lib/Config/PopulatorData/Templates/NewspaperTraditional.php:143
 #: lib/Config/PopulatorData/Templates/NewspaperTraditional.php:1211
 #: lib/Config/PopulatorData/Templates/NotSoMedium.php:986
@@ -10097,25 +10173,22 @@ msgstr "Заметка добавлена к вашему заказу"
 #: lib/Config/PopulatorData/Templates/Synagogue.php:1777
 #: lib/Config/PopulatorData/Templates/Vlogger.php:105
 #: lib/Config/PopulatorData/Templates/Vlogger.php:1402
-#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:62
 #: lib/Config/PopulatorData/Templates/WelcomeBlank1Column.php:62
+#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:62
 #: lib/Config/PopulatorData/Templates/WideStoryLayout.php:751
 #: lib/Config/PopulatorData/Templates/WineCity.php:937
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:105
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:1413
-#: views/newsletter/editor.html:1523
 msgid "View this in your browser."
 msgstr "Просмотреть в вашем браузере."
 
 #: lib/Config/PopulatorData/Templates/Fitness.php:1191
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1655
-#: lib/WooCommerce/TransactionalEmails.php:56
 msgid "Thanks for shopping with us"
 msgstr "Спасибо, что покупаете с нами"
 
 #: lib/Config/PopulatorData/Templates/Fitness.php:1190
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1654
-#: lib/WooCommerce/TransactionalEmails.php:52
 msgid "Thank you for your order"
 msgstr "Спасибо за ваш заказ"
 
@@ -10140,6 +10213,7 @@ msgstr "Магазин моды"
 msgid "Kids Shop"
 msgstr "Детский магазин"
 
+#: views/newsletter/editor.html:1340
 #: lib/Config/PopulatorData/Templates/Avocado.php:643
 #: lib/Config/PopulatorData/Templates/Avocado.php:876
 #: lib/Config/PopulatorData/Templates/Birds.php:1349
@@ -10208,10 +10282,10 @@ msgstr "Детский магазин"
 #: lib/Config/PopulatorData/Templates/Music.php:1091
 #: lib/Config/PopulatorData/Templates/Music.php:1336
 #: lib/Config/PopulatorData/Templates/NewsDay.php:949
-#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:321
+#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:200
 #: lib/Config/PopulatorData/Templates/NewsletterBlank12Column.php:261
 #: lib/Config/PopulatorData/Templates/NewsletterBlank13Column.php:284
-#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:200
+#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:321
 #: lib/Config/PopulatorData/Templates/NewspaperTraditional.php:722
 #: lib/Config/PopulatorData/Templates/NewspaperTraditional.php:1064
 #: lib/Config/PopulatorData/Templates/NotSoMedium.php:604
@@ -10248,8 +10322,8 @@ msgstr "Детский магазин"
 #: lib/Config/PopulatorData/Templates/TakeAHike.php:677
 #: lib/Config/PopulatorData/Templates/Vlogger.php:1003
 #: lib/Config/PopulatorData/Templates/Vlogger.php:1255
-#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:291
 #: lib/Config/PopulatorData/Templates/WelcomeBlank1Column.php:200
+#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:291
 #: lib/Config/PopulatorData/Templates/WideStoryLayout.php:360
 #: lib/Config/PopulatorData/Templates/WideStoryLayout.php:626
 #: lib/Config/PopulatorData/Templates/WineCity.php:504
@@ -10257,7 +10331,6 @@ msgstr "Детский магазин"
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:1032
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:1266
 #: lib/Config/PopulatorData/Templates/WorldCup.php:724
-#: views/newsletter/editor.html:1340
 msgid "Add your postal address here!"
 msgstr "Добавьте сюда ваш почтовый адрес!"
 
@@ -10351,10 +10424,10 @@ msgstr "Доверие"
 #: lib/Config/PopulatorData/Templates/Music.php:1336
 #: lib/Config/PopulatorData/Templates/NewsDay.php:562
 #: lib/Config/PopulatorData/Templates/NewsDay.php:949
-#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:321
+#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:200
 #: lib/Config/PopulatorData/Templates/NewsletterBlank12Column.php:261
 #: lib/Config/PopulatorData/Templates/NewsletterBlank13Column.php:284
-#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:200
+#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:321
 #: lib/Config/PopulatorData/Templates/NewspaperTraditional.php:722
 #: lib/Config/PopulatorData/Templates/NewspaperTraditional.php:1064
 #: lib/Config/PopulatorData/Templates/NotSoMedium.php:604
@@ -10393,8 +10466,8 @@ msgstr "Доверие"
 #: lib/Config/PopulatorData/Templates/TakeAHike.php:647
 #: lib/Config/PopulatorData/Templates/Vlogger.php:1003
 #: lib/Config/PopulatorData/Templates/Vlogger.php:1255
-#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:291
 #: lib/Config/PopulatorData/Templates/WelcomeBlank1Column.php:200
+#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:291
 #: lib/Config/PopulatorData/Templates/WideStoryLayout.php:360
 #: lib/Config/PopulatorData/Templates/WideStoryLayout.php:626
 #: lib/Config/PopulatorData/Templates/WineCity.php:504
@@ -10403,7 +10476,7 @@ msgstr "Доверие"
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:1266
 #: lib/Config/PopulatorData/Templates/WorldCup.php:724
 #: lib/Config/PopulatorData/Templates/YogaStudio.php:698
-#: lib/Subscription/Pages.php:384 lib/Subscription/Pages.php:476
+#: lib/Subscription/Pages.php:375 lib/Subscription/Pages.php:467
 msgid "Manage your subscription"
 msgstr "Управлять вашей подпиской"
 
@@ -10463,6 +10536,7 @@ msgstr "Птицы"
 msgid "Avocado"
 msgstr "Авокадо"
 
+#: views/newsletter/editor.html:1340
 #: lib/Config/PopulatorData/Templates/AppWelcome.php:319
 #: lib/Config/PopulatorData/Templates/Avocado.php:643
 #: lib/Config/PopulatorData/Templates/Avocado.php:876
@@ -10539,10 +10613,10 @@ msgstr "Авокадо"
 #: lib/Config/PopulatorData/Templates/Music.php:1336
 #: lib/Config/PopulatorData/Templates/NewsDay.php:562
 #: lib/Config/PopulatorData/Templates/NewsDay.php:949
-#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:321
+#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:200
 #: lib/Config/PopulatorData/Templates/NewsletterBlank12Column.php:261
 #: lib/Config/PopulatorData/Templates/NewsletterBlank13Column.php:284
-#: lib/Config/PopulatorData/Templates/NewsletterBlank1Column.php:200
+#: lib/Config/PopulatorData/Templates/NewsletterBlank121Column.php:321
 #: lib/Config/PopulatorData/Templates/NewspaperTraditional.php:722
 #: lib/Config/PopulatorData/Templates/NewspaperTraditional.php:1064
 #: lib/Config/PopulatorData/Templates/NotSoMedium.php:604
@@ -10582,8 +10656,8 @@ msgstr "Авокадо"
 #: lib/Config/PopulatorData/Templates/TakeAHike.php:647
 #: lib/Config/PopulatorData/Templates/Vlogger.php:1003
 #: lib/Config/PopulatorData/Templates/Vlogger.php:1255
-#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:291
 #: lib/Config/PopulatorData/Templates/WelcomeBlank1Column.php:200
+#: lib/Config/PopulatorData/Templates/WelcomeBlank12Column.php:291
 #: lib/Config/PopulatorData/Templates/WideStoryLayout.php:360
 #: lib/Config/PopulatorData/Templates/WideStoryLayout.php:626
 #: lib/Config/PopulatorData/Templates/WineCity.php:504
@@ -10593,7 +10667,6 @@ msgstr "Авокадо"
 #: lib/Config/PopulatorData/Templates/WorldCup.php:724
 #: lib/Config/PopulatorData/Templates/YogaStudio.php:698
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:94
-#: views/newsletter/editor.html:1340
 msgid "Unsubscribe"
 msgstr "Отписаться"
 
@@ -10634,71 +10707,70 @@ msgstr "Списки из MailPoet"
 msgid "MailPoet Subscribers"
 msgstr "Подписчики MailPoet"
 
-#: lib/Config/Menu.php:381 lib/Config/Menu.php:382
+#: lib/Config/Menu.php:400 lib/Config/Menu.php:401
 msgid "WooCommerce Setup"
 msgstr "Установка WooCommerce"
 
-#: lib/Config/Menu.php:368 lib/Config/Menu.php:369
+#: lib/Config/Menu.php:387 lib/Config/Menu.php:388
 msgid "Welcome Wizard"
 msgstr "Приветственный мастер настройки"
 
-#: lib/Config/Menu.php:341 lib/Config/Menu.php:342
+#: lib/Config/Menu.php:360 lib/Config/Menu.php:361
 msgid "Help"
 msgstr "Помощь"
 
-#: lib/Config/Hooks.php:433 lib/Config/Menu.php:328 lib/Config/Menu.php:329
-#: views/newsletters.html:136 views/settings.html:33
+#: views/newsletters.html:136 views/settings.html:33 lib/Config/Hooks.php:439
+#: lib/Config/Menu.php:347 lib/Config/Menu.php:348
 msgid "Settings"
 msgstr "Настройки"
 
-#: lib/Config/Menu.php:303 lib/Config/Menu.php:304 views/forms.html:78
-#: views/newsletters.html:135 views/newsletters.html:276 views/segments.html:36
-#: views/subscribers/subscribers.html:87
+#: views/forms.html:78 views/newsletters.html:135 views/newsletters.html:276
+#: views/segments.html:36 views/subscribers/subscribers.html:87
+#: lib/Config/Menu.php:322 lib/Config/Menu.php:323
 msgid "Lists"
 msgstr "Списки"
 
-#: lib/Config/Menu.php:290 lib/Config/Menu.php:291
 #: views/subscribers/importExport/export.html:6
 #: views/subscribers/importExport/export.html:80
-#: views/subscribers/subscribers.html:128
+#: views/subscribers/subscribers.html:128 lib/Config/Menu.php:309
+#: lib/Config/Menu.php:310
 msgid "Export"
 msgstr "Экспорт"
 
-#: lib/Config/Menu.php:277 lib/Config/Menu.php:278
 #: views/subscribers/importExport/import.html:6
 #: views/subscribers/importExport/import.html:100
-#: views/subscribers/subscribers.html:127
+#: views/subscribers/subscribers.html:127 lib/Config/Menu.php:296
+#: lib/Config/Menu.php:297
 msgid "Import"
 msgstr "Импорт"
 
-#: lib/Config/Menu.php:252 lib/Config/Menu.php:253
-#: views/subscribers/subscribers.html:26
+#: views/subscribers/subscribers.html:26 lib/Config/Menu.php:271
 msgid "Subscribers"
 msgstr "Подписчики"
 
-#: lib/Config/Menu.php:231 lib/Config/Menu.php:232
+#: lib/Config/Menu.php:250 lib/Config/Menu.php:251
 msgid "Select Form Template"
 msgstr "Выберите шаблон формы"
 
-#: lib/Config/Menu.php:211 lib/Config/Menu.php:212
+#: lib/Config/Menu.php:230 lib/Config/Menu.php:231
 msgid "Form Editor"
 msgstr "Редактор форм"
 
-#: lib/Config/Menu.php:186 lib/Config/Menu.php:187 views/forms.html:44
+#: views/forms.html:44 lib/Config/Menu.php:205 lib/Config/Menu.php:206
 msgid "Forms"
 msgstr "Формы"
 
-#: lib/Config/Menu.php:174 views/newsletter/editor.html:328
+#: views/newsletter/editor.html:328 lib/Config/Menu.php:191
 msgid "Newsletter Editor"
 msgstr "Редактор рассылок"
 
-#: lib/Config/Menu.php:173 lib/Newsletter/Shortcodes/ShortcodesHelper.php:42
 #: views/newsletter/editor.html:371 views/newsletters.html:71
-#: views/newsletters.html:211
+#: views/newsletters.html:211 lib/Config/Menu.php:190
+#: lib/Newsletter/Shortcodes/ShortcodesHelper.php:42
 msgid "Newsletter"
 msgstr "Рассылка"
 
-#: lib/Config/Menu.php:148 lib/Config/Menu.php:149 views/newsletters.html:69
+#: views/newsletters.html:69 lib/Config/Menu.php:165 lib/Config/Menu.php:166
 msgid "Emails"
 msgstr "Письма"
 
@@ -10706,16 +10778,18 @@ msgstr "Письма"
 msgid "Unable to connect to the database (the database is unable to open a file or folder), the connection is likely not configured correctly. Please read our [link] Knowledge Base article [/link] for steps how to resolve it."
 msgstr "Невозможно подключиться к базе данных (база данных не может открыть файл или папку), скорее всего соединение не настроено должным образом. Пожалуйста, прочтите нашу [link] статью из Базы знаний [/link] для поиска решения этой проблемы."
 
-#: lib/Config/Hooks.php:377
+#: lib/Config/Hooks.php:383
 msgid "MailPoet Newsletter"
 msgstr "Рассылка в MailPoet"
 
-#: lib/Config/Capabilities.php:80 lib/Config/Menu.php:535
+#. Plugin Name of the plugin
+#. Author of the plugin
+#: lib/Config/Capabilities.php:80 lib/Config/Menu.php:559
 #: lib/Config/PrivacyPolicy.php:12
 msgid "MailPoet"
 msgstr "MailPoet"
 
-#: lib/Config/Activator.php:47
+#: lib/Config/Activator.php:54
 msgid "MailPoet version update is in progress, please refresh the page in a minute."
 msgstr "Идет обновление версии MailPoet, пожалуйста, обновите страницу через минуту."
 
@@ -10760,14 +10834,13 @@ msgstr "Необходим WooCommerce"
 msgid "Automatically send an email based on your customers’ purchase behavior. Enhance your customer service and start increasing sales with WooCommerce follow up emails."
 msgstr "Автоматически отправляйте электронное письмо, основываясь на покупательском поведении ваших клиентов. Улучшайте обслуживания клиентов и начните увеличивать продажи с электронных рассылок WooCommerce."
 
-#: lib/AutomaticEmails/WooCommerce/WooCommerce.php:65
 #: views/newsletter/editor.html:374 views/newsletters.html:74
-#: views/settings.html:37
+#: views/settings.html:37 lib/AutomaticEmails/WooCommerce/WooCommerce.php:65
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:82
 #: views/segments.html:216
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:82
 msgid "Search products"
 msgstr "Искать товары"
 
@@ -10827,18 +10900,18 @@ msgstr "Первая покупка"
 msgid "We recommend setting up 3 abandoned cart emails. Here’s why."
 msgstr "Мы рекомендуем установить 3 сообщения о забытой корзине. И вот почему."
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:76
 #: views/newsletters.html:266
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:76
 msgid "week(s) later"
 msgstr "недель после"
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:72
 #: views/newsletters.html:265
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:72
 msgid "day(s) later"
 msgstr "дней после"
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:68
 #: views/newsletters.html:264
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:68
 msgid "hour(s) later"
 msgstr "часов после"
 
@@ -10851,7 +10924,7 @@ msgstr "Необходимо"
 msgid "Send an email to logged-in visitors who have items in their shopping carts but left your website without checking out. Can convert up to 5% of abandoned carts."
 msgstr "Отправьте сообщение активным посетителям с товарами в корзине, но которые ушли с сайта без покупки. Можно вернуть до 5% незавершенных покупок."
 
-#: lib/AutomaticEmails/WooCommerce/WooCommerce.php:114 views/help.html:31
+#: views/help.html:31 lib/AutomaticEmails/WooCommerce/WooCommerce.php:114
 msgid "Please contact our technical support for assistance."
 msgstr "Пожалуйста, свяжитесь с нашей службой технической поддержки для помощи."
 
@@ -10867,47 +10940,47 @@ msgstr "Такой список уже существует."
 msgid "List name is required."
 msgstr "Необходимо название списка."
 
-#: lib/API/MP/v1/Subscribers.php:112
+#: lib/API/MP/v1/Subscribers.php:120
 msgid "This subscriber already exists."
 msgstr "Такой подписчик уже существует."
 
-#: lib/API/MP/v1/Subscribers.php:104
+#: lib/API/MP/v1/Subscribers.php:112
 msgid "Subscriber email address is required."
 msgstr "Необходим email адрес подписчика."
 
 #. translators: %s is the count of lists
-#: lib/API/MP/v1/Subscribers.php:359
+#: lib/API/MP/v1/Subscribers.php:410
 msgid "List with ID %s does not exist."
 msgid_plural "Lists with IDs %s do not exist."
 msgstr[0] "Списка с ID %s не существует."
 msgstr[1] "Списков с ID %s не существует."
 msgstr[2] "Списков с ID %s не существует."
 
-#: lib/API/MP/v1/Subscribers.php:280
+#: lib/API/MP/v1/Subscribers.php:331
 msgid "At least one segment ID is required."
 msgstr "Необходим, по крайней мере, один ID сегмента."
 
+#: views/form/editor.html:160 views/subscribers/subscribers.html:67
 #: lib/API/MP/v1/CustomFields.php:43
 #: lib/Subscribers/ImportExport/ImportExportFactory.php:62
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:172
-#: views/form/editor.html:160 views/subscribers/subscribers.html:67
 msgid "Last name"
 msgstr "Фамилия"
 
+#: views/form/editor.html:158 views/subscribers/subscribers.html:66
 #: lib/API/MP/v1/CustomFields.php:35
 #: lib/Subscribers/ImportExport/ImportExportFactory.php:61
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:163
-#: views/form/editor.html:158 views/subscribers/subscribers.html:66
 msgid "First name"
 msgstr "Имя"
 
+#: views/form/editor.html:167 views/help.html:71
+#: views/newsletter/editor.html:1128 views/newsletter/editor.html:1129
+#: views/segments.html:115 views/subscription/manage_subscription.html:9
 #: lib/API/MP/v1/CustomFields.php:27
 #: lib/Form/Templates/Templates/InitialForm.php:22
 #: lib/Subscribers/ImportExport/ImportExportFactory.php:60
 #: lib/Subscribers/ImportExport/PersonalDataExporters/SubscriberExporter.php:70
-#: views/form/editor.html:167 views/help.html:71
-#: views/newsletter/editor.html:1128 views/newsletter/editor.html:1129
-#: views/segments.html:115 views/subscription/manage_subscription.html:9
 msgid "Email"
 msgstr "Адрес электронной почты"
 
@@ -10927,10 +11000,10 @@ msgstr "Ваш адрес электронной почты недействит
 msgid "Please enter your email address"
 msgstr "Пожалуйста, введите ваш адрес электронной почты"
 
-#: lib/API/JSON/v1/SubscriberStats.php:38 lib/API/JSON/v1/Subscribers.php:89
-#: lib/API/JSON/v1/Subscribers.php:183 lib/API/JSON/v1/Subscribers.php:199
-#: lib/API/JSON/v1/Subscribers.php:211 lib/API/JSON/v1/Subscribers.php:241
-#: lib/API/MP/v1/Subscribers.php:300
+#: lib/API/JSON/v1/Subscribers.php:89 lib/API/JSON/v1/Subscribers.php:183
+#: lib/API/JSON/v1/Subscribers.php:199 lib/API/JSON/v1/Subscribers.php:211
+#: lib/API/JSON/v1/Subscribers.php:241 lib/API/JSON/v1/SubscriberStats.php:38
+#: lib/API/MP/v1/Subscribers.php:351
 msgid "This subscriber does not exist."
 msgstr "Такого подписчика не существует."
 
@@ -10947,76 +11020,76 @@ msgstr "Не указан адрес электронной почты."
 msgid "You have not specified any settings to be saved."
 msgstr "Вы не указали никаких настроек для сохранения."
 
-#: lib/API/JSON/v1/Services.php:287
+#: lib/API/JSON/v1/Services.php:291
 msgid "Contact your hosting support to check the connection between your host and https://bridge.mailpoet.com"
 msgstr "Свяжитесь с техподдержкой хостера, чтобы проверить доступность https://bridge.mailpoet.com"
 
-#: lib/API/JSON/v1/Services.php:284
+#: lib/API/JSON/v1/Services.php:288
 msgid "Service unavailable"
 msgstr "Сервис недоступен"
 
-#: lib/API/JSON/v1/Services.php:269
+#: lib/API/JSON/v1/Services.php:273
 msgid "Sending of congratulatory email failed."
 msgstr "Отправка поздравительного электронного письма не удалась."
 
 #. translators: %s is the email address, which is not authorized.
-#: lib/API/JSON/v1/Services.php:260
+#: lib/API/JSON/v1/Services.php:264
 msgid "Sender email address '%s' is not authorized."
 msgstr "Не авторизован адрес отправителя '%s'."
 
-#: lib/API/JSON/v1/Services.php:244
+#: lib/API/JSON/v1/Services.php:248
 msgid "Sender email address is not set."
 msgstr "Не установлен адрес отправителя."
 
-#: lib/API/JSON/v1/Services.php:255
+#: lib/API/JSON/v1/Services.php:259
 msgid "No FROM email addresses are authorized."
 msgstr "Нет авторизованных адресов ОТ."
 
-#: lib/API/JSON/v1/Services.php:239 views/settings.html:203
+#: views/settings.html:203 lib/API/JSON/v1/Services.php:243
 msgid "MailPoet Sending Service is not active."
 msgstr "Сервис рассылки MailPoet отключен"
 
 #. translators: %s is the error message.
-#: lib/API/JSON/v1/Services.php:208
+#: lib/API/JSON/v1/Services.php:212
 msgid "Error validating Premium key, please try again later (%s)"
 msgstr "Ошибка во время проверки Премиум-ключа, пожалуйста, попробуйте позже (%s)"
 
-#: lib/API/JSON/v1/Services.php:202
+#: lib/API/JSON/v1/Services.php:206
 msgid "Your Premium key is already used on another site"
 msgstr "Ваш Премиум-ключ уже используется на другом сайте"
 
-#: lib/API/JSON/v1/Services.php:199 views/settings.html:201
+#: views/settings.html:201 lib/API/JSON/v1/Services.php:203
 msgid "Your key is not valid for MailPoet Premium"
 msgstr "Ваш ключ не подходит для MailPoet Премиум"
 
 #. translators: %s is the expiration date.
-#: lib/API/JSON/v1/Services.php:181
+#: lib/API/JSON/v1/Services.php:185
 msgid "Your Premium key expires on %s"
 msgstr "Ваш Премиум-ключ истекает %s"
 
-#: lib/API/JSON/v1/Services.php:177
+#: lib/API/JSON/v1/Services.php:179
 msgid "Your Premium key has been successfully validated"
 msgstr "Ваш Премиум-ключ успешно прошел проверку"
 
-#: lib/API/JSON/v1/Services.php:143
+#: lib/API/JSON/v1/Services.php:145
 msgid "Note that it doesn't work on localhost."
 msgstr "Учтите, что это не работает на локальном хосте."
 
 #. translators: %s is the error message.
-#: lib/API/JSON/v1/Services.php:140
+#: lib/API/JSON/v1/Services.php:142
 msgid "Error validating MailPoet Sending Service key, please try again later (%s)."
 msgstr "Ошибка во время проверки ключа сервиса рассылки MailPoet, пожалуйста, попробуйте позже (%s)."
 
-#: lib/API/JSON/v1/Services.php:135
+#: lib/API/JSON/v1/Services.php:137
 msgid "Your MailPoet Sending Service key is already used on another site"
 msgstr "Ваш ключ сервиса рассылки Mailpoet уже используется на другом сайте"
 
-#: lib/API/JSON/v1/Services.php:132 views/settings.html:205
+#: views/settings.html:205 lib/API/JSON/v1/Services.php:134
 msgid "Your key is not valid for the MailPoet Sending Service"
 msgstr "Ваш ключ не подходит для сервиса рассылки MailPoet"
 
 #. translators: %s is the expiration date.
-#: lib/API/JSON/v1/Services.php:117
+#: lib/API/JSON/v1/Services.php:119
 msgid "Your MailPoet Sending Service key expires on %s!"
 msgstr "Ваш ключ сервиса рассылки MailPoet истекает %s!"
 
@@ -11024,7 +11097,7 @@ msgstr "Ваш ключ сервиса рассылки MailPoet истекае�
 msgid "Your MailPoet Sending Service key has been successfully validated"
 msgstr "Ваш ключ сервиса рассылки MailPoet успешно прошел проверку"
 
-#: lib/API/JSON/v1/Services.php:86 lib/API/JSON/v1/Services.php:160
+#: lib/API/JSON/v1/Services.php:86 lib/API/JSON/v1/Services.php:162
 msgid "Please specify a key."
 msgstr "Пожалуйста, укажите ключ."
 
@@ -11068,9 +11141,12 @@ msgstr "Этот список не может быть перемещен в к�
 
 #: lib/API/JSON/v1/Segments.php:99 lib/API/JSON/v1/Segments.php:161
 #: lib/API/JSON/v1/Segments.php:171 lib/API/JSON/v1/Segments.php:235
-#: lib/API/JSON/v1/Segments.php:257 lib/API/MP/v1/Subscribers.php:314
+#: lib/API/JSON/v1/Segments.php:257 lib/API/MP/v1/Subscribers.php:365
 msgid "This list does not exist."
-msgstr "Такого списка не существует."
+msgid_plural "These lists do not exist."
+msgstr[0] "Такого списка не существует."
+msgstr[1] ""
+msgstr[2] ""
 
 #: lib/API/JSON/v1/Premium.php:64
 msgid "Error when activating MailPoet Premium plugin."
@@ -11084,28 +11160,28 @@ msgstr "Ошибка во время установки плагина MailPoet 
 msgid "Premium key is not valid."
 msgstr "Премиум-ключ недействителен."
 
-#: lib/API/JSON/v1/Newsletters.php:320
+#: lib/API/JSON/v1/Newsletters.php:322
 msgid "Please specify receiver information."
 msgstr "Пожалуйста, укажите информацию получателя."
 
-#: lib/API/JSON/v1/Newsletters.php:297
+#: lib/API/JSON/v1/Newsletters.php:299
 msgid "Newsletter data is missing."
 msgstr "Данные рассылки отсутствуют."
 
-#: lib/API/JSON/v1/Newsletters.php:202
+#: lib/API/JSON/v1/Newsletters.php:204
 msgid "This email has incorrect state."
 msgstr "Письмо находится в неверном состоянии."
 
-#: lib/API/JSON/v1/Newsletters.php:176 lib/API/JSON/v1/SendingQueue.php:90
+#: lib/API/JSON/v1/Newsletters.php:178 lib/API/JSON/v1/SendingQueue.php:90
 #: lib/API/JSON/v1/SendingQueue.php:223
 msgid "Subscribers limit reached."
 msgstr "Достигнут лимит подписчиков."
 
 #: lib/API/JSON/v1/Newsletters.php:123 lib/API/JSON/v1/Newsletters.php:140
-#: lib/API/JSON/v1/Newsletters.php:183 lib/API/JSON/v1/Newsletters.php:242
-#: lib/API/JSON/v1/Newsletters.php:258 lib/API/JSON/v1/Newsletters.php:272
-#: lib/API/JSON/v1/Newsletters.php:289 lib/API/JSON/v1/Newsletters.php:304
-#: lib/API/JSON/v1/Newsletters.php:327
+#: lib/API/JSON/v1/Newsletters.php:185 lib/API/JSON/v1/Newsletters.php:244
+#: lib/API/JSON/v1/Newsletters.php:260 lib/API/JSON/v1/Newsletters.php:274
+#: lib/API/JSON/v1/Newsletters.php:291 lib/API/JSON/v1/Newsletters.php:306
+#: lib/API/JSON/v1/Newsletters.php:329
 msgid "This email does not exist."
 msgstr "Такого письма не существует."
 
@@ -11139,7 +11215,7 @@ msgstr "Новая форма"
 msgid "Invalid status. Allowed values are (%1$s), you specified %2$s"
 msgstr "Неверный статус. Допустимые значения: (%1$s), вы указали %2$s"
 
-#: lib/API/JSON/v1/Forms.php:108 lib/API/JSON/v1/Newsletters.php:170
+#: lib/API/JSON/v1/Forms.php:108 lib/API/JSON/v1/Newsletters.php:172
 msgid "You need to specify a status."
 msgstr "Вам необходимо указать статус."
 
@@ -11201,11 +11277,11 @@ msgstr "Тип сегмента неизвестен."
 msgid "The segment type is missing."
 msgstr "Тип сегмента отсутствует."
 
+#: views/form/templatesLegacy/settings/field_form.hbs:53
+#: views/subscribers/importExport/import/step_data_manipulation.html:14
 #: lib/API/JSON/v1/DynamicSegments.php:120 lib/API/JSON/v1/ImportExport.php:116
 #: lib/API/JSON/v1/Segments.php:125 lib/Models/CustomField.php:26
 #: lib/Models/NewsletterOptionField.php:22 lib/Models/Segment.php:28
-#: views/form/templatesLegacy/settings/field_form.hbs:53
-#: views/subscribers/importExport/import/step_data_manipulation.html:14
 msgid "Please specify a name."
 msgstr "Пожалуйста, укажите имя."
 

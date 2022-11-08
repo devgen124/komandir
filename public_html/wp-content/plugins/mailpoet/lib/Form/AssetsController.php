@@ -108,7 +108,7 @@ setTimeout(initMailpoetTranslation, 250);
 EOL;
     $this->wp->wpAddInlineScript(
       'mailpoet_public',
-      sprintf($inlineScript, $ajaxFailedErrorMessage),
+      sprintf($inlineScript, esc_js($ajaxFailedErrorMessage)),
       'after'
     );
   }
@@ -129,5 +129,38 @@ EOL;
       Env::$version,
       true
     );
+  }
+
+  public function setupAutomationListingDependencies(): void {
+    $this->wp->wpEnqueueScript(
+      'automation',
+      Env::$assetsUrl . '/dist/js/' . $this->renderer->getJsAsset('automation.js'),
+      [],
+      Env::$version,
+      true
+    );
+    $this->wp->wpSetScriptTranslations('automation', 'mailpoet');
+  }
+
+  public function setupAutomationEditorDependencies(): void {
+    $this->wp->wpEnqueueScript(
+      'automation_editor',
+      Env::$assetsUrl . '/dist/js/' . $this->renderer->getJsAsset('automation_editor.js'),
+      [],
+      Env::$version,
+      true
+    );
+    $this->wp->wpSetScriptTranslations('automation_editor', 'mailpoet');
+  }
+
+  public function setupAutomationTemplatesDependencies(): void {
+    $this->wp->wpEnqueueScript(
+      'automation_templates',
+      Env::$assetsUrl . '/dist/js/' . $this->renderer->getJsAsset('automation_templates.js'),
+      [],
+      Env::$version,
+      true
+    );
+    $this->wp->wpSetScriptTranslations('automation_templates', 'mailpoet');
   }
 }

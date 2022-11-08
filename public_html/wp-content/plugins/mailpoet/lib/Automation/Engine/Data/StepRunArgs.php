@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Automation\Engine\Exceptions;
 use MailPoet\Automation\Engine\Exceptions\InvalidStateException;
-use MailPoet\Automation\Engine\Workflows\Payload;
-use MailPoet\Automation\Engine\Workflows\Subject;
+use MailPoet\Automation\Engine\Integration\Payload;
+use MailPoet\Automation\Engine\Integration\Subject;
 
 class StepRunArgs {
   /** @var Workflow */

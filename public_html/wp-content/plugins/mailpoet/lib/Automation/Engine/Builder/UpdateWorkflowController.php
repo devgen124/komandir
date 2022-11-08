@@ -10,6 +10,7 @@ use MailPoet\Automation\Engine\Data\Workflow;
 use MailPoet\Automation\Engine\Exceptions;
 use MailPoet\Automation\Engine\Exceptions\UnexpectedValueException;
 use MailPoet\Automation\Engine\Hooks;
+use MailPoet\Automation\Engine\Storage\WorkflowStatisticsStorage;
 use MailPoet\Automation\Engine\Storage\WorkflowStorage;
 use MailPoet\Automation\Engine\Validation\WorkflowValidator;
 
@@ -20,6 +21,9 @@ class UpdateWorkflowController {
   /** @var WorkflowStorage */
   private $storage;
 
+  /** @var WorkflowStatisticsStorage */
+  private $statisticsStorage;
+
   /** @var WorkflowValidator */
   private $workflowValidator;
 
@@ -29,11 +33,13 @@ class UpdateWorkflowController {
   public function __construct(
     Hooks $hooks,
     WorkflowStorage $storage,
+    WorkflowStatisticsStorage $statisticsStorage,
     WorkflowValidator $workflowValidator,
     UpdateStepsController $updateStepsController
   ) {
     $this->hooks = $hooks;
     $this->storage = $storage;
+    $this->statisticsStorage = $statisticsStorage;
     $this->workflowValidator = $workflowValidator;
     $this->updateStepsController = $updateStepsController;
   }
@@ -43,6 +49,7 @@ class UpdateWorkflowController {
     if (!$workflow) {
       throw Exceptions::workflowNotFound($id);
     }
+    $this->validateIfWorkflowCanBeUpdated($workflow, $data);
 
     if (array_key_exists('name', $data)) {
       $workflow->setName($data['name']);
@@ -72,6 +79,34 @@ class UpdateWorkflowController {
       throw Exceptions::workflowNotFound($id);
     }
     return $workflow;
+  }
+
+  /**
+   * This is a temporary validation, see MAILPOET-4744
+   */
+  private function validateIfWorkflowCanBeUpdated(Workflow $workflow, array $data): void {
+
+    if (
+      !in_array(
+      $workflow->getStatus(),
+      [
+        Workflow::STATUS_ACTIVE,
+        Workflow::STATUS_DEACTIVATING,
+      ],
+      true
+      )
+    ) {
+      return;
+    }
+
+    $statistics = $this->statisticsStorage->getWorkflowStats($workflow->getId());
+    if ($statistics->getInProgress() === 0) {
+      return;
+    }
+
+    if (!isset($data['status']) || $data['status'] === $workflow->getStatus()) {
+      throw Exceptions::workflowHasActiveRuns($workflow->getId());
+    }
   }
 
   private function checkWorkflowStatus(string $status): void {

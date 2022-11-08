@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 
 use Html2Text\Html2Text;
+use MailPoet\Cron\Workers\SendingQueue\Tasks\Shortcodes;
 use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Mailer\MailerFactory;
@@ -110,6 +111,10 @@ class ConfirmationEmailMailer {
       'activation_link'
     );
 
+    $subject = Shortcodes::process($signupConfirmation['subject'], null, null, $subscriber, null);
+
+    $body = Shortcodes::process($body, null, null, $subscriber, null);
+
     //create a text version. @ is important here, Html2Text throws warnings
     $text = @Html2Text::convert(
       (mb_detect_encoding($body, 'UTF-8', true)) ? $body : utf8_encode($body),
@@ -118,7 +123,7 @@ class ConfirmationEmailMailer {
 
     // build email data
     $email = [
-      'subject' => $signupConfirmation['subject'],
+      'subject' => $subject,
       'body' => [
         'html' => $body,
         'text' => $text,

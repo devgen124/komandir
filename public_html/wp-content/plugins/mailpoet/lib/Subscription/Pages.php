@@ -218,9 +218,11 @@ class Pages {
     // when global status changes to subscribed, fire subscribed hook for all subscribed segments
     if ($this->featuresController->isSupported(FeaturesController::AUTOMATION)) {
       $segments = $this->subscriber->getSubscriberSegments();
-      foreach ($segments as $subscriberSegment) {
-        if ($subscriberSegment->getStatus() === SubscriberEntity::STATUS_SUBSCRIBED) {
-          $this->wp->doAction('mailpoet_segment_subscribed', $subscriberSegment);
+      if ($originalStatus !== SubscriberEntity::STATUS_SUBSCRIBED) {
+        foreach ($segments as $subscriberSegment) {
+          if ($subscriberSegment->getStatus() === SubscriberEntity::STATUS_SUBSCRIBED) {
+            $this->wp->doAction('mailpoet_segment_subscribed', $subscriberSegment);
+          }
         }
       }
     }
@@ -357,28 +359,19 @@ class Pages {
     return $meta;
   }
 
-  private function getConfirmTitle() {
-    if ($this->isPreview()) {
-      $title = sprintf(
-        // translators: %s is a comma-separated list of segment names.
-        __("You have subscribed to: %s", 'mailpoet'),
-        'demo 1, demo 2'
-      );
-    } else {
-      $segmentNames = array_map(function($segment) {
-        return $segment->getName();
-      }, $this->subscriber->getSegments()->toArray());
+  private function getConfirmTitle(): string {
+    $wpSiteTitle = $this->wp->getBloginfo('name');
 
-      if (empty($segmentNames)) {
-        $title = __("You are now subscribed!", 'mailpoet');
-      } else {
-        $title = sprintf(
-          // translators: %s is a comma-separated list of segment names.
-          __("You have subscribed to: %s", 'mailpoet'),
-          join(', ', $segmentNames)
-        );
-      }
+    if (empty($wpSiteTitle)) {
+      $title = __("You are now subscribed!", 'mailpoet');
+    } else {
+      $title = sprintf(
+        // translators: %s is the website title or website name.
+        __("You have subscribed to %s", 'mailpoet'),
+        $wpSiteTitle
+      );
     }
+
     return $title;
   }
 

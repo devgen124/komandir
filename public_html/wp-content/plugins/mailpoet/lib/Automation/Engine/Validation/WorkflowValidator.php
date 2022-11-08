@@ -7,31 +7,52 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Automation\Engine\Data\Workflow;
 use MailPoet\Automation\Engine\Validation\WorkflowGraph\WorkflowWalker;
+use MailPoet\Automation\Engine\Validation\WorkflowRules\AtLeastOneTriggerRule;
 use MailPoet\Automation\Engine\Validation\WorkflowRules\ConsistentStepMapRule;
 use MailPoet\Automation\Engine\Validation\WorkflowRules\NoCycleRule;
 use MailPoet\Automation\Engine\Validation\WorkflowRules\NoDuplicateEdgesRule;
 use MailPoet\Automation\Engine\Validation\WorkflowRules\NoJoinRule;
 use MailPoet\Automation\Engine\Validation\WorkflowRules\NoSplitRule;
 use MailPoet\Automation\Engine\Validation\WorkflowRules\NoUnreachableStepsRule;
+use MailPoet\Automation\Engine\Validation\WorkflowRules\TriggerNeedsToBeFollowedByActionRule;
 use MailPoet\Automation\Engine\Validation\WorkflowRules\TriggersUnderRootRule;
+use MailPoet\Automation\Engine\Validation\WorkflowRules\UnknownStepRule;
+use MailPoet\Automation\Engine\Validation\WorkflowRules\ValidStepArgsRule;
+use MailPoet\Automation\Engine\Validation\WorkflowRules\ValidStepOrderRule;
+use MailPoet\Automation\Engine\Validation\WorkflowRules\ValidStepRule;
+use MailPoet\Automation\Engine\Validation\WorkflowRules\ValidStepValidationRule;
 
 class WorkflowValidator {
-  /** @var WorkflowStepsValidator */
-  private $stepsValidator;
-
   /** @var WorkflowWalker */
   private $workflowWalker;
 
+  /** @var ValidStepArgsRule */
+  private $validStepArgsRule;
+
+  /** @var ValidStepOrderRule */
+  private $validStepOrderRule;
+
+  /** @var ValidStepValidationRule */
+  private $validStepValidationRule;
+
+  /** @var UnknownStepRule */
+  private $unknownStepRule;
+
   public function __construct(
-    WorkflowStepsValidator $stepsValidator,
+    UnknownStepRule $unknownStepRule,
+    ValidStepArgsRule $validStepArgsRule,
+    ValidStepOrderRule $validStepOrderRule,
+    ValidStepValidationRule $validStepValidationRule,
     WorkflowWalker $workflowWalker
   ) {
+    $this->unknownStepRule = $unknownStepRule;
+    $this->validStepArgsRule = $validStepArgsRule;
+    $this->validStepOrderRule = $validStepOrderRule;
+    $this->validStepValidationRule = $validStepValidationRule;
     $this->workflowWalker = $workflowWalker;
-    $this->stepsValidator = $stepsValidator;
   }
 
   public function validate(Workflow $workflow): void {
-    // validate graph
     $this->workflowWalker->walk($workflow, [
       new NoUnreachableStepsRule(),
       new ConsistentStepMapRule(),
@@ -40,9 +61,14 @@ class WorkflowValidator {
       new NoCycleRule(),
       new NoJoinRule(),
       new NoSplitRule(),
+      $this->unknownStepRule,
+      new AtLeastOneTriggerRule(),
+      new TriggerNeedsToBeFollowedByActionRule(),
+      new ValidStepRule([
+        $this->validStepArgsRule,
+        $this->validStepOrderRule,
+        $this->validStepValidationRule,
+      ]),
     ]);
-
-    // validate steps
-    $this->stepsValidator->validateSteps($workflow);
   }
 }

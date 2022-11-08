@@ -5,6 +5,7 @@ namespace MailPoet\WooCommerce;
 if (!defined('ABSPATH')) exit;
 
 
+use Automattic\WooCommerce\Admin\API\Reports\Customers\Stats\Query;
 use MailPoet\DI\ContainerWrapper;
 use MailPoet\RuntimeException;
 use MailPoet\WP\Functions as WPFunctions;
@@ -64,6 +65,13 @@ class Helper {
     return wc_get_product($theProduct);
   }
 
+  public function wcGetPageId(string $page): ?int {
+    if (function_exists('wc_get_page_id')) {
+      return wc_get_page_id($page);
+    }
+    return null;
+  }
+
   public function getWoocommerceCurrency() {
     return get_woocommerce_currency();
   }
@@ -105,6 +113,18 @@ class Helper {
     return (new \WC_Countries)->get_allowed_countries() ?? [];
   }
 
+  public function getCustomersCount(): int {
+    if (!class_exists(Query::class)) {
+      return 0;
+    }
+    $query = new Query([
+      'fields' => ['customers_count'],
+    ]);
+    // Query::get_data declares it returns array but the underlying DataStore returns stdClass
+    $result = (array)$query->get_data();
+    return isset($result['customers_count']) ? intval($result['customers_count']) : 0;
+  }
+
   public function wasMailPoetInstalledViaWooCommerceOnboardingWizard(): bool {
     $wp = ContainerWrapper::getInstance()->get(WPFunctions::class);
     $installedViaWooCommerce = false;
@@ -128,5 +148,13 @@ class Helper {
     }
 
     return \Automattic\WooCommerce\Internal\DataStores\Orders\OrdersTableDataStore::get_orders_table_name();
+  }
+
+  public function getAddressesTableName() {
+    if (!method_exists('\Automattic\WooCommerce\Internal\DataStores\Orders\OrdersTableDataStore', 'get_addresses_table_name')) {
+      throw new RuntimeException('Cannot get addresses table name when running a WooCommerce version that doesn\'t support custom order tables.');
+    }
+
+    return \Automattic\WooCommerce\Internal\DataStores\Orders\OrdersTableDataStore::get_addresses_table_name();
   }
 }

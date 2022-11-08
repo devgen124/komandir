@@ -5,7 +5,8 @@ namespace MailPoet\Automation\Engine\Control;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Automation\Engine\Workflows\Step;
+use MailPoet\Automation\Engine\Data\StepValidationArgs;
+use MailPoet\Automation\Engine\Integration\Step;
 use MailPoet\Validator\Schema\ObjectSchema;
 
 class RootStep implements Step {
@@ -23,5 +24,8 @@ class RootStep implements Step {
 
   public function getSubjectKeys(): array {
     return [];
+  }
+
+  public function validate(StepValidationArgs $args): void {
   }
 }

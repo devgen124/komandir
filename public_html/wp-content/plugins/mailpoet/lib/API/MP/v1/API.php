@@ -83,8 +83,24 @@ class API {
     return $this->segments->addList($list);
   }
 
+  public function deleteList(string $listId): bool {
+    return $this->segments->deleteList($listId);
+  }
+
+  public function updateList(array $list): array {
+    return $this->segments->updateList($list);
+  }
+
   public function getSubscriber($subscriberEmail) {
     return $this->subscribers->getSubscriber($subscriberEmail);
+  }
+
+  public function getSubscribers(array $filter = [], int $limit = 50, int $offset = 0): array {
+    return $this->subscribers->getSubscribers($filter, $limit, $offset);
+  }
+
+  public function getSubscribersCount(array $filter = []): int {
+    return $this->subscribers->getSubscribersCount($filter);
   }
 
   public function isSetupComplete() {

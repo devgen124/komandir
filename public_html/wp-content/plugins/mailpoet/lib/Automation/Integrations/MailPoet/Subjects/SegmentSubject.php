@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Automation\Engine\Data\Field;
 use MailPoet\Automation\Engine\Data\Subject as SubjectData;
-use MailPoet\Automation\Engine\Workflows\Payload;
-use MailPoet\Automation\Engine\Workflows\Subject;
+use MailPoet\Automation\Engine\Integration\Payload;
+use MailPoet\Automation\Engine\Integration\Subject;
 use MailPoet\Automation\Integrations\MailPoet\Payloads\SegmentPayload;
 use MailPoet\NotFoundException;
 use MailPoet\Segments\SegmentsRepository;
