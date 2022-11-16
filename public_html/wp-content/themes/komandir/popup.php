@@ -51,7 +51,7 @@ class PopupController {
 
                 try {
 
-                    self::send_code_test($phone);
+                    self::send_code($phone);
                     $response['success'] = true;
                     $response['phone_number'] = $phone;
                 } catch (Exception $e) {
@@ -114,7 +114,7 @@ class PopupController {
 
                     try {
 
-                        self::send_code_test($phone);
+                        self::send_code($phone);
                         $response['success'] = true;
                         $response['phone_number'] = $phone;
                     } catch (Exception $e) {
@@ -476,7 +476,7 @@ class PopupController {
 
         try {
 
-            self::send_code_test($phone);
+            self::send_code($phone);
             $response['success'] = true;
 
         } catch (Exception $e) {
