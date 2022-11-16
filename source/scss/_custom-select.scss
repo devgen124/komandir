@@ -2,7 +2,6 @@
     --margin: 10px;
     --field-height: 30px;
     --width: 300px;
-    --border: 1px solid var(--gray);
 
     position: relative;
     max-width: var(--width);
@@ -31,9 +30,9 @@
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: var(--white);
+    background-color: $white;
     z-index: 10;
-    border: var(--border);
+    border: 1px solid $accent-color;
 
     &.is-above {
         bottom: 100%;
@@ -45,7 +44,6 @@
     min-height: var(--field-height);
     padding: 5px 20px 5px 10px;
     position: relative;
-    border: var(--border);
     cursor: pointer;
     color: $accent-color;
 
