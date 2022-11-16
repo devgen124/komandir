@@ -12288,7 +12288,6 @@ input[type=checkbox]:checked + label::before {
   --margin: 10px;
   --field-height: 30px;
   --width: 300px;
-  --border: 1px solid var(--gray);
   position: relative;
   max-width: var(--width);
   font-size: 14px;
@@ -12313,9 +12312,9 @@ input[type=checkbox]:checked + label::before {
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: var(--white);
+  background-color: #fff;
   z-index: 10;
-  border: var(--border);
+  border: 1px solid #00a9b4;
 }
 .custom-select__panel.is-above {
   bottom: 100%;
@@ -12326,7 +12325,6 @@ input[type=checkbox]:checked + label::before {
   min-height: var(--field-height);
   padding: 5px 20px 5px 10px;
   position: relative;
-  border: var(--border);
   cursor: pointer;
   color: #00a9b4;
 }
@@ -12361,6 +12359,51 @@ input[type=checkbox]:checked + label::before {
 .custom-select__optgroup::before {
   content: attr(data-label);
   display: block;
+}
+
+form.mailpoet-manage-subscription .mailpoet_text_label,
+form.mailpoet-manage-subscription .mailpoet_select_label,
+form.mailpoet-manage-subscription .mailpoet_segment_label {
+  margin-bottom: 0.5em;
+  display: block;
+  font-weight: bold;
+}
+form.mailpoet-manage-subscription .mailpoet_select,
+form.mailpoet-manage-subscription .mailpoet_text {
+  width: 50%;
+  padding: 12px;
+}
+form.mailpoet-manage-subscription .mailpoet_paragraph {
+  margin-bottom: 20px;
+}
+form.mailpoet-manage-subscription .mailpoet_paragraph .custom-select {
+  border: 2px solid #00a9b4;
+  border-radius: 4px;
+}
+form.mailpoet-manage-subscription .mailpoet_submit {
+  display: block;
+  padding: 19px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #00a9b4;
+  border: none;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+form.mailpoet-manage-subscription .mailpoet_submit:hover {
+  color: #fff;
+  background-color: #008790;
+}
+
+.mailpoet_confirm_unsubscribe a {
+  margin-top: 1em;
+  display: inline-block;
+  color: #00a9b4;
+}
+.mailpoet_confirm_unsubscribe a:hover {
+  color: #008790;
 }
 
 @media (max-width: 575.98px) {

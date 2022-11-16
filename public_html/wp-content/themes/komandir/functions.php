@@ -217,6 +217,20 @@ if ( class_exists( 'WooCommerce' ) ) {
     require_once(get_template_directory() . '/popup.php');
 }
 
+/**
+ * Mailpoet Customization
+ */
+
+add_filter( 'mailpoet_manage_subscription_page_form_fields', 'komandir_remove_manage_fields', 10);
+function komandir_remove_manage_fields( $form ) {	
+
+	unset($form[0]); // First Name
+	unset($form[1]); // Last Name
+    unset($form[3]); // Subscribe List
+    	
+	return $form;
+}
+
 require 'helpers/svg-helper.php';
 
 $svg = new SVGHelper();

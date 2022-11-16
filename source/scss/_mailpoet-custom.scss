@@ -1,0 +1,56 @@
+form.mailpoet-manage-subscription {
+
+    .mailpoet_text_label,
+    .mailpoet_select_label,
+    .mailpoet_segment_label {
+        margin-bottom: 0.5em;
+        display: block;
+        font-weight: bold;
+    }
+
+    .mailpoet_select,
+    .mailpoet_text {
+        width: 50%;
+        padding: 12px;
+    }
+
+    .mailpoet_paragraph {
+        margin-bottom: 20px;
+
+        .custom-select {
+            border: 2px solid $accent-color;
+            border-radius: 4px;
+        }
+    }
+
+    .mailpoet_submit {
+        display: block;
+        padding: 19px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        background-color: $accent-color;
+        border: none;
+        border-radius: 3px;
+        transition: 0.3s;
+
+        &:hover {
+            color: #fff;
+            background-color: $accent-color-hover;
+        }
+    }
+
+}
+
+.mailpoet_confirm_unsubscribe {
+    a {
+        margin-top: 1em;
+        display: inline-block;
+        color: $accent-color;
+
+        &:hover {
+            color: $accent-color-hover;
+        }
+    }
+}
