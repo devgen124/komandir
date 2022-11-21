@@ -76,7 +76,7 @@ class __TwigTemplate_fabd1248ff21b91584686f92b4c5275cf43b599b650065f182e5564d092
     <input type=\"button\" name=\"save\" value=\"";
         // line 22
         echo $this->extensions['MailPoet\Twig\I18n']->translate("Save");
-        echo "\" class=\"button button-primary mailpoet_save_go_to_workflow mailpoet_hidden\" />
+        echo "\" class=\"button button-primary mailpoet_save_go_to_automation mailpoet_hidden\" />
 {{else}}
     <input type=\"button\" name=\"preview\" class=\"button mailpoet_show_preview\" value=\"";
         // line 24

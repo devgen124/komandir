@@ -850,4 +850,8 @@ class Functions {
   public function isWpError($value): bool {
     return is_wp_error($value);
   }
+
+  public function wpIsSiteUrlUsingHttps(): bool {
+    return wp_is_site_url_using_https();
+  }
 }

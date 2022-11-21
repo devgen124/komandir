@@ -32,7 +32,9 @@ class Store {
       VALUES (?, current_timestamp())
       ON DUPLICATE KEY UPDATE
         started_at = current_timestamp(),
-        retries = retries + 1
+        completed_at = NULL,
+        retries = retries + 1,
+        error = NULL
     ", [$name]);
   }
 
@@ -74,7 +76,7 @@ class Store {
         error text NULL,
         PRIMARY KEY (id),
         UNIQUE KEY (name)
-      ) Engine=InnoDB {$collate};
+      ) {$collate};
     ");
   }
 }
