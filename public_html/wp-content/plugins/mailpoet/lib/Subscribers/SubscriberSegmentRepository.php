@@ -9,7 +9,6 @@ use MailPoet\Doctrine\Repository;
 use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\SubscriberSegmentEntity;
-use MailPoet\Features\FeaturesController;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 use MailPoetVendor\Doctrine\ORM\Query\Expr\Join;
@@ -18,19 +17,14 @@ use MailPoetVendor\Doctrine\ORM\Query\Expr\Join;
  * @extends Repository<SubscriberSegmentEntity>
  */
 class SubscriberSegmentRepository extends Repository {
-  /** @var FeaturesController */
-  private $featuresController;
-
   /** @var WPFunctions */
   private $wp;
 
   public function __construct(
     EntityManager $entityManager,
-    FeaturesController $featuresController,
     WPFunctions $wp
   ) {
     parent::__construct($entityManager);
-    $this->featuresController = $featuresController;
     $this->wp = $wp;
   }
 
@@ -118,8 +112,7 @@ class SubscriberSegmentRepository extends Repository {
 
     // fire subscribed hook for new subscriptions
     if (
-      $this->featuresController->isSupported(FeaturesController::AUTOMATION)
-      && $subscriber->getStatus() === SubscriberEntity::STATUS_SUBSCRIBED
+      $subscriber->getStatus() === SubscriberEntity::STATUS_SUBSCRIBED
       && $subscriberSegment->getStatus() === SubscriberEntity::STATUS_SUBSCRIBED
       && $oldStatus !== SubscriberEntity::STATUS_SUBSCRIBED
     ) {

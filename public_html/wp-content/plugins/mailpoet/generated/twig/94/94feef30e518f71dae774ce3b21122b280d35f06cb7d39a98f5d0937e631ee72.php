@@ -68,9 +68,9 @@ class __TwigTemplate_5c71d57f60a0f5a4fc5d48d80259463fe103c80202fce3a75da88803acd
         // line 11
         echo json_encode(($context["api"] ?? null));
         echo ";
-    var mailpoet_workflow_count = ";
+    var mailpoet_automation_count = ";
         // line 12
-        echo json_encode(($context["workflowCount"] ?? null));
+        echo json_encode(($context["automationCount"] ?? null));
         echo ";
     var mailpoet_automation_templates = ";
         // line 13

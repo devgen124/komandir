@@ -78,9 +78,9 @@ class __TwigTemplate_fb71bf89a426c5b5b4c882632d479b3cffbaded39146d864b8aea902ce9
         // line 12
         echo json_encode(($context["context"] ?? null));
         echo ";
-  var mailpoet_automation_workflow = ";
+  var mailpoet_automation = ";
         // line 13
-        echo ((($context["workflow"] ?? null)) ? (json_encode(($context["workflow"] ?? null))) : ("undefined"));
+        echo ((($context["automation"] ?? null)) ? (json_encode(($context["automation"] ?? null))) : ("undefined"));
         echo ";
 </script>
 ";

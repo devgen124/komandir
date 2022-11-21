@@ -465,11 +465,11 @@ class Populator {
         'newsletter_type' => NewsletterEntity::TYPE_RE_ENGAGEMENT,
       ],
       [
-        'name' => 'workflowId',
+        'name' => 'automationId',
         'newsletter_type' => NewsletterEntity::TYPE_AUTOMATION,
       ],
       [
-        'name' => 'workflowStepId',
+        'name' => 'automationStepId',
         'newsletter_type' => NewsletterEntity::TYPE_AUTOMATION,
       ],
     ];
