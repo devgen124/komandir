@@ -143,6 +143,10 @@ class Functions {
     return esc_sql($sql);
   }
 
+  public function escUrl($url): string {
+    return esc_url($url);
+  }
+
   public function getBloginfo($show = '', $filter = 'raw') {
     return get_bloginfo($show, $filter);
   }
@@ -624,6 +628,10 @@ class Functions {
 
   public function isMainQuery(): bool {
     return is_main_query();
+  }
+
+  public function getPrivacyPolicyUrl(): string {
+    return get_privacy_policy_url();
   }
 
   /**

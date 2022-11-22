@@ -1,6 +1,6 @@
 <?php
 
-//If access directly, die
+// If access directly, die
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -29,14 +29,14 @@ class MailpoetCustomField {
 	 */
 	public function __( $text ) {
 		return __( $text, 'add-on-contact-form-7-mailpoet' );
-	}//End of __
+	}//end __()
 
 
 	/**
 	 * Admin init
 	 */
 	public function admin_init() {
-		//Add Tag generator button
+		// Add Tag generator button
 		if ( ! class_exists( 'WPCF7_TagGenerator' ) ) {
 			return;
 		}
@@ -64,13 +64,13 @@ class MailpoetCustomField {
 
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $key => $value ) {
-				echo $this->__('MailPoet Custom field name: ' . $value . "<br>");
-				echo $this->__('Custom field ID (which should be used as contact form\'s field name): ' . '<strong>' . $key . '</strong>');
-				echo "<br>";
-				echo "<br>";
-            }
+				echo $this->__( 'MailPoet Custom field name: ' . $value . '<br>' );
+				echo $this->__( 'Custom field ID (which should be used as contact form\'s field name): ' . '<strong>' . $key . '</strong>' );
+				echo '<br>';
+				echo '<br>';
+			}
 		} else {
-			echo $this->__("No mailpoet custom field available.");
+			echo $this->__( 'No mailpoet custom field available.' );
 		}
 	} //End of mailpoetsignup_cf
 

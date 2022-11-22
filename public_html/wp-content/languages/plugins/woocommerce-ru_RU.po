@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-11-11 09:54:10+0000\n"
+"PO-Revision-Date: 2022-11-21 13:38:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27032,10 +27032,6 @@ msgstr "Детали профиля"
 msgid "Reset password"
 msgstr "Сброс пароля"
 
-#: includes/emails/class-wc-email-customer-note.php:39
-msgid "Customer note"
-msgstr "Ппримечание клиента"
-
 #: includes/emails/class-wc-email-customer-refunded-order.php:72
 msgid "Your {site_title} order #{order_number} has been partially refunded"
 msgstr "Ваш заказ на сайте {site_title} № {order_number} был частично возвращён"
@@ -27090,6 +27086,10 @@ msgstr "Возврат заказа № %s отменён"
 #: includes/emails/class-wc-email-customer-processing-order.php:69
 msgid "Thank you for your order"
 msgstr "Благодарим вас за ваш заказ"
+
+#: includes/emails/class-wc-email-customer-note.php:39
+msgid "Customer note"
+msgstr "Примечание клиента"
 
 #: includes/legacy/api/v2/class-wc-api-products.php:2199
 msgid "Invalid product SKU"

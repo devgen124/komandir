@@ -1,6 +1,6 @@
 <?php
 
-//If access directly, die
+// If access directly, die
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -30,7 +30,7 @@ class MailpoetSubscriptionConsent {
 	 */
 	public function __( $text ) {
 		return __( $text, 'add-on-contact-form-7-mailpoet' );
-	}//End of __
+	}//end __()
 
 
 	/**
@@ -50,7 +50,7 @@ class MailpoetSubscriptionConsent {
 	 * Admin init
 	 */
 	public function admin_init() {
-		//Add Tag generator button
+		// Add Tag generator button
 		if ( ! class_exists( 'WPCF7_TagGenerator' ) ) {
 			return;
 		}
@@ -81,7 +81,6 @@ class MailpoetSubscriptionConsent {
 
 		$attributes = wpcf7_format_atts( $atts );
 
-
 		// build consent ***
 		$consent = '';
 
@@ -89,7 +88,7 @@ class MailpoetSubscriptionConsent {
 
 			if ( empty( $value ) ) {
 
-				$consent .= "<br/>";
+				$consent .= '<br/>';
 				continue;
 			}
 
@@ -114,7 +113,7 @@ class MailpoetSubscriptionConsent {
 
 		?>
 
-        <span class="wpcf7-form-control-wrap <?php echo $tag->name; ?>">
+		<span class="wpcf7-form-control-wrap <?php echo $tag->name; ?>">
 			<span class="<?php echo $controls_class; ?>">
 				<?php echo $consent; ?>
 			</span>
@@ -131,109 +130,114 @@ class MailpoetSubscriptionConsent {
 	public function mailpoetsignup_tag_generator() {
 		?>
 
-        <div class="control-box">
-            <fieldset>
-                <legend><?php echo $this->__( 'Mailpoet Subscription Consent' ); ?></legend>
-                <table class="form-table">
-                    <tbody>
-                    <tr>
-                        <th scope="row">
+		<div class="control-box">
+			<fieldset>
+				<legend><?php echo $this->__( 'Mailpoet Subscription Consent' ); ?></legend>
+				<table class="form-table">
+					<tbody>
+					<tr>
+						<th scope="row">
 							<?php echo $this->__( 'Consent Message' ); ?>
-                        </th>
-                        <td>
-                            <label>
-                                    <textarea name="values" id="values" cols="40" rows="10"
-                                              class="oneline"><?php printf(
-		                                    esc_html__( "By subscribing you agree to receive our promotional marketing materials and agree with out {privacypage}. You may unsubscribe at any time.",
-			                                    'contact-form-7' )
-	                                    );
-	                                    ?>
-                                    </textarea>
-                            </label>
-                            <br/>
+						</th>
+						<td>
+							<label>
+									<textarea name="values" id="values" cols="40" rows="10" class="oneline">
+										<?php
+											printf(
+												esc_html__(
+													'By subscribing you agree to receive our promotional marketing materials and agree with out {privacypage}. You may unsubscribe at any time.',
+													'contact-form-7'
+												)
+											);
+										?>
+									</textarea>
+							</label>
+							<br/>
 							<?php
 							printf(
-								esc_html__( "We have add some default text to help. Please feel free to input any kinds of text in it. Don't forget to include this -> {privacypage} shortcode to include privacy policy page link automatically which you can select from dropdown below.",
-									'contact-form-7' )
+								esc_html__(
+									"We have add some default text to help. Please feel free to input any kinds of text in it. Don't forget to include this -> {privacypage} shortcode to include privacy policy page link automatically which you can select from dropdown below.",
+									'contact-form-7'
+								)
 							);
 							?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
 							<?php echo $this->__( 'Privacy Page' ); ?>
-                        </th>
-                        <td>
-                            <label>
-								<?php echo $this->privacy_page_select(); ?> or <a
-                                        href="<?php echo admin_url( '/privacy.php' ); ?>"> Create new </a>
-                                <input type="hidden" name="privacypage" id="privacypage" class="option">
-                            </label>
-                            <script>
-                                var pr_sel = document.getElementById('page_id');
-                                pr_sel.addEventListener('change', function () {
-                                    console.log('fired');
-                                    document.getElementById('privacypage').value = pr_sel.value;
-                                }, false);
-                            </script>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
+						</th>
+						<td>
+							<label>
+								<?php echo $this->privacy_page_select(); ?> or <a href="<?php echo admin_url( '/privacy.php' ); ?>"> Create new </a>
+								<input type="hidden" name="privacypage" id="privacypage" class="option">
+							</label>
+							<script>
+								var pr_sel = document.getElementById('page_id');
+								pr_sel.addEventListener('change', function () {
+									// console.log('fired');
+									document.getElementById('privacypage').value = pr_sel.value;
+								}, false);
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
 							<?php echo $this->__( 'Name' ); ?>
-                        </th>
-                        <td>
-                            <label>
-                                <input type="text" name="name" class="tg-name oneline" id="name">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
+						</th>
+						<td>
+							<label>
+								<input type="text" name="name" class="tg-name oneline" id="name">
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
 							<?php echo $this->__( 'Id attribute' ); ?>
-                        </th>
-                        <td>
-                            <label>
-                                <input type="text" name="id" class="idvalue oneline option" id="id-attr">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
+						</th>
+						<td>
+							<label>
+								<input type="text" name="id" class="idvalue oneline option" id="id-attr">
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
 							<?php echo $this->__( 'Class attribute' ); ?>
-                        </th>
-                        <td>
-                            <label>
-                                <input type="text" name="class" class="classvalue oneline option" id="class-attr">
-                            </label>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </fieldset>
-        </div>
+						</th>
+						<td>
+							<label>
+								<input type="text" name="class" class="classvalue oneline option" id="class-attr">
+							</label>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
 
-        <!-- Show Insert shortcode in popup -->
-        <div class="insert-box">
-            <input type="text" name="mpconsent" class="tag code" readonly="readonly" onfocus="this.select()"/>
-            <div class="submitbox">
-                <input type="button" class="button button-primary insert-tag"
-                       value="<?php esc_attr_e( 'Insert Tag', 'contact-form-7' ); ?>"/>
-            </div>
-            <br class="clear"/>
-            <p class="description mail-tag">
-                <label>
+		<!-- Show Insert shortcode in popup -->
+		<div class="insert-box">
+			<input type="text" name="mpconsent" class="tag code" readonly="readonly" onfocus="this.select()"/>
+			<div class="submitbox">
+				<input type="button" class="button button-primary insert-tag" value="<?php esc_attr_e( 'Insert Tag', 'contact-form-7' ); ?>"/>
+			</div>
+			<br class="clear"/>
+			<p class="description mail-tag">
+				<label>
 					<?php
 					printf(
-						esc_html__( "To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.",
-							'contact-form-7' ),
+						esc_html__(
+							'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.',
+							'contact-form-7'
+						),
 						'<strong><span class="mail-tag"></span></strong>'
 					);
 					?>
-                    <input type="text" class="mail-tag code hidden" readonly="readonly"/>
-                </label>
-            </p>
-        </div><!-- /.insert-box -->
+					<input type="text" class="mail-tag code hidden" readonly="readonly"/>
+				</label>
+			</p>
+		</div><!-- /.insert-box -->
 
 		<?php
 	} //End of mailpoetsignup_tag_generator
@@ -241,22 +245,23 @@ class MailpoetSubscriptionConsent {
 
 	public function privacy_page_select() {
 
-		$pages = get_pages( array(
-			'post_status'   => 'publish',
-			'post_per_page' => - 1
-		) );
+		$pages = get_pages(
+			array(
+				'post_status'   => 'publish',
+				'post_per_page' => - 1,
+			)
+		);
 
 		$ret = "<select name='page_id' id='page_id'>";
 
 		foreach ( $pages as $key => $page ) {
 
 			$link = get_permalink( $page, false );
-			$ret  .= "<option value='$link'> $page->post_title </option>";
+			$ret .= "<option value='$link'> $page->post_title </option>";
 
 		}
 
-		$ret .= "</select>";
-
+		$ret .= '</select>';
 
 		return $ret;
 	}

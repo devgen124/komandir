@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Spam Protection - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-01-26 05:31:29+0000\n"
+"PO-Revision-Date: 2022-11-21 13:40:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,21 @@ msgstr ""
 "X-Generator: GlotPress/4.0.0-alpha.3\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - Akismet Spam Protection - Stable (latest release)\n"
+
+#: views/notice.php:32
+msgid "WP-Cron has been disabled using the DISABLE_WP_CRON constant. Comment rechecks may not work properly."
+msgstr "WP-Cron отключен с помощью константы DISABLE_WP_CRON. Перепроверка комментариев может работать некорректно."
+
+#. translators: %1$s is a human-readable time difference, like "3 hours ago",
+#. and %2$s is an already-translated phrase describing how a comment's status
+#. changed, like "This comment was reported as spam."
+#: class.akismet-admin.php:689
+msgid "%1$s - %2$s"
+msgstr "%1$s, %2$s"
+
+#: views/get.php:11
+msgid "(opens in a new tab)"
+msgstr "(откроется в новой вкладке)"
 
 #. translators: The placeholder is the name of a subscription level, like
 #. "Plus" or "Enterprise" .
@@ -102,7 +117,7 @@ msgstr "Введите ваш ключ API"
 
 #: views/connect-jp.php:66
 msgid "Set up a different account"
-msgstr "Настроить другую учетную запись."
+msgstr "Настроить другую учетную запись"
 
 #: views/setup.php:2
 msgid "Set up your Akismet account to enable spam filtering on this site."
@@ -111,6 +126,10 @@ msgstr "Настройте учетную запись Akismet для того, 
 #: class.akismet-admin.php:1146
 msgid "Akismet could not recheck your comments for spam."
 msgstr "Плагину Akismet не удалось перепроверить ваши комментарии на наличие спама."
+
+#: class.akismet-admin.php:439
+msgid "You don&#8217;t have permission to do that."
+msgstr "У вас недостаточно прав."
 
 #: class.akismet-cli.php:165
 msgid "Stats response could not be decoded."
@@ -290,9 +309,9 @@ msgstr "Комментарий не найден."
 #: class.akismet-cli.php:88
 msgid "%d comment could not be checked."
 msgid_plural "%d comments could not be checked."
-msgstr[0] "%d комментарий не может быть проверен"
-msgstr[1] "%d комментария не могут быть проверены"
-msgstr[2] "%d комментариев не могут быть проверены"
+msgstr[0] "%d комментарий не может быть проверен."
+msgstr[1] "%d комментария не могут быть проверены."
+msgstr[2] "%d комментариев не могут быть проверены."
 
 #: class.akismet-cli.php:85
 msgid "%d comment moved to Spam."
@@ -304,9 +323,9 @@ msgstr[2] "%d комментариев отправлены в Спам."
 #: class.akismet-cli.php:84
 msgid "Processed %d comment."
 msgid_plural "Processed %d comments."
-msgstr[0] "Обработан %d комментарий"
-msgstr[1] "Обработано %d комментария"
-msgstr[2] "Обработано %d комментариев"
+msgstr[0] "Обработан %d комментарий."
+msgstr[1] "Обработано %d комментария."
+msgstr[2] "Обработано %d комментариев."
 
 #: class.akismet-cli.php:46
 msgid "Comment #%d could not be checked."
@@ -360,7 +379,7 @@ msgstr "Пожалуйста, обновите ваши платёжные да�
 
 #: views/notice.php:17
 msgid "<strong>Almost done</strong> - configure Akismet and say goodbye to spam"
-msgstr "<strong>Почти готово</strong> - настройте Akismet и попрощайтесь со спамом."
+msgstr "<strong>Почти готово</strong> - настройте Akismet и попрощайтесь со спамом"
 
 #: class.akismet-admin.php:1051
 msgid "Akismet has saved you %d minute!"
@@ -477,12 +496,12 @@ msgstr "Без паники! Свяжитесь с нами, и мы помож�
 #. translators: %s is the WordPress.com email address
 #: views/connect-jp.php:44
 msgid "Your subscription for %s is suspended."
-msgstr "Ваша подписка для %s приостановлена"
+msgstr "Ваша подписка для %s приостановлена."
 
 #. translators: %s is the WordPress.com email address
 #: views/connect-jp.php:36
 msgid "Your subscription for %s is cancelled."
-msgstr "Ваша подписка для %s отменена"
+msgstr "Ваша подписка для %s отменена."
 
 #: views/notice.php:191
 msgid "You&#8217;re using Akismet on far too many sites for your Plus subscription."
@@ -607,7 +626,7 @@ msgstr "Режим защиты Akismet"
 
 #: views/config.php:139
 msgid "Show the number of approved comments beside each comment author"
-msgstr "Отображать количество одобренных комментариев рядом с каждым автором."
+msgstr "Отображать количество одобренных комментариев рядом с каждым автором"
 
 #: views/config.php:126
 msgid "Show approved comments"
@@ -813,7 +832,7 @@ msgstr "Спам"
 
 #: class.akismet-admin.php:277
 msgid "Cheatin&#8217; uh?"
-msgstr "Эй! Жульничаем?!"
+msgstr "Эй! Жульничаем?"
 
 #: class.akismet-admin.php:271
 msgid "Akismet Support"
@@ -829,7 +848,7 @@ msgstr "Дополнительная информация:"
 
 #: class.akismet-admin.php:260
 msgid "The subscription status - active, cancelled or suspended"
-msgstr "Статус подписки &#8212; активна, отменена или приостановлена."
+msgstr "Статус подписки &#8212; активна, отменена или приостановлена"
 
 #: class.akismet-admin.php:260 views/config.php:220
 msgid "Status"

@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Google Listings and Ads plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Listings and Ads 2.2.0\n"
+"Project-Id-Version: Google Listings and Ads 2.3.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/google-listings-and-ads\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-18T15:16:44+00:00\n"
+"POT-Creation-Date: 2022-11-22T12:37:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: google-listings-and-ads\n"
@@ -24,7 +24,7 @@ msgid "Native integration with Google that allows merchants to easily display th
 msgstr ""
 
 #. Author of the plugin
-#: js/build/index.js:43
+#: js/build/index.js:44
 msgid "WooCommerce"
 msgstr ""
 
@@ -39,8 +39,8 @@ msgstr ""
 
 #: src/Admin/Admin.php:182
 #: src/Menu/Settings.php:25
-#: js/build/index.js:29
-#: js/build/index.js:43
+#: js/build/index.js:27
+#: js/build/index.js:44
 msgid "Settings"
 msgstr ""
 
@@ -58,11 +58,15 @@ msgid "Default"
 msgstr ""
 
 #: src/Admin/Input/BooleanSelect.php:21
+#: src/Product/Attributes/Adult.php:82
+#: src/Product/Attributes/IsBundle.php:83
 #: js/build/index.js:13
 msgid "Yes"
 msgstr ""
 
 #: src/Admin/Input/BooleanSelect.php:22
+#: src/Product/Attributes/Adult.php:83
+#: src/Product/Attributes/IsBundle.php:84
 #: js/build/index.js:13
 msgid "No"
 msgstr ""
@@ -107,6 +111,7 @@ msgid "The date a preordered or backordered product becomes available for delive
 msgstr ""
 
 #: src/Admin/Product/Attributes/Input/BrandInput.php:25
+#: src/Product/Attributes/Brand.php:61
 msgid "Brand"
 msgstr ""
 
@@ -115,6 +120,7 @@ msgid "Brand of the product."
 msgstr ""
 
 #: src/Admin/Product/Attributes/Input/ColorInput.php:25
+#: src/Product/Attributes/Color.php:61
 msgid "Color"
 msgstr ""
 
@@ -123,6 +129,7 @@ msgid "Color of the product."
 msgstr ""
 
 #: src/Admin/Product/Attributes/Input/ConditionInput.php:25
+#: src/Product/Attributes/Condition.php:76
 msgid "Condition"
 msgstr ""
 
@@ -131,6 +138,7 @@ msgid "Condition or state of the item."
 msgstr ""
 
 #: src/Admin/Product/Attributes/Input/GenderInput.php:25
+#: src/Product/Attributes/Gender.php:76
 msgid "Gender"
 msgstr ""
 
@@ -155,6 +163,7 @@ msgid "Whether the item is a bundle of products. A bundle is a custom grouping o
 msgstr ""
 
 #: src/Admin/Product/Attributes/Input/MaterialInput.php:25
+#: src/Product/Attributes/Material.php:61
 msgid "Material"
 msgstr ""
 
@@ -171,6 +180,7 @@ msgid "This code uniquely identifies the product to its manufacturer."
 msgstr ""
 
 #: src/Admin/Product/Attributes/Input/MultipackInput.php:25
+#: src/Product/Attributes/Multipack.php:72
 msgid "Multipack"
 msgstr ""
 
@@ -179,6 +189,7 @@ msgid "The number of identical products in a multipack. Use this attribute to in
 msgstr ""
 
 #: src/Admin/Product/Attributes/Input/PatternInput.php:25
+#: src/Product/Attributes/Pattern.php:61
 msgid "Pattern"
 msgstr ""
 
@@ -187,6 +198,7 @@ msgid "The item's pattern (e.g. polka dots)."
 msgstr ""
 
 #: src/Admin/Product/Attributes/Input/SizeInput.php:25
+#: src/Product/Attributes/Size.php:61
 msgid "Size"
 msgstr ""
 
@@ -582,6 +594,42 @@ msgstr ""
 msgid "Successfully marked Ads setup as completed."
 msgstr ""
 
+#: src/API/Site/Controllers/AttributeMapping/AttributeMappingDataController.php:71
+msgid "The attribute key to get the sources."
+msgstr ""
+
+#: src/API/Site/Controllers/AttributeMapping/AttributeMappingDataController.php:125
+msgid "The list of attributes or attribute sources."
+msgstr ""
+
+#: src/API/Site/Controllers/AttributeMapping/AttributeMappingRulesController.php:207
+msgid "The Id for the rule."
+msgstr ""
+
+#: src/API/Site/Controllers/AttributeMapping/AttributeMappingRulesController.php:213
+msgid "The attribute value for the rule."
+msgstr ""
+
+#: src/API/Site/Controllers/AttributeMapping/AttributeMappingRulesController.php:220
+msgid "The source value for the rule."
+msgstr ""
+
+#: src/API/Site/Controllers/AttributeMapping/AttributeMappingRulesController.php:226
+msgid "The category condition type to apply for this rule."
+msgstr ""
+
+#: src/API/Site/Controllers/AttributeMapping/AttributeMappingRulesController.php:233
+msgid "List of category IDs, separated by commas."
+msgstr ""
+
+#: src/API/Site/Controllers/AttributeMapping/AttributeMappingSyncerController.php:89
+msgid "Indicates if the products are currently syncing"
+msgstr ""
+
+#: src/API/Site/Controllers/AttributeMapping/AttributeMappingSyncerController.php:96
+msgid "Timestamp with the last sync."
+msgstr ""
+
 #: src/API/Site/Controllers/BaseReportsController.php:45
 msgid "Limit response to data after a given ISO8601 compliant date."
 msgstr ""
@@ -672,6 +720,18 @@ msgstr ""
 msgid "The domain registered with the Merchant Center Account."
 msgstr ""
 
+#: src/API/Site/Controllers/MerchantCenter/AttributeMappingCategoriesController.php:80
+msgid "The Category ID."
+msgstr ""
+
+#: src/API/Site/Controllers/MerchantCenter/AttributeMappingCategoriesController.php:86
+msgid "The category name."
+msgstr ""
+
+#: src/API/Site/Controllers/MerchantCenter/AttributeMappingCategoriesController.php:92
+msgid "The category parent."
+msgstr ""
+
 #: src/API/Site/Controllers/MerchantCenter/ConnectionController.php:56
 msgid "Action that should be completed after connection."
 msgstr ""
@@ -688,39 +748,39 @@ msgstr ""
 msgid "The verification status of the phone number associated with the Merchant Center account."
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:145
+#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:146
 msgid "The address associated with the Merchant Center account."
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:151
+#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:152
 msgid "The WooCommerce store address."
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:157
+#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:158
 msgid "Whether the Merchant Center account address is different than the WooCommerce store address."
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:162
+#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:163
 msgid "The errors associated with the WooCommerce address"
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:176
+#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:177
 msgid "Street-level part of the address."
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:181
+#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:182
 msgid "City, town or commune. May also include dependent localities or sublocalities (e.g. neighborhoods or suburbs)."
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:186
+#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:187
 msgid "Top-level administrative subdivision of the country. For example, a state like California (\"CA\") or a province like Quebec (\"QC\")."
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:191
+#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:192
 msgid "Postal code or ZIP (e.g. \"94043\")."
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:196
+#: src/API/Site/Controllers/MerchantCenter/ContactInformationController.php:197
 msgid "CLDR country code (e.g. \"US\")."
 msgstr ""
 
@@ -1067,7 +1127,7 @@ msgid "Your installation of Google Listings and Ads is incomplete. If you instal
 msgstr ""
 
 #: src/Coupon/CouponSyncer.php:471
-#: src/Product/ProductSyncer.php:361
+#: src/Product/ProductSyncer.php:360
 msgid "Google Merchant Center has not been set up correctly. Please review your configuration."
 msgstr ""
 
@@ -1116,6 +1176,18 @@ msgstr ""
 msgid "Unable to update Merchant Center account."
 msgstr ""
 
+#: src/Integration/YoastWooCommerceSeo.php:202
+msgid "- Yoast SEO -"
+msgstr ""
+
+#: src/Integration/YoastWooCommerceSeo.php:211
+msgid "GTIN Field"
+msgstr ""
+
+#: src/Integration/YoastWooCommerceSeo.php:220
+msgid "MPN Field"
+msgstr ""
+
 #: src/Internal/Requirements/GoogleProductFeedValidator.php:84
 msgid "The Google Product Feed plugin may cause conflicts or unexpected results."
 msgstr ""
@@ -1143,35 +1215,40 @@ msgstr ""
 msgid "The job named \"%s\" does not exist."
 msgstr ""
 
-#: src/Menu/Dashboard.php:63
-#: src/Menu/Dashboard.php:78
-#: src/Menu/Dashboard.php:82
-#: src/Menu/GetStarted.php:63
-#: src/Menu/GetStarted.php:78
-#: src/Menu/GetStarted.php:82
+#: src/Menu/AttributeMapping.php:25
+#: js/build/index.js:44
+msgid "Attribute Mapping"
+msgstr ""
+
+#: src/Menu/Dashboard.php:39
+#: src/Menu/Dashboard.php:56
+#: src/Menu/Dashboard.php:60
+#: src/Menu/GetStarted.php:39
+#: src/Menu/GetStarted.php:56
+#: src/Menu/GetStarted.php:60
 #: views/attributes/variations-form.php:22
 #: views/meta-box/channel_visibility.php:95
 #: views/meta-box/coupon_channel_visibility.php:160
-#: js/build/index.js:43
+#: js/build/index.js:44
 msgid "Google Listings & Ads"
 msgstr ""
 
-#: src/Menu/Dashboard.php:93
-#: js/build/index.js:29
-#: js/build/index.js:43
+#: src/Menu/Dashboard.php:71
+#: js/build/index.js:27
+#: js/build/index.js:44
 msgid "Dashboard"
 msgstr ""
 
 #: src/Menu/ProductFeed.php:25
-#: js/build/index.js:29
-#: js/build/index.js:39
-#: js/build/index.js:43
+#: js/build/index.js:27
+#: js/build/index.js:37
+#: js/build/index.js:44
 msgid "Product Feed"
 msgstr ""
 
 #: src/Menu/Reports.php:25
-#: js/build/index.js:29
-#: js/build/index.js:43
+#: js/build/index.js:27
+#: js/build/index.js:44
 msgid "Reports"
 msgstr ""
 
@@ -1235,7 +1312,7 @@ msgid "Update this attribute in your product data"
 msgstr ""
 
 #: src/Notes/AfterCampaignMigration.php:47
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Your Google Listings & Ads campaigns have been automatically upgraded"
 msgstr ""
 
@@ -1247,18 +1324,35 @@ msgstr ""
 msgid "Read more about this upgrade"
 msgstr ""
 
+#: src/Notes/AttributeMappingNewFeature.php:43
+msgid "Our latest improvement to the Google Listings & Ads extension: Custom Attribute Mapping"
+msgstr ""
+
+#: src/Notes/AttributeMappingNewFeature.php:45
+msgid "You spoke, we listened. This new feature enables you to easily upload your products, customize your product attributes in one place, and target shoppers with more relevant ads. Extend how far your ad dollars go with each campaign."
+msgstr ""
+
+#: src/Notes/AttributeMappingNewFeature.php:55
+#: src/Notes/SetupCampaign.php:81
+#: js/build/index.js:21
+#: js/build/index.js:22
+#: js/build/index.js:33
+#: js/build/index.js:41
+msgid "Learn more"
+msgstr ""
+
 #: src/Notes/BeforeCampaignMigration.php:47
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Your Google Listings & Ads campaigns will soon be automatically upgraded"
 msgstr ""
 
 #: src/Notes/BeforeCampaignMigration.php:49
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "From July through September, Google will be upgrading your existing campaigns from Smart Shopping to Performance Max, giving you the same benefits, plus expanded reach. There will be no impact to your spend or campaign settings due to this upgrade."
 msgstr ""
 
 #: src/Notes/BeforeCampaignMigration.php:60
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Learn more about this upgrade"
 msgstr ""
 
@@ -1343,14 +1437,6 @@ msgstr ""
 msgid "Complete Setup"
 msgstr ""
 
-#: src/Notes/SetupCampaign.php:81
-#: js/build/index.js:21
-#: js/build/index.js:22
-#: js/build/index.js:35
-#: js/build/index.js:43
-msgid "Learn more"
-msgstr ""
-
 #: src/Notes/SetupCampaignTwoWeeks.php:48
 msgid "Reach more shoppers with paid listings on Google"
 msgstr ""
@@ -1379,116 +1465,194 @@ msgstr ""
 msgid "Go to coupons"
 msgstr ""
 
-#: src/Product/Attributes/AgeGroup.php:39
-msgid "Newborn"
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:70
+msgid "- Global attributes -"
 msgstr ""
 
-#: src/Product/Attributes/AgeGroup.php:40
-msgid "Infant"
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:80
+msgid "- Taxonomies -"
 msgstr ""
 
-#: src/Product/Attributes/AgeGroup.php:41
-msgid "Toddler"
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:96
+msgid "Allow backorders setting"
 msgstr ""
 
-#: src/Product/Attributes/AgeGroup.php:42
-msgid "Kids"
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:97
+#: js/build/index.js:33
+msgid "Product title"
 msgstr ""
 
-#: src/Product/Attributes/AgeGroup.php:43
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:98
+msgid "SKU"
+msgstr ""
+
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:99
+msgid "Stock Qty"
+msgstr ""
+
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:100
+msgid "Stock Status"
+msgstr ""
+
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:101
+msgid "Tax class"
+msgstr ""
+
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:102
+msgid "Variation title"
+msgstr ""
+
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:103
+msgid "Weight (raw value, no units)"
+msgstr ""
+
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:104
+msgid "Weight (with units)"
+msgstr ""
+
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:110
+msgid "- Product fields -"
+msgstr ""
+
+#: src/Product/AttributeMapping/Traits/IsFieldTrait.php:133
+msgid "- Custom Attributes -"
+msgstr ""
+
+#: src/Product/Attributes/Adult.php:72
+#: src/Product/Attributes/AgeGroup.php:46
 msgid "Adult"
 msgstr ""
 
-#: src/Product/Attributes/Condition.php:48
+#: src/Product/Attributes/AgeGroup.php:42
+msgid "Newborn"
+msgstr ""
+
+#: src/Product/Attributes/AgeGroup.php:43
+msgid "Infant"
+msgstr ""
+
+#: src/Product/Attributes/AgeGroup.php:44
+msgid "Toddler"
+msgstr ""
+
+#: src/Product/Attributes/AgeGroup.php:45
+msgid "Kids"
+msgstr ""
+
+#: src/Product/Attributes/AgeGroup.php:79
+msgid "Age group"
+msgstr ""
+
+#: src/Product/Attributes/Condition.php:51
 msgid "New"
 msgstr ""
 
-#: src/Product/Attributes/Condition.php:49
+#: src/Product/Attributes/Condition.php:52
 msgid "Refurbished"
 msgstr ""
 
-#: src/Product/Attributes/Condition.php:50
+#: src/Product/Attributes/Condition.php:53
 msgid "Used"
 msgstr ""
 
-#: src/Product/Attributes/Gender.php:39
+#: src/Product/Attributes/Gender.php:42
 msgid "Male"
 msgstr ""
 
-#: src/Product/Attributes/Gender.php:40
+#: src/Product/Attributes/Gender.php:43
 msgid "Female"
 msgstr ""
 
-#: src/Product/Attributes/Gender.php:41
+#: src/Product/Attributes/Gender.php:44
 msgid "Unisex"
 msgstr ""
 
-#: src/Product/Attributes/SizeSystem.php:48
-msgid "US"
+#: src/Product/Attributes/GTIN.php:61
+msgid "GTIN"
 msgstr ""
 
-#: src/Product/Attributes/SizeSystem.php:49
-msgid "EU"
+#: src/Product/Attributes/IsBundle.php:72
+msgid "Is Bundle"
 msgstr ""
 
-#: src/Product/Attributes/SizeSystem.php:50
-msgid "UK"
+#: src/Product/Attributes/MPN.php:61
+msgid "MPN"
 msgstr ""
 
 #: src/Product/Attributes/SizeSystem.php:51
-msgid "DE"
+msgid "US"
 msgstr ""
 
 #: src/Product/Attributes/SizeSystem.php:52
-msgid "FR"
+msgid "EU"
 msgstr ""
 
 #: src/Product/Attributes/SizeSystem.php:53
-msgid "IT"
+msgid "UK"
 msgstr ""
 
 #: src/Product/Attributes/SizeSystem.php:54
-msgid "AU"
+msgid "DE"
 msgstr ""
 
 #: src/Product/Attributes/SizeSystem.php:55
-msgid "BR"
+msgid "FR"
 msgstr ""
 
 #: src/Product/Attributes/SizeSystem.php:56
-msgid "CN"
+msgid "IT"
 msgstr ""
 
 #: src/Product/Attributes/SizeSystem.php:57
-msgid "JP"
+msgid "AU"
 msgstr ""
 
 #: src/Product/Attributes/SizeSystem.php:58
+msgid "BR"
+msgstr ""
+
+#: src/Product/Attributes/SizeSystem.php:59
+msgid "CN"
+msgstr ""
+
+#: src/Product/Attributes/SizeSystem.php:60
+msgid "JP"
+msgstr ""
+
+#: src/Product/Attributes/SizeSystem.php:61
 msgid "MEX"
 msgstr ""
 
-#: src/Product/Attributes/SizeType.php:49
-msgid "Regular"
-msgstr ""
-
-#: src/Product/Attributes/SizeType.php:50
-msgid "Petite"
-msgstr ""
-
-#: src/Product/Attributes/SizeType.php:51
-msgid "Plus"
+#: src/Product/Attributes/SizeSystem.php:84
+msgid "Size System"
 msgstr ""
 
 #: src/Product/Attributes/SizeType.php:52
-msgid "Tall"
+msgid "Regular"
 msgstr ""
 
 #: src/Product/Attributes/SizeType.php:53
-msgid "Big"
+msgid "Petite"
 msgstr ""
 
 #: src/Product/Attributes/SizeType.php:54
+msgid "Plus"
+msgstr ""
+
+#: src/Product/Attributes/SizeType.php:55
+msgid "Tall"
+msgstr ""
+
+#: src/Product/Attributes/SizeType.php:56
+msgid "Big"
+msgstr ""
+
+#: src/Product/Attributes/SizeType.php:57
 msgid "Maternity"
+msgstr ""
+
+#: src/Product/Attributes/SizeType.php:80
+msgid "Size Type"
 msgstr ""
 
 #. translators: %1 is the shipping rate, %2 is the currency (e.g. USD)
@@ -1545,8 +1709,8 @@ msgid "Google Listing & Ads"
 msgstr ""
 
 #: views/meta-box/channel_visibility.php:67
+#: js/build/index.js:35
 #: js/build/index.js:37
-#: js/build/index.js:39
 msgid "Sync and show"
 msgstr ""
 
@@ -1569,7 +1733,7 @@ msgstr ""
 #: views/meta-box/channel_visibility.php:98
 #: views/meta-box/coupon_channel_visibility.php:163
 #: js/build/index.js:17
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Complete setup"
 msgstr ""
 
@@ -1950,6 +2114,18 @@ msgid "Unable to update the channel visibility of products. Please try again lat
 msgstr ""
 
 #: js/build/index.js:2
+msgid "There was an error creating the rule."
+msgstr ""
+
+#: js/build/index.js:2
+msgid "There was an error updating the rule."
+msgstr ""
+
+#: js/build/index.js:2
+msgid "There was an error deleting the rule."
+msgstr ""
+
+#: js/build/index.js:2
 msgid "There was an error loading Google account access info."
 msgstr ""
 
@@ -1990,6 +2166,22 @@ msgid "There was an error loading report."
 msgstr ""
 
 #: js/build/index.js:2
+msgid "There was an error loading the mapping attributes."
+msgstr ""
+
+#: js/build/index.js:2
+msgid "There was an error loading the mapping sources for the selected attribute."
+msgstr ""
+
+#: js/build/index.js:2
+msgid "There was an error loading the mapping rules."
+msgstr ""
+
+#: js/build/index.js:2
+msgid "There was an error getting the store categories."
+msgstr ""
+
+#: js/build/index.js:2
 msgid "Your site language is <language />. This language is currently not supported by Google Listings & Ads. <settingsLink>You can change your site language here</settingsLink>. <supportedLanguagesLink>Read more about supported languages</supportedLanguagesLink>"
 msgstr ""
 
@@ -2011,7 +2203,7 @@ msgstr ""
 
 #: js/build/index.js:2
 #: js/build/index.js:22
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "Google Logo"
 msgstr ""
 
@@ -2032,7 +2224,7 @@ msgid "Google"
 msgstr ""
 
 #: js/build/index.js:2
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Google Merchant Center"
 msgstr ""
 
@@ -2041,7 +2233,7 @@ msgid "Required to sync products and list on Google"
 msgstr ""
 
 #: js/build/index.js:2
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Google Ads"
 msgstr ""
 
@@ -2051,13 +2243,13 @@ msgstr ""
 
 #: js/build/index.js:2
 #: js/build/index.js:21
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Phone number"
 msgstr ""
 
 #: js/build/index.js:2
 #: js/build/index.js:21
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Store address"
 msgstr ""
 
@@ -2075,7 +2267,7 @@ msgstr ""
 
 #: js/build/index.js:2
 #: js/build/index.js:9
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Connect"
 msgstr ""
 
@@ -2088,7 +2280,7 @@ msgid "<alert>Uh-oh!</alert> You did not allow WooCommerce sufficient access to 
 msgstr ""
 
 #: js/build/index.js:2
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Allow full access"
 msgstr ""
 
@@ -2119,7 +2311,7 @@ msgstr ""
 #: js/build/index.js:3
 #: js/build/index.js:5
 #: js/build/index.js:6
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "%1$s (%2$s)"
 msgstr ""
 
@@ -2137,7 +2329,7 @@ msgstr ""
 
 #: js/build/index.js:3
 #: js/build/index.js:9
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "Create account"
 msgstr ""
 
@@ -2147,7 +2339,7 @@ msgid "%1$s ・ %2$s (%3$s)"
 msgstr ""
 
 #: js/build/index.js:4
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "Select one"
 msgstr ""
 
@@ -2204,7 +2396,8 @@ msgid "Yes, I want a new account"
 msgstr ""
 
 #: js/build/index.js:9
-#: js/build/index.js:36
+#: js/build/index.js:34
+#: js/build/index.js:44
 msgid "Cancel"
 msgstr ""
 
@@ -2229,7 +2422,7 @@ msgid "You agree to comply with Google’s terms and policies, including <link>G
 msgstr ""
 
 #: js/build/index.js:9
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "I have read and accept these terms"
 msgstr ""
 
@@ -2242,7 +2435,7 @@ msgid "This may take a few minutes, please wait a moment…"
 msgstr ""
 
 #: js/build/index.js:9
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "Creating…"
 msgstr ""
 
@@ -2251,7 +2444,7 @@ msgid "Unable to connect Merchant Center account. Please try again later."
 msgstr ""
 
 #: js/build/index.js:9
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Select an existing account"
 msgstr ""
 
@@ -2292,7 +2485,7 @@ msgid "Once you have set up your Merchant Center account you can use our onboard
 msgstr ""
 
 #: js/build/index.js:9
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Set up your accounts"
 msgstr ""
 
@@ -2301,7 +2494,7 @@ msgid "Connect the accounts required to use Google Listings & Ads."
 msgstr ""
 
 #: js/build/index.js:9
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Connect accounts"
 msgstr ""
 
@@ -2311,7 +2504,7 @@ msgstr ""
 
 #: js/build/index.js:9
 #: js/build/index.js:21
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Continue"
 msgstr ""
 
@@ -2355,6 +2548,7 @@ msgstr ""
 
 #. translators: %d: The number of extra tags to show
 #: js/build/index.js:11
+#: js/build/index.js:43
 msgid "All"
 msgstr ""
 
@@ -2438,6 +2632,7 @@ msgstr ""
 #: js/build/index.js:11
 #: js/build/index.js:13
 #: js/build/index.js:17
+#: js/build/index.js:44
 msgid "Delete"
 msgstr ""
 
@@ -2459,8 +2654,9 @@ msgstr ""
 #: js/build/index.js:15
 #: js/build/index.js:17
 #: js/build/index.js:21
-#: js/build/index.js:29
-#: js/build/index.js:35
+#: js/build/index.js:27
+#: js/build/index.js:33
+#: js/build/index.js:44
 msgid "Edit"
 msgstr ""
 
@@ -2516,7 +2712,7 @@ msgid "Add another minimum order"
 msgstr ""
 
 #: js/build/index.js:15
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Shipping rates"
 msgstr ""
 
@@ -2590,7 +2786,7 @@ msgid "Update shipping time"
 msgstr ""
 
 #: js/build/index.js:17
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Shipping times"
 msgstr ""
 
@@ -2705,7 +2901,7 @@ msgid "Please enter a phone number to be used for verification."
 msgstr ""
 
 #: js/build/index.js:21
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Loading…"
 msgstr ""
 
@@ -2862,7 +3058,7 @@ msgid "Please check the requirement."
 msgstr ""
 
 #: js/build/index.js:21
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Confirm store requirements"
 msgstr ""
 
@@ -3021,1134 +3217,1308 @@ msgid "Using free listings and paid ads together can double impressions and incr
 msgstr ""
 
 #. translators: %s: user's account ID
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "Account %s"
 msgstr ""
 
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "Or, connect to a different Google Ads account"
 msgstr ""
 
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "Create Google Ads Account"
 msgstr ""
 
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "By creating a Google Ads account, you agree to the following terms and conditions:"
 msgstr ""
 
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "You agree to comply with Google’s terms and policies, including <policylink>Shopping ads policies</policylink> and <termslink>Google Ads Terms and Conditions</termslink>."
 msgstr ""
 
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "Unable to create Google Ads account. Please try again later."
 msgstr ""
 
-#: js/build/index.js:26
+#: js/build/index.js:24
 msgid "Or, use your existing Google Ads account"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "If you manage multiple sub-accounts in Google Ads, please connect the relevant sub-account, not a manager account. <link>Learn more</link>"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Connecting…"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Unable to connect your Google Ads account. Please try again later."
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Or, create a new Google Ads account"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Unable to get Google authorization page. Please try again later."
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Check your maximum free credit"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Whatever you spend in the next month will be added back to your Google Ads account as free credit, up to a maximum limit depending on your store’s country."
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Spend $500 to get $500 in Google Ads credits!"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "New to Google Ads? Get $500 in ad credit when you spend $500 within your first 60 days. Check how much credit you can receive in your country <checkLink>here</checkLink>. <termLink>Terms and conditions apply</termLink>."
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "A Google Ads account is required to create paid campaigns with your product listings"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "You can only choose from countries you’ve selected during product listings configuration."
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Select country/s"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Select one country"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Ads audience"
 msgstr ""
 
-#: js/build/index.js:27
+#: js/build/index.js:25
 msgid "Choose where you want your product ads to appear"
 msgstr ""
 
 #. translators: it's a range of recommended budget amount. 1: the low value of the range, 2: the high value of the range, 3: the currency of amount.
-#: js/build/index.js:28
+#: js/build/index.js:26
 msgid "Google will optimize your ads to maximize performance across the country/s you select.<br /><em>Tip: Most merchants targeting similar countries <strong>set a daily budget of %1$f to %2$f %3$s</strong></em>"
 msgstr ""
 
 #. translators: it's a range of recommended budget amount. 1: the low value of the range, 2: the high value of the range, 3: the currency of amount, 4: a country name selected by the merchant.
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Google will optimize your ads to maximize performance across the country/s you select.<br /><em>Tip: Most merchants targeting <strong>%4$s set a daily budget of %1$f to %2$f %3$s</strong></em>"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "With a budget lower than your competitor range, your campaign may not get noticeable results."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Set your budget"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "With Performance Max campaigns, you can set your own budget and Google’s Smart Bidding technology will serve the most appropriate ad, with the optimal bid, to maximize campaign performance."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Daily average cost"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Monthly max, estimated"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Unable to complete your Google Ads account setup. Please try again later."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "You do not have billing information set up in your Google Ads account. Once you have set up billing, you can start running ads."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "You will be directed to Google Ads for this step. In case your browser is unable to open the pop-up, <link>click here instead</link>."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Set up billing"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Billing method for Google Ads added successfully"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Please select at least one country for your ads campaign."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Please make sure daily average cost is greater than 0."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Unable to complete your setup."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Complete your campaign with paid ads"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "As soon as your products are approved, your listings and ads will be live. In the meantime, let’s set up your ads."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Skip this step for now"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Create a paid ad campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Skip paid ads creation"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Configure product listings"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Configure your product listings"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "There was an error saving audience."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "There was an error saving settings."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "There was an error saving shipping rates."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "There was an error saving shipping times."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Complete your campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Connect your Google account and your Google Ads account to set up a paid Performance Max campaign."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Any campaigns created through this app will appear in your Google Ads account. You will be billed directly through Google."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "This Google account is connected to your store’s product feed."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Preview product ad"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Each of your product variants will have its own ad. Previews shown here are examples and don't include all possible formats."
 msgstr ""
 
-#: js/build/index.js:29
-#: js/build/index.js:34
+#: js/build/index.js:27
+#: js/build/index.js:32
 msgid "Create your paid campaign"
 msgstr ""
 
-#: js/build/index.js:29
-#: js/build/index.js:34
+#: js/build/index.js:27
+#: js/build/index.js:32
 msgid "Paid Performance Max campaigns are automatically optimized for you by Google. <link>See what your ads will look like.</link>"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Great! You already have billing information saved for this <link>Google Ads account</link>."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "You will be billed directly by Google Ads, and you only pay when you get results."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "In order to launch your paid campaign, your billing information is required. You will be billed directly by Google and only pay when someone clicks on your ad."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Payment info through Google Ads"
 msgstr ""
 
-#: js/build/index.js:29
-#: js/build/index.js:34
+#: js/build/index.js:27
+#: js/build/index.js:32
 msgid "Launch paid campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Set up paid campaign"
 msgstr ""
 
-#: js/build/index.js:29
-#: js/build/index.js:30
+#: js/build/index.js:27
+#: js/build/index.js:28
 msgid "You have unsaved campaign data. Are you sure you want to leave?"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Note: The currency set in your Google Ads account is <adsCurrency />, which is different from your store currency, <storeCurrency />. <readMoreLink>Read more</readMoreLink>"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Google has auto-upgraded your existing campaigns from Smart Shopping to Performance Max, giving you the same benefits plus extended reach across the Google network. No changes were made to your campaign settings and metrics from previous campaigns will continue to be available in <link>Reports</link> for historical purposes."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Your existing campaigns have been upgraded to Performance Max. <readMoreLink>Learn more about this upgrade</readMoreLink>"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
+msgid "Attributes"
+msgstr ""
+
+#: js/build/index.js:27
 msgid "Pencil icon"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Add paid campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Create your first campaign and get $500 in ad credit*"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Create your first campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "We're having trouble loading this data. Try again later, or track your performance in Google Merchant Center."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Open Google Merchant Center"
 msgstr ""
 
-#: js/build/index.js:29
-#: js/build/index.js:35
+#: js/build/index.js:27
+#: js/build/index.js:33
 msgid "Clicks"
 msgstr ""
 
-#: js/build/index.js:29
-#: js/build/index.js:35
+#: js/build/index.js:27
+#: js/build/index.js:33
 msgid "Total Spend"
 msgstr ""
 
-#: js/build/index.js:29
-#: js/build/index.js:30
+#: js/build/index.js:27
+#: js/build/index.js:28
 msgid "Free"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "We're having trouble loading this data. Try again later, or track your performance in Google Ads."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Open Google Ads"
 msgstr ""
 
-#: js/build/index.js:29
-#: js/build/index.js:35
+#: js/build/index.js:27
+#: js/build/index.js:33
 msgid "Total Sales"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Performance (Free Listing)"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Performance (Paid Campaigns)"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Create another campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Got it"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Drawing of a person who successfuly launched a campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "You've set up a paid Performance Max Campaign!"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "You can pause or edit your campaign at any time. For best results, we recommend allowing your campaign to run for at least 14 days without pausing or editing. <link>Learn more about Performance Max technology.</link>"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Permanently Remove?"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Keep Campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Remove Campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Results typically improve with time with Google’s paid ad campaigns. Removing a paid ad campaign will result in the loss of any optimisations learned from those campaigns."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Once a campaign is removed, it cannot be re-enabled."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Remove"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Before you edit…"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Don't edit"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Continue to edit"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Results typically improve with time with Google’s Free Listing and paid ad campaigns."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Editing will result in the loss of any optimisations learned over time."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "We recommend allowing your programs to run for at least 14 days after set up, without pausing or editing, for optimal performance."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Before you pause…"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Keep Active"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Pause Campaign"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Results typically improve with time with Google’s paid ad campaigns. If you pause, your products won’t be shown to people looking for what you offer."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Pausing a paid ad campaign will result in the loss of any optimisations learned from those campaigns."
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Free listings cannot be paused through WooCommerce. Go to Google Merchant Center for advanced settings."
 msgstr ""
 
-#: js/build/index.js:29
-#: js/build/index.js:35
+#: js/build/index.js:27
+#: js/build/index.js:33
 msgid "Program"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Country"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Daily budget"
 msgstr ""
 
-#: js/build/index.js:29
+#: js/build/index.js:27
 msgid "Enabled"
 msgstr ""
 
 #. translators: %d: number of countries, with minimum value of 1.
-#: js/build/index.js:30
+#: js/build/index.js:28
 msgid " + %d more"
 msgstr ""
 
-#: js/build/index.js:30
-#: js/build/index.js:35
+#: js/build/index.js:28
+#: js/build/index.js:33
 msgid "Free listings"
 msgstr ""
 
-#: js/build/index.js:30
-#: js/build/index.js:35
+#: js/build/index.js:28
+#: js/build/index.js:33
 msgid "Programs"
 msgstr ""
 
-#: js/build/index.js:30
+#: js/build/index.js:28
 msgid "Edit free listings"
 msgstr ""
 
-#: js/build/index.js:30
+#: js/build/index.js:28
 msgid "Edit your listings"
 msgstr ""
 
-#: js/build/index.js:30
+#: js/build/index.js:28
 msgctxt "the separator for concatenating the messages of failed actions"
 msgid ", "
 msgstr ""
 
 #. translators: 1: optional string when there are multiple failed actions, and it's a concatenated text of failed actions except for the last one. 2: the last one or the only failed action.
-#: js/build/index.js:31
+#: js/build/index.js:29
 msgid "There is an error in the following action: %1$s%2$s."
 msgid_plural "There are errors in the following actions: %1$s and %2$s."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: text for the failed action(s).
-#: js/build/index.js:32
+#: js/build/index.js:30
 msgid "%s Other changes have been saved. Please try again later."
 msgstr ""
 
 #. translators: text for the failed action(s).
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "%s Please try again later."
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Target audience"
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Merchant Center Settings"
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Your changes to your Free Listings have been saved and will be synced to your Google Merchant Center account."
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Something went wrong while saving your changes. Please try again later."
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Save changes"
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Once a campaign has been created, you cannot change the target country(s)."
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Once a campaign has been created, you cannot change the target country."
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Edit your paid campaign"
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "Paid ad campaigns are automatically optimized for you by Google."
 msgstr ""
 
-#: js/build/index.js:33
+#: js/build/index.js:31
 msgid "See what your ads will look like."
 msgstr ""
 
 #. translators: %s: campaign's name.
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Edit %s"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Edit Campaign"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Error in loading your paid ads campaign. Please try again later."
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "You’ve successfully created a paid campaign!"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "How easy was it to create a Google Ad campaign?"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Unavailable"
 msgstr ""
 
-#: js/build/index.js:34
-#: js/build/index.js:35
+#: js/build/index.js:32
+#: js/build/index.js:33
 msgid "Free Listings"
 msgstr ""
 
-#: js/build/index.js:34
-#: js/build/index.js:35
+#: js/build/index.js:32
+#: js/build/index.js:33
 msgid "Show"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "All Google programs"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Single program"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Type to search for a program"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Single Program"
 msgstr ""
 
-#: js/build/index.js:34
-#: js/build/index.js:35
+#: js/build/index.js:32
+#: js/build/index.js:33
 msgid "Comparison"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Check at least two programs below to compare"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Search for programs to compare"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Compare Programs"
 msgstr ""
 
-#: js/build/index.js:34
-#: js/build/index.js:35
+#: js/build/index.js:32
+#: js/build/index.js:33
 msgid "Compare"
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "This data is currently available for paid campaigns only."
 msgstr ""
 
-#: js/build/index.js:34
+#: js/build/index.js:32
 msgid "Please try again later, or go to <googleMerchantCenterLink /> to track your performance for Google Free Listings."
 msgstr ""
 
 #. translators: %s: link to Google Merchant Center.
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Google Merchant Center (%s)"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "No data for the selected date range"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "This campaign has been upgraded to Performance Max"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Select one or more programs to compare"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Products"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Conversions"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Impressions"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Spend"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "All Products"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Single Product"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Type to search for a product"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Check at least two products below to compare"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Search for products to compare"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Compare Products"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "All Variations"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Single Variation"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Type to search for a variation"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Check at least two variations below to compare"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Search for variations to compare"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Compare Variations"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Show data from"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Paid campaigns"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Select one or more products to compare"
 msgstr ""
 
-#: js/build/index.js:35
-msgid "Product title"
-msgstr ""
-
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Type"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Affected product"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Issue"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Suggested action"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "All account issues resolved"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "All product issues resolved"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "However, there are issues affecting your products that needs to be resolved. Head over to the <strong>Product Issues</strong> tab to view them."
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "However, there are issues affecting your account that needs to be resolved. Head over to the <strong>Account Issues</strong> tab to view them."
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "What to do?"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Read more about this issue"
 msgstr ""
 
+#: js/build/index.js:33
 #: js/build/index.js:35
-#: js/build/index.js:37
 msgid "Issues to resolve"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "An error occurred while retrieving issues. Please try again later."
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Loading Issues To Resolve"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Account Issues"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Product Issues"
 msgstr ""
 
-#: js/build/index.js:35
+#: js/build/index.js:33
 msgid "Request a review on the following issue(s):"
 msgstr ""
 
 #. translators: %d: The number of extra issues issues
-#: js/build/index.js:36
+#: js/build/index.js:34
 msgid "Request account review"
 msgstr ""
 
-#: js/build/index.js:36
+#: js/build/index.js:34
 msgid "Your account review was successfully requested."
 msgstr ""
 
-#: js/build/index.js:36
+#: js/build/index.js:34
 msgid "Please ensure that you have resolved all account suspension issues before requesting for an account review. If some issues are unresolved, you wont be able to request another review for at least 7 days. <Link>Learn more</Link>"
 msgstr ""
 
-#: js/build/index.js:36
+#: js/build/index.js:34
 msgid "I have resolved all the issue(s) listed above."
 msgstr ""
 
 #. translators: %s: Cool down period date.
-#: js/build/index.js:37
+#: js/build/index.js:35
 msgid "Your account is under cool down period. You can request a new review on %s."
 msgstr ""
 
-#: js/build/index.js:37
+#: js/build/index.js:35
 msgid "Request review"
 msgstr ""
 
-#: js/build/index.js:37
+#: js/build/index.js:35
 msgid "Products and stores must meet <link>Google Merchant Center’s requirements</link> in order to get approved. WooCommerce and Google automatically check your product feed to help you resolve any issues. "
 msgstr ""
 
-#: js/build/index.js:37
+#: js/build/index.js:35
 msgid "Select channel visibility"
 msgstr ""
 
-#: js/build/index.js:37
+#: js/build/index.js:35
 msgid "Don’t sync and show"
 msgstr ""
 
-#: js/build/index.js:37
+#: js/build/index.js:35
 msgid "Select one or more products to bulk edit"
 msgstr ""
 
 #. translators: %d: number of selected products to edit channel visibility, with minimum value of 1.
-#: js/build/index.js:38
+#: js/build/index.js:36
 msgid "Apply to %d selected"
 msgstr ""
 
-#: js/build/index.js:38
+#: js/build/index.js:36
 msgid "Approved"
 msgstr ""
 
-#: js/build/index.js:38
+#: js/build/index.js:36
 msgid "Partially approved"
 msgstr ""
 
-#: js/build/index.js:38
-#: js/build/index.js:43
+#: js/build/index.js:36
+#: js/build/index.js:41
 msgid "Expiring"
 msgstr ""
 
-#: js/build/index.js:38
-#: js/build/index.js:43
+#: js/build/index.js:36
+#: js/build/index.js:41
 msgid "Pending"
 msgstr ""
 
-#: js/build/index.js:38
-#: js/build/index.js:43
+#: js/build/index.js:36
+#: js/build/index.js:41
 msgid "Disapproved"
 msgstr ""
 
-#: js/build/index.js:38
+#: js/build/index.js:36
 msgid "Not synced"
 msgstr ""
 
-#: js/build/index.js:38
+#: js/build/index.js:36
 msgid "Product Title"
 msgstr ""
 
-#: js/build/index.js:38
+#: js/build/index.js:36
 msgid "Channel Visibility"
 msgstr ""
 
-#: js/build/index.js:38
+#: js/build/index.js:36
 msgid "Status"
 msgstr ""
 
 #. translators: %d: number of products are updated successfully, with minimum value of 1.
-#: js/build/index.js:39
+#: js/build/index.js:37
 msgid "You successfully changed the channel visibility of %d product"
 msgid_plural "You successfully changed the channel visibility of %d products"
 msgstr[0] ""
 msgstr[1] ""
 
-#: js/build/index.js:39
+#: js/build/index.js:37
 msgid "An error occurred while retrieving products. Please try again later."
 msgstr ""
 
-#: js/build/index.js:39
+#: js/build/index.js:37
 msgid "Don't sync and show"
 msgstr ""
 
 #. translators: 1: current page number 2: total number of pages
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "WooCommerce Logo"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "You’ve successfully set up Google Listings & Ads! 🎉"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "Your products are being synced and reviewed. Google reviews product listings in 3-5 days."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "No ads will launch yet and you won’t be charged until Google approves your listings. Updates are available in your WooCommerce dashboard."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "<productFeedLink>Manage and edit your product feed in WooCommerce.</productFeedLink> We will also notify you of any product feed issues to ensure your products get approved and perform well on Google."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "Spend $500 to get $500 in Google Ads credits"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "New to Google Ads? Get $500 in ad credit when you spend $500 within your first 60 days* You can edit or cancel your campaign at any time."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "*Full terms and conditions <link>here</link>."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "View product feed"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "Maybe later"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "Create paid campaign"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "Back"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "Your product feed is <strong>automatically synced</strong> from WooCommerce to Google, every 1-2 days. "
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "<strong>‘Not synced’ products</strong> do not appear in Google listings. They are queued for submission, or they may be ineligible or excluded from the product feed."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "After submission, Google assigns each product a status: <strong>Active, Expiring, Pending, or Disapproved.</strong>"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "<strong>‘Active’ products</strong> are fully approved and eligible to appear in free listings on Google."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "<strong>‘Expiring’ products</strong> will become inactive and no longer appear in Google listings in the next 3 days."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "<strong>‘Pending’ products</strong> are being processed by Google. They will not appear in listings until they are approved."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "<strong>‘Disapproved’ products</strong> are inactive and do not appear in Google listings."
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "<link>Read more about product sync and statuses</link>"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "Sync in progress"
 msgstr ""
 
-#: js/build/index.js:41
+#: js/build/index.js:39
 msgid "Automatically synced to Google"
 msgstr ""
 
 #. translators: %s: datetime of last update products sync status, and %d: number of synced products, with minimum value of 1.
-#: js/build/index.js:42
+#: js/build/index.js:40
 msgid "Last updated: %1$s, containing %2$d product"
 msgid_plural "Last updated: %1$s, containing %2$d products"
 msgstr[0] ""
 msgstr[1] ""
 
-#: js/build/index.js:42
+#: js/build/index.js:40
 msgid "Sync with Google:"
 msgstr ""
 
-#: js/build/index.js:42
+#: js/build/index.js:40
 msgid "No issues to resolve 🎉"
 msgstr ""
 
 #. translators: %d: number of unsolved Merchant Center issues, with minimum value of 1.
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "%d issue to resolve"
 msgid_plural "%d issues to resolve"
 msgstr[0] ""
 msgstr[1] ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Feed setup:"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Free listings setup completed"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Account status:"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Overview"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Active"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Not Synced"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "How easy was it to set up Google Listings & Ads?"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "An error occurred while retrieving your product feed. Please try again later."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Linked accounts"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "A WordPress.com account, Google account, and Google Merchant Center account are required to use this extension in WooCommerce."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Disconnect all accounts"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Yes, I want to disconnect all my accounts."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "I understand that I am disconnecting any WordPress.com account, Google account, Google Merchant Center account and Google Ads account connected to this extension."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Any active product listings will continue to show on Google. They can be managed, edited, or deleted manually from Google Merchant Center (merchants.google.com)."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Any ongoing paid campaigns will continue to run. They can be managed, edited, or deleted manually from Google Ads (ads.google.com)."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Disconnect Google Ads account"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Disconnect Google Ads Account"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Yes, I want to disconnect my Google Ads account."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "I understand that I am disconnecting my Google Ads account from this WooCommerce extension."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Some configurations for Google Ads created through WooCommerce may be lost. This cannot be undone."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Never mind"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Disconnect Google Ads account only"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Disconnect from all accounts"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Your WordPress.com account has been disconnected."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Connect your WordPress.com account to ensure your products stay listed on Google. If you do not re-connect, your products can’t be automatically synced to Google, and any existing listings may be removed from Google."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "This Google account, <accountEmail />, was not the Google account previously connected to this integration."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Thus, it doesn‘t have access to the Google Merchant Center and/or Google Ads account currently connected to this WooCommerce store."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Try connecting with a different Google account, or completely disconnect all your connected accounts."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Try another Google account"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Connect account"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Edit store address"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Your store address is required by Google for verification purposes. It will be shared with the Google Merchant Center and will not be displayed to customers."
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Save details"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Edit phone number"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:41
 msgid "Your phone number is required by Google for verification purposes. It will be shared with the Google Merchant Center and will not be displayed to customers."
 msgstr ""
 
+#: js/build/index.js:41
+msgid "Create attribute rules to control what product data gets sent to Google and to manage product attributes in bulk."
+msgstr ""
+
+#: js/build/index.js:41
+msgctxt "the separator for concatenating the categories where the Attribute mapping rule is applied."
+msgid ", "
+msgstr ""
+
+#. translators: %d: number of categories.
+#: js/build/index.js:42
+msgid "Category ID %s (deleted)"
+msgstr ""
+
+#. translators: %d: number of categories.
 #: js/build/index.js:43
+msgid "%d category"
+msgid_plural "%d categories"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: The number of categories.
+#: js/build/index.js:44
+msgid "+ %d more"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Only in"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "All except"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Select one option"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Set a fixed value."
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Use value from existing product field."
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Choose how to assign a value to the target attribute"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Create a connection between the target attribute and an existing product field to auto-populate the target attribute with with the value of the field it is linked to."
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Can’t find an appropriate field?. <link>Create a new attribute</link>"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Use fixed values to populate the target attribute with a value you specify. For example, you can enter a fixed value of White to specify a single color for all your products."
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Enter a value"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Apply to All categories"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Apply to All categories EXCEPT"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Apply ONLY to this categories"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Type for search"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Select default value"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Select a Google attribute that you want to manage"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Select one attribute"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Saving…"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Save rule"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Target attribute"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Assign value"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Categories"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Deleting…"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Delete attribute rule"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Deleting a rule does’t affect any data that has already been submitted to Google."
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Product data is re-submitted to Google every 30 days to ensure that the information in your product listings are up-to-date."
+msgstr ""
+
+#: js/build/index.js:44
+msgid "To ensure your products continue to be approved and promoted by Google, make sure that your product fields include all the required information."
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Scheduled for sync"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Never"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Last sync:"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "When an attribute rule is added or changed, data will be synced to Google Merchant Center via an async job. Note that it may take a while for the update to show up on Merchant Center, especially if it involves products that have not been synced and approved before."
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Target Attribute"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Data Source / Default Value"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Loading Attribute Mapping rules"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Attribute Mapping configuration"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Create attribute rule"
+msgstr ""
+
+#: js/build/index.js:44
+msgid "Manage attributes"
+msgstr ""
+
+#: js/build/index.js:44
 msgid "Marketing"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:44
 msgid "Setup Merchant Center"
 msgstr ""
 
-#: js/build/index.js:43
+#: js/build/index.js:44
 msgid "Setup Google Ads"
 msgstr ""
 

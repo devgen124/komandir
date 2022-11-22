@@ -2,18 +2,22 @@
 # This file is distributed under the same license as the Plugins - Category Order and Taxonomy Terms Order - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-02-16 09:03:44+0000\n"
+"PO-Revision-Date: 2022-11-21 13:52:45+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"X-Generator: GlotPress/4.0.0-alpha.3\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - Category Order and Taxonomy Terms Order - Stable (latest release)\n"
 
 #. Author URI of the plugin
 msgid "https://www.nsp-code.com"
 msgstr "https://www.nsp-code.com"
+
+#. Description of the plugin
+msgid "Order Categories and all custom taxonomies terms (hierarchically) and child terms using a Drag and Drop Sortable javascript capability."
+msgstr "Упорядочить категории и все пользовательские термины таксономии (иерархически) и дочерние термины, используя возможность сортировки перетаскиванием javascript."
 
 #. Plugin URI of the plugin
 msgid "http://www.nsp-code.com"
@@ -23,7 +27,7 @@ msgstr "http://www.nsp-code.com"
 msgid "Nsp-Code"
 msgstr "Nsp-Code "
 
-#: taxonomy-terms-order.php:81
+#: taxonomy-terms-order.php:99
 msgid "Taxonomy Terms Order"
 msgstr "Сортировка списка элементов"
 
@@ -119,19 +123,11 @@ msgstr "Всего сообщений"
 msgid "This plugin can't work without javascript, because it's use drag and drop and AJAX."
 msgstr "Этот плагин не может работать без javascript, потому что он использует перетаскивание и AJAX."
 
-#: include/functions.php:57
-msgid "plugin which allow to custom sort all posts, pages, custom post types"
-msgstr "плагин, который позволяет вручную сортировать все сообщения, страницы, типы сообщений"
-
 #: include/interface.php:100
 msgid "Taxonomies"
 msgstr "Сортировка"
 
-#: include/functions.php:56
-msgid "plugin which allow to custom sort categories and custom taxonomies terms per post basis"
-msgstr "Плагин, который позволяет вручную настраивать сортировку категорий и вручную настраивать порядок пользовательских элементов для каждых основных постов"
-
-#: include/functions.php:56 include/functions.php:57
+#: include/functions.php:74 include/functions.php:75
 msgid "Check our"
 msgstr "Проверьте наш"
 
@@ -139,19 +135,19 @@ msgstr "Проверьте наш"
 msgid "Taxonomy Title"
 msgstr "Заголовок таксономии"
 
-#: include/interface.php:38 taxonomy-terms-order.php:116
-#: taxonomy-terms-order.php:118 taxonomy-terms-order.php:120
+#: include/interface.php:38 taxonomy-terms-order.php:134
+#: taxonomy-terms-order.php:136 taxonomy-terms-order.php:138
 msgid "Taxonomy Order"
 msgstr "Порядок таксономии"
 
-#: include/functions.php:55
-msgid "Did you know there is available an advanced version of this plug-in?"
-msgstr "Знаете ли вы, что есть расширенная версия этого плагина?"
+#: include/functions.php:74
+msgid "plugin which allows to custom sort all posts, pages, custom post types"
+msgstr "плагин, который позволяет вручную сортировать все сообщения, страницы, типы сообщений"
 
-#: include/functions.php:54
+#: include/functions.php:72
 msgid "Did you find this plugin useful? Please support our work with a donation or write an article about this plugin in your blog with a link to our site"
 msgstr "Считаете этот плагин полезным? Пожалуйста, поддержите нашу работу пожертвованием или напишите статью об этом плагине в своем блоге со ссылкой на наш сайт"
 
-#: include/functions.php:55
+#: include/functions.php:73
 msgid "Read more"
 msgstr "Подробнее"
