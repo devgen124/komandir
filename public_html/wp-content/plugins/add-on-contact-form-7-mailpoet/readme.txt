@@ -2,10 +2,10 @@
 Contributors: kasperta
 Tags: mailpoet, contact form 7, cf7, form, forms, contact form, wysija, mail, email, e-mail, extension, add-on, newsletter, newsletters, subscription, checkout, list, lists, double opt-in
 Donate link: http://www.tikweb.dk/donate/
-Requires at least: 5.2
-Tested up to: 5.5.1
-Requires PHP: 7.0
-Stable tag: 1.3.19
+Requires at least: 5.3
+Tested up to: 6.1
+Requires PHP: 7.2
+Stable tag: 1.3.20
 
 Add a MailPoet 3 signup field to your Contact Form 7 forms.
 

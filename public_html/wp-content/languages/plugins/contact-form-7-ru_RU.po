@@ -2,16 +2,20 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-08-22 12:20:49+0000\n"
+"PO-Revision-Date: 2022-11-21 13:37:50+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.0-alpha.1\n"
+"X-Generator: GlotPress/4.0.0-alpha.3\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
 
-#: includes/config-validator.php:581
+#: includes/config-validator.php:634
+msgid "Uploadable file size exceeds PHP’s maximum acceptable size."
+msgstr "Размер загружаемого файла превышает максимально допустимый размер PHP."
+
+#: includes/config-validator.php:583
 msgid "Colons are used in form-tag names."
 msgstr "В названиях тегов формы используются двоеточия."
 
@@ -175,7 +179,7 @@ msgstr "%1$s %2$s"
 msgid "Unique identifier for the contact form."
 msgstr "Уникальный идентификатор для контактной формы."
 
-#: includes/config-validator.php:553
+#: includes/config-validator.php:555
 msgid "Dots are used in form-tag names."
 msgstr "Точки используются в названиях меток формы."
 
@@ -414,11 +418,11 @@ msgstr "Дополнительные настройки"
 msgid "Error"
 msgstr "Ошибка"
 
-#: includes/config-validator.php:772
+#: includes/config-validator.php:825
 msgid "The total size of attachment files is too large."
 msgstr "Общий размер вложенных файлов слишком велик."
 
-#: includes/config-validator.php:526
+#: includes/config-validator.php:528
 msgid "Unavailable HTML elements are used in the form template."
 msgstr "Недоступные элементы HTML используются в шаблоне формы."
 
@@ -544,7 +548,7 @@ msgstr "Constant Contact"
 msgid "Email marketing"
 msgstr "Маркетинг по электронной почте"
 
-#: includes/config-validator.php:858
+#: includes/config-validator.php:911
 msgid "It is not allowed to use files outside the wp-content directory."
 msgstr "Запрещается использовать файлы вне каталога wp-content."
 
@@ -666,7 +670,7 @@ msgstr "Мы не смогли бы работать над плагином б�
 msgid "This contact form is available only for logged in users."
 msgstr "Эта форма доступна только для зарегистрированных пользователей."
 
-#: includes/config-validator.php:191
+#: includes/config-validator.php:192
 msgid "Deprecated settings are used."
 msgstr "Используются устаревшие настройки."
 
@@ -701,36 +705,36 @@ msgstr "Невозможно создать существующую конта�
 msgid "You are not allowed to access contact forms."
 msgstr "У вас нет доступа к контактной форме."
 
-#: includes/config-validator.php:834
+#: includes/config-validator.php:887
 msgid "Attachment file does not exist at %path%."
 msgstr "По указанному %path% файл вложения не существует."
 
-#: includes/config-validator.php:691
+#: includes/config-validator.php:744
 msgid "Invalid mailbox syntax is used in the %name% field."
 msgstr "Был использован некорректный синтаксис почтового адреса в поле %name%."
 
 #. translators: %names%: a list of form control names
-#: includes/config-validator.php:503
+#: includes/config-validator.php:505
 msgid "Unavailable names (%names%) are used for form controls."
 msgstr "Использованы недопустимые названия (%names%) элементов управления формы."
 
-#: includes/config-validator.php:189
+#: includes/config-validator.php:190
 msgid "There are invalid mail header fields."
 msgstr "Присутствуют недопустимые поля заголовка почты."
 
-#: includes/config-validator.php:185
+#: includes/config-validator.php:186
 msgid "HTML tags are used in a message."
 msgstr "В сообщении используются HTML теги."
 
-#: includes/config-validator.php:183
+#: includes/config-validator.php:184
 msgid "Sender email address does not belong to the site domain."
 msgstr "Электронный адрес отправителя не принадлежит домену сайта."
 
-#: includes/config-validator.php:181
+#: includes/config-validator.php:182
 msgid "Invalid mailbox syntax is used."
 msgstr "Использован некорректный синтаксис почтового адреса."
 
-#: includes/config-validator.php:179
+#: includes/config-validator.php:180
 msgid "There is a possible empty field."
 msgstr "Вероятно есть пустое поле."
 
@@ -803,7 +807,7 @@ msgstr "Спамеры пытаются проникнуть повсюду и �
 msgid "Getting spammed? You have protection."
 msgstr "Получаете спам? У нас есть защита."
 
-#: includes/config-validator.php:187
+#: includes/config-validator.php:188
 msgid "Multiple form controls are in a single label element."
 msgstr "Несколько элементов управления формы находятся внутри одного элемента маркировки."
 
@@ -862,7 +866,7 @@ msgstr "Ошибки в конфигурации ведут к сбоям в о�
 msgid "Validate Contact Form 7 Configuration"
 msgstr "Проверить конфигурацию Contact Form 7"
 
-#: includes/config-validator.php:36
+#: includes/config-validator.php:37
 msgid "https://contactform7.com/configuration-errors/"
 msgstr "https://contactform7.com/configuration-errors/"
 

@@ -70,6 +70,12 @@ class SegmentEntity {
    */
   private $averageEngagementScoreUpdatedAt;
 
+  /**
+   * @ORM\Column(type="boolean")
+   * @var bool
+   */
+  private $displayInManageSubscriptionPage = false;
+
   public function __construct(
     string $name,
     string $type,
@@ -157,6 +163,14 @@ class SegmentEntity {
 
   public function setAverageEngagementScoreUpdatedAt(?\DateTimeInterface $averageEngagementScoreUpdatedAt): void {
     $this->averageEngagementScoreUpdatedAt = $averageEngagementScoreUpdatedAt;
+  }
+
+  public function getDisplayInManageSubscriptionPage(): bool {
+    return $this->displayInManageSubscriptionPage;
+  }
+
+  public function setDisplayInManageSubscriptionPage(bool $state): void {
+    $this->displayInManageSubscriptionPage = $state;
   }
 
   /**

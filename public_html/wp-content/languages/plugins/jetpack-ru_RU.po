@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack &#8211; WP Security, Backup, Speed, &amp; Growth - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-11-01 15:18:26+0000\n"
+"PO-Revision-Date: 2022-11-21 16:23:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -526,6 +526,13 @@ msgstr "Продвигайте контент в социальных сетях
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-social.php:74
 msgid "Reach your audience on social media"
 msgstr "Делитесь контентом с вашей аудиторией в социальных сетях"
+
+#: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-social.php:65
+#: jetpack_vendor/automattic/jetpack-publicize/src/class-publicize-ui.php:120
+#: _inc/lib/core-api/class.jetpack-core-api-site-endpoints.php:270
+#: _inc/build/admin.js:85
+msgid "Jetpack Social"
+msgstr "Jetpack в социальных сетях"
 
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-protect.php:95
 msgid "Easy to navigate and use"
@@ -6895,7 +6902,7 @@ msgstr "Нет фото для отображения. Убедитесь что
 
 #: modules/widgets/flickr.php:52
 msgid "Flickr Photos"
-msgstr "фото Flickr"
+msgstr "Фотографии из Flickr"
 
 #: modules/widgets/flickr.php:25
 msgid "Display your recent Flickr photos."
@@ -6944,7 +6951,7 @@ msgstr "Это в вашей ответственности чтобы ваш с
 
 #: modules/widgets/eu-cookie-law/form.php:133
 msgid "Button text"
-msgstr "текст кнопки"
+msgstr "Текст кнопки"
 
 #: modules/widgets/eu-cookie-law/form.php:36
 msgid "Custom:"
@@ -6952,7 +6959,7 @@ msgstr "Произвольно:"
 
 #: modules/widgets/eu-cookie-law/form.php:14
 msgid "Banner text"
-msgstr "текст баннера"
+msgstr "Текст баннера"
 
 #: modules/widgets/eu-cookie-law/form.php:185
 msgid "after this amount of time"
@@ -7812,7 +7819,7 @@ msgstr "Пусть поисковые машины легко находят в�
 #: modules/module-headings.php:136
 msgctxt "Module Description"
 msgid "Publish posts by sending an email"
-msgstr "Публикуйте записи посылая их по эл.почте."
+msgstr "Опубликовать сообщения, отправив электронное письмо"
 
 #: modules/module-headings.php:121
 msgctxt "Module Description"
@@ -7827,7 +7834,7 @@ msgstr "Разрешает приложениям безопасный дост�
 #: modules/module-headings.php:81
 msgctxt "Module Description"
 msgid "Automatically load new content when a visitor scrolls"
-msgstr "Автоматически подгружает новое содержимое при прокрутке."
+msgstr "Автоматически подгружает новое содержимое при прокрутке"
 
 #: modules/module-headings.php:26
 msgctxt "Module Description"
@@ -8176,7 +8183,7 @@ msgstr "Лучшие результаты в поисковых системах
 #: modules/module-headings.php:166
 msgctxt "Module Description"
 msgid "Better results on search engines and social media."
-msgstr "Лучшие результаты в поисковых системах и социальных сетях. "
+msgstr "Лучшие результаты в поисковых системах и в социальных сетях."
 
 #: modules/module-headings.php:165
 msgctxt "Module Name"
@@ -8997,7 +9004,7 @@ msgstr "Отсутствует параметр type."
 #: _inc/lib/class.core-rest-api-endpoints.php:2088
 #: _inc/lib/class.core-rest-api-endpoints.php:2121
 msgid "Invalid Parameter"
-msgstr "Неверный параметр."
+msgstr "Неверный параметр"
 
 #: _inc/lib/class.core-rest-api-endpoints.php:2111
 msgid "Jetpack options reset."
@@ -9502,7 +9509,7 @@ msgstr "Skype"
 
 #: modules/sharedaddy/sharing-sources.php:1662
 msgid "Click to share on Facebook"
-msgstr "Нажмите здесь, чтобы поделиться контентом на Facebook."
+msgstr "Нажмите, чтобы открыть на Facebook"
 
 #: modules/module-headings.php:354
 msgctxt "Module Tag"
@@ -9517,7 +9524,7 @@ msgstr "Файлы Sitemap"
 #. translators: %s is the name of a form field
 #: modules/contact-form/grunion-contact-form.php:4044
 msgid "%s requires at least one selection"
-msgstr "%s требует выбора хотя бы одного элемента."
+msgstr "%s требует выбора хотя бы одного элемента"
 
 #: _inc/lib/debugger/class-jetpack-debugger.php:122
 msgid "If this solves the problem, something in your theme is probably broken – let the theme's author know."
@@ -9539,15 +9546,15 @@ msgstr "<span>Автор:</span> <a href=\"%1$s\">%2$s</a>"
 
 #: json-endpoints/jetpack/class.wpcom-json-api-update-option-endpoint.php:39
 msgid "You must specify an option_value"
-msgstr "Укажите значение option_value."
+msgstr "Вы должны указать option_value"
 
 #: json-endpoints/jetpack/class.wpcom-json-api-get-option-endpoint.php:69
 msgid "You must specify a whitelisted option_name"
-msgstr "Укажите значение option_name из белого списка."
+msgstr "Вы должны указать whitelisted option_name"
 
 #: json-endpoints/jetpack/class.wpcom-json-api-get-option-endpoint.php:54
 msgid "You must specify an option_name"
-msgstr "Укажите значение option_name."
+msgstr "Необходимо указать имя_параметра"
 
 #: jetpack_vendor/automattic/jetpack-jitm/src/class-post-connection-jitm.php:341
 msgid "Success!"
@@ -10065,7 +10072,7 @@ msgstr "Ошибка при загрузке профиля"
 
 #: modules/widgets/gravatar-profile.php:155
 msgid "View Full Profile &rarr;"
-msgstr "Посмотреть полный профиль →"
+msgstr "Посмотреть полный профиль →;"
 
 #. translators: %s is a link to the widget settings page.
 #: modules/widgets/gravatar-profile.php:84
@@ -10825,15 +10832,15 @@ msgstr "прошедший день"
 
 #: modules/stats.php:851
 msgid "month"
-msgstr "мес."
+msgstr "месяц"
 
 #: modules/stats.php:850
 msgid "week"
-msgstr "нед."
+msgstr "неделя"
 
 #: modules/stats.php:849
 msgid "day"
-msgstr "дн."
+msgstr "день"
 
 #: modules/stats.php:773
 msgid "Views over 48 hours. Click for more Site Stats."
@@ -11006,7 +11013,7 @@ msgstr "Перетащите доступные сервисы сюда."
 
 #: modules/sharedaddy/sharing.php:417
 msgid "Services dragged here will appear individually."
-msgstr "Перетащенные сюда сервисы будут отображаться по отдельности. "
+msgstr "Перетаскиваемые здесь услуги будут отображаться индивидуально."
 
 #: modules/sharedaddy/sharing.php:414
 msgid "Enabled Services"
@@ -11193,7 +11200,7 @@ msgstr "Послать ссылку другу по электронной по�
 #: modules/sharedaddy/sharing-sources.php:988
 msgctxt "share to"
 msgid "Email"
-msgstr "по электронной почте"
+msgstr "E-mail"
 
 #: extensions/blocks/eventbrite/eventbrite.php:196
 #: modules/wordads/php/class-wordads-california-privacy.php:262
@@ -11457,15 +11464,15 @@ msgstr "Невозможно использовать глобальный фл�
 
 #: modules/protect/shared-functions.php:98
 msgid "Expecting an array"
-msgstr "Ожидается массив."
+msgstr "Ожидание массива"
 
 #: modules/protect/math-fallback.php:165
 msgid "Prove your humanity"
-msgstr "Докажите, что вы человек:"
+msgstr "Докажи, что человек"
 
 #: modules/protect/math-fallback.php:102
 msgid "Continue &rarr;"
-msgstr "Продолжить →"
+msgstr "Продолжить →;"
 
 #: modules/protect/math-fallback.php:96
 msgid "Your answer was incorrect, please try again."
@@ -11648,7 +11655,7 @@ msgstr "Статистика сайта"
 #: modules/module-headings.php:336
 msgctxt "Module Tag"
 msgid "Recommended"
-msgstr "рекомендует"
+msgstr "Рекомендуется"
 
 #: modules/module-headings.php:341
 msgctxt "Module Tag"
@@ -11778,7 +11785,7 @@ msgstr "Отслеживать"
 #: modules/module-headings.php:106
 msgctxt "Module Description"
 msgid "Write posts or pages in plain-text Markdown syntax"
-msgstr "Создавайте записи или страницы в виде неформатированного текста с использованием языка разметки Markdown."
+msgstr "Запись сообщений или страниц в текстовом синтаксисе Markdown"
 
 #: modules/module-headings.php:105
 msgctxt "Module Name"
@@ -12076,7 +12083,7 @@ msgstr "Показывать профили пользователей при н
 
 #: modules/gravatar-hovercards.php:59
 msgid "Gravatar Hovercards"
-msgstr "Всплывающая \"визитка\" "
+msgstr "Всплывающие визитки Gravatar"
 
 #: modules/custom-post-types/testimonial.php:769
 msgid "Your Testimonial Archive currently has no entries. You can start creating them on your dashboard."
@@ -12205,6 +12212,10 @@ msgstr "Ваша тема поддерживает отзывы"
 #: modules/masterbar/masterbar/class-masterbar.php:1186 _inc/build/admin.js:99
 msgid "Testimonials"
 msgstr "Отзывы"
+
+#: modules/custom-post-types/portfolios.php:1021
+msgid "Types:"
+msgstr "Типы:"
 
 #: modules/custom-post-types/portfolios.php:942
 msgid "Your Portfolio Archive currently has no entries. You can start creating them on your dashboard."
@@ -12402,7 +12413,7 @@ msgstr "Проекты"
 #. translators: %1$s is replaced with an input field for numbers
 #: modules/custom-post-types/portfolios.php:187
 msgid "Portfolio pages display at most %1$s projects"
-msgstr "Страницы портфолио отображаются в большинстве проектов %1$s."
+msgstr "Страницы портфолио отображаются в большинстве проектов %1$s"
 
 #: modules/custom-post-types/portfolios.php:176
 msgid "Enable Portfolio Projects for this site."
@@ -12426,7 +12437,7 @@ msgstr "Нет ярлыков"
 #: modules/custom-post-types/nova.php:1489
 msgctxt "Nova label separator"
 msgid ", "
-msgstr ","
+msgstr ", "
 
 #: modules/custom-post-types/nova.php:1315
 msgid "Add These New Menu Items"
@@ -12473,7 +12484,7 @@ msgstr "Без рубрики"
 
 #: modules/custom-post-types/nova.php:1097
 msgid "edit"
-msgstr "Изменить"
+msgstr "изменить"
 
 #: modules/custom-post-types/nova.php:770
 #: modules/custom-post-types/nova.php:860
@@ -13081,7 +13092,7 @@ msgstr "CSS"
 
 #: modules/custom-css/custom-css.php:968
 msgid "Preview: changes must be saved or they will be lost"
-msgstr "Предварительный просмотр: изменения необходимо сохранить, иначе они будут утеряны."
+msgstr "Предварительный просмотр: изменения должны быть сохранены или они будут потеряны"
 
 #: modules/custom-content-types.php:52
 msgid "Use these settings to display different types of content on your site."
@@ -13132,7 +13143,7 @@ msgstr "Сохранить настройки поля"
 #: modules/contact-form/grunion-editor-view.php:269
 #: modules/contact-form/grunion-form-view.php:242
 msgid "Required?"
-msgstr "Обязательное поле"
+msgstr "Обязательно?"
 
 #: modules/contact-form/grunion-form-view.php:235
 msgid "Add another option"
@@ -13277,7 +13288,7 @@ msgstr "(обязательно)"
 
 #: modules/contact-form/grunion-form-view.php:47
 msgid "Saved successfully"
-msgstr "Успешно сохранено."
+msgstr "Успешно сохранено"
 
 #: modules/contact-form/grunion-form-view.php:46
 msgctxt "Link to edit an HTML form field in contact form builder"
@@ -13384,7 +13395,7 @@ msgstr "URL-адрес контактной формы:"
 
 #: modules/contact-form/grunion-contact-form.php:3567
 msgid "IP Address:"
-msgstr "IP-адрес"
+msgstr "IP Адрес:"
 
 #: modules/contact-form/grunion-contact-form.php:3566
 msgid "Time:"
@@ -13834,7 +13845,7 @@ msgstr "Посмотреть в полном размере <span class=\"photo-
 
 #: modules/carousel/jetpack-carousel.php:436
 msgid "Loading Comments..."
-msgstr "Загружаются Комментарии... "
+msgstr "Загружаются Комментарии..."
 
 #: modules/carousel/jetpack-carousel.php:435
 msgid "Write a Comment..."
@@ -13846,7 +13857,7 @@ msgstr "Отправить комментарий"
 
 #: modules/carousel/jetpack-carousel.php:433
 msgid "Comment"
-msgstr "комментарий"
+msgstr "Комментарий"
 
 #: modules/carousel/jetpack-carousel.php:225
 msgid "Jetpack's Carousel has been disabled, because another plugin or your theme is overriding the [gallery] shortcode."
@@ -14026,7 +14037,7 @@ msgstr "Для этого сайта отключен режим полноце�
 
 #: json-endpoints/jetpack/class.jetpack-json-api-endpoint.php:86
 msgid "You must specify a valid action"
-msgstr "Необходимо указать допустимое действие."
+msgstr "Необходимо указать действительное действие"
 
 #: json-endpoints/jetpack/class.jetpack-json-api-check-capabilities-endpoint.php:28
 msgid "You are required to specify a capability to check."
@@ -14352,7 +14363,7 @@ msgstr "Деактивировать"
 
 #: class.jetpack-modules-list-table.php:89
 msgid "Search Modules…"
-msgstr "Поиск модулей..."
+msgstr "Поиск модулей…"
 
 #: class.jetpack-modules-list-table.php:265
 #: modules/carousel/jetpack-carousel.php:689

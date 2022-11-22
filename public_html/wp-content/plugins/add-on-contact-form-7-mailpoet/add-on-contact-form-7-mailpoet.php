@@ -2,14 +2,14 @@
 /**
  * Plugin Name:       Add-on Contact Form 7 - Mailpoet 3
  * Description:       Add a MailPoet 3 signup field to your Contact Form 7 forms.
- * Version:           1.3.19
+ * Version:           1.3.20
  * Author:            Tikweb
- * Author URI:        http://www.tikweb.dk/
+ * Author URI:        http://www.tikweb.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       add-on-contact-form-7-mailpoet
  * Domain Path:       /languages
-*/
+ */
 
 
 /*
@@ -28,11 +28,11 @@ along with Add-on Contact Form 7 - Mailpoet 3 Integration. If not, see http://ww
 */
 
 // If this file is called directly, abort.
-if(!defined( 'WPINC' )){
+if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-if(!defined('ABSPATH')){
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -42,8 +42,11 @@ if(!defined('ABSPATH')){
 
 function acfm_load_text_domain() {
 
-	load_plugin_textdomain( 'add-on-contact-form-7-mailpoet', false,
-		dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	load_plugin_textdomain(
+		'add-on-contact-form-7-mailpoet',
+		false,
+		dirname( plugin_basename( __FILE__ ) ) . '/languages'
+	);
 }
 add_action( 'plugins_loaded', 'acfm_load_text_domain' );
 
@@ -51,46 +54,48 @@ add_action( 'plugins_loaded', 'acfm_load_text_domain' );
 /**
  * Define root path
  */
-if(!defined('MCFI_ROOT_PATH')){
-	$mbh_root = plugin_dir_path(__FILE__);
-	define('MCFI_ROOT_PATH', $mbh_root);
+if ( ! defined( 'MCFI_ROOT_PATH' ) ) {
+	$mbh_root = plugin_dir_path( __FILE__ );
+	define( 'MCFI_ROOT_PATH', $mbh_root );
 }
 
 
 /**
  * If php version is lower
  */
-if(version_compare(phpversion(), '7.0', '<')){
-	function mailpoet_cfi_php_version_notice(){
+if ( version_compare( phpversion(), '7.0', '<' ) ) {
+	function mailpoet_cfi_php_version_notice() {
 		?>
 		<div class="error">
-			<p><?php _e('Add-on Contact Form 7 - Mailpoet 3 Integration plugin requires PHP version 7.0 or newer, Please upgrade your PHP.', 'add-on-contact-form-7-mailpoet'); ?></p>
+			<p><?php _e( 'Add-on Contact Form 7 - Mailpoet 3 Integration plugin requires PHP version 7.0 or newer, Please upgrade your PHP.', 'add-on-contact-form-7-mailpoet' ); ?></p>
 		</div>
 		<?php
 	}
-	add_action('admin_notices', 'mailpoet_cfi_php_version_notice');
+	add_action( 'admin_notices', 'mailpoet_cfi_php_version_notice' );
 	return;
 }
 
 /**
  * Include plugin.php to detect plugin.
  */
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 /**
  * Check MailPoet active
  * Prerequisite
  */
-if(!is_plugin_active('mailpoet/mailpoet.php')){
-	add_action('admin_notices', function(){
-		?>
+if ( ! is_plugin_active( 'mailpoet/mailpoet.php' ) ) {
+	add_action(
+		'admin_notices',
+		function() {
+			?>
 		<div class="error">
 			<p>
 			<?php
-				$name = 'Add-on Contact Form 7 - Mailpoet 3 Integration';
+				$name    = 'Add-on Contact Form 7 - Mailpoet 3 Integration';
 				$mp_link = '<a href="https://wordpress.org/plugins/mailpoet/" target="_blank">MailPoet</a>';
 				printf(
-					__('%s plugin requires %s plugin, Please activate %s first to using %s.', 'add-on-contact-form-7-mailpoet'),
+					__( '%1$s plugin requires %2$s plugin, Please activate %3$s first to using %4$s.', 'add-on-contact-form-7-mailpoet' ),
 					$name,
 					$mp_link,
 					$mp_link,
@@ -99,9 +104,10 @@ if(!is_plugin_active('mailpoet/mailpoet.php')){
 			?>
 			</p>
 		</div>
-		<?php
-	});
-	return;	// If not then return
+			<?php
+		}
+	);
+	return; // If not then return
 }
 
 
@@ -109,16 +115,18 @@ if(!is_plugin_active('mailpoet/mailpoet.php')){
  * Check Contact Form 7 active
  * Prerequisite
  */
-if(!is_plugin_active('contact-form-7/wp-contact-form-7.php')){
-	add_action('admin_notices', function(){
-		?>
+if ( ! is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
+	add_action(
+		'admin_notices',
+		function() {
+			?>
 		<div class="error">
 			<p>
 			<?php
-				$name = 'Add-on Contact Form 7 - Mailpoet 3 Integration';
+				$name     = 'Add-on Contact Form 7 - Mailpoet 3 Integration';
 				$cf7_link = '<a href="https://wordpress.org/plugins/contact-form-7/" target="_blank">Contact Form 7</a>';
 				printf(
-					__('%s plugin requires %s plugin, Please activate %s first to using %s.', 'add-on-contact-form-7-mailpoet'),
+					__( '%1$s plugin requires %2$s plugin, Please activate %3$s first to using %4$s.', 'add-on-contact-form-7-mailpoet' ),
 					$name,
 					$cf7_link,
 					$cf7_link,
@@ -127,9 +135,10 @@ if(!is_plugin_active('contact-form-7/wp-contact-form-7.php')){
 			?>
 			</p>
 		</div>
-		<?php
-	});
-	return;	// If not then return
+			<?php
+		}
+	);
+	return; // If not then return
 }
 
 /**
