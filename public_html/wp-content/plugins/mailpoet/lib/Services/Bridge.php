@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
 
 namespace MailPoet\Services;
 
@@ -104,12 +104,16 @@ class Bridge {
     return $wp->wpRemoteRetrieveResponseCode($result) === 200;
   }
 
+  /**
+   * @return API
+   */
   public function initApi($apiKey) {
-    if ($this->api) {
+    if ($this->api instanceof API) {
       $this->api->setKey($apiKey);
     } else {
       $this->api = new Bridge\API($apiKey);
     }
+    return $this->api;
   }
 
   /**
@@ -117,9 +121,7 @@ class Bridge {
    * @return API
    */
   public function getApi($key) {
-    $this->initApi($key);
-    assert($this->api instanceof API);
-    return $this->api;
+    return $this->initApi($key);
   }
 
   public function getAuthorizedEmailAddresses($type = 'authorized'): array {

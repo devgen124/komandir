@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Plugin Name: Checkout Fields Manager for WooCommerce
+ * Plugin Name: WooCommerce Checkout Manager
  * Plugin URI:  https://quadlayers.com/portfolio/woocommerce-checkout-manager/
  * Description: Manage and customize WooCommerce Checkout fields (Add, Edit, Delete or re-order fields).
- * Version:     6.3.5
+ * Version:     6.4.1
  * Author:      QuadLayers
  * Author URI:  https://quadlayers.com
  * License: GPLv3
  * Text Domain: woocommerce-checkout-manager
  * WC requires at least: 3.1.0
- * WC tested up to: 7.0
+ * WC tested up to: 7.2
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
-define( 'WOOCCM_PLUGIN_NAME', 'Checkout Fields Manager for WooCommerce' );
-define( 'WOOCCM_PLUGIN_VERSION', '6.3.5' );
+define( 'WOOCCM_PLUGIN_NAME', 'WooCommerce Checkout Manager' );
+define( 'WOOCCM_PLUGIN_VERSION', '6.4.1' );
 define( 'WOOCCM_PLUGIN_FILE', __FILE__ );
 define( 'WOOCCM_PLUGIN_DIR', __DIR__ . DIRECTORY_SEPARATOR );
 define( 'WOOCCM_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );

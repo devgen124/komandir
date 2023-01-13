@@ -7,13 +7,6 @@
  */
 class WtGtAdmin extends WtGtAdminBehavior
 {
-	var $geobase_array = array(
-        'sypexgeo_service' => 'Sypex Geo',
-        'dadata_service' => 'DaData',
-		'maxmind_service' => 'MaxMind',
-        'none' => 'Отключить'
-	);
-
     var $geobase_sipexgeo_servers = array(
         'api.sypexgeo.net' => 'Автовыбор сервера (GeoDNS)',
         'ua.sxgeo.city' => 'Украина, Хмельницкий',
@@ -162,7 +155,7 @@ class WtGtAdmin extends WtGtAdminBehavior
 			'id'        => 'base_name',
 			'option_name' => 'wt_geotargeting_geobase',
 			'label_for' => 'base_name',
-			'vals'		=> $this->geobase_array,
+			'vals'		=> WtGeolocation::$services,
 			'desc'      => 'Выберите сервис для определения месторасположения посетителя сайта'
 		);
 		add_settings_field('base_name', 'Сервис геолокации', array(&$this, 'displaySettings'), 'wt_geotargeting_geobase_page', 'wt_geotargeting_geobase', $field_params);

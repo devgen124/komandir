@@ -9,8 +9,9 @@ class WOOCCM_Admin_Links {
 	}
 
 	public function add_action_links( $links ) {
+		$links[] = '<a target="_blank" href="' . WOOCCM_PREMIUM_SELL_URL . '">' . esc_html__( 'Premium', 'woocommerce-checkout-manager' ) . '</a>';
 		$links[] = '<a target="_blank" href="' . WOOCCM_DEMO_URL . '">' . esc_html__( 'Documentation', 'woocommerce-checkout-manager' ) . '</a>';
-		$links[] = '<a target="_blank" href="' . WOOCCM_SUPPORT_URL . '">' . esc_html__( 'Support', 'woocommerce-checkout-manager' ) . '</a>';
+		$links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=' . sanitize_title( WOOCCM_PREFIX ) ) . '">' . esc_html__( 'Settings', 'woocommerce-checkout-manager' ) . '</a>';
 		return $links;
 	}
 

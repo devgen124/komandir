@@ -6,17 +6,17 @@ class WOOCCM_Fields_Display {
 	protected static $_instance;
 
 	public function __construct() {
-		 // Remove by product
-		add_filter( 'wooccm_checkout_field_filter', array( $this, 'disable_by_product' ) );
-		// Remove by category
-		add_filter( 'wooccm_checkout_field_filter', array( $this, 'disable_by_category' ) );
-		// Remove by role
-		add_filter( 'wooccm_checkout_field_filter', array( $this, 'disable_by_role' ) );
 		// Fix country
 		add_filter( 'wooccm_checkout_field_filter', array( $this, 'fix_country' ) );
 		// Fix email
 		// make sure guest users include their email in order to download products
 		add_filter( 'wooccm_checkout_field_filter', array( $this, 'fix_email' ) );
+		// Remove by product
+		add_filter( 'wooccm_checkout_field_filter', array( $this, 'disable_by_product' ), 20 );
+		// Remove by category
+		add_filter( 'wooccm_checkout_field_filter', array( $this, 'disable_by_category' ), 30 );
+		// Remove by role
+		add_filter( 'wooccm_checkout_field_filter', array( $this, 'disable_by_role' ), 40 );
 	}
 
 	public static function instance() {
@@ -30,8 +30,11 @@ class WOOCCM_Fields_Display {
 		if ( $field['type'] == 'country' && $field['disabled'] == true ) {
 			$field['disabled'] = false;
 			$field['required'] = false;
-			$field['type']     = 'hidden';
-			// $field['class'] = array('hidden');
+			/**
+			 * Fix:Preserve the select field to allow state selection based on default store country
+			 * $field['type']     = 'hidden';
+			 */
+			$field['class'] = array( 'wooccm-type-hidden' );
 		}
 
 		return $field;

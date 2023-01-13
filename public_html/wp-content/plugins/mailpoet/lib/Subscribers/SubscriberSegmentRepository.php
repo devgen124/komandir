@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
 
 namespace MailPoet\Subscribers;
 
@@ -91,13 +91,18 @@ class SubscriberSegmentRepository extends Repository {
   /**
    * @param SegmentEntity[] $segments
    */
-  public function subscribeToSegments(SubscriberEntity $subscriber, array $segments): void {
+  public function subscribeToSegments(SubscriberEntity $subscriber, array $segments, bool $skipHooks = false): void {
     foreach ($segments as $segment) {
-      $this->createOrUpdate($subscriber, $segment, SubscriberEntity::STATUS_SUBSCRIBED);
+      $this->createOrUpdate($subscriber, $segment, SubscriberEntity::STATUS_SUBSCRIBED, $skipHooks);
     }
   }
 
-  public function createOrUpdate(SubscriberEntity $subscriber, SegmentEntity $segment, string $status): SubscriberSegmentEntity {
+  public function createOrUpdate(
+    SubscriberEntity $subscriber,
+    SegmentEntity $segment,
+    string $status,
+    bool $skipHooks = false
+  ): SubscriberSegmentEntity {
     $subscriberSegment = $this->findOneBy(['segment' => $segment, 'subscriber' => $subscriber]);
 
     $oldStatus = null;
@@ -112,7 +117,8 @@ class SubscriberSegmentRepository extends Repository {
 
     // fire subscribed hook for new subscriptions
     if (
-      $subscriber->getStatus() === SubscriberEntity::STATUS_SUBSCRIBED
+      !$skipHooks
+      && $subscriber->getStatus() === SubscriberEntity::STATUS_SUBSCRIBED
       && $subscriberSegment->getStatus() === SubscriberEntity::STATUS_SUBSCRIBED
       && $oldStatus !== SubscriberEntity::STATUS_SUBSCRIBED
     ) {

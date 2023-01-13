@@ -26,7 +26,7 @@
                                 <b><a href="https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Быстрый старт</a></b> — первые шаги настройки геотаргетинга.
                             </p>
 							<p>
-								На официальном сайте есть возможность приобрести расширенную версию плагина. <a href="https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Подробнее на странице плагина</a>.
+								На официальном сайте есть возможность бесплатно попробовать <b>расширенную PRO версию</b> плагина. <a href="https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting-pro?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Подробнее на странице плагина</a>.
 							</p>
 							<h3><span style="color: red;"><?php esc_attr_e('Внимание!!!', 'wp_admin_style'); ?></span></h3>
 							<p>
@@ -34,18 +34,18 @@
 							</p>
 							<h3><span><?php esc_attr_e( 'Информация:', 'wp_admin_style' ); ?></span></h3>
 							<p>
-								<a href="https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Официальная страница плагина</a><br>
+								<a href="https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting-pro/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Официальная страница плагина</a><br>
 								<a href="https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting-for-cms-wordpress/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Документация</a><br>
 								<a href="https://wordpress.org/plugins/wt-geotargeting" target="_blank">Страница плагина на WordPress.org</a><br>
 								<a href="https://vk.com/topic-40886935_33381010" target="_blank">Тема Вконтакте для обсуждения плагина</a><br>
 							</p>
                             <h3><span><?php esc_attr_e( 'Полезные статьи:', 'wp_admin_style' ); ?></span></h3>
                             <p>
-                                <a href="https://romankusty.ru/blog/geotargeting-odin-sajt-dlya-vseh-gorodov/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Геотаргетинг — один сайт для всех городов!</a> - вводная статья о геотаргетинге.<br>
+                                <a href="https://web-technology.biz/blog/geotargeting-odin-sajt-dlya-vseh-gorodov/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Геотаргетинг — один сайт для всех городов!</a> - вводная статья о геотаргетинге.<br>
                                 <a href="https://web-technology.biz/primenenie-geotargetinga-na-sajte/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Применение геотаргетинга на сайте</a> - статья о юзабилити сайта с геотаргетингом.<br>
-                                <a href="https://romankusty.ru/blog/chek-list-nastrojka-geotargetinga-na-sajte/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Чек-лист «Настройка геотаргетинга на сайте»</a><br>
-                                Кейс: <a href="https://web-technology.biz/portfolio/nastrojka-geotargetinga-na-sajte-minmaks-case/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Настройка геотаргетинга на сайте обучающей компании «МинМакс»</a><br>
-                                Кейс: <a href="https://web-technology.biz/portfolio/razrabotka-novogo-sajta-megaxend/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Разработка нового сайта «Мегахенд» с геотаргетингом</a><br>
+                                <a href="https://web-technology.biz/blog/chek-list-nastrojka-geotargetinga-na-sajte/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Чек-лист «Настройка геотаргетинга на сайте»</a><br>
+                                <b>Кейс:</b> <a href="https://web-technology.biz/portfolio/nastrojka-geotargetinga-na-sajte-minmaks-case/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Настройка геотаргетинга на сайте обучающей компании «МинМакс»</a><br>
+                                    <b>Кейс:</b> <a href="https://web-technology.biz/portfolio/razrabotka-novogo-sajta-megaxend/?utm_source=plugin-wt-geotargeting&utm_medium=info" target="_blank">Разработка нового сайта «Мегахенд» с геотаргетингом</a><br>
                             </p>
 						</div>
 

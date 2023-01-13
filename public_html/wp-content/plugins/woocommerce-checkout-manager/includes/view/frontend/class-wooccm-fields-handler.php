@@ -203,6 +203,26 @@ class WOOCCM_Fields_Handler {
 			}
 		}
 
+		// Text
+		if ( $field['type'] == 'text' ) {
+			if ( $field['validate_regex'] ) {
+				$field['custom_attributes']['validate_regex'] = $field['validate_regex'];
+			}
+		}
+
+		// File
+		if ( $field['type'] == 'file' ) {
+			if ( $field['file_limit'] ) {
+				$field['custom_attributes']['data-file-limit'] = absint( $field['file_limit'] );
+			}
+			if ( $field['file_types'] ) {
+				$field['custom_attributes']['data-file-types'] = htmlentities( json_encode( $field['file_types'] ) );
+			}
+			if ( $field['file_max_size'] ) {
+				$field['custom_attributes']['data-file-max-size'] = absint( $field['file_max_size'] );
+			}
+		}
+
 		return $field;
 	}
 

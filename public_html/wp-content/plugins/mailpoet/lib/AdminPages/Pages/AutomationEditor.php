@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace MailPoet\AdminPages\Pages;
 
@@ -91,6 +91,9 @@ class AutomationEditor {
       'api' => [
         'root' => rtrim($this->wp->escUrlRaw($this->wp->restUrl()), '/'),
         'nonce' => $this->wp->wpCreateNonce('wp_rest'),
+      ],
+      'jsonapi' => [
+        'root' => rtrim($this->wp->escUrlRaw(admin_url('admin-ajax.php')), '/'),
       ],
       'user_roles' => $roles->get_names(),
       'segments' => $segments,

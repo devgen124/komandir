@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
 
 namespace MailPoet\Analytics;
 
@@ -34,6 +34,7 @@ use MailPoet\Services\AuthorizedEmailsController;
 use MailPoet\Settings\Pages;
 use MailPoet\Settings\SettingsController;
 use MailPoet\Settings\TrackingConfig;
+use MailPoet\Subscribers\ConfirmationEmailCustomizer;
 use MailPoet\Subscribers\NewSubscriberNotificationMailer;
 use MailPoet\Subscribers\SubscriberListingRepository;
 use MailPoet\Tags\TagRepository;
@@ -79,6 +80,9 @@ class Reporter {
   /** @var AutomationStorage  */
   private $automationStorage;
 
+  /*** @var UnsubscribeReporter */
+  private $unsubscribeReporter;
+
   public function __construct(
     NewslettersRepository $newslettersRepository,
     SegmentsRepository $segmentsRepository,
@@ -91,7 +95,8 @@ class Reporter {
     SubscribersFeature $subscribersFeature,
     TrackingConfig $trackingConfig,
     SubscriberListingRepository $subscriberListingRepository,
-    AutomationStorage $automationStorage
+    AutomationStorage $automationStorage,
+    UnsubscribeReporter $unsubscribeReporter
   ) {
     $this->newslettersRepository = $newslettersRepository;
     $this->segmentsRepository = $segmentsRepository;
@@ -105,6 +110,7 @@ class Reporter {
     $this->trackingConfig = $trackingConfig;
     $this->subscriberListingRepository = $subscriberListingRepository;
     $this->automationStorage = $automationStorage;
+    $this->unsubscribeReporter = $unsubscribeReporter;
   }
 
   public function getData() {
@@ -202,12 +208,14 @@ class Reporter {
       'Number of segments with multiple conditions' => $this->segmentsRepository->getSegmentCountWithMultipleFilters(),
       'Support tier' => $this->subscribersFeature->hasPremiumSupport() ? 'premium' : 'free',
       'Unauthorized email notice shown' => !empty($this->settings->get(AuthorizedEmailsController::AUTHORIZED_EMAIL_ADDRESSES_ERROR_SETTING)),
+      'Sign-up confirmation: Confirmation Template > using html email editor template' => (boolean)$this->settings->get(ConfirmationEmailCustomizer::SETTING_ENABLE_EMAIL_CUSTOMIZER, false),
     ];
 
     $result = array_merge(
       $result,
       $this->subscriberProperties(),
-      $this->automationProperties()
+      $this->automationProperties(),
+      $this->unsubscribeReporter->getProperties()
     );
     if ($hasWc) {
       $result['WooCommerce version'] = $woocommerce->version;
