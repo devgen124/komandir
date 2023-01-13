@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
 
 namespace MailPoet\API\JSON\v1;
 
@@ -129,7 +129,7 @@ class Services extends APIEndpoint {
     }
 
     if ($successMessage) {
-      return $this->successResponse(['message' => $successMessage]);
+      return $this->successResponse(['message' => $successMessage, 'state' => $state]);
     }
 
     switch ($state) {

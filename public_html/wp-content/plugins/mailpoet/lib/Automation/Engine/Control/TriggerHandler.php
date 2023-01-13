@@ -66,7 +66,7 @@ class TriggerHandler {
 
       $automationRun = new AutomationRun($automation->getId(), $automation->getVersionId(), $trigger->getKey(), $subjects);
       if (!$trigger->isTriggeredBy(new StepRunArgs($automation, $automationRun, $step, $subjectEntries))) {
-        return;
+        continue;
       }
 
       $automationRunId = $this->automationRunStorage->createAutomationRun($automationRun);

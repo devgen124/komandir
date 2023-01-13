@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
 
 namespace MailPoet\Config;
 
@@ -117,6 +117,8 @@ class Initializer {
   private $actionSchedulerRunner;
 
   const INITIALIZED = 'MAILPOET_INITIALIZED';
+
+  const PLUGIN_ACTIVATED = 'mailpoet_plugin_activated';
 
   public function __construct(
     RendererFactory $rendererFactory,
@@ -256,11 +258,17 @@ class Initializer {
       'register',
     ]);
 
+    WPFunctions::get()->addAction('admin_init', [
+      $this,
+      'afterPluginActivation',
+    ]);
+
     $this->hooks->initEarlyHooks();
   }
 
   public function runActivator() {
     try {
+      $this->wpFunctions->addOption(self::PLUGIN_ACTIVATED, true); // used in afterPluginActivation
       $this->activator->activate();
     } catch (InvalidStateException $e) {
       return $this->handleRunningMigration($e);
@@ -320,6 +328,22 @@ class Initializer {
     }
 
     define(self::INITIALIZED, true);
+  }
+
+  /**
+   * Walk around for getting this to work correctly
+   *
+   * Read more here: https://developer.wordpress.org/reference/functions/register_activation_hook/
+   * and https://github.com/mailpoet/mailpoet/pull/4620#discussion_r1058210174
+   * @return void
+   */
+  public function afterPluginActivation() {
+    if (!$this->wpFunctions->isAdmin() || !defined(self::INITIALIZED) || !$this->wpFunctions->getOption(self::PLUGIN_ACTIVATED)) return;
+
+    $this->changelog->redirectToLandingPage();
+
+    // done with afterPluginActivation actions
+    $this->wpFunctions->deleteOption(self::PLUGIN_ACTIVATED);
   }
 
   public function maybeDbUpdate() {

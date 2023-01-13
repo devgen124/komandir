@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
 
 namespace MailPoet\WP;
 
@@ -121,6 +121,10 @@ class Functions {
 
   public function deleteCommentMeta($commentId, $metaKey, $metaValue = '') {
     return delete_comment_meta($commentId, $metaKey, $metaValue);
+  }
+
+  public function addOption($option, $value) {
+    return add_option($option, $value);
   }
 
   public function deleteOption($option) {

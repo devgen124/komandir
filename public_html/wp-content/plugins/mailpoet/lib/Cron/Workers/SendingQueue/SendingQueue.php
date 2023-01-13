@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
 
 namespace MailPoet\Cron\Workers\SendingQueue;
 
@@ -15,7 +15,6 @@ use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\ScheduledTaskEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Logging\LoggerFactory;
-use MailPoet\Mailer\MailerError;
 use MailPoet\Mailer\MailerLog;
 use MailPoet\Mailer\MetaInfo;
 use MailPoet\Models\Newsletter;
@@ -426,7 +425,6 @@ class SendingQueue {
     // log error message and schedule retry/pause sending
     if ($sendResult['response'] === false) {
       $error = $sendResult['error'];
-      assert($error instanceof MailerError);
       $this->errorHandler->processError($error, $sendingTask, $preparedSubscribersIds, $preparedSubscribers);
     } elseif (!$sendingTask->updateProcessedSubscribers($preparedSubscribersIds)) { // update processed/to process list
       MailerLog::processError(

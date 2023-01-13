@@ -157,8 +157,8 @@ class MSP_Admin_Assets {
       $msp_preset_effect = empty( $msp_preset_effect ) ? '' : $msp_preset_effect;
       $msp_buttons_style = empty( $msp_buttons_style ) ? '' : $msp_buttons_style;
 
-      
-      wp_add_inline_script( $this->panel_js_handler, 'var __MSP_DATA = "' . $msp_data . '";');
+
+      wp_add_inline_script( $this->panel_js_handler, 'var __MSP_DATA = ' . $msp_data );
       wp_add_inline_script( $this->panel_js_handler, 'var __MSP_PRESET_STYLE = "' . $msp_preset_style . '";');
       wp_add_inline_script( $this->panel_js_handler, 'var __MSP_PRESET_EFFECT = "' . $msp_preset_effect . '";');
       wp_add_inline_script( $this->panel_js_handler, 'var __MSP_TYPE = "' . $slider_type . '";' );

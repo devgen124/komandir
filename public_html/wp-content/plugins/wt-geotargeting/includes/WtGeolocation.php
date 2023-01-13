@@ -17,6 +17,7 @@ class WtGeolocation
     public $error_text = '';
 
     static $services = array(
+        'ip_api_service' => 'IP Geolocation API',
         'sypexgeo_service' => 'Sypex Geo',
         'dadata_service' => 'DaData',
         'maxmind_service' => 'MaxMind',
@@ -29,7 +30,7 @@ class WtGeolocation
      * @var array Настройки
      */
     public $options = array(
-        'base_name' => 'sypexgeo_service',
+        'base_name' => 'ip_api_service',
         'sypexgeo_server' => 'api.sypexgeo.net',
         'sypexgeo_api_key' => null,
         'maxmind_language' => array('ru')
@@ -134,7 +135,6 @@ class WtGeolocation
 
     /**
      * Очистка значений cookie
-     * 23.01.2017
      */
     function cleanCookie(){
         setcookie('wt_geo_data', '', time()-3600, '/');
@@ -143,7 +143,6 @@ class WtGeolocation
 
     /**
      * Обновить геоданные
-     * 24.01.2017
      */
     function reloadData(){
         if ($this->cookie && !empty($_COOKIE['wt_geo_data'])){
@@ -173,7 +172,6 @@ class WtGeolocation
 
     /**
      * Получить данные о месторасположении по ip
-     * 24.01.2016
      *
      * @return array - возвращает массив с данными
      */
@@ -262,12 +260,40 @@ class WtGeolocation
             if (!empty($record->location->longitude)) $data['lng'] = $record->location->longitude;
 
             return $data;
+        }elseif ($base_name == 'ip_api_service')
+        {
+            $service = new IpApiCom();
+            $service->ip = $this->ip;
+            $data_service = $service->getData();
+
+            if ($service->error){
+                $this->error_text .= ' Ошибка при обращении к сервису IP Geolocation API';
+                if (!empty($service->error_text)) $this->error_text .= ' - ' . $service->error_text;
+                add_action('admin_notices', array($this, 'noticeError'));
+            }
+
+            $data = array(
+                'country' => null,
+                'district' => null,
+                'region' => null,
+                'city' => null,
+                'lat' => null,
+                'lng' => null
+            );
+
+            if (!empty($data_service['country'])) $data['country'] = $data_service['country'];
+            if (!empty($data_service['district'])) $data['district'] = $data_service['district'];
+            if (!empty($data_service['regionName'])) $data['region'] = $data_service['regionName'];
+            if (!empty($data_service['city'])) $data['city'] = $data_service['city'];
+            if (!empty($data_service['lat'])) $data['lat'] = $data_service['lat'];
+            if (!empty($data_service['lon'])) $data['lng'] = $data_service['lon'];
+
+            return $data;
         }
     }
 
     /**
      * Получить текущие геоданные
-     * 24.01.2017
      *
      * @return string|array
      */
@@ -277,7 +303,6 @@ class WtGeolocation
 
     /**
      * Получить текущее значение
-     * 24.01.2017
      *
      * @param $key
      * @return null
@@ -289,7 +314,6 @@ class WtGeolocation
 
     /**
      * Присвоить новое значение
-     * 24.01.2017
      *
      * @param $key
      * @param null $value
@@ -305,7 +329,6 @@ class WtGeolocation
 
     /**
      * Сохранить массив значений
-     * 24.01.2017
      *
      * @param array $data
      */
@@ -320,7 +343,6 @@ class WtGeolocation
 
     /**
      * Проверка, является ли посетитель роботом поисковой системы / https://toster.ru/q/190331
-     * 01.02.2017
      *
      * @param string $botname
      * @return bool

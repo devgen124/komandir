@@ -3,7 +3,7 @@
 Plugin Name: WT Geotargeting
 Plugin URI: https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting
 Description: Набор инструментов для настройки геотаргетинга.
-Version: 1.8.2
+Version: 1.9
 Author: Кусты Роман, АИТ "WebTechnology"
 Author URI: https://web-technology.biz
 */
@@ -16,11 +16,12 @@ require_once(WT_GT_PRO_PLUGIN_DIR . '/vendor/autoload.php');
 
 include(WT_GT_PRO_PLUGIN_DIR . '/includes/DaData.php');	// Класс для работы с DaData
 include(WT_GT_PRO_PLUGIN_DIR . '/includes/SypexGeo.php');	// Класс для работы с SypexGeo
+include(WT_GT_PRO_PLUGIN_DIR . '/includes/IpApiCom.php');	// Класс для работы с IP Geolocation API
 
 include(WT_GT_PRO_PLUGIN_DIR . '/includes/WtKit.php');      // Статический класс и набор инструментов
 include(WT_GT_PRO_PLUGIN_DIR . '/includes/wt_data_files.php');
 
-require(WT_GT_PRO_PLUGIN_DIR . '/includes/wt_gt_admin_behavior.php');
+require(WT_GT_PRO_PLUGIN_DIR . '/includes/WtGtAdminBehavior.php');
 
 include(WT_GT_PRO_PLUGIN_DIR . '/includes/WtInitialization.php'); // Настройка библиотек
 include(WT_GT_PRO_PLUGIN_DIR . '/includes/WtGeolocation.php');		// Оболочка для работы с Web-сервисами

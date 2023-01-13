@@ -49,7 +49,7 @@ class WOOCCM_Fields_Conditional {
 			}
 
 			$form_action = WOOCCM_Field_Helpers::get_form_action();
-			
+
 			switch ( $form_action ) {
 				case 'account':
 				case 'save':

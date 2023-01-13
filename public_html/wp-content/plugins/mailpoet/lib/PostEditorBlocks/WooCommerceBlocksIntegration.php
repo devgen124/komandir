@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace MailPoet\PostEditorBlocks;
 
@@ -123,7 +123,7 @@ class WooCommerceBlocksIntegration {
           return [
             'optin' => [
               'description' => __('Subscribe to marketing opt-in.', 'mailpoet'),
-              'type' => 'boolean',
+              'type' => ['boolean', 'null'],
             ],
           ];
         },

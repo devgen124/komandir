@@ -58,13 +58,6 @@ final class WOOCCM {
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'wooccm_upload' ),
-				'limit'    => array(
-					'max_file_size' => wp_max_upload_size(),
-					'max_files'     => 4,
-			// 'mime_types' => $this->get_mime_types(),
-				),
-				// 'ajax_url' => admin_url( 'admin-ajax.php?metabox=' . is_admin() ),
-				// 'nonce'    => wp_create_nonce( 'wooccm_upload' ),
 				'icons'    => array(
 					'interactive' => site_url( 'wp-includes/images/media/interactive.png' ),
 					'spreadsheet' => site_url( 'wp-includes/images/media/spreadsheet.png' ),

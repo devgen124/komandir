@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
 
 namespace MailPoet\Config;
 
@@ -31,7 +31,8 @@ use MailPoet\Settings\SettingsController;
 use MailPoet\Settings\UserFlagsRepository;
 use MailPoet\Subscribers\NewSubscriberNotificationMailer;
 use MailPoet\Subscribers\Source;
-use MailPoet\Subscription\Captcha;
+use MailPoet\Subscription\Captcha\CaptchaConstants;
+use MailPoet\Subscription\Captcha\CaptchaRenderer;
 use MailPoet\Util\Helpers;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Carbon\Carbon;
@@ -45,8 +46,8 @@ class Populator {
   private $settings;
   /** @var WPFunctions */
   private $wp;
-  /** @var Captcha */
-  private $captcha;
+  /** @var CaptchaRenderer */
+  private $captchaRenderer;
   /** @var ReferralDetector  */
   private $referralDetector;
   const TEMPLATES_NAMESPACE = '\MailPoet\Config\PopulatorData\Templates\\';
@@ -62,7 +63,7 @@ class Populator {
   public function __construct(
     SettingsController $settings,
     WPFunctions $wp,
-    Captcha $captcha,
+    CaptchaRenderer $captchaRenderer,
     ReferralDetector $referralDetector,
     EntityManager $entityManager,
     WP $wpSegment,
@@ -71,7 +72,7 @@ class Populator {
   ) {
     $this->settings = $settings;
     $this->wp = $wp;
-    $this->captcha = $captcha;
+    $this->captchaRenderer = $captchaRenderer;
     $this->wpSegment = $wpSegment;
     $this->referralDetector = $referralDetector;
     $this->prefix = Env::$dbPrefix;
@@ -262,11 +263,11 @@ class Populator {
     $captcha = $this->settings->fetch('captcha');
     $reCaptcha = $this->settings->fetch('re_captcha');
     if (empty($captcha)) {
-      $captchaType = Captcha::TYPE_DISABLED;
+      $captchaType = CaptchaConstants::TYPE_DISABLED;
       if (!empty($reCaptcha['enabled'])) {
-        $captchaType = Captcha::TYPE_RECAPTCHA;
-      } elseif ($this->captcha->isSupported()) {
-        $captchaType = Captcha::TYPE_BUILTIN;
+        $captchaType = CaptchaConstants::TYPE_RECAPTCHA;
+      } elseif ($this->captchaRenderer->isSupported()) {
+        $captchaType = CaptchaConstants::TYPE_BUILTIN;
       }
       $this->settings->set('captcha', [
         'type' => $captchaType,

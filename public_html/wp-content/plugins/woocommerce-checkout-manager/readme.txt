@@ -5,9 +5,9 @@ Tags: checkout field editor, woocommerce checkout field editor, checkout manager
 Requires at least: 4.9
 Tested up to: 6.1
 Requires PHP: 5.6
-Stable tag: 6.3.5
+Stable tag: 6.4.1
 WC requires at least: 3.1.0
-WC tested up to: 7.0
+WC tested up to: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -148,6 +148,27 @@ Your Order data can be reviewed in each order within the default WooCommerce Ord
 10. Handle uploaded files in order admin dashboard.
 
 == Changelog ==
+
+=  6.4.1
+* Fix. State field type disabled
+* Fix. State field select when country field is disabled
+
+=  6.4.0
+* New. Settings link
+
+=  6.3.9
+* New. Settings link
+
+=  6.3.8
+* New. Regex validation for premium version
+
+=  6.3.7
+* Fix. WooCommerce order video upload
+* Fix. WooCommerce order upload
+* New. WooCommerce order uploaded files icons
+
+=  6.3.6
+* Fix. Premium Compatibility
 
 =  6.3.5
 * Fix. WordPress Compatibility

@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
 
 namespace MailPoet\DI;
 
@@ -41,6 +41,7 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\AdminPages\Pages\FormEditor::class)->setPublic(true);
     $container->autowire(\MailPoet\AdminPages\Pages\Forms::class)->setPublic(true);
     $container->autowire(\MailPoet\AdminPages\Pages\Help::class)->setPublic(true);
+    $container->autowire(\MailPoet\AdminPages\Pages\Homepage::class)->setPublic(true);
     $container->autowire(\MailPoet\AdminPages\Pages\Logs::class)->setPublic(true);
     $container->autowire(\MailPoet\AdminPages\Pages\NewsletterEditor::class)->setPublic(true);
     $container->autowire(\MailPoet\AdminPages\Pages\Newsletters::class)->setPublic(true);
@@ -52,9 +53,11 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\AdminPages\Pages\SubscribersImport::class)->setPublic(true);
     $container->autowire(\MailPoet\AdminPages\Pages\WelcomeWizard::class)->setPublic(true);
     $container->autowire(\MailPoet\AdminPages\Pages\WooCommerceSetup::class)->setPublic(true);
+    $container->autowire(\MailPoet\AdminPages\Pages\Landingpage::class)->setPublic(true);
     // Analytics
     $container->autowire(\MailPoet\Analytics\Analytics::class)->setPublic(true);
     $container->autowire(\MailPoet\Analytics\Reporter::class)->setPublic(true);
+    $container->autowire(\MailPoet\Analytics\UnsubscribeReporter::class)->setPublic(true);
     // API
     $container->autowire(\MailPoet\API\JSON\API::class)
       ->addArgument(new Reference(ContainerWrapper::class))
@@ -74,6 +77,7 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\API\JSON\v1\Forms::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\ImportExport::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\Mailer::class)->setPublic(true);
+    $container->autowire(\MailPoet\API\JSON\v1\Tags::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\Newsletters::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\NewsletterLinks::class)->setPublic(true);
     $container->autowire(\MailPoet\API\JSON\v1\NewsletterTemplates::class)->setPublic(true);
@@ -307,7 +311,7 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\Listing\Handler::class)->setPublic(true);
     $container->autowire(\MailPoet\Listing\PageLimit::class)->setPublic(true);
     // Logging
-    $container->autowire(\MailPoet\Logging\LoggerFactory::class);
+    $container->autowire(\MailPoet\Logging\LoggerFactory::class)->setPublic(true);
     $container->autowire(\MailPoet\Logging\LogRepository::class)->setPublic(true);
     // Notices
     $container->autowire(\MailPoet\Util\Notices\PermanentNotices::class);
@@ -366,6 +370,7 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\Subscribers\ImportExport\PersonalDataExporters\NewsletterClicksExporter::class)->setPublic(true);
     $container->autowire(\MailPoet\Subscribers\Statistics\SubscriberStatisticsRepository::class);
     $container->autowire(\MailPoet\Subscribers\SubscribersCountsController::class)->setPublic(true);
+    $container->autowire(\MailPoet\Subscribers\ConfirmationEmailCustomizer::class)->setPublic(true);
     // Segments
     $container->autowire(\MailPoet\Segments\WooCommerce::class)->setPublic(true);
     $container->autowire(\MailPoet\Segments\WP::class)->setPublic(true);
@@ -412,9 +417,13 @@ class ContainerConfigurator implements IContainerConfigurator {
     $container->autowire(\MailPoet\Settings\UserFlagsController::class);
     $container->autowire(\MailPoet\Settings\UserFlagsRepository::class)->setPublic(true);
     // Subscription
-    $container->autowire(\MailPoet\Subscription\Captcha::class)->setPublic(true);
-    $container->autowire(\MailPoet\Subscription\CaptchaRenderer::class)->setPublic(true);
-    $container->autowire(\MailPoet\Subscription\CaptchaSession::class);
+    $container->autowire(\MailPoet\Subscription\Captcha\CaptchaConstants::class)->setPublic(true);
+    $container->autowire(\MailPoet\Subscription\CaptchaFormRenderer::class)->setPublic(true);
+    $container->autowire(\MailPoet\Subscription\Captcha\CaptchaSession::class);
+    $container->autowire(\MailPoet\Subscription\Captcha\CaptchaRenderer::class);
+    $container->autowire(\MailPoet\Subscription\Captcha\CaptchaPhrase::class);
+    $container->autowire(\MailPoet\Subscription\Captcha\Validator\BuiltInCaptchaValidator::class)->setPublic(true);
+    $container->autowire(\MailPoet\Subscription\Captcha\Validator\RecaptchaValidator::class)->setPublic(true);
     $container->autowire(\MailPoet\Subscription\Comment::class)->setPublic(true);
     $container->autowire(\MailPoet\Subscription\Form::class)->setPublic(true);
     $container->autowire(\MailPoet\Subscription\Manage::class)->setPublic(true);

@@ -2,8 +2,8 @@
 Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.8
-Tested up to: 6.0
-Stable tag: 4.0.1
+Tested up to: 6.1
+Stable tag: 4.4.0
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,43 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 4.4.0 - 2023-01-10 =
+* Updated: TinyMCE editor to v6;
+* Improved: log PHP errors in JSON API calls;
+* Fixed: prevent paused sending without an error message;
+* Fixed: horizontal scrollbar in automation actions popup.
+
+= 4.3.1 - 2023-01-03 =
+* Improved: welcome wizard first step design;
+* Improved: error handling for confirmation emails;
+* Fixed: occasional error on column detection during plugin update;
+* Fixed: occasional call to undefined function error during plugin update.
+
+= 4.3.0 - 2022-12-19 =
+* Added: confirmation email can be designed in email editor;
+* Improved: nicer and more understandable onboarding.
+
+= 4.2.0 - 2022-12-12 =
+* Added: link to purchase a MailPoet plan from Key Activation page;
+* Improved: support for ANSI_QUOTES sql mode;
+* Improved: 1-click unsubscribe is also tracked as a click;
+* Improved: "Maximum execution time" error is now more descriptive in MailPoet > Help > System Status;
+* Changed: email language in HTML is set to site's language (Settings > General) instead of English.
+
+= 4.1.1 - 2022-12-05 =
+* Improved: the 3rd-party libraries description in Welcome Wizard;
+* Improved: display a warning if sending function is not available;
+* Fixed: Column not found error experienced by some users;
+* Fixed: wc_get_page_id causes an error when WooCommerce is not installed;
+* Fixed: block settings in email editor look broken.
+
+= 4.1.0 - 2022-11-28 =
+* Improved: don't automatically activate MailPoet Sending Service for Creator plans;
+* Improved: MailPoet's built-in CAPTCHA now includes audio fallback to improve accessibility;
+* Fixed: automation may not always start if there exists another automation with the same trigger;
+* Fixed: automations beta badge wraps in some languages;
+* Fixed: domain authentication is not shown when sending a preview email.
 
 = 4.0.1 - 2022-11-22 =
 * Improved: when editing a list, you can choose if it should be shown on the Manage Subscription page (on by default);

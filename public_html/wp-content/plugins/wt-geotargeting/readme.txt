@@ -1,9 +1,9 @@
 === WT GeoTargeting ===
 Contributors: kustyrt
-Tags: geotargeting, geo, geolocation, DaData, SypexGeo, геотаргетинг, MaxMind
+Tags: geotargeting, geo, geolocation, DaData, ip-api, геотаргетинг, MaxMind
 Donate link: https://web-technology.biz/cms-wordpress/finansovaya-podderzhka/
 Requires at least: 3.9
-Tested up to: 5.8
+Tested up to: 6.0.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,10 +16,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 **Геотаргетинг** – вывод на страницах сайта контента (заголовки, текст, адреса, телефоны и т.д.), соответствующего географическому местоположению посетителя.
 
-[«Зачем нужен геотаргетинг на сайте?»](https://romankusty.ru/blog/geotargeting-odin-sajt-dlya-vseh-gorodov/?utm_source=wordpress-org&utm_medium=plugin-page&utm_campaign=wt-geotargeting) - полезная статья для начинающих разработчиков.
+[«Зачем нужен геотаргетинг на сайте?»](https://web-technology.biz/blog/geotargeting-odin-sajt-dlya-vsex-gorodov/?utm_source=wordpress-org&utm_medium=plugin-page&utm_campaign=wt-geotargeting) - полезная статья для начинающих разработчиков.
 
 = Основные возможности плагина: =
-* Геолокация на основе баз IP-адресов «Sypex Geo», «DaData» или «MaxMind»;
+* Геолокация на основе баз IP-адресов «IP Geolocation API», «Sypex Geo», «DaData» или «MaxMind»;
 * Определение местоположения посетителей с точностью до страны;
 * Определение местоположения посетителей России, Украины и Беларуси с точностью до города;
 * Отображение контента с привязкой к местоположению посетителя;
@@ -36,14 +36,13 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Поддержка поддоменов (субдоменов);
 * Добавление разных цен товара WooCommerce.
 
-[Подробнее о стандарной и расширенной версиях](https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting/?utm_source=wordpress-org&utm_medium=plugin-page&utm_campaign=wt-geotargeting)
+[Подробнее о стандарной и расширенной версиях](https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting-pro/?utm_source=wordpress-org&utm_medium=plugin-page&utm_campaign=wt-geotargeting)
 
 Перед настройкой **рекомендуем прочитать** нашу статью [«Юзабилити сайта с геотаргетингом»](http://web-technology.biz/primenenie-geotargetinga-na-sajte/?utm_source=wordpress-org&utm_medium=plugin-page&utm_campaign=wt-geotargeting).
 
-Официальная страница плагина: [WT Geotargeting](https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting/?utm_source=wordpress-org&utm_medium=plugin-page&utm_campaign=wt-geotargeting).<br />
-Документация: [WT Geotargeting](https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting-for-cms-wordpress/?utm_source=wordpress-org&utm_medium=plugin-page&utm_campaign=wt-geotargeting).<br />
-Обсуждение и предложения: [Реформал](http://wt-geotargeting.reformal.ru/).<br />
-Новости и обсуждение Вконтакте: [vk.com/agency_web_technology](https://vk.com/agency_web_technology).
+**Официальная страница плагина:** [WT Geotargeting](https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting-pro/?utm_source=wordpress-org&utm_medium=plugin-page&utm_campaign=wt-geotargeting).<br />
+**Документация:** [WT Geotargeting](https://web-technology.biz/cms-wordpress/plugin-wt-geotargeting-for-cms-wordpress/?utm_source=wordpress-org&utm_medium=plugin-page&utm_campaign=wt-geotargeting).<br />
+**Новости и обсуждение Вконтакте:** [vk.com/agency_web_technology](https://vk.com/agency_web_technology).
 
 == Installation ==
 
@@ -57,6 +56,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Changelog ==
 
+= 1.9 =
+* Поддержка сервиса геолокации «IP Geolocation API»
+
 = 1.8.2 =
 * Отключение сервиса геолокации «IpGeoBase»
 
@@ -65,29 +67,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 = 1.8 =
 * Сервис SypexGeo: Выбор сервера и ввод ключа API
-* JavaScript WtLocation (*Pro): Обработка поля "Поиск"
-* Регион (*Pro): Дополнительные поля - region, region_name, parent_name, parent_type, map_zoom, vk, instagram, facebook, telegram, whats_app, viber.
-* Шорткод WT_LOCATION (*Pro): Значение {get_phone_href} в виде ссылки на телефонный номер.
-* Шорткод WT_LOCATION (*Pro): Новые атрибуты - show_for_parent, not_show_for_parent.
-* Шорткод WT_LOCATIONS (*Pro): Обновление аргументов list_tag и type_select_location.
-* Шорткод WT_LOCATIONS (*Pro): Новый аргумент filter_parent.
-* Yoast SEO (*Pro): Улучшена обработка стандартных и OpenGraph мета-данных.
-* Yoast SEO (*Pro): Улучшена обработка канонических ссылок субдоменов.
-* Yoast SEO (*Pro): Отключение отображение ссылок в мета-данных из кэша.
-* Региональные директории в URL (*Pro): Изменение логики работы.
-* robots.txt (*Pro): Доработка отображения активного доменного имени.
-* robots.txt (*Pro): Поле ввода кода кода для всех субдоменов.
-* Субдомены (*Pro): На основном домене отображаем регион без поддомена и со значением "По умолчанию"
-* Субдомены (*Pro): Активация работы с кириллическим доменным именем.
-* WooCommerce (*Pro): Доработка интерфейса панели управления ценами и запасами.
-* WooCommerce (*Pro): Региональные запасы.
-* WooCommerce (*Pro): Скрытие отсутствующих товаров в регионах.
-* WooCommerce (*Pro): Фильтрация товара по региональным ценам.
-* WooCommerce (*Pro): Поддержка вариативных товаров.
-* Импорт (*Pro): Опция "Удалить теги HTML и PHP из строк"
-* Импорт (*Pro): Доработка алгоритма
 * Тестирование и отладка: Исправлена ошибка с выбором города.
-* Тестирование и отладка (*Pro): Новые возможности.
 
 = 1.7.13 =
 * Шорткод WT_LOCATIONS (*Pro): Исправлена ошибка с отображением 1 колонки.
