@@ -222,9 +222,6 @@ function komandir_woocommerce_wrapper_before() {
         return $defaults;
     }
 
-    // remove wc sidebar
-    // remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
-
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 
     add_filter('woocommerce_get_image_size_gallery_thumbnail', function ($size) {
@@ -331,10 +328,16 @@ function komandir_woocommerce_wrapper_before() {
 
     // add catalog to breadcrumbs on second position
 
-    add_filter('woocommerce_get_breadcrumb', 'komandir_breadcrumbs_product_cat_page', 20, 2);
+    add_filter('woocommerce_get_breadcrumb', 'komandir_breadcrumbs_product_cat_page', 20);
 
     function komandir_breadcrumbs_product_cat_page($crumbs) {
         if (!empty($crumbs)) {
+            if (is_product_tag()) {
+                global $wp_query;
+                $this_query = $wp_query->query;
+                $product_tag = get_term_by( 'slug', $this_query['product_tag'], 'product_tag');
+                $crumbs[1][0] = 'Товары по акции "' . $product_tag->name . '"';
+            }
             $catalog_page_id = wc_get_page_id('shop');
             $catalog_page = get_post($catalog_page_id);
             $catalog = array(get_the_title($catalog_page), get_permalink($catalog_page));
