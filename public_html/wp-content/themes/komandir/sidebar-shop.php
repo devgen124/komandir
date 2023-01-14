@@ -9,7 +9,7 @@
 
 ?>
 
-<?php if (is_product_category()) :?>
+<?php if (is_product_category() || is_product_tag()) :?>
 
 <aside id="woo-sidebar" class="widget-area filters-sidebar">
     <div class="filters-sidebar-inner">

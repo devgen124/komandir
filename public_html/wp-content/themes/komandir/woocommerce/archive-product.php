@@ -20,7 +20,7 @@ defined('ABSPATH') || exit;
 
 get_header();
 
-if (isset($_GET['s'])) {
+if (isset($_GET['s']) || is_product_tag()) {
   do_action('woocommerce_before_main_content');
 
 ?>
@@ -51,6 +51,8 @@ if (isset($_GET['s'])) {
      */
     do_action('woocommerce_before_shop_loop');
 
+    do_action( 'woocommerce_products_wrapper_start' );
+
     woocommerce_product_loop_start();
 
     if (wc_get_loop_prop('total')) {
@@ -74,6 +76,9 @@ if (isset($_GET['s'])) {
      * @hooked woocommerce_pagination - 10
      */
     do_action('woocommerce_after_shop_loop');
+
+    do_action( 'woocommerce_products_wrapper_end' );
+
   } else {
     /**
      * Hook: woocommerce_no_products_found.
@@ -84,18 +89,19 @@ if (isset($_GET['s'])) {
   }
 
   /**
-   * Hook: woocommerce_after_main_content.
-   *
-   * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
-   */
-  do_action('woocommerce_after_main_content');
+ * Hook: woocommerce_sidebar.
+ *
+ * @hooked woocommerce_get_sidebar - 10
+ */
+do_action( 'woocommerce_sidebar' );
 
-  /**
-   * Hook: woocommerce_sidebar.
-   *
-   * @hooked woocommerce_get_sidebar - 10
-   */
-  do_action('woocommerce_sidebar');
+/**
+ * Hook: woocommerce_after_main_content.
+ *
+ * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+ */
+do_action( 'woocommerce_after_main_content' );
+
 } else {
 
   require dirname(__FILE__) . '/../data/shop-icons.php';
