@@ -20,7 +20,7 @@ defined('ABSPATH') || exit;
 
 get_header();
 
-if (isset($_GET['s']) || is_product_tag()) {
+if (isset($_GET['s'])) {
   do_action('woocommerce_before_main_content');
 
 ?>

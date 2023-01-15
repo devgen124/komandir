@@ -336,7 +336,16 @@ function komandir_woocommerce_wrapper_before() {
                 global $wp_query;
                 $this_query = $wp_query->query;
                 $product_tag = get_term_by( 'slug', $this_query['product_tag'], 'product_tag');
-                $crumbs[1][0] = 'Товары по акции "' . $product_tag->name . '"';
+                if (isset($_GET['preview'])) {
+                    $crumbs[1][0] = 'Акция "' . $product_tag->name . '"';
+                    $crumbs = array_merge(
+                        array_slice($crumbs, 0, -1),
+                        [['Акции', get_permalink(get_page_by_path('promotion'))]],
+                        [$crumbs[1]]
+                    );
+                } else {
+                    $crumbs[1][0] = 'Товары по акции "' . $product_tag->name . '"';
+                }
             }
             $catalog_page_id = wc_get_page_id('shop');
             $catalog_page = get_post($catalog_page_id);
