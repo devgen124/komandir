@@ -12718,18 +12718,12 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
     width: calc(50% - 13px);
   }
 }
-@media (max-width: 767.98px) {
-  .woocommerce ul.products.grid li.product, .woocommerce ul.products[class*=columns-].grid li.product,
-  .woocommerce-page ul.products.grid li.product,
-  .woocommerce-page ul.products[class*=columns-].grid li.product {
-    width: calc(100% - 13px);
-  }
-}
 @media (max-width: 575.98px) {
   .woocommerce ul.products.grid li.product, .woocommerce ul.products[class*=columns-].grid li.product,
   .woocommerce-page ul.products.grid li.product,
   .woocommerce-page ul.products[class*=columns-].grid li.product {
-    width: calc(50% - 13px);
+    margin: 0 auto;
+    width: 300px;
   }
   .woocommerce ul.products.grid li.product .icon_after_add_to_cart, .woocommerce ul.products[class*=columns-].grid li.product .icon_after_add_to_cart,
   .woocommerce-page ul.products.grid li.product .icon_after_add_to_cart,
@@ -13103,18 +13097,6 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 .woocommerce .woocommerce-ordering .custom-select__option--selected::before,
 .woocommerce-page .woocommerce-ordering .custom-select__option--selected::before {
   background-image: url("../images/radio-checked.svg");
-}
-.woocommerce .filters-btn,
-.woocommerce-page .filters-btn {
-  padding: 0;
-  background: none;
-  border: none;
-}
-@media (min-width: 576px) {
-  .woocommerce .filters-btn,
-  .woocommerce-page .filters-btn {
-    display: none;
-  }
 }
 .woocommerce .grid-switcher,
 .woocommerce-page .grid-switcher {
@@ -13516,6 +13498,7 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 
 .woocommerce-main-wrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 .woocommerce-main-wrapper .products-wrapper {
   width: calc(80% - 13px);
@@ -13526,18 +13509,9 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
     width: calc(75% - 13px);
   }
 }
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
   .woocommerce-main-wrapper .products-wrapper {
-    width: calc(66.6% - 13px);
-  }
-}
-@media (max-width: 575.98px) {
-  .woocommerce-main-wrapper .products-wrapper {
-    width: calc(100% + 2 * var(--bs-gutter-x, 0.75rem));
-    margin-left: var(--bs-gutter-x, -0.75rem);
-    margin-right: var(--bs-gutter-x, -0.75rem);
-    padding-left: var(--bs-gutter-x, 0.75rem);
-    padding-right: var(--bs-gutter-x, 0.75rem);
+    width: calc(100% - 13px);
   }
 }
 .woocommerce-main-wrapper .filters-sidebar {
@@ -13555,26 +13529,17 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 }
 @media (max-width: 991.98px) {
   .woocommerce-main-wrapper .filters-sidebar {
-    width: calc(33.3% - 13px);
-  }
-}
-@media (max-width: 991.98px) {
-  .woocommerce-main-wrapper .filters-sidebar {
-    width: calc(50% - 13px);
-  }
-}
-@media (max-width: 575.98px) {
-  .woocommerce-main-wrapper .filters-sidebar {
-    display: none;
+    transform: translateX(-100%);
     width: 100%;
     position: absolute;
     height: 100vh;
-    top: 0;
+    top: 68px;
     left: 0;
     z-index: 10;
+    transition: transform 0.3s;
   }
   .woocommerce-main-wrapper .filters-sidebar-visible {
-    display: block;
+    transform: translateX(0);
   }
   .woocommerce-main-wrapper .filters-sidebar-inner {
     margin: 0 -17px;
@@ -13588,21 +13553,12 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
     display: none;
   }
 }
-.woocommerce-main-wrapper .filters-sidebar-header {
-  display: none;
-}
-@media (max-width: 575.98px) {
-  .woocommerce-main-wrapper .filters-sidebar-header {
-    margin-bottom: 70px;
-    display: flex;
-    align-items: center;
-  }
-  .woocommerce-main-wrapper .filters-sidebar-header h2, .woocommerce-main-wrapper .filters-sidebar-header .h2 {
-    margin-bottom: 0;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1.4;
-  }
+.woocommerce-main-wrapper .filters-sidebar-open {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: url("../images/tune.svg") center/18px no-repeat;
+  border: none;
 }
 .woocommerce-main-wrapper .filters-close {
   margin-left: auto;
@@ -13610,6 +13566,12 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   width: 40px;
   height: 40px;
   background: url("../images/close.svg") center/20px no-repeat;
+  border: none;
+}
+
+.filters-btn {
+  background: none;
+  padding: 0;
   border: none;
 }
 
