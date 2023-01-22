@@ -166,12 +166,9 @@ $cols: (1, 2, 3, 4, 5, 6);
                         width: calc(50% - 13px);
                     }
 
-                    @include media-breakpoint-down(md) {
-                        width: calc(100% - 13px);
-                    }
-
                     @include media-breakpoint-down(sm) {
-                        width: calc(50% - 13px);
+                        margin: 0 auto;
+                        width: 300px;
 
                         .icon_after_add_to_cart {
                             position: absolute;
@@ -489,16 +486,6 @@ $cols: (1, 2, 3, 4, 5, 6);
             &--selected::before {
                 background-image: url("../images/radio-checked.svg");
             }
-        }
-    }
-
-    .filters-btn {
-        padding: 0;
-        background: none;
-        border: none;
-
-        @include media-breakpoint-up(sm) {
-            display: none;
         }
     }
 
@@ -950,6 +937,7 @@ $cols: (1, 2, 3, 4, 5, 6);
 
 .woocommerce-main-wrapper {
     display: flex;
+    flex-wrap: wrap;
 
     .products-wrapper {
         width: calc(80% - 13px);
@@ -959,17 +947,17 @@ $cols: (1, 2, 3, 4, 5, 6);
             width: calc(75% - 13px);
         }
 
-        @include media-breakpoint-down(md) {
-            width: calc(66.6% - 13px);
+        @include media-breakpoint-down(lg) {
+            width: calc(100% - 13px);
         }
 
-        @include media-breakpoint-down(sm) {
-            width: calc(100% + 2 * var(--bs-gutter-x, 0.75rem));
-            margin-left: var(--bs-gutter-x, -0.75rem);
-            margin-right: var(--bs-gutter-x, -0.75rem);
-            padding-left: var(--bs-gutter-x, 0.75rem);
-            padding-right: var(--bs-gutter-x, 0.75rem);
-        }
+        // @include media-breakpoint-down(lg) {
+        //     width: calc(100% + 2 * var(--bs-gutter-x, 0.75rem));
+        //     margin-left: var(--bs-gutter-x, -0.75rem);
+        //     margin-right: var(--bs-gutter-x, -0.75rem);
+        //     padding-left: var(--bs-gutter-x, 0.75rem);
+        //     padding-right: var(--bs-gutter-x, 0.75rem);
+        // }
     }
 
     .filters-sidebar {
@@ -985,24 +973,17 @@ $cols: (1, 2, 3, 4, 5, 6);
         }
 
         @include media-breakpoint-down(lg) {
-            width: calc(33.3% - 13px);
-        }
-
-        @include media-breakpoint-down(lg) {
-            width: calc(50% - 13px);
-        }
-
-        @include media-breakpoint-down(sm) {
-            display: none;
+            transform: translateX(-100%);
             width: 100%;
             position: absolute;
             height: 100vh;
-            top: 0;
+            top: 68px;
             left: 0;
             z-index: 10;
+            transition: transform 0.3s;
 
             &-visible {
-                display: block;
+                transform: translateX(0);
             }
 
             &-inner {
@@ -1014,22 +995,12 @@ $cols: (1, 2, 3, 4, 5, 6);
             }
         }
 
-        &-header {
-            display: none;
-
-
-            @include media-breakpoint-down(sm) {
-                margin-bottom: 70px;
-                display: flex;
-                align-items: center;
-
-                h2 {
-                    margin-bottom: 0;
-                    font-weight: 700;
-                    font-size: 24px;
-                    line-height: 1.4;
-                }
-            }
+        &-open {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            background: url("../images/tune.svg") center/18px no-repeat;
+            border: none;
         }
     }
 
@@ -1041,6 +1012,12 @@ $cols: (1, 2, 3, 4, 5, 6);
         background: url("../images/close.svg") center/20px no-repeat;
         border: none;
     }
+}
+
+.filters-btn {
+    background: none;
+    padding: 0;
+    border: none;
 }
 
 .woo-attributes-item {
