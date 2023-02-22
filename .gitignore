@@ -43,3 +43,4 @@ __MACOSX/
 public_html/wp-admin/*
 public_html/wp-includes/*
 public_html/wp-content/uploads/*
+public_html/wp-content/languages/**/*.json
