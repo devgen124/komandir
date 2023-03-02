@@ -370,14 +370,17 @@ function komandir_woocommerce_wrapper_before() {
 
     function komandir_filters_btn() {
         global $svg;
-?>
-    <button class="filters-btn">
-        <?= $svg->view_from_sprite([
-            'title' => 'filters',
-            'width' => 18,
-            'height' => 18
-        ]); ?>
-    </button>
+?>  
+    <div class="filters-mobile">
+        <span>Фильтры</span>
+        <button class="filters-btn">
+            <?= $svg->view_from_sprite([
+                'title' => 'filters',
+                'width' => 18,
+                'height' => 18
+            ]); ?>
+        </button>
+    </div>
 <?php
     }
 
