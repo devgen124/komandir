@@ -45,3 +45,4 @@ public_html/wp-includes/*
 public_html/wp-content/uploads/*
 public_html/wp-content/languages/**/*.json
 public_html/wp-content/plugins/woocommerce-synchronization-1c/files/**/temp/*
+public_html/wp-content/plugins/woocommerce-synchronization-1c/files/**/logs/*
