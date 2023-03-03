@@ -983,9 +983,9 @@ function woocommerce_rbspayment()
             $needs_shipping = apply_filters( 'woocommerce_cart_needs_shipping', $needs_shipping );
 
             // Virtual order, with virtual disabled.
-            if ( ! $needs_shipping ) {
-                return false;
-            }
+            // if ( ! $needs_shipping ) {
+            //     return false;
+            // }
 
             // Only apply if all packages are being shipped via chosen method, or order is virtual.
             if ( ! empty( $this->enable_for_methods ) && $needs_shipping ) {
