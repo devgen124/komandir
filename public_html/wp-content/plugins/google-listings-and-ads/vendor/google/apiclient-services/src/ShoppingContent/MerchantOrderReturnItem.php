@@ -15,25 +15,30 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class MerchantOrderReturnItem extends \Google\Collection
+class MerchantOrderReturnItem extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'returnShipmentIds';
   protected $customerReturnReasonType = CustomerReturnReason::class;
   protected $customerReturnReasonDataType = '';
+  public $customerReturnReason;
   /**
    * @var string
    */
   public $itemId;
   protected $merchantRejectionReasonType = MerchantRejectionReason::class;
   protected $merchantRejectionReasonDataType = '';
+  public $merchantRejectionReason;
   protected $merchantReturnReasonType = RefundReason::class;
   protected $merchantReturnReasonDataType = '';
+  public $merchantReturnReason;
   protected $productType = OrderLineItemProduct::class;
   protected $productDataType = '';
+  public $product;
   protected $refundableAmountType = MonetaryAmount::class;
   protected $refundableAmountDataType = '';
+  public $refundableAmount;
   /**
    * @var string
    */

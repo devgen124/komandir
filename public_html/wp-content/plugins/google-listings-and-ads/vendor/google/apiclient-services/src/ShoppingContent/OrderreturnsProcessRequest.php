@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrderreturnsProcessRequest extends \Google\Collection
+class OrderreturnsProcessRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'returnItems';
   /**
@@ -30,8 +30,10 @@ class OrderreturnsProcessRequest extends \Google\Collection
   public $operationId;
   protected $refundShippingFeeType = OrderreturnsRefundOperation::class;
   protected $refundShippingFeeDataType = '';
+  public $refundShippingFee;
   protected $returnItemsType = OrderreturnsReturnItem::class;
   protected $returnItemsDataType = 'array';
+  public $returnItems;
 
   /**
    * @param bool

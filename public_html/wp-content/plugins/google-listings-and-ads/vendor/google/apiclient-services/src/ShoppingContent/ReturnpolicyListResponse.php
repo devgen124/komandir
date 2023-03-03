@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ReturnpolicyListResponse extends \Google\Collection
+class ReturnpolicyListResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'resources';
   /**
@@ -26,6 +26,7 @@ class ReturnpolicyListResponse extends \Google\Collection
   public $kind;
   protected $resourcesType = ReturnPolicy::class;
   protected $resourcesDataType = 'array';
+  public $resources;
 
   /**
    * @param string

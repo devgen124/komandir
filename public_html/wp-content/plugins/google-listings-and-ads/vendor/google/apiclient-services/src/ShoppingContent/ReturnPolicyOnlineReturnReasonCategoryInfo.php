@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ReturnPolicyOnlineReturnReasonCategoryInfo extends \Google\Model
+class ReturnPolicyOnlineReturnReasonCategoryInfo extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var string
@@ -29,6 +29,7 @@ class ReturnPolicyOnlineReturnReasonCategoryInfo extends \Google\Model
   public $returnReasonCategory;
   protected $returnShippingFeeType = ReturnPolicyOnlineReturnShippingFee::class;
   protected $returnShippingFeeDataType = '';
+  public $returnShippingFee;
 
   /**
    * @param string

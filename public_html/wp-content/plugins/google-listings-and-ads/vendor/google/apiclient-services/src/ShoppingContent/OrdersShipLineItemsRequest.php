@@ -15,13 +15,14 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrdersShipLineItemsRequest extends \Google\Collection
+class OrdersShipLineItemsRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'shipmentInfos';
   protected $lineItemsType = OrderShipmentLineItemShipment::class;
   protected $lineItemsDataType = 'array';
+  public $lineItems;
   /**
    * @var string
    */
@@ -32,6 +33,7 @@ class OrdersShipLineItemsRequest extends \Google\Collection
   public $shipmentGroupId;
   protected $shipmentInfosType = OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo::class;
   protected $shipmentInfosDataType = 'array';
+  public $shipmentInfos;
 
   /**
    * @param OrderShipmentLineItemShipment[]

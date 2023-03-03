@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrdersGetByMerchantOrderIdResponse extends \Google\Model
+class OrdersGetByMerchantOrderIdResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var string
@@ -25,6 +25,7 @@ class OrdersGetByMerchantOrderIdResponse extends \Google\Model
   public $kind;
   protected $orderType = Order::class;
   protected $orderDataType = '';
+  public $order;
 
   /**
    * @param string

@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrderreportsListTransactionsResponse extends \Google\Collection
+class OrderreportsListTransactionsResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'transactions';
   /**
@@ -30,6 +30,7 @@ class OrderreportsListTransactionsResponse extends \Google\Collection
   public $nextPageToken;
   protected $transactionsType = OrderReportTransaction::class;
   protected $transactionsDataType = 'array';
+  public $transactions;
 
   /**
    * @param string

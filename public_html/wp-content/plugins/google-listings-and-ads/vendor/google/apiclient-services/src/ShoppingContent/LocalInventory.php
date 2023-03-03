@@ -15,14 +15,18 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class LocalInventory extends \Google\Model
+class LocalInventory extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
+  protected $collection_key = 'customAttributes';
   /**
    * @var string
    */
   public $availability;
+  protected $customAttributesType = CustomAttribute::class;
+  protected $customAttributesDataType = 'array';
+  public $customAttributes;
   /**
    * @var string
    */
@@ -41,12 +45,14 @@ class LocalInventory extends \Google\Model
   public $pickupSla;
   protected $priceType = Price::class;
   protected $priceDataType = '';
+  public $price;
   /**
    * @var string
    */
   public $quantity;
   protected $salePriceType = Price::class;
   protected $salePriceDataType = '';
+  public $salePrice;
   /**
    * @var string
    */
@@ -69,6 +75,20 @@ class LocalInventory extends \Google\Model
   public function getAvailability()
   {
     return $this->availability;
+  }
+  /**
+   * @param CustomAttribute[]
+   */
+  public function setCustomAttributes($customAttributes)
+  {
+    $this->customAttributes = $customAttributes;
+  }
+  /**
+   * @return CustomAttribute[]
+   */
+  public function getCustomAttributes()
+  {
+    return $this->customAttributes;
   }
   /**
    * @param string

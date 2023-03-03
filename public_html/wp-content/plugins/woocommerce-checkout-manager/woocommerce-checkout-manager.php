@@ -1,56 +1,82 @@
 <?php
 
 /**
- * Plugin Name: WooCommerce Checkout Manager
- * Plugin URI:  https://quadlayers.com/portfolio/woocommerce-checkout-manager/
- * Description: Manage and customize WooCommerce Checkout fields (Add, Edit, Delete or re-order fields).
- * Version:     6.4.1
- * Author:      QuadLayers
- * Author URI:  https://quadlayers.com
- * License: GPLv3
- * Text Domain: woocommerce-checkout-manager
- * WC requires at least: 3.1.0
- * WC tested up to: 7.2
+ * Plugin Name:             WooCommerce Checkout Manager
+ * Plugin URI:              https://quadlayers.com/portfolio/woocommerce-checkout-manager/
+ * Description:             Manage and customize WooCommerce Checkout fields (Add, Edit, Delete or re-order fields).
+ * Version:                 7.0.3
+ * Author:                  QuadLayers
+ * Author URI:              https://quadlayers.com
+ * License:                 GPLv3
+ * Text Domain:             woocommerce-checkout-manager
+ * Domain Path:             /languages
+ * Request at least:        4.7.0
+ * Tested up to:            6.1
+ * Requires PHP:            5.6
+ * WC requires at least:    4.0
+ * WC tested up to:         7.4
  */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
+/**
+ * Definition globals varibles
+ */
 define( 'WOOCCM_PLUGIN_NAME', 'WooCommerce Checkout Manager' );
-define( 'WOOCCM_PLUGIN_VERSION', '6.4.1' );
+define( 'WOOCCM_PLUGIN_VERSION', '7.0.3' );
 define( 'WOOCCM_PLUGIN_FILE', __FILE__ );
 define( 'WOOCCM_PLUGIN_DIR', __DIR__ . DIRECTORY_SEPARATOR );
 define( 'WOOCCM_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WOOCCM_PREFIX', 'wooccm' );
 define( 'WOOCCM_WORDPRESS_URL', 'https://wordpress.org/plugins/woocommerce-checkout-manager/' );
-define( 'WOOCCM_REVIEW_URL', 'https://wordpress.org/support/plugin/woocommerce-checkout-manager/reviews/?filter=5#new-post' );
 define( 'WOOCCM_DOCUMENTATION_URL', 'https://quadlayers.com/documentation/woocommerce-checkout-manager/?utm_source=wooccm_admin' );
-define( 'WOOCCM_DEMO_URL', 'https://quadlayers.com/portfolio/woocommerce-checkout-manager/?utm_source=wooccm_admin' );
-define( 'WOOCCM_PURCHASE_URL', WOOCCM_DEMO_URL );
 define( 'WOOCCM_SUPPORT_URL', 'https://quadlayers.com/account/support/?utm_source=wooccm_admin' );
-define( 'WOOCCM_GROUP_URL', 'https://www.facebook.com/groups/quadlayers' );
-define( 'WOOCCM_DEVELOPER', false );
-
-define( 'WOOCCM_PREMIUM_SELL_SLUG', 'woocommerce-checkout-manager-pro' );
-define( 'WOOCCM_PREMIUM_SELL_NAME', 'WooCommerce Checkout Manager' );
 define( 'WOOCCM_PREMIUM_SELL_URL', 'https://quadlayers.com/portfolio/woocommerce-checkout-manager/?utm_source=wooccm_admin' );
 
-define( 'WOOCCM_CROSS_INSTALL_SLUG', 'woocommerce-direct-checkout' );
-define( 'WOOCCM_CROSS_INSTALL_NAME', 'Direct Checkout' );
-define( 'WOOCCM_CROSS_INSTALL_DESCRIPTION', esc_html__( 'Direct Checkout for WooCommerce allows you to reduce the steps in the checkout process by skipping the shopping cart page. This can encourage buyers to shop more and quickly. You will increase your sales reducing cart abandonment.', 'woocommerce-checkout-manager' ) );
-define( 'WOOCCM_CROSS_INSTALL_URL', 'https://quadlayers.com/portfolio/woocommerce-checkout-manager/?utm_source=wooccm_admin' );
 
-if ( ! class_exists( 'WOOCCM', false ) ) {
-	include_once WOOCCM_PLUGIN_DIR . 'includes/class-wooccm.php';
-}
+/**
+ * Developer debug variable
+ */
+define( 'WOOCCM_DEVELOPER', false );
 
-require_once WOOCCM_PLUGIN_DIR . 'includes/quadlayers/widget.php';
-require_once WOOCCM_PLUGIN_DIR . 'includes/quadlayers/notices.php';
-require_once WOOCCM_PLUGIN_DIR . 'includes/quadlayers/links.php';
+/**
+ * Load composer autoload
+ */
+require_once __DIR__ . '/vendor/autoload.php';
 
-function WOOCCM() {     // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
-	return WOOCCM::instance();
-}
+/**
+ * Load vendor_packages packages
+ */
+require_once __DIR__ . '/vendor_packages/wp-i18n-map.php';
+require_once __DIR__ . '/vendor_packages/wp-dashboard-widget-news.php';
+require_once __DIR__ . '/vendor_packages/wp-plugin-table-links.php';
+require_once __DIR__ . '/vendor_packages/wp-notice-plugin-required.php';
+require_once __DIR__ . '/vendor_packages/wp-notice-plugin-promote.php';
+require_once __DIR__ . '/vendor_packages/wp-plugin-suggestions.php';
 
-// Global for backwards compatibility.
-$GLOBALS['wooccm'] = WOOCCM();
+/**
+ * Load plugin classes
+ */
+require_once __DIR__ . '/lib/class-plugin.php';
+
+/**
+ * Plugin activation hook
+ */
+register_activation_hook(
+	__FILE__,
+	function() {
+		do_action( 'wooccm_activation' );
+	}
+);
+
+/**
+ * Plugin activation hook
+ */
+register_deactivation_hook(
+	__FILE__,
+	function() {
+		do_action( 'wooccm_deactivation' );
+	}
+);

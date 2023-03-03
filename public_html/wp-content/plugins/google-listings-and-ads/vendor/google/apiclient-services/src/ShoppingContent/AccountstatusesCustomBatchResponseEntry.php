@@ -15,18 +15,20 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class AccountstatusesCustomBatchResponseEntry extends \Google\Model
+class AccountstatusesCustomBatchResponseEntry extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   protected $accountStatusType = AccountStatus::class;
   protected $accountStatusDataType = '';
+  public $accountStatus;
   /**
    * @var string
    */
   public $batchId;
   protected $errorsType = Errors::class;
   protected $errorsDataType = '';
+  public $errors;
 
   /**
    * @param AccountStatus

@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ReturnpolicyCustomBatchResponseEntry extends \Google\Model
+class ReturnpolicyCustomBatchResponseEntry extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var string
@@ -25,12 +25,14 @@ class ReturnpolicyCustomBatchResponseEntry extends \Google\Model
   public $batchId;
   protected $errorsType = Errors::class;
   protected $errorsDataType = '';
+  public $errors;
   /**
    * @var string
    */
   public $kind;
   protected $returnPolicyType = ReturnPolicy::class;
   protected $returnPolicyDataType = '';
+  public $returnPolicy;
 
   /**
    * @param string

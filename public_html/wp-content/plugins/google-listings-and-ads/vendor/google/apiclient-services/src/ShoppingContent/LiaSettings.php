@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class LiaSettings extends \Google\Collection
+class LiaSettings extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'countrySettings';
   /**
@@ -26,6 +26,7 @@ class LiaSettings extends \Google\Collection
   public $accountId;
   protected $countrySettingsType = LiaCountrySettings::class;
   protected $countrySettingsDataType = 'array';
+  public $countrySettings;
   /**
    * @var string
    */

@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class AccountsLinkRequest extends \Google\Collection
+class AccountsLinkRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'services';
   /**
@@ -26,6 +26,7 @@ class AccountsLinkRequest extends \Google\Collection
   public $action;
   protected $eCommercePlatformLinkInfoType = ECommercePlatformLinkInfo::class;
   protected $eCommercePlatformLinkInfoDataType = '';
+  public $eCommercePlatformLinkInfo;
   /**
    * @var string
    */
@@ -36,6 +37,7 @@ class AccountsLinkRequest extends \Google\Collection
   public $linkedAccountId;
   protected $paymentServiceProviderLinkInfoType = PaymentServiceProviderLinkInfo::class;
   protected $paymentServiceProviderLinkInfoDataType = '';
+  public $paymentServiceProviderLinkInfo;
   /**
    * @var string[]
    */

@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class AccounttaxListResponse extends \Google\Collection
+class AccounttaxListResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'resources';
   /**
@@ -30,6 +30,7 @@ class AccounttaxListResponse extends \Google\Collection
   public $nextPageToken;
   protected $resourcesType = AccountTax::class;
   protected $resourcesDataType = 'array';
+  public $resources;
 
   /**
    * @param string

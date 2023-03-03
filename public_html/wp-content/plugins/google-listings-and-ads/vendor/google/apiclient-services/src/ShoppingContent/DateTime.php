@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class DateTime extends \Google\Model
+class DateTime extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var int
@@ -45,6 +45,7 @@ class DateTime extends \Google\Model
   public $seconds;
   protected $timeZoneType = TimeZone::class;
   protected $timeZoneDataType = '';
+  public $timeZone;
   /**
    * @var string
    */

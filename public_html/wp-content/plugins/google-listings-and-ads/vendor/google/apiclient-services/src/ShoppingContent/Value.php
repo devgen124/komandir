@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class Value extends \Google\Model
+class Value extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var string
@@ -25,6 +25,7 @@ class Value extends \Google\Model
   public $carrierRateName;
   protected $flatRateType = Price::class;
   protected $flatRateDataType = '';
+  public $flatRate;
   /**
    * @var bool
    */

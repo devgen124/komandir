@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class Product extends \Google\Collection
+class Product extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'taxes';
   /**
@@ -82,8 +82,10 @@ class Product extends \Google\Collection
   public $contentLanguage;
   protected $costOfGoodsSoldType = Price::class;
   protected $costOfGoodsSoldDataType = '';
+  public $costOfGoodsSold;
   protected $customAttributesType = CustomAttribute::class;
   protected $customAttributesDataType = 'array';
+  public $customAttributes;
   /**
    * @var string
    */
@@ -144,6 +146,10 @@ class Product extends \Google\Collection
   /**
    * @var string
    */
+  public $feedLabel;
+  /**
+   * @var string
+   */
   public $gender;
   /**
    * @var string
@@ -171,6 +177,7 @@ class Product extends \Google\Collection
   public $includedDestinations;
   protected $installmentType = Installment::class;
   protected $installmentDataType = '';
+  public $installment;
   /**
    * @var bool
    */
@@ -184,6 +191,10 @@ class Product extends \Google\Collection
    */
   public $kind;
   /**
+   * @var string[]
+   */
+  public $lifestyleImageLinks;
+  /**
    * @var string
    */
   public $link;
@@ -193,6 +204,7 @@ class Product extends \Google\Collection
   public $linkTemplate;
   protected $loyaltyPointsType = LoyaltyPoints::class;
   protected $loyaltyPointsDataType = '';
+  public $loyaltyPoints;
   /**
    * @var string
    */
@@ -251,30 +263,37 @@ class Product extends \Google\Collection
   public $pickupSla;
   protected $priceType = Price::class;
   protected $priceDataType = '';
+  public $price;
   protected $productDetailsType = ProductProductDetail::class;
   protected $productDetailsDataType = 'array';
+  public $productDetails;
   protected $productHeightType = ProductDimension::class;
   protected $productHeightDataType = '';
+  public $productHeight;
   /**
    * @var string[]
    */
   public $productHighlights;
   protected $productLengthType = ProductDimension::class;
   protected $productLengthDataType = '';
+  public $productLength;
   /**
    * @var string[]
    */
   public $productTypes;
   protected $productWeightType = ProductWeight::class;
   protected $productWeightDataType = '';
+  public $productWeight;
   protected $productWidthType = ProductDimension::class;
   protected $productWidthDataType = '';
+  public $productWidth;
   /**
    * @var string[]
    */
   public $promotionIds;
   protected $salePriceType = Price::class;
   protected $salePriceDataType = '';
+  public $salePrice;
   /**
    * @var string
    */
@@ -285,18 +304,23 @@ class Product extends \Google\Collection
   public $sellOnGoogleQuantity;
   protected $shippingType = ProductShipping::class;
   protected $shippingDataType = 'array';
+  public $shipping;
   protected $shippingHeightType = ProductShippingDimension::class;
   protected $shippingHeightDataType = '';
+  public $shippingHeight;
   /**
    * @var string
    */
   public $shippingLabel;
   protected $shippingLengthType = ProductShippingDimension::class;
   protected $shippingLengthDataType = '';
+  public $shippingLength;
   protected $shippingWeightType = ProductShippingWeight::class;
   protected $shippingWeightDataType = '';
+  public $shippingWeight;
   protected $shippingWidthType = ProductShippingDimension::class;
   protected $shippingWidthDataType = '';
+  public $shippingWidth;
   /**
    * @var string[]
    */
@@ -319,6 +343,7 @@ class Product extends \Google\Collection
   public $source;
   protected $subscriptionCostType = ProductSubscriptionCost::class;
   protected $subscriptionCostDataType = '';
+  public $subscriptionCost;
   /**
    * @var string
    */
@@ -329,6 +354,7 @@ class Product extends \Google\Collection
   public $taxCategory;
   protected $taxesType = ProductTax::class;
   protected $taxesDataType = 'array';
+  public $taxes;
   /**
    * @var string
    */
@@ -339,8 +365,10 @@ class Product extends \Google\Collection
   public $transitTimeLabel;
   protected $unitPricingBaseMeasureType = ProductUnitPricingBaseMeasure::class;
   protected $unitPricingBaseMeasureDataType = '';
+  public $unitPricingBaseMeasure;
   protected $unitPricingMeasureType = ProductUnitPricingMeasure::class;
   protected $unitPricingMeasureDataType = '';
+  public $unitPricingMeasure;
 
   /**
    * @param string[]
@@ -787,6 +815,20 @@ class Product extends \Google\Collection
   /**
    * @param string
    */
+  public function setFeedLabel($feedLabel)
+  {
+    $this->feedLabel = $feedLabel;
+  }
+  /**
+   * @return string
+   */
+  public function getFeedLabel()
+  {
+    return $this->feedLabel;
+  }
+  /**
+   * @param string
+   */
   public function setGender($gender)
   {
     $this->gender = $gender;
@@ -937,6 +979,20 @@ class Product extends \Google\Collection
   public function getKind()
   {
     return $this->kind;
+  }
+  /**
+   * @param string[]
+   */
+  public function setLifestyleImageLinks($lifestyleImageLinks)
+  {
+    $this->lifestyleImageLinks = $lifestyleImageLinks;
+  }
+  /**
+   * @return string[]
+   */
+  public function getLifestyleImageLinks()
+  {
+    return $this->lifestyleImageLinks;
   }
   /**
    * @param string

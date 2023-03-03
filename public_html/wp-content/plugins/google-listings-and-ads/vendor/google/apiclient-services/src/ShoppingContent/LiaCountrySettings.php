@@ -15,12 +15,13 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class LiaCountrySettings extends \Google\Model
+class LiaCountrySettings extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   protected $aboutType = LiaAboutPageSettings::class;
   protected $aboutDataType = '';
+  public $about;
   /**
    * @var string
    */
@@ -31,10 +32,13 @@ class LiaCountrySettings extends \Google\Model
   public $hostedLocalStorefrontActive;
   protected $inventoryType = LiaInventorySettings::class;
   protected $inventoryDataType = '';
+  public $inventory;
   protected $onDisplayToOrderType = LiaOnDisplayToOrderSettings::class;
   protected $onDisplayToOrderDataType = '';
+  public $onDisplayToOrder;
   protected $posDataProviderType = LiaPosDataProvider::class;
   protected $posDataProviderDataType = '';
+  public $posDataProvider;
   /**
    * @var bool
    */

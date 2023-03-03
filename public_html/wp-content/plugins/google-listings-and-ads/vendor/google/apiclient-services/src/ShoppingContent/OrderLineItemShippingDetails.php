@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrderLineItemShippingDetails extends \Google\Model
+class OrderLineItemShippingDetails extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var string
@@ -25,6 +25,7 @@ class OrderLineItemShippingDetails extends \Google\Model
   public $deliverByDate;
   protected $methodType = OrderLineItemShippingDetailsMethod::class;
   protected $methodDataType = '';
+  public $method;
   /**
    * @var string
    */

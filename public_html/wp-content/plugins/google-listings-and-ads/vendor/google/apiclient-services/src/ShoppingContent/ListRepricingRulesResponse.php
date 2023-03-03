@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ListRepricingRulesResponse extends \Google\Collection
+class ListRepricingRulesResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'repricingRules';
   /**
@@ -26,6 +26,7 @@ class ListRepricingRulesResponse extends \Google\Collection
   public $nextPageToken;
   protected $repricingRulesType = RepricingRule::class;
   protected $repricingRulesDataType = 'array';
+  public $repricingRules;
 
   /**
    * @param string
