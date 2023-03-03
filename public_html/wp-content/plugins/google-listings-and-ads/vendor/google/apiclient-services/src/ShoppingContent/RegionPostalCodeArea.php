@@ -15,13 +15,14 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class RegionPostalCodeArea extends \Google\Collection
+class RegionPostalCodeArea extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'postalCodes';
   protected $postalCodesType = RegionPostalCodeAreaPostalCodeRange::class;
   protected $postalCodesDataType = 'array';
+  public $postalCodes;
   /**
    * @var string
    */

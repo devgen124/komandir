@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrderreturnsRefundOperation extends \Google\Model
+class OrderreturnsRefundOperation extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var bool
@@ -25,6 +25,7 @@ class OrderreturnsRefundOperation extends \Google\Model
   public $fullRefund;
   protected $partialRefundType = OrderreturnsPartialRefund::class;
   protected $partialRefundDataType = '';
+  public $partialRefund;
   /**
    * @var string
    */

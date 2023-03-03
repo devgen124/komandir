@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrderRefund extends \Google\Model
+class OrderRefund extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var string
@@ -25,6 +25,7 @@ class OrderRefund extends \Google\Model
   public $actor;
   protected $amountType = Price::class;
   protected $amountDataType = '';
+  public $amount;
   /**
    * @var string
    */

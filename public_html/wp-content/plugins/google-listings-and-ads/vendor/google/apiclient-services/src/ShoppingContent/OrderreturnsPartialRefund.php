@@ -15,14 +15,16 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrderreturnsPartialRefund extends \Google\Model
+class OrderreturnsPartialRefund extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   protected $priceAmountType = Price::class;
   protected $priceAmountDataType = '';
+  public $priceAmount;
   protected $taxAmountType = Price::class;
   protected $taxAmountDataType = '';
+  public $taxAmount;
 
   /**
    * @param Price

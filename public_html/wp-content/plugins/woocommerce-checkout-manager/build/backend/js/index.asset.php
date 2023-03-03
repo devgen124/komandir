@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('backbone', 'jquery', 'jquery-serializejson', 'jquery-ui-datepicker', 'wp-util'), 'version' => 'f67e0ed96ee9b0e5e761');
+<?php return array('dependencies' => array('backbone', 'jquery', 'jquery-serializejson', 'jquery-ui-datepicker', 'wp-util'), 'version' => '2e6aaecee7bd21077cbb');

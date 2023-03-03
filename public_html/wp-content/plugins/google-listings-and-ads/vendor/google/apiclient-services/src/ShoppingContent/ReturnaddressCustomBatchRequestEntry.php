@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ReturnaddressCustomBatchRequestEntry extends \Google\Model
+class ReturnaddressCustomBatchRequestEntry extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var string
@@ -33,6 +33,7 @@ class ReturnaddressCustomBatchRequestEntry extends \Google\Model
   public $method;
   protected $returnAddressType = ReturnAddress::class;
   protected $returnAddressDataType = '';
+  public $returnAddress;
   /**
    * @var string
    */

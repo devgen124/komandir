@@ -15,14 +15,16 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrderLineItemAdjustment extends \Google\Model
+class OrderLineItemAdjustment extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   protected $priceAdjustmentType = Price::class;
   protected $priceAdjustmentDataType = '';
+  public $priceAdjustment;
   protected $taxAdjustmentType = Price::class;
   protected $taxAdjustmentDataType = '';
+  public $taxAdjustment;
   /**
    * @var string
    */

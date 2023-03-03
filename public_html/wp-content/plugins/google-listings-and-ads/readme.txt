@@ -2,9 +2,10 @@
 Contributors: automattic, google, woocommerce
 Tags: woocommerce, google, listings, ads
 Requires at least: 5.9
-Tested up to: 6.1
+Tested up to: 6.1.1
 Requires PHP: 7.4
-Stable tag: 2.3.6
+Requires PHP Architecture: 64 Bits
+Stable tag: 2.3.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,6 +57,7 @@ Create a new Google Ads account through Google Listings & Ads and a promotional 
 * WordPress 5.9 or greater
 * WooCommerce 6.9 or greater
 * PHP version 7.4 or greater
+* PHP Architecture 64 bits
 * MySQL version 5.6 or greater
 
 Visit the [WooCommerce server requirements documentation](https://docs.woocommerce.com/document/server-requirements/) for a detailed list of server requirements.
@@ -109,22 +111,22 @@ Yes, you can run both at the same time, and we recommend it! In the US, advertis
 
 == Changelog ==
 
-= 2.3.6 - 2023-01-10 =
-* Dev - Use extracted Button component from @wordpress/components package.
-* Fix - i18n for "View Reports" button.
-* Tweak - WooCommerce 7.3 Compatibility with Customer Effort Score prompt.
+= 2.3.10 - 2023-02-21 =
+* Add "Working with DEWP.md" to exclude list.
+* Add - Integration with WooCommerce Multichannel Marketing.
+* Tweak - Remove unnecessary PMax migration banners.
+* Tweak - Remove unnecessary woocommerce_loop_add_to_cart_link filter param.
 
-= 2.3.5 - 2022-12-28 =
-* Tweak - Adjust copy in Attribute Mapping section.
-* Tweak - Retrieve a published product as a landing page URL.
-* Tweak - Simplify report controller parameters.
+= 2.3.9 - 2023-02-15 =
+* Dev - Update phpunit to version 9.5.
+* Fix - Prefix Google Service packages to prevent plugin conflicts.
+* Tweak - Improve PHP 8.1 compatibility.
+* Tweak - Show admin notice when PHP 32 bits is being used.
+* Tweak - WC 7.4 compatibility.
+* Update - Google Ads library to API V12.
+* Update - Google Content library to API 2.13.
 
-= 2.3.4 - 2022-12-20 =
-* Tweak - Improve image validation error messages.
-
-= 2.3.3 - 2022-12-14 =
-* Fix - Tours API Endpoint.
-* Tweak - WC 7.2 compatibility.
-* Update - Drop support for WordPress < 5.9.
+= 2.3.8 - 2023-01-24 =
+* Fix - Product feed table footer rendering a zero when there are no products.
 
 [See changelog for all versions](https://raw.githubusercontent.com/woocommerce/google-listings-and-ads/trunk/changelog.txt).

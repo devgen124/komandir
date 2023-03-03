@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ShippingsettingsGetSupportedPickupServicesResponse extends \Google\Collection
+class ShippingsettingsGetSupportedPickupServicesResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'pickupServices';
   /**
@@ -26,6 +26,7 @@ class ShippingsettingsGetSupportedPickupServicesResponse extends \Google\Collect
   public $kind;
   protected $pickupServicesType = PickupServicesPickupService::class;
   protected $pickupServicesDataType = 'array';
+  public $pickupServices;
 
   /**
    * @param string

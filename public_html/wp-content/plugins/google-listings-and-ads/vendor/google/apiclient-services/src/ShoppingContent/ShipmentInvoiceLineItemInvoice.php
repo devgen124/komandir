@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ShipmentInvoiceLineItemInvoice extends \Google\Collection
+class ShipmentInvoiceLineItemInvoice extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'shipmentUnitIds';
   /**
@@ -34,6 +34,7 @@ class ShipmentInvoiceLineItemInvoice extends \Google\Collection
   public $shipmentUnitIds;
   protected $unitInvoiceType = UnitInvoice::class;
   protected $unitInvoiceDataType = '';
+  public $unitInvoice;
 
   /**
    * @param string

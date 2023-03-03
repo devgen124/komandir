@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class Collection extends \Google\Collection
+class Collection extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'imageLink';
   /**
@@ -42,6 +42,7 @@ class Collection extends \Google\Collection
   public $customLabel4;
   protected $featuredProductType = CollectionFeaturedProduct::class;
   protected $featuredProductDataType = 'array';
+  public $featuredProduct;
   /**
    * @var string[]
    */

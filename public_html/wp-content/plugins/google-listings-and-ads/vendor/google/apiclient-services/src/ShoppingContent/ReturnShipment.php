@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ReturnShipment extends \Google\Collection
+class ReturnShipment extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'shipmentTrackingInfos';
   /**
@@ -38,6 +38,7 @@ class ReturnShipment extends \Google\Collection
   public $shipmentId;
   protected $shipmentTrackingInfosType = ShipmentTrackingInfo::class;
   protected $shipmentTrackingInfosDataType = 'array';
+  public $shipmentTrackingInfos;
   /**
    * @var string
    */

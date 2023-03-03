@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class TestOrderLineItemProduct extends \Google\Collection
+class TestOrderLineItemProduct extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'variantAttributes';
   /**
@@ -34,6 +34,7 @@ class TestOrderLineItemProduct extends \Google\Collection
   public $contentLanguage;
   protected $feesType = OrderLineItemProductFee::class;
   protected $feesDataType = 'array';
+  public $fees;
   /**
    * @var string
    */
@@ -56,6 +57,7 @@ class TestOrderLineItemProduct extends \Google\Collection
   public $offerId;
   protected $priceType = Price::class;
   protected $priceDataType = '';
+  public $price;
   /**
    * @var string
    */
@@ -66,6 +68,7 @@ class TestOrderLineItemProduct extends \Google\Collection
   public $title;
   protected $variantAttributesType = OrderLineItemProductVariantAttribute::class;
   protected $variantAttributesDataType = 'array';
+  public $variantAttributes;
 
   /**
    * @param string

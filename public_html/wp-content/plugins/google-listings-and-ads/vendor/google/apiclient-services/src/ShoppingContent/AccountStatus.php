@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class AccountStatus extends \Google\Collection
+class AccountStatus extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'products';
   /**
@@ -26,6 +26,7 @@ class AccountStatus extends \Google\Collection
   public $accountId;
   protected $accountLevelIssuesType = AccountStatusAccountLevelIssue::class;
   protected $accountLevelIssuesDataType = 'array';
+  public $accountLevelIssues;
   /**
    * @var string
    */
@@ -36,6 +37,7 @@ class AccountStatus extends \Google\Collection
   public $kind;
   protected $productsType = AccountStatusProducts::class;
   protected $productsDataType = 'array';
+  public $products;
   /**
    * @var bool
    */

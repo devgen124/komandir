@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class Datafeed extends \Google\Collection
+class Datafeed extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'targets';
   /**
@@ -30,12 +30,14 @@ class Datafeed extends \Google\Collection
   public $contentType;
   protected $fetchScheduleType = DatafeedFetchSchedule::class;
   protected $fetchScheduleDataType = '';
+  public $fetchSchedule;
   /**
    * @var string
    */
   public $fileName;
   protected $formatType = DatafeedFormat::class;
   protected $formatDataType = '';
+  public $format;
   /**
    * @var string
    */
@@ -50,6 +52,7 @@ class Datafeed extends \Google\Collection
   public $name;
   protected $targetsType = DatafeedTarget::class;
   protected $targetsDataType = 'array';
+  public $targets;
 
   /**
    * @param string

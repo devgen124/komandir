@@ -15,18 +15,20 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class AccounttaxCustomBatchResponseEntry extends \Google\Model
+class AccounttaxCustomBatchResponseEntry extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   protected $accountTaxType = AccountTax::class;
   protected $accountTaxDataType = '';
+  public $accountTax;
   /**
    * @var string
    */
   public $batchId;
   protected $errorsType = Errors::class;
   protected $errorsDataType = '';
+  public $errors;
   /**
    * @var string
    */

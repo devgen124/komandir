@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrdersGetTestOrderTemplateResponse extends \Google\Model
+class OrdersGetTestOrderTemplateResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var string
@@ -25,6 +25,7 @@ class OrdersGetTestOrderTemplateResponse extends \Google\Model
   public $kind;
   protected $templateType = TestOrder::class;
   protected $templateDataType = '';
+  public $template;
 
   /**
    * @param string

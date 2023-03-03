@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class MerchantOrderReturn extends \Google\Collection
+class MerchantOrderReturn extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'returnShipments';
   /**
@@ -38,10 +38,13 @@ class MerchantOrderReturn extends \Google\Collection
   public $orderReturnId;
   protected $returnItemsType = MerchantOrderReturnItem::class;
   protected $returnItemsDataType = 'array';
+  public $returnItems;
   protected $returnPricingInfoType = ReturnPricingInfo::class;
   protected $returnPricingInfoDataType = '';
+  public $returnPricingInfo;
   protected $returnShipmentsType = ReturnShipment::class;
   protected $returnShipmentsDataType = 'array';
+  public $returnShipments;
 
   /**
    * @param string

@@ -15,20 +15,23 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class RepricingRuleEligibleOfferMatcher extends \Google\Model
+class RepricingRuleEligibleOfferMatcher extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   protected $brandMatcherType = RepricingRuleEligibleOfferMatcherStringMatcher::class;
   protected $brandMatcherDataType = '';
+  public $brandMatcher;
   protected $itemGroupIdMatcherType = RepricingRuleEligibleOfferMatcherStringMatcher::class;
   protected $itemGroupIdMatcherDataType = '';
+  public $itemGroupIdMatcher;
   /**
    * @var string
    */
   public $matcherOption;
   protected $offerIdMatcherType = RepricingRuleEligibleOfferMatcherStringMatcher::class;
   protected $offerIdMatcherDataType = '';
+  public $offerIdMatcher;
   /**
    * @var bool
    */

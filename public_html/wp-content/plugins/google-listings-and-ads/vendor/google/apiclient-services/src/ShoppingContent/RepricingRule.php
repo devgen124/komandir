@@ -15,20 +15,23 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class RepricingRule extends \Google\Model
+class RepricingRule extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   protected $cogsBasedRuleType = RepricingRuleCostOfGoodsSaleRule::class;
   protected $cogsBasedRuleDataType = '';
+  public $cogsBasedRule;
   /**
    * @var string
    */
   public $countryCode;
   protected $effectiveTimePeriodType = RepricingRuleEffectiveTime::class;
   protected $effectiveTimePeriodDataType = '';
+  public $effectiveTimePeriod;
   protected $eligibleOfferMatcherType = RepricingRuleEligibleOfferMatcher::class;
   protected $eligibleOfferMatcherDataType = '';
+  public $eligibleOfferMatcher;
   /**
    * @var string
    */
@@ -43,12 +46,14 @@ class RepricingRule extends \Google\Model
   public $paused;
   protected $restrictionType = RepricingRuleRestriction::class;
   protected $restrictionDataType = '';
+  public $restriction;
   /**
    * @var string
    */
   public $ruleId;
   protected $statsBasedRuleType = RepricingRuleStatsBasedRule::class;
   protected $statsBasedRuleDataType = '';
+  public $statsBasedRule;
   /**
    * @var string
    */

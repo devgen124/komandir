@@ -15,15 +15,17 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class InvoiceSummary extends \Google\Collection
+class InvoiceSummary extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'additionalChargeSummaries';
   protected $additionalChargeSummariesType = InvoiceSummaryAdditionalChargeSummary::class;
   protected $additionalChargeSummariesDataType = 'array';
+  public $additionalChargeSummaries;
   protected $productTotalType = Amount::class;
   protected $productTotalDataType = '';
+  public $productTotal;
 
   /**
    * @param InvoiceSummaryAdditionalChargeSummary[]

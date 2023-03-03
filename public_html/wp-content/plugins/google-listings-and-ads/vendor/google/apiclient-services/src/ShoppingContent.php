@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service;
 
-use Google\Client;
+use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Client;
 
 /**
  * Service definition for ShoppingContent (v2.1).
@@ -32,7 +32,7 @@ use Google\Client;
  *
  * @author Google, Inc.
  */
-class ShoppingContent extends \Google\Service
+class ShoppingContent extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service
 {
   /** Manage your product listings and accounts for Google Shopping. */
   const CONTENT =
@@ -43,7 +43,6 @@ class ShoppingContent extends \Google\Service
   public $accounts_labels;
   public $accounts_returncarrier;
   public $accountstatuses;
-  public $accountstatusesbyexternalsellerid;
   public $accounttax;
   public $buyongoogleprograms;
   public $collections;
@@ -67,6 +66,7 @@ class ShoppingContent extends \Google\Service
   public $productstatuses_repricingreports;
   public $promotions;
   public $pubsubnotificationsettings;
+  public $quotas;
   public $regionalinventory;
   public $regions;
   public $reports;
@@ -512,36 +512,6 @@ class ShoppingContent extends \Google\Service
                 'pageToken' => [
                   'location' => 'query',
                   'type' => 'string',
-                ],
-              ],
-            ],
-          ]
-        ]
-    );
-    $this->accountstatusesbyexternalsellerid = new ShoppingContent\Resource\Accountstatusesbyexternalsellerid(
-        $this,
-        $this->serviceName,
-        'accountstatusesbyexternalsellerid',
-        [
-          'methods' => [
-            'get' => [
-              'path' => '{merchantId}/accountstatusesbyexternalsellerid/{externalSellerId}',
-              'httpMethod' => 'GET',
-              'parameters' => [
-                'merchantId' => [
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ],
-                'externalSellerId' => [
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ],
-                'destinations' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
                 ],
               ],
             ],
@@ -1010,6 +980,10 @@ class ShoppingContent extends \Google\Service
                   'required' => true,
                 ],
                 'country' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'feedLabel' => [
                   'location' => 'query',
                   'type' => 'string',
                 ],
@@ -2346,6 +2320,34 @@ class ShoppingContent extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->quotas = new ShoppingContent\Resource\Quotas(
+        $this,
+        $this->serviceName,
+        'quotas',
+        [
+          'methods' => [
+            'list' => [
+              'path' => '{merchantId}/quotas',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'merchantId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],

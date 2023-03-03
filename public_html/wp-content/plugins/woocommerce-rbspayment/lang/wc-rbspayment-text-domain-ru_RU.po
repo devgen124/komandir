@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce RBSPayment Checkout Gateway\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-02 08:54+0000\n"
-"PO-Revision-Date: 2020-10-29 09:51+0000\n"
+"PO-Revision-Date: 2022-04-17 19:54+0000\n"
 "Last-Translator: \n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -13,7 +13,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.4.0; wp-5.5.1"
+"X-Loco-Version: 2.4.0; wp-5.8.4"
+
+msgid "Select shipping methods (empty for all)"
+msgstr "Оставьте поле пустым для всех типов доставок"
+
+msgid "Enable for shipping methods"
+msgstr "Для каких типов доставок отображать способ оплаты"
 
 #: wc-rbspayment.php:63
 msgid "Online acquiring and payment processing."
@@ -113,7 +119,7 @@ msgid "General"
 msgstr "Общая"
 
 msgid "Simplified, income"
-msgstr "Упрощеная, доход"
+msgstr "Упрощённая, доход"
 
 msgid "Simplified, income minus expences"
 msgstr "Упрощённая, доход минус расход"
@@ -155,23 +161,23 @@ msgid "VAT applicable rate 20/120"
 msgstr "НДС чека по расчетной ставке 20/120"
 
 msgid "Fiscal document format"
-msgstr "Формат Фискальных Документов"
+msgstr "Версия ФФД"
 
-msgid "FFD 1.0"
-msgstr "ФФД версии 1.0"
+msgid "v1.0"
+msgstr "v1.0"
 
-msgid "FFD 1.05"
-msgstr "ФФД версии 1.05"
+msgid "v1.05"
+msgstr "v1.05"
 
-msgid "FFD 1.1"
-msgstr "ФФД версии 1.1"
+msgid "v1.2"
+msgstr "v1.2"
 
 msgid ""
 "Also specify the version in your bank web account and in your fiscal service "
 "web account."
 msgstr ""
-"Формат версии требуется указать в личном кабинете банка и в кабинете сервиса "
-"фискализации."
+"Необходимо указать версию в личном кабинете банка и в личном кабинете "
+"фискальной службы."
 
 msgid "Payment type"
 msgstr "Тип оплаты"
@@ -202,7 +208,7 @@ msgid "Payment on credit"
 msgstr "Оплата предмета расчёта после его передачи с оплатой в кредит"
 
 msgid "Used in FFD starting from 1.05"
-msgstr "Используется в версих ФФД, начиная с 1.05"
+msgstr ""
 
 msgid "Payment type for delivery"
 msgstr "Тип оплаты для доставки"
@@ -226,13 +232,13 @@ msgid "Stake in gambling"
 msgstr "Ставка азартной игры"
 
 msgid "Gambling gain"
-msgstr "Выигрыш от азартных игр"
+msgstr ""
 
 msgid "Lottery ticket"
 msgstr "Лотерейный билет"
 
 msgid "Lottery gain"
-msgstr "Выигрыш в лотерею"
+msgstr ""
 
 msgid "Intellectual property provision"
 msgstr "Предоставление РИД"

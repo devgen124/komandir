@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class SearchResponse extends \Google\Collection
+class SearchResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'results';
   /**
@@ -26,6 +26,7 @@ class SearchResponse extends \Google\Collection
   public $nextPageToken;
   protected $resultsType = ReportRow::class;
   protected $resultsDataType = 'array';
+  public $results;
 
   /**
    * @param string

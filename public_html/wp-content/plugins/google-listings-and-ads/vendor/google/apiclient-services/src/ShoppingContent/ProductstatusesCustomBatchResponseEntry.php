@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ProductstatusesCustomBatchResponseEntry extends \Google\Model
+class ProductstatusesCustomBatchResponseEntry extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var string
@@ -25,12 +25,14 @@ class ProductstatusesCustomBatchResponseEntry extends \Google\Model
   public $batchId;
   protected $errorsType = Errors::class;
   protected $errorsDataType = '';
+  public $errors;
   /**
    * @var string
    */
   public $kind;
   protected $productStatusType = ProductStatus::class;
   protected $productStatusDataType = '';
+  public $productStatus;
 
   /**
    * @param string

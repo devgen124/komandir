@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class SettlementReport extends \Google\Collection
+class SettlementReport extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'transferIds';
   /**
@@ -30,6 +30,7 @@ class SettlementReport extends \Google\Collection
   public $kind;
   protected $previousBalanceType = Price::class;
   protected $previousBalanceDataType = '';
+  public $previousBalance;
   /**
    * @var string
    */
@@ -40,6 +41,7 @@ class SettlementReport extends \Google\Collection
   public $startDate;
   protected $transferAmountType = Price::class;
   protected $transferAmountDataType = '';
+  public $transferAmount;
   /**
    * @var string
    */

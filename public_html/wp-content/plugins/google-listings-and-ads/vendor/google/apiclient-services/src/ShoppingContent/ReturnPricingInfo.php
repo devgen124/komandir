@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class ReturnPricingInfo extends \Google\Model
+class ReturnPricingInfo extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   /**
    * @var bool
@@ -25,12 +25,16 @@ class ReturnPricingInfo extends \Google\Model
   public $chargeReturnShippingFee;
   protected $maxReturnShippingFeeType = MonetaryAmount::class;
   protected $maxReturnShippingFeeDataType = '';
+  public $maxReturnShippingFee;
   protected $refundableItemsTotalAmountType = MonetaryAmount::class;
   protected $refundableItemsTotalAmountDataType = '';
+  public $refundableItemsTotalAmount;
   protected $refundableShippingAmountType = MonetaryAmount::class;
   protected $refundableShippingAmountDataType = '';
+  public $refundableShippingAmount;
   protected $totalRefundedAmountType = MonetaryAmount::class;
   protected $totalRefundedAmountDataType = '';
+  public $totalRefundedAmount;
 
   /**
    * @param bool

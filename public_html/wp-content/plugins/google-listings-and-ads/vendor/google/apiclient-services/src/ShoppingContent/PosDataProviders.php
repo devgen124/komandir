@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class PosDataProviders extends \Google\Collection
+class PosDataProviders extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'posDataProviders';
   /**
@@ -26,6 +26,7 @@ class PosDataProviders extends \Google\Collection
   public $country;
   protected $posDataProvidersType = PosDataProvidersPosDataProvider::class;
   protected $posDataProvidersDataType = 'array';
+  public $posDataProviders;
 
   /**
    * @param string

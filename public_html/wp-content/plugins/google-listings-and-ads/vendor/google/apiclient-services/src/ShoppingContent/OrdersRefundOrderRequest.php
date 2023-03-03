@@ -15,12 +15,13 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class OrdersRefundOrderRequest extends \Google\Model
+class OrdersRefundOrderRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
   protected $amountType = MonetaryAmount::class;
   protected $amountDataType = '';
+  public $amount;
   /**
    * @var bool
    */

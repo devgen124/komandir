@@ -15,9 +15,9 @@
  * the License.
  */
 
-namespace Google\Service\ShoppingContent;
+namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\ShoppingContent;
 
-class PosListResponse extends \Google\Collection
+class PosListResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'resources';
   /**
@@ -26,6 +26,7 @@ class PosListResponse extends \Google\Collection
   public $kind;
   protected $resourcesType = PosStore::class;
   protected $resourcesDataType = 'array';
+  public $resources;
 
   /**
    * @param string
