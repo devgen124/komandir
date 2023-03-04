@@ -1207,3 +1207,12 @@ $cols: (1, 2, 3, 4, 5, 6);
         background-color: $accent-color-hover;
     }
 }
+
+a.showcoupon {
+    color: $accent-color;
+    transition: 0.3s;
+
+    &:hover {
+        color: $accent-color-hover;
+    }
+}

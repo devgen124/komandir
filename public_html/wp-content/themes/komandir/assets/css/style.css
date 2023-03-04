@@ -13744,6 +13744,14 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   background-color: #008790;
 }
 
+a.showcoupon {
+  color: #00a9b4;
+  transition: 0.3s;
+}
+a.showcoupon:hover {
+  color: #008790;
+}
+
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {
   padding: 7px;
   background: #fff;
