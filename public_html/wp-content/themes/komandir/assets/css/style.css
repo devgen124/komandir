@@ -11687,7 +11687,7 @@ main {
 }
 
 a {
-  color: inherit;
+  color: #00a9b4;
   text-decoration: none;
 }
 a:focus {
@@ -11695,6 +11695,9 @@ a:focus {
 }
 a:visited {
   color: inherit;
+}
+a:hover {
+  color: #008790;
 }
 
 img,
