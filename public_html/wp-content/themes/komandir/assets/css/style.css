@@ -11972,6 +11972,7 @@ input[type=checkbox]:checked + label::before {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
+  color: #707070;
   transition: 0.3s;
 }
 .top-menu a svg {
