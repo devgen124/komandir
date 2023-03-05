@@ -31,7 +31,7 @@
       </label>
       <a href="<?php echo wc_lostpassword_url();?>" class="recover-link">Забыли пароль?</a>
       <?php wp_nonce_field('komandir-pass', 'komandir-pass-nonce'); ?>
-      <button class="custom-popup-submit form-pass-submit">Войти</button>
+      <button type="submit" class="custom-popup-submit form-pass-submit">Войти</button>
     </form>
   </div></template>
 
@@ -43,7 +43,7 @@
         <input type="text" placeholder="Код из SMS" name="sms" maxlength="4" autocomplete="off"/>
       </label>
       <?php wp_nonce_field('komandir-sms', 'komandir-sms-nonce'); ?>
-      <button class="custom-popup-submit form-sms-submit"></button>
+      <button type="submit" class="custom-popup-submit form-sms-submit"></button>
     </form>
     <div class="counter-block"></div>
     <p class="alter-text">Другие способы входа:</p>
