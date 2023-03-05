@@ -44,7 +44,7 @@ main {
 
 
 a {
-    color: inherit;
+    color: $accent-color;
     text-decoration: none;
 
     &:focus {
@@ -53,6 +53,10 @@ a {
 
     &:visited {
         color: inherit;
+    }
+
+    &:hover {
+        color: $accent-color-hover;
     }
 }
 
