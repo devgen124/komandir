@@ -240,10 +240,12 @@ function komandir_woocommerce_wrapper_before() {
 
     add_filter('wishlist_table_heading', '__return_null');
 
+    // removes my account menu items
+
     add_filter('woocommerce_account_menu_items', 'komandir_my_account_menu_items');
 
     function komandir_my_account_menu_items($items) {
-        return array_filter($items, fn ($k) => !in_array($k, ['dashboard', 'downloads']), ARRAY_FILTER_USE_KEY);
+        return array_filter($items, fn ($k) => !in_array($k, ['dashboard', 'downloads', 'edit-address']), ARRAY_FILTER_USE_KEY);
     }
 
     function komandir_wc_get_categories($id) {
@@ -630,22 +632,29 @@ function komandir_woocommerce_wrapper_before() {
 
     // custom my address formatted address
 
-    add_filter('woocommerce_my_account_my_address_formatted_address', 'komandir_my_account_my_address_formatted_address', 10, 3);
+    // add_filter('woocommerce_my_account_my_address_formatted_address', 'komandir_my_account_my_address_formatted_address', 10, 3);
 
-    function komandir_my_account_my_address_formatted_address($address, $customer_id, $address_type) {
-        $address['phone'] = get_user_meta($customer_id, 'phone_number', true);
-        return $address;
-    };
+    // function komandir_my_account_my_address_formatted_address($address, $customer_id, $address_type) {
+    //     $address['phone'] = get_user_meta($customer_id, 'phone_number', true);
+    //     return $address;
+    // };
 
     // custom edit address in myaccount
 
-    add_filter('woocommerce_localisation_address_formats', 'komandir_localisation_address_formats');
+    // add_filter('woocommerce_my_account_get_addresses', 'komandir_my_account_get_addresses');
 
-    function komandir_localisation_address_formats($array) {
-        $array['default'] = "<b>Имя:</b> {name}\n<b>Телефон:</b> {phone}\n<b>Адрес:</b> {address_1}, {city}, {state}, {country}";
+    // function komandir_my_account_get_addresses($array) {
+    //     $array['billing'] = 'Адрес';
+    //     return $array;
+    // }
 
-        return $array;
-    }
+    // add_filter('woocommerce_localisation_address_formats', 'komandir_localisation_address_formats');
+
+    // function komandir_localisation_address_formats($array) {
+    //     $array['default'] = "<b>Имя:</b> {name}\n<b>Телефон:</b> {phone}\n<b>Адрес:</b> {address_1}, {city}, {state}, {country}";
+
+    //     return $array;
+    // }
 
     add_filter('woocommerce_formatted_address_replacements', 'komandir_formatted_address_replacements', 10, 2);
 
@@ -688,4 +697,14 @@ function komandir_woocommerce_wrapper_before() {
         }
 
         return $result;
+    }
+
+    //
+
+    add_action( 'woocommerce_checkout_order_review', 'komandir_checkout_order_review' );
+
+    function komandir_checkout_order_review() {
+        ?>
+        <p><b>По вопросу доставки мы с Вами свяжемся после оформления заказа. С условиями доставки можно ознакомиться на странице <a href="/shipping">Доставка</a></b></p>
+        <?php
     }
