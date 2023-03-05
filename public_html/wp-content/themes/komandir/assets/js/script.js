@@ -1101,12 +1101,34 @@ function initPopups() {
 
         const loginPopup = new Popup();
 
+        const addClickListener = ($instance) => {
+            let mouseDownEl;
+
+            $instance.contentContainer.on('mousedown mouseup', function (e) {
+                if ($instance.content) {
+                    const content = $instance.content.get(0);
+
+                    if (e.type == 'mousedown') mouseDownEl = e.target;
+
+                    if (!(mouseDownEl == content || content.contains(mouseDownEl))) {
+                        $instance.close();
+                    }
+                }
+            })
+        }
+
         $accountLink.magnificPopup({
             type: 'inline',
             midClick: true,
+            closeOnBgClick: false,
             callbacks: {
-                open: loginPopup.initLogin,
-                close: loginPopup.clear
+                open: function () {
+                    loginPopup.initLogin();
+                    addClickListener(this);
+                },
+                close: function () {
+                    loginPopup.clear();
+                }
             }
         });
 
@@ -1118,9 +1140,15 @@ function initPopups() {
             $changePhoneLink.magnificPopup({
                 type: 'inline',
                 midClick: true,
+                closeOnBgClick: false,
                 callbacks: {
-                    open: changePhonePopup.initChangePhone,
-                    close: changePhonePopup.clear
+                    open: function () {
+                        changePhonePopup.initChangePhone();
+                        addClickListener(this);
+                    },
+                    close: function () {
+                        changePhonePopup.clear();
+                    }
                 }
             });
         }
