@@ -525,12 +525,8 @@ function komandir_woocommerce_wrapper_before() {
 
                 foreach ($attribute_values as $attribute_value) {
                     $value_name = esc_html($attribute_value->name);
-
-                    if ($attribute_taxonomy->attribute_public) {
-                        $values[] = '<a href="' . esc_url(get_term_link($attribute_value->term_id, $attribute->get_name())) . '" rel="tag">' . $value_name . '</a>';
-                    } else {
-                        $values[] = $value_name;
-                    }
+                    
+                    $values[] = $value_name;
                 }
             } else {
                 $values = $attribute->get_options();
@@ -699,7 +695,7 @@ function komandir_woocommerce_wrapper_before() {
         return $result;
     }
 
-    //
+    // add shipping warning
 
     add_action( 'woocommerce_checkout_order_review', 'komandir_checkout_order_review' );
 
@@ -708,3 +704,12 @@ function komandir_woocommerce_wrapper_before() {
         <p><b>По вопросу доставки мы с Вами свяжемся после оформления заказа. С условиями доставки можно ознакомиться на странице <a href="/shipping">Доставка</a></b></p>
         <?php
     }
+
+    // remove product attributes links
+
+    // add_filter( 'woocommerce_display_product_attributes', 'komandir_remove_product_attributes_links' );
+
+    // function komandir_remove_product_attributes_links($product_attributes) {
+    //     var_dump($product_attributes);
+    //     return $product_attributes;
+    // }
