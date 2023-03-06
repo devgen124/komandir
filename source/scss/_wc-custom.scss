@@ -1216,3 +1216,8 @@ a.showcoupon {
         color: $accent-color-hover;
     }
 }
+
+.woocommerce-product-attributes-item__value a {
+    color: #000;
+    pointer-events: none;
+}

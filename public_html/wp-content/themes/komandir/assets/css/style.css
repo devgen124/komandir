@@ -13756,6 +13756,11 @@ a.showcoupon:hover {
   color: #008790;
 }
 
+.woocommerce-product-attributes-item__value a {
+  color: #000;
+  pointer-events: none;
+}
+
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {
   padding: 7px;
   background: #fff;
