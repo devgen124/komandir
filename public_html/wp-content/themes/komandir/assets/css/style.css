@@ -13765,6 +13765,7 @@ a.showcoupon:hover {
 }
 .wpcf7-form .wpcf7-acceptance a {
   position: relative;
+  color: #000;
   box-shadow: 0 1px #b9b9b9;
   transition: 0.3s;
 }
@@ -13802,6 +13803,7 @@ a.showcoupon:hover {
   margin-bottom: 26px;
 }
 .footer-links-list a {
+  color: #000;
   transition: 0.3s;
 }
 .footer-links-list a:hover {
