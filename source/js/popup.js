@@ -68,8 +68,6 @@ class Popup {
                 this.removeWarning(thisSection);
                 this.removeInvalidInputs(thisSection);
 
-                console.log(res);
-
                 if (res['console_message']) {
                     console.log(res['console_message']);
                 }
