@@ -28,14 +28,14 @@ class PopupController {
 
         $response = array();
 
-        if (!isset($_POST['phone'])) wp_die();
+        if (empty($_POST['phone']) || empty(trim($_POST['phone']))) {
 
-        $raw_phone = $_POST['phone'];
+            $response['error_message'][] = 'Введите номер телефона';
+            $response['error_fields'][] = 'phone';
 
-        if (self::is_phone(wc_sanitize_phone_number($raw_phone))) {
+        } elseif (self::is_phone(wc_sanitize_phone_number($_POST['phone']))) {
 
-            $phone = wc_sanitize_phone_number($raw_phone);
-
+            $phone = wc_sanitize_phone_number($_POST['phone']);
             $last_time = WC()->session->get('sms_timestamp') ? (int) WC()->session->get('sms_timestamp') : 0;
 
             $now_time = time();
@@ -58,10 +58,7 @@ class PopupController {
                     $response['console_message'] = $e->getMessage();
                 }
             }
-        } else if (!trim($raw_phone)) {
 
-            $response['error_message'][] = 'Заполните поле';
-            $response['error_fields'][] = 'phone';
         } else {
 
             $response['error_message'][] = 'Неверный формат';
