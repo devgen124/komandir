@@ -13,7 +13,7 @@
     <p class="alter-text">Другие способы входа:</p>
     <a href="#" class="login-pass-link">Войти с паролем</a>
     <p class="policy-text">Нажимая кнопку "Получить код", Вы соглашаетесь c условиями
-      <a href="#">политики конфиденциальности</a>
+      <a href="/privacy-policy">политики конфиденциальности</a>
     </p>
   </div></template>
 
