@@ -118,7 +118,7 @@
 		</div>
 		<div class="row justify-content-between footer-row">
 			<div class="col-auto">
-				<div class="footer-copyright">© Командир 2022</div>
+				<div class="footer-copyright">© Командир 2023</div>
 			</div>
 			<div class="col-auto">
 				<div class="footer-copyright">Разработка сайта Rustika</div>
