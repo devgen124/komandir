@@ -4,11 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf720ea72b9fca52013002e65d19a2b03
+class ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868
 {
     public static $files = array (
         '3773ef3f09c37da5478d578e32b03a4b' => __DIR__ . '/../..' . '/jetpack_vendor/automattic/jetpack-assets/actions.php',
-        '02de31f978c9996d3c90b9ae7e83529d' => __DIR__ . '/../..' . '/lib/compatibility/functions.php',
+        'a7b5e344bf0356201afb442ca78f3772' => __DIR__ . '/../..' . '/compatibility/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -83,6 +83,7 @@ class ComposerStaticInitf720ea72b9fca52013002e65d19a2b03
         'QuadLayers\\WP_Notice_Plugin_Promote\\Load' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Load.php',
         'QuadLayers\\WP_Notice_Plugin_Promote\\PluginByFile' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/PluginByFile.php',
         'QuadLayers\\WP_Notice_Plugin_Promote\\PluginBySlug' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/PluginBySlug.php',
+        'QuadLayers\\WP_Notice_Plugin_Promote\\PluginBySlugV2' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/PluginBySlugV2.php',
         'QuadLayers\\WP_Notice_Plugin_Promote\\Traits\\PluginActions' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Traits/PluginActions.php',
         'QuadLayers\\WP_Notice_Plugin_Promote\\Traits\\PluginActionsLinks' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Traits/PluginActionsLinks.php',
         'QuadLayers\\WP_Notice_Plugin_Promote\\Traits\\PluginDataByFile' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Traits/PluginDataByFile.php',
@@ -97,9 +98,9 @@ class ComposerStaticInitf720ea72b9fca52013002e65d19a2b03
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf720ea72b9fca52013002e65d19a2b03::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf720ea72b9fca52013002e65d19a2b03::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitf720ea72b9fca52013002e65d19a2b03::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868::$classMap;
 
         }, null, ClassLoader::class);
     }

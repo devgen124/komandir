@@ -28,8 +28,10 @@ use Google\Ads\GoogleAds\V12\Services\AdGroupAdServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AdGroupCriterionServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AdGroupServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AdServiceClient;
+use Google\Ads\GoogleAds\V12\Services\AssetGroupAssetServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AssetGroupListingGroupFilterServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AssetGroupServiceClient;
+use Google\Ads\GoogleAds\V12\Services\AssetServiceClient;
 use Google\Ads\GoogleAds\V12\Services\BillingSetupServiceClient;
 use Google\Ads\GoogleAds\V12\Services\CampaignBudgetServiceClient;
 use Google\Ads\GoogleAds\V12\Services\CampaignCriterionServiceClient;
@@ -191,6 +193,14 @@ trait ServiceClientFactoryTrait
     }
 
     /**
+     * @return AssetGroupAssetServiceClient
+     */
+    public function getAssetGroupAssetServiceClient(): AssetGroupAssetServiceClient
+    {
+        return new AssetGroupAssetServiceClient($this->getGoogleAdsClientOptions());
+    }
+
+    /**
      * @return AssetGroupListingGroupFilterServiceClient
      */
     public function getAssetGroupListingGroupFilterServiceClient(): AssetGroupListingGroupFilterServiceClient
@@ -204,6 +214,14 @@ trait ServiceClientFactoryTrait
     public function getAssetGroupServiceClient(): AssetGroupServiceClient
     {
         return new AssetGroupServiceClient($this->getGoogleAdsClientOptions());
+    }
+
+    /**
+     * @return AssetServiceClient
+     */
+    public function getAssetServiceClient(): AssetServiceClient
+    {
+        return new AssetServiceClient($this->getGoogleAdsClientOptions());
     }
 
     /**

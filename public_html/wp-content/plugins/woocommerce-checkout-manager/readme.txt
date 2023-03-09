@@ -5,13 +5,13 @@ Tags: checkout field editor, woocommerce checkout field editor, checkout manager
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 6.1
-Stable tag: 7.0.3
+Stable tag: 7.0.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 WC requires at least: 4.7.0
 WC tested up to: 7.4
 
-Checkout Field Manager (Checkout Manager) for WooCommerce is the best pluginn most advanced "Checkout Manager" to customize checkout fields on your WooCommerce checkout page.
+Checkout Field Manager (Checkout Manager) for WooCommerce is the best plugin most advanced "Checkout Manager" to customize checkout fields on your WooCommerce checkout page.
 
 == Presentation ==
 
@@ -148,6 +148,21 @@ Your Order data can be reviewed in each order within the default WooCommerce Ord
 10. Handle uploaded files in order admin dashboard.
 
 == Changelog ==
+
+=  7.0.8
+* Fix: Composer packages update
+
+=  7.0.7
+* Fix: Composer packages update
+
+=  7.0.6
+* Fix: Language package update
+
+=  7.0.5
+* Fix: Composer packages update
+
+= 7.0.4 = 
+* Fix: Fix Call to a member function get_cart_contents() on null
 
 =  7.0.3
 * Fix: WooCommerce Paypal Payments compatibility

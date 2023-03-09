@@ -24,6 +24,7 @@ use Google\Ads\GoogleAds\V12\Services\AdGroupAdServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AdGroupCriterionServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AdGroupServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AdServiceClient;
+use Google\Ads\GoogleAds\V12\Services\AssetGroupAssetServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AssetGroupListingGroupFilterServiceClient;
 use Google\Ads\GoogleAds\V12\Services\AssetGroupServiceClient;
 use Google\Ads\GoogleAds\V12\Services\BillingSetupServiceClient;
@@ -177,6 +178,26 @@ final class ResourceNames
     }
 
     /**
+     * Generates a resource name of asset type.
+     *
+     * @param string $customerId
+     * @param string $assetId
+     * @return string the asset resource name
+     */
+    public static function forAsset(
+        $customerId,
+        $assetId
+    ): string {
+        $pathTemplate = new PathTemplate(
+            'customers/{customer_id}/assets/{asset_id}'
+        );
+        return $pathTemplate->render([
+            'customer_id' => $customerId,
+            'asset_id' => $assetId,
+        ]);
+    }
+
+    /**
      * Generates a resource name of asset group type.
      *
      * @param string $customerId
@@ -190,6 +211,29 @@ final class ResourceNames
         return AssetGroupServiceClient::assetGroupName(
             $customerId,
             $assetGroupId
+        );
+    }
+
+    /**
+     * Generates a resource name of asset group asset type.
+     *
+     * @param string $customerId
+     * @param string $assetGroupId
+     * @param string $assetId
+     * @param string $fieldType
+     * @return string the asset group asset resource name
+     */
+    public static function forAssetGroupAsset(
+        $customerId,
+        $assetGroupId,
+        $assetId,
+        $fieldType
+    ): string {
+        return AssetGroupAssetServiceClient::assetGroupAssetName(
+            $customerId,
+            $assetGroupId,
+            $assetId,
+            $fieldType
         );
     }
 

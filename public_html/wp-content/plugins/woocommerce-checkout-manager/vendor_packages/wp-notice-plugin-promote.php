@@ -1,6 +1,6 @@
 <?php
 
-if ( class_exists( 'QuadLayers\\WP_Plugin_Table_Links\\Load' ) ) {
+if ( class_exists( 'QuadLayers\\WP_Notice_Plugin_Promote\\Load' ) ) {
 	/**
 	 *  Promote constants
 	 */
@@ -15,6 +15,7 @@ if ( class_exists( 'QuadLayers\\WP_Plugin_Table_Links\\Load' ) ) {
 	define( 'WOOCCM_PROMOTE_PREMIUM_SELL_SLUG', 'woocommerce-checkout-manager-pro' );
 	define( 'WOOCCM_PROMOTE_PREMIUM_SELL_NAME', 'WooCommerce Checkout Manager PRO' );
 	define( 'WOOCCM_PROMOTE_PREMIUM_SELL_URL', WOOCCM_PREMIUM_SELL_URL );
+	define( 'WOOCCM_PROMOTE_PREMIUM_INSTALL_URL', 'https://quadlayers.com/product/woocommerce-checkout-manager/?utm_source=wooccm_admin' );
 	/**
 	 * Notice cross sell 1
 	 */
@@ -58,6 +59,11 @@ if ( class_exists( 'QuadLayers\\WP_Plugin_Table_Links\\Load' ) ) {
 			),
 			array(
 				'plugin_slug'        => WOOCCM_PROMOTE_PREMIUM_SELL_SLUG,
+				'plugin_install_link'   => WOOCCM_PROMOTE_PREMIUM_INSTALL_URL,
+				'plugin_install_label'  => esc_html__(
+					'Purchase Now',
+					'woocommerce-checkout-manager'
+				),
 				'notice_delay'       => MONTH_IN_SECONDS,
 				'notice_logo'        => WOOCCM_PROMOTE_LOGO_SRC,
 				'notice_title'       => esc_html__(

@@ -82,66 +82,68 @@ class Fields_Disable {
 	public function disable_by_category( $field ) {
 		if ( empty( $field['disabled'] ) && ( ! empty( $field['hide_product_cat'] ) || ! empty( $field['show_product_cat'] ) ) ) {
 
-			$cart_contents = WC()->cart->get_cart_contents();
-			if ( is_object( WC()->cart ) && count( $cart_contents ) ) {
+			if ( is_object( WC()->cart ) ) {
+				$cart_contents = WC()->cart->get_cart_contents();
+				if ( count( $cart_contents ) ) {
 
-				$hide_cats_array = (array) $field['hide_product_cat'];
+					$hide_cats_array = (array) $field['hide_product_cat'];
 
-				$show_cats_array = (array) $field['show_product_cat'];
+					$show_cats_array = (array) $field['show_product_cat'];
 
-				$more_product = empty( $field['more_product'] );
+					$more_product = empty( $field['more_product'] );
 
-				$product_cats = array();
+					$product_cats = array();
 
-				foreach ( $cart_contents as $key => $values ) {
-					$cats = wp_get_post_terms( $values['product_id'], 'product_cat', array( 'fields' => 'ids' ) );
-					if ( $cats ) {
-						$product_cats = array_merge( $product_cats, $cats );
+					foreach ( $cart_contents as $key => $values ) {
+						$cats = wp_get_post_terms( $values['product_id'], 'product_cat', array( 'fields' => 'ids' ) );
+						if ( $cats ) {
+							$product_cats = array_merge( $product_cats, $cats );
+						}
 					}
-				}
 
-				// field without more
-				// -------------------------------------------------------------------
-				if ( $more_product && count( $cart_contents ) < 2 ) {
-					// hide field
-					// -----------------------------------------------------------------
-					if ( count( $hide_cats_array ) ) {
-						if ( array_intersect( $product_cats, $hide_cats_array ) ) {
+					// field without more
+					// -------------------------------------------------------------------
+					if ( $more_product && count( $cart_contents ) < 2 ) {
+						// hide field
+						// -----------------------------------------------------------------
+						if ( count( $hide_cats_array ) ) {
+							if ( array_intersect( $product_cats, $hide_cats_array ) ) {
 								$field['disabled'] = true;
+							}
 						}
-					}
 
-					// show field
-					// -----------------------------------------------------------------
-					if ( count( $show_cats_array ) ) {
-						if ( ! array_intersect( $product_cats, $show_cats_array ) ) {
-							$field['disabled'] = true;
-						} else {
-							$field['disabled'] = false;
-						}
-					}
-				}
-
-				// field with more
-				// -------------------------------------------------------------------
-				if ( ! $more_product ) {
-
-					// hide field
-					// -------------------------------------------------------------
-					if ( count( $hide_cats_array ) ) {
-						if ( array_intersect( $product_cats, $hide_cats_array ) ) {
+						// show field
+						// -----------------------------------------------------------------
+						if ( count( $show_cats_array ) ) {
+							if ( ! array_intersect( $product_cats, $show_cats_array ) ) {
 								$field['disabled'] = true;
+							} else {
+								$field['disabled'] = false;
+							}
 						}
 					}
 
-					// show field
-					// ---------------------------------------------------------------
-					if ( count( $show_cats_array ) ) {
+					// field with more
+					// -------------------------------------------------------------------
+					if ( ! $more_product ) {
 
-						if ( ! array_intersect( $product_cats, $show_cats_array ) ) {
-							$field['disabled'] = true;
-						} else {
-							$field['disabled'] = false;
+						// hide field
+						// -------------------------------------------------------------
+						if ( count( $hide_cats_array ) ) {
+							if ( array_intersect( $product_cats, $hide_cats_array ) ) {
+								$field['disabled'] = true;
+							}
+						}
+
+						// show field
+						// ---------------------------------------------------------------
+						if ( count( $show_cats_array ) ) {
+
+							if ( ! array_intersect( $product_cats, $show_cats_array ) ) {
+								$field['disabled'] = true;
+							} else {
+								$field['disabled'] = false;
+							}
 						}
 					}
 				}
@@ -153,60 +155,61 @@ class Fields_Disable {
 
 	public function disable_by_product( $field ) {
 		if ( empty( $field['disabled'] ) && ( ! empty( $field['hide_product'] ) || ! empty( $field['show_product'] ) ) ) {
+			if ( is_object( WC()->cart ) ) {
+				$cart_contents = WC()->cart->get_cart_contents();
+				if ( count( $cart_contents ) ) {
 
-			$cart_contents = WC()->cart->get_cart_contents();
-			if ( is_object( WC()->cart ) && count( $cart_contents ) ) {
+					$hide_ids_array = (array) $field['hide_product'];
 
-				$hide_ids_array = (array) $field['hide_product'];
+					$show_ids_array = (array) $field['show_product'];
 
-				$show_ids_array = (array) $field['show_product'];
+					$more_product = empty( $field['more_product'] );
 
-				$more_product = empty( $field['more_product'] );
+					$product_ids = array_column( $cart_contents, 'product_id' );
 
-				$product_ids = array_column( $cart_contents, 'product_id' );
-
-				// field without more
-				// -------------------------------------------------------------------
-				if ( $more_product && count( $cart_contents ) < 2 ) {
-					// hide field
-					// -----------------------------------------------------------------
-					if ( count( $hide_ids_array ) ) {
-						if ( array_intersect( $product_ids, $hide_ids_array ) ) {
-							$field['disabled'] = true;
-						}
-					}
-
-					// show field
-					// -----------------------------------------------------------------
-					if ( count( $show_ids_array ) ) {
-						if ( ! array_intersect( $product_ids, $show_ids_array ) ) {
+					// field without more
+					// -------------------------------------------------------------------
+					if ( $more_product && count( $cart_contents ) < 2 ) {
+						// hide field
+						// -----------------------------------------------------------------
+						if ( count( $hide_ids_array ) ) {
+							if ( array_intersect( $product_ids, $hide_ids_array ) ) {
 								$field['disabled'] = true;
-						} else {
+							}
+						}
+
+						// show field
+						// -----------------------------------------------------------------
+						if ( count( $show_ids_array ) ) {
+							if ( ! array_intersect( $product_ids, $show_ids_array ) ) {
+								$field['disabled'] = true;
+							} else {
 								$field['disabled'] = false;
+							}
 						}
 					}
-				}
 
-				// field with more
-				// -------------------------------------------------------------------
-				if ( ! $more_product ) {
+					// field with more
+					// -------------------------------------------------------------------
+					if ( ! $more_product ) {
 
-					// hide field
-					// -------------------------------------------------------------
-					if ( count( $hide_ids_array ) ) {
+						// hide field
+						// -------------------------------------------------------------
+						if ( count( $hide_ids_array ) ) {
 
-						if ( array_intersect( $product_ids, $hide_ids_array ) ) {
+							if ( array_intersect( $product_ids, $hide_ids_array ) ) {
 								$field['disabled'] = true;
+							}
 						}
-					}
 
-					// show field
-					// ---------------------------------------------------------------
-					if ( count( $show_ids_array ) ) {
-						if ( ! array_intersect( $product_ids, $show_ids_array ) ) {
-							$field['disabled'] = true;
-						} else {
-							$field['disabled'] = false;
+						// show field
+						// ---------------------------------------------------------------
+						if ( count( $show_ids_array ) ) {
+							if ( ! array_intersect( $product_ids, $show_ids_array ) ) {
+								$field['disabled'] = true;
+							} else {
+								$field['disabled'] = false;
+							}
 						}
 					}
 				}
@@ -216,4 +219,3 @@ class Fields_Disable {
 		return $field;
 	}
 }
-
