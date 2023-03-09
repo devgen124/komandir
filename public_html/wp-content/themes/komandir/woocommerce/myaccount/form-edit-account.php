@@ -13,30 +13,30 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.5.0
+ * @version 7.0.1
  */
 
-defined('ABSPATH') || exit;
+ defined( 'ABSPATH' ) || exit;
 
-do_action('woocommerce_before_edit_account_form'); ?>
+ do_action( 'woocommerce_before_edit_account_form' ); ?>
 
 <div class="woocommerce-edit-account-wrapper">
 
-    <form class="woocommerce-EditAccountForm edit-account" action="" method="post" <?php do_action('woocommerce_edit_account_form_tag'); ?>>
+<form class="woocommerce-EditAccountForm edit-account" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> >
 
-        <?php do_action('woocommerce_edit_account_form_start'); ?>
+        <?php do_action( 'woocommerce_edit_account_form_start' ); ?>
 
         <label class="edit-account-label">
-            <input type="text" name="account_first_name" autocomplete="given-name" value="<?php echo esc_attr($user->first_name); ?>" placeholder="<?php esc_html_e('First name', 'woocommerce'); ?>" />
+            <input type="text" name="account_first_name" autocomplete="given-name" value="<?php echo esc_attr($user->first_name); ?>" placeholder="<?php esc_html_e( 'First name', 'woocommerce' ); ?>" />
         </label>
         <label class="edit-account-label">
-            <input type="text" name="account_last_name" autocomplete="family-name" value="<?php echo esc_attr($user->last_name); ?>" placeholder="<?php esc_html_e('Last name', 'woocommerce'); ?>" />
+            <input type="text" name="account_last_name" autocomplete="family-name" value="<?php echo esc_attr($user->last_name); ?>" placeholder="<?php esc_html_e( 'Last name', 'woocommerce' ); ?>" />
         </label>
         <label class="edit-account-label">
-            <input type="text" name="account_display_name" value="<?php echo esc_attr($user->display_name); ?>" placeholder="<?php esc_html_e('Display name', 'woocommerce'); ?>" />
+            <input type="text" name="account_display_name" value="<?php echo esc_attr( $user->display_name ); ?>" placeholder="<?php esc_html_e( 'Display name', 'woocommerce' ); ?>" />
         </label>
         <label class="edit-account-label">
-            <input type="email" name="account_email" id="account_email" autocomplete="email" value="<?php echo esc_attr($user->user_email); ?>" placeholder="<?php esc_html_e('Email address', 'woocommerce'); ?>" />
+            <input type="email" name="account_email" id="account_email" autocomplete="email" value="<?php echo esc_attr( $user->user_email ); ?>" placeholder="<?php esc_html_e( 'Email address', 'woocommerce' ); ?>" />
         </label>
 
         <fieldset class="edit-account-fieldset">
@@ -63,17 +63,17 @@ do_action('woocommerce_before_edit_account_form'); ?>
             </label>
         </fieldset>
 
-        <?php do_action('woocommerce_edit_account_form'); ?>
+        <?php do_action( 'woocommerce_edit_account_form' ); ?>
 
 
-        <?php wp_nonce_field('save_account_details', 'save-account-details-nonce'); ?>
-        <button type="submit" class="woocommerce-Button button edit-account-button"><?php esc_html_e('Save changes', 'woocommerce'); ?></button>
+        <?php wp_nonce_field( 'save_account_details', 'save-account-details-nonce' ); ?>
+        <button type="submit" class="woocommerce-Button button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> edit-account-button"><?php esc_html_e('Save changes', 'woocommerce'); ?></button>
         <input type="hidden" name="action" value="save_account_details" />
 
-        <?php do_action('woocommerce_edit_account_form_end'); ?>
+        <?php do_action( 'woocommerce_edit_account_form_end' ); ?>
     </form>
 
-    <?php do_action('woocommerce_after_edit_account_form'); ?>
+    <?php do_action( 'woocommerce_after_edit_account_form' ); ?>
 
 </div>
 
