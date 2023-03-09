@@ -76,17 +76,17 @@ class PopupController {
 
         $response = array();
 
-        if (!isset($_POST['phone'])) wp_die();
+        if (empty($_POST['phone']) || empty(trim($_POST['phone']))) {
 
-        $raw_phone = $_POST['phone'];
+            $response['error_message'][] = 'Введите номер телефона';
+            $response['error_fields'][] = 'phone';
 
-        if (self::is_phone(wc_sanitize_phone_number($raw_phone))) {
-
+        } elseif (self::is_phone(wc_sanitize_phone_number($_POST['phone']))) {
             $current_user = wp_get_current_user();
 
             $current_user_phone = get_user_meta($current_user->ID, 'billing_phone', true);
 
-            $phone = wc_sanitize_phone_number($raw_phone);
+            $phone = wc_sanitize_phone_number($_POST['phone']);
 
             if (self::get_user_by_phone($phone)) {
 
