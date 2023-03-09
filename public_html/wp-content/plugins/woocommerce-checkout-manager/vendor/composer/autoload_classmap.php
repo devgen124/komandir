@@ -43,6 +43,7 @@ return array(
     'QuadLayers\\WP_Notice_Plugin_Promote\\Load' => $baseDir . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Load.php',
     'QuadLayers\\WP_Notice_Plugin_Promote\\PluginByFile' => $baseDir . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/PluginByFile.php',
     'QuadLayers\\WP_Notice_Plugin_Promote\\PluginBySlug' => $baseDir . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/PluginBySlug.php',
+    'QuadLayers\\WP_Notice_Plugin_Promote\\PluginBySlugV2' => $baseDir . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/PluginBySlugV2.php',
     'QuadLayers\\WP_Notice_Plugin_Promote\\Traits\\PluginActions' => $baseDir . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Traits/PluginActions.php',
     'QuadLayers\\WP_Notice_Plugin_Promote\\Traits\\PluginActionsLinks' => $baseDir . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Traits/PluginActionsLinks.php',
     'QuadLayers\\WP_Notice_Plugin_Promote\\Traits\\PluginDataByFile' => $baseDir . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Traits/PluginDataByFile.php',

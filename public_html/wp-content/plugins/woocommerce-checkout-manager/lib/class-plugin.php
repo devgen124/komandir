@@ -13,7 +13,7 @@ final class Plugin {
 
 	protected static $_instance;
 
-	public function __construct() {
+	private function __construct() {
 
 		/**
 		 * Load plugin textdomain.
