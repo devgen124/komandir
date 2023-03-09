@@ -157,7 +157,9 @@ class Popup {
         inpArr.forEach(inp => {
             const invalidInput = section.querySelector(`input[name="${inp}"]`);
             invalidInput.classList.add('invalid');
+            console.log(invalidInput);
             invalidInput.oninput = () => {
+                console.log('oninput');
                 invalidInput.classList.remove('invalid');
             };
         });
