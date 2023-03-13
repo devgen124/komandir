@@ -713,3 +713,21 @@ function komandir_woocommerce_wrapper_before() {
     //     var_dump($product_attributes);
     //     return $product_attributes;
     // }
+
+    // DEBUG LOG FUNCTION
+
+    function log_error($var) {
+        ob_start();
+        var_dump($var);
+        $res =  ob_get_contents();
+        ob_end_clean();
+        error_log('KOMANDIR LOG ERROR: '.$res);
+    }
+
+    add_action( 'woocommerce_new_order', 'komandir_woocommerce_update_new_order_phone', 10, 2 );
+
+    function komandir_woocommerce_update_new_order_phone ( $order_id, $order ) {
+        $phone = get_user_meta($order->get_user_id(), 'billing_phone', true);
+        update_post_meta($order_id, '_billing_phone', $phone);
+    }
+
