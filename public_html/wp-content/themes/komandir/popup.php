@@ -121,7 +121,7 @@ class PopupController {
             }
         } else {
 
-            $response['error_message'][] = !trim($raw_phone) ? 'Заполните поле' : 'Неверный формат';
+            $response['error_message'][] = !trim($_POST['phone']) ? 'Заполните поле' : 'Неверный формат';
             $response['error_fields'][] = 'phone';
         }
 
