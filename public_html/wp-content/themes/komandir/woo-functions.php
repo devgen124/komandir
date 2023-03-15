@@ -731,3 +731,60 @@ function komandir_woocommerce_wrapper_before() {
         update_post_meta($order_id, '_billing_phone', $phone);
     }
 
+    // скидка 1% на оплату картой
+
+    add_action( 'woocommerce_cart_calculate_fees','online_payment_method_discount', 20 );
+    function online_payment_method_discount( $cart ) {
+    
+        if ( is_admin() && ! defined( 'DOING_AJAX' ) ) return;
+    
+        $payment_method = 'rbspayment';
+    
+        $percent = 5;
+    
+        $cart_total = $cart->subtotal_ex_tax;
+        $chosen_payment_method = WC()->session->get('chosen_payment_method');
+    
+        if( $payment_method == $chosen_payment_method ){
+            $label_text = 'Скидка для онлайн оплаты банковской картой 5%';
+            $discount = number_format(($cart_total / 100) * $percent, 2);
+            $cart->add_fee( $label_text, -$discount, false );
+        }
+    }
+    
+    add_action( 'woocommerce_review_order_before_payment', 'refresh_payment_methods' );
+    function refresh_payment_methods(){
+        ?>
+        <script type="text/javascript">
+            (function($){
+                $( 'form.checkout' ).on( 'change', 'input[name^="payment_method"]', function() {
+                    $('body').trigger('update_checkout');
+                });
+            })(jQuery);
+        </script>
+        <?php
+    }
+
+// добавление суммы отрицательных сборов как скидки при обмене с 1С
+
+add_filter( 'itglx/wc/1c/sale/query/order-discount-list', 'komandir_add_negative_fees_as_discounts', 10, 2 );
+
+function komandir_add_negative_fees_as_discounts( $list, $order ) {
+    $total_fees = array_reduce(
+        $order->get_fees(),
+        function ($total, $fee) {
+            $amount = $fee->get_amount();
+            return $amount < 0 ? ( $total + $amount ) : $total;
+        }
+    );
+
+    if ($total_fees) {
+        $list[] = [
+            'Наименование' => 'Скидка',
+            'Сумма' => -$total_fees,
+            'УчтеноВСумме' => 'true',
+        ];
+    }
+
+    return $list;
+}
