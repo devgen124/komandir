@@ -724,11 +724,14 @@ function komandir_woocommerce_wrapper_before() {
         error_log('KOMANDIR LOG ERROR: '.$res);
     }
 
-    add_action( 'woocommerce_new_order', 'komandir_woocommerce_update_new_order_phone', 10, 2 );
+    add_action( 'woocommerce_new_order', 'komandir_woocommerce_set_name_and_phone', 10, 2 );
 
-    function komandir_woocommerce_update_new_order_phone ( $order_id, $order ) {
+    function komandir_woocommerce_set_name_and_phone ( $order_id, $order ) {
+        $user = $order->get_user();
         $phone = get_user_meta($order->get_user_id(), 'billing_phone', true);
         update_post_meta($order_id, '_billing_phone', $phone);
+        update_post_meta($order_id, '_billing_first_name', $user->first_name);
+        update_post_meta($order_id, '_billing_last_name', $user->last_name);
     }
 
     // скидка 1% на оплату картой
@@ -747,8 +750,11 @@ function komandir_woocommerce_wrapper_before() {
     
         if( $payment_method == $chosen_payment_method ){
             $label_text = 'Скидка для онлайн оплаты банковской картой 5%';
-            $discount = number_format(($cart_total / 100) * $percent, 2);
-            $cart->add_fee( $label_text, -$discount, false );
+            $discount = number_format(($cart_total / 100) * $percent, 0);
+            if ($discount) {
+                $cart->add_fee( $label_text, -$discount, false );
+            }
+            error_log('DISCOUNT '.$discount);
         }
     }
     
