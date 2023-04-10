@@ -2,19 +2,14 @@
 # This file is distributed under the same license as the Themes - Twenty Twenty-Two package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-05-24 20:30:06+0000\n"
+"PO-Revision-Date: 2023-03-29 19:09:03+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.0-alpha.3\n"
+"X-Generator: GlotPress/4.0.0-alpha.4\n"
 "Language: ru\n"
 "Project-Id-Version: Themes - Twenty Twenty-Two\n"
-
-#. Description of the theme
-#, gp-priority: high
-msgid "Built on a solidly designed foundation, Twenty Twenty-Two embraces the idea that everyone deserves a truly unique website. The theme’s subtle styles are inspired by the diversity and versatility of birds: its typography is lightweight yet strong, its color palette is drawn from nature, and its layout elements sit gently on the page. The true richness of Twenty Twenty-Two lies in its opportunity for customization. The theme is built to take advantage of the Full Site Editing features introduced in WordPress 5.9, which means that colors, typography, and the layout of every single page on your site can be customized to suit your vision. It also includes dozens of block patterns, opening the door to a wide range of professionally designed layouts in just a few clicks. Whether you’re building a single-page website, a blog, a business website, or a portfolio, Twenty Twenty-Two will help you create a site that is uniquely yours."
-msgstr "Twenty Twenty-Two, построена на прочной основе и воплощает идею о том, что каждый достоин создания поистине уникального веб-сайта. Утончённые стили темы вдохновлены разнообразием и универсальностью птиц: её типографика легкая, но сильная; цветовая палитра заимствована из природы, а элементы макета мягко ложатся на страницу. Истинное богатство Twenty Twenty-Two заключается в возможностях настройки. Эта тема создана для использования преимуществ функций полного редактирования сайта, представленных в WordPress 5.9, это означает, что цвета, типографика и макет каждой отдельной страницы вашего сайта могут быть настроены в соответствии с вашим видением. Она также включает в себя десятки шаблонов блоков, открывающих путь к широкому спектру профессионально разработанных макетов всего за несколько щелчков мышью. Создаете ли вы одностраничный веб-сайт, блог, бизнес-сайт или портфолио, Twenty Twenty-Two поможет вам создать сайт, который будет уникальным для вас."
 
 #. Theme Name of the theme
 #, gp-priority: high
@@ -163,7 +158,7 @@ msgstr "Диагональный от вторичного к фону"
 #: theme.json
 msgctxt "Gradient name"
 msgid "Diagonal primary to foreground"
-msgstr "Диагональный от основного к фону"
+msgstr "Диагональный от основного к переднему плану"
 
 #: theme.json
 msgctxt "Gradient name"
@@ -502,16 +497,13 @@ msgid "Title and button header"
 msgstr "Название и заголовок с кнопкой"
 
 #: inc/patterns/header-text-only-with-tagline-black-background.php:6
-msgid "Text-only header with tagline and black background"
-msgstr "Заголовок только с текстом и слоганом на чёрном фоне"
-
-#: inc/patterns/header-text-only-salmon-background.php:6
-msgid "Text-only header with salmon background"
-msgstr "Заголовок только с текстом на фоне лососевого цвета"
+msgid "Text-only header with tagline and background"
+msgstr "Заголовок только с текстом и слоганом на фоне"
 
 #: inc/patterns/header-text-only-green-background.php:6
-msgid "Text-only header with green background"
-msgstr "Заголовок только с текстом на зеленом фоне"
+#: inc/patterns/header-text-only-salmon-background.php:6
+msgid "Text-only header with background"
+msgstr "Заголовок только с текстом на фоне"
 
 #: inc/patterns/header-stacked.php:6
 msgid "Logo and navigation header"
@@ -522,16 +514,16 @@ msgid "Small header with dark background"
 msgstr "Маленький заголовок с тёмным фоном"
 
 #: inc/patterns/header-logo-navigation-social-black-background.php:6
-msgid "Logo, navigation, and social links header with black background"
-msgstr "Логотип, навигация и заголовок с социальными ссылками и тёмным фоном"
+msgid "Logo, navigation, and social links header with background"
+msgstr "Логотип, навигация и заголовок с социальными ссылками и фоном"
 
 #: inc/patterns/header-logo-navigation-offset-tagline.php:6
 msgid "Logo, navigation, and offset tagline Header"
 msgstr "Логотип, навигация и смещенный заголовок со слоганом"
 
 #: inc/patterns/header-logo-navigation-gray-background.php:6
-msgid "Logo and navigation header with gray background"
-msgstr "Логотип и заголовок навигации с серым фоном"
+msgid "Logo and navigation header with background"
+msgstr "Логотип и заголовок навигации с фоном"
 
 #: inc/patterns/header-large-dark.php:24
 #: inc/patterns/hidden-heading-and-bird.php:14
@@ -559,16 +551,16 @@ msgid "Default header"
 msgstr "Заголовок по умолчанию"
 
 #: inc/patterns/header-centered-title-navigation-social.php:6
-msgid "Centered header with navigation, social links, and salmon background"
-msgstr "Центрированный заголовок с навигацией, социальными ссылками и лососевым цветом фона"
+msgid "Centered header with navigation, social links, and background"
+msgstr "Центрированный заголовок с навигацией, социальными ссылками и фоном"
 
 #: inc/patterns/header-centered-logo.php:6
 msgid "Header with centered logo"
 msgstr "Заголовок с центированным заголовком"
 
 #: inc/patterns/header-centered-logo-black-background.php:6
-msgid "Header with centered logo and black background"
-msgstr "Заголовок с центрированным заголовком и тёмным фоном"
+msgid "Header with centered logo and background"
+msgstr "Заголовок с логотипом и фоном по центру"
 
 #: inc/patterns/general-wide-image-intro-buttons.php:31
 msgid "Learn More"
