@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack &#8211; WP Security, Backup, Speed, &amp; Growth - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-03-14 10:54:10+0000\n"
+"PO-Revision-Date: 2023-03-14 20:43:05+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -220,14 +220,14 @@ msgstr "Извините, у вас нет доступа к шаблонам н
 msgid "The type of the template."
 msgstr "Тип шаблона."
 
-#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1719
-#: modules/contact-form/grunion-contact-form.php:1830
+#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1726
+#: modules/contact-form/grunion-contact-form.php:1840
 msgctxt "noun"
 msgid "Consent"
 msgstr "Согласие"
 
-#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1720
-#: modules/contact-form/grunion-contact-form.php:1831
+#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1727
+#: modules/contact-form/grunion-contact-form.php:1841
 msgid "IP Address"
 msgstr "IP адрес"
 
@@ -255,7 +255,7 @@ msgstr "Чтобы загрузить блок, добавьте в свой ф�
 msgid "#%d (no title)"
 msgstr "№ %d (без заголовка)"
 
-#: modules/contact-form/grunion-contact-form.php:3301
+#: modules/contact-form/grunion-contact-form.php:3311
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
 #: _inc/blocks/editor-beta.js:20 _inc/blocks/editor-experimental.js:20
 #: _inc/blocks/editor-no-post-editor.js:6 _inc/blocks/editor.js:10
@@ -280,11 +280,11 @@ msgstr "<p><a href='%s'>Прочитайте запись</a>, чтобы под
 msgid "Reading"
 msgstr "Чтение"
 
-#: modules/contact-form/grunion-contact-form.php:3298
+#: modules/contact-form/grunion-contact-form.php:3308
 msgid "Choose one option"
 msgstr "Выберите одну опцию"
 
-#: modules/contact-form/grunion-contact-form.php:3295
+#: modules/contact-form/grunion-contact-form.php:3305
 msgid "Choose several options"
 msgstr "Выберите несколько опций"
 
@@ -459,25 +459,25 @@ msgid "Custom title to be used in HTML <title /> tag."
 msgstr "Произвольный заголовок для использования в HTML-теге <title />."
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-field.php:535
-#: modules/contact-form/grunion-contact-form.php:4652
+#: modules/contact-form/grunion-contact-form.php:4662
 msgid "Please enter a valid URL - https://www.example.com"
 msgstr "Введите действительный URL-адрес в формате https://www.example.com"
 
 #. translators: %s is the name of a form field
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-field.php:230
-#: modules/contact-form/grunion-contact-form.php:4347
+#: modules/contact-form/grunion-contact-form.php:4357
 msgid "%s: Please enter a valid URL - https://www.example.com"
 msgstr "%s: введите действительный URL-адрес в формате https://www.example.com"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1186
-#: modules/contact-form/grunion-contact-form.php:1299
+#: modules/contact-form/grunion-contact-form.php:1300
 msgid "All sources"
 msgstr "Все источники"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:856
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:136
-#: modules/contact-form/grunion-contact-form.php:968
-#: modules/contact-form/grunion-contact-form.php:2603
+#: modules/contact-form/grunion-contact-form.php:969
+#: modules/contact-form/grunion-contact-form.php:2613
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:2
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
 #: _inc/blocks/editor-beta.js:16 _inc/blocks/editor-beta.js:20
@@ -505,9 +505,9 @@ msgstr "Данные ответа"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-admin.php:642
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-admin.php:741
-#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1717
+#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1724
 #: modules/contact-form/admin.php:263 modules/contact-form/admin.php:361
-#: modules/contact-form/grunion-contact-form.php:1828
+#: modules/contact-form/grunion-contact-form.php:1838
 #: jetpack_vendor/automattic/jetpack-forms/dist/dashboard/jetpack-forms-dashboard.js:2
 msgid "Source"
 msgstr "Источник"
@@ -1449,7 +1449,7 @@ msgid "All of your contacts in one place. Build better relationships with your c
 msgstr "Все ваши контакты собраны в одном месте. Выстраивайте крепкие отношения со своими клиентами и покупателями."
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:297
-#: modules/contact-form/grunion-contact-form.php:2764
+#: modules/contact-form/grunion-contact-form.php:2774
 #: jetpack_vendor/automattic/jetpack-my-jetpack/build/index.js:7
 #: jetpack_vendor/automattic/jetpack-videopress/build/admin/index.js:10
 msgid "Go back"
@@ -2504,8 +2504,8 @@ msgstr "Поиск по ответам"
 #: jetpack_vendor/automattic/jetpack-forms/src/dashboard/class-dashboard.php:73
 #: modules/contact-form/grunion-contact-form.php:320
 #: modules/contact-form/grunion-contact-form.php:321
-#: modules/contact-form/grunion-contact-form.php:729
 #: modules/contact-form/grunion-contact-form.php:730
+#: modules/contact-form/grunion-contact-form.php:731
 msgid "Form Responses"
 msgstr "Ответы на форму"
 
@@ -2908,7 +2908,7 @@ msgid "Jetpack has detected that data is not properly in sync which may be impac
 msgstr "Jetpack обнаружил, что данные не синхронизированы необходимым образом. Это может ухудшать работу сайта. <strong>Нажмите <a id=\"full_sync_request_link\" href=\"#\">сюда</a>, чтобы решить проблему</strong> и синхронизировать Jetpack с данными сайта. Если эта ошибка повторится после исправления, обратитесь за помощью в службу поддержки."
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:406
-#: modules/contact-form/grunion-contact-form.php:518
+#: modules/contact-form/grunion-contact-form.php:517
 msgid "Submit a form."
 msgstr "Отправить форму"
 
@@ -3040,7 +3040,7 @@ msgid "Choose an amount"
 msgstr "Выбрать сумму"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:837
-#: modules/contact-form/grunion-contact-form.php:3304
+#: modules/contact-form/grunion-contact-form.php:3314
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:2
 #: _inc/blocks/editor-beta.js:16 _inc/blocks/editor-experimental.js:16
 #: _inc/blocks/editor-no-post-editor.js:2 _inc/blocks/editor.js:6
@@ -3048,7 +3048,7 @@ msgid "Consent"
 msgstr "Согласие"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:593
-#: modules/contact-form/grunion-contact-form.php:705
+#: modules/contact-form/grunion-contact-form.php:706
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:2
 #: _inc/blocks/editor-beta.js:16 _inc/blocks/editor-experimental.js:16
 #: _inc/blocks/editor-no-post-editor.js:2 _inc/blocks/editor.js:6
@@ -3056,7 +3056,7 @@ msgid "Can we send you an email from time to time?"
 msgstr "Можем ли мы периодически посылать вам электронные письма?"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:589
-#: modules/contact-form/grunion-contact-form.php:701
+#: modules/contact-form/grunion-contact-form.php:702
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:2
 #: _inc/blocks/editor-beta.js:16 _inc/blocks/editor-experimental.js:16
 #: _inc/blocks/editor-no-post-editor.js:2 _inc/blocks/editor.js:6
@@ -4222,7 +4222,7 @@ msgid "Show Timeline"
 msgstr "Отобразить временную шкалу"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:137
-#: modules/contact-form/grunion-contact-form.php:2604
+#: modules/contact-form/grunion-contact-form.php:2614
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
 #: _inc/blocks/editor-beta.js:20 _inc/blocks/editor-experimental.js:20
 #: _inc/blocks/editor-no-post-editor.js:6 _inc/blocks/editor.js:10
@@ -5456,7 +5456,7 @@ msgid "Choose several"
 msgstr "Выбрать несколько"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:822
-#: modules/contact-form/grunion-contact-form.php:3289
+#: modules/contact-form/grunion-contact-form.php:3299
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:2
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
 #: _inc/blocks/editor-beta.js:16 _inc/blocks/editor-beta.js:20
@@ -6121,8 +6121,8 @@ msgstr "Ссылка на Политику конфиденциальности"
 #. translators: %d: Post ID.
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1465
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1481
-#: modules/contact-form/grunion-contact-form.php:1578
-#: modules/contact-form/grunion-contact-form.php:1594
+#: modules/contact-form/grunion-contact-form.php:1579
+#: modules/contact-form/grunion-contact-form.php:1595
 msgid "Feedback ID %d could not be removed at this time."
 msgstr "Не удалось удалить отзыв с идентификатором %d."
 
@@ -10046,7 +10046,7 @@ msgstr "Если это помогло решить проблему, то ва�
 
 #. translators: %s is the name of a form field
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-field.php:244
-#: modules/contact-form/grunion-contact-form.php:4361
+#: modules/contact-form/grunion-contact-form.php:4371
 msgid "%s requires at least one selection"
 msgstr "%s требует выбора хотя бы одного элемента"
 
@@ -11195,7 +11195,7 @@ msgstr "Статистика"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:133
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-editor-view.php:119
-#: modules/contact-form/grunion-contact-form.php:2600
+#: modules/contact-form/grunion-contact-form.php:2610
 #: modules/contact-form/grunion-editor-view.php:117 modules/stats.php:1208
 #: modules/videopress/class.videopress-player.php:310
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
@@ -12031,8 +12031,8 @@ msgstr "Подключение работает надлежащим образ�
 msgid "Tiled Galleries"
 msgstr "Галереи в виде \"плиток\""
 
-#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1716
-#: modules/contact-form/grunion-contact-form.php:1827
+#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1723
+#: modules/contact-form/grunion-contact-form.php:1837
 #: modules/sitemaps/sitemap-stylist.php:446
 #: modules/sitemaps/sitemap-stylist.php:590
 #: modules/widgets/facebook-likebox.php:255
@@ -13533,14 +13533,14 @@ msgstr "Вы можете прочитать свой отзыв в любое �
 
 #. translators: the blog name (and post name, if applicable).
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:109
-#: modules/contact-form/grunion-contact-form.php:2576
+#: modules/contact-form/grunion-contact-form.php:2586
 msgctxt "%1$s = blog name"
 msgid "%1$s Sidebar"
 msgstr "Боковая панель %1$s"
 
 #. translators: the blog name and post title.
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:99
-#: modules/contact-form/grunion-contact-form.php:2566
+#: modules/contact-form/grunion-contact-form.php:2576
 msgctxt "%1$s = blog name, %2$s = post title"
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
@@ -13552,19 +13552,19 @@ msgstr "%s (обязательно)"
 
 #. translators: %s is the name of a form field
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-field.php:251
-#: modules/contact-form/grunion-contact-form.php:4368
+#: modules/contact-form/grunion-contact-form.php:4378
 msgid "%s is required"
 msgstr "%s - поле, обязательное к заполнению."
 
 #. translators: %s is the name of a form field
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-field.php:237
-#: modules/contact-form/grunion-contact-form.php:4354
+#: modules/contact-form/grunion-contact-form.php:4364
 msgid "%s requires a valid email address"
 msgstr "%s требуется работающий адрес электронной почты"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-field.php:130
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-editor-view.php:121
-#: modules/contact-form/grunion-contact-form.php:4247
+#: modules/contact-form/grunion-contact-form.php:4257
 #: modules/contact-form/grunion-editor-view.php:119
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
 #: _inc/blocks/editor-beta.js:20 _inc/blocks/editor-experimental.js:20
@@ -13607,7 +13607,7 @@ msgid "Adjust your Comments form with a clever greeting and color-scheme."
 msgstr "Настройте форму для комментариев с помощью приветственного текста и цветовой схемы."
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:848
-#: modules/contact-form/grunion-contact-form.php:960
+#: modules/contact-form/grunion-contact-form.php:961
 #: _inc/lib/core-api/wpcom-endpoints/class-wpcom-rest-api-v2-endpoint-instagram-gallery.php:121
 #: _inc/blocks/editor-beta.js:22 _inc/blocks/editor-beta.js:24
 #: _inc/blocks/editor-experimental.js:22 _inc/blocks/editor-experimental.js:23
@@ -13699,9 +13699,9 @@ msgstr "Комментарии"
 msgid "Comments on this post are closed."
 msgstr "Автор запретил оставлять комментарии к этой записи."
 
-#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:2049
+#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:2057
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:72
-#: modules/contact-form/grunion-contact-form.php:2159
+#: modules/contact-form/grunion-contact-form.php:2169
 #: modules/contact-form/grunion-form-view.php:59
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
 #: _inc/blocks/editor-beta.js:20 _inc/blocks/editor-experimental.js:20
@@ -13710,7 +13710,7 @@ msgid "Contact Form"
 msgstr "Форма обратной связи"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:1342
-#: modules/contact-form/grunion-contact-form.php:3809
+#: modules/contact-form/grunion-contact-form.php:3819
 msgid "Contact Form URL:"
 msgstr "URL-адрес контактной формы:"
 
@@ -13728,7 +13728,7 @@ msgstr "Тёмный"
 #: jetpack_vendor/automattic/jetpack-search/src/widgets/class-search-widget.php:991
 #: jetpack_vendor/automattic/jetpack-search/src/widgets/class-search-widget.php:1029
 #: modules/contact-form/admin.php:264
-#: modules/contact-form/grunion-contact-form.php:3286
+#: modules/contact-form/grunion-contact-form.php:3296
 #: modules/contact-form/grunion-editor-view.php:252
 #: modules/widgets/milestone/class-milestone-widget.php:659
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
@@ -13844,12 +13844,12 @@ msgid "Error in restoring from Trash."
 msgstr "Ошибка при восстановлении из корзины."
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:279
-#: modules/contact-form/grunion-contact-form.php:2746
+#: modules/contact-form/grunion-contact-form.php:2756
 msgid "Error!"
 msgstr "Ошибка!"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1131
-#: modules/contact-form/grunion-contact-form.php:1244
+#: modules/contact-form/grunion-contact-form.php:1245
 msgid "Feedback discarded."
 msgstr "Сообщение не прошло проверку."
 
@@ -14009,8 +14009,8 @@ msgstr "Пометить это сообщение как спам"
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:164
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:825
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-editor-view.php:117
-#: modules/contact-form/grunion-contact-form.php:2631
-#: modules/contact-form/grunion-contact-form.php:3292
+#: modules/contact-form/grunion-contact-form.php:2641
+#: modules/contact-form/grunion-contact-form.php:3302
 #: modules/contact-form/grunion-editor-view.php:115
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1183
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
@@ -14122,12 +14122,12 @@ msgstr "Сохранить настройки поля"
 
 #. translators: the the name of the site.
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:1350
-#: modules/contact-form/grunion-contact-form.php:3817
+#: modules/contact-form/grunion-contact-form.php:3827
 msgid "Sent by a verified %s user."
 msgstr "Отправлено проверенным пользователем %s."
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:1356
-#: modules/contact-form/grunion-contact-form.php:3823
+#: modules/contact-form/grunion-contact-form.php:3833
 msgid "Sent by an unverified visitor to your site."
 msgstr "Отправлено неподтверждённым посетителем Вашего сайта."
 
@@ -14163,7 +14163,7 @@ msgstr[1] "Спам <span class=\"count\">(%s)</span>"
 msgstr[2] "Спам <span class=\"count\">(%s)</span>"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:160
-#: modules/contact-form/grunion-contact-form.php:2627
+#: modules/contact-form/grunion-contact-form.php:2637
 msgid "Subject"
 msgstr "Тема"
 
@@ -14176,7 +14176,7 @@ msgstr "Отправка комментария%s"
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:807
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-editor-view.php:245
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:236
-#: modules/contact-form/grunion-contact-form.php:3274
+#: modules/contact-form/grunion-contact-form.php:3284
 #: modules/contact-form/grunion-editor-view.php:243
 #: modules/contact-form/grunion-form-view.php:223
 msgid "Text"
@@ -14199,7 +14199,7 @@ msgid "(required)"
 msgstr "(обязательно)"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:1340
-#: modules/contact-form/grunion-contact-form.php:3807
+#: modules/contact-form/grunion-contact-form.php:3817
 msgid "Time:"
 msgstr "Время:"
 
@@ -14227,8 +14227,8 @@ msgstr "Посмотреть в полном размере <span class=\"photo-
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-editor-view.php:248
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:238
 #: modules/carousel/jetpack-carousel.php:700
-#: modules/contact-form/grunion-contact-form.php:2623
-#: modules/contact-form/grunion-contact-form.php:3283
+#: modules/contact-form/grunion-contact-form.php:2633
+#: modules/contact-form/grunion-contact-form.php:3293
 #: modules/contact-form/grunion-editor-view.php:114
 #: modules/contact-form/grunion-editor-view.php:246
 #: modules/contact-form/grunion-form-view.php:225
@@ -14260,9 +14260,9 @@ msgstr "Вы не можете управлять этим элементом."
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-field.php:648
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-field.php:650
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-editor-view.php:183
-#: modules/contact-form/grunion-contact-form.php:4745
-#: modules/contact-form/grunion-contact-form.php:4765
-#: modules/contact-form/grunion-contact-form.php:4767
+#: modules/contact-form/grunion-contact-form.php:4755
+#: modules/contact-form/grunion-contact-form.php:4775
+#: modules/contact-form/grunion-contact-form.php:4777
 #: modules/contact-form/grunion-editor-view.php:181
 #: jetpack_vendor/automattic/jetpack-forms/dist/blocks/editor.js:6
 #: _inc/blocks/editor-beta.js:20 _inc/blocks/editor-experimental.js:20
@@ -14316,7 +14316,7 @@ msgstr "Комментарий"
 
 #. translators: the time of the form submission.
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:1255
-#: modules/contact-form/grunion-contact-form.php:3722
+#: modules/contact-form/grunion-contact-form.php:3732
 msgctxt "{$date_format} \\a\\t {$time_format}"
 msgid "%1$s \\a\\t %2$s"
 msgstr "%1$s \\a\\t %2$s"
@@ -14331,8 +14331,8 @@ msgstr "Ошибка: пожалуйста, заполните необходи�
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-editor-view.php:247
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:233
 #: modules/carousel/jetpack-carousel.php:692
-#: modules/contact-form/grunion-contact-form.php:2622
-#: modules/contact-form/grunion-contact-form.php:3280
+#: modules/contact-form/grunion-contact-form.php:2632
+#: modules/contact-form/grunion-contact-form.php:3290
 #: modules/contact-form/grunion-editor-view.php:113
 #: modules/contact-form/grunion-editor-view.php:245
 #: modules/contact-form/grunion-form-view.php:220
@@ -14375,7 +14375,7 @@ msgid "Comment"
 msgstr "Комментарий"
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form.php:1341
-#: modules/contact-form/grunion-contact-form.php:3808
+#: modules/contact-form/grunion-contact-form.php:3818
 msgid "IP Address:"
 msgstr "IP Адрес:"
 
@@ -14981,11 +14981,11 @@ msgstr "Подробности ошибки: %s"
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1328
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:1398
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:209
-#: modules/contact-form/grunion-contact-form.php:718
 #: modules/contact-form/grunion-contact-form.php:719
-#: modules/contact-form/grunion-contact-form.php:1423
-#: modules/contact-form/grunion-contact-form.php:1441
-#: modules/contact-form/grunion-contact-form.php:1511
+#: modules/contact-form/grunion-contact-form.php:720
+#: modules/contact-form/grunion-contact-form.php:1424
+#: modules/contact-form/grunion-contact-form.php:1442
+#: modules/contact-form/grunion-contact-form.php:1512
 #: modules/contact-form/grunion-form-view.php:196
 #: modules/masterbar/admin-menu/class-jetpack-admin-menu.php:150
 msgid "Feedback"
@@ -15075,8 +15075,8 @@ msgstr "Мой Jetpack"
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-editor-view.php:246
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:234
 #: modules/carousel/jetpack-carousel.php:696
-#: modules/contact-form/grunion-contact-form.php:2621
-#: modules/contact-form/grunion-contact-form.php:3277
+#: modules/contact-form/grunion-contact-form.php:2631
+#: modules/contact-form/grunion-contact-form.php:3287
 #: modules/contact-form/grunion-editor-view.php:112
 #: modules/contact-form/grunion-editor-view.php:244
 #: modules/contact-form/grunion-form-view.php:221
