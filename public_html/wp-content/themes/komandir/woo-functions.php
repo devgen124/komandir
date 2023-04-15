@@ -754,7 +754,6 @@ function komandir_woocommerce_wrapper_before() {
             if ($discount) {
                 $cart->add_fee( $label_text, -$discount, false );
             }
-            error_log('DISCOUNT '.$discount);
         }
     }
     
