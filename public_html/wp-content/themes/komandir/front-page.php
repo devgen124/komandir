@@ -18,14 +18,14 @@ get_header();
 require 'data/shop-icons.php';
 
 // $supercats = array_slice($shop_icons, 1);
-$promotion = array_shift($shop_icons);
+$promotion = array_shift( $shop_icons );
 
 global $svg;
 
-$parent_cats = get_categories([
+$parent_cats = get_categories( [
 	'taxonomy' => 'product_cat',
 	'parent' => 0
-]);
+] );
 ?>
 
 <main id="primary" class="site-main">
@@ -36,31 +36,32 @@ $parent_cats = get_categories([
 				<aside class="d-none d-lg-block flex-shrink-0 supercategories-sidebar">
 					<ul class="supercategories-sidebar-list">
 
-							<li>
-								<a href="<?= get_permalink( get_page_by_path( 'promotion' ) ); ?>">
-									<span>
-										<?= $svg->view_from_sprite([
-												'title' => $promotion['icon']['title'],
-												'width' => $promotion['icon']['width'],
-												'height' => $promotion['icon']['height']
-										]); ?>
-									</span>
-									Акции</a>
-							</li>
-						
-						<?php foreach ($parent_cats as $cat):?>
-							<?php foreach ($shop_icons as $item) : ?>
-								<?php if ($item['name'] == $cat->cat_name):?>
+						<li>
+							<a href="<?= get_permalink( get_page_by_path( 'promotion' ) ); ?>">
+								<span>
+									<?= $svg->view_from_sprite( [
+										'title' => $promotion['icon']['title'],
+										'width' => $promotion['icon']['width'],
+										'height' => $promotion['icon']['height']
+									] ); ?>
+								</span>
+								Акции</a>
+						</li>
+
+						<?php foreach ( $parent_cats as $cat ) : ?>
+							<?php foreach ( $shop_icons as $item ) : ?>
+								<?php if ( $item['name'] == $cat->cat_name ) : ?>
 									<li>
-										<a href="<?= get_term_link($cat->slug, 'product_cat'); ?>">
+										<a href="<?= get_term_link( $cat->slug, 'product_cat' ); ?>">
 											<span>
-												<?= $svg->view_from_sprite([
-														'title' => $item['icon']['title'],
-														'width' => $item['icon']['width'],
-														'height' => $item['icon']['height']
-													]) ?>
+												<?= $svg->view_from_sprite( [
+													'title' => $item['icon']['title'],
+													'width' => $item['icon']['width'],
+													'height' => $item['icon']['height']
+												] ) ?>
 											</span>
-											<?= $cat->cat_name; ?></a>
+											<?= $cat->cat_name; ?>
+										</a>
 									</li>
 								<?php endif; ?>
 							<?php endforeach; ?>
@@ -68,7 +69,7 @@ $parent_cats = get_categories([
 					</ul>
 				</aside>
 				<section class="flex-grow-1 promo-slider">
-					<?php masterslider(1); ?>
+					<?php masterslider( 1 ); ?>
 				</section>
 			</div>
 		</div>
@@ -81,7 +82,7 @@ $parent_cats = get_categories([
 					<p>товары со скидкой или акционные</p>
 				</div>
 				<div class="woocommerce-scroller">
-					<?= do_shortcode('[products limit="12" category="televizory"]') ?>
+					<?= do_shortcode( '[products limit="12" category="televizory"]' ) ?>
 				</div>
 			</section>
 		</div>

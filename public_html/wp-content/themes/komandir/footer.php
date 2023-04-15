@@ -57,10 +57,12 @@
 							],
 						];
 
-						foreach ($social_list as $item) { ?>
+						foreach ( $social_list as $item ) { ?>
 							<li>
 								<a href="<?= $item['link'] ?>" aria-label="<?= $item['title'] ?>">
-									<img width="26" height="26" src="<?= get_template_directory_uri() ?>/assets/images/<?= $item['icon'] ?>" alt="<?= $item['title'] ?>">
+									<img width="26" height="26"
+										src="<?= get_template_directory_uri() ?>/assets/images/<?= $item['icon'] ?>"
+										alt="<?= $item['title'] ?>">
 								</a>
 							</li>
 						<?php }
@@ -97,11 +99,13 @@
 								]
 							],
 						];
-						foreach ($social_list as $item) { ?>
+						foreach ( $social_list as $item ) { ?>
 
 							<li>
 								<a aria-label="<?= $item['title'] ?>">
-									<img width="<?= $item['size']['width'] ?>" height="<?= $item['size']['height'] ?>" src="<?= get_template_directory_uri() ?>/assets/images/<?= $item['icon'] ?>" alt="<?= $item['title'] ?>">
+									<img width="<?= $item['size']['width'] ?>" height="<?= $item['size']['height'] ?>"
+										src="<?= get_template_directory_uri() ?>/assets/images/<?= $item['icon'] ?>"
+										alt="<?= $item['title'] ?>">
 								</a>
 							</li>
 
@@ -112,7 +116,7 @@
 			</div>
 			<div class="col-12 col-md-4 pb-5 pb-md-0">
 				<div class="footer-subscribe">
-					<?php echo do_shortcode('[contact-form-7 id="80" title="Рассылка"]'); ?>
+					<?php echo do_shortcode( '[contact-form-7 id="80" title="Рассылка"]' ); ?>
 				</div>
 			</div>
 		</div>

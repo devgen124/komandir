@@ -23,4 +23,4 @@ $columns = esc_attr( wc_get_loop_prop( 'columns' ) );
 $columns = is_product_category() || is_product_tag() ? $columns - 1 : $columns;
 ?>
 
-<ul class="products columns-<?= $columns;?> grid">
+<ul class="products columns-<?= $columns; ?> grid">
