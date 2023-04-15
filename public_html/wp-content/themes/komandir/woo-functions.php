@@ -743,13 +743,13 @@ function komandir_woocommerce_wrapper_before() {
     
         $payment_method = 'rbspayment';
     
-        $percent = 5;
+        $percent = 1;
     
         $cart_total = $cart->subtotal_ex_tax;
         $chosen_payment_method = WC()->session->get('chosen_payment_method');
     
         if( $payment_method == $chosen_payment_method ){
-            $label_text = 'Скидка для онлайн оплаты банковской картой 5%';
+            $label_text = "Скидка для онлайн оплаты банковской картой $percent%";
             $discount = number_format(($cart_total / 100) * $percent, 0);
             if ($discount) {
                 $cart->add_fee( $label_text, -$discount, false );
