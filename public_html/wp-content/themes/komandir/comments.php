@@ -36,7 +36,7 @@ if ( post_password_required() ) {
 					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
 				);
 			} else {
-				printf( 
+				printf(
 					/* translators: 1: comment count number, 2: title. */
 					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $komandir_comment_count, 'comments title', 'komandir' ) ),
 					number_format_i18n( $komandir_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -52,7 +52,7 @@ if ( post_password_required() ) {
 			<?php
 			wp_list_comments(
 				array(
-					'style'      => 'ol',
+					'style' => 'ol',
 					'short_ping' => true,
 				)
 			);
@@ -65,7 +65,9 @@ if ( post_password_required() ) {
 		// If comments are closed and there are comments, let's leave a little note, shall we?
 		if ( ! comments_open() ) :
 			?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'komandir' ); ?></p>
+			<p class="no-comments">
+				<?php esc_html_e( 'Comments are closed.', 'komandir' ); ?>
+			</p>
 			<?php
 		endif;
 

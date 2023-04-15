@@ -22,53 +22,63 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 /**
-* Hook: woocommerce_before_main_content.
-*
-* @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-* @hooked woocommerce_breadcrumb - 20
-* @hooked WC_Structured_Data::generate_website_data() - 30
-*/
+ * Hook: woocommerce_before_main_content.
+ *
+ * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+ * @hooked woocommerce_breadcrumb - 20
+ * @hooked WC_Structured_Data::generate_website_data() - 30
+ */
 do_action( 'woocommerce_before_main_content' );
 
-if (isset($_GET['preview'])) {
+if ( isset( $_GET['preview'] ) ) {
 	$tag = get_queried_object();
 	?>
 
-	<h1><?= $tag->name; ?></h1>
+	<h1>
+		<?= $tag->name; ?>
+	</h1>
 	<div class="promo-preview-wrapper">
 		<section class="promo-preview">
-			<?php 
-			$image = get_field( 'major-pic', $tag );
-			if( !empty( $image ) ): ?>
-				<img class="promo-preview-image" src="<?= esc_url($image['url']); ?>" width="<?= $image['width']; ?>" height="<?= $image['height']; ?>" alt="<?= isset($image['alt']) ? esc_attr($image['alt']) : 'Акция "' . $tag->name . '"'; ?>"/>
-				<?php 
-			endif; ?>
-			<div class="promo-preview-text"><?= get_field( 'text', $tag ); ?></div>
 			<?php
-            $time = get_field( 'term', $tag );
-            if( !empty( $time ) ): ?>
-                <p class="promo-preview-term">Срок проведения акции: <?= $time; ?></p>
-            <?php 
-            endif;
-            ?>
+			$image = get_field( 'major-pic', $tag );
+			if ( ! empty( $image ) ) : ?>
+				<img class="promo-preview-image" src="<?= esc_url( $image['url'] ); ?>" width="<?= $image['width']; ?>"
+					height="<?= $image['height']; ?>"
+					alt="<?= isset( $image['alt'] ) ? esc_attr( $image['alt'] ) : 'Акция "' . $tag->name . '"'; ?>" />
+			<?php
+			endif; ?>
+			<div class="promo-preview-text">
+				<?= get_field( 'text', $tag ); ?>
+			</div>
+			<?php
+			$time = get_field( 'term', $tag );
+			if ( ! empty( $time ) ) : ?>
+				<p class="promo-preview-term">Срок проведения акции:
+					<?= $time; ?>
+				</p>
+			<?php
+			endif;
+			?>
 		</section>
 		<section class="promo-preview-products">
 			<header>
 				<h3>Товары</h3>
-				<a  href="<?= get_tag_link( $tag->term_id ); ?>">Смотреть все →</a>
+				<a href="<?= get_tag_link( $tag->term_id ); ?>">Смотреть все →</a>
 			</header>
-			<?= do_shortcode("[products tag=\"{$tag->slug}\" limit=\"8\" columns=\"1\"]");?>
+			<?= do_shortcode( "[products tag=\"{$tag->slug}\" limit=\"8\" columns=\"1\"]" ); ?>
 		</section>
 	</div>
 	</div>
-    </main><!-- #main -->
+	</main><!-- #main -->
 
 	<?php
 } else {
 	?>
 	<header class="woocommerce-products-header">
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
-			<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
+			<h1 class="woocommerce-products-header__title page-title">
+				<?php woocommerce_page_title(); ?>
+			</h1>
 		<?php endif; ?>
 
 		<?php
@@ -146,4 +156,3 @@ if (isset($_GET['preview'])) {
 }
 
 get_footer();
-

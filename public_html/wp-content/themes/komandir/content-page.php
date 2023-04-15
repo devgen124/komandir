@@ -8,14 +8,14 @@ Template Name: Контентная страница
 get_header();
 ?>
 
-	<main id="primary" class="site-main content-page">
-		<div class="container">
+<main id="primary" class="site-main content-page">
+	<div class="container">
 
-				<?php the_content(); ?>
+		<?php the_content(); ?>
 
-		</div>
+	</div>
 
-	</main><!-- #main -->
+</main><!-- #main -->
 
 <?php
 get_footer();
