@@ -236,3 +236,10 @@ input[type="checkbox"] {
 // #wpadminbar {
 //     display: none;
 // }
+
+
+.site-main {
+	@include media-breakpoint-down(lg) {
+		padding-top: 20px;
+	}
+}
