@@ -11851,6 +11851,12 @@ input[type=checkbox]:checked + label::before {
   box-shadow: none;
 }
 
+@media (max-width: 991.98px) {
+  .site-main {
+    padding-top: 20px;
+  }
+}
+
 .site-header {
   position: fixed;
   width: 100%;
