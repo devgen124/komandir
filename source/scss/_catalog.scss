@@ -23,7 +23,8 @@
       font: 700 24px/1.4 $font-family-main;
       transition: 0.3s;
 
-      &:hover {
+      &:hover,
+	  &:visited {
         color: $accent-color;
       }
 
@@ -146,6 +147,10 @@
       height: 9px;
       background: url("../images/forward-arrow.svg") no-repeat center;
     }
+
+	&:visited {
+		color: $accent-color;
+	}
   }
 }
 
