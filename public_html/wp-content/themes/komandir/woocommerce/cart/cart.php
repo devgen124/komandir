@@ -29,12 +29,14 @@ do_action( 'woocommerce_before_cart' ); ?>
 
     <div class="woocommerce-custom-cart">
 
-        <ul class="woocommerce-custom-cart-list">
+        <ul class="woocommerce-cart-form__contents woocommerce-custom-cart-list">
 
             <?php do_action( 'woocommerce_before_cart_contents' ); ?>
 
             <?php
-            foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+
+            foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+				var_dump($cart_item['quantity']);
                 $_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 				$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 
@@ -59,10 +61,10 @@ do_action( 'woocommerce_before_cart' ); ?>
                         <div class="product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
                             <?php
                             if ( ! $product_permalink ) {
-                                echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;' );
-                            } else {
-                                echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $_product->get_name() ), $cart_item, $cart_item_key ) );
-                            }
+								echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;' );
+							} else {
+								echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $_product->get_name() ), $cart_item, $cart_item_key ) );
+							}
 
                             do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
 
@@ -85,7 +87,7 @@ do_action( 'woocommerce_before_cart' ); ?>
                                 $min_quantity = 0;
                                 $max_quantity = $_product->get_max_purchase_quantity();
                             }
-    
+
                             $product_quantity = woocommerce_quantity_input(
                                 array(
                                     'input_name'   => "cart[{$cart_item_key}][qty]",
@@ -119,19 +121,19 @@ do_action( 'woocommerce_before_cart' ); ?>
                         ?>
 
                         <div class="product-remove">
-                            <?php
-                            echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                'woocommerce_cart_item_remove_link',
-                                sprintf(
-                                    '<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">Удалить</a>',
-                                    esc_url(wc_get_cart_remove_url($cart_item_key)),
-                                    esc_html__('Remove this item', 'woocommerce'),
-                                    esc_attr($product_id),
-                                    esc_attr($_product->get_sku())
-                                ),
-                                $cart_item_key
-                            );
-                            ?>
+							<?php
+								echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									'woocommerce_cart_item_remove_link',
+									sprintf(
+										'<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
+										esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
+										esc_html__( 'Remove this item', 'woocommerce' ),
+										esc_attr( $product_id ),
+										esc_attr( $_product->get_sku() )
+									),
+									$cart_item_key
+								);
+							?>
                         </div>
 
                     </li>
