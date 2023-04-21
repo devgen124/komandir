@@ -1005,12 +1005,17 @@ $cols: (1, 2, 3, 4, 5, 6);
     }
 
     .filters-close {
+		display: none;
         margin-left: auto;
         padding: 0;
         width: 40px;
         height: 40px;
         background: url("../images/close.svg") center/20px no-repeat;
         border: none;
+
+		@include media-breakpoint-down (lg) {
+			display: inline;
+		}
     }
 }
 
@@ -1196,8 +1201,8 @@ $cols: (1, 2, 3, 4, 5, 6);
     }
 }
 
-.woocommerce #respond input#submit.alt, 
-.woocommerce a.button.alt, 
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt,
 .woocommerce button.button.alt,
 .woocommerce input.button.alt {
     background-color: $accent-color;

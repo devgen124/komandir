@@ -1,6 +1,6 @@
 const filtersBtn = document.querySelector('.filters-btn');
 const filtersSidebar = document.querySelector('.filters-sidebar');
-const isMobile = document.documentElement.clientWidth < 576;
+const isMobile = document.documentElement.clientWidth < 992;
 
 export default function initSidebarToggler() {
 
@@ -14,7 +14,7 @@ export default function initSidebarToggler() {
                 filtersSidebar.classList.toggle('filters-sidebar-visible');
                 document.body.classList.toggle('scroll-lock');
             }
-        
+
             filtersBtn.addEventListener('click', toggleSidebarVisibility);
             const closeBtn = filtersSidebar.querySelector('.filters-close');
             closeBtn.addEventListener('click', toggleSidebarVisibility);
