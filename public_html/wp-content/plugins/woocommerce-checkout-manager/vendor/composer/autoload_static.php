@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868
+class ComposerStaticInit95f8033c2e3a1059ed89f3ec548d480b
 {
     public static $files = array (
         '3773ef3f09c37da5478d578e32b03a4b' => __DIR__ . '/../..' . '/jetpack_vendor/automattic/jetpack-assets/actions.php',
@@ -79,6 +79,7 @@ class ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868
         'QuadLayers\\WOOCCM\\View\\Frontend\\Fields_Handler' => __DIR__ . '/../..' . '/lib/view/frontend/class-fields-handler.php',
         'QuadLayers\\WOOCCM\\View\\Frontend\\Fields_I18n' => __DIR__ . '/../..' . '/lib/view/frontend/class-fields-i18n.php',
         'QuadLayers\\WOOCCM\\View\\Frontend\\Fields_Register' => __DIR__ . '/../..' . '/lib/view/frontend/class-fields-register.php',
+        'QuadLayers\\WOOCCM\\View\\Frontend\\Fields_Validation' => __DIR__ . '/../..' . '/lib/view/frontend/class-fields-validation.php',
         'QuadLayers\\WP_Dashboard_Widget_News\\Load' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-dashboard-widget-news/src/Load.php',
         'QuadLayers\\WP_Notice_Plugin_Promote\\Load' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Load.php',
         'QuadLayers\\WP_Notice_Plugin_Promote\\PluginByFile' => __DIR__ . '/../..' . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/PluginByFile.php',
@@ -98,9 +99,9 @@ class ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit7ec45efcf51dfed8c37dc636e5dcc868::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit95f8033c2e3a1059ed89f3ec548d480b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit95f8033c2e3a1059ed89f3ec548d480b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit95f8033c2e3a1059ed89f3ec548d480b::$classMap;
 
         }, null, ClassLoader::class);
     }

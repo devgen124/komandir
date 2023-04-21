@@ -50,6 +50,10 @@ class Fields_Filter {
 			$args['custom_attributes']['maxlength'] = absint( $args['maxlength'] );
 		}
 
+		if ( $args['minlength'] ) {
+			$args['custom_attributes']['minlength'] = absint( $args['minlength'] );
+		}
+
 		if ( ! empty( $args['autocomplete'] ) ) {
 			$args['custom_attributes']['autocomplete'] = $args['autocomplete'];
 		}

@@ -16,6 +16,9 @@ class ApiDataSanitizer {
     'header' => ['text'],
     'footer' => ['text'],
     'text' => ['text'],
+    'button' => ['url'],
+    'image' => ['link'],
+    'socialIcon' => ['link'],
   ];
 
   public function __construct(
@@ -38,6 +41,8 @@ class ApiDataSanitizer {
       }
       if (isset($block['blocks']) && is_array($block['blocks'])) {
         $blocks[$key]['blocks'] = $this->sanitizeBlocks($block['blocks']);
+      } elseif (isset($block['icons']) && is_array($block['icons'])) {
+        $blocks[$key]['icons'] = $this->sanitizeBlocks($block['icons']);
       } else {
         $blocks[$key] = $this->sanitizeBlock($block);
       }
@@ -54,6 +59,9 @@ class ApiDataSanitizer {
         continue;
       }
       $block[$property] = $this->htmlSanitizer->sanitize($block[$property]);
+      if (in_array($property, ['url', 'link'], true)) {
+        $block[$property] = $this->htmlSanitizer->sanitizeURL($block[$property]);
+      }
     }
     return $block;
   }

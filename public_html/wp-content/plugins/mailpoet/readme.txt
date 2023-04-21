@@ -3,7 +3,7 @@ Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.9
 Tested up to: 6.1
-Stable tag: 4.8.0
+Stable tag: 4.12.1
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,43 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 4.12.1 - 2023-04-19 =
+* Fixed: post notifications not sent if scheduled with minutes.
+
+= 4.12.0 - 2023-04-17 =
+* Added: "Order status change" trigger in Automations;
+* Improved: messaging when subscriber limit is reached;
+* Improved: consistent use of order statuses in segment conditions.
+
+= 4.11.1 - 2023-04-10 =
+* Improved: minor changes and fixes.
+
+= 4.11.0 - 2023-04-04 =
+* Added: shortcode support when editing WooCommerce emails;
+* Added: "single order value" segment;
+* Added: "Purchase date" segment;
+* Fixed: an error when you try to duplicate an email, that was sent to a deleted list;
+* Fixed: missing help icon next to subject and preview text explaining the use of shortcodes;
+* Fixed: sending gets stuck if all contacts in a batch unsubscribe between scheduling and sending the email;
+* Fixed: separators (<hr>) are stripped from posts when included in the email.
+
+= 4.10.0 - 2023-03-27 =
+* Added: WooCommerce version check and notice when using an old version;
+* Added: Emails can now be scheduled to be sent at minute granularity, not only one or more hours later;
+* Improved: prevent forms from showing multiple times when other plugins call the same hooks multiple times;
+* Improved: added HPOS support for WooCommerce Subscription segment;
+* Improved: when editing active email, a warning is shown that it will be deactivated;
+* Fixed: rendering error on home page when there is no change in lists size;
+* Fixed: occasional horizontal scrollbar in popup forms.
+
+= 4.9.0 - 2023-03-21 =
+* Updated: Gutenberg dependencies.
+
+= 4.8.1 - 2023-03-14 =
+* Added: Home page;
+* Improved: custom field validation errors are translated;
+* Fixed: error when sorting sending status page by subscriber name.
 
 = 4.8.0 - 2023-03-06 =
 * Added: option to run an automation multiple times for the same subscriber;

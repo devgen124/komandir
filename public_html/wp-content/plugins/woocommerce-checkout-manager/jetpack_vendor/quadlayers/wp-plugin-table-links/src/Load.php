@@ -3,10 +3,7 @@
  * QuadLayers WP Plugin Table Links
  *
  * @package   quadlayers/wp-plugin-table-links
- * @author    QuadLayers
  * @link      https://github.com/quadlayers/wp-plugin-table-links
- * @copyright Copyright (c) 2023
- * @license   GPL-3.0
  */
 
 namespace QuadLayers\WP_Plugin_Table_Links;
@@ -34,12 +31,12 @@ class Load {
 	 * @param string $plugin_file Plugin file.
 	 * @param array  $plugin_links Plugin links.
 	 */
-	public function __construct( string $plugin_file, array $plugin_links = array() ) {
+	public function __construct( $plugin_file, array $plugin_links = array() ) {
 		add_filter(
 			'plugin_row_meta',
 			function( $links, $plugin_file_name, $plugin_data, $status ) use ( $plugin_file, $plugin_links ) {
 
-				if ( $plugin_file_name !== plugin_basename( $plugin_file ) ) {
+				if ( plugin_basename( $plugin_file ) !== $plugin_file_name ) {
 					return $links;
 				}
 

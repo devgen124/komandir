@@ -168,6 +168,7 @@ class Field extends Model {
 			'class'                    => array(),
 			// Input/Textarea
 			'maxlength'                => null,
+			'minlength'                => null,
 			// Display
 			// -------------------------------------------------------------------
 			'show_cart_minimum'        => 0,
@@ -315,8 +316,31 @@ class Field extends Model {
 	}
 
 	public function delete_fields() {
+		$this->delete_checkout_field();
 		$this->delete();
 		$this->save_items( $this->get_default_fields() );
+	}
+
+	protected function delete_checkout_field( $field_id = null ) {
+
+		$fields_data = $this->get_fields();
+
+		if ( null !== $field_id ) {
+			foreach ( $fields_data as $field ) {
+				if ( $field['id'] == $field_id ) {
+					$fields_data = array( $field );
+					continue;
+				}
+			}
+		}
+
+		$users = get_users( array( 'fields' => array( 'ID' ) ) );
+
+		foreach ( $users as $user ) {
+			foreach ( $fields_data as $field ) {
+					delete_user_meta( $user->ID, $field['key'] );
+			}
+		}
 	}
 
 	// Field
@@ -335,6 +359,7 @@ class Field extends Model {
 	}
 
 	public function delete_field( $field_id ) {
+		$this->delete_checkout_field( $field_id );
 		return $this->delete_item( $field_id );
 	}
 
