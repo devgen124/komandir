@@ -20,6 +20,10 @@ class Helpers {
 		if ( isset( $_REQUEST['post_data'] ) && isset( $_REQUEST['wc-ajax'] ) && 'update_order_review' == $_REQUEST['wc-ajax'] ) {
 			return 'update';
 		}
+
+		if ( isset( $_REQUEST['wc-ajax'] ) && 'ppc-create-order' == $_REQUEST['wc-ajax'] ) {
+			return 'paypal-payments';
+		}
 	}
 
 	public static function get_file_extension_icon( string $file_extension = null ) {

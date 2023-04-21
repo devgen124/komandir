@@ -2,14 +2,22 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-12-28 07:06:18+0000\n"
+"PO-Revision-Date: 2023-03-24 08:38:26+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.0-alpha.3\n"
+"X-Generator: GlotPress/4.0.0-alpha.4\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
+
+#: includes/contact-form-functions.php:230
+msgid "Contact form not found."
+msgstr "Контактная форма не найдена."
+
+#: includes/contact-form-functions.php:229
+msgid "Error:"
+msgstr "Ошибка:"
 
 #: includes/block-editor/block.json
 msgctxt "block keyword"
@@ -26,7 +34,7 @@ msgctxt "block title"
 msgid "Contact Form 7"
 msgstr "Contact Form 7"
 
-#: modules/select.php:84
+#: modules/select.php:88
 msgid "&#8212;Please choose an option&#8212;"
 msgstr "&#8212;Выберите вариант&#8212;"
 
@@ -70,27 +78,27 @@ msgstr "Введите URL."
 msgid "Please enter an email address."
 msgstr "Введите адрес электронной почты."
 
-#: modules/number.php:187
+#: modules/number.php:191
 msgid "This field has a too large number."
 msgstr "В это поле введено слишком большое число."
 
-#: modules/number.php:182
+#: modules/number.php:186
 msgid "This field has a too small number."
 msgstr "В это поле введено слишком маленькое число."
 
-#: modules/number.php:177
+#: modules/number.php:181
 msgid "Please enter a number."
 msgstr "Введите число."
 
-#: modules/date.php:168
+#: modules/date.php:172
 msgid "This field has a too late date."
 msgstr "В это поле введена слишком поздняя дата."
 
-#: modules/date.php:163
+#: modules/date.php:167
 msgid "This field has a too early date."
 msgstr "В это поле введена слишком ранняя дата."
 
-#: modules/date.php:158
+#: modules/date.php:162
 msgid "Please enter a date in YYYY-MM-DD format."
 msgstr "Введите дату в формате ГГГГ-ММ-ДД."
 
@@ -99,7 +107,7 @@ msgid "The request payload format is not supported."
 msgstr "Формат нагрузки запроса не поддерживается."
 
 #. translators: 1: WordPress hook name, 2: version number
-#: includes/functions.php:619
+#: includes/functions.php:572
 msgid "Hook %1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s with no alternative available."
 msgstr "Вебзацеп %1$s <strong>устарел</strong>, начиная с Contact Form 7 версии %2$s, альтернативы ему нет."
 
@@ -121,7 +129,7 @@ msgstr "Важно заполнить это поле."
 
 #. translators: 1: PHP function name, 2: version number, 3: alternative
 #. function name
-#: includes/functions.php:570
+#: includes/functions.php:523
 msgid "Function %1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
 msgstr "Функция %1$s <strong>устарела</strong>, начиная с Contact Form 7 версии %2$s! Вместо неё используйте %3$s."
 
@@ -131,7 +139,7 @@ msgstr "Защита от спама"
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Contact Form 7 version number.
-#: includes/functions.php:654
+#: includes/functions.php:607
 msgid "Function %1$s was called incorrectly. %2$s %3$s"
 msgstr "Функция %1$s была вызвана неправильно. %2$s %3$s"
 
@@ -379,17 +387,17 @@ msgstr "Вы не аутентифицированы. Проверьте акт�
 msgid "Sendinblue"
 msgstr "SendinBlue"
 
-#: includes/mail.php:180
+#: includes/mail.php:244
 msgid "Failed to attach a file. The total file size exceeds the limit of 25 megabytes."
 msgstr "Невозможно прикрепить файл. Максимальный размер файла 25 мегабайт."
 
 #. translators: %s: Attachment file path.
-#: includes/mail.php:159
+#: includes/mail.php:223
 msgid "Failed to attach a file. %s is not a readable file."
 msgstr "Не удалось прикрепить файл. %s не читается."
 
 #. translators: %s: Attachment file path.
-#: includes/mail.php:144
+#: includes/mail.php:208
 msgid "Failed to attach a file. %s is not in the allowed directory."
 msgstr "Невозможно прикрепить файл. %s отсутствует в папке."
 
@@ -413,18 +421,14 @@ msgstr "Использованы запрещенные слова (%s)."
 msgid "Disallowed words are used."
 msgstr "Использованы запрещенные слова."
 
-#: includes/contact-form-functions.php:224
-msgid "Not Found"
-msgstr "Не найдено"
-
 #. translators: %s: Contact Form 7 version number.
-#: includes/functions.php:646
+#: includes/functions.php:599
 msgid "(This message was added in Contact Form 7 version %s.)"
 msgstr "(Это сообщение было добавлено в Contact Form 7 версии %s.)"
 
 #: includes/special-mail-tags.php:22 includes/special-mail-tags.php:97
 #: includes/special-mail-tags.php:164 includes/special-mail-tags.php:218
-#: modules/flamingo.php:292
+#: modules/flamingo.php:304
 msgid "The fourth parameter ($mail_tag) must be an instance of the WPCF7_MailTag class."
 msgstr "Четвертый параметр ($mail_tag) должен быть экземпляром класса WPCF7_MailTag."
 
@@ -457,7 +461,7 @@ msgstr "Дополнительные настройки"
 msgid "Error"
 msgstr "Ошибка"
 
-#: includes/config-validator.php:825
+#: includes/config-validator.php:832
 msgid "The total size of attachment files is too large."
 msgstr "Общий размер вложенных файлов слишком велик."
 
@@ -473,11 +477,11 @@ msgstr "reCAPTCHA активна на этом сайте."
 msgid "reCAPTCHA response token is empty."
 msgstr "Токен ответа reCAPTCHA не содержит данных."
 
-#: includes/submission.php:719
+#: includes/submission.php:714
 msgid "Submitted nonce is invalid."
 msgstr "Отправленный код nonce неверен."
 
-#: includes/submission.php:710
+#: includes/submission.php:705
 msgid "User-Agent string is unnaturally short."
 msgstr "Строка User-Agent неестественно коротка."
 
@@ -511,7 +515,7 @@ msgid "Connection established."
 msgstr "Соединение установлено."
 
 #. translators: 1: response code, 2: message, 3: body, 4: URL
-#: includes/functions.php:693
+#: includes/functions.php:646
 msgid "HTTP Response: %1$s %2$s %3$s from %4$s"
 msgstr "HTTP-ответ: %1$s %2$s %3$s из %4$s"
 
@@ -587,7 +591,7 @@ msgstr "Constant Contact"
 msgid "Email marketing"
 msgstr "Маркетинг по электронной почте"
 
-#: includes/config-validator.php:911
+#: includes/config-validator.php:918
 msgid "It is not allowed to use files outside the wp-content directory."
 msgstr "Запрещается использовать файлы вне каталога wp-content."
 
@@ -744,11 +748,11 @@ msgstr "Невозможно создать существующую конта�
 msgid "You are not allowed to access contact forms."
 msgstr "У вас нет доступа к контактной форме."
 
-#: includes/config-validator.php:887
+#: includes/config-validator.php:894
 msgid "Attachment file does not exist at %path%."
 msgstr "По указанному %path% файл вложения не существует."
 
-#: includes/config-validator.php:744
+#: includes/config-validator.php:751
 msgid "Invalid mailbox syntax is used in the %name% field."
 msgstr "Был использован некорректный синтаксис почтового адреса в поле %name%."
 
@@ -807,7 +811,7 @@ msgstr "Обнаружена 1 ошибка в конфигурации"
 
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: includes/functions.php:608
+#: includes/functions.php:561
 msgid "Hook %1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
 msgstr "Вебзацеп %1$s считается <strong>устаревшим</strong> начиная с Contact Form 7 версии %2$s! Вместо него используйте %3$s ."
 
@@ -1087,19 +1091,19 @@ msgstr "Генерируйте тег формы для кнопки отпра�
 msgid "submit"
 msgstr "отправить"
 
-#: modules/select.php:199
+#: modules/select.php:203
 msgid "Insert a blank item as the first option"
 msgstr "Вставьте пустой пункт в качестве первого варианта"
 
-#: modules/select.php:198
+#: modules/select.php:202
 msgid "Allow multiple selections"
 msgstr "Разрешить множественный выбор"
 
-#: modules/select.php:165
+#: modules/select.php:169
 msgid "Generate a form-tag for a drop-down menu. For more details, see %s."
 msgstr "Генерируйте тег формы для выпадающего меню. Для более подробной информации см. %s."
 
-#: modules/select.php:158
+#: modules/select.php:162
 msgid "drop-down menu"
 msgstr "в раскрывающемся меню"
 
@@ -1131,39 +1135,39 @@ msgstr "опрос"
 msgid "Sender does not enter the correct answer to the quiz"
 msgstr "Отправитель не ввёл корректный ответ на вопрос"
 
-#: modules/number.php:225
+#: modules/number.php:229
 msgid "Slider"
 msgstr "Слайдер"
 
-#: modules/number.php:224
+#: modules/number.php:228
 msgid "Spinbox"
 msgstr "Поле счетчика"
 
-#: modules/number.php:209
+#: modules/number.php:213
 msgid "Number fields"
 msgstr "Числовые поля"
 
-#: modules/number.php:209
+#: modules/number.php:213
 msgid "https://contactform7.com/number-fields/"
 msgstr "https://contactform7.com/number-fields/"
 
-#: modules/number.php:207
+#: modules/number.php:211
 msgid "Generate a form-tag for a field for numeric value input. For more details, see %s."
 msgstr "Генерируйте тег формы для поля ввода числового значения. Для более подробной информации см. %s."
 
-#: modules/number.php:199
+#: modules/number.php:203
 msgid "number"
 msgstr "номер"
 
-#: modules/number.php:186
+#: modules/number.php:190
 msgid "Number is larger than maximum limit"
 msgstr "Число больше максимального предела"
 
-#: modules/number.php:181
+#: modules/number.php:185
 msgid "Number is smaller than minimum limit"
 msgstr "Число меньше минимального предела"
 
-#: modules/number.php:176
+#: modules/number.php:180
 msgid "Number format that the sender entered is invalid"
 msgstr "Отправителем введён некорректный числовой формат"
 
@@ -1216,113 +1220,113 @@ msgstr "Тип файла запрещен к загрузке"
 msgid "Uploading a file fails for any reason"
 msgstr "Неудачная загрузка файла по какой-то причине"
 
-#: modules/date.php:231 modules/number.php:255
+#: modules/date.php:235 modules/number.php:259
 msgid "Max"
 msgstr "Макс."
 
-#: modules/date.php:226 modules/number.php:250
+#: modules/date.php:230 modules/number.php:254
 msgid "Min"
 msgstr "Мин."
 
-#: modules/date.php:221 modules/date.php:224 modules/number.php:245
-#: modules/number.php:248
+#: modules/date.php:225 modules/date.php:228 modules/number.php:249
+#: modules/number.php:252
 msgid "Range"
 msgstr "Диапазон"
 
-#: modules/date.php:217 modules/number.php:241 modules/text.php:265
+#: modules/date.php:221 modules/number.php:245 modules/text.php:265
 #: modules/textarea.php:178
 msgid "Use this text as the placeholder of the field"
 msgstr "Используйте этот текст в качестве заполнителя поля"
 
-#: modules/date.php:215 modules/number.php:239 modules/text.php:263
+#: modules/date.php:219 modules/number.php:243 modules/text.php:263
 #: modules/textarea.php:176
 msgid "Default value"
 msgstr "Значение по умолчанию"
 
-#: modules/date.php:190
+#: modules/date.php:194
 msgid "Date field"
 msgstr "Поле даты"
 
-#: modules/date.php:190
+#: modules/date.php:194
 msgid "https://contactform7.com/date-field/"
 msgstr "https://contactform7.com/date-field/"
 
-#: modules/date.php:188
+#: modules/date.php:192
 msgid "Generate a form-tag for a date input field. For more details, see %s."
 msgstr "Генерируйте тег формы для поля ввода даты. Для более подробной информации см. %s."
 
-#: modules/date.php:180
+#: modules/date.php:184
 msgid "date"
 msgstr "дата"
 
-#: modules/date.php:167
+#: modules/date.php:171
 msgid "Date is later than maximum limit"
 msgstr "Более поздняя дата установленного ограничения"
 
-#: modules/date.php:162
+#: modules/date.php:166
 msgid "Date is earlier than minimum limit"
 msgstr "Более ранняя дата установленного ограничения"
 
-#: modules/date.php:157
+#: modules/date.php:161
 msgid "Date format that the sender entered is invalid"
 msgstr "Отправителем введён некорректный формат даты"
 
-#: modules/checkbox.php:304 modules/date.php:261 modules/number.php:285
-#: modules/select.php:228 modules/text.php:321 modules/textarea.php:205
+#: modules/checkbox.php:303 modules/date.php:265 modules/number.php:289
+#: modules/select.php:232 modules/text.php:321 modules/textarea.php:205
 msgid "To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab."
 msgstr "Чтобы использовать значение, введенное через это поле в поле почты, вам нужно вставить соответствующий почтовый-тег (%s) в поле на вкладке Почта."
 
-#: modules/checkbox.php:274
+#: modules/checkbox.php:273
 msgid "Make checkboxes exclusive"
 msgstr "Сделать чекбоксы исключительными"
 
-#: modules/checkbox.php:272
+#: modules/checkbox.php:271
 msgid "Wrap each item with label element"
 msgstr "Оберните каждый элемент с элементом метки"
 
-#: modules/checkbox.php:271
+#: modules/checkbox.php:270
 msgid "Put a label first, a checkbox last"
 msgstr "Поместите метку первой, а флажок последним"
 
-#: modules/checkbox.php:270 modules/select.php:197
+#: modules/checkbox.php:269 modules/select.php:201
 msgid "One option per line."
 msgstr "Один вариант в каждой строке."
 
-#: modules/checkbox.php:253 modules/date.php:204 modules/file.php:165
-#: modules/number.php:228 modules/select.php:181 modules/text.php:252
+#: modules/checkbox.php:252 modules/date.php:208 modules/file.php:165
+#: modules/number.php:232 modules/select.php:185 modules/text.php:252
 #: modules/textarea.php:165
 msgid "Required field"
 msgstr "Обязательное поле"
 
-#: modules/checkbox.php:249 modules/checkbox.php:252 modules/date.php:200
-#: modules/date.php:203 modules/file.php:161 modules/file.php:164
-#: modules/number.php:219 modules/number.php:222 modules/select.php:177
-#: modules/select.php:180 modules/text.php:248 modules/text.php:251
+#: modules/checkbox.php:248 modules/checkbox.php:251 modules/date.php:204
+#: modules/date.php:207 modules/file.php:161 modules/file.php:164
+#: modules/number.php:223 modules/number.php:226 modules/select.php:181
+#: modules/select.php:184 modules/text.php:248 modules/text.php:251
 #: modules/textarea.php:161 modules/textarea.php:164
 msgid "Field type"
 msgstr "Тип поля"
 
-#: modules/checkbox.php:238 modules/select.php:167
+#: modules/checkbox.php:237 modules/select.php:171
 msgid "Checkboxes, radio buttons and menus"
 msgstr "Флажки, переключатели и меню"
 
-#: modules/checkbox.php:238 modules/select.php:167
+#: modules/checkbox.php:237 modules/select.php:171
 msgid "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
 msgstr "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
 
-#: modules/checkbox.php:235
+#: modules/checkbox.php:234
 msgid "Generate a form-tag for a group of radio buttons. For more details, see %s."
 msgstr "Генерируйте тег формы для группы радио кнопок. Для более подробной информации см. %s."
 
-#: modules/checkbox.php:233
+#: modules/checkbox.php:232
 msgid "Generate a form-tag for a group of checkboxes. For more details, see %s."
 msgstr "Генерируйте тег формы для группы чекбоксов. Для более подробной информации см. %s."
 
-#: modules/checkbox.php:220
+#: modules/checkbox.php:219
 msgid "radio buttons"
 msgstr "радио кнопка"
 
-#: modules/checkbox.php:218
+#: modules/checkbox.php:217
 msgid "checkboxes"
 msgstr "чекбоксы"
 
@@ -1367,38 +1371,38 @@ msgstr "Код введен неверно."
 msgid "The code that sender entered does not match the CAPTCHA"
 msgstr "Код, который ввел отправитель не совпадает с CAPTCHA"
 
-#: modules/acceptance.php:302 modules/checkbox.php:299 modules/date.php:256
-#: modules/file.php:204 modules/number.php:280 modules/quiz.php:269
-#: modules/really-simple-captcha.php:337 modules/select.php:223
+#: modules/acceptance.php:302 modules/checkbox.php:298 modules/date.php:260
+#: modules/file.php:204 modules/number.php:284 modules/quiz.php:269
+#: modules/really-simple-captcha.php:337 modules/select.php:227
 #: modules/submit.php:88 modules/text.php:316 modules/textarea.php:200
 msgid "Insert Tag"
 msgstr "Вставить тег"
 
-#: modules/acceptance.php:289 modules/checkbox.php:286 modules/date.php:244
-#: modules/file.php:191 modules/number.php:268 modules/quiz.php:256
+#: modules/acceptance.php:289 modules/checkbox.php:285 modules/date.php:248
+#: modules/file.php:191 modules/number.php:272 modules/quiz.php:256
 #: modules/really-simple-captcha.php:310 modules/really-simple-captcha.php:325
-#: modules/select.php:210 modules/submit.php:75 modules/text.php:303
+#: modules/select.php:214 modules/submit.php:75 modules/text.php:303
 #: modules/textarea.php:187
 msgid "Class attribute"
 msgstr "Атрибут class"
 
-#: modules/acceptance.php:284 modules/checkbox.php:281 modules/date.php:239
-#: modules/file.php:186 modules/number.php:263 modules/quiz.php:251
+#: modules/acceptance.php:284 modules/checkbox.php:280 modules/date.php:243
+#: modules/file.php:186 modules/number.php:267 modules/quiz.php:251
 #: modules/really-simple-captcha.php:305 modules/really-simple-captcha.php:320
-#: modules/select.php:205 modules/submit.php:70 modules/text.php:298
+#: modules/select.php:209 modules/submit.php:70 modules/text.php:298
 #: modules/textarea.php:182
 msgid "Id attribute"
 msgstr "Атрибут Id"
 
 #: modules/acceptance.php:274 modules/acceptance.php:277
-#: modules/checkbox.php:265 modules/checkbox.php:268 modules/select.php:192
-#: modules/select.php:195
+#: modules/checkbox.php:264 modules/checkbox.php:267 modules/select.php:196
+#: modules/select.php:199
 msgid "Options"
 msgstr "Опции"
 
-#: modules/acceptance.php:264 modules/checkbox.php:260 modules/date.php:210
-#: modules/file.php:171 modules/number.php:234 modules/quiz.php:235
-#: modules/really-simple-captcha.php:295 modules/select.php:187
+#: modules/acceptance.php:264 modules/checkbox.php:259 modules/date.php:214
+#: modules/file.php:171 modules/number.php:238 modules/quiz.php:235
+#: modules/really-simple-captcha.php:295 modules/select.php:191
 #: modules/text.php:258 modules/textarea.php:171
 #: includes/block-editor/index.js:1
 msgid "Name"
@@ -1478,7 +1482,7 @@ msgstr "Сообщение:"
 msgid "Subject: %s"
 msgstr "Тема: %s"
 
-#. translators: %s: [your-name] <[your-email]>
+#. translators: %s: [your-name] [your-email]
 #: includes/contact-form-template.php:64
 msgid "From: %s"
 msgstr "От: %s"
@@ -1874,6 +1878,6 @@ msgid "Contact"
 msgstr "Contact Form 7"
 
 #. Plugin Name of the plugin
-#: admin/admin.php:29 modules/flamingo.php:203
+#: admin/admin.php:29 modules/flamingo.php:215
 msgid "Contact Form 7"
 msgstr "Contact Form 7"

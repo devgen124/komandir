@@ -14,6 +14,7 @@ use QuadLayers\WOOCCM\View\Frontend\Fields_Additional as Fields_Additional;
 use QuadLayers\WOOCCM\View\Frontend\Fields_Disable as Fields_Disable;
 use QuadLayers\WOOCCM\View\Frontend\Fields_Conditional as Fields_Conditional;
 use QuadLayers\WOOCCM\View\Frontend\Fields_Filter as Fields_Filter;
+use QuadLayers\WOOCCM\View\Frontend\Fields_Validation as Fields_Validation;
 
 /**
  * Field Class
@@ -34,6 +35,7 @@ class Field extends Controller {
 		if ( ! is_admin() ) {
 			Fields_Register::instance();
 			Fields_Additional::instance();
+			Fields_Validation::instance();
 			Fields_Disable::instance();
 			Fields_Conditional::instance();
 			Fields_Handler::instance();
@@ -171,17 +173,21 @@ class Field extends Controller {
 	public function ajax_save_field() {
 		if ( isset( $_REQUEST['field_data'] ) && current_user_can( 'manage_woocommerce' ) && check_ajax_referer( 'wooccm_field', 'nonce', false ) ) {
 
-			$field_data = json_decode( wc_clean( wp_unslash( $_REQUEST['field_data'] ) ), true );
+			// phpcs:ignore
+			$field_data           = json_decode( wp_unslash( $_REQUEST['field_data'] ), true );
+			$field_data_sanitized = wc_clean( $field_data );
 
-			if ( is_array( $field_data ) ) {
-				if ( isset( $field_data['id'] ) ) {
+			$field_data_sanitized['description'] = wp_kses_post( $field_data['description'] );
 
-					unset( $field_data['show_product_selected'] );
-					unset( $field_data['hide_product_selected'] );
+			if ( is_array( $field_data_sanitized ) ) {
+				if ( isset( $field_data_sanitized['id'] ) ) {
 
-					return parent::success_ajax( $this->save_modal_field( $field_data ) );
+					unset( $field_data_sanitized['show_product_selected'] );
+					unset( $field_data_sanitized['hide_product_selected'] );
+
+					return parent::success_ajax( $this->save_modal_field( $field_data_sanitized ) );
 				} else {
-					return parent::success_ajax( $this->add_modal_field( $field_data ) );
+					return parent::success_ajax( $this->add_modal_field( $field_data_sanitized ) );
 				}
 			}
 		}
@@ -407,4 +413,3 @@ class Field extends Controller {
 		}
 	}
 }
-

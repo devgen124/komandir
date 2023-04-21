@@ -158,7 +158,13 @@
 	<# if ( data.type=='text' || data.type=='textarea' ) { #>
 		<p class="form-field dimensions_field">
 			<label><?php esc_html_e( 'Maxlength', 'woocommerce-checkout-manager' ); ?></label>
-			<input class="short" type="text" name="maxlength" placeholder="<?php esc_html_e( 'Enter a maxlength value (optional)', 'woocommerce-checkout-manager' ); ?>" value="{{data.maxlength}}">
+			<input class="short" type="number" name="maxlength" placeholder="<?php esc_html_e( 'Enter a maxlength value (optional)', 'woocommerce-checkout-manager' ); ?>" value="{{data.maxlength}}">
+		</p>
+	<# } #>
+	<# if ( data.type=='text' || data.type=='textarea' ) { #>
+		<p class="form-field dimensions_field">
+			<label><?php esc_html_e( 'Minlength', 'woocommerce-checkout-manager' ); ?></label>
+			<input class="short" type="number" name="minlength" placeholder="<?php esc_html_e( 'Enter a minlength value (optional)', 'woocommerce-checkout-manager' ); ?>" value="{{data.minlength}}">
 		</p>
 	<# } #>
 	<# if ( data.type=='text' ) { #>

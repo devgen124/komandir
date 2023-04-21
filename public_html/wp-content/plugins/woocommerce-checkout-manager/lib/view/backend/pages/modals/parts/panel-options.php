@@ -1,7 +1,7 @@
 <# if ( _.contains(<?php echo json_encode( $option ); ?>, data.type)) { #>
   <div class="panel woocommerce_options_panel <# if (data.panel != 'options') { #>hidden<# } #>">
 	<# if ( _.isObject(data.options)) { #>
-	  <div class="options_group">
+	  <div class="options_group media-modal-render-panels">
 		<table class="wc_gateways widefat wooccm-enhanced-options" style="border:none;box-shadow: none">
 		  <thead>
 			<tr>

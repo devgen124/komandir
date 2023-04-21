@@ -39,6 +39,7 @@ return array(
     'QuadLayers\\WOOCCM\\View\\Frontend\\Fields_Handler' => $baseDir . '/lib/view/frontend/class-fields-handler.php',
     'QuadLayers\\WOOCCM\\View\\Frontend\\Fields_I18n' => $baseDir . '/lib/view/frontend/class-fields-i18n.php',
     'QuadLayers\\WOOCCM\\View\\Frontend\\Fields_Register' => $baseDir . '/lib/view/frontend/class-fields-register.php',
+    'QuadLayers\\WOOCCM\\View\\Frontend\\Fields_Validation' => $baseDir . '/lib/view/frontend/class-fields-validation.php',
     'QuadLayers\\WP_Dashboard_Widget_News\\Load' => $baseDir . '/jetpack_vendor/quadlayers/wp-dashboard-widget-news/src/Load.php',
     'QuadLayers\\WP_Notice_Plugin_Promote\\Load' => $baseDir . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/Load.php',
     'QuadLayers\\WP_Notice_Plugin_Promote\\PluginByFile' => $baseDir . '/jetpack_vendor/quadlayers/wp-notice-plugin-promote/src/PluginByFile.php',

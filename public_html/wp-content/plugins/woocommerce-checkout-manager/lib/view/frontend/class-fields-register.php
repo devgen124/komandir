@@ -68,6 +68,15 @@ class Fields_Register {
 			}
 		);
 
+		if ( isset( $fields['billing']['billing_address_2']['label_class'] ) && in_array( 'screen-reader-text', $fields['billing']['billing_address_2']['label_class'], true ) ) {
+			$fields['billing']['billing_address_2']['label_class'] = array_filter(
+				$fields['billing']['billing_address_2']['label_class'],
+				static function ( $class ) {
+				return 'screen-reader-text' !== $class;
+				}
+			);
+		}
+
 		return $fields;
 	}
 
@@ -87,6 +96,14 @@ class Fields_Register {
 				return ( empty( $field['disabled'] ) );
 			}
 		);
+		if ( isset( $fields['shipping']['shipping_address_2']['label_class'] ) && in_array( 'screen-reader-text', $fields['shipping']['shipping_address_2']['label_class'], true ) ) {
+			$fields['shipping']['shipping_address_2']['label_class'] = array_filter(
+				$fields['shipping']['shipping_address_2']['label_class'],
+				static function ( $class ) {
+				return 'screen-reader-text' !== $class;
+				}
+			);
+		}
 
 		return $fields;
 	}

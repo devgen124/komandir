@@ -77,6 +77,15 @@ class Fields_Conditional {
 						}
 						break;
 					}
+				case 'paypal-payments':
+					if ( isset( $GLOBALS['_POST'] ) ) {
+						$post_data = wp_unslash( $GLOBALS['_POST'] );
+						$is_valid_conditional_field = $this->is_valid_conditional_field( $post_data, $field );
+						if ( ! $is_valid_conditional_field ) {
+							$fields[ $field['key'] ]['required'] = false;
+						}
+						break;
+					}
 			}
 		}
 
@@ -119,4 +128,3 @@ class Fields_Conditional {
 		return $field;
 	}
 }
-
