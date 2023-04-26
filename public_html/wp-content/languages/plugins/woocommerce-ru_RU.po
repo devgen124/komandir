@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-04-20 15:25:08+0000\n"
+"PO-Revision-Date: 2023-04-22 17:17:36+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13653,7 +13653,7 @@ msgstr "Запланированное действие"
 
 #: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore_PostTypeRegistrar.php:20
 msgid "Scheduled actions are hooks triggered on a cetain date and time."
-msgstr "Запланированные действия - это события, запускаемыми в определённые дату и время."
+msgstr "Запланированные действия - это ловушки, запускаемые в определённые дату и время."
 
 #. translators: %s: count
 #: packages/action-scheduler/classes/data-stores/ActionScheduler_wpPostStore_PostStatusRegistrar.php:53
@@ -13855,7 +13855,7 @@ msgstr "действие создано"
 
 #: packages/action-scheduler/classes/ActionScheduler_ListTable.php:648
 msgid "Search hook, args and claim ID"
-msgstr "Поиск события, аргументы или ID"
+msgstr "Поиск ловушки, аргумента или ID заявки"
 
 #. translators: %s: date interval
 #: packages/action-scheduler/classes/ActionScheduler_ListTable.php:488
@@ -14007,7 +14007,7 @@ msgstr "Аргументы"
 #: packages/action-scheduler/classes/ActionScheduler_AdminView.php:241
 #: packages/action-scheduler/classes/ActionScheduler_ListTable.php:96
 msgid "Hook"
-msgstr "Событие"
+msgstr "Ловушка"
 
 #. translators: 1: action ID 2: arguments
 #: packages/action-scheduler/classes/ActionScheduler_InvalidActionException.php:40
