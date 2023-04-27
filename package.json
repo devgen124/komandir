@@ -44,8 +44,9 @@
   },
   "dependencies": {
     "@fancyapps/ui": "^4.0.9",
-    "bootstrap": "^5.2",
+    "bootstrap": "^5.2.3",
     "cookie": "^0.4.1",
+    "imask": "^6.6.1-alpha.2",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.5",
     "select-custom": "^1.1.9"
