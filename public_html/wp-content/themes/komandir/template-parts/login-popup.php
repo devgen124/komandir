@@ -6,7 +6,7 @@
 		<form class="form-send-code" method="post">
 			<label class="custom-popup-form-label">
 				<input type="tel" placeholder="Телефон" name="phone" />
-				<button class="input-tip" aria-label="Подсказка"></button>
+				<button class="input-tip" id="phone-tip" aria-label="Подсказка"></button>
 			</label>
 			<?php wp_nonce_field( 'komandir-send-code', 'komandir-send-code-nonce' ); ?>
 			<button type="submit" class="custom-popup-submit form-send-code-submit">Получить код</button>
@@ -26,7 +26,7 @@
 		<form class="form-pass" method="post">
 			<label class="custom-popup-form-label">
 				<input type="text" placeholder="Телефон, e-mail или логин" name="login" />
-				<button class="input-tip" aria-label="Подсказка"></button>
+				<button class="input-tip" id="phone-tip" aria-label="Подсказка"></button>
 			</label>
 			<label class="custom-popup-form-label">
 				<input type="password" placeholder="Пароль" name="pass" />

@@ -1,7 +1,13 @@
-export default function phoneMask () {
-  const $phoneMask = $('.phone-mask');
+import IMask from 'imask';
 
-  if ($phoneMask) {
-    $phoneMask.mask('+79999999999');
-  }
-} 
+export default function phoneMask() {
+	const phoneInputs = document.querySelectorAll('.phone-mask');
+
+	if (phoneInputs) {
+		phoneInputs.forEach(input => {
+			let mask = IMask(input, {
+				mask: '+{7} 000 000 00 00'
+			});
+		});
+	}
+}
