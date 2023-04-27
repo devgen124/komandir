@@ -1,5 +1,6 @@
 import initPassViewSwitcher from "./pass-view-switcher.js";
-
+import IMask from 'imask';
+import tippy from 'tippy.js';
 
 class Popup {
 
@@ -24,7 +25,14 @@ class Popup {
         const thisSection = this.popup.querySelector('.custom-popup-section');
         const sendCodeSubmit = thisSection.querySelector('.custom-popup-submit');
         const telInput = thisSection.querySelector('input[type="tel"]');
-        const loginPassLink = thisSection.querySelector('.login-pass-link');
+		const loginPassLink = thisSection.querySelector('.login-pass-link');
+		const phoneTip = thisSection.querySelector('#phone-tip');
+
+		if (phoneTip) {
+			tippy('#phone-tip', {
+				content: 'Телефон в формате +7 000 000 00 00'
+			});
+		}
 
         this.setMask(telInput);
 
@@ -48,11 +56,22 @@ class Popup {
         this.addFormListeners(sendCodeSubmit, 'change_phone_send_code', ['phone'], this.renderChangePhoneSmsCode);
     }
 
-    setMask = (inp) => {
-        $(inp).mask('+79999999999');
+	setMask = (inp) => {
+		const mask = IMask(inp, {
+			mask: '+{7} 000 000 00 00'
+		});
     }
 
-    addFormListeners = (submitBtn, action, inputNamesArr, successCb = null) => {
+	addFormListeners = (submitBtn, action, inputNamesArr, successCb = null) => {
+		const form = submitBtn.closest('form');
+		const inputs = inputNamesArr.map((name) => form.querySelector(`input[name=${name}]`));
+
+		inputs.forEach((input) => {
+			input.oninput = () => {
+				input.classList.remove('invalid');
+			}
+		});
+
         submitBtn.onclick = (e) => {
             e.preventDefault();
             const thisBtn = e.target;
@@ -61,7 +80,7 @@ class Popup {
             const thisForm = e.target.closest('form');
             const thisSection = e.target.closest('.custom-popup-section');
 
-            this.ajaxSend(action, this.getFormValues(thisForm, inputNamesArr), (res) => {
+			this.ajaxSend(action, this.getFormValues(thisForm, inputNamesArr), (res) => {
 
                 this.removeLoading(thisBtn);
 
@@ -92,7 +111,7 @@ class Popup {
                     successCb();
                 }
             });
-        }
+		}
     }
 
     addLoginPassListener = (link) => {
@@ -156,8 +175,7 @@ class Popup {
     setInvalidInputs = (section, inpArr) => {
         inpArr.forEach(inp => {
             const invalidInput = section.querySelector(`input[name="${inp}"]`);
-            invalidInput.classList.add('invalid');
-            console.log(invalidInput);
+			invalidInput.classList.add('invalid');
             invalidInput.oninput = () => {
                 console.log('oninput');
                 invalidInput.classList.remove('invalid');
@@ -218,10 +236,11 @@ class Popup {
 
         const thisSection = this.popup.querySelector('.custom-popup-section');
         const passSubmit = thisSection.querySelector('.custom-popup-submit');
-        const counterBlock = thisSection.querySelector('.counter-block');
+		const counterBlock = thisSection.querySelector('.counter-block');
+		const backlink = thisSection.querySelector('.login-popup-backlink');
 
         this.initCounter(counterBlock);
-
+		this.addBacklinkListener(backlink);
         this.addFormListeners(passSubmit, 'login_send_sms', ['sms'], this.renderProfile);
     }
 
@@ -234,7 +253,6 @@ class Popup {
         const counterBlock = thisSection.querySelector('.counter-block');
 
         this.initCounter(counterBlock);
-
         this.addFormListeners(passSubmit, 'change_phone_send_sms', ['sms']);
     }
 
@@ -319,7 +337,7 @@ class Popup {
                     });
                 }
             }
-            
+
         }, 1000);
     }
 }

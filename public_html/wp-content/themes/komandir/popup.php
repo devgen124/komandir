@@ -28,12 +28,14 @@ class PopupController {
 
 		$response = array();
 
+		// $response['console_message'] = ;
+
 		if ( empty( $_POST['phone'] ) || empty( trim( $_POST['phone'] ) ) ) {
 
 			$response['error_message'][] = 'Введите номер телефона';
 			$response['error_fields'][] = 'phone';
 
-		} elseif ( self::is_phone( wc_sanitize_phone_number( $_POST['phone'] ) ) ) {
+		} elseif ( self::is_phone( $_POST['phone'] ) ) {
 
 			$phone = wc_sanitize_phone_number( $_POST['phone'] );
 			$last_time = WC()->session->get( 'sms_timestamp' ) ? (int) WC()->session->get( 'sms_timestamp' ) : 0;
@@ -82,6 +84,7 @@ class PopupController {
 			$response['error_fields'][] = 'phone';
 
 		} elseif ( self::is_phone( wc_sanitize_phone_number( $_POST['phone'] ) ) ) {
+
 			$current_user = wp_get_current_user();
 
 			$current_user_phone = get_user_meta( $current_user->ID, 'billing_phone', true );
@@ -132,43 +135,42 @@ class PopupController {
 
 	private static function is_phone( $phone ) {
 
-		if ( 0 < strlen( trim( preg_replace( '/[\s\#0-9_\-\+\/\(\)\.]/', '', $phone ) ) ) ) {
+		return preg_match( '/\+7\s\d{3}\s\d{3}\s\d{2}\s\d{2}/', $phone );
 
-			return false;
-		} else {
-
-			return true;
-		}
 	}
 
-	private static function send_code( $phone ) {
+	private static function send_code( $phone, $testMode = true ) {
 
-		$smsAuth = new SmsAuthController( 'komandir124', 'Kom24A22' );
-		$response = array();
+		if ( $testMode ) {
 
-		try {
-
-			$result = $smsAuth->generateCode(
-				$phone,
-				'komandir124',
-				4,
-				'Ваш код авторизации: {код}'
-			);
-
-			$code = (string) $result->success->attributes()['code'];
+			$code = '1234';
 
 			WC()->session->set( 'sms_code', $code );
-		} catch (Exception $e) {
+			WC()->session->set( 'sms_timestamp', time() );
 
-			throw new Exception( $e->getMessage() );
+		} else {
+
+			$smsAuth = new SmsAuthController( 'komandir124', 'Kom24A22' );
+
+			try {
+
+				$result = $smsAuth->generateCode(
+					$phone,
+					'komandir124',
+					4,
+					'Ваш код авторизации: {код}'
+				);
+
+				$code = (string) $result->success->attributes()['code'];
+
+				WC()->session->set( 'sms_code', $code );
+
+			} catch (Exception $e) {
+
+				throw new Exception( $e->getMessage() );
+			}
+
 		}
-	}
-
-	private static function send_code_test( $phone ) {
-		$code = '1234';
-
-		WC()->session->set( 'sms_code', $code );
-		WC()->session->set( 'sms_timestamp', time() );
 	}
 
 	public static function komandir_login_send_sms() {

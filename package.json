@@ -49,6 +49,7 @@
     "imask": "^6.6.1-alpha.2",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.5",
-    "select-custom": "^1.1.9"
+    "select-custom": "^1.1.9",
+    "tippy.js": "^6.3.7"
   }
 }
