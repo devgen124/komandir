@@ -155,10 +155,6 @@ function komandir_scripts() {
   wp_enqueue_style( 'magnific-popup', get_template_directory_uri() . '/assets/vendor/css/magnific-popup.css', _S_VERSION );
   wp_enqueue_script('magnific-popup', get_template_directory_uri() . '/assets/vendor/js/jquery.magnific-popup.min.js', array( 'jquery' ), _S_VERSION, true);
 
-	// masked input
-
-	wp_enqueue_script('masked-input', get_template_directory_uri() . '/assets/vendor/js/jquery.maskedinput.min.js', array( 'jquery' ), _S_VERSION, true);
-
 	// custom script
 
 	wp_enqueue_script('komandir-script', get_template_directory_uri() . '/assets/js/script.js', array( 'jquery' ), _S_VERSION, true);
@@ -222,12 +218,12 @@ if ( class_exists( 'WooCommerce' ) ) {
  */
 
 add_filter( 'mailpoet_manage_subscription_page_form_fields', 'komandir_remove_manage_fields', 10);
-function komandir_remove_manage_fields( $form ) {	
+function komandir_remove_manage_fields( $form ) {
 
 	unset($form[0]); // First Name
 	unset($form[1]); // Last Name
     unset($form[3]); // Subscribe List
-    	
+
 	return $form;
 }
 
