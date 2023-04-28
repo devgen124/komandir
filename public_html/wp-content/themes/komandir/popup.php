@@ -26,7 +26,13 @@ class PopupController {
 
 		check_ajax_referer( 'komandir-nonce', 'nonce_code' );
 
-		$response = array();
+		$response = [
+			'error_message' 	=> [],
+			'error_fields' 		=> [],
+			'success' 			=> false,
+			'phone_number' 		=> null,
+			'console_message' 	=> null
+		];
 
 		// $response['console_message'] = ;
 
@@ -38,7 +44,8 @@ class PopupController {
 		} elseif ( self::is_phone( $_POST['phone'] ) ) {
 
 			$phone = wc_sanitize_phone_number( $_POST['phone'] );
-			$last_time = WC()->session->get( 'sms_timestamp' ) ? (int) WC()->session->get( 'sms_timestamp' ) : 0;
+			$timestamp = WC()->session->get('sms_timestamp');
+			$last_time = $timestamp ? (int) $timestamp : 0;
 
 			$now_time = time();
 			$diff = $now_time - $last_time;
@@ -76,7 +83,13 @@ class PopupController {
 
 		check_ajax_referer( 'komandir-nonce', 'nonce_code' );
 
-		$response = array();
+		$response = [
+			'error_message' 	=> [],
+			'error_fields' 		=> [],
+			'success' 			=> false,
+			'phone_number' 		=> null,
+			'console_message' 	=> null
+		];
 
 		if ( empty( $_POST['phone'] ) || empty( trim( $_POST['phone'] ) ) ) {
 
@@ -177,7 +190,13 @@ class PopupController {
 
 		check_ajax_referer( 'komandir-nonce', 'nonce_code' );
 
-		$response = array();
+		$response = [
+			'error_message' => [],
+			'error_fields' 	=> [],
+			'success' 		=> false,
+			'phone_number' 	=> null,
+			'reload' 		=> false
+		];
 
 		if ( ! isset( $_POST['sms'] ) )
 			wp_die();
@@ -233,7 +252,12 @@ class PopupController {
 
 		check_ajax_referer( 'komandir-nonce', 'nonce_code' );
 
-		$response = array();
+		$response = [
+			'error_message' => [],
+			'error_fields' 	=> [],
+			'success' 		=> false,
+			'reload' 		=> false
+		];
 
 		if ( ! isset( $_POST['sms'] ) )
 			wp_die();
@@ -285,7 +309,12 @@ class PopupController {
 
 		$password_regexp = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/';
 
-		$response = array();
+		$response = [
+			'error_message' => [],
+			'error_fields' 	=> [],
+			'success' 		=> false,
+			'reload' 		=> false
+		];
 
 		$email = filter_input( INPUT_POST, 'login-email', FILTER_VALIDATE_EMAIL );
 
@@ -325,6 +354,7 @@ class PopupController {
 
 				$required_fields = [
 					'Email' => 'login-email',
+					'Логин' => 'login-display-name',
 					'Пароль' => 'login-pass-first',
 					'Повторите пароль' => 'login-pass-second'
 				];
@@ -388,7 +418,12 @@ class PopupController {
 
 		check_ajax_referer( 'komandir-nonce', 'nonce_code' );
 
-		$response = array();
+		$response = [
+			'error_message' => [],
+			'error_fields' 	=> [],
+			'phone' 		=> null,
+			'reload' 		=> false
+		];
 
 		$login = trim( wp_unslash( $_POST['login'] ) );
 
