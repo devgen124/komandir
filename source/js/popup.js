@@ -177,7 +177,6 @@ class Popup {
             const invalidInput = section.querySelector(`input[name="${inp}"]`);
 			invalidInput.classList.add('invalid');
             invalidInput.oninput = () => {
-                console.log('oninput');
                 invalidInput.classList.remove('invalid');
             };
         });
@@ -270,7 +269,8 @@ class Popup {
 
         this.addFormListeners(profileSubmit, 'create_customer', [
             'login-phone',
-            'login-email',
+			'login-email',
+			'login-display-name',
             'login-first-name',
             'login-second-name',
             'login-pass-first',
