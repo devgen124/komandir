@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack &#8211; WP Security, Backup, Speed, &amp; Growth - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-04-13 11:54:08+0000\n"
+"PO-Revision-Date: 2023-04-30 14:17:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1230,6 +1230,11 @@ msgctxt "Module Description"
 msgid "Protect your site with Jetpack's Web Application Firewall"
 msgstr "Защитите свой сайт с помощью Jetpack Web Application Firewall"
 
+#: modules/module-headings.php:370
+msgctxt "Module Tag"
+msgid "WAF"
+msgstr "WAF"
+
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-social.php:95
 msgid "Supports the major social networks"
 msgstr "Поддержка основных социальных сетей"
@@ -1384,10 +1389,6 @@ msgstr "Не удалось обработать предложения для �
 msgid "Could not retrieve intro offers."
 msgstr "Не удалось получить предложения для новых клиентов."
 
-#: _inc/lib/class.core-rest-api-endpoints.php:2060
-msgid "Could not parse discount"
-msgstr "Не удалось обработать скидку "
-
 #: _inc/lib/class.core-rest-api-endpoints.php:2052
 msgid "Could not retrieve site discount."
 msgstr "Не удалось получить скидку сайта."
@@ -1406,6 +1407,10 @@ msgstr "Приватность видео: разрешить просмотр �
 #: sal/class.json-api-post-base.php:100
 msgid "Call to undefined method %s"
 msgstr "Вызов в неопределенный метод %s"
+
+#: _inc/lib/class.core-rest-api-endpoints.php:2060
+msgid "Could not parse discount"
+msgstr "Не удалось разобрать скидку"
 
 #: modules/videopress/class.videopress-edit-attachment.php:342
 #: jetpack_vendor/automattic/jetpack-videopress/build/admin/index.js:10
@@ -1586,7 +1591,7 @@ msgstr "Выбор шрифтов Google для тем с блоками. Раб
 #: _inc/blocks/editor-experimental.js:55 _inc/blocks/editor-experimental.js:56
 #: _inc/blocks/editor.js:45 _inc/blocks/editor.js:46
 msgid "Type your email…"
-msgstr "Начните вводить текст сообщения..."
+msgstr "Введите адрес электронной почты…"
 
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-security.php:81
 msgctxt "Security Product Feature"
@@ -1650,7 +1655,7 @@ msgstr "Проверка орфографии"
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-search.php:106
 #: jetpack_vendor/automattic/jetpack-search/build/dashboard/jp-search-dashboard.js:31
 msgid "Supports 38 languages"
-msgstr "Поддержка 38 языков"
+msgstr "Поддержка 29 языков"
 
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-search.php:105
 #: jetpack_vendor/automattic/jetpack-search/build/dashboard/jp-search-dashboard.js:31
@@ -1813,14 +1818,6 @@ msgstr "Скачать"
 msgid "No valid event name or type."
 msgstr "Не указаны действительное имя или тип события."
 
-#: jetpack_vendor/automattic/jetpack-sync/src/class-rest-endpoints.php:296
-msgid "Do we want the checksum or object ids."
-msgstr "Требуются ли идентификаторы контрольной суммы или объекта?"
-
-#: jetpack_vendor/automattic/jetpack-sync/src/class-rest-endpoints.php:291
-msgid "Should only range endges be returned"
-msgstr "Следует ли возвращать только границы диапазона?"
-
 #: jetpack_vendor/automattic/jetpack-sync/src/class-rest-endpoints.php:286
 msgid "Shared Salt to use when generating checksum"
 msgstr "Общие случайные данные для использования при генерации контрольной суммы"
@@ -1925,6 +1922,14 @@ msgstr "Ваш тарифный план не поддерживает Jetpack S
 #: jetpack_vendor/automattic/jetpack-password-checker/src/class-password-checker.php:254
 msgid "Your password is too weak: Looks like you are including easy to guess information about yourself. Try something a little more unique."
 msgstr "Ваш пароль слишком слабый. Похоже, вашу информацию о себе легко угадать. Выберите что-то более сложное."
+
+#: jetpack_vendor/automattic/jetpack-sync/src/class-rest-endpoints.php:296
+msgid "Do we want the checksum or object ids."
+msgstr "Нам нужна контрольная сумма или идентификаторы объектов."
+
+#: jetpack_vendor/automattic/jetpack-sync/src/class-rest-endpoints.php:291
+msgid "Should only range endges be returned"
+msgstr "Должны ли возвращаться только концы диапазона"
 
 #. translators: %s is a comma-separated list of license keys.
 #: jetpack_vendor/automattic/jetpack-licensing/src/class-licensing.php:230
@@ -2133,7 +2138,7 @@ msgstr "Блог уже зарегистрирован"
 #. translators: %1$s is a PHP class name.
 #: jetpack_vendor/automattic/jetpack-config/src/class-config.php:196
 msgid "Unable to load class %1$s. Please add the package that contains it using composer and make sure you are requiring the Jetpack autoloader"
-msgstr "Не удалось загрузить класс %1$s. С помощью инструмента создания добавьте содержащий его пакет и убедитесь, что решение для автозагрузки Jetpack указано в качестве обязательного элемента."
+msgstr "Не удалось загрузить класс %1$s. Пожалуйста, добавьте содержащий его пакет с помощью композитора и убедитесь, что вам требуется автозагрузчик Jetpack."
 
 #. translators: 1: wp_default_scripts. 2: Name of the domain being aliased.
 #: jetpack_vendor/automattic/jetpack-assets/src/class-assets.php:554
@@ -2161,11 +2166,6 @@ msgstr "Одно или несколько имен опций, включаем
 msgid "ID of the database object to fetch"
 msgstr "Идентификатор получаемого объекта базы данных"
 
-#. translators: %s: comma-separated list of allowed object types
-#: jetpack_vendor/automattic/jetpack-backup/src/class-rest-controller.php:92
-msgid "The object_type argument should be one of %s"
-msgstr "Аргумент object_type должен быть одним из типов объектов %s."
-
 #: jetpack_vendor/automattic/jetpack-backup/src/class-rest-controller.php:80
 msgid "The object_type argument must be a non-empty string."
 msgstr "Аргумент object_type должен быть непустой строкой."
@@ -2178,14 +2178,19 @@ msgstr "Тип объекта, получаемого из базы данных
 msgid "Path to Backup Helper Script"
 msgstr "Путь к сценарию вспомогательной службы резервного копирования"
 
-#: jetpack_vendor/automattic/jetpack-backup/src/class-rest-controller.php:38
-msgid "base64 encoded Backup Helper Script body."
-msgstr "Текст сценария вспомогательной службы резервного копирования, закодированный по стандарту base64."
-
 #. translators: %s is the script handle.
 #: jetpack_vendor/automattic/jetpack-assets/src/class-assets.php:389
 msgid "Script \"%s\" depends on wp-i18n but does not specify \"textdomain\""
 msgstr "Сценарий \"%s\" зависит от wp-i18n, но не указывает textdomain"
+
+#: jetpack_vendor/automattic/jetpack-backup/src/class-rest-controller.php:38
+msgid "base64 encoded Backup Helper Script body."
+msgstr "Тело вспомогательного сценария резервного копирования в кодировке base64."
+
+#. translators: %s: comma-separated list of allowed object types
+#: jetpack_vendor/automattic/jetpack-backup/src/class-rest-controller.php:92
+msgid "The object_type argument should be one of %s"
+msgstr "Аргумент object_type должен быть одним из типов объектов %s"
 
 #: jetpack_vendor/automattic/jetpack-search/src/widgets/class-search-widget.php:984
 #: _inc/build/widget-visibility/editor/index.js:1
@@ -2221,7 +2226,7 @@ msgstr "Комплексная защита сайта, включая резе�
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-backup.php:92
 msgctxt "Backup Product Feature"
 msgid "30-day archive & activity log*"
-msgstr "Архив и журнал действий за 30 дней*"
+msgstr "Архив и журнал действий за 30 дн."
 
 #: class.jetpack.php:6698
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-backup.php:90
@@ -2272,7 +2277,7 @@ msgstr "Неограниченное количество пользовател
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-videopress.php:102
 msgctxt "VideoPress Product Feature"
 msgid "Ad-free and customizable player"
-msgstr "Настраиваемый плеер без рекламы"
+msgstr "Плеер без рекламы и с возможностью брендинга"
 
 #: class.jetpack.php:6779
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-videopress.php:101
@@ -2362,7 +2367,7 @@ msgstr "Проверка орфографии"
 #: class.jetpack.php:6735
 msgctxt "Search Product Feature"
 msgid "Supports 38 languages"
-msgstr "Поддержка 38 языков"
+msgstr "Поддержка 29 языков"
 
 #: class.jetpack.php:6734
 msgctxt "Search Product Feature"
@@ -2608,11 +2613,11 @@ msgstr "Пользователи WordPress.com могут изменить ос�
 #: modules/masterbar/nudges/additional-css/class-atomic-additional-css-manager.php:49
 #: modules/masterbar/nudges/additional-css/class-wpcom-additional-css-manager.php:49
 msgid "Purchase a Pro Plan to<br> activate CSS customization"
-msgstr "Купите план Pro, чтобы<br> активировать настраиваемые таблицы CSS"
+msgstr "Купите план Premium, чтобы <br>активировать настраиваемые таблицы CSS"
 
 #: modules/masterbar/nudges/additional-css/class-wpcom-additional-css-manager.php:42
 msgid "Purchase a Premium Plan to<br> activate CSS customization"
-msgstr "Купите план Premium, чтобы <br>активировать настраиваемые таблицы CSS"
+msgstr "Приобрести тарифный план Business для<br> активации функции настройки CSS"
 
 #: modules/carousel/jetpack-carousel.php:621
 msgid "Toggle photo comments visibility"
@@ -2750,11 +2755,6 @@ msgstr "Развернуто (с изображениями)"
 msgid "User %s could not be disconnected."
 msgstr "Невозможно отключить пользователя %s."
 
-#. translators: %s is a username
-#: class.jetpack-cli.php:283
-msgid "User %s could not be disconnected because it is not connected!"
-msgstr "Невозможно отключить пользователя %s, так как он не подключен."
-
 #: _inc/lib/core-api/wpcom-endpoints/class-wpcom-rest-api-v2-endpoint-transient.php:80
 msgid "Sorry, you are not allowed to delete this transient."
 msgstr "Извините, вам не разрешено удалить этот транзиент."
@@ -2775,6 +2775,11 @@ msgstr "Обновления уже выполняются."
 #: class.jetpack-cli.php:1716
 msgid "Jetpack Social requires a user-level connection to WordPress.com"
 msgstr "Для Jetpack Social требуется подключение к WordPress.com на уровне пользователя"
+
+#. translators: %s is a username
+#: class.jetpack-cli.php:283
+msgid "User %s could not be disconnected because it is not connected!"
+msgstr "Пользователь %s не может быть отключен, так как он не подключен!"
 
 #: _inc/lib/class.core-rest-api-endpoints.php:2636
 msgid "Facebook Domain Verification"
@@ -2821,13 +2826,13 @@ msgstr "Отсутствует токен для владельца подклю
 msgid "Could not set this license key. Please try again."
 msgstr "Не удалось установить этот ключ лицензии. Повторите попытку."
 
-#: _inc/lib/class.core-rest-api-endpoints.php:2881
-msgid "SEO page title structures."
-msgstr "Варианты структуры заголовков страниц для поисковой оптимизации"
-
 #: _inc/lib/class.core-rest-api-endpoints.php:2873
 msgid "Front page meta description."
-msgstr "Метаописание главной страницы"
+msgstr "Мета-описание главной страницы."
+
+#: _inc/lib/class.core-rest-api-endpoints.php:2881
+msgid "SEO page title structures."
+msgstr "SEO-заголовки страниц."
 
 #: modules/masterbar/admin-menu/class-admin-menu.php:473 _inc/build/admin.js:69
 msgid "WooCommerce"
@@ -2972,11 +2977,6 @@ msgstr "Плагины %s"
 msgid "Activity Log"
 msgstr "Журнал активности"
 
-#: modules/masterbar/admin-menu/class-atomic-admin-menu.php:302
-#: modules/masterbar/admin-menu/class-wpcom-admin-menu.php:267
-msgid "Hourly views"
-msgstr "просмотров за час"
-
 #: modules/masterbar/admin-menu/class-wpcom-admin-menu.php:174
 msgid "Domain"
 msgstr "Домен"
@@ -3048,6 +3048,11 @@ msgstr "Общие"
 msgid "Add New Site"
 msgstr "Добавить новый сайт"
 
+#: modules/masterbar/admin-menu/class-atomic-admin-menu.php:302
+#: modules/masterbar/admin-menu/class-wpcom-admin-menu.php:267
+msgid "Hourly views"
+msgstr "Почасовые просмотры"
+
 #: modules/masterbar/admin-color-schemes/class-admin-color-schemes.php:84
 msgid "Classic Blue"
 msgstr "Классический синий"
@@ -3070,7 +3075,7 @@ msgstr "Отображать меню отправки в плеере."
 
 #: jetpack_vendor/automattic/jetpack-videopress/src/class-wpcom-rest-api-v2-endpoint-videopress.php:70
 msgid "The video content rating. One of G, PG-13 or R-17"
-msgstr "Рейтинг видеоролика. G, PG-13 или R-17"
+msgstr "Рейтинг видеоролика. G, PG-13, R-17 или X-18"
 
 #: jetpack_vendor/automattic/jetpack-videopress/src/class-wpcom-rest-api-v2-endpoint-videopress.php:58
 msgid "The description of the video."
@@ -3088,15 +3093,15 @@ msgstr "Jetpack обнаружил, что данные не синхрониз�
 msgid "Jetpack has detected that data is not properly in sync which may be impacting some of your site’s functionality. <strong>Click <a id=\"full_sync_request_link\" href=\"#\">here</a> to start a fix</strong> to align Jetpack with your site data. If you still notice this error after running the fix process, please contact support for additional assistance."
 msgstr "Jetpack обнаружил, что данные не синхронизированы необходимым образом. Это может ухудшать работу сайта. <strong>Нажмите <a id=\"full_sync_request_link\" href=\"#\">сюда</a>, чтобы решить проблему</strong> и синхронизировать Jetpack с данными сайта. Если эта ошибка повторится после исправления, обратитесь за помощью в службу поддержки."
 
-#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:424
-#: modules/contact-form/grunion-contact-form.php:529
-msgid "Submit a form."
-msgstr "Отправить форму"
-
 #: modules/module-headings.php:111
 msgctxt "Module Description"
 msgid "Replaces the admin bar with a useful toolbar to quickly manage your site via WordPress.com. Also adds additional customizations to the WPAdmin dashboard experience for better compatibility with WP.com."
 msgstr "Заменить панель администратора удобной панелью для управления вашим сайтом через WordPress.com Дополнительные настраиваемые параметры консоли WPAdmin для совместимости с WP.com."
+
+#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-contact-form-plugin.php:424
+#: modules/contact-form/grunion-contact-form.php:529
+msgid "Submit a form."
+msgstr "Отправить форму."
 
 #: modules/module-headings.php:110
 msgctxt "Module Name"
@@ -3105,7 +3110,7 @@ msgstr "Панель инструментов WordPress.com и настраив�
 
 #: modules/masterbar/admin-color-schemes/class-admin-color-schemes.php:33
 msgid "Slug of the admin color scheme."
-msgstr "Слаг цветовой схемы консоли администратора"
+msgstr "Слаг админской цветовой схемы."
 
 #: extensions/blocks/image-compare/image-compare.php:45
 msgid "Slide to compare images"
@@ -3144,7 +3149,7 @@ msgstr "Автоматическое удаление спама из комме
 #: modules/stats/class-jetpack-stats-upgrade-nudges.php:419
 #: _inc/build/admin.js:49
 msgid "Save every change and get back online quickly with one-click restores."
-msgstr "Сохраняйте каждое изменение и быстро восстанавливайте работоспособность сайта одним щелчком мыши"
+msgstr "Сохраняйте все изменения и быстро подключайтесь к сети с помощью восстановления одним щелчком мыши."
 
 #: _inc/lib/debugger/class-jetpack-cxn-tests.php:561
 msgid "Invalid Jetpack connection tokens."
@@ -3755,14 +3760,6 @@ msgstr "Выберите тему для наложения в поиске."
 msgid "View Privacy Policy"
 msgstr "Показать политику конфиденциальности"
 
-#: modules/wordads/php/class-wordads-california-privacy.php:259
-msgid "On"
-msgstr "Вкл."
-
-#: modules/wordads/php/class-wordads-california-privacy.php:258
-msgid "Off"
-msgstr "Выкл."
-
 #: modules/wordads/php/class-wordads-california-privacy.php:240
 msgid "Close dialog"
 msgstr "Закрыть окно"
@@ -3835,6 +3832,14 @@ msgstr "У вас недостаточно прав для того, чтобы 
 #: modules/contact-form/admin.php:1291 modules/contact-form/admin.php:1462
 msgid "You aren’t authorized to do that."
 msgstr "У вас нет разрешения сделать это."
+
+#: modules/wordads/php/class-wordads-california-privacy.php:258
+msgid "Off"
+msgstr "Выкл"
+
+#: modules/wordads/php/class-wordads-california-privacy.php:259
+msgid "On"
+msgstr "Вкл"
 
 #: modules/wordads/php/class-wordads-california-privacy.php:214
 msgid "This opt-out is managed through cookies, so if you delete cookies, your browser is set to delete cookies automatically after a certain length of time, or if you visit this site with a different browser, you'll need to make this selection again."
@@ -3940,7 +3945,7 @@ msgstr "Подключение…"
 
 #: class.jetpack-cli.php:103
 msgid "One or more tests did not pass. Please investigate!"
-msgstr "тест или несколько тестов не пройдены. Пожалуйста, изучите проблему!"
+msgstr "Один или несколько тестов не пройдены. Пожалуйста, исследуйте!"
 
 #. translators: placeholder is a percentage number.
 #: _inc/lib/debugger/class-jetpack-cxn-tests.php:747
@@ -4015,7 +4020,7 @@ msgstr "Включить защиту от спама"
 #: class-jetpack-stats-dashboard-widget.php:201
 msgctxt "{#} Spam comments blocked by Akismet -- number is on a prior line, text is a caption."
 msgid "Blocked spam comments"
-msgstr "Заблокированные комментарии со спамом"
+msgstr "заблокированных комментариев со спамом."
 
 #: class-jetpack-stats-dashboard-widget.php:191
 msgid "Brute force attack protection is inactive."
@@ -4257,11 +4262,6 @@ msgstr "Ошибка"
 msgid "Your site is connected to Jetpack."
 msgstr "Ваш сайт подключен к Jetpack."
 
-#. translators: Screen reader text indicating a test has passed
-#: _inc/lib/debugger/class-jetpack-cxn-tests.php:265
-msgid "Passed"
-msgstr "Успешно!"
-
 #: _inc/lib/debugger/class-jetpack-cxn-tests.php:148
 #: _inc/lib/debugger/class-jetpack-cxn-tests.php:263
 msgid "A healthy connection ensures Jetpack essential services are provided to your WordPress site, such as Stats and Site Security."
@@ -4291,6 +4291,11 @@ msgid ""
 msgstr ""
 "Не удалось подключить ваш сервер к серверу Jetpack с помощью %1$s\n"
 "\t\t\t\tПопросите поставщика услуг хостинга убедиться, что ваш сервер может отправлять запросы на jetpack.com."
+
+#. translators: Screen reader text indicating a test has passed
+#: _inc/lib/debugger/class-jetpack-cxn-tests.php:265
+msgid "Passed"
+msgstr "Пройден"
 
 #: _inc/lib/class.core-rest-api-endpoints.php:2599
 msgid "Trigger an auto config of instant search"
@@ -4508,10 +4513,6 @@ msgstr "Хостинг изображений"
 msgid "Super-fast, mobile-ready images served by Jetpack"
 msgstr "Супер-быстрая, адаптированная под мобильные устройства доставка изображений Jetpack"
 
-#: _inc/lib/core-api/class.jetpack-core-api-site-endpoints.php:251
-msgid "Ad-free, lightning-fast videos delivered by Jetpack"
-msgstr "Доставлено Jetpack свободной от рекламы видео "
-
 #: _inc/lib/core-api/class.jetpack-core-api-site-endpoints.php:271
 msgid "Live social media site connections, powered by Jetpack"
 msgstr "Живое соединения с соцсетями, заряжено Jetpack"
@@ -4528,6 +4529,10 @@ msgstr "Преимущества сайту доставлены."
 #: _inc/lib/core-api/class.jetpack-core-api-site-endpoints.php:202
 msgid "Jetpack Backup"
 msgstr "Jetpack Backup"
+
+#: _inc/lib/core-api/class.jetpack-core-api-site-endpoints.php:251
+msgid "Ad-free, lightning-fast videos delivered by Jetpack"
+msgstr "Молниеносное видео без рекламы, доставляемое Jetpack"
 
 #: jetpack_vendor/automattic/jetpack-connection/src/class-rest-connector.php:654
 #: _inc/lib/class.core-rest-api-endpoints.php:1705
@@ -4604,14 +4609,6 @@ msgstr "Управление"
 msgid "Plugin icon"
 msgstr "Значок плагина"
 
-#: class.jetpack-cli.php:336
-msgid ""
-"\n"
-"This is a dry run.\n"
-msgstr ""
-"\n"
-"Это холостой запуск.\n"
-
 #: modules/comments/comments.php:585
 msgid "Unknown security token."
 msgstr "Неизвестный токен безопасности."
@@ -4635,10 +4632,6 @@ msgstr "Укажите URL-адрес с SoundCloud."
 #: class.jetpack-cli.php:337
 msgid "No actions will be taken.\n"
 msgstr "Не будет совершено никаких действий.\n"
-
-#: class.jetpack-cli.php:397
-msgid "Please specify if you would like to reset your options, modules or sync-checksum"
-msgstr "Укажите, что вы хотите сбросить: настройки, модули или контрольные суммы синхронизации."
 
 #. translators: %1$d is a number, %2$s is the name of an option, %2$s is the
 #. site URL.
@@ -4677,6 +4670,18 @@ msgstr "При вводе шорткода Wufoo произошла ошибка
 msgid "Recurring Payments plans"
 msgstr "Тарифные планы с регулярной оплатой"
 
+#: class.jetpack-cli.php:336
+msgid ""
+"\n"
+"This is a dry run.\n"
+msgstr ""
+"\n"
+"Это пробный запуск.\n"
+
+#: class.jetpack-cli.php:397
+msgid "Please specify if you would like to reset your options, modules or sync-checksum"
+msgstr "Укажите, хотите ли вы сбросить параметры, модули или контрольную сумму синхронизации."
+
 #: _inc/lib/admin-pages/class.jetpack-admin-page.php:436
 msgid "About"
 msgstr "О Jetpack"
@@ -4697,7 +4702,7 @@ msgstr "Невозможно получить данные об активнос
 
 #: _inc/lib/class.core-rest-api-endpoints.php:2004
 msgid "No activity found"
-msgstr "Активности пока не было."
+msgstr "Активности пока не было"
 
 #. translators: Placeholders are numbers, versions of WordPress in use on the
 #. site, and required by WordPress.
@@ -4806,11 +4811,6 @@ msgstr "Вы должны указать и тип объекта и id для �
 msgid "Error writing new %s"
 msgstr "Ошибка при записи нового %s"
 
-#. translators: %s is the path to the file with the block list
-#: class.jetpack-cli.php:2075
-msgid "Error fetching contents of %s"
-msgstr "Ошибка при получении содержимого %s."
-
 #: class.jetpack-cli.php:2068
 msgid "No files were created"
 msgstr "Файлы не созданы"
@@ -4875,10 +4875,6 @@ msgstr "Ярлык блока добавлен в список %4$s по %5$s"
 msgid "The files were created at %3$s"
 msgstr "Файлы созданы в %3$s"
 
-#: class.jetpack-cli.php:2115
-msgid "To start using the block, build the blocks with pnpm run build-extensions"
-msgstr "Чтобы начать использование блока, создайте блоки с помощью расширений на основе pnpm."
-
 #: class.jetpack-cli.php:1733
 msgid "Jetpack is currently in offline mode, so the Jetpack Social module will not load."
 msgstr "Jetpack сейчас находится в автономном режиме, модуль Jetpack Social не будет загружен."
@@ -4886,6 +4882,15 @@ msgstr "Jetpack сейчас находится в автономном режи
 #: class.jetpack-cli.php:1730
 msgid "Jetpack is current in offline mode because the site url does not contain a '.', which often occurs when dynamically setting the WP_SITEURL constant. While in offline mode, the Jetpack Social module will not load."
 msgstr "Jetpack сейчас находится в автономном режиме, так как в URL-адресе сайта нет точки (.), что обычно происходит при динамической настройке константы WP_SITEURL. В автономном режиме модуль Jetpack Social не загрузится."
+
+#. translators: %s is the path to the file with the block list
+#: class.jetpack-cli.php:2075
+msgid "Error fetching contents of %s"
+msgstr "Ошибка получения содержимого %s"
+
+#: class.jetpack-cli.php:2115
+msgid "To start using the block, build the blocks with pnpm run build-extensions"
+msgstr "Чтобы начать использовать блок, соберите блоки с помощью pnpm run build-extensions."
 
 #: class.jetpack-cli.php:1551
 msgid "Both `pass` and `kpri` fields cannot be blank."
@@ -5147,13 +5152,6 @@ msgctxt "Navigation item"
 msgid "Sites"
 msgstr "Сайты"
 
-#: _inc/lib/admin-pages/class.jetpack-admin-page.php:373
-#: _inc/lib/admin-pages/class.jetpack-admin-page.php:377
-#: _inc/lib/admin-pages/class.jetpack-admin-page.php:446
-#: _inc/lib/admin-pages/class.jetpack-admin-page.php:451
-msgid "Manage your network's Jetpack Sites."
-msgstr "Управляйте Jetpack сайтами своей сети"
-
 #: _inc/lib/debugger/class-jetpack-cxn-tests.php:378
 msgid "PHP XML manipulation libraries are not available."
 msgstr "Библиотеки обработки PHP XML недоступны."
@@ -5161,6 +5159,13 @@ msgstr "Библиотеки обработки PHP XML недоступны."
 #: _inc/lib/debugger/class-jetpack-cxn-test-base.php:262
 msgid "Test passed!"
 msgstr "Проверка пройдена!"
+
+#: _inc/lib/admin-pages/class.jetpack-admin-page.php:373
+#: _inc/lib/admin-pages/class.jetpack-admin-page.php:377
+#: _inc/lib/admin-pages/class.jetpack-admin-page.php:446
+#: _inc/lib/admin-pages/class.jetpack-admin-page.php:451
+msgid "Manage your network's Jetpack Sites."
+msgstr "Управляйте сайтами Jetpack в вашей сети."
 
 #. translators: number of active installs
 #: _inc/lib/admin-pages/class-jetpack-about-page.php:504
@@ -5783,10 +5788,6 @@ msgstr[0] "Показать общее количество подписчико
 msgstr[1] "Показать общее количество подписчиков? %s подписчик)"
 msgstr[2] "Показать общее количество подписчиков? %s подписчик)"
 
-#: modules/subscriptions/views.php:776
-msgid "Follow Button Text:"
-msgstr "Текст кнопки «Подписаться»"
-
 #: modules/subscriptions/views.php:768
 msgid "Optional text to display to non-WordPress.com users:"
 msgstr "Произвольный текст, отображаемый для пользователей, которые не выполнили вход на WordPress.com:"
@@ -5810,6 +5811,10 @@ msgid_plural "Join %s other followers"
 msgstr[0] "Присоединиться к ещё %s подписчику"
 msgstr[1] "Присоединиться к ещё %s подписчикам"
 msgstr[2] "Присоединиться к ещё %s подписчикам"
+
+#: modules/subscriptions/views.php:776
+msgid "Follow Button Text:"
+msgstr "Текст кнопки Follow:"
 
 #: jetpack_vendor/automattic/jetpack-publicize/src/class-publicize-ui.php:468
 #: _inc/blocks/editor-beta.js:2 _inc/blocks/editor-experimental.js:2
@@ -5884,7 +5889,7 @@ msgstr "Карта сайта не найдена. Попытка перестр
 
 #: modules/sitemaps/sitemap-builder.php:162
 msgid "Jetpack can not load necessary XML manipulation libraries. Please ask your hosting provider to refer to our server requirements at https://jetpack.com/support/server-requirements/ ."
-msgstr "Jetpack не может загрузить нужные библиотеки для работы с XML. Спросите вашу поддержку хостинга посмотреть требования к серверу на https://jetpack.com/support/server-requirements/ . "
+msgstr "Jetpack не может загрузить необходимые библиотеки для работы с XML. Попросите вашего хостинг-провайдера ознакомиться с нашими требованиями к серверу на странице https://jetpack.com/support/server-requirements/."
 
 #: modules/widgets/blog-stats.php:159
 msgid "There was an issue retrieving stats. Please try again later."
@@ -5962,17 +5967,17 @@ msgstr "Недопустимые параметры."
 msgid "Your plan doesn't include Pay with PayPal. <a href=\"%s\" rel=\"noopener noreferrer\" target=\"_blank\">Learn more and upgrade</a>."
 msgstr "В ваш тарифный план не включены платежи через PayPal. <a href=\"%s\" rel=\"noopener noreferrer\" target=\"_blank\">Узнайте подробности и улучшите тариф</a>."
 
-#. translators: %1$s is the link to Facebook documentation to create a page,
-#. %2$s is the target of the link
-#: jetpack_vendor/automattic/jetpack-publicize/src/class-publicize.php:811
-msgid "<a class=\"button\" href=\"%1$s\" target=\"%2$s\">Create a Facebook page</a> to get started."
-msgstr "Чтобы начать, <a class=\"button\" href=\"%1$s\" target=\"%2$s\">создайте страницу на Facebook.</a>"
-
 #. translators: %s is the link to the support page about using Facebook with
 #. Jetpack Social
 #: jetpack_vendor/automattic/jetpack-publicize/src/class-publicize.php:744
 msgid "Facebook supports Jetpack Social connections to Facebook Pages, but not to Facebook Profiles. <a href=\"%s\">Learn More about Jetpack Social for Facebook</a>"
 msgstr "Facebook разрешает подключения Jetpack Social к страницам Facebook, но не к профилям Facebook. <a href=\"%s\">Подробнее о Jetpack Social для Facebook</a>"
+
+#. translators: %1$s is the link to Facebook documentation to create a page,
+#. %2$s is the target of the link
+#: jetpack_vendor/automattic/jetpack-publicize/src/class-publicize.php:811
+msgid "<a class=\"button\" href=\"%1$s\" target=\"%2$s\">Create a Facebook page</a> to get started."
+msgstr "<a class=\"button\" href=\"%1$s\" target=\"%2$s\">Создайте страницу Facebook,</a> чтобы начать."
 
 #: class.jetpack-cli.php:2170
 msgctxt "\"yes\" is a command - do not translate."
@@ -6109,19 +6114,19 @@ msgstr "Это XML карта сайта для новостей, созданн
 #. URL.
 #: modules/sitemaps/sitemap-stylist.php:452
 msgid "This is an XML Video Sitemap generated by <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack</a>, meant to be consumed by search engines like <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> or <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>."
-msgstr "Это XML карта сайта для видео, созданная <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack</a> для поисковых систем типа <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> или <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>. "
+msgstr "Это XML Video Sitemap, сгенерированный <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack,</a>предназначенный для использования поисковыми системами, такими как <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> или <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>."
 
 #. translators: %1$s: jetpack.com URL. %2$s: google.com URL. %3$s: bing.com
 #. URL.
 #: modules/sitemaps/sitemap-stylist.php:317
 msgid "This is an XML Image Sitemap generated by <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack</a>, meant to be consumed by search engines like <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> or <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>."
-msgstr "Это XML карта сайта для изображений, созданная <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack</a> для поисковых систем типа <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> или <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>. "
+msgstr "Это КАРТА САЙТА XML-изображений, сгенерированная <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack,</a>предназначенная для использования поисковыми системами, такими как <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> или <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>."
 
 #. translators: %1$s: jetpack.com URL. %2$s: google.com URL. %3$s: bing.com
 #. URL.
 #: modules/sitemaps/sitemap-stylist.php:188
 msgid "This is an XML Sitemap Index generated by <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack</a>, meant to be consumed by search engines like <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> or <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>."
-msgstr "Это индекс XML карты сайта, созданный <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack</a> для поисковых систем типа <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> или <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>. "
+msgstr "Это XML-индекс карты сайта, сгенерированный <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack,</a>предназначенный для использования поисковыми системами, такими как <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> или <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>."
 
 #. translators: %1$s: sitemaps.org URL.
 #: modules/sitemaps/sitemap-stylist.php:86
@@ -6145,7 +6150,7 @@ msgstr "Создано <a href=\"%s\" rel=\"noopener noreferrer\" target=\"_blan
 #. URL.
 #: modules/sitemaps/sitemap-stylist.php:73
 msgid "This is an XML Sitemap generated by <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack</a>, meant to be consumed by search engines like <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> or <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>."
-msgstr "Это XML карта сайта, созданная <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack</a> для поисковых систем типа <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> или <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>. "
+msgstr "Это XML-карта сайта, сгенерированная <a href=\"%1$s\" rel=\"noopener noreferrer\" target=\"_blank\">Jetpack,</a>предназначенная для использования поисковыми системами, такими как <a href=\"%2$s\" rel=\"noopener noreferrer\" target=\"_blank\">Google</a> или <a href=\"%3$s\" rel=\"noopener noreferrer\" target=\"_blank\">Bing</a>."
 
 #: modules/simple-payments/simple-payments.php:634
 msgctxt "noun: a quantity of goods or items purchased or sold"
@@ -6156,10 +6161,6 @@ msgstr "Заказ"
 msgid "The WordAds module is not active"
 msgstr "WordAds модуль неактивен"
 
-#: modules/related-posts/class.related-posts-customize.php:225
-msgid "Show a thumbnail image where available."
-msgstr "Показывать изображение миниатюры, если доступно "
-
 #: modules/sharedaddy/recaptcha.php:71
 msgid "Unexpected hostname"
 msgstr "Неверное имя хоста"
@@ -6168,6 +6169,10 @@ msgstr "Неверное имя хоста"
 #: modules/infinite-scroll/infinity.php:458
 msgid "This option has moved. You can now manage it %1$shere%2$s."
 msgstr "Эта опция перемещена. Вы можете настроить её %1$sздесь%2$s."
+
+#: modules/related-posts/class.related-posts-customize.php:225
+msgid "Show a thumbnail image where available."
+msgstr "Отображение эскиза, если доступно."
 
 #: modules/carousel/jetpack-carousel.php:1386
 msgid "Show photo metadata (<a href=\"https://en.wikipedia.org/wiki/Exchangeable_image_file_format\" rel=\"noopener noreferrer\" target=\"_blank\">Exif</a>) in carousel, when available."
@@ -6258,7 +6263,7 @@ msgstr "Срок действия согласия истекает"
 
 #: modules/widgets/eu-cookie-law/form.php:201
 msgid "Visitors must provide consent by clicking the dismiss button when WordAds is turned on."
-msgstr "Пользователи должны дать согласие, нажав кнопку \"Игнорировать\" при включённом плагине WordAds."
+msgstr "Пользователи должны дать согласие, нажав кнопку \"Игнорировать\" при включённом плагине Jetpack Ads."
 
 #: modules/widgets/eu-cookie-law/form.php:149
 msgctxt "action"
@@ -6272,7 +6277,7 @@ msgstr "Текст ссылки"
 #. Translators: %s is the URL to a Jetpack support article.
 #: modules/widgets/eu-cookie-law/form.php:97
 msgid "For GDPR compliance, please make sure your policy contains <a href=\"%s\" target=\"_blank\">privacy information relating to WordAds</a>."
-msgstr "Убедитесь, что в соответствии с GDPR в правилах вашего сайта содержатся <a href=\"%s\" target=\"_blank\">сведения о конфиденциальности в отношении WordAds</a>."
+msgstr "Убедитесь что, в соответствии с GDPR, в правилах вашего сайта содержатся <a href=\"%s\" target=\"_blank\">сведения о конфиденциальности в отношении Jetpack Ads</a>."
 
 #: modules/widgets/eu-cookie-law/form.php:86
 msgid "The default policy URL only covers cookies set by Jetpack. If you’re running other plugins, custom cookies, or third-party tracking technologies, you should create and link to your own cookie statement."
@@ -6360,7 +6365,7 @@ msgstr "Добавить значки социальных сетей на ва�
 #. https://subscribe.wordpress.com/, 2: Description of this link.
 #: modules/subscriptions/views.php:216
 msgid "You have already subscribed to this site. Please check your email inbox. You can manage your preferences from the <a href=\"%1$s\" title=\"%2$s\" target=\"_blank\">Subscriptions Manager</a>."
-msgstr "Вы уже подписаны на этот сайт. Проверьте почту. Измените настройки в разделе <a href=\"%1$s\" title=\"%2$s\" target=\"_blank\">Управление подписками</a>."
+msgstr "Вы уже подписаны на этот сайт. Пожалуйста, проверьте входящие вашей почты. <br /> Вы можете управлять настройками на <a href=\"%1$s\" title=\"%2$s\" target=\"_blank\">subscribe.wordpress.com</a>"
 
 #. translators: Message shown after a post is published
 #: modules/subscriptions.php:231
@@ -6456,7 +6461,7 @@ msgstr "При проверке этого запроса возникла пр�
 #: jetpack_vendor/automattic/jetpack-connection/src/class-secrets.php:186
 #: jetpack_vendor/automattic/jetpack-connection/src/class-secrets.php:205
 msgid "The required \"%s\" parameter is missing."
-msgstr "Отсутствует обязательный параметр \"%s\"."
+msgstr "Отсутствует обязательный параметр nonce."
 
 #: jetpack_vendor/automattic/jetpack-connection/legacy/class-jetpack-xmlrpc-server.php:284
 #: jetpack_vendor/automattic/jetpack-connection/legacy/class-jetpack-xmlrpc-server.php:385
@@ -6803,6 +6808,11 @@ msgstr "Пусто"
 msgid "Last query information:"
 msgstr "Информация о последнем запросе:"
 
+#: 3rd-party/debug-bar/class-jetpack-search-debug-bar.php:120
+msgctxt "displayed in search results when results are cached"
+msgid "cache hit"
+msgstr "попадание в кеш"
+
 #: 3rd-party/debug-bar/class-jetpack-search-debug-bar.php:33
 #: jetpack_vendor/automattic/jetpack-my-jetpack/src/products/class-search.php:76
 #: jetpack_vendor/automattic/jetpack-search/src/customberg/class-customberg.php:62
@@ -6815,11 +6825,6 @@ msgstr "Информация о последнем запросе:"
 #: _inc/build/admin.js:57
 msgid "Jetpack Search"
 msgstr "Поиск Jetpack"
-
-#: 3rd-party/debug-bar/class-jetpack-search-debug-bar.php:120
-msgctxt "displayed in search results when results are cached"
-msgid "cache hit"
-msgstr "попадание в кеш"
 
 #: jetpack_vendor/automattic/jetpack-search/src/widgets/class-search-widget.php:1088
 #: modules/widgets/social-icons.php:388
@@ -7752,7 +7757,7 @@ msgstr "Показывать разные типы содержимого ваш
 #: modules/module-headings.php:36
 msgctxt "Module Description"
 msgid "Let visitors use a WordPress.com, Twitter, or Facebook account to comment"
-msgstr "Разрешите посетителям использовать учётные записи WordPress.com, Twitter или Facebook, чтобы оставлять комментарии"
+msgstr "Дать возможность комментирования используя аккаунты WordPress.com, Facebook, Google или Twitter"
 
 #: modules/masterbar/masterbar/class-masterbar.php:1402
 msgctxt "Label for the button on the Masterbar to add a new domain"
@@ -8233,10 +8238,6 @@ msgstr "URL-адрес сайта WordPress настроен неправиль�
 msgid "Items to show:"
 msgstr "Элементы для отображения:"
 
-#: modules/widgets/upcoming-events.php:80
-msgid "iCalendar Feed URL:"
-msgstr "URL-адрес ленты iCalendar:"
-
 #: modules/widgets/upcoming-events.php:33
 msgid "Display upcoming events from an iCalendar feed."
 msgstr "Показывать приближающиеся события из ленты iCalendar."
@@ -8249,6 +8250,10 @@ msgstr "Изображение отсутствует, или URL-адрес н�
 #: modules/widgets/facebook-likebox.php:271
 msgid "Width in pixels"
 msgstr "Ширина в пикселях"
+
+#: modules/widgets/upcoming-events.php:80
+msgid "iCalendar Feed URL:"
+msgstr "адрес канала iCalendar-URL:"
 
 #: modules/widgets/blog-stats.php:104
 msgid "Hit counter is delayed by up to 60 seconds."
@@ -8419,10 +8424,6 @@ msgstr "Новое приложение WordPress для Android застави�
 msgid "In \"Mobile\""
 msgstr "В разделе «Для мобильных устройств»"
 
-#: modules/related-posts/jetpack-related-posts.php:1159
-msgid "It is that time of the year when devices are shiny again."
-msgstr "Всё в природе обновляется — и ваши устройства тоже!"
-
 #: modules/related-posts/jetpack-related-posts.php:697
 msgid "Show context (category or tag)"
 msgstr "Показать контекст (рубрику или метку)"
@@ -8434,6 +8435,10 @@ msgstr "Показать дату записи"
 #: modules/related-posts/class.related-posts-customize.php:265
 msgid "Please note that the related posts displayed now are only for previewing purposes."
 msgstr "Похожие записи, которые отображаются сейчас, предназначены только для предварительного просмотра."
+
+#: modules/related-posts/jetpack-related-posts.php:1159
+msgid "It is that time of the year when devices are shiny again."
+msgstr "Это время года, когда устройства снова блестят."
 
 #: modules/related-posts/class.related-posts-customize.php:253
 msgid "List"
@@ -8936,7 +8941,9 @@ msgstr "SEO инструменты"
 #. translators: %s: Site URL.
 #: jetpack_vendor/automattic/jetpack-identity-crisis/src/class-identity-crisis.php:1055
 msgid "No. <a href=\"%1$s\">%2$s</a> is a new and different website that's separate from <a href=\"%3$s\">%4$s</a>. It requires  a new connection to WordPress.com for new stats and subscribers."
-msgstr "Нет. <a href=\"%1$s\">%2$s</a> — новый отличный веб-сайт, который не связан с <a href=\"%3$s\">%4$s</a>. Для ведения отдельной статистики посещений и подписчиков необходимо  создать новое подключение к WordPress.com."
+msgstr ""
+"Нет. <a href=\"%1$s\">%2$s</a> это новый и другой сайт, работающий отдельно от\n"
+"\t\t\t\t\t<a href=\"%3$s\">%4$s</a>. Ему требуется отдельное подключение к WordPress.com для отдельной статистики посещений и подписчиков."
 
 #: modules/module-headings.php:166
 msgctxt "Module Description"
@@ -8963,17 +8970,23 @@ msgstr "Это %1$s новый дом %2$s?"
 #. translators: %s: Site URL.
 #: jetpack_vendor/automattic/jetpack-identity-crisis/src/class-identity-crisis.php:1007
 msgid "Yes. <a href=\"%1$s\">%2$s</a> is replacing <a href=\"%3$s\">%4$s</a>. I would like to migrate my stats and subscribers from <a href=\"%3$s\">%4$s</a> to <a href=\"%1$s\">%2$s</a>."
-msgstr "Да. <a href=\"%1$s\">%2$s</a> заменяет <a href=\"%3$s\">%4$s</a>. Мне необходимо перенести статистику и подписчиков из <a href=\"%3$s\">%4$s</a> в <a href=\"%1$s\">%2$s</a>."
+msgstr ""
+"Да. <a href=\"%1$s\">%2$s</a> заменяет <a href=\"%3$s\">%4$s</a>. Я хочу\n"
+"\t\t\t\t\tперенести статистику и подписчиков моего сайта с <a href=\"%3$s\">%4$s</a> на <a href=\"%1$s\">%2$s</a>."
 
 #. translators: %s: Site URL.
 #: jetpack_vendor/automattic/jetpack-identity-crisis/src/class-identity-crisis.php:937
 msgid "If this is a separate and new website, or the new home of <a href=\"%1$s\">%2$s</a>, we recommend turning Safe Mode off, and re-establishing your connection to WordPress.com."
-msgstr "Если это новый отдельный веб-сайт либо новое место размещения <a href=\"%1$s\">%2$s</a>, рекомендуем отключить безопасный режим и выполнить повторное подключение к WordPress.com."
+msgstr ""
+"Если это новый отдельный новый веб-сайт или новая платформа для <a href=\"%1$s\">%2$s</a>, \n"
+"\t\t\t\t\tрекомендуем отключить на нём безопасный режим и установить повторное подключение к WordPress.com."
 
 #. translators: %s: Site URL.
 #: jetpack_vendor/automattic/jetpack-identity-crisis/src/class-identity-crisis.php:891
 msgid "Is this website a temporary duplicate of <a href=\"%1$s\">%2$s</a> for the purposes of testing, staging or development? If so, we recommend keeping it in Safe Mode."
-msgstr "Этот веб-сайт — временная копия <a href=\"%1$s\">%2$s</a> для тестирования, подготовки контента и разработки? Рекомендуем не отключать на нём безопасный режим."
+msgstr ""
+"Этот сайт — временная копия <a href=\"%1$s\">%2$s</a> для \n"
+"\t\t\t\t\tтестирования и разработки? Если это так, мы рекомендуем продолжать в безопасном режиме."
 
 #: jetpack_vendor/automattic/jetpack-identity-crisis/src/class-identity-crisis.php:733
 msgid "Try Again"
@@ -9002,7 +9015,9 @@ msgstr "У вас задан URL-адрес %1$s, но в параметрах �
 #. translators: %s: Safe mode docs URL.
 #: jetpack_vendor/automattic/jetpack-identity-crisis/src/class-identity-crisis.php:865
 msgid "Please confirm Safe Mode or fix the Jetpack connection. Select one of the options below or <a href=\"%1$s\">learn more about Safe Mode</a>."
-msgstr "Подтвердите безопасный режим или установите подключение к Jetpack. Выберите один из приведённых ниже вариантов или <a href=\"%1$s\">узнайте больше о безопасном режиме</a>."
+msgstr ""
+"Подтвердите безопасный режим или установите подключение к Jetpack. Выберите один из приведённых ниже вариантов или <a href=\"%1$s\">получите \n"
+"\t\t\t\t\tболее подробные сведения о безопасном режиме</a>."
 
 #. translators: Link to a Jetpack support page.
 #: _inc/lib/debugger/class-jetpack-debugger.php:213
@@ -9242,7 +9257,7 @@ msgid ""
 "\t\tand email. You can configure services to appear as icons, text, or both and some services like Twitter\n"
 "\t\thave additional options."
 msgstr ""
-"Посетители могут делиться вашими записями с помощью Twitter, Facebook, Reddit, Digg, LinkedIn, средств печати\n"
+"Посетители могут делиться вашими записями с помощью Twitter, Facebook, Reddit, Digg, LinkedIn, Google+, средств печати\n"
 "\t\tи электронной почты. Можно настроить отображение служб в виде значков, текста или и того и другого. Некоторые службы, например Twitter,\n"
 "\t\tпредлагают дополнительные варианты."
 
@@ -9271,7 +9286,7 @@ msgid ""
 "Simple and concise statistics about your traffic. Jetpack Stats collects data on page views, likes, comments,\n"
 "\t\tlocations, and top posts. View them in your dashboard or on WordPress.com."
 msgstr ""
-"Простая и наглядная статистика по вашему трафику. В статистике Jetpack собираются данные о просмотрах страниц, отметках «Нравится», комментариях,\n"
+"Простая и наглядная статистика по вашему трафику. Jetpack собирает данные о просмотрах страниц, отметках «Нравится», комментариях,\n"
 "\t\tрасположениях и популярных записях. Просматривайте их в консоли или на странице WordPress.com."
 
 #: modules/module-info.php:131
@@ -9466,9 +9481,9 @@ msgstr "Значение %s должно быть строкой."
 #: _inc/lib/class.core-rest-api-endpoints.php:3791
 msgid "%s plugin needs updating."
 msgid_plural "%s plugins need updating."
-msgstr[0] "Необходимо обновить %s плагин."
-msgstr[1] "Необходимо обновить %s плагина."
-msgstr[2] "Необходимо обновить %s плагинов."
+msgstr[0] "Необходимо обновление плагина %s."
+msgstr[1] "Необходимо обновление плагинов %s."
+msgstr[2] "Необходимо обновление плагинов %s."
 
 #: _inc/lib/class.core-rest-api-endpoints.php:3801
 msgid "Could not check updates for plugins on this site."
@@ -11412,7 +11427,7 @@ msgstr "Настройки для избранного содержимого <a
 
 #: modules/subscriptions/views.php:267
 msgid "Oops! There was an error when subscribing. Please try again."
-msgstr "Ой. При подписке произошла ошибка. Повторите попытку."
+msgstr "При подписке произошла ошибка. Повторите попытку."
 
 #: modules/subscriptions.php:557
 msgid "These settings change emails sent from your blog to followers."
@@ -11449,7 +11464,7 @@ msgstr "VideoPress"
 
 #: modules/stats.php:1038
 msgid "Views over 48 hours. Click for more Jetpack Stats."
-msgstr "Просмотры за 48 часов. Нажмите, чтобы увидеть больше статистики Jetpack."
+msgstr "Просмотры за 48 часов. Нажмите для получения дополнительной статистики сайта."
 
 #: modules/stats.php:1417
 msgid "We were unable to get your stats just now. Please reload this page to try again."
@@ -11496,11 +11511,11 @@ msgstr "Смотреть: %s"
 
 #: modules/stats.php:501
 msgid "View Jetpack Stats without JavaScript"
-msgstr "Просматривать статистику Jetpack без JavaScript"
+msgstr "Посмотреть статистику сайта без JavaScript"
 
 #: modules/stats.php:500
 msgid "Jetpack Stats work better with JavaScript enabled."
-msgstr "Статистика Jetpack работает лучше с включённым JavaScript."
+msgstr "Статистика сайта работает лучше с включенным JavaScript."
 
 #: extensions/blocks/subscriptions/subscriptions.php:404
 #: modules/subscriptions/views.php:708 _inc/blocks/editor-beta.js:56
@@ -11593,7 +11608,7 @@ msgstr "Нажмите для автоматического воспроизв�
 
 #: modules/sharedaddy/sharing-sources.php:1029
 msgid "Click to email a link to a friend"
-msgstr "Послать ссылку другу по электронной почте"
+msgstr "Послать это другу"
 
 #: modules/sharedaddy/sharing-sources.php:1825
 msgid "Click to print"
@@ -11883,7 +11898,7 @@ msgstr "Внимание! Поддержка мультибайтовых код
 #: modules/related-posts/jetpack-related-posts.php:1733
 msgid "With %s comment"
 msgid_plural "With %s comments"
-msgstr[0] "С %s комментарием"
+msgstr[0] "С 1 комментарием"
 msgstr[1] "С %s комментариями"
 msgstr[2] "С %s комментариями"
 
@@ -12508,7 +12523,7 @@ msgstr "Пользовательские типы содержимого"
 #: modules/module-headings.php:171
 msgctxt "Module Description"
 msgid "Add Twitter and Facebook buttons at the bottom of each post, making it easy for visitors to share your content."
-msgstr "Добавьте кнопки Twitter и Facebook в конце каждой записи, чтобы посетителям было проще делиться ими в социальных сетях."
+msgstr "Благодаря кнопкам Twitter, Facebook и Google+ в конце каждой записи посетителям проще делиться ими в социальных сетях."
 
 #: modules/module-headings.php:156
 msgctxt "Module Description"
@@ -14522,15 +14537,15 @@ msgstr "Email"
 msgid "Error: please enter a valid email address."
 msgstr "Ошибка: пожалуйста, введите корректный адрес e-mail."
 
-#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:62
-#: modules/contact-form/grunion-form-view.php:49
-msgid "Are you sure you want to exit the form editor without saving? Any changes you have made will be lost."
-msgstr "Выйти из редактора формы без сохранения изменений? Любые изменения будут потеряны."
-
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:217
 #: modules/contact-form/grunion-form-view.php:204
 msgid "Nope. However, if you’d like to modify where your feedback is sent, or the subject line you can. If you don&#8217;t make any changes here, feedback will be sent to the author of the page/post and the subject will be the name of this page/post."
 msgstr "Нет. Однако если вы хотите изменить адрес отправки отзыва или тему, вы можете это сделать. Если вы не внесли каких-либо изменений, ваш отзыв будет отправлен автору страницы/записи, а в качестве темы будет использовано название этой страницы/записи."
+
+#: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:62
+#: modules/contact-form/grunion-form-view.php:49
+msgid "Are you sure you want to exit the form editor without saving? Any changes you have made will be lost."
+msgstr "Выйти из редактора формы без сохранения изменений? Любые изменения будут потеряны."
 
 #: jetpack_vendor/automattic/jetpack-forms/src/contact-form/class-form-view.php:56
 #: modules/contact-form/grunion-form-view.php:43
