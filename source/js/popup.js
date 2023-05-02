@@ -56,6 +56,7 @@ class Popup {
 		const phoneTip = section.querySelector('#phone-tip');
 
 		if (phoneTip) {
+			phoneTip.onclick = (e) => e.preventDefault();
 			tippy('#phone-tip', {
 				content: text
 			});

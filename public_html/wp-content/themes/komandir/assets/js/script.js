@@ -10541,6 +10541,7 @@ class Popup {
 		const phoneTip = section.querySelector('#phone-tip');
 
 		if (phoneTip) {
+			phoneTip.onclick = (e) => e.preventDefault();
 			(0,tippy_js__WEBPACK_IMPORTED_MODULE_2__["default"])('#phone-tip', {
 				content: text
 			});
