@@ -152,7 +152,7 @@ class PopupController {
 
 	}
 
-	private static function send_code( $phone, $testMode = true ) {
+	private static function send_code( $phone, $testMode = false ) {
 
 		if ( $testMode ) {
 
@@ -368,7 +368,7 @@ class PopupController {
 					}
 				}
 
-				if ( ! isset( $response['error_message'], $response['error_fields'] ) ) {
+				if ( empty( $response['error_message'] ) && empty( $response['error_fields'] ) ) {
 
 					$account_display_name = wc_clean( wp_unslash( $_POST['login-display-name'] ) );
 					$account_first_name = ! empty( $_POST['login-first-name'] ) ? wc_clean( wp_unslash( $_POST['login-first-name'] ) ) : '';
@@ -438,17 +438,15 @@ class PopupController {
 			$phone_regexp = '/^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/';
 
 			if ( preg_match( $phone_regexp, $login ) ) {
-				$response['phone'] = 1;
 
-				$phone_tail = substr( preg_replace( '/[\+\-\s\(\)]/', '', $login ), -10 );
-
-				$phone = '+7' . $phone_tail;
+				$phone = '+7' . substr( preg_replace( '/[\-\s\(\)]/', '', $login ), -10 );
 
 				$user = self::get_user_by_phone( $phone );
+
 			} else {
-				$response['login'] = is_email( $login ) ? 'email' : 'login';
 
 				$user = get_user_by( is_email( $login ) ? 'email' : 'login', $login );
+
 			}
 
 

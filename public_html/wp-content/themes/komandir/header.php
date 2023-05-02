@@ -186,10 +186,8 @@ global $svg;
 								'width' => 20,
 								'height' => 20
 							] ); ?> <span>
-								<?php echo $current_user->first_name ??
-									$current_user->display_name ??
-									$current_user->user_login ??
-									$current_user->user_email;
+								<?= $current_user->user_firstname ??
+									$current_user->user_login;
 								?>
 							</span>
 						</a>
