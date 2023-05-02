@@ -2746,7 +2746,7 @@ msgstr "Отображение строки подытога корзины."
 #: packages/woocommerce-blocks/build/inner-blocks/checkout-order-summary-subtotal-block/block.json
 msgctxt "block title"
 msgid "Subtotal"
-msgstr "Подытог"
+msgstr "Сумма заказа"
 
 #: packages/woocommerce-blocks/assets/js/blocks/cart/inner-blocks/cart-order-summary-shipping/block.json
 #: packages/woocommerce-blocks/assets/js/blocks/checkout/inner-blocks/checkout-order-summary-shipping/block.json
