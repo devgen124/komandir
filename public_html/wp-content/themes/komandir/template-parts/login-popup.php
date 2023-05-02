@@ -69,12 +69,12 @@
 			<label class="custom-popup-form-label">
 				<input type="text" placeholder="Логин" name="login-display-name" />
 			</label>
-			<label class="custom-popup-form-label">
+			<!-- <label class="custom-popup-form-label">
 				<input type="text" placeholder="Имя" name="login-first-name" />
 			</label>
 			<label class="custom-popup-form-label">
 				<input type="text" placeholder="Фамилия" name="login-second-name" />
-			</label>
+			</label> -->
 			<div class="form-profile-pass-row">
 				<label class="custom-popup-form-label">
 					<input type="password" placeholder="Пароль" name="login-pass-first" autocomplete="off" />

@@ -28,11 +28,7 @@ class Popup {
 		const loginPassLink = thisSection.querySelector('.login-pass-link');
 		const phoneTip = thisSection.querySelector('#phone-tip');
 
-		if (phoneTip) {
-			tippy('#phone-tip', {
-				content: 'Телефон в формате +7 000 000 00 00'
-			});
-		}
+		this.addPhoneTip(thisSection, 'Телефон в формате +7 000 000 00 00');
 
         this.setMask(telInput);
 
@@ -54,7 +50,17 @@ class Popup {
         this.setMask(telInput);
 
         this.addFormListeners(sendCodeSubmit, 'change_phone_send_code', ['phone'], this.renderChangePhoneSmsCode);
-    }
+	}
+
+	addPhoneTip = (section, text) => {
+		const phoneTip = section.querySelector('#phone-tip');
+
+		if (phoneTip) {
+			tippy('#phone-tip', {
+				content: text
+			});
+		}
+	}
 
 	setMask = (inp) => {
 		const mask = IMask(inp, {
@@ -81,6 +87,8 @@ class Popup {
             const thisSection = e.target.closest('.custom-popup-section');
 
 			this.ajaxSend(action, this.getFormValues(thisForm, inputNamesArr), (res) => {
+
+				console.log(res);
 
                 this.removeLoading(thisBtn);
 
@@ -271,11 +279,11 @@ class Popup {
             'login-phone',
 			'login-email',
 			'login-display-name',
-            'login-first-name',
-            'login-second-name',
+            // 'login-first-name',
+            // 'login-second-name',
             'login-pass-first',
             'login-pass-second'
-        ], this.renderProfile)
+        ])
     }
 
     renderLoginPass = () => {
@@ -288,6 +296,7 @@ class Popup {
 
         initPassViewSwitcher(thisSection);
 
+		this.addPhoneTip(thisSection, 'Введите логин, эл. почту или телефон');
         this.addBacklinkListener(backlink);
         this.addFormListeners(passSubmit, 'authorize', ['login', 'pass']);
     }
