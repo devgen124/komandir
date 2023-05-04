@@ -808,3 +808,16 @@ function komandir_add_negative_fees_as_discounts( $list, $order ) {
 
 	return $list;
 }
+
+// убирает display name из обязательных полей в личном кабинете
+
+add_filter( 'woocommerce_save_account_details_required_fields', 'komandir_save_account_details_required_fields' );
+
+function komandir_save_account_details_required_fields( $array ) {
+
+	if ( isset( $array['account_display_name'] ) ) {
+		unset($array['account_display_name']);
+	}
+
+	return $array;
+}

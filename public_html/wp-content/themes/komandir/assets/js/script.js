@@ -10702,7 +10702,7 @@ class Popup {
         })
             .then(response => response.json())
             .then(callback)
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
     }
 
     render = (template, setWide = false) => {
@@ -10764,9 +10764,9 @@ class Popup {
         this.addFormListeners(profileSubmit, 'create_customer', [
             'login-phone',
 			'login-email',
-			'login-display-name',
-            // 'login-first-name',
-            // 'login-second-name',
+			// 'login-display-name',
+            'login-firstname',
+            'login-lastname',
             'login-pass-first',
             'login-pass-second'
         ])
@@ -10782,7 +10782,7 @@ class Popup {
 
         (0,_pass_view_switcher_js__WEBPACK_IMPORTED_MODULE_0__["default"])(thisSection);
 
-		this.addPhoneTip(thisSection, 'Введите логин, эл. почту или телефон');
+		this.addPhoneTip(thisSection, 'Введите ваш email или телефон');
         this.addBacklinkListener(backlink);
         this.addFormListeners(passSubmit, 'authorize', ['login', 'pass']);
     }
