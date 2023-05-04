@@ -1,6 +1,7 @@
 <?php
 
 require_once 'sms-auth-controller.php';
+require_once 'login-generator.php';
 
 class PopupController {
 
@@ -33,8 +34,6 @@ class PopupController {
 			'phone_number' 		=> null,
 			'console_message' 	=> null
 		];
-
-		// $response['console_message'] = ;
 
 		if ( empty( $_POST['phone'] ) || empty( trim( $_POST['phone'] ) ) ) {
 
@@ -328,6 +327,18 @@ class PopupController {
 				$response['error_fields'][] = 'login-email';
 			} else {
 
+				$firstname_not_match_text = 'Имя должно состоять только из букв';
+				$name_regexp = '/[А-я,Ё,ё,A-z]/';
+
+				if ( ! preg_match( $name_regexp, $_POST['login-firstname'] ) ) {
+
+					if ( in_array( ! $firstname_not_match_text, $response['error_message'] ) ) {
+						$response['error_message'][] = $firstname_not_match_text;
+					}
+
+					$response['error_fields'][] = 'login-firstname';
+				}
+
 				$password_not_match_text = 'Пароль должен содержать не менее 8 символов, не менее одной цифры и одной буквы';
 
 				if ( ! preg_match( $password_regexp, $_POST['login-pass-first'] ) ) {
@@ -354,7 +365,7 @@ class PopupController {
 
 				$required_fields = [
 					'Email' => 'login-email',
-					'Логин' => 'login-display-name',
+					'Имя' => 'login-firstname',
 					'Пароль' => 'login-pass-first',
 					'Повторите пароль' => 'login-pass-second'
 				];
@@ -370,14 +381,15 @@ class PopupController {
 
 				if ( empty( $response['error_message'] ) && empty( $response['error_fields'] ) ) {
 
-					$account_display_name = wc_clean( wp_unslash( $_POST['login-display-name'] ) );
-					$account_first_name = ! empty( $_POST['login-first-name'] ) ? wc_clean( wp_unslash( $_POST['login-first-name'] ) ) : '';
-					$account_last_name = ! empty( $_POST['login-second-name'] ) ? wc_clean( wp_unslash( $_POST['login-second-name'] ) ) : '';
+					$account_first_name = ! empty( $_POST['login-firstname'] ) ? wc_clean( wp_unslash( $_POST['login-firstname'] ) ) : '';
+					$account_last_name = ! empty( $_POST['login-lastname'] ) ? wc_clean( wp_unslash( $_POST['login-lastname'] ) ) : '';
 					$account_email = ! empty( $_POST['login-email'] ) ? wc_clean( wp_unslash( $_POST['login-email'] ) ) : '';
 					$account_password = ! empty( $_POST['login-pass-first'] ) ? $_POST['login-pass-first'] : '';
 					$phone_number = ! empty( $_POST['login-phone'] ) ? wc_clean( wp_unslash( $_POST['login-phone'] ) ) : '';
 
-					$new_customer_id = wc_create_new_customer( $account_email, $account_display_name, $account_password );
+					$account_login = LoginGenerator::create( $account_first_name , $account_last_name );
+
+					$new_customer_id = wc_create_new_customer( $account_email, $account_login, $account_password );
 
 					if ( is_wp_error( $new_customer_id ) ) {
 

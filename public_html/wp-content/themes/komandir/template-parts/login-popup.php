@@ -25,7 +25,7 @@
 		<h2>Войти с паролем</h2>
 		<form class="form-pass" method="post">
 			<label class="custom-popup-form-label">
-				<input type="text" placeholder="Телефон, e-mail или логин" name="login" />
+				<input type="text" placeholder="Телефон или email" name="login" />
 				<button class="input-tip" id="phone-tip" aria-label="Подсказка"></button>
 			</label>
 			<label class="custom-popup-form-label">
@@ -66,15 +66,15 @@
 			<label class="custom-popup-form-label">
 				<input type="email" placeholder="Email" name="login-email" />
 			</label>
-			<label class="custom-popup-form-label">
-				<input type="text" placeholder="Логин" name="login-display-name" />
-			</label>
 			<!-- <label class="custom-popup-form-label">
-				<input type="text" placeholder="Имя" name="login-first-name" />
+				<input type="text" placeholder="Логин" name="login-display-name" />
+			</label> -->
+			<label class="custom-popup-form-label">
+				<input type="text" placeholder="Имя" name="login-firstname" />
 			</label>
 			<label class="custom-popup-form-label">
-				<input type="text" placeholder="Фамилия" name="login-second-name" />
-			</label> -->
+				<input type="text" placeholder="Фамилия" name="login-lastname" />
+			</label>
 			<div class="form-profile-pass-row">
 				<label class="custom-popup-form-label">
 					<input type="password" placeholder="Пароль" name="login-pass-first" autocomplete="off" />

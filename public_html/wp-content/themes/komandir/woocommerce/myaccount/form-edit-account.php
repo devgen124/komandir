@@ -36,10 +36,10 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 				value="<?php echo esc_attr( $user->last_name ); ?>"
 				placeholder="<?php esc_html_e( 'Last name', 'woocommerce' ); ?>" />
 		</label>
-		<label class="edit-account-label">
-			<input type="text" name="account_display_name" value="<?php echo esc_attr( $user->display_name ); ?>"
-				placeholder="<?php esc_html_e( 'Display name', 'woocommerce' ); ?>" />
-		</label>
+		<!-- <label class="edit-account-label">
+			<input type="text" name="account_display_name" value="<?php //echo esc_attr( $user->display_name ); ?>"
+				placeholder="<?php //esc_html_e( 'Display name', 'woocommerce' ); ?>" />
+		</label> -->
 		<label class="edit-account-label">
 			<input type="email" name="account_email" id="account_email" autocomplete="email"
 				value="<?php echo esc_attr( $user->user_email ); ?>"
