@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.2.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-03-28 17:03:54+0000\n"
+"PO-Revision-Date: 2023-05-04 09:31:17+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2742,7 +2742,7 @@ msgstr[2] "Обратите внимание на <strong>%1$d элементо�
 
 #: wp-admin/includes/dashboard.php:1998
 msgid "Your site&#8217;s health is looking good, but there are still some things you can do to improve its performance and security."
-msgstr "Статус здоровья вашего сайта смотрится неплохо, но есть некоторые вещи, которые вы можете сделать для улучшения производительности и безопасности."
+msgstr "Статус здоровья сайта выглядит неплохо, но есть некоторые вещи, которые вы можете сделать для улучшения производительности и безопасности."
 
 #: wp-admin/includes/dashboard.php:1990
 msgid "Great job! Your site currently passes all site health checks."
@@ -14202,6 +14202,11 @@ msgstr "Прилепить запись"
 #: wp-admin/includes/class-wp-posts-list-table.php:1963
 msgid "Not Sticky"
 msgstr "Не прилеплена"
+
+#: wp-admin/includes/class-wp-posts-list-table.php:1959
+#: wp-admin/includes/class-wp-posts-list-table.php:1962
+msgid "Sticky"
+msgstr "Прилеплена"
 
 #: wp-admin/includes/class-wp-posts-list-table.php:1921
 msgid "Allow Pings"
