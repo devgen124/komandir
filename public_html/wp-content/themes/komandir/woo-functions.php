@@ -750,40 +750,40 @@ function komandir_woocommerce_set_name_and_phone( $order_id, $order ) {
 
 // скидка 1% на оплату картой
 
-add_action( 'woocommerce_cart_calculate_fees', 'online_payment_method_discount', 20 );
-function online_payment_method_discount( $cart ) {
+// add_action( 'woocommerce_cart_calculate_fees', 'online_payment_method_discount', 20 );
+// function online_payment_method_discount( $cart ) {
 
-	if ( is_admin() && ! defined( 'DOING_AJAX' ) )
-		return;
+// 	if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+// 		return;
 
-	$payment_method = 'rbspayment';
+// 	$payment_method = 'rbspayment';
 
-	$percent = 1;
+// 	$percent = 1;
 
-	$cart_total = $cart->subtotal_ex_tax;
-	$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
+// 	$cart_total = $cart->subtotal_ex_tax;
+// 	$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
 
-	if ( $payment_method == $chosen_payment_method ) {
-		$label_text = "Скидка для онлайн оплаты банковской картой $percent%";
-		$discount = number_format( ( $cart_total / 100 ) * $percent, 0 );
-		if ( $discount ) {
-			$cart->add_fee( $label_text, -$discount, false );
-		}
-	}
-}
+// 	if ( $payment_method == $chosen_payment_method ) {
+// 		$label_text = "Скидка для онлайн оплаты банковской картой $percent%";
+// 		$discount = number_format( ( $cart_total / 100 ) * $percent, 0 );
+// 		if ( $discount ) {
+// 			$cart->add_fee( $label_text, -$discount, false );
+// 		}
+// 	}
+// }
 
-add_action( 'woocommerce_review_order_before_payment', 'refresh_payment_methods' );
-function refresh_payment_methods() {
-	?>
-	<script type="text/javascript">
+// add_action( 'woocommerce_review_order_before_payment', 'refresh_payment_methods' );
+// function refresh_payment_methods() {
+// 	?>
+	<!-- <script type="text/javascript">
 				(function($){
 					$( 'form.checkout' ).on( 'change', 'input[name^="payment_method"]', function() {
 						$('body').trigger('update_checkout');
 				   });
 				})(jQuery);
-	</script>
-	<?php
-}
+	</script> -->
+	<?php //
+// }
 
 // добавление суммы отрицательных сборов как скидки при обмене с 1С
 
