@@ -8372,7 +8372,7 @@ msgstr "«%s» уже применён и не может использоват
 #. translators: %s coupon code
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/CartController.php:920
 msgid "Coupon code \"%s\" has already been applied."
-msgstr "Код промокода «%s» уже применён."
+msgstr "Промокода «%s» уже применён."
 
 #. translators: %s coupon code
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/CartController.php:908
@@ -23644,7 +23644,7 @@ msgstr "Не удалось обновить промокод, попробуй�
 #: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:975
 #: includes/rest-api/Controllers/Version3/class-wc-rest-orders-controller.php:65
 msgid "Coupon code is required."
-msgstr "Код промокода указывать обязательно."
+msgstr "Промокод указывать обязательно."
 
 #: includes/legacy/api/v2/class-wc-api-orders.php:1134
 #: includes/legacy/api/v3/class-wc-api-orders.php:1179
@@ -24461,7 +24461,7 @@ msgstr "Дата создания промокода в часовом пояс�
 #: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:1858
 #: src/Admin/API/Reports/Coupons/Controller.php:178
 msgid "Coupon code."
-msgstr "Код промокода."
+msgstr "Промокод."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-coupons-v1-controller.php:418
 #: includes/rest-api/Controllers/Version2/class-wc-rest-coupons-v2-controller.php:339
@@ -24472,7 +24472,7 @@ msgstr "Уникальный идентификатор объекта."
 #: includes/rest-api/Controllers/Version1/class-wc-rest-coupons-v1-controller.php:256
 #: includes/rest-api/Controllers/Version2/class-wc-rest-coupons-v2-controller.php:275
 msgid "The coupon code cannot be empty."
-msgstr "Код промокода не может быть пустым."
+msgstr "Промокод не может быть пустым."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-coupons-v1-controller.php:110
 #: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:105
@@ -28753,7 +28753,7 @@ msgstr "Жаль, но промокод «%s» уже применён и не �
 #: includes/abstracts/abstract-wc-order.php:1228
 #: includes/class-wc-coupon.php:999
 msgid "Coupon code already applied!"
-msgstr "Код промокода уже использован!"
+msgstr "Промокод уже использован!"
 
 #. translators: %s: coupon code
 #: includes/class-wc-coupon.php:996
@@ -28776,11 +28776,11 @@ msgstr "Неверный промокод."
 
 #: includes/class-wc-coupon.php:966
 msgid "Coupon code removed successfully."
-msgstr "Код промокода успешно удалён."
+msgstr "Промокод успешно удалён."
 
 #: includes/class-wc-coupon.php:963
 msgid "Coupon code applied successfully."
-msgstr "Код промокода успешно добавлен."
+msgstr "Промокод успешно добавлен."
 
 #: includes/class-wc-privacy-erasers.php:56
 #: includes/class-wc-privacy-exporters.php:195
@@ -29710,7 +29710,7 @@ msgstr "Неправильный тип промокода — тип промо
 #: includes/rest-api/Controllers/Version1/class-wc-rest-coupons-v1-controller.php:272
 #: includes/rest-api/Controllers/Version2/class-wc-rest-coupons-v2-controller.php:290
 msgid "The coupon code already exists"
-msgstr "Код промокода уже существует"
+msgstr "Промокод уже существует"
 
 #. translators: %s: parameter
 #: includes/class-wc-auth.php:172
@@ -32997,7 +32997,7 @@ msgstr "Регенерировать разрешения на загрузку"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:362
 msgid "Coupon code already exists - customers will use the latest coupon with this code."
-msgstr "Код промокода уже существует – клиенты будут использовать последний промокод с этим кодом."
+msgstr "Промокод уже существует – клиенты будут использовать последний промокод с этим кодом."
 
 #: includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php:329
 msgid "How many times this coupon can be used by an individual user. Uses billing email for guests, and user ID for logged in users."
@@ -33922,7 +33922,7 @@ msgstr "Описание (необязательно)"
 #: templates/checkout/form-coupon.php:35
 #: assets/client/admin/chunks/analytics-report-coupons.js:1
 msgid "Coupon code"
-msgstr "Код промокода"
+msgstr "Промокод"
 
 #: includes/admin/class-wc-admin-post-types.php:644
 #: assets/client/admin/wp-admin-scripts/product-tour.js:1
