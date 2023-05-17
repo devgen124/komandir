@@ -714,8 +714,7 @@ add_action( 'woocommerce_checkout_order_review', 'komandir_checkout_order_review
 
 function komandir_checkout_order_review() {
 	?>
-	<p><b>По вопросу доставки мы с Вами свяжемся после оформления заказа. С условиями доставки можно ознакомиться на
-			странице <a href="/shipping">Доставка</a></b></p>
+	<p><b>По вопросу доставки мы с Вами свяжемся после оформления заказа. С условиями доставки можно ознакомиться на странице <a href="/shipping">Доставка</a></b></p>
 	<?php
 }
 
@@ -746,6 +745,19 @@ function komandir_woocommerce_set_name_and_phone( $order_id, $order ) {
 	update_post_meta( $order_id, '_billing_phone', $phone );
 	update_post_meta( $order_id, '_billing_first_name', $user->first_name );
 	update_post_meta( $order_id, '_billing_last_name', $user->last_name );
+}
+
+add_action( 'woocommerce_review_order_before_payment', 'refresh_payment_methods' );
+function refresh_payment_methods() {
+	?>
+	<!-- <script type="text/javascript">
+				(function($){
+					$( 'form.checkout' ).on( 'change', 'input[name^="payment_method"]', function() {
+						$('body').trigger('update_checkout');
+				   });
+				})(jQuery);
+	</script> -->
+	<?php
 }
 
 // добавление суммы отрицательных сборов как скидки при обмене с 1С
