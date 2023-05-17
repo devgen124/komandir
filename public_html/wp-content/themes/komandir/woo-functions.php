@@ -355,10 +355,13 @@ function komandir_breadcrumbs_product_cat_page( $crumbs ) {
 				$crumbs[1][0] = 'Товары по акции "' . $product_tag->name . '"';
 			}
 		}
-		$catalog_page_id = wc_get_page_id( 'shop' );
-		$catalog_page = get_post( $catalog_page_id );
-		$catalog = array( get_the_title( $catalog_page ), get_permalink( $catalog_page ) );
-		array_splice( $crumbs, 1, 0, array( $catalog ) );
+
+		if ( ! isset( $_GET['s'] ) ) {
+			$catalog_page_id = wc_get_page_id( 'shop' );
+			$catalog_page = get_post( $catalog_page_id );
+			$catalog = array( get_the_title( $catalog_page ), get_permalink( $catalog_page ) );
+			array_splice( $crumbs, 1, 0, array( $catalog ) );
+		}
 
 		return $crumbs;
 	}
