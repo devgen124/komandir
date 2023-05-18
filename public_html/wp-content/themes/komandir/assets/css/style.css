@@ -14021,17 +14021,18 @@ a.showcoupon:hover {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  color: #00a9b4;
   transition: 0.3s;
 }
 .cat-wrapper a:hover {
-  color: inherit;
+  color: #008790;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
 }
 .cat-wrapper a:hover h3, .cat-wrapper a:hover .h3 {
   color: inherit;
 }
 .cat-wrapper a:visited {
-  color: inherit;
+  color: #00a9b4;
 }
 .cat-wrapper img {
   width: min(195px, 100%);
