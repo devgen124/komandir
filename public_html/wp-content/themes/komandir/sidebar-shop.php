@@ -9,7 +9,7 @@
 
 ?>
 
-<?php if ( is_product_category() || is_product_tag() ) : ?>
+<?php if ( is_product_category() || is_product_tag() || isset( $_GET['s'] ) ): ?>
 
 	<aside id="woo-sidebar" class="widget-area filters-sidebar">
 		<h2>Фильтры</h2>
@@ -19,6 +19,7 @@
 			<?= do_shortcode( '[br_filters_group group_id=14536]' ); ?>
 			<?= do_shortcode( '[br_filters_group group_id=14540]' ); ?>
 			<?= do_shortcode( '[br_filters_group group_id=14508]' ); ?>
+			<?= do_shortcode( '[br_filters_group group_id=20096]' ); ?>
 		</div>
 	</aside>
 
