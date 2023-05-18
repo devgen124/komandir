@@ -1,40 +1,32 @@
 <?php
 
-add_action( 'after_setup_theme', 'woocommerce_support' );
-
-function woocommerce_support() {
+add_action( 'after_setup_theme', function () {
 	add_theme_support( 'woocommerce' );
 	add_theme_support( 'wc-product-gallery-zoom' );
 	add_theme_support( 'wc-product-gallery-lightbox' );
 	add_theme_support( 'wc-product-gallery-slider' );
-}
+} );
 
 // woocommerce archive and single page wrappers
 
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
-add_action( 'woocommerce_before_main_content', 'komandir_woocommerce_wrapper_before', 10 );
-add_action( 'woocommerce_after_main_content', 'komandir_woocommerce_wrapper_after', 20 );
 
-function komandir_woocommerce_wrapper_before() {
+add_action( 'woocommerce_before_main_content', function () {
 	?>
 	<main id="primary" class="site-main">
 		<div class="container">
 			<?php
-}
+}, 10 );
 
-function komandir_woocommerce_wrapper_after() {
+add_action( 'woocommerce_after_main_content', function () {
 	?>
 		</div>
 	</main><!-- #main -->
 	<?php
-}
+}, 20 );
 
-add_filter( 'woocommerce_add_to_cart_message', 'remove_add_to_cart_message' );
-
-function remove_add_to_cart_message() {
-	return 'success';
-}
+add_filter( 'woocommerce_add_to_cart_message', fn () => 'success' );
 
 //ajax add to cart
 
@@ -177,12 +169,7 @@ function komandir_get_template_price() {
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
 
-add_filter( 'woocommerce_sale_flash', 'hide_sale_flash' );
-
-function hide_sale_flash() {
-	return false;
-}
-
+add_filter( 'woocommerce_sale_flash', '__return_false' );
 
 
 remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
@@ -216,14 +203,12 @@ function get_wishlist_count() {
 	return $count;
 }
 
-//breadcrumbs separator
+//change the breadcrumb delimeter from '/' to '>'
 
-add_filter( 'woocommerce_breadcrumb_defaults', 'komander_change_breadcrumb_delimiter' );
-function komander_change_breadcrumb_delimiter( $defaults ) {
-	// Change the breadcrumb delimeter from '/' to '>'
+add_filter( 'woocommerce_breadcrumb_defaults', function ( $defaults ) {
 	$defaults['delimiter'] = ' &gt; ';
 	return $defaults;
-}
+} );
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
@@ -235,40 +220,15 @@ add_filter( 'woocommerce_get_image_size_gallery_thumbnail', function ($size) {
 	);
 } );
 
-add_filter( 'woocommerce_reviews_title', 'komandir_remove_reviews_title' );
-
-function komandir_remove_reviews_title( $title ) {
-	return;
-}
+add_filter( 'woocommerce_reviews_title', '__return_empty_string' );
 
 add_filter( 'wishlist_table_heading', '__return_null' );
 
 // removes my account menu items
 
-add_filter( 'woocommerce_account_menu_items', 'komandir_my_account_menu_items' );
-
-function komandir_my_account_menu_items( $items ) {
+add_filter( 'woocommerce_account_menu_items', function ( $items ) {
 	return array_filter( $items, fn($k) => ! in_array( $k, [ 'dashboard', 'downloads', 'edit-address' ] ), ARRAY_FILTER_USE_KEY );
-}
-
-function komandir_wc_get_categories( $id ) {
-	$categories = get_categories( [
-		'taxonomy' => 'product_cat',
-		'parent' => $id
-	] );
-
-	$categories = array_filter( $categories, function ($cat) {
-		$products = wc_get_products( [
-			'category' => array( $cat->cat_name )
-		] );
-
-		$products = array_filter( $products, fn($product) => $product->is_in_stock() );
-
-		return $products ? true : false;
-	} );
-
-	return $categories;
-}
+} );
 
 // mobile catalog ajax
 
@@ -317,9 +277,7 @@ function render_children_cat_list() {
 
 // custom sorting
 
-add_filter( 'woocommerce_catalog_orderby', 'komandir_orderby_list' );
-
-function komandir_orderby_list() {
+add_filter( 'woocommerce_catalog_orderby', function () {
 	return array(
 		'menu_order' => __( 'Default sorting', 'woocommerce' ),
 		'popularity' => __( 'Sort by popularity', 'woocommerce' ),
@@ -327,8 +285,7 @@ function komandir_orderby_list() {
 		'price' => __( 'Sort by price: low to high', 'woocommerce' ),
 		'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
 	);
-}
-;
+} );
 
 // remove products count
 
@@ -336,9 +293,7 @@ remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 
 // add catalog to breadcrumbs on second position
 
-add_filter( 'woocommerce_get_breadcrumb', 'komandir_breadcrumbs_product_cat_page', 20 );
-
-function komandir_breadcrumbs_product_cat_page( $crumbs ) {
+add_filter( 'woocommerce_get_breadcrumb', function ( $crumbs ) {
 	if ( ! empty( $crumbs ) ) {
 		if ( is_product_tag() ) {
 			global $wp_query;
@@ -365,21 +320,15 @@ function komandir_breadcrumbs_product_cat_page( $crumbs ) {
 
 		return $crumbs;
 	}
-}
+}, 20 );
 
 // hide page title in archive page
 
-add_filter( 'woocommerce_show_page_title', 'komandir_hide_page_title' );
-
-function komandir_hide_page_title() {
-	return false;
-}
+add_filter( 'woocommerce_show_page_title', '__return_false' );
 
 // add filters mobile button
 
-add_action( 'woocommerce_before_shop_loop', 'komandir_filters_btn', 39 );
-
-function komandir_filters_btn() {
+add_action( 'woocommerce_before_shop_loop', function () {
 	global $svg;
 	?>
 	<div class="filters-mobile">
@@ -392,13 +341,11 @@ function komandir_filters_btn() {
 		</button>
 	</div>
 	<?php
-}
+}, 39 );
 
 // add view grid switcher
 
-add_action( 'woocommerce_before_shop_loop', 'komandir_grid_switcher', 40 );
-
-function komandir_grid_switcher() {
+add_action( 'woocommerce_before_shop_loop', function () {
 	global $svg;
 	?>
 	<div class="grid-switcher">
@@ -418,46 +365,29 @@ function komandir_grid_switcher() {
 		</button>
 	</div>
 	<?php
-}
+}, 40 );
 
 // woocommerce top wrapper (ordering + grid switcher)
 
-add_action( 'woocommerce_before_shop_loop', 'komandir_add_top_wrapper_start', 25 );
-add_action( 'woocommerce_before_shop_loop', 'komandir_add_top_wrapper_end', 45 );
+add_action( 'woocommerce_before_shop_loop', function () {
+	echo '<div class="woocommerce-top-controls">';
+}, 25 );
 
-function komandir_add_top_wrapper_start() {
-	?>
-	<div class="woocommerce-top-controls">
-		<?php
-}
-
-function komandir_add_top_wrapper_end() {
-	?>
-	</div>
-	<?php
-}
+add_action( 'woocommerce_before_shop_loop', function () {
+	echo '</div>';
+}, 45 );
 
 // woocommerce columns layout (aside filters + products)
 
-add_action( 'woocommerce_before_shop_loop', 'komandir_add_main_wrapper_start', 50 );
-add_action( 'woocommerce_after_main_content', 'komandir_add_main_wrapper_end', 10 );
+add_action('woocommerce_before_shop_loop', function () {
+	echo '<div class="woocommerce-main-wrapper">';
+}, 50 );
 
-function komandir_add_main_wrapper_start() {
-	?>
-	<div class="woocommerce-main-wrapper">
-		<?php
-}
+add_action('woocommerce_after_main_content', function () {
+	echo '</div>';
+}, 10 );
 
-function komandir_add_main_wrapper_end() {
-	?>
-	</div>
-	<?php
-}
-
-add_action( 'widgets_init', 'komandir_wc_widgets_init' );
-
-function komandir_wc_widgets_init() {
-
+add_action( 'widgets_init', function () {
 	register_sidebar(
 		array(
 			'name' => esc_html__( 'Woo Sidebar', 'komandir' ),
@@ -469,32 +399,24 @@ function komandir_wc_widgets_init() {
 			'after_title' => '</h2>',
 		)
 	);
-}
+} );
 
 // products + pagination wrapper
 
-add_action( 'woocommerce_products_wrapper_start', 'komandir_products_wrapper_start' );
-add_action( 'woocommerce_products_wrapper_end', 'komandir_products_wrapper_end' );
+add_action( 'woocommerce_products_wrapper_start', function () {
+	echo '<div class="products-wrapper">';
+} );
 
-function komandir_products_wrapper_start() {
-	?>
-	<div class="products-wrapper">
-		<?php
-}
-
-function komandir_products_wrapper_end() {
-	?>
-	</div>
-	<?php
-}
+add_action('woocommerce_products_wrapper_end', function () {
+	echo '</div>';
+} );
 
 //related products columns count
 
-add_filter( 'woocommerce_output_related_products_args', 'komandir_related_products_args', 20 );
-function komandir_related_products_args( $args ) {
+add_filter( 'woocommerce_output_related_products_args', function ( $args ) {
 	$args['columns'] = 5;
 	return $args;
-}
+}, 20 );
 
 add_action( 'woocommerce_after_shop_loop_item', 'komandir_archive_additional_info', 20 );
 
@@ -579,67 +501,47 @@ function komandir_archive_additional_info() {
 	<?php
 }
 
-add_action( 'woocommerce_after_shop_loop_item', 'komandir_add_cart_wrapper_start', 7 );
-add_action( 'woocommerce_after_shop_loop_item', 'komandir_add_cart_wrapper_end', 15 );
-
-function komandir_add_cart_wrapper_start() {
-	?>
-	<div class="woocommerce-add-cart-wrapper">
-		<?php
-}
-
-function komandir_add_cart_wrapper_end() {
-	?>
-	</div>
-	<?php
-}
+add_action('woocommerce_after_shop_loop_item', function () {
+	echo '<div class="woocommerce-add-cart-wrapper">';
+}, 7 );
+add_action('woocommerce_after_shop_loop_item', function () {
+	echo '</div>';
+}, 15 );
 
 // customize single product tabs
 
-add_filter( 'woocommerce_product_tabs', 'komandir_product_tabs' );
-
-function komandir_product_tabs( $tabs ) {
+add_filter( 'woocommerce_product_tabs', function ( $tabs ) {
 	if ( isset( $tabs['description'] ) )
 		$tabs['description']['title'] = 'О товаре';
 	if ( isset( $tabs['additional_information'] ) )
 		$tabs['additional_information']['title'] = 'Характеристики';
 
 	return $tabs;
-}
+} );
 
 // remove additional information heading
 
 add_filter( 'woocommerce_product_additional_information_heading', '__return_false' );
 
-
-
 // redirect to home page after logout
 
-add_action( 'wp_logout', 'komandir_redirect_to_home_page' );
-
-function komandir_redirect_to_home_page() {
+add_action( 'wp_logout', function () {
 	wp_safe_redirect( home_url() );
 	exit;
-}
+} );
 
 // save phone in account details
 
-add_action( 'woocommerce_save_account_details', 'komandir_save_phone_account_details', 12, 1 );
-
-function komandir_save_phone_account_details( $user_id ) {
-
+add_action( 'woocommerce_save_account_details', function ( $user_id ) {
 	if ( isset( $_POST['account_phone'] ) ) {
 		update_user_meta( $user_id, 'phone_number', sanitize_text_field( $_POST['account_phone'] ) );
 	}
-}
+}, 12, 1 );
 
-add_action( 'woocommerce_save_account_details', 'komandir_save_account_details_redirect', 90, 1 );
-function komandir_save_account_details_redirect() {
-
+add_action( 'woocommerce_save_account_details', function () {
 	wp_safe_redirect( wc_get_endpoint_url( 'edit-account' ) );
-
 	exit();
-}
+}, 90, 1 );
 
 // custom my address formatted address
 
@@ -667,58 +569,48 @@ function komandir_save_account_details_redirect() {
 //     return $array;
 // }
 
-add_filter( 'woocommerce_formatted_address_replacements', 'komandir_formatted_address_replacements', 10, 2 );
-
-function komandir_formatted_address_replacements( $replacements, $args ) {
+add_filter( 'woocommerce_formatted_address_replacements', function ( $replacements, $args ) {
 	$replacements['{phone}'] = $args['phone'];
 	return $replacements;
-}
+}, 10, 2 );
 
 // phone_number to billing_phone
 
-add_filter( 'woocommerce_my_account_edit_address_field_value', 'komandir_my_account_edit_address_field_value', 10, 3 );
-
-function komandir_my_account_edit_address_field_value( $value, $key, $load_address ) {
+add_filter( 'woocommerce_my_account_edit_address_field_value', function ( $value, $key, $load_address ) {
 	if ( $key === 'billing_phone' ) {
 		$value = get_user_meta( get_current_user_id(), 'phone_number', true );
 	}
 	return $value;
-}
+}, 10, 3 );
 
 // change product placeholder
 
-add_filter( 'woocommerce_placeholder_img_src', 'komandir_placeholder_img_src' );
-
-function komandir_placeholder_img_src( $src ) {
+add_filter( 'woocommerce_placeholder_img_src', function ( $src ) {
 	$upload_dir = wp_upload_dir();
 	$uploads = untrailingslashit( $upload_dir['baseurl'] );
 	// replace with path to your image
 	$src = $uploads . '/2022/04/komandir-placeholder.svg';
 
 	return $src;
-}
+} );
 
 // add placeholder in aws results output
 
-add_filter( 'aws_search_pre_filter_single_product', 'komandir_aws_placeholder', 10 );
-
-function komandir_aws_placeholder( $result ) {
+add_filter( 'aws_search_pre_filter_single_product', function ( $result ) {
 	if ( ! $result['image'] ) {
 		$result['image'] = wc_placeholder_img_src();
 	}
 
 	return $result;
-}
+}, 10 );
 
 // add shipping warning
 
-add_action( 'woocommerce_checkout_order_review', 'komandir_checkout_order_review' );
-
-function komandir_checkout_order_review() {
+add_action( 'woocommerce_checkout_order_review', function () {
 	?>
 	<p><b>По вопросу доставки мы с Вами свяжемся после оформления заказа. С условиями доставки можно ознакомиться на странице <a href="/shipping">Доставка</a></b></p>
 	<?php
-}
+} );
 
 // remove product attributes links
 
@@ -739,34 +631,17 @@ function log_error( $var ) {
 	error_log( 'KOMANDIR LOG ERROR: ' . $res );
 }
 
-add_action( 'woocommerce_new_order', 'komandir_woocommerce_set_name_and_phone', 10, 2 );
-
-function komandir_woocommerce_set_name_and_phone( $order_id, $order ) {
+add_action( 'woocommerce_new_order', function ( $order_id, $order ) {
 	$user = $order->get_user();
 	$phone = get_user_meta( $order->get_user_id(), 'billing_phone', true );
 	update_post_meta( $order_id, '_billing_phone', $phone );
 	update_post_meta( $order_id, '_billing_first_name', $user->first_name );
 	update_post_meta( $order_id, '_billing_last_name', $user->last_name );
-}
-
-add_action( 'woocommerce_review_order_before_payment', 'refresh_payment_methods' );
-function refresh_payment_methods() {
-	?>
-	<!-- <script type="text/javascript">
-				(function($){
-					$( 'form.checkout' ).on( 'change', 'input[name^="payment_method"]', function() {
-						$('body').trigger('update_checkout');
-				   });
-				})(jQuery);
-	</script> -->
-	<?php
-}
+}, 10, 2 );
 
 // добавление суммы отрицательных сборов как скидки при обмене с 1С
 
-add_filter( 'itglx/wc/1c/sale/query/order-discount-list', 'komandir_add_negative_fees_as_discounts', 10, 2 );
-
-function komandir_add_negative_fees_as_discounts( $list, $order ) {
+add_filter( 'itglx/wc/1c/sale/query/order-discount-list', function ( $list, $order ) {
 	$total_fees = array_reduce(
 		$order->get_fees(),
 		function ($total, $fee) {
@@ -784,20 +659,21 @@ function komandir_add_negative_fees_as_discounts( $list, $order ) {
 	}
 
 	return $list;
-}
+
+}, 10, 2 );
+
+
 
 // убирает display name из обязательных полей в личном кабинете
 
-add_filter( 'woocommerce_save_account_details_required_fields', 'komandir_save_account_details_required_fields' );
+add_filter('woocommerce_save_account_details_required_fields', function ($array) {
 
-function komandir_save_account_details_required_fields( $array ) {
-
-	if ( isset( $array['account_display_name'] ) ) {
+	if (isset($array['account_display_name'])) {
 		unset($array['account_display_name']);
 	}
 
 	return $array;
-}
+});
 
 // убирает кнопку ссылку Убрать у "псевдокупона (скидка из плагина Woo Discounts)
 
