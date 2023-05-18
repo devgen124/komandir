@@ -1023,6 +1023,10 @@ $cols: (1, 2, 3, 4, 5, 6);
     background: none;
     padding: 0;
     border: none;
+
+	@include media-breakpoint-up(lg) {
+		display: none;
+	}
 }
 
 .woo-attributes-item {

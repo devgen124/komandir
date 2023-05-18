@@ -13537,6 +13537,11 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   padding: 0;
   border: none;
 }
+@media (min-width: 992px) {
+  .filters-btn {
+    display: none;
+  }
+}
 
 .woo-attributes-item {
   display: flex;
