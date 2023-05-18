@@ -21,14 +21,12 @@ get_header( 'shop' );
 
 global $wp_query;
 
-$cat_children = get_term_children( $wp_query->queried_object->term_id, $wp_query->queried_object->taxonomy );
+$cat_children = get_terms( [
+	'taxonomy' => 'product_cat',
+	'parent' => $wp_query->queried_object->term_id
+] );
 
 if ( ! empty( $cat_children ) ) {
-
-	$cat_children = get_terms( [
-		'taxonomy' => 'product_cat',
-		'include' => $cat_children
-	] );
     ?>
 
 	<main id="primary" class="site-main">
