@@ -21,21 +21,22 @@ get_header( 'shop' );
 
 global $wp_query;
 
-if ( $wp_query->queried_object->parent == 0 ) {
+$cat_children = get_term_children( $wp_query->queried_object->term_id, $wp_query->queried_object->taxonomy );
 
-	$cats = get_categories( [
+if ( ! empty( $cat_children ) ) {
+
+	$cat_children = get_terms( [
 		'taxonomy' => 'product_cat',
-		'parent' => $wp_query->queried_object->term_id
+		'include' => $cat_children
 	] );
-
-	?>
+    ?>
 
 	<main id="primary" class="site-main">
 		<div class="container">
 			<?php woocommerce_breadcrumb(); ?>
 			<div class="row">
 
-				<?php foreach ( $cats as $cat ) :
+				<?php foreach ( $cat_children as $cat ) :
 
 					$thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
 
