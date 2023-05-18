@@ -383,7 +383,6 @@ function komandir_filters_btn() {
 	global $svg;
 	?>
 	<div class="filters-mobile">
-		<span>Фильтры</span>
 		<button class="filters-btn">
 			<?= $svg->view_from_sprite( [
 				'title' => 'filters',
