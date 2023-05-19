@@ -27,7 +27,7 @@ class CartItemcategoryCombination extends Base
             return false;
         }
         $result = false;
-        if (isset($options->combination) && isset($options->operator) && isset($options->type) && isset($options->category) && is_array($options->category) && isset($options->from) && isset($options->from) && isset($options->to)) {
+        if (isset($options->combination) && isset($options->operator) && isset($options->type) && isset($options->category) && is_array($options->category) && isset($options->from) && isset($options->to)) {
             if (empty($options->category)) {
                 return true;
             }

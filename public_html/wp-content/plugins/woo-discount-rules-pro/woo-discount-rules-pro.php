@@ -1,17 +1,17 @@
 <?php
 /**
  * Plugin name: Woo Discount Rules PRO 2.0
- * Plugin URI: http://www.flycart.org
+ * Plugin URI: https://www.flycart.org
  * Description: PRO package for Woo Discount Rules. You need both the Core and PRO packages to get the PRO features running.
  * Author: Flycart
  * Author URI: https://www.flycart.org
- * Version: 2.4.2
+ * Version: 2.6.0
  * Slug: woo-discount-rules-pro
  * Text Domain: woo-discount-rules-pro
  * Domain Path: /i18n/languages/
  * Requires at least: 4.6.1
  * WC requires at least: 3.0
- * WC tested up to: 6.6
+ * WC tested up to: 7.6
  */
 if (!defined('ABSPATH')) {
     exit;
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
  * Current version of our app
  */
 if (!defined('WDR_PRO_VERSION')) {
-    define('WDR_PRO_VERSION', '2.4.2');
+    define('WDR_PRO_VERSION', '2.6.0');
 }
 
 /**
@@ -137,5 +137,14 @@ if (defined('WDR_CORE')) {
 add_action( 'plugins_loaded', function (){
     if(function_exists('load_plugin_textdomain')){
         load_plugin_textdomain( 'woo-discount-rules-pro', FALSE, basename( dirname( __FILE__ ) ) . '/i18n/languages/' );
+    }
+});
+
+/**
+ * To set plugin is compatible for WC Custom Order Table (HPOS) feature.
+ */
+add_action('before_woocommerce_init', function() {
+    if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
     }
 });

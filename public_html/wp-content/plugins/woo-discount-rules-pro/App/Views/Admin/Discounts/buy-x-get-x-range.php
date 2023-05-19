@@ -37,7 +37,7 @@ if (!defined('ABSPATH')) {
                     <input type="number"
                            name="buyx_getx_adjustments[ranges][<?php echo esc_attr($buyx_getx_index); ?>][free_qty]"
                            class="awdr-buyx-getx-number-box awdr_value_selector bxgx-qty"
-                           placeholder="<?php esc_attr_e('Free Quantity', 'woo-discount-rules-pro'); ?>" min="0" step="any"
+                           placeholder="<?php esc_attr_e('Free Quantity', 'woo-discount-rules-pro'); ?>" min="1" step="any"
                            value="<?php echo (isset($buyx_getx_adjustment->free_qty) && !empty($buyx_getx_adjustment->free_qty)) ? esc_attr($buyx_getx_adjustment->free_qty) : '1';?>"
                     >
                     <span class="wdr_desc_text"><?php esc_html_e('Free Quantity', 'woo-discount-rules-pro'); ?></span>

@@ -33,7 +33,7 @@ class CartItemsWeight extends Base
                 }
             }
         }
-        if (isset($options->operator) && $options->value && !empty($total_weight)) {
+        if (isset($options->operator) && isset($options->value) && $options->value >= 0 && $total_weight >= 0) {
             $operator = sanitize_text_field($options->operator);
             $value = $options->value;
             return $this->doComparisionOperation($operator, $total_weight, $value);

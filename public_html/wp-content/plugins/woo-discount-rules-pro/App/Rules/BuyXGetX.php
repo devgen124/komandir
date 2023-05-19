@@ -59,7 +59,7 @@ class BuyXGetX
      * */
     public static function calculateBuyXGetXDiscount($rule, $price, $quantity, $product, $ajax_price = false, $cart_item = array(), $is_cart = true){
         $buy_x_get_x_ranges = self::getBuyXGetXAdjustments($rule);
-        if(empty($buy_x_get_x_ranges->ranges->{1}->from)){
+        if(empty($buy_x_get_x_ranges->ranges->{1}->from) && empty($buy_x_get_x_ranges->ranges->{1}->to)){
             return null;
         }
         $matched_rule = $return_value = array();
@@ -76,7 +76,7 @@ class BuyXGetX
             } else {
                 $discount_price = BOGO::calculateDiscountPriceFromRuleRange($matched_rule, $price, $discount_quantity, $quantity, $product);
             }
-            $discount_value = $matched_rule->free_value;
+            $discount_value = BOGO::getDiscountValueFromRule($matched_rule, $price);
             $return_value = array(
                 "discount_type" => $discount_type,
                 "discount_value" => $discount_value,
