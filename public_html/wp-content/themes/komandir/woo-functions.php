@@ -608,7 +608,7 @@ add_filter( 'aws_search_pre_filter_single_product', function ( $result ) {
 
 add_action( 'woocommerce_checkout_order_review', function () {
 	?>
-	<p><b>По вопросу доставки мы с Вами свяжемся после оформления заказа. С условиями доставки можно ознакомиться на странице <a href="/shipping">Доставка</a></b></p>
+	<p><b>По вопросу получения товара мы с Вами свяжемся после оформления заказа. С условиями доставки можно ознакомиться на странице <a href="/shipping">Доставка</a></b></p>
 	<?php
 } );
 
