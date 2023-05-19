@@ -29,8 +29,8 @@ if (!defined('ABSPATH')) {
                     <input type="number"
                            name="set_adjustments[ranges][<?php echo esc_attr($set_range); ?>][value]"
                            class="set_discount_value bulk_value_selector awdr-left-align"
-                           value="<?php if (isset($range->value) && !empty($range->value)) {
-                               echo esc_attr($range->value);
+                           value="<?php if (isset($range->value) && $range->value >= 0) {
+                               echo esc_attr(floatval($range->value));
                            } ?>"
                            placeholder="<?php esc_attr_e('Value', 'woo-discount-rules-pro'); ?>"
                            min="0"

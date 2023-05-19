@@ -23,17 +23,11 @@ echo ($render_saved_condition == true) ? '' : '<div class="user_list">';
                 data-placeholder="<?php esc_attr_e('Search User', 'woo-discount-rules-pro');?>"
                 name="conditions[<?php echo (isset($i)) ? esc_attr($i) : '{i}' ?>][options][value][]"><?php
             if ($values) {
-                $users = get_users(array('fields' => array('ID', 'user_nicename'), 'orderby' => 'user_nicename'));
-                $user_name = '';
-                foreach ($values as $value) {
-                    foreach ($users as $user) {
-                        if ($user->ID == $value) {
-                            $user_name = $user->user_nicename;
-                        }
-                    }
-                    if ($user_name != '') {
+                $users = get_users(array('include' => $values, 'fields' => array('ID', 'user_nicename'), 'orderby' => 'user_nicename'));
+                foreach ($users as $user) {
+                    if (isset($user->user_nicename) && $user->user_nicename != '') {
                         ?>
-                        <option value="<?php echo esc_attr($value) ?>" selected><?php echo esc_html($user_name); ?></option>
+                        <option value="<?php echo esc_attr($user->ID) ?>" selected><?php echo esc_html($user->user_nicename); ?></option>
                         <?php
                     }
                 }

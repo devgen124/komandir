@@ -57,13 +57,21 @@ class PurchaseLastOrderAmount extends Base
                     if (isset($options->status) && is_array($options->status) && !empty($options->status)) {
                         $args['post_status'] = $options->status;
                     }
-                    $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
                     $last_order_amount = 0;
-                    if (!empty($orders)) {
-                        foreach ($orders as $order) {
-                            if (!empty($order) && isset($order->ID)) {
-                                $order_obj = self::$woocommerce_helper->getOrder($order->ID);
-                                $last_order_amount += self::$woocommerce_helper->getOrderTotal($order_obj);
+                    if (CoreMethodCheck::customOrdersTableIsEnabled()) {
+                        $cot_query_args = CoreMethodCheck::prepareCOTQueryArgsThroughWPQuery($args);
+                        $cot_query_args['select'] = 'total_amount';
+                        $cot_query_args['order_by'] = 'id DESC';
+                        $cot_query_args['return'] = 'var';
+                        $last_order_amount = (float) CoreMethodCheck::performCOTQuery($cot_query_args);
+                    } else {
+                        $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
+                        if (!empty($orders)) {
+                            foreach ($orders as $order) {
+                                if (!empty($order) && isset($order->ID)) {
+                                    $order_obj = self::$woocommerce_helper->getOrder($order->ID);
+                                    $last_order_amount += self::$woocommerce_helper->getOrderTotal($order_obj);
+                                }
                             }
                         }
                     }

@@ -120,19 +120,22 @@ trait CheapestCommon {
         if(isset($buy_x_get_y_ranges->ranges) && !empty($buy_x_get_y_ranges->ranges)){
             $matched_rule = Cheapest::getMatchedRule($buy_x_get_y_ranges->ranges, $quantity, $product);
         }
+        
         if(!empty($matched_rule)){
             $matched_rule = Cheapest::setFreeDiscountInMatchedRule($matched_rule);
             $discount_quantity = $matched_rule->free_qty;
             if($buy_x_get_y_ranges->operator == 'variation'){
+                $product_page_data['count_type'] = 'variation';
                 $_key = self::getDiscountKey($rule, $buy_x_get_y_ranges->operator, $cart_item['data']);
             } else {
+                $product_page_data['count_type'] = 'individual';
                 $_key = self::getDiscountKey($rule, $buy_x_get_y_ranges->operator, $product);
             }
             $cheapest_items_based_on_type = $is_cart? self::$cheapest_items: self::$cheapest_products;
             $type = self::getType($matched_rule);
             $product_page_data['product'] = $product;
             $product_page_data['quantity'] = $product_quantity;
-            $product_page_data['count_type'] = 'individual';
+//            $product_page_data['count_type'] = 'individual';
             $product_page_data['already_applied'] = $cheapest_items_based_on_type;
             $cheapest = Cheapest::getCheapestItemsFromCart($rule, $matched_rule, $discount_quantity, $buy_x_get_y_ranges->mode, $type, array(), array(), $is_cart, $product_page_data);
             if(isset($cheapest_items_based_on_type[$_key])){
@@ -142,7 +145,12 @@ trait CheapestCommon {
                     } else {
                         self::$cheapest_products[$_key] = $cheapest;//array_merge($cheapest_items_based_on_type[$_key], $cheapest);
                     }
-
+                } else {
+                    if($is_cart){
+                        self::$cheapest_items[$_key] = $cheapest;
+                    } else {
+                        self::$cheapest_products[$_key] = $cheapest;
+                    }
                 }
             } else {
                 if($is_cart){
@@ -204,7 +212,7 @@ trait CheapestCommon {
                     if ($rule->isFilterPassed($cart_item['data'])) {
                         $quantity = $cart_item['quantity'];
                         if($buy_x_get_y_ranges->operator == 'variation'){
-                            $quantity = $rule->getQuantityBasedOnCountAdjustment($buy_x_get_y_ranges->operator, $product_quantity, $cart_item['data'], $is_cart);
+                            $quantity = $rule->getQuantityBasedOnCountAdjustment($buy_x_get_y_ranges->operator, $product_quantity, $cart_item['data'], true);
                         }
                         self::calculateDiscountForAnItemIndividual($cart_item, $quantity, $buy_x_get_y_ranges, $rule, $price, $product_quantity, $product, $is_cart);
                     }
@@ -272,7 +280,7 @@ trait CheapestCommon {
                                     $quantity = (isset($cart_item['key']))? $cart_item['quantity']: $product_quantity;
                                     $matched_rule = $cheapest_item_data_values['matched_rule'];
                                     $discount_price = Cheapest::calculateDiscountPriceFromRuleRange($matched_rule, $price, $quantity_to_apply, $quantity, $product);
-                                    $discount_value = $matched_rule->free_value;
+                                    $discount_value = Cheapest::getDiscountValueFromRule($matched_rule, $price);
                                     $discount_type = $matched_rule->free_type;
                                     $return_value = array(
                                         "discount_type" => $discount_type,

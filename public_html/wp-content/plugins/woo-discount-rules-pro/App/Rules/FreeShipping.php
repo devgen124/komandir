@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) {
 }
 use Wdr\App\Controllers\DiscountCalculator;
 use Wdr\App\Helpers\Woocommerce;
+use Wdr\App\Router;
 use WDRPro\App\Helpers\CoreMethodCheck;
 use WDRPro\App\Helpers\FreeShippingMethod;
 
@@ -33,6 +34,16 @@ class FreeShipping
         add_action('woocommerce_checkout_update_order_review', array(__CLASS__, 'refreshShippingOptionsOnLoadOrderReview'), 10, 1);
         add_filter('woocommerce_shipping_chosen_method', array(__CLASS__, 'reset_default_shipping_method_woo_discount'), 100, 2);
         add_filter('woocommerce_package_rates', array(__CLASS__, 'wdrHideShippingWhenFreeIsAvailable'), 100 );
+        add_action('woocommerce_after_calculate_totals', array(__CLASS__, 'setFreeShippingInAppliedRules'), 11);
+    }
+
+    /**
+     * Set free shipping on $applied_rules so we can display message and update used count
+     * */
+    public static function setFreeShippingInAppliedRules(){
+        remove_action('woocommerce_after_calculate_totals', array(__CLASS__, 'setFreeShippingInAppliedRules'), 11);
+        DiscountCalculator::getFreeshippingMethod();
+        add_action('woocommerce_after_calculate_totals', array(__CLASS__, 'setFreeShippingInAppliedRules'), 11);
     }
 
     /**
@@ -88,6 +99,11 @@ class FreeShipping
         if (!empty(self::$shipping_discounts)) {
             if (isset(self::$shipping_discounts['free_shipping']) && !empty(self::$shipping_discounts['free_shipping'])) {
                 self::$free_shipping = apply_filters('advanced_woo_discount_rules_apply_free_shipping', true);
+                // To remove third party coupon from cart when free shipping is applied as this doesn't trigger when only shipping rule is enabled. From v2.5.0
+                if(self::$free_shipping){
+                    $manage_discount = Router::$manage_discount;
+                    add_action('woocommerce_after_calculate_totals', array($manage_discount, 'removeThirdPartyCoupon'), 20);
+                }
             }
         }
         return self::$free_shipping;

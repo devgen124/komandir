@@ -43,7 +43,7 @@ class CartItemsQuantity extends Base
                 }
             }
         }
-        if (!empty($operator) && !empty($value) && !empty($total_quantities)) {
+        if (!empty($operator) && !empty($total_quantities) && $value >= 0) {
             $status = $this->doComparisionOperation($operator, $total_quantities, $value);
             if(!$status){
                 $config = new Configuration();

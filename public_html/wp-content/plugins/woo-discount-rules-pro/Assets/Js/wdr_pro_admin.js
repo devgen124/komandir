@@ -144,11 +144,11 @@
          */
         $(document).on('change', '.combination_operator', function () {
             if ($(this).val() == 'in_range') {
-                $('.product_combination_to').show();
-                $('.product_combination_from_placeholder').attr("placeholder", "From");
+                $(this).parents('.wdr-condition-group').find('.product_combination_to').show();
+                $(this).parents('.wdr-condition-group').find('.product_combination_from_placeholder').attr("placeholder", "From");
             } else {
-                $('.product_combination_to').hide();
-                $('.product_combination_from_placeholder').attr("placeholder", "Quantity");
+                $(this).parents('.wdr-condition-group').find('.product_combination_to').hide();
+                $(this).parents('.wdr-condition-group').find('.product_combination_from_placeholder').attr("placeholder", "Quantity");
             }
         });
         /**
@@ -157,11 +157,11 @@
          */
         $(document).on('change', '.cat_combination_operator', function () {
             if ($(this).val() == 'in_range') {
-                $('.cat_combination_to').show();
-                $('.cat_combination_from_placeholder').attr("placeholder", "From");
+                $(this).parents('.wdr-condition-group').find('.cat_combination_to').show();
+                $(this).parents('.wdr-condition-group').find('.cat_combination_from_placeholder').attr("placeholder", "From");
             } else {
-                $('.cat_combination_to').hide();
-                $('.cat_combination_from_placeholder').attr("placeholder", "Value");
+                $(this).parents('.wdr-condition-group').find('.cat_combination_to').hide();
+                $(this).parents('.wdr-condition-group').find('.cat_combination_from_placeholder').attr("placeholder", "Value");
             }
         });
 

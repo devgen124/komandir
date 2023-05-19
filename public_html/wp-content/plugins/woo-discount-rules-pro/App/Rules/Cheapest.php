@@ -86,12 +86,13 @@ class Cheapest
             if(!empty($matched_rule->free_type)){
                 if($matched_rule->free_type == "percentage"){
                     if($matched_rule->free_value > 0){
-                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedPercentageDiscount($product, $price, $quantity, $matched_rule->free_value, $discount_quantity);
+                        $discount_value = self::getDiscountValueFromRule($matched_rule, $price);
+                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedPercentageDiscount($product, $price, $quantity, $discount_value, $discount_quantity);
                     }
                 } else if($matched_rule->free_type == "flat"){
                     if($matched_rule->free_value > 0){
-                        $free_value = CoreMethodCheck::getConvertedFixedPrice($matched_rule->free_value, 'flat');
-                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedFlatDiscount($product, $price, $quantity, $free_value, $discount_quantity);
+                        $discount_value = self::getDiscountValueFromRule($matched_rule, $price);
+                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedFlatDiscount($product, $price, $quantity, $discount_value, $discount_quantity);
                     }
                 }
             }
@@ -99,6 +100,39 @@ class Cheapest
         }
 
         return $discount_price;
+    }
+
+    /**
+     * Get discount value from matched rule
+     *
+     * @param $matched_rule object
+     * @param $price int/float
+     * @return int/float
+     */
+    public static function getDiscountValueFromRule($matched_rule, $price)
+    {
+        $discount_value = 0;
+        if(!empty($matched_rule)){
+            if(!empty($matched_rule->free_type)){
+                if($matched_rule->free_type == "percentage"){
+                    if($matched_rule->free_value > 0){
+                        $discount_value = $matched_rule->free_value;
+                        if ($discount_value > 100) {
+                            $discount_value = 100;
+                        }
+                    }
+                } else if($matched_rule->free_type == "flat"){
+                    if($matched_rule->free_value > 0){
+                        $discount_value = CoreMethodCheck::getConvertedFixedPrice($matched_rule->free_value, 'flat');
+                        if ($discount_value > $price) {
+                            $discount_value = $price;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $discount_value;
     }
 
     /**
@@ -194,9 +228,10 @@ class Cheapest
                         if(self::validateCartItemBasedOnType($item['data'], $type_and_values, $item)){
                             $cart_item_product = $item['data'];
                             $current_item_price = Woocommerce::getProductPrice($cart_item_product);
+                            $current_item_price = apply_filters('advanced_woo_discount_rules_get_price_of_cart_item_on_find_cheapest_item', $current_item_price, $cart_item_product, $item);
                             if($cheapest_price === null || self::isConditionMatched($condition, $cheapest_price, $current_item_price)){
                                 $current_qty = $item['quantity'];
-                                if(isset($product_page_data['count_type']) && $product_page_data['count_type'] = 'individual'){
+                                if(isset($product_page_data['count_type']) && $product_page_data['count_type'] == 'individual'){
                                     $applied_qty = self::getAppliedQty($key, $rule->rule->id, $product_page_data);
                                     if($applied_qty > 0){
                                         $current_qty = $current_qty - $applied_qty;

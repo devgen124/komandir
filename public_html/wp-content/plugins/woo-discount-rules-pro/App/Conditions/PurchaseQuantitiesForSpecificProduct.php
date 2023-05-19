@@ -28,7 +28,9 @@ class PurchaseQuantitiesForSpecificProduct extends Base
             $apply_discount_to_child = apply_filters('advanced_woo_discount_rules_apply_discount_to_child', true);
             if($apply_discount_to_child){
                 if(isset($options->product_variants) && !empty($options->product_variants) && is_array($options->product_variants)){
-                    $options->products = Helper::combineProductArrays($options->products, $options->product_variants);
+                    if (!CoreMethodCheck::customOrdersTableIsEnabled()) {
+                        $options->products = Helper::combineProductArrays($options->products, $options->product_variants);
+                    }
                 }
             }
             $conditions = '';
@@ -68,19 +70,40 @@ class PurchaseQuantitiesForSpecificProduct extends Base
                     if ($options->time != "all_time") {
                         $args['date_query'] = array('after' => $this->getDateByString($options->time, 'Y-m-d').' 00:00:00');
                     }
-                    $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
-
                     $order_qty_count = 0;
-                    if (!empty($orders)) {
-                        foreach ($orders as $order) {
-                            if (!empty($order) && isset($order->ID)) {
-                                $order_obj = self::$woocommerce_helper->getOrder($order->ID);
+                    if (CoreMethodCheck::customOrdersTableIsEnabled()) {
+                        $cot_query_args = CoreMethodCheck::prepareCOTQueryArgsThroughWPQuery($args);
+                        $cot_query_args['select'] = ['id', 'product_id', 'variation_id', 'quantity'];
+                        $cot_query_args['join'] = 'order_items';
+                        $cot_query_args['where'] = [
+                            [
+                                'column' => 'product_id',
+                                'operator' => 'IN',
+                                'value' => $options->products,
+                            ],
+                            [
+                                'column' => 'variation_id',
+                                'operator' => 'IN',
+                                'value' => $options->products,
+                            ]
+                        ];
+                        $cot_query_args['where_relation'] = 'OR';
+                        $cot_query_args['sum'] = 'quantity';
+                        $cot_query_args['return'] = 'var';
+                        $order_qty_count = (int) CoreMethodCheck::performCOTQuery($cot_query_args);
+                    } else {
+                        $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
+                        if (!empty($orders)) {
+                            foreach ($orders as $order) {
+                                if (!empty($order) && isset($order->ID)) {
+                                    $order_obj = self::$woocommerce_helper->getOrder($order->ID);
 
-                                $order_item_quantities = self::$woocommerce_helper->getOrderItemsQty($order_obj);
-                                if(!empty($order_item_quantities) && !empty($options->products) && is_array($options->products)){
-                                    foreach ($order_item_quantities as $product_id => $qty){
-                                        if(in_array($product_id, $options->products)){
-                                            $order_qty_count += $qty;
+                                    $order_item_quantities = self::$woocommerce_helper->getOrderItemsQty($order_obj);
+                                    if(!empty($order_item_quantities) && !empty($options->products) && is_array($options->products)){
+                                        foreach ($order_item_quantities as $product_id => $qty){
+                                            if(in_array($product_id, $options->products)){
+                                                $order_qty_count += $qty;
+                                            }
                                         }
                                     }
                                 }

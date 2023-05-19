@@ -5,9 +5,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 use Wdr\App\Controllers\DiscountCalculator;
+use Wdr\App\Controllers\ManageDiscount;
 use Wdr\App\Helpers\Helper;
 use Wdr\App\Helpers\Rule;
 use Wdr\App\Helpers\Woocommerce;
+use WDRPro\App\Helpers\CoreMethodCheck;
 
 class BOGO
 {
@@ -45,6 +47,7 @@ class BOGO
         add_filter('advanced_woo_discount_rules_process_cart_item_for_buy_x_get_y_limited_discounts', array(__CLASS__, 'excludeFreeProductFromDiscount'), 10, 2);
         //Translate the Free text in orders and emails
         add_filter('woocommerce_order_item_get_formatted_meta_data', array(__CLASS__, 'translateFreeTextInOrderAndEmails'), 10, 2);
+        add_filter('advanced_woo_discount_rules_get_auto_add_discount_details_from_cart_item', array(__CLASS__, 'getFreeDiscountDetailsFromCartItem'), 10, 3);
     }
 
     /**
@@ -232,7 +235,9 @@ class BOGO
                                         $variation_new = $variation;
                                         $variation_new[self::$free_product_cart_item_identifier] = self::$free_product_cart_item_identifier_value;
                                         $current_variation = $item['variation'];
-                                        unset($current_variation['wdr_for_cart_item']);
+                                        if(isset($current_variation['wdr_for_cart_item'])) {
+                                            unset($current_variation['wdr_for_cart_item']);
+                                        }
                                         if($variation_id == $item['variation_id']){
                                             $check_variation_matches = apply_filters('advanced_woo_discount_rules_check_variation_attributes_matches_for_free_products', false, $item);
                                             if($check_variation_matches === true){
@@ -312,17 +317,17 @@ class BOGO
      * @return boolean
      * */
     public static function isVariantPurchasableForBXGY($product, $quantity, $bogo_product_id, $variation_id){
-        if(method_exists($product, 'is_purchasable')){
+        if(is_object($product) && method_exists($product, 'is_purchasable')){
             if ( ! $product->is_purchasable() ) {
                 return false;
             }
         }
-        if(method_exists($product, 'is_in_stock')) {
+        if(is_object($product) && method_exists($product, 'is_in_stock')) {
             if (!$product->is_in_stock()) {
                 return false;
             }
         }
-        if(method_exists($product, 'get_stock_quantity') && method_exists($product, 'get_manage_stock') && method_exists($product, 'get_backorders')) {
+        if(is_object($product) && method_exists($product, 'get_stock_quantity') && method_exists($product, 'get_manage_stock') && method_exists($product, 'get_backorders')) {
             if ($product->get_manage_stock()) {
                 if('no' === $product->get_backorders()){
                     if($product->get_stock_quantity() < $quantity){
@@ -351,7 +356,7 @@ class BOGO
             //Check WPML language
             if(apply_filters( 'advanced_woo_discount_rules_check_wpml_language_for_product_before_auto_add', true, $product, $variation_id)){
                 global $sitepress;
-                if(!empty($sitepress) && method_exists($sitepress, 'get_current_language')){
+                if(is_object($sitepress) && method_exists($sitepress, 'get_current_language')){
                     //$current_lang = $sitepress->get_current_language();
                     $post_language_information = apply_filters( 'wpml_post_language_details', NULL, Woocommerce::getProductId($product));
                     if(isset($post_language_information['different_language'])){
@@ -363,17 +368,17 @@ class BOGO
             }
         }
 
-        if(method_exists($product, 'is_purchasable')){
+        if(is_object($product) && method_exists($product, 'is_purchasable')){
             if ( ! $product->is_purchasable() ) {
                 return false;
             }
         }
-        if(method_exists($product, 'is_in_stock')) {
+        if(is_object($product) && method_exists($product, 'is_in_stock')) {
             if (!$product->is_in_stock()) {
                 return false;
             }
         }
-        if(method_exists($product, 'get_stock_quantity') && method_exists($product, 'get_manage_stock') && method_exists($product, 'get_backorders')) {
+        if(is_object($product) && method_exists($product, 'get_stock_quantity') && method_exists($product, 'get_manage_stock') && method_exists($product, 'get_backorders')) {
             if ($product->get_manage_stock()) {
                 if('no' === $product->get_backorders()){
                     if($check_existing_qty == true){
@@ -609,11 +614,13 @@ class BOGO
             if(!empty($matched_rule->free_type)){
                 if($matched_rule->free_type == "percentage"){
                     if($matched_rule->free_value > 0){
-                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedPercentageDiscount($product, $price, $quantity, $matched_rule->free_value, $discount_quantity);
+                        $discount_value = self::getDiscountValueFromRule($matched_rule, $price);
+                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedPercentageDiscount($product, $price, $quantity, $discount_value, $discount_quantity);
                     }
                 } else if($matched_rule->free_type == "flat"){
                     if($matched_rule->free_value > 0){
-                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedFlatDiscount($product, $price, $quantity, $matched_rule->free_value, $discount_quantity);
+                        $discount_value = self::getDiscountValueFromRule($matched_rule, $price);
+                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedFlatDiscount($product, $price, $quantity, $discount_value, $discount_quantity);
                     }
                 }
             }
@@ -621,6 +628,39 @@ class BOGO
         }
 
         return $discount_price;
+    }
+
+    /**
+     * Get discount value from matched rule
+     *
+     * @param $matched_rule object
+     * @param $price int/float
+     * @return int/float
+     */
+    public static function getDiscountValueFromRule($matched_rule, $price)
+    {
+        $discount_value = 0;
+        if(!empty($matched_rule)){
+            if(!empty($matched_rule->free_type)){
+                if($matched_rule->free_type == "percentage"){
+                    if($matched_rule->free_value > 0){
+                        $discount_value = $matched_rule->free_value;
+                        if ($discount_value > 100) {
+                            $discount_value = 100;
+                        }
+                    }
+                } else if($matched_rule->free_type == "flat"){
+                    if($matched_rule->free_value > 0){
+                        $discount_value = CoreMethodCheck::getConvertedFixedPrice($matched_rule->free_value, 'flat');
+                        if ($discount_value > $price) {
+                            $discount_value = $price;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $discount_value;
     }
 
     /**
@@ -686,6 +726,51 @@ class BOGO
         }
 
         return $discount_price;
+    }
+
+
+    public static function getFreeDiscountDetailsFromCartItem($details, $cart_item, $cart_item_key)
+    {
+        if (!isset(ManageDiscount::$config) || !isset(ManageDiscount::$calculator)) {
+            return $details;
+        }
+        if (isset($cart_item[self::$free_product_cart_item_identifier])) { // for free products
+            $product_id = $cart_item['variation_id'] > 0 ? $cart_item['variation_id'] : $cart_item['product_id'];
+            $product = Woocommerce::getProduct($product_id);
+            if ($product) {
+                $calculate_from = ManageDiscount::$config->getConfig('calculate_discount_from', 'sale_price');
+                $product_price = ManageDiscount::$calculator->getProductPriceFromConfig($product, $calculate_from , false);
+                $product_price_with_tax = ManageDiscount::$calculator->mayHaveTax($product, $product_price);
+                $cart_item_discounts['initial_price'] = $product_price;
+                $cart_item_discounts['initial_price_with_tax'] = $product_price_with_tax;
+                $cart_item_discounts['discounted_price'] = $cart_item_discounts['discounted_price_with_tax'] = 0;
+                $cart_item_discounts['is_free_product'] = true;
+                if (isset($cart_item['wdr_for_cart_item'])) { // for bxgx free
+                    foreach ($cart_item['wdr_for_cart_item'] as $parent_item_key) {
+                        $buy_x_get_x_free_discounts = isset(Rule::$additional_discounts['buy_x_get_x_discounts']) ? Rule::$additional_discounts['buy_x_get_x_discounts'] : '';
+                        if (isset($buy_x_get_x_free_discounts[$parent_item_key]['rule_id'])) {
+                            $details = $buy_x_get_x_free_discounts[$parent_item_key];
+                            $rule_id = $details['rule_id'];
+                            $details['discount_type'] = 'free_product';
+                            $details['discount_price'] = $product_price;
+                            $cart_item_discounts['total_discount_details'][$cart_item_key][$rule_id] = $details;
+                        }
+                    }
+                }
+                if (isset($cart_item['wdr_for_rule'])) { // for bxgy free
+                    $buy_x_get_y_free_discounts = isset(Rule::$additional_discounts['buy_x_get_y_discounts']) ? Rule::$additional_discounts['buy_x_get_y_discounts'] : '';
+                    if (!empty($buy_x_get_y_free_discounts)) {
+                        foreach ($buy_x_get_y_free_discounts as $rule_id => $details) {
+                            $details['discount_type'] = 'free_product';
+                            $details['discount_price'] = $product_price;
+                            $cart_item_discounts['total_discount_details'][$cart_item_key][$rule_id] = $details;
+                        }
+                    }
+                }
+                return $cart_item_discounts;
+            }
+        }
+        return $details;
     }
 }
 

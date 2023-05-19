@@ -58,13 +58,20 @@ class PurchaseSpent extends Base
                     if ($options->time != "all_time") {
                         $args['date_query'] = array('after' => $this->getDateByString($options->time, 'Y-m-d').' 00:00:00');
                     }
-                    $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
                     $total_spent = 0;
-                    if (!empty($orders)) {
-                        foreach ($orders as $order) {
-                            if (!empty($order) && isset($order->ID)) {
-                                $order_obj = self::$woocommerce_helper->getOrder($order->ID);
-                                $total_spent += self::$woocommerce_helper->getOrderTotal($order_obj);
+                    if (CoreMethodCheck::customOrdersTableIsEnabled()) {
+                        $cot_query_args = CoreMethodCheck::prepareCOTQueryArgsThroughWPQuery($args);
+                        $cot_query_args['select'] = 'SUM(total_amount)';
+                        $cot_query_args['return'] = 'var';
+                        $total_spent = (float) CoreMethodCheck::performCOTQuery($cot_query_args);
+                    } else {
+                        $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
+                        if (!empty($orders)) {
+                            foreach ($orders as $order) {
+                                if (!empty($order) && isset($order->ID)) {
+                                    $order_obj = self::$woocommerce_helper->getOrder($order->ID);
+                                    $total_spent += self::$woocommerce_helper->getOrderTotal($order_obj);
+                                }
                             }
                         }
                     }

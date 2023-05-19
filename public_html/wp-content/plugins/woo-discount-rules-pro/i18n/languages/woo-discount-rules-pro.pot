@@ -4,8 +4,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: Woo Discount Rules Pro\n"
-"POT-Creation-Date: 2022-06-21\n"
-"PO-Revision-Date: 2022-06-21\n"
+"POT-Creation-Date: 2023-05-04\n"
+"PO-Revision-Date: 2023-05-04\n"
 "Last-Translator: \n"
 "Language-Team: Flycart\n"
 "MIME-Version: 1.0\n"
@@ -288,11 +288,11 @@ msgstr ""
 msgid "Wdr Free Shipping"
 msgstr ""
 
-#: App/Rules/BOGO.php:165
+#: App/Rules/BOGO.php:168
 msgid "Discount"
 msgstr ""
 
-#: App/Rules/BOGO.php:166 App/Views/Admin/Discounts/buy-x-get-x-range.php:50
+#: App/Rules/BOGO.php:169 App/Views/Admin/Discounts/buy-x-get-x-range.php:50
 #: App/Views/Admin/Discounts/buy-x-get-y-range.php:162
 msgid "Free"
 msgstr ""
@@ -603,7 +603,7 @@ msgstr ""
 msgid "Search User"
 msgstr ""
 
-#: App/Views/Admin/Conditions/Customer/user.php:43
+#: App/Views/Admin/Conditions/Customer/user.php:37
 msgid "Select User"
 msgstr ""
 

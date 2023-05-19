@@ -28,7 +28,9 @@ class PurchasePreviousOrdersForSpecificProduct extends Base
             $apply_discount_to_child = apply_filters('advanced_woo_discount_rules_apply_discount_to_child', true);
             if($apply_discount_to_child){
                 if(isset($options->product_variants) && !empty($options->product_variants) && is_array($options->product_variants)){
-                    $options->products = Helper::combineProductArrays($options->products, $options->product_variants);
+                    if (!CoreMethodCheck::customOrdersTableIsEnabled()) {
+                        $options->products = Helper::combineProductArrays($options->products, $options->product_variants);
+                    }
                 }
             }
             $conditions = '';
@@ -67,15 +69,39 @@ class PurchasePreviousOrdersForSpecificProduct extends Base
                 if(isset(self::$cache_order_count[$cache_key])){
                     $order_count = self::$cache_order_count[$cache_key];
                 } else {
-                    $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
                     $order_count = 0;
-                    if (!empty($orders)) {
-                        foreach ($orders as $order) {
-                            if (!empty($order) && isset($order->ID)) {
-                                $order_obj = self::$woocommerce_helper->getOrder($order->ID);
-                                $keys = self::$woocommerce_helper->getOrderItemsId($order_obj);
-                                if ($count = count(array_intersect($options->products, $keys))) {
-                                    $order_count += $count;
+                    if (CoreMethodCheck::customOrdersTableIsEnabled()) {
+                        $cot_query_args = CoreMethodCheck::prepareCOTQueryArgsThroughWPQuery($args);
+                        $cot_query_args['select'] = ['id', 'product_id', 'variation_id'];
+                        $cot_query_args['join'] = 'order_items';
+                        $cot_query_args['where'] = [
+                            [
+                                'column' => 'product_id',
+                                'operator' => 'IN',
+                                'value' => $options->products,
+                            ],
+                            [
+                                'column' => 'variation_id',
+                                'operator' => 'IN',
+                                'value' => $options->products,
+                            ]
+                        ];
+                        $cot_query_args['where_relation'] = 'OR';
+                        $cot_query_args['count'] = 'product_id';
+                        $cot_query_args['count_distinct'] = true;
+                        $cot_query_args['group_by'] = 'id';
+                        $cot_query_args['return'] = 'var';
+                        $order_count = (int) CoreMethodCheck::performCOTQuery($cot_query_args);
+                    } else {
+                        $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
+                        if (!empty($orders)) {
+                            foreach ($orders as $order) {
+                                if (!empty($order) && isset($order->ID)) {
+                                    $order_obj = self::$woocommerce_helper->getOrder($order->ID);
+                                    $keys = self::$woocommerce_helper->getOrderItemsId($order_obj);
+                                    if ($count = count(array_intersect($options->products, $keys))) {
+                                        $order_count += $count;
+                                    }
                                 }
                             }
                         }

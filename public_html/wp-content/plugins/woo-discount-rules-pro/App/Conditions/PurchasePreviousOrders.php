@@ -59,8 +59,17 @@ class PurchasePreviousOrders extends Base
                     if ($options->time != "all_time") {
                         $args['date_query'] = array('after' => $this->getDateByString($options->time, 'Y-m-d').' 00:00:00');
                     }
-                    $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
-                    $order_count = self::$cache_order_count[$cache_key] = count($orders);
+                    if (CoreMethodCheck::customOrdersTableIsEnabled()) {
+                        $cot_query_args = CoreMethodCheck::prepareCOTQueryArgsThroughWPQuery($args);
+                        $cot_query_args['select'] = 'COUNT(id)';
+                        $cot_query_args['order_by'] = 'id DESC';
+                        $cot_query_args['return'] = 'var';
+                        $order_count = (int) CoreMethodCheck::performCOTQuery($cot_query_args);
+                    } else {
+                        $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
+                        $order_count = count($orders);
+                    }
+                    self::$cache_order_count[$cache_key] = $order_count;
                 }
 
                 return $this->doComparisionOperation($options->operator, $order_count, $options->count);

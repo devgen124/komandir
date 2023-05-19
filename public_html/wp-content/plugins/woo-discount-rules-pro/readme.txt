@@ -1,14 +1,14 @@
 === Discount Rules Pro for WooCommerce ===
 Contributors: flycart
 Donate link: https://flycart.org/
-Tags: woocommerce, coupons, discounts, dynamic pricing, Buy One Get One Free, pricing deals, bulk discount, discount
+Tags: woocommerce, coupons, discounts, dynamic pricing, woocommerce coupon, Buy One Get One Free, pricing deals, bulk discount, discount rules, auto-apply coupons, category discounts, url coupons
 Requires at least: 4.4.1
-Tested up to: 6.0
-Stable tag: 2.4.2
+Tested up to: 6.2
+Stable tag: 2.6.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Create simple to complex discount rules, dynamic pricing and discounts. A flexible and powerful WooCommerce discount & WooCommerce coupon plugin.
+Create simple and flexible WooCommerce discounts, dynamic pricing discounts, BOGO discounts and more. A powerful WooCommerce discount & WooCommerce coupon plugin.
 
 == Description ==
 
@@ -335,6 +335,50 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 * Dutch Translation - [@mvdburg1971](https://profiles.wordpress.org/mvdburg1971) - Michael van der Burg
 
 == Changelog ==
+
+= 2.6.0 - 08/05/23 =
+* Add: Support WooCommerce High-Performance order storage feature [Core and Pro].
+* Improvement: Query optimization while load coupon in backend [Pro].
+* Improvement: Licence URL update [Pro].
+* Fix: Loading range on backend - disappear when remove the first one [Core and Pro].
+
+= 2.5.3 - 16/01/23 =
+* Fix: Validation fix on creating rules [Pro].
+* Fix: The cheapest product does not receive a discount when variant together option is enabled [Pro].
+* Fix: Error on variation is not an array [Pro].
+* Fix: Condition doesn't match when have Match any option with user role condition [Pro].
+* Fix: On-sale page shows incorrect data while have attribute in filters [Pro].
+
+= 2.5.2 - 09/11/22 =
+* Add: Support for WordPress 6.1.
+* Fix: SKU filter displays wrong value, when having space in SKU.
+
+= 2.5.1 - 02/11/22 =
+* Fix: Loading issue on click Add to Cart button.
+
+= 2.5.0 - 01/11/22 =
+* Improvement: Added applied discount info in order and order item meta _wdr_discounts.
+* Improvement: Set 3 for 10 fixed .1 difference on subtotal.
+* Improvement: Show free shipping rule reports since v2.5.0.
+* Add: Show total order count and sales on report section.
+* Fix: Disable coupon option doesn't working with free shipping.
+* Fix: Applied message is not displaying in cart for free shipping.
+* Fix: Limit option is not working with Free shipping.
+* Fix: Warning on PHP 8.
+
+= 2.4.5 - 27/09/22 =
+* Improvement: Backend field validation.
+* Improvement: Condition and filter matches on any operation.
+* Fix: Applying discount more than discount quantity on set and BXGY.
+* Fix: Quantity issue on set discount while manual request.
+
+= 2.4.4 - 09/08/22 =
+* Fix: Onsale page query improvement for on-sale filter.
+* Fix: BXGY cheapest variants together strikeout issue fix.
+* Fix: Wrong price on subtotal promotion message while set including tax.
+
+= 2.4.3 - 28/06/22 =
+* Improvement: Event: advanced_woo_discount_rules_get_price_of_cart_item_on_find_cheapest_item
 
 = 2.4.2 - 21/06/22 =
 * Feature: Option to schedule sale page product rebuild on daily once.

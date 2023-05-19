@@ -66,7 +66,14 @@ class PurchaseLastOrder extends Base
                             $args['date_query'] = array('after' => $date);
                             break;
                     }
-                    $orders = self::$cache_order_count[$cache_key] = CoreMethodCheck::getOrdersThroughWPQuery($args);
+                    if (CoreMethodCheck::customOrdersTableIsEnabled()) {
+                        $cot_query_args = CoreMethodCheck::prepareCOTQueryArgsThroughWPQuery($args);
+                        $cot_query_args['order_by'] = 'id DESC';
+                        $orders = CoreMethodCheck::performCOTQuery($cot_query_args);
+                    } else {
+                        $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
+                    }
+                    self::$cache_order_count[$cache_key] = $orders;
                 }
                 return !empty($orders);
             }

@@ -51,7 +51,7 @@ if(isset($get_buyx_gety_types) && $get_buyx_gety_types == 'bxgy_all'){
                     global $sitepress;
                     $check_wpml_language = $wpml_language_conflict = false;
                     $rule_language = $conflict_products = array();
-                    if(!empty($sitepress) && method_exists($sitepress, 'get_current_language')){
+                    if(is_object($sitepress) && method_exists($sitepress, 'get_current_language')){
                         if(isset($rule->rule) && !empty($rule->rule->rule_language)){
                             $rule_language = json_decode($rule->rule->rule_language);
                             if(!empty($rule_language) && !empty($buyx_gety_adjustment->products)){
@@ -129,7 +129,7 @@ if(isset($get_buyx_gety_types) && $get_buyx_gety_types == 'bxgy_all'){
                     <input type="number"
                            name="buyx_gety_adjustments[ranges][<?php echo esc_attr($buyx_gety_index); ?>][free_qty]"
                            class="awdr-buyx-gety-number-box awdr_value_selector bxgy-qty"
-                           placeholder="<?php esc_attr_e('Free Quantity', 'woo-discount-rules-pro'); ?>" min="0" step="any"
+                           placeholder="<?php esc_attr_e('Free Quantity', 'woo-discount-rules-pro'); ?>" min="1" step="any"
                            value="<?php echo (isset($buyx_gety_adjustment->free_qty) && !empty($buyx_gety_adjustment->free_qty)) ? esc_attr($buyx_gety_adjustment->free_qty) : '1'; ?>"
                     >
                     <span class="wdr_desc_text"><?php esc_html_e('Free Quantity', 'woo-discount-rules-pro'); ?></span>

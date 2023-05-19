@@ -53,7 +53,13 @@ class PurchaseFirstOrder extends Base
                     'posts_per_page' => 1,
                     'meta_query' => $conditions,
                 );
-                $orders = self::$cache_order_count[$cache_key] = CoreMethodCheck::getOrdersThroughWPQuery($args);
+                if (CoreMethodCheck::customOrdersTableIsEnabled()) {
+                    $cot_query_args = CoreMethodCheck::prepareCOTQueryArgsThroughWPQuery($args);
+                    $orders = CoreMethodCheck::performCOTQuery($cot_query_args);
+                } else {
+                    $orders = CoreMethodCheck::getOrdersThroughWPQuery($args);
+                }
+                self::$cache_order_count[$cache_key] = $orders;
             }
             $first_order = (int)isset($options->value) ? $options->value : 1;
             if ($first_order) {

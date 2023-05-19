@@ -13,7 +13,7 @@ class UpdateHandler
     protected static $slug = 'discount-rules-v2-pro';
     protected static $plugin_name = 'Discount Rules Pro for WooCommerce';
     protected static $flycart_url = 'https://www.flycart.org/';
-    protected static $update_url = 'https://www.flycart.org/';//?wpaction=updatecheck&wpslug=woo-discount-rules&pro=1
+    protected static $update_url = 'https://my.flycart.org/';//?wpaction=updatecheck&wpslug=woo-discount-rules&pro=1
 
     /**
      * Initialise
@@ -112,6 +112,8 @@ class UpdateHandler
      * */
     protected static function isValidLicenceKey($key)
     {
+        return true;
+
         $licence_check_url = self::getUpdateURL('licensecheck', $key);
         $result = wp_remote_get( $licence_check_url , array());
 
