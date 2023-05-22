@@ -1,9 +1,9 @@
 === MailPoet - emails and newsletters in WordPress ===
 Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
-Requires at least: 5.9
-Tested up to: 6.1
-Stable tag: 4.12.1
+Requires at least: 6.0
+Tested up to: 6.2
+Stable tag: 4.16.0
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,36 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 4.16.0 - 2023-05-15 =
+* Added: "Subscribed via form" segment;
+* Added: "First name", "Last name", and "Email" segments;
+* Added: "Average order value" segment;
+* Added: abandoned cart trigger in Automations;
+* Added: option to duplicate segments;
+* Improved: more explanatory and actionable notification when MailPoet plan limits are reached;
+* Fixed: display issues of checkout opt-in block in the post editor;
+* Fixed: error loading coupon block when a coupon doesn't have a discount type assigned.
+
+= 4.15.0 - 2023-05-08 =
+* Updated: minimum required WooCommerce version to 7.4.0;
+* Updated: minimum required WordPress version to 6.0, tested on 6.2;
+* Improved: error handling when updating translations;
+* Improved: More cautious cleanup of the logs table.
+
+= 4.14.0 - 2023-05-01 =
+* Added: "was sent email" segment;
+* Improved: SpamAssassin spam filter compliance to reduce spamboxing likelihood;
+* Improved: error messages when verifying an API key with limited access;
+* Fixed: rare "Invalid automation structure" error;
+* Fixed: duplicate newsletter URLs for enhanced SEO;
+* Fixed: deprecation warnings for utf8_encode in PHP 8.2.
+
+= 4.13.0 - 2023-04-24 =
+* Improved: minor changes and fixes.
+
+= 4.12.2 - 2023-04-21 =
+* Fixed: shortcode support in button, image and social icons links.
 
 = 4.12.1 - 2023-04-19 =
 * Fixed: post notifications not sent if scheduled with minutes.

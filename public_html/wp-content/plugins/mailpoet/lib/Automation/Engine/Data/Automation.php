@@ -45,7 +45,7 @@ class Automation {
   /** @var ?DateTimeImmutable */
   private $activatedAt = null;
 
-  /** @var array<string, Step> */
+  /** @var array<string|int, Step> */
   private $steps;
 
   /** @var array<string, mixed> */
@@ -121,12 +121,24 @@ class Automation {
     return $this->activatedAt;
   }
 
-  /** @return array<string, Step> */
+  /** @return array<string|int, Step> */
   public function getSteps(): array {
     return $this->steps;
   }
 
-  /** @param array<string, Step> $steps */
+  /**
+   * @return array<string|int, Step>
+   */
+  public function getTriggers(): array {
+    return array_filter(
+      $this->steps,
+      function (Step $step) {
+        return $step->getType() === Step::TYPE_TRIGGER;
+      }
+    );
+  }
+
+  /** @param array<string|int, Step> $steps */
   public function setSteps(array $steps): void {
     $this->steps = $steps;
     $this->setUpdatedAt();

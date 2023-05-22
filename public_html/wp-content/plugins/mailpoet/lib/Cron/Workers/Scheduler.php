@@ -130,7 +130,7 @@ class Scheduler {
         $this->processReEngagementEmail($queue);
       } elseif ($newsletter->type === NewsletterEntity::TYPE_AUTOMATION) {
         $this->processScheduledAutomationEmail($queue);
-      } elseif ($newsletter->type === NewsletterEntity::TYPE_TRANSACTIONAL) {
+      } elseif ($newsletter->type === NewsletterEntity::TYPE_AUTOMATION_TRANSACTIONAL) {
         $this->processScheduledTransactionalEmail($queue);
       }
       $this->cronHelper->enforceExecutionLimit($timer);
@@ -374,7 +374,7 @@ class Scheduler {
 
   public function verifySubscriber($subscriber, $queue) {
     $newsletter = $queue->newsletterId ? $this->newslettersRepository->findOneById($queue->newsletterId) : null;
-    if ($newsletter && $newsletter->getType() === NewsletterEntity::TYPE_TRANSACTIONAL) {
+    if ($newsletter && $newsletter->getType() === NewsletterEntity::TYPE_AUTOMATION_TRANSACTIONAL) {
       return $subscriber->status !== Subscriber::STATUS_BOUNCED;
     }
     if ($subscriber->status === Subscriber::STATUS_UNCONFIRMED) {
