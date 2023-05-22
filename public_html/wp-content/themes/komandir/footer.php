@@ -41,18 +41,23 @@
 						<?php
 						$social_list = [
 							[
-								'title' => 'Мы в WhatsApp',
-								'link' => '#',
-								'icon' => 'whatsapp.svg'
+								'title' => 'Мы в ВК',
+								'link' => 'https://vk.com/komandir124',
+								'icon' => 'vk.svg'
 							],
 							[
 								'title' => 'Мы в Telegram',
-								'link' => '#',
+								'link' => 'https://t.me/komandir_124',
 								'icon' => 'telegram.svg'
 							],
 							[
+								'title' => 'Мы в WhatsApp',
+								'link' => 'https://wa.me/79232999688',
+								'icon' => 'whatsapp.svg'
+							],
+							[
 								'title' => 'Мы в Viber',
-								'link' => '#',
+								'link' => 'viber://chat?number=%2B79232999688',
 								'icon' => 'viber.svg'
 							],
 						];
