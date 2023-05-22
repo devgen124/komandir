@@ -76,15 +76,7 @@ $parent_cats = get_categories( [
 	</div>
 	<div class="container">
 		<div class="row">
-			<section class="col sales">
-				<div class="sales-heading">
-					<h2>Распродажа</h2>
-					<p>товары со скидкой или акционные</p>
-				</div>
-				<div class="woocommerce-scroller">
-					<?= do_shortcode( '[products limit="12" category="televizory"]' ) ?>
-				</div>
-			</section>
+			<?php get_template_part( 'template-parts/sales' )?>
 		</div>
 	</div>
 </main><!-- #main -->
