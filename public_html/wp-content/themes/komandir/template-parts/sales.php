@@ -4,6 +4,6 @@
 		<p>товары со скидкой или акционные</p>
 	</div>
 	<div class="woocommerce-scroller">
-		<?= do_shortcode( '[sale_products limit="12" orderby="rand" erder="rand"]' ) ?>
+		<?= do_shortcode( '[sale_products limit="12" orderby="rand" order="rand"]' ) ?>
 	</div>
 </section>
