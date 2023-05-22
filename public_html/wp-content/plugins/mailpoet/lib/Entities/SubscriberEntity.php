@@ -28,6 +28,7 @@ class SubscriberEntity {
   public const HOOK_SUBSCRIBER_CREATED = 'mailpoet_subscriber_created';
   public const HOOK_SUBSCRIBER_DELETED = 'mailpoet_subscriber_deleted';
   public const HOOK_SUBSCRIBER_UPDATED = 'mailpoet_subscriber_updated';
+  public const HOOK_SUBSCRIBER_STATUS_CHANGED = 'mailpoet_subscriber_status_changed';
   public const HOOK_MULTIPLE_SUBSCRIBERS_CREATED = 'mailpoet_multiple_subscribers_created';
   public const HOOK_MULTIPLE_SUBSCRIBERS_DELETED = 'mailpoet_multiple_subscribers_deleted';
   public const HOOK_MULTIPLE_SUBSCRIBERS_UPDATED = 'mailpoet_multiple_subscribers_updated';
@@ -472,6 +473,13 @@ class SubscriberEntity {
    */
   public function getSubscriberCustomFields() {
     return $this->subscriberCustomFields;
+  }
+
+  public function getSubscriberCustomField(CustomFieldEntity $customField): ?SubscriberCustomFieldEntity {
+    $criteria = Criteria::create()
+      ->where(Criteria::expr()->eq('customField', $customField))
+      ->setMaxResults(1);
+    return $this->getSubscriberCustomFields()->matching($criteria)->first() ?: null;
   }
 
   /**

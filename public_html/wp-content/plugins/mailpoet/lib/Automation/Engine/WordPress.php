@@ -5,6 +5,7 @@ namespace MailPoet\Automation\Engine;
 if (!defined('ABSPATH')) exit;
 
 
+use DateTimeZone;
 use WP_User;
 
 class WordPress {
@@ -15,6 +16,19 @@ class WordPress {
   /** @param mixed ...$arg */
   public function doAction(string $hookName, ...$arg): void {
     do_action($hookName, ...$arg);
+  }
+
+  /**
+   * @param mixed $value
+   * @param mixed ...$args
+   * @return mixed
+   */
+  public function applyFilters(string $hookName, $value, ...$args) {
+    return apply_filters($hookName, $value, ...$args);
+  }
+
+  public function wpTimezone(): DateTimeZone {
+    return wp_timezone();
   }
 
   public function wpGetCurrentUser(): WP_User {

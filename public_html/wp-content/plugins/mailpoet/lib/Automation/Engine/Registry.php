@@ -6,7 +6,9 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Automation\Engine\Control\RootStep;
+use MailPoet\Automation\Engine\Data\Field;
 use MailPoet\Automation\Engine\Integration\Action;
+use MailPoet\Automation\Engine\Integration\Filter;
 use MailPoet\Automation\Engine\Integration\Payload;
 use MailPoet\Automation\Engine\Integration\Step;
 use MailPoet\Automation\Engine\Integration\Subject;
@@ -22,6 +24,12 @@ class Registry {
 
   /** @var SubjectTransformer[] */
   private $subjectTransformers = [];
+
+  /** @var array<string, Field> */
+  private $fields = [];
+
+  /** @var array<string, Filter> */
+  private $filters = [];
 
   /** @var array<string, Trigger> */
   private $triggers = [];
@@ -50,6 +58,9 @@ class Registry {
       throw new \Exception(); // TODO
     }
     $this->subjects[$key] = $subject;
+    foreach ($subject->getFields() as $field) {
+      $this->addField($field);
+    }
   }
 
   /** @return Subject<Payload>|null */
@@ -68,6 +79,40 @@ class Registry {
 
   public function getSubjectTransformers(): array {
     return $this->subjectTransformers;
+  }
+
+  public function addField(Field $field): void {
+    $key = $field->getKey();
+    if (isset($this->fields[$key])) {
+      throw new \Exception(); // TODO
+    }
+    $this->fields[$key] = $field;
+  }
+
+  public function getField(string $key): ?Field {
+    return $this->fields[$key] ?? null;
+  }
+
+  /** @return array<string, Field> */
+  public function getFields(): array {
+    return $this->fields;
+  }
+
+  public function addFilter(Filter $filter): void {
+    $fieldType = $filter->getFieldType();
+    if (isset($this->filters[$fieldType])) {
+      throw new \Exception(); // TODO
+    }
+    $this->filters[$fieldType] = $filter;
+  }
+
+  public function getFilter(string $fieldType): ?Filter {
+    return $this->filters[$fieldType] ?? null;
+  }
+
+  /** @return array<string, Filter> */
+  public function getFilters(): array {
+    return $this->filters;
   }
 
   public function addStep(Step $step): void {

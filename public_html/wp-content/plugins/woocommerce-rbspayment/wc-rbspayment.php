@@ -785,6 +785,56 @@ function woocommerce_rbspayment()
                     $items[] = $item;
                 }
 
+				// START KOMANDIR FEES AS CART ITEMS
+
+				$fees = $order->get_fees();
+
+				if ($fees)
+				{
+					foreach ($fees as $fee)
+					{
+						// if ($fee->get_amount() > 0)
+						// {
+							$feeItem['positionId'] = $itemsCnt++;
+							$feeItem['name'] = $fee->get_name();
+
+							// FFDVersion
+							if ($this->FFDVersion == 'v1_05') {
+								$feeItem['quantity'] = array(
+									'value' => 1,
+									'measure' => RBS_MEASUREMENT_NAME
+								);
+							} else {
+								$feeItem['quantity'] = array(
+									'value' => 1,
+									'measure' => RBS_MEASUREMENT_CODE
+								);
+
+							}
+
+							$feeItem['itemAmount'] = $feeItem['itemPrice'] = (int) $fee->get_amount();
+							$feeItem['itemCode'] = 'fee';
+							$feeItem['tax'] = array(
+								'taxType' => $this->getTaxType($fee)
+							);
+
+							$attributes = array();
+                    		$attributes[] = array(
+                    		    "name" => "paymentMethod",
+                    		    "value" => $this->paymentMethodType
+                    		);
+                    		$attributes[] = array(
+                    		    "name" => "paymentObject",
+                    		    "value" => $this->paymentObjectType
+                    		);
+
+                    		$feeItem['itemAttributes']['attributes'] = $attributes;
+							$items[] = $feeItem;
+						// }
+					}
+				}
+
+				// END KOMANDIR FEES AS CART ITEMS
 
                 // delivery_total
                 $shipping_total = $order->get_shipping_total();

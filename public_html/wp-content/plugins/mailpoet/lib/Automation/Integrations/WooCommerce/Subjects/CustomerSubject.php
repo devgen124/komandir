@@ -43,4 +43,8 @@ class CustomerSubject implements Subject {
     }
     return new CustomerPayload($customer);
   }
+
+  public function getFields(): array {
+    return [];
+  }
 }

@@ -2,20 +2,20 @@
 # This file is distributed under the same license as the Plugins - reCaptcha by BestWebSoft - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-11-17 09:11:38+0000\n"
+"PO-Revision-Date: 2023-05-06 08:50:18+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.0-alpha.3\n"
+"X-Generator: GlotPress/4.0.0-alpha.4\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - reCaptcha by BestWebSoft - Stable (latest release)\n"
 
-#: includes/class-gglcptch-settings-tabs.php:178
+#: includes/class-gglcptch-settings-tabs.php:192
 msgid "The Google reCaptcha block loads the webfont \"Roboto\" from fonts.googleapis.com. If you do not want to load this font use %1$sCaptcha by BestWebSoft%2$s plugin."
 msgstr "Блок Google reCaptcha загружает веб-шрифт «Roboto» с сайта fonts.googleapis.com. Если вы не хотите загружать этот шрифт, используйте плагин %1$sCaptcha by BestWebSoft%2$s."
 
-#: google-captcha.php:1025
+#: google-captcha.php:1033 google-captcha.php:1043
 msgid "The reCaptcha verification failed. Please try again."
 msgstr "Проверка reCaptcha не удалась. Пожалуйста, попробуйте еще раз."
 
@@ -25,23 +25,19 @@ msgstr "Проверка безопасности"
 
 #: bws_menu/class-bws-settings.php:537
 msgid "The ability to add custom code is available in the Pro version. If the Pro version is not available please contact us via Help Center"
-msgstr "Возможность добавления пользовательского кода доступна в версии Pro. Если версия Pro недоступна, свяжитесь с нами через Справочный центр."
+msgstr "Возможность добавления пользовательского кода доступна в версии Pro. Если версия Pro недоступна, свяжитесь с нами через Справочный центр"
 
-#: includes/pro_banners.php:78
+#: includes/pro_banners.php:83
 msgid "Elementor Contact Form"
 msgstr "Elementor Contact Form"
 
-#: includes/class-gglcptch-settings-tabs.php:405
-msgid "ReCaptcha plugin is fully compliant with GDPR. %s Learn more %s"
-msgstr "Плагин reCaptcha полностью соответствует требованиям GDPR. %s Узнайте больше %s"
-
-#: google-captcha.php:795
+#: google-captcha.php:803
 msgid "Response is empty"
 msgstr "Ответ пуст"
 
 #: bws_menu/bws_functions.php:617
 msgid "Start Now"
-msgstr "Начать"
+msgstr "Начать сейчас"
 
 #: bws_menu/bws_functions.php:612
 msgid "Get commission!"
@@ -49,7 +45,7 @@ msgstr "Получайте комиссию!"
 
 #: bws_menu/bws_functions.php:608
 msgid "Promote and sell products"
-msgstr "Продвигайте и продавайте товары"
+msgstr "Продвижение и продажа товаров"
 
 #: bws_menu/bws_functions.php:604
 msgid "Join affiliate program"
@@ -67,45 +63,37 @@ msgstr "Получить %s"
 msgid "Affiliate Program"
 msgstr "Партнерская программа"
 
-#: includes/pro_banners.php:76
+#: includes/pro_banners.php:81
 msgid "Ultimate Member Profile form"
 msgstr "Форма профиля Ultimate Member"
 
-#: includes/pro_banners.php:75
+#: includes/pro_banners.php:80
 msgid "Ultimate Member Registration form"
 msgstr "Форма регистрации Ultimate Member"
 
-#: includes/pro_banners.php:74
+#: includes/pro_banners.php:79
 msgid "Ultimate Member Login form"
 msgstr "Форма входа в систему Ultimate Member"
 
-#: includes/pro_banners.php:73
+#: includes/pro_banners.php:78
 msgid "WPForms"
 msgstr "WPForms"
 
-#: includes/class-gglcptch-settings-tabs.php:328
+#: includes/class-gglcptch-settings-tabs.php:368
 msgid "Additional Protective Measures"
 msgstr "Дополнительные меры защиты"
 
-#: includes/class-gglcptch-settings-tabs.php:288
+#: includes/class-gglcptch-settings-tabs.php:328
 msgid "Appearance"
 msgstr "Отображение"
 
-#: includes/class-gglcptch-settings-tabs.php:270
+#: includes/class-gglcptch-settings-tabs.php:310
 msgid "If Google is not accessible or blocked in your country select other one."
 msgstr "Если Google недоступен или заблокирован в вашей стране, выберите другой."
 
-#: includes/class-gglcptch-settings-tabs.php:262
+#: includes/class-gglcptch-settings-tabs.php:302
 msgid "reCaptcha Domain"
 msgstr "Домен Recaptcha"
-
-#: includes/class-gglcptch-settings-tabs.php:171
-msgid "If you do not want to create API keys use %1%sCaptcha by BestWebSoft%2$s plugin."
-msgstr "Если вы не хотите создавать ключи API, используйте %1%sCaptcha от BestWebSoft%2$s."
-
-#: includes/class-gglcptch-settings-tabs.php:167
-msgid "Register your domain name with Google reCaptcha service and add the keys to the fields below. %s Get the API Keys. %s"
-msgstr "Зарегистрируйте свое доменное имя в сервисе Google reCaptcha и добавьте ключи в поля ниже. %s Получить ключи API. %s"
 
 #: bws_menu/class-bws-settings.php:1268
 msgid "Thank you!"
@@ -113,11 +101,11 @@ msgstr "Спасибо!"
 
 #: bws_menu/class-bws-settings.php:1266
 msgid "Submit"
-msgstr "Утвердить"
+msgstr "Отправить"
 
 #: bws_menu/class-bws-settings.php:1258
 msgid "Describe your idea"
-msgstr "Опишите идею"
+msgstr "Опишите свою идею"
 
 #: bws_menu/class-bws-settings.php:1256
 msgid "We look forward to hear your ideas."
@@ -125,13 +113,13 @@ msgstr "Мы с нетерпением ждем ваших идей."
 
 #: bws_menu/class-bws-settings.php:1254
 msgid "How can we improve %s?"
-msgstr "Что можно улучшить %s?"
+msgstr "Как мы можем улучшить %s?"
 
 #: bws_menu/class-bws-settings.php:1248
 msgid "Request a Feature"
 msgstr "Запросить функцию"
 
-#: includes/pro_banners.php:72
+#: includes/pro_banners.php:77
 msgid "Gravity Forms"
 msgstr "Gravity Forms"
 
@@ -143,23 +131,23 @@ msgstr "Вы в разрешенном списке"
 msgid "Allow List"
 msgstr "Разрешенный список"
 
-#: includes/class-gglcptch-settings-tabs.php:359
+#: includes/class-gglcptch-settings-tabs.php:413
 msgid "Allow List Notification"
 msgstr "Уведомление разрешенного списка"
 
-#: includes/allowlist.php:160
+#: includes/allowlist.php:180
 msgid "No IP in the Allow List"
 msgstr "Нет IP-адреса в списке разрешенных"
 
-#: includes/allowlist.php:101
+#: includes/allowlist.php:113
 msgid "Add IP to Allow List"
 msgstr "Добавить IP в список разрешенных"
 
-#: includes/allowlist.php:74
+#: includes/allowlist.php:84
 msgid "IP to Allow List"
 msgstr "IP в разрешенный список"
 
-#: google-captcha.php:58 includes/allowlist.php:46
+#: google-captcha.php:58 includes/allowlist.php:49
 msgid "reCaptcha Allow List"
 msgstr "Список разрешенных IP адресов reCaptcha"
 
@@ -171,45 +159,41 @@ msgstr "Дайте рождение вашему WordPress сайту для б�
 msgid "Protect WordPress website forms from spam entries with reCaptcha."
 msgstr "Защищайте формы вашего сайта WordPress от спама с помощью reCaptcha."
 
-#: includes/class-gglcptch-settings-tabs.php:337
-msgid "Set the minimum verification score from %s to %s (default is %s)."
-msgstr "Установите минимальный балл проверки от %s до %s (по умолчанию %s)."
-
-#: includes/class-gglcptch-settings-tabs.php:317
+#: includes/class-gglcptch-settings-tabs.php:357
 msgid "Hide reCaptcha Badge"
 msgstr "Спрятать значок reCAPTCHA"
 
-#: includes/class-gglcptch-settings-tabs.php:341
+#: includes/class-gglcptch-settings-tabs.php:393
 msgid "Hide reCaptcha for"
 msgstr "Скрыть reCaptcha для"
 
 #: bws_menu/product_list.php:58
 msgid "Add columns with custom content to WordPress website pages, posts, widgets, etc."
-msgstr "Добавляйте столбцы с настраиваемым контентом на страницы веб-сайта WordPress, сообщения, виджеты и т. Д."
+msgstr "Добавляйте столбцы с настраиваемым контентом на страницы веб-сайта WordPress, сообщения, виджеты и т. д."
 
 #: bws_menu/bws_menu.php:192
 msgid "Mb"
 msgstr "Мб"
 
-#: google-captcha.php:1038
+#: google-captcha.php:1046
 msgid "reCaptcha v3 test failed"
 msgstr "Тест reCAPTCHA v3 не пройден"
 
-#: bws_menu/bws_menu.php:639 bws_menu/bws_menu.php:668
+#: bws_menu/bws_menu.php:647 bws_menu/bws_menu.php:676
 msgid "Get Pro"
-msgstr "Получить Pro"
+msgstr "Получить Про"
 
 #: bws_menu/bws_menu.php:482
 msgid "Licenses & Domains"
-msgstr "Лицензии & Домены"
+msgstr "Лицензии и домены"
 
 #: bws_menu/bws_menu.php:479 bws_menu/class-bws-settings.php:874
 msgid "Knowledge Base"
-msgstr "База Знаний"
+msgstr "База знаний"
 
 #: bws_menu/bws_menu.php:473 bws_menu/class-bws-settings.php:868
 msgid "Get Started"
-msgstr "Начать "
+msgstr "Начать"
 
 #: bws_menu/bws_menu.php:470 bws_menu/class-bws-settings.php:864
 msgid "How to install WordPress plugin from your admin Dashboard (ZIP archive)"
@@ -221,7 +205,7 @@ msgstr "Нужна помощь в установке плагина?"
 
 #: bws_menu/bws_menu.php:464 bws_menu/class-bws-settings.php:858
 msgid "Download Now"
-msgstr "Загрузить сейчас"
+msgstr "Загрузить Сейчас"
 
 #: bws_menu/bws_menu.php:461 bws_menu/class-bws-settings.php:855
 msgid "Your plugin has been zipped, and now is ready to download."
@@ -229,22 +213,22 @@ msgstr "Ваш плагин заархивирован, и готов к заг�
 
 #: bws_menu/bws_menu.php:459 bws_menu/class-bws-settings.php:853
 msgid "Your Pro plugin is ready"
-msgstr "Ваш Pro плагин готов"
+msgstr "Ваш Про плагин готов"
 
 #: bws_menu/bws_menu.php:457
 msgid "Download Pro Plugin"
-msgstr "Загрузить Pro плагина"
+msgstr "Загрузить Про плагин"
 
-#: includes/class-gglcptch-settings-tabs.php:420
+#: includes/class-gglcptch-settings-tabs.php:487
 msgid "reCaptcha Shortcode"
 msgstr "Шорткод reCaptcha"
 
 #: google-captcha.php:39 google-captcha.php:49 google-captcha.php:527
-#: includes/class-gglcptch-settings-tabs.php:147
+#: includes/class-gglcptch-settings-tabs.php:151
 msgid "reCaptcha Settings"
 msgstr "Настройки reCaptcha"
 
-#: includes/forms.php:78
+#: includes/forms.php:84
 msgid "reCaptcha Plugin"
 msgstr "Плагин reCaptcha"
 
@@ -256,19 +240,19 @@ msgstr "reCaptcha by BestWebSoft"
 msgid "Skip and Deactivate"
 msgstr "Пропустить и Деактивировать"
 
-#: includes/class-gglcptch-settings-tabs.php:381
+#: includes/class-gglcptch-settings-tabs.php:435
 msgid "Enable to keep submit button disabled until user passes the reCaptcha test (for Version 2)."
 msgstr "Включите, чтобы кнопка отправки оставалась отключенной до тех пор, пока пользователь не пройдет тест reCAPTCHA (для версии 2)."
 
-#: includes/class-gglcptch-settings-tabs.php:366
+#: includes/class-gglcptch-settings-tabs.php:420
 msgid "Advanced Protection"
 msgstr "Усиленная защита"
 
-#: includes/class-gglcptch-settings-tabs.php:297
+#: includes/class-gglcptch-settings-tabs.php:337
 msgid "Dark"
 msgstr "Тёмная"
 
-#: includes/class-gglcptch-settings-tabs.php:296
+#: includes/class-gglcptch-settings-tabs.php:336
 msgid "Light"
 msgstr "Светлая"
 
@@ -296,19 +280,19 @@ msgstr "Политика конфиденциальности"
 msgid "This site is protected by reCAPTCHA and the Google "
 msgstr "Этот сайт защищен reCAPTCHA и применяются "
 
-#: includes/class-gglcptch-settings-tabs.php:322
+#: includes/class-gglcptch-settings-tabs.php:362
 msgid "Enable to hide reCaptcha Badge for Version 3 and Invisible reCaptcha."
 msgstr "Включите, чтобы скрыть значок reCAPTCHA для версии 3 и Invisible reCAPTCHA."
 
-#: includes/pro_banners.php:71
+#: includes/pro_banners.php:76
 msgid "Divi Login Form"
 msgstr "Форма логина плагина Divi"
 
-#: includes/pro_banners.php:70
+#: includes/pro_banners.php:75
 msgid "Divi Contact Form"
 msgstr "Контактная форма плагина Divi"
 
-#: includes/pro_banners.php:69
+#: includes/pro_banners.php:74
 msgid "Ninja Forms"
 msgstr "Ninja Forms"
 
@@ -316,83 +300,83 @@ msgstr "Ninja Forms"
 msgid "Please enable JavaScript in your browser."
 msgstr "Пожалуйста, включите поддержку JavaScript в вашем браузере."
 
-#: includes/class-gglcptch-settings-tabs.php:332
+#: includes/class-gglcptch-settings-tabs.php:372
 msgid "Score"
 msgstr "Количество очков"
 
-#: includes/forms.php:16
+#: includes/forms.php:17
 msgid "Testimonials"
 msgstr "Testimonials"
 
-#: includes/forms.php:266
+#: includes/forms.php:277
 msgid "Authentication failed."
 msgstr "Ошибка аутентификации."
 
-#: includes/pro_banners.php:68
+#: includes/pro_banners.php:73
 msgid "wpForo Reply form"
 msgstr "Форма ответа плагина wpForo"
 
-#: includes/pro_banners.php:67
+#: includes/pro_banners.php:72
 msgid "wpForo New Topic form"
 msgstr "Форма новой темы плагина wpForo"
 
-#: includes/pro_banners.php:66
+#: includes/pro_banners.php:71
 msgid "wpForo Registration form"
 msgstr "Форма регистрации плагина wpForo"
 
-#: includes/pro_banners.php:65
+#: includes/pro_banners.php:70
 msgid "wpForo Login form"
 msgstr "Форма логина плагина wpForo"
 
-#: includes/pro_banners.php:64
+#: includes/pro_banners.php:69
 msgid "WooCommerce Checkout form"
 msgstr "Форма оформления заказа плагина WooCommerce"
 
-#: includes/pro_banners.php:63
+#: includes/pro_banners.php:68
 msgid "WooCommerce Reset password form"
 msgstr "Форма восстановления пароля плагина WooCommerce"
 
-#: includes/pro_banners.php:62
+#: includes/pro_banners.php:67
 msgid "WooCommerce Registration form"
 msgstr "Форма регистрации плагина WooCommerce"
 
-#: includes/pro_banners.php:61
+#: includes/pro_banners.php:66
 msgid "WooCommerce Login form"
 msgstr "Форма логина плагина WooCommerce"
 
-#: includes/pro_banners.php:60
+#: includes/pro_banners.php:65
 msgid "BuddyPress Add New Group form"
 msgstr "Форма добавления новой группы плагина BuddyPress"
 
-#: includes/pro_banners.php:59
+#: includes/pro_banners.php:64
 msgid "BuddyPress Comments form"
 msgstr "Форма комментариев плагина BuddyPress"
 
-#: includes/pro_banners.php:58
+#: includes/pro_banners.php:63
 msgid "BuddyPress Registration form"
 msgstr "Форма регистрации плагина BuddyPress"
 
-#: includes/pro_banners.php:57
+#: includes/pro_banners.php:62
 msgid "bbPress Reply form"
 msgstr "Форма ответа плагина bbPress"
 
-#: includes/pro_banners.php:56
+#: includes/pro_banners.php:61
 msgid "bbPress New Topic form"
 msgstr "Форма новой темы плагина bbPress"
 
-#: includes/pro_banners.php:53
+#: includes/pro_banners.php:58
 msgid "Jetpack Contact Form"
 msgstr "Контактная форма плагина Jetpack"
 
-#: includes/forms.php:57
+#: includes/forms.php:60
 msgid "Custom Forms"
 msgstr "Пользовательские формы"
 
-#: includes/class-gglcptch-settings-tabs.php:370
+#: includes/class-gglcptch-settings-tabs.php:424
 msgid "Enable to keep submit button disabled until reCaptcha is loaded (do not use this option if you see \"Failed to load Google reCaptcha\" message)."
 msgstr "Включите, чтобы кнопка подтверждения оставалась отключенной до тех пор, пока не будет загружена reCAPTCHA (Не используйте эту опцию, если вы видите сообщение \"Не удалось загрузить Google reCAPTCHA\")."
 
-#: includes/class-gglcptch-settings-tabs.php:376
+#: includes/class-gglcptch-settings-tabs.php:430
 msgid "Disabled Submit Button"
 msgstr "Отключенная кнопка подтверждения"
 
@@ -492,63 +476,63 @@ msgstr "К сожалению, время использования вашей 
 msgid "%s reviews"
 msgstr "%s отзывы"
 
-#: includes/allowlist.php:222 includes/allowlist.php:232
+#: includes/allowlist.php:249 includes/allowlist.php:260
 msgid "Delete"
 msgstr "Удалить"
 
-#: includes/pro_banners.php:196
+#: includes/pro_banners.php:233
 msgid "Enable to switch language automatically on multilingual website using the Multilanguage plugin."
 msgstr "Включить, чтобы переключить язык автоматически на многоязычном сайте, используя плагин Multilanguage."
 
-#: includes/pro_banners.php:193
+#: includes/pro_banners.php:230
 msgid "Multilanguage"
 msgstr "Multilanguage"
 
-#: includes/pro_banners.php:185
+#: includes/pro_banners.php:222
 msgid "Language"
 msgstr "Язык"
 
-#: includes/pro_banners.php:208
+#: includes/pro_banners.php:247
 msgid "Size"
 msgstr "Размер"
 
-#: includes/class-gglcptch-settings-tabs.php:423
+#: includes/class-gglcptch-settings-tabs.php:490
 msgid "Add reCaptcha to your posts or pages using the following shortcode:"
 msgstr "Добавьте reCaptcha в свои записи или страницы, используя следующий шорткод:"
 
-#: includes/class-gglcptch-settings-tabs.php:395
+#: includes/class-gglcptch-settings-tabs.php:453
 msgid "reCaptcha version was changed. Please submit \"Test reCaptcha\" and regenerate Site and Secret keys if necessary."
 msgstr "Версия reCaptcha была изменена. Пожалуйста, отправьте «Test reCaptcha» и при необходимости заново сгенерируйте сайт и секретные ключи."
 
-#: includes/class-gglcptch-settings-tabs.php:362
+#: includes/class-gglcptch-settings-tabs.php:416
 msgid "This message will be displayed instead of the reCaptcha."
 msgstr "Это сообщение будет отображено вместо поля reCaptcha."
 
-#: includes/class-gglcptch-settings-tabs.php:292
+#: includes/class-gglcptch-settings-tabs.php:332
 msgid "Theme"
 msgstr "Тема"
 
-#: includes/class-gglcptch-settings-tabs.php:153
+#: includes/class-gglcptch-settings-tabs.php:157
 msgid "reCaptcha Version"
 msgstr "Версия reCaptcha"
 
-#: includes/forms.php:47 includes/pro_banners.php:82
+#: includes/forms.php:48 includes/pro_banners.php:93
 msgid "External Plugins"
 msgstr "Внешние плагины"
 
-#: includes/class-gglcptch-settings-tabs.php:204
+#: includes/class-gglcptch-settings-tabs.php:240
 msgid "Enable reCaptcha for"
 msgstr "Включить reCaptcha для"
 
-#: includes/class-gglcptch-settings-tabs.php:150
+#: includes/class-gglcptch-settings-tabs.php:154
 msgid "General"
 msgstr "Общее"
 
-#: includes/class-gglcptch-settings-tabs.php:198
+#: includes/class-gglcptch-settings-tabs.php:234
 msgid "Test reCaptcha"
 msgstr "Тестирование reCaptcha"
 
-#: includes/class-gglcptch-settings-tabs.php:65
+#: includes/class-gglcptch-settings-tabs.php:63
 msgid "Invisible"
 msgstr "Невидимая"
 
@@ -556,7 +540,7 @@ msgstr "Невидимая"
 msgid "Misc"
 msgstr "Разное"
 
-#: google-captcha.php:1076
+#: google-captcha.php:1084
 msgid "Please submit \"Test verification\""
 msgstr "Пожалуйста, нажмите кнопку \"Тестирование проверки\"."
 
@@ -574,7 +558,7 @@ msgstr "СММ"
 
 #: bws_menu/product_list.php:16
 msgid "SEO"
-msgstr "Поисковая оптимизация"
+msgstr "SEO"
 
 #: bws_menu/product_list.php:13
 msgid "Navigation"
@@ -586,7 +570,7 @@ msgstr "Маркетинг"
 
 #: bws_menu/product_list.php:11
 msgid "eCommerce"
-msgstr "Коммерция"
+msgstr "электронная торговля"
 
 #: bws_menu/product_list.php:10
 msgid "Content"
@@ -764,15 +748,15 @@ msgstr "Добавляйте неограниченное количество �
 msgid "Allow customers to reach you using secure contact form plugin any website must have."
 msgstr "Предоставьте возможность клиентам осуществлять связь с вами через безопасный плагин контактной формы, который должен иметь любой сайт."
 
-#: includes/forms.php:360
+#: includes/forms.php:375
 msgid "Click the BACK button on your browser and try again."
 msgstr "Нажмите кнопку НАЗАД в вашем браузере и попытайтесь снова."
 
-#: google-captcha.php:1036
+#: google-captcha.php:1044
 msgid "More than one reCAPTCHA has been found in the current form. Please remove all unnecessary reCAPTCHA fields to make it work properly."
 msgstr "В текущей форме найдено более одного блока reCAPTCHA. Пожалуйста, удалите все лишние блоки reCAPTCHA для дальнейшей корректной работы."
 
-#: google-captcha.php:1027
+#: google-captcha.php:1035
 msgid "Secret Key is missing."
 msgstr "Секретный ключ отсутствует."
 
@@ -829,7 +813,7 @@ msgid "Enter your license key to activate %s and get premium plugin features."
 msgstr "Введите лицензионный ключ для активации %s и получения дополнительных возможностей плагина."
 
 #: bws_menu/class-bws-settings.php:837
-#: includes/class-gglcptch-settings-tabs.php:26
+#: includes/class-gglcptch-settings-tabs.php:25
 msgid "License Key"
 msgstr "Лицензионный ключ"
 
@@ -892,11 +876,11 @@ msgstr "Пользовательский код"
 
 #: bws_menu/class-bws-settings.php:368
 msgid "All plugin settings were restored."
-msgstr "Все настройки плагина были восстановлены."
+msgstr "Все настройки плагина восстановлены."
 
 #: bws_menu/class-bws-settings.php:221
-#: includes/class-gglcptch-settings-tabs.php:63
-#: includes/class-gglcptch-settings-tabs.php:64
+#: includes/class-gglcptch-settings-tabs.php:61
+#: includes/class-gglcptch-settings-tabs.php:62
 msgid "Version"
 msgstr "Версия"
 
@@ -977,7 +961,7 @@ msgstr "WordPress Системная среда"
 msgid "Congratulations! Pro Membership license is activated successfully."
 msgstr "Поздравляем! Pro Membership лицензия успешно активирована."
 
-#: bws_menu/bws_functions.php:1059
+#: bws_menu/bws_functions.php:1062
 msgid "Are you sure you want to restore default settings?"
 msgstr "Вы уверены что хотите восстановить все настройки плагина к настройкам по умолчанию?"
 
@@ -1021,103 +1005,103 @@ msgstr "Понравился плагин?"
 msgid "https://bestwebsoft.com/products/wordpress/plugins/google-captcha/"
 msgstr "https://bestwebsoft.com/products/wordpress/plugins/google-captcha/"
 
-#: includes/allowlist.php:370
+#: includes/allowlist.php:404
 msgid "Search results for"
 msgstr "Результаты поиска для"
 
-#: includes/allowlist.php:368
+#: includes/allowlist.php:402
 msgid "You have not entered any IP in to the search form."
 msgstr "Вы не ввели значения в форму поиска."
 
-#: includes/allowlist.php:365
+#: includes/allowlist.php:399
 msgid "You have not entered any IP."
 msgstr "Вы не ввели ни одного IP адреса."
 
-#: includes/allowlist.php:358
+#: includes/allowlist.php:392
 msgid "One IP was deleted successfully."
 msgstr "Один IP адрес был успешно удален."
 
-#: includes/allowlist.php:344
+#: includes/allowlist.php:375
 msgid "%s IP was deleted successfully."
 msgid_plural "%s IPs were deleted successfully."
 msgstr[0] "%s IP было успешно удалено "
 msgstr[1] "%s IP было успешно удалено "
 msgstr[2] "%s IP было успешно удалено "
 
-#: includes/allowlist.php:328
+#: includes/allowlist.php:359
 msgid "Invalid IP. See allowed formats."
 msgstr "Неверный IP. Смотите доступные форматы."
 
-#: includes/allowlist.php:325
+#: includes/allowlist.php:356
 msgid "IP is already in the allow list."
 msgstr "IP уже находится в разрешенном списке."
 
-#: includes/allowlist.php:322 includes/allowlist.php:348
-#: includes/allowlist.php:362
+#: includes/allowlist.php:353 includes/allowlist.php:379
+#: includes/allowlist.php:396
 msgid "Some errors occurred."
 msgstr "Возникли некоторые ошибки."
 
-#: includes/allowlist.php:320
+#: includes/allowlist.php:351
 msgid "IP added to the allow list successfully."
 msgstr "IP-адрес успешно добавлен в список разрешенных."
 
-#: includes/allowlist.php:168
+#: includes/allowlist.php:190
 msgid "Date Added"
 msgstr "Дата добавления"
 
-#: includes/allowlist.php:167
+#: includes/allowlist.php:189
 msgid "IP Address"
 msgstr "IP Адресс"
 
-#: includes/allowlist.php:160
+#: includes/allowlist.php:180
 msgid "Nothing found"
 msgstr "Ничего не найдено"
 
-#: includes/allowlist.php:106
+#: includes/allowlist.php:119
 msgid "Search IP"
 msgstr "Искать IP"
 
-#: includes/allowlist.php:88
+#: includes/allowlist.php:98
 msgid "Allowed diapason"
 msgstr "Доступные диапазоны"
 
-#: includes/allowlist.php:81
+#: includes/allowlist.php:91
 msgid "My IP"
 msgstr "Мой IP"
 
-#: includes/pro_banners.php:44
+#: includes/pro_banners.php:48
 msgid "tab, new line or carriage return."
 msgstr "табуляция, новая строка или возврат каретки."
 
-#: includes/pro_banners.php:44
+#: includes/pro_banners.php:48
 msgid "Allowed separators for reasons: a comma"
 msgstr "Доступные разделители для причин: запятая"
 
-#: includes/pro_banners.php:41
+#: includes/pro_banners.php:45
 msgid "ordinary space, tab, new line or carriage return."
 msgstr "обычный пробел, табуляция, новая строка или возврат каретки."
 
-#: includes/pro_banners.php:41 includes/pro_banners.php:44
+#: includes/pro_banners.php:45 includes/pro_banners.php:48
 msgid "semicolon"
 msgstr "точка с запятой"
 
-#: includes/pro_banners.php:41
+#: includes/pro_banners.php:45
 msgid "Allowed separators for IPs: a comma"
 msgstr "Доступные разделители для IP-адресов: запятая"
 
-#: includes/allowlist.php:86 includes/pro_banners.php:40
+#: includes/allowlist.php:96 includes/pro_banners.php:44
 msgid "Allowed formats"
 msgstr "Доступные форматы"
 
-#: includes/pro_banners.php:42
+#: includes/pro_banners.php:46
 msgid "Reason"
 msgstr "Причина"
 
-#: includes/pro_banners.php:17
+#: includes/pro_banners.php:19
 msgid "This options is available in Pro version of plugin"
 msgstr "Эта опция доступна в Pro версии плагина"
 
-#: bws_menu/bws_menu.php:617
+#: bws_menu/bws_menu.php:625
 msgid "Not installed"
 msgstr "Не установлен"
 
@@ -1137,37 +1121,37 @@ msgstr "Другое"
 msgid "Security"
 msgstr "Безопасность"
 
-#: bws_menu/bws_menu.php:764
+#: bws_menu/bws_menu.php:772
 msgid "Browse More WordPress Themes"
 msgstr "Обзор WordPress тем"
 
-#: bws_menu/bws_menu.php:692
+#: bws_menu/bws_menu.php:700
 msgid "Nothing found. Try another criteria."
 msgstr "Ничего не найдено. Попробуйте другие критерии."
 
-#: bws_menu/bws_menu.php:679
+#: bws_menu/bws_menu.php:687
 msgid "Install this plugin"
 msgstr "Установить этот плагин"
 
-#: bws_menu/bws_functions.php:128 bws_menu/bws_menu.php:651
+#: bws_menu/bws_functions.php:128 bws_menu/bws_menu.php:659
 msgid "Donate"
 msgstr "Пожертвовать"
 
-#: bws_menu/bws_menu.php:645 bws_menu/class-bws-settings.php:202
+#: bws_menu/bws_menu.php:653 bws_menu/class-bws-settings.php:202
 #: bws_menu/class-bws-settings.php:1206 google-captcha.php:76
-#: includes/pro_banners.php:29
+#: includes/pro_banners.php:31
 msgid "Upgrade to Pro"
-msgstr "Обновить до Pro"
+msgstr "Обновиться до Pro"
 
-#: bws_menu/bws_menu.php:624
+#: bws_menu/bws_menu.php:632
 msgid "Update to v %s"
 msgstr "Обновить до версии %s"
 
-#: bws_menu/bws_menu.php:621
+#: bws_menu/bws_menu.php:629
 msgid "Renew to get updates"
 msgstr "Продлить для обновления"
 
-#: bws_menu/bws_menu.php:532 bws_menu/bws_menu.php:697
+#: bws_menu/bws_menu.php:532 bws_menu/bws_menu.php:705
 msgid "Category"
 msgstr "Категория"
 
@@ -1197,7 +1181,7 @@ msgstr "Плагин произвёл при активации %d символ�
 
 #: bws_menu/bws_menu.php:428
 msgid "Upload Plugin"
-msgstr "Загрузить плагин"
+msgstr "Добавить новый"
 
 #: bws_menu/bws_menu.php:377
 msgid "Subscribe to Pro Membership"
@@ -1225,9 +1209,9 @@ msgstr "Этот лицензионный ключ привязан к друг�
 
 #: bws_menu/class-bws-settings.php:558
 msgid "This PHP code will be hooked to the %s Action and will be printed on front end only."
-msgstr "Этот PHP код будет прикреплен к %s аction и будет добавлен только во фронтенде."
+msgstr "Этот PHP-код будет привязан к действию %s и будет напечатан только во внешнем интерфейсе."
 
-#: bws_menu/bws_functions.php:834
+#: bws_menu/bws_functions.php:838
 msgid "Add BWS Shortcode"
 msgstr "Добавить BWS шорткод"
 
@@ -1263,31 +1247,31 @@ msgstr "Спасибо за установку плагинов компании
 msgid "System Status"
 msgstr "Системная информация"
 
-#: google-captcha.php:1105
+#: google-captcha.php:1113
 msgid "The verification is successfully completed."
 msgstr "Тестирование проверки успешно завершено."
 
-#: google-captcha.php:1034
+#: google-captcha.php:1042
 msgid "User response is invalid"
 msgstr "Некорректный ответ пользователя"
 
-#: google-captcha.php:1032
+#: google-captcha.php:1040
 msgid "and enter it again"
 msgstr "и введите его снова"
 
-#: google-captcha.php:1031
+#: google-captcha.php:1039
 msgid "Check your domain configurations"
 msgstr "Проверьте настройки вашего домена"
 
-#: google-captcha.php:1030
+#: google-captcha.php:1038
 msgid "Secret Key is invalid."
 msgstr "Некорректный секретный ключ."
 
-#: google-captcha.php:1084
+#: google-captcha.php:1092
 msgid "Test verification"
 msgstr "Тестирование проверки"
 
-#: google-captcha.php:1078
+#: google-captcha.php:1086
 msgid "Please complete the captcha and submit \"Test verification\""
 msgstr "Пожалуйста, заполните капчу и нажмите кнопку \"Тестирование проверки\"."
 
@@ -1319,60 +1303,60 @@ msgstr "Если у вас есть предложения по добавлен
 msgid "Warning"
 msgstr "Внимание"
 
-#: includes/forms.php:38
+#: includes/forms.php:39
 msgid "WordPress default"
 msgstr "Стандартных форм WordPress"
 
-#: bws_menu/bws_functions.php:1200
+#: bws_menu/bws_functions.php:1203
 msgid "Submit a Request"
 msgstr "Отправить запрос"
 
-#: bws_menu/bws_functions.php:1199 bws_menu/bws_menu.php:477
+#: bws_menu/bws_functions.php:1202 bws_menu/bws_menu.php:477
 #: bws_menu/class-bws-settings.php:872
 msgid "Video Instructions"
 msgstr "Видео инструкции"
 
-#: bws_menu/bws_functions.php:1198 bws_menu/bws_menu.php:475
+#: bws_menu/bws_functions.php:1201 bws_menu/bws_menu.php:475
 #: bws_menu/class-bws-settings.php:870
 msgid "Documentation"
 msgstr "Документация"
 
-#: bws_menu/bws_functions.php:1197
+#: bws_menu/bws_functions.php:1200
 msgid "For more information:"
 msgstr "Для дополнительной информации:"
 
-#: bws_menu/bws_functions.php:124 bws_menu/bws_functions.php:1186
+#: bws_menu/bws_functions.php:124 bws_menu/bws_functions.php:1189
 #: bws_menu/class-bws-settings.php:1193
 msgid "Visit Help Center"
 msgstr "Перейти в Help Center"
 
-#: bws_menu/bws_functions.php:857
+#: bws_menu/bws_functions.php:861
 msgid "Add BestWebSoft plugins' shortcodes using this button."
 msgstr "Добавьте шорткоды BestWebSoft плагинов с помощью этой кнопки."
 
-#: bws_menu/bws_functions.php:857
+#: bws_menu/bws_functions.php:861
 msgid "Add shortcode"
 msgstr "Добавить шорткод"
 
-#: bws_menu/bws_functions.php:1139
+#: bws_menu/bws_functions.php:1142
 msgid "The shortcode will be inserted"
 msgstr "Будет вставлен шорткод"
 
-#: bws_menu/bws_functions.php:1134
+#: bws_menu/bws_functions.php:1137
 msgid "Shortcode settings"
 msgstr "Настройки шорткода"
 
-#: bws_menu/bws_functions.php:1125
+#: bws_menu/bws_functions.php:1128
 msgid "Plugin"
 msgstr "Плагин"
 
-#: bws_menu/bws_functions.php:835
+#: bws_menu/bws_functions.php:839
 msgid "Add BWS Plugins Shortcode"
 msgstr "Добавить шорткод BWS Плагина"
 
 #: bws_menu/bws_functions.php:634
 msgid "The plugin's settings have been changed."
-msgstr "Настройки плагина были изменены"
+msgstr "Настройки плагина были изменены."
 
 #: bws_menu/bws_functions.php:238 bws_menu/bws_functions.php:263
 #: bws_menu/bws_functions.php:313 bws_menu/bws_functions.php:323
@@ -1381,9 +1365,9 @@ msgid "Close notice"
 msgstr "Закрыть"
 
 #: bws_menu/bws_functions.php:309 bws_menu/bws_functions.php:341
-#: includes/allowlist.php:49
+#: includes/allowlist.php:52
 msgid "Add New"
-msgstr "Добавить"
+msgstr "Добавить новую"
 
 #: bws_menu/bws_functions.php:305
 msgid "Let's get started"
@@ -1405,15 +1389,11 @@ msgstr "https://bestwebsoft.com/"
 msgid "BestWebSoft"
 msgstr "BestWebSoft"
 
-#: bws_menu/bws_menu.php:365 google-captcha.php:1141
+#: bws_menu/bws_menu.php:365 google-captcha.php:1149
 msgid "Support"
 msgstr "Поддержка"
 
-#: google-captcha.php:1035
-msgid "You have entered an incorrect reCAPTCHA value."
-msgstr "Ошибка: Вы ввели неверное значение reCAPTCHA."
-
-#: google-captcha.php:896 includes/forms.php:358
+#: google-captcha.php:904 includes/forms.php:373
 msgid "Error"
 msgstr "Ошибка"
 
@@ -1444,64 +1424,64 @@ msgstr "Сохранить изменения"
 msgid "Notice"
 msgstr "Внимание"
 
-#: bws_menu/bws_functions.php:1191 google-captcha.php:1140
+#: bws_menu/bws_functions.php:1194 google-captcha.php:1148
 msgid "FAQ"
 msgstr "FAQ"
 
-#: includes/class-gglcptch-settings-tabs.php:135
+#: includes/class-gglcptch-settings-tabs.php:138
 msgid "Settings saved."
 msgstr "Настройки сохранены."
 
-#: includes/class-gglcptch-settings-tabs.php:97
+#: includes/class-gglcptch-settings-tabs.php:100
 msgid "Enter secret key"
 msgstr "Введите секретный ключ"
 
-#: includes/class-gglcptch-settings-tabs.php:91
-#: includes/class-gglcptch-settings-tabs.php:98
+#: includes/class-gglcptch-settings-tabs.php:94
+#: includes/class-gglcptch-settings-tabs.php:101
 msgid "WARNING: The captcha will not be displayed until you fill key fields."
 msgstr "ПРЕДУПРЕЖДЕНИЕ: Google Captcha не будет отображаться пока вы не заполните поля с ключами."
 
-#: includes/class-gglcptch-settings-tabs.php:90
+#: includes/class-gglcptch-settings-tabs.php:93
 msgid "Enter site key"
 msgstr "Введите ключ сайта"
 
-#: includes/forms.php:14
+#: includes/forms.php:15
 msgid "Comments form"
 msgstr "Форма комментариев"
 
-#: includes/forms.php:13
+#: includes/forms.php:14
 msgid "Reset password form"
 msgstr "Форма восстановления пароля"
 
-#: includes/forms.php:12
+#: includes/forms.php:13
 msgid "Registration form"
 msgstr "Форма регистрации"
 
-#: includes/forms.php:11
+#: includes/forms.php:12
 msgid "Login form"
 msgstr "Форма логина"
 
-#: includes/class-gglcptch-settings-tabs.php:56
+#: includes/class-gglcptch-settings-tabs.php:54
 msgid "Secret Key"
 msgstr "Секретный ключ"
 
-#: includes/class-gglcptch-settings-tabs.php:51
+#: includes/class-gglcptch-settings-tabs.php:49
 msgid "Site Key"
 msgstr "Ключ сайта"
 
-#: includes/pro_banners.php:213
+#: includes/pro_banners.php:252
 msgid "Compact"
 msgstr "Компактный"
 
-#: includes/pro_banners.php:212
+#: includes/pro_banners.php:251
 msgid "Normal"
 msgstr "Нормальный"
 
-#: bws_menu/bws_menu.php:790
+#: bws_menu/bws_menu.php:798
 msgid "Send to custom email &#187;"
 msgstr "Отправить на емейл &#187;"
 
-#: bws_menu/bws_menu.php:783
+#: bws_menu/bws_menu.php:791
 msgid "Send to support"
 msgstr "Отправить в тех. поддержку"
 
@@ -1513,26 +1493,26 @@ msgstr "Неактивированные плагины"
 msgid "Active Plugins"
 msgstr "Активированные плагины"
 
-#: bws_menu/bws_menu.php:752
+#: bws_menu/bws_menu.php:760
 msgid "Already Installed"
 msgstr "Уже установлена"
 
-#: bws_menu/bws_menu.php:743
+#: bws_menu/bws_menu.php:751
 msgid "By %s"
 msgstr "%s"
 
-#: bws_menu/bws_menu.php:679 includes/forms.php:119 includes/forms.php:144
-#: includes/forms.php:148
+#: bws_menu/bws_menu.php:687 includes/forms.php:126 includes/forms.php:151
+#: includes/forms.php:155
 msgid "Install Now"
-msgstr "Установить сейчас"
+msgstr "Установить"
 
-#: bws_menu/bws_menu.php:665 bws_menu/bws_menu.php:674
+#: bws_menu/bws_menu.php:673 bws_menu/bws_menu.php:682
 msgid "Activate this plugin"
 msgstr "Активировать плагин"
 
 #: bws_menu/bws_functions.php:306 bws_menu/bws_functions.php:339
-#: bws_menu/bws_menu.php:657 bws_menu/bws_menu.php:659 google-captcha.php:50
-#: google-captcha.php:1125 google-captcha.php:1138
+#: bws_menu/bws_menu.php:665 bws_menu/bws_menu.php:667 google-captcha.php:50
+#: google-captcha.php:1133 google-captcha.php:1146
 #: includes/class-gglcptch-settings-tabs.php:22
 msgid "Settings"
 msgstr "Настройки"
@@ -1541,17 +1521,17 @@ msgstr "Настройки"
 msgid "Recommended"
 msgstr "Рекомендованные"
 
-#: bws_menu/bws_menu.php:514 bws_menu/bws_menu.php:754
+#: bws_menu/bws_menu.php:514 bws_menu/bws_menu.php:762
 msgid "Installed"
-msgstr "Установленные"
+msgstr "Установлена"
 
 #: bws_menu/bws_menu.php:506 bws_menu/bws_menu.php:541
-#: bws_menu/bws_menu.php:706
+#: bws_menu/bws_menu.php:714
 msgid "All"
 msgstr "Все"
 
 #: bws_menu/bws_menu.php:329 bws_menu/bws_menu.php:350
-#: bws_menu/bws_menu.php:731 bws_menu/deprecated.php:28
+#: bws_menu/bws_menu.php:739 bws_menu/deprecated.php:28
 msgid "Themes"
 msgstr "Темы"
 
@@ -1561,13 +1541,13 @@ msgid "Plugins"
 msgstr "Плагины"
 
 #: bws_menu/bws_menu.php:334 bws_menu/bws_menu.php:358
-#: bws_menu/bws_menu.php:767
+#: bws_menu/bws_menu.php:775
 msgid "System status"
 msgstr "Системная информация"
 
 #: bws_menu/bws_menu.php:487
 msgid "Client Area"
-msgstr "Клиентская область"
+msgstr "Client Area"
 
 #: bws_menu/class-bws-settings.php:1189
 msgid "Need Help?"
@@ -1682,11 +1662,11 @@ msgstr "Вкл"
 msgid "Not set"
 msgstr "Не задан"
 
-#: bws_menu/bws_functions.php:1063
+#: bws_menu/bws_functions.php:1066
 msgid "No, go back to the settings page"
 msgstr "Нет, вернуться на страницу настроек"
 
-#: bws_menu/bws_functions.php:1062
+#: bws_menu/bws_functions.php:1065
 msgid "Yes, restore all settings"
 msgstr "Да, восстановить все настройки"
 
@@ -1698,9 +1678,10 @@ msgstr "Восстановить настройки"
 msgid "Restore all plugin settings to defaults"
 msgstr "Восстановить все настройки плагина к настройкам по умолчанию"
 
-#: bws_menu/bws_functions.php:967 includes/class-gglcptch-settings-tabs.php:251
-#: includes/class-gglcptch-settings-tabs.php:279
-#: includes/class-gglcptch-settings-tabs.php:306 includes/pro_banners.php:20
+#: bws_menu/bws_functions.php:970 includes/class-gglcptch-settings-tabs.php:291
+#: includes/class-gglcptch-settings-tabs.php:319
+#: includes/class-gglcptch-settings-tabs.php:346
+#: includes/class-gglcptch-settings-tabs.php:384 includes/pro_banners.php:22
 msgid "Close"
 msgstr "Закрыть"
 
@@ -1795,11 +1776,11 @@ msgstr "После этого вы сможете активировать ег�
 msgid "In order to continue using the plugin it is necessary to buy a %s license."
 msgstr "Чтобы продолжить пользоваться плагином, необходимо приобрести %s лицензию."
 
-#: bws_menu/bws_menu.php:406 bws_menu/bws_menu.php:665
-#: bws_menu/bws_menu.php:674 bws_menu/class-bws-settings.php:898
+#: bws_menu/bws_menu.php:406 bws_menu/bws_menu.php:673
+#: bws_menu/bws_menu.php:682 bws_menu/class-bws-settings.php:898
 #: bws_menu/deprecated.php:170 bws_menu/deprecated.php:178
 #: bws_menu/deprecated.php:268 bws_menu/deprecated.php:281
-#: includes/forms.php:117 includes/forms.php:141
+#: includes/forms.php:124 includes/forms.php:148
 msgid "Activate"
 msgstr "Активировать"
 
@@ -1857,7 +1838,7 @@ msgid "Wrong license key"
 msgstr "Неправильный лицензионный ключ"
 
 #: bws_menu/bws_functions.php:155 bws_menu/bws_functions.php:247
-#: bws_menu/bws_menu.php:746 bws_menu/class-bws-settings.php:189
+#: bws_menu/bws_menu.php:754 bws_menu/class-bws-settings.php:189
 msgid "Learn More"
 msgstr "Подробнее"
 
