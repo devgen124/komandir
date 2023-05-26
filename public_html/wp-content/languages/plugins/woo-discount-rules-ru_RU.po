@@ -702,7 +702,7 @@ msgstr "Обработка, пожалуйста, подождите.."
 
 #: v2/App/Controllers/Admin/Settings.php:579
 msgid "Oops! Coupon already exists in Woocommerce"
-msgstr "Ой! Купон уже существует в Woocommerce"
+msgstr "Ой! Промокод уже существует в Woocommerce"
 
 #: v2/App/Views/Admin/Rules/Manage.php:199
 msgid "Note : You can also exclude products/categories."
@@ -897,7 +897,7 @@ msgstr "Тип условия"
 
 #: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:18
 msgid "Subtotal should be"
-msgstr "Подытог должен быть"
+msgstr "Предварительный итог должен быть"
 
 #: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:24
 msgid "Subtotal Amount "
@@ -1417,7 +1417,7 @@ msgstr "Изменить"
 
 #: v2/App/Conditions/CartSubTotal.php:18 v2/App/Helpers/Helper.php:162
 msgid "Subtotal"
-msgstr "Подытог"
+msgstr "Предварительный итог"
 
 #: v2/App/Views/Admin/Tabs/DiscountRule.php:224
 #: v2/App/Views/Admin/Tabs/help.php:112
@@ -1433,7 +1433,7 @@ msgstr "Откл."
 #: v2/App/Helpers/Helper.php:171 v2/App/Views/Admin/Tabs/settings.php:319
 #: v2/App/Views/Admin/Tabs/Statistics.php:230
 msgid "Coupon"
-msgstr "Купон"
+msgstr "Промокод"
 
 #: v2/App/Controllers/Admin/Tabs/Help.php:17
 #: v2/App/Views/Admin/Tabs/DiscountRule.php:69

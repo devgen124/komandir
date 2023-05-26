@@ -577,7 +577,7 @@ msgstr "Применить стили ко всем купонам"
 #: views/newsletter/templates/blocks/coupon/settings.hbs:1
 #: views/newsletter/templates/blocks/coupon/widget.hbs:4
 msgid "Coupon"
-msgstr "Купон"
+msgstr "Промокод"
 
 #: views/newsletter/templates/blocks/coupon/block.hbs:4
 msgid "The coupon code will be auto-generated when this campaign is activated. All subscribers of this campaign will receive the same coupon code."
