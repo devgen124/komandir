@@ -10426,7 +10426,7 @@ function initPassViewSwitcher(element) {
         showPassButtons.forEach((btn) => {
             btn.onclick = (e) => {
                 e.preventDefault();
-                const inp = e.target.previousElementSibling;
+                const inp = e.target.closest('label').querySelector('input');
 
                 if (inp) {
                     if (inp.type === 'password') {
@@ -10439,6 +10439,7 @@ function initPassViewSwitcher(element) {
         });
     }
 }
+
 
 /***/ }),
 

@@ -28,22 +28,22 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 
 		<label class="edit-account-label">
 			<input type="text" name="account_first_name" autocomplete="given-name"
-				value="<?php echo esc_attr( $user->first_name ); ?>"
-				placeholder="<?php esc_html_e( 'First name', 'woocommerce' ); ?>" />
+				value="<?php echo esc_attr( $user->first_name ); ?>" placeholder="<?php esc_html_e( 'First name', 'woocommerce' ); ?>" />
+			<span class="floating-label"><?php esc_html_e( 'First name', 'woocommerce' ); ?></span>
 		</label>
 		<label class="edit-account-label">
 			<input type="text" name="account_last_name" autocomplete="family-name"
-				value="<?php echo esc_attr( $user->last_name ); ?>"
-				placeholder="<?php esc_html_e( 'Last name', 'woocommerce' ); ?>" />
+				value="<?php echo esc_attr( $user->last_name ); ?>" placeholder="<?php esc_html_e( 'Last name', 'woocommerce' ); ?>" />
+			<span class="floating-label"><?php esc_html_e( 'Last name', 'woocommerce' ); ?></span>
 		</label>
-		<!-- <label class="edit-account-label">
-			<input type="text" name="account_display_name" value="<?php //echo esc_attr( $user->display_name ); ?>"
-				placeholder="<?php //esc_html_e( 'Display name', 'woocommerce' ); ?>" />
-		</label> -->
+		<label class="edit-account-label">
+			<input type="text" name="account_display_name" value="<?php echo esc_attr( $user->display_name ); ?>" placeholder="Логин" />
+			<span class="floating-label">Логин</span>
+		</label>
 		<label class="edit-account-label">
 			<input type="email" name="account_email" id="account_email" autocomplete="email"
-				value="<?php echo esc_attr( $user->user_email ); ?>"
-				placeholder="<?php esc_html_e( 'Email address', 'woocommerce' ); ?>" />
+				value="<?php echo esc_attr( $user->user_email ); ?>" placeholder="<?php esc_html_e( 'Email address', 'woocommerce' ); ?>" />
+			<span class="floating-label"><?php esc_html_e( 'Email address', 'woocommerce' ); ?></span>
 		</label>
 
 		<fieldset class="edit-account-fieldset">
@@ -51,6 +51,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 			<label class="edit-account-label">
 				<input disabled type="tel" name="account_phone" id="account_phone"
 					value="<?php echo WC()->customer->get_billing_phone(); ?>" placeholder="Телефон" />
+				<span class="floating-label">Телефон</span>
 			</label>
 			<a href="#change-phone-number-popup" class="button edit-account-button change-phone-number-link">Изменить
 				номер телефона</a>
@@ -62,15 +63,17 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 			</legend>
 			<label class="edit-account-label">
 				<input type="password" name="password_current" autocomplete="off" placeholder="Действующий пароль" />
+				<span class="floating-label">Действующий пароль</span>
 				<button class="show-pass" aria-label="Показать пароль"></button>
 			</label>
 			<label class="edit-account-label">
 				<input type="password" name="password_1" autocomplete="off" placeholder="Новый пароль" />
+				<span class="floating-label">Новый пароль</span>
 				<button class="show-pass" aria-label="Показать пароль"></button>
 			</label>
 			<label class="edit-account-label">
-				<input type="password" name="password_2" autocomplete="off"
-					placeholder="<?php esc_html_e( 'Confirm new password', 'woocommerce' ); ?>" />
+				<input type="password" name="password_2" autocomplete="off" placeholder="<?php esc_html_e( 'Confirm new password', 'woocommerce' ); ?>" />
+				<span class="floating-label"><?php esc_html_e( 'Confirm new password', 'woocommerce' ); ?></span>
 				<button class="show-pass" aria-label="Показать пароль"></button>
 			</label>
 		</fieldset>

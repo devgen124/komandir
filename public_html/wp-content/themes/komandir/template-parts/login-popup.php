@@ -66,9 +66,9 @@
 			<label class="custom-popup-form-label">
 				<input type="email" placeholder="Email" name="login-email" />
 			</label>
-			<!-- <label class="custom-popup-form-label">
+			<label class="custom-popup-form-label">
 				<input type="text" placeholder="Логин" name="login-display-name" />
-			</label> -->
+			</label>
 			<label class="custom-popup-form-label">
 				<input type="text" placeholder="Имя" name="login-firstname" />
 			</label>
