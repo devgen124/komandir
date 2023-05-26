@@ -1,7 +1,6 @@
 <?php
 
 require_once 'sms-auth-controller.php';
-require_once 'login-generator.php';
 
 class PopupController {
 
@@ -381,13 +380,12 @@ class PopupController {
 
 				if ( empty( $response['error_message'] ) && empty( $response['error_fields'] ) ) {
 
+					$account_login = ! empty( $_POST['login-display-name'] ) ? wc_clean( wp_unslash( $_POST['login-display-name'] ) ) : '';
 					$account_first_name = ! empty( $_POST['login-firstname'] ) ? wc_clean( wp_unslash( $_POST['login-firstname'] ) ) : '';
 					$account_last_name = ! empty( $_POST['login-lastname'] ) ? wc_clean( wp_unslash( $_POST['login-lastname'] ) ) : '';
 					$account_email = ! empty( $_POST['login-email'] ) ? wc_clean( wp_unslash( $_POST['login-email'] ) ) : '';
 					$account_password = ! empty( $_POST['login-pass-first'] ) ? $_POST['login-pass-first'] : '';
 					$phone_number = ! empty( $_POST['login-phone'] ) ? wc_clean( wp_unslash( $_POST['login-phone'] ) ) : '';
-
-					$account_login = LoginGenerator::create( $account_first_name , $account_last_name );
 
 					$new_customer_id = wc_create_new_customer( $account_email, $account_login, $account_password );
 
