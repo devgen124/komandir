@@ -26,13 +26,12 @@ class Popup {
         const sendCodeSubmit = thisSection.querySelector('.custom-popup-submit');
         const telInput = thisSection.querySelector('input[type="tel"]');
 		const loginPassLink = thisSection.querySelector('.login-pass-link');
-		const phoneTip = thisSection.querySelector('#phone-tip');
 
 		this.addPhoneTip(thisSection, 'Телефон в формате +7 000 000 00 00');
 
         this.setMask(telInput);
 
-        this.addFormListeners(sendCodeSubmit, 'login_send_code', ['phone'], this.renderSmsCode);
+        this.addFormListeners(sendCodeSubmit, 'login_send_code', this.renderSmsCode);
 
         this.prevSection = 'send_code';
 
@@ -49,7 +48,7 @@ class Popup {
 
         this.setMask(telInput);
 
-        this.addFormListeners(sendCodeSubmit, 'change_phone_send_code', ['phone'], this.renderChangePhoneSmsCode);
+        this.addFormListeners(sendCodeSubmit, 'change_phone_send_code', this.renderChangePhoneSmsCode);
 	}
 
 	addPhoneTip = (section, text) => {
@@ -69,9 +68,9 @@ class Popup {
 		});
     }
 
-	addFormListeners = (submitBtn, action, inputNamesArr, successCb = null) => {
+	addFormListeners = (submitBtn, action, successCb = null) => {
 		const form = submitBtn.closest('form');
-		const inputs = inputNamesArr.map((name) => form.querySelector(`input[name=${name}]`));
+		const inputs = form.querySelectorAll('input');
 
 		inputs.forEach((input) => {
 			input.oninput = () => {
@@ -79,17 +78,19 @@ class Popup {
 			}
 		});
 
-        submitBtn.onclick = (e) => {
-            e.preventDefault();
-            const thisBtn = e.target;
-            this.addLoading(thisBtn);
+        form.onsubmit = (e) => {
+			e.preventDefault();
+			const thisForm = e.target;
+            const thisBtn = thisForm.querySelector('.custom-popup-submit');
+			this.addLoading(thisBtn);
 
-            const thisForm = e.target.closest('form');
-            const thisSection = e.target.closest('.custom-popup-section');
+			const formData = new FormData(thisForm);
 
-			this.ajaxSend(action, this.getFormValues(thisForm, inputNamesArr), (res) => {
+            const thisSection = thisForm.closest('.custom-popup-section');
 
-				console.log(res);
+			this.ajaxSend(action, formData, (res) => {
+
+				// console.log(res);
 
                 this.removeLoading(thisBtn);
 
@@ -148,16 +149,6 @@ class Popup {
         innerOverlay.remove();
     }
 
-    getFormValues = (formSelector, namesArr) => {
-        const valuesObj = {};
-        namesArr.forEach(name => {
-            const input = formSelector.querySelector(`input[name="${name}"]`);
-            valuesObj[name] = input.value;
-        });
-
-        return valuesObj;
-    }
-
     addWarnings = (section, warnings) => {
         const heading = section.querySelector('h2');
 
@@ -200,20 +191,13 @@ class Popup {
         }
     }
 
-    ajaxSend = (action, dataObject, callback) => {
-        const data = new FormData();
-        data.append('action', action);
-        data.append('nonce_code', dataObj.nonce);
-
-        if (dataObject) {
-            Object.entries(dataObject).forEach((([key, value]) => {
-                data.append(key, value);
-            }));
-        }
+    ajaxSend = (action, formData, callback) => {
+        formData.append('action', action);
+        formData.append('nonce_code', dataObj.nonce);
 
         fetch(dataObj.ajaxurl, {
             method: 'POST',
-            body: data
+            body: formData
         })
             .then(response => response.json())
             .then(callback)
@@ -249,7 +233,7 @@ class Popup {
 
         this.initCounter(counterBlock);
 		this.addBacklinkListener(backlink);
-        this.addFormListeners(passSubmit, 'login_send_sms', ['sms'], this.renderProfile);
+        this.addFormListeners(passSubmit, 'login_send_sms', this.renderProfile);
     }
 
     renderChangePhoneSmsCode = () => {
@@ -261,7 +245,7 @@ class Popup {
         const counterBlock = thisSection.querySelector('.counter-block');
 
         this.initCounter(counterBlock);
-        this.addFormListeners(passSubmit, 'change_phone_send_sms', ['sms']);
+        this.addFormListeners(passSubmit, 'change_phone_send_sms');
     }
 
     renderProfile = () => {
@@ -276,15 +260,7 @@ class Popup {
 
         initPassViewSwitcher(thisSection);
 
-        this.addFormListeners(profileSubmit, 'create_customer', [
-            'login-phone',
-			'login-email',
-			// 'login-display-name',
-            'login-firstname',
-            'login-lastname',
-            'login-pass-first',
-            'login-pass-second'
-        ])
+		this.addFormListeners(profileSubmit, 'create_customer');
     }
 
     renderLoginPass = () => {
@@ -299,7 +275,7 @@ class Popup {
 
 		this.addPhoneTip(thisSection, 'Введите ваш email или телефон');
         this.addBacklinkListener(backlink);
-        this.addFormListeners(passSubmit, 'authorize', ['login', 'pass']);
+        this.addFormListeners(passSubmit, 'authorize');
     }
 
     addBacklinkListener = (link) => {
