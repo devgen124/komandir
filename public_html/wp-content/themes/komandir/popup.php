@@ -365,7 +365,7 @@ class PopupController {
 
 				$required_fields = [
 					'Email' => 'login-email',
-					'Имя' => 'login-firstname',
+					'Логин' => 'login-display-name',
 					'Пароль' => 'login-pass-first',
 					'Повторите пароль' => 'login-pass-second'
 				];
@@ -460,8 +460,6 @@ class PopupController {
 				$user = get_user_by( is_email( $login ) ? 'email' : 'login', $login );
 
 			}
-
-
 
 			if ( $user ) {
 

@@ -14924,14 +14924,14 @@ p.outstock {
   border-radius: 3px;
 }
 .edit-account-label input[type=text]::-moz-placeholder, .edit-account-label input[type=password]::-moz-placeholder, .edit-account-label input[type=email]::-moz-placeholder, .edit-account-label input[type=tel]::-moz-placeholder, .edit-account-label input[type=number]::-moz-placeholder {
-  color: #7E7E7E;
+  opacity: 0;
 }
 .edit-account-label input[type=text]::placeholder,
 .edit-account-label input[type=password]::placeholder,
 .edit-account-label input[type=email]::placeholder,
 .edit-account-label input[type=tel]::placeholder,
 .edit-account-label input[type=number]::placeholder {
-  color: #7E7E7E;
+  opacity: 0;
 }
 .edit-account-label input[type=text]:focus,
 .edit-account-label input[type=password]:focus,
@@ -14947,6 +14947,37 @@ p.outstock {
 .edit-account-label input[type=number].invalid {
   border-color: red;
   color: red;
+}
+.edit-account-label input[type=text] ~ .floating-label,
+.edit-account-label input[type=password] ~ .floating-label,
+.edit-account-label input[type=email] ~ .floating-label,
+.edit-account-label input[type=tel] ~ .floating-label,
+.edit-account-label input[type=number] ~ .floating-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 21px 16px;
+  font-size: 14px;
+  line-height: 1;
+  color: #7E7E7E;
+  transform-origin: 21px 0;
+  transition: transform 0.3s;
+}
+.edit-account-label input[type=text]:not(:-moz-placeholder-shown) ~ .floating-label, .edit-account-label input[type=password]:not(:-moz-placeholder-shown) ~ .floating-label, .edit-account-label input[type=email]:not(:-moz-placeholder-shown) ~ .floating-label, .edit-account-label input[type=tel]:not(:-moz-placeholder-shown) ~ .floating-label, .edit-account-label input[type=number]:not(:-moz-placeholder-shown) ~ .floating-label {
+  transform: scale(0.8) translateY(-10px);
+}
+.edit-account-label input[type=text]:not(:placeholder-shown) ~ .floating-label, .edit-account-label input[type=text]:focus ~ .floating-label,
+.edit-account-label input[type=password]:not(:placeholder-shown) ~ .floating-label,
+.edit-account-label input[type=password]:focus ~ .floating-label,
+.edit-account-label input[type=email]:not(:placeholder-shown) ~ .floating-label,
+.edit-account-label input[type=email]:focus ~ .floating-label,
+.edit-account-label input[type=tel]:not(:placeholder-shown) ~ .floating-label,
+.edit-account-label input[type=tel]:focus ~ .floating-label,
+.edit-account-label input[type=number]:not(:placeholder-shown) ~ .floating-label,
+.edit-account-label input[type=number]:focus ~ .floating-label {
+  transform: scale(0.8) translateY(-10px);
 }
 .edit-account-label .show-pass {
   width: 22px;

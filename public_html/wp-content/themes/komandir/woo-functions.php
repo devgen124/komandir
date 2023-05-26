@@ -666,14 +666,14 @@ add_filter( 'itglx/wc/1c/sale/query/order-discount-list', function ( $list, $ord
 
 // убирает display name из обязательных полей в личном кабинете
 
-add_filter('woocommerce_save_account_details_required_fields', function ($array) {
+// add_filter('woocommerce_save_account_details_required_fields', function ($array) {
 
-	if (isset($array['account_display_name'])) {
-		unset($array['account_display_name']);
-	}
+// 	if (isset($array['account_display_name'])) {
+// 		unset($array['account_display_name']);
+// 	}
 
-	return $array;
-});
+// 	return $array;
+// });
 
 // убирает кнопку ссылку Убрать у "псевдокупона (скидка из плагина Woo Discounts)
 

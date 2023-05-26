@@ -41,7 +41,7 @@
         border-radius: 3px;
 
         &::placeholder {
-            color: #7E7E7E;
+            opacity: 0;
         }
 
         &:focus {
@@ -52,6 +52,25 @@
             border-color: red;
             color: red;
         }
+
+		~ .floating-label {
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			padding: 21px 16px;
+			font-size: 14px;
+			line-height: 1;
+			color: #7E7E7E;
+			transform-origin: 21px 0;
+			transition: transform 0.3s;
+		}
+
+		&:not(:placeholder-shown) ~ .floating-label,
+		&:focus ~ .floating-label {
+			transform: scale(0.8) translateY(-10px);
+		}
     }
 
     .show-pass {
