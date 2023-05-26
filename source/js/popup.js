@@ -44,7 +44,9 @@ class Popup {
 
         const thisSection = this.popup.querySelector('.custom-popup-section');
         const sendCodeSubmit = thisSection.querySelector('.custom-popup-submit');
-        const telInput = thisSection.querySelector('input[type="tel"]');
+		const telInput = thisSection.querySelector('input[type="tel"]');
+
+		this.addPhoneTip(thisSection, 'Телефон в формате +7 000 000 00 00');
 
         this.setMask(telInput);
 
