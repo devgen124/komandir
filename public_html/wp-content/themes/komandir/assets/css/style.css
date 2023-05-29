@@ -14888,9 +14888,13 @@ p.outstock {
   color: red;
 }
 
+.woocommerce-edit-account-wrapper {
+  margin: 0 auto;
+}
 @media (min-width: 576px) {
   .woocommerce-edit-account-wrapper {
     max-width: 395px;
+    margin: 0;
   }
 }
 
@@ -15015,6 +15019,23 @@ a.button.edit-account-button:hover,
 button.button.edit-account-button:hover {
   color: #fff;
   background-color: #008790;
+}
+
+@media (max-width: 767.98px) {
+  .woocommerce-MyAccount-navigation {
+    margin-bottom: 20px;
+  }
+  .woocommerce-MyAccount-navigation ul {
+    max-width: 395px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+
+.woocommerce-orders-table__cell a:not(:last-child) {
+  margin-right: 20px;
 }
 
 .content-page h2, .content-page .h2 {
