@@ -13728,6 +13728,10 @@ a.showcoupon:hover {
   pointer-events: none;
 }
 
+.woocommerce-MyAccount-content mark, .woocommerce-MyAccount-content .mark {
+  background-color: rgba(0, 169, 180, 0.3);
+}
+
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {
   padding: 7px;
   background: #fff;
