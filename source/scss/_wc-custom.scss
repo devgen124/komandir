@@ -1235,3 +1235,7 @@ a.showcoupon {
     color: #000;
     pointer-events: none;
 }
+
+.woocommerce-MyAccount-content mark {
+	background-color: rgba($accent-color, 0.3);
+}
