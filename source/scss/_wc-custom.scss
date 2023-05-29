@@ -646,6 +646,10 @@ $cols: (1, 2, 3, 4, 5, 6);
         font-size: 14px;
         line-height: 1.4;
         color: #a7a7a7;
+
+		@include media-breakpoint-down(sm) {
+			margin-bottom: 20px;
+		}
     }
 
     div.product {
@@ -727,7 +731,7 @@ $cols: (1, 2, 3, 4, 5, 6);
 
             .panel {
                 &[id="tab-description"] {
-                    display: flex;
+                    // display: flex;
 
                     @include media-breakpoint-down(lg) {
                         display: block;
@@ -744,12 +748,13 @@ $cols: (1, 2, 3, 4, 5, 6);
 
                     p {
                         width: 80%;
-                        font-size: 14px;
+                        font-size: 18px;
                         line-height: 1.4;
                         color: $black;
 
                         @include media-breakpoint-down(lg) {
                             width: 100%;
+							font-size: 14px;
                         }
                     }
                 }

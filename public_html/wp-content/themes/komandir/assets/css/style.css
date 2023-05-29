@@ -13203,6 +13203,11 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   line-height: 1.4;
   color: #a7a7a7;
 }
+@media (max-width: 575.98px) {
+  .woocommerce .woocommerce-breadcrumb {
+    margin-bottom: 20px;
+  }
+}
 .woocommerce div.product .product_title {
   margin-bottom: 22px;
   font-size: 24px;
@@ -13272,9 +13277,6 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active {
   border-bottom-color: #000;
 }
-.woocommerce div.product .woocommerce-tabs .panel[id=tab-description] {
-  display: flex;
-}
 @media (max-width: 991.98px) {
   .woocommerce div.product .woocommerce-tabs .panel[id=tab-description] {
     display: block;
@@ -13291,13 +13293,14 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 }
 .woocommerce div.product .woocommerce-tabs .panel[id=tab-description] p {
   width: 80%;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.4;
   color: #000;
 }
 @media (max-width: 991.98px) {
   .woocommerce div.product .woocommerce-tabs .panel[id=tab-description] p {
     width: 100%;
+    font-size: 14px;
   }
 }
 
