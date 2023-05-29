@@ -1,6 +1,9 @@
 .woocommerce-edit-account-wrapper {
+	margin: 0 auto;
+
     @include media-breakpoint-up(sm) {
         max-width: 395px;
+		margin: 0;
     }
 }
 
@@ -108,4 +111,22 @@ button.button.edit-account-button {
         color: #fff;
         background-color: $accent-color-hover;
     }
+}
+
+.woocommerce-MyAccount-navigation {
+	@include media-breakpoint-down(md) {
+		margin-bottom: 20px;
+
+		ul {
+			max-width: 395px;
+			margin: 0 auto;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 20px;
+		}
+	}
+}
+
+.woocommerce-orders-table__cell a:not(:last-child) {
+	margin-right: 20px;
 }
