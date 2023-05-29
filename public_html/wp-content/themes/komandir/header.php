@@ -180,7 +180,7 @@ global $svg;
 				<div class="d-none d-lg-block middle-menu-item middle-menu-account">
 					<?php if ( $current_user->exists() ) : ?>
 
-						<a href="<? echo wc_get_account_endpoint_url( 'edit-account' ); ?>" class="account-link logged-in">
+						<a href="<?= get_permalink( wc_get_page_id( 'myaccount' ) ) ?>" class="account-link logged-in">
 							<?= $svg->view_from_sprite( [
 								'title' => 'logged-in',
 								'width' => 20,

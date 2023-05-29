@@ -230,6 +230,15 @@ add_filter( 'woocommerce_account_menu_items', function ( $items ) {
 	return array_filter( $items, fn($k) => ! in_array( $k, [ 'dashboard', 'downloads', 'edit-address' ] ), ARRAY_FILTER_USE_KEY );
 } );
 
+// redirect default account page to my orders
+
+add_action( 'template_redirect', function () {
+	if( is_account_page() && empty( WC()->query->get_current_endpoint() ) ){
+		wp_safe_redirect( wc_get_account_endpoint_url( 'orders' ) );
+		exit;
+	}
+} );
+
 // mobile catalog ajax
 
 add_action( 'wp_ajax_get_children_cats', 'render_children_cat_list' );
