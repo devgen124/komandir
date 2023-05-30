@@ -10306,26 +10306,22 @@ function initQuantityCounter(triggerEventFunc) {
     if (quantityEl.length) {
         quantityEl.forEach((el) => {
             const input = el.querySelector('[type="number"]');
-            const minus = el.querySelector('.product-quantity-minus');
-            const plus = el.querySelector('.product-quantity-plus');
+			const countButtons = el.querySelectorAll('.product-quantity-btn');
+			const isMinusBtn = (btn) => btn.classList.contains('product-quantity-minus');
+			const isPlusBtn = (btn) => btn.classList.contains('product-quantity-plus');
 
-            minus.onclick = (e) => {
-                e.preventDefault();
-
-                if (input.value == 0) {
-                    input.value = 0;
-                } else {
-                    input.value--;
-                    triggerEventFunc(input);
-                }
-            };
-
-            plus.onclick = (e) => {
-                e.preventDefault();
-                input.value++;
-                triggerEventFunc(input);
-            };
-
+			countButtons.forEach(btn => {
+				btn.onclick = (e) => {
+					e.preventDefault();
+					if (isMinusBtn(e.target) && input.value > 1) {
+						input.value--;
+						triggerEventFunc(input);
+					} else if (isPlusBtn(e.target)) {
+						input.value++;
+						triggerEventFunc(input);
+					}
+				};
+			});
         });
     }
 }

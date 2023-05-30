@@ -100,13 +100,13 @@ do_action( 'woocommerce_before_cart' ); ?>
                             );
                             ?>
 
-                            <button class="product-quantity-minus" aria-label="Уменьшить">-</button>
+                            <button class="product-quantity-btn product-quantity-minus" aria-label="Уменьшить">-</button>
 
                             <?php
                             echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
                             ?>
 
-                            <button class="product-quantity-plus" aria-label="Увеличить">+</button>
+                            <button class="product-quantity-btn product-quantity-plus" aria-label="Увеличить">+</button>
                         </div>
 
                         <div class="product-subtotal" data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>">
