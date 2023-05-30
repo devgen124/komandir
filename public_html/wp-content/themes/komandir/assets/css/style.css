@@ -13732,6 +13732,10 @@ a.showcoupon:hover {
   background-color: rgba(0, 169, 180, 0.3);
 }
 
+.woocommerce button.update-cart[name=update_cart] {
+  display: none;
+}
+
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {
   padding: 7px;
   background: #fff;

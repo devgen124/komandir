@@ -1239,3 +1239,7 @@ a.showcoupon {
 .woocommerce-MyAccount-content mark {
 	background-color: rgba($accent-color, 0.3);
 }
+
+.woocommerce button.update-cart[name="update_cart"] {
+	display: none;
+}
