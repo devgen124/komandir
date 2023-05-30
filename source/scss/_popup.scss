@@ -80,10 +80,6 @@
     background: #EFF4F4;
     border-radius: 3px;
 
-    &:visited {
-        color: $accent-color;
-    }
-
     &::before {
         content: "";
         margin-right: 10px;
@@ -131,10 +127,6 @@
     font-size: 14px;
     color: $accent-color;
     transition: 0.3s;
-
-    &:visited {
-        color: $accent-color;
-    }
 
     &:hover {
         opacity: 0.7;

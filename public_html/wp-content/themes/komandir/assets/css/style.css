@@ -11640,9 +11640,6 @@ a {
 a:focus {
   outline: none;
 }
-a:visited {
-  color: inherit;
-}
 a:hover {
   color: #008790;
 }
@@ -13912,7 +13909,7 @@ a.showcoupon:hover {
   font: 700 24px/1.4 "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   transition: 0.3s;
 }
-.categories-parent-list-item > a:hover, .categories-parent-list-item > a:visited {
+.categories-parent-list-item > a:hover {
   color: #00a9b4;
 }
 .categories-parent-list-item > a > span {
@@ -14022,9 +14019,6 @@ a.showcoupon:hover {
   height: 9px;
   background: url("../images/forward-arrow.svg") no-repeat center;
 }
-.catalog-slide-item > a:visited {
-  color: #00a9b4;
-}
 
 .cat-wrapper a {
   margin: 0 0 36px;
@@ -14041,9 +14035,6 @@ a.showcoupon:hover {
 }
 .cat-wrapper a:hover h3, .cat-wrapper a:hover .h3 {
   color: inherit;
-}
-.cat-wrapper a:visited {
-  color: #00a9b4;
 }
 .cat-wrapper img {
   width: min(195px, 100%);
@@ -14737,9 +14728,6 @@ p.outstock {
   background: #EFF4F4;
   border-radius: 3px;
 }
-.login-pass-link:visited {
-  color: #00a9b4;
-}
 .login-pass-link::before {
   content: "";
   margin-right: 10px;
@@ -14784,9 +14772,6 @@ p.outstock {
   font-size: 14px;
   color: #00a9b4;
   transition: 0.3s;
-}
-.recover-link:visited {
-  color: #00a9b4;
 }
 .recover-link:hover {
   opacity: 0.7;
