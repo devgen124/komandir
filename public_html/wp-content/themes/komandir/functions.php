@@ -244,3 +244,15 @@ function format_quantity_ending ($number, $nouns_array) {
 		return "$number $nouns_array[2]";
 	}
 }
+
+add_filter( 'wpcf7_spam', function( $spam ) {
+	if ( $spam ) {
+	  return $spam;
+	}
+
+	if ( isset( $_POST['consult-phone'] ) && preg_match( '/\+7 \d{3} \d{3} \d{2} \d{2}/', $_POST['consult-phone'] ) ) {
+	  $spam = true;
+	}
+
+	return $spam;
+}, 10, 1 );
