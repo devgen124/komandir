@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Discount Rules for WooCommerce &#8211; Create Smart WooCommerce Coupons &amp; Discounts - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-05-27 12:17:02+0000\n"
+"PO-Revision-Date: 2023-06-02 08:19:37+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -338,10 +338,6 @@ msgstr "мин"
 #: v2/App/Views/Admin/Rules/Discounts/Bulk.php:28
 msgid "max"
 msgstr "макс"
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:68
-msgid "Label"
-msgstr "Ярлык"
 
 #: v2/App/Helpers/Woocommerce.php:1095
 msgid "Friday"
@@ -702,7 +698,7 @@ msgstr "Обработка, пожалуйста, подождите.."
 
 #: v2/App/Controllers/Admin/Settings.php:579
 msgid "Oops! Coupon already exists in Woocommerce"
-msgstr "Ой! Промокод уже существует в Woocommerce"
+msgstr "Ой! Купон уже существует в Woocommerce"
 
 #: v2/App/Views/Admin/Rules/Manage.php:199
 msgid "Note : You can also exclude products/categories."
@@ -897,7 +893,7 @@ msgstr "Тип условия"
 
 #: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:18
 msgid "Subtotal should be"
-msgstr "Предварительный итог должен быть"
+msgstr "Подытог должен быть"
 
 #: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:24
 msgid "Subtotal Amount "
@@ -1128,6 +1124,10 @@ msgstr "<p>Переход завершен.</p>"
 #: v2/App/Helpers/Migration.php:216
 msgid "%s Completed. Please wait.."
 msgstr "Выполнено %s. Пожалуйста, подождите.."
+
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:68
+msgid "Label"
+msgstr "Этикетка"
 
 #: v2/App/Controllers/ManageDiscount.php:1348
 msgid "Sorry, it is not possible to apply coupon <b>\"%s\"</b> as you already have a discount applied in cart."
@@ -1417,7 +1417,7 @@ msgstr "Изменить"
 
 #: v2/App/Conditions/CartSubTotal.php:18 v2/App/Helpers/Helper.php:162
 msgid "Subtotal"
-msgstr "Предварительный итог"
+msgstr "Подытог"
 
 #: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:23
 msgid "Line item count"
@@ -1437,7 +1437,7 @@ msgstr "Откл."
 #: v2/App/Helpers/Helper.php:171 v2/App/Views/Admin/Tabs/settings.php:319
 #: v2/App/Views/Admin/Tabs/Statistics.php:230
 msgid "Coupon"
-msgstr "Промокод"
+msgstr "Купон"
 
 #: v2/App/Controllers/Admin/Tabs/Help.php:17
 #: v2/App/Views/Admin/Tabs/DiscountRule.php:69

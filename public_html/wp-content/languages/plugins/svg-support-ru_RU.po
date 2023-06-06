@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the Plugins - SVG Support - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-01-15 12:51:01+0000\n"
+"PO-Revision-Date: 2023-06-04 16:25:40+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.0-alpha.3\n"
+"X-Generator: GlotPress/4.0.0-alpha.4\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - SVG Support - Stable (latest release)\n"
 
@@ -22,6 +22,14 @@ msgstr "Не проводить очистку файлов от этих рол
 #: admin/svgs-settings-page.php:120
 msgid "Sanitize SVG while uploading"
 msgstr "Очищать SVG при загрузке"
+
+#: admin/svgs-settings-page.php:184
+msgid "Delete Plugin's Data"
+msgstr "Удалить данные плагина"
+
+#: admin/svgs-settings-page.php:190
+msgid "Delete all plugin's data during uninstallation process."
+msgstr "Удалите все данные плагина в процессе удаления."
 
 #: admin/svgs-settings-page.php:457
 msgid "@SVGSupport"
