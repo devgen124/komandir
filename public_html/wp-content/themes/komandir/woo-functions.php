@@ -650,26 +650,26 @@ add_action( 'woocommerce_new_order', function ( $order_id, $order ) {
 
 // добавление суммы отрицательных сборов как скидки при обмене с 1С
 
-add_filter( 'itglx/wc/1c/sale/query/order-discount-list', function ( $list, $order ) {
-	$total_fees = array_reduce(
-		$order->get_fees(),
-		function ($total, $fee) {
-			$amount = $fee->get_amount();
-			return $amount < 0 ? ( $total + $amount ) : $total;
-		}
-	);
+// add_filter( 'itglx/wc/1c/sale/query/order-discount-list', function ( $list, $order ) {
+// 	$total_fees = array_reduce(
+// 		$order->get_fees(),
+// 		function ($total, $fee) {
+// 			$amount = $fee->get_amount();
+// 			return $amount < 0 ? ( $total + $amount ) : $total;
+// 		}
+// 	);
 
-	if ( $total_fees ) {
-		$list[] = [
-			'Наименование' => 'Скидка',
-			'Сумма' => -$total_fees,
-			'УчтеноВСумме' => 'true',
-		];
-	}
+// 	if ( $total_fees ) {
+// 		$list[] = [
+// 			'Наименование' => 'Скидка',
+// 			'Сумма' => -$total_fees,
+// 			'УчтеноВСумме' => 'true',
+// 		];
+// 	}
 
-	return $list;
+// 	return $list;
 
-}, 10, 2 );
+// }, 10, 2 );
 
 
 
@@ -692,3 +692,14 @@ add_filter('woocommerce_cart_totals_coupon_html', function ($coupon_html, $coupo
 	}
 	return $coupon_html;
 }, 10, 3 );
+
+// добавляет в обмен subtotal вместо total для совместимости с 1с
+
+// add_filter( 'itglx_wc1c_xml_order_product_row_params', function ($product, $order) {
+// 	foreach ( $order->get_items as $item ) {
+// 		if ( $product['id'] == $item['product_id'] ) {
+// 			$product['lineTotal'] = round((float) $item->get_subtotal(), wc_get_price_decimals());
+// 		}
+// 	}
+// 	return $product;
+// }, 10, 2 );
