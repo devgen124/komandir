@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Master Slider &#8211; Responsive Touch Slider - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-05-29 14:15:32+0000\n"
+"PO-Revision-Date: 2023-06-03 09:04:22+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,6 +22,10 @@ msgstr "Может быть, позже"
 #: includes/msp-hooks.php:26
 msgid "Sure, I like Master slider"
 msgstr "Конечно, мне нравится Master slider"
+
+#: includes/msp-hooks.php:25
+msgid "Could you please do us a HUGE favor? If you could take 2 min of your time, we would be really thankful if you give Master Slider a 5-star rating on WordPress. By spreading the love, we can push Master Slider forward and create even greater free stuff in the future!"
+msgstr "Не могли бы вы оказать нам огромную услугу? Если вы потратите 2 минуты своего времени, мы будем очень благодарны, если вы поставите Master Slider оценку 5 звезд на WordPress. Распространяя любовь, мы сможем продвинуть Master Slider вперед и создать еще больше бесплатных вещей в будущем!"
 
 #: includes/msp-hooks.php:24
 msgid "Hi! Thank you so much for using Master Slider."
