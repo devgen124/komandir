@@ -10825,14 +10825,16 @@ class Popup {
 		});
 
         form.onsubmit = (e) => {
-			e.preventDefault();
-			const thisForm = e.target;
-            const thisBtn = thisForm.querySelector('.custom-popup-submit');
+            e.preventDefault();
+
+            const formData = new FormData();
+
+            inputs.forEach(([name, value]) => formData.append(name, value));
+
+            const thisBtn = form.querySelector('.custom-popup-submit');
 			this.addLoading(thisBtn);
 
-			const formData = new FormData(thisForm);
-
-            const thisSection = thisForm.closest('.custom-popup-section');
+            const thisSection = form.closest('.custom-popup-section');
 
 			this.ajaxSend(action, formData, (res) => {
 
