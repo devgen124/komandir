@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - SVG Support - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-06-04 16:25:40+0000\n"
+"PO-Revision-Date: 2023-06-06 07:39:15+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,6 +30,10 @@ msgstr "Удалить данные плагина"
 #: admin/svgs-settings-page.php:190
 msgid "Delete all plugin's data during uninstallation process."
 msgstr "Удалите все данные плагина в процессе удаления."
+
+#: admin/svgs-settings-page.php:257
+msgid " Checking this will use vanilla JS file instead of the jQuery."
+msgstr " При проверке этого будет использоваться файл vanilla JS вместо jQuery."
 
 #: admin/svgs-settings-page.php:457
 msgid "@SVGSupport"
