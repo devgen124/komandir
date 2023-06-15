@@ -241,11 +241,11 @@ AwsHooks.filters = AwsHooks.filters || {};
 
                         html += '</span>';
 
-                        if ( result.on_sale ) {
-                            html += '<span class="aws_result_sale">';
-                            html += '<span class="aws_onsale">' + translate.sale + '</span>';
-                            html += '</span>';
-                        }
+                        // if ( result.on_sale ) {
+                        //     html += '<span class="aws_result_sale">';
+                        //     html += '<span class="aws_onsale">' + translate.sale + '</span>';
+                        //     html += '</span>';
+                        // }
 
                         html += '</div>';
                         html += '</li>';
