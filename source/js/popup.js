@@ -85,7 +85,7 @@ class Popup {
 
             const formData = new FormData();
 
-            inputs.forEach(([name, value]) => formData.append(name, value));
+            inputs.forEach((inp) => formData.append(inp.name, inp.value));
 
             const thisBtn = form.querySelector('.custom-popup-submit');
 			this.addLoading(thisBtn);
