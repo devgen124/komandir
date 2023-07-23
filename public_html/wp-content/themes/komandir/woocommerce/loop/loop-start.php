@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $columns = esc_attr( wc_get_loop_prop( 'columns' ) );
-$columns = is_product_category() || is_product_tag() || isset($_GET['s']) ? $columns - 1 : $columns;
+$columns = is_product_category() || is_tax( 'promotion' ) || isset($_GET['s']) ? $columns - 1 : $columns;
 ?>
 
 <ul class="products columns-<?= $columns; ?> grid">

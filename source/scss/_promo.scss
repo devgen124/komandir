@@ -1,205 +1,55 @@
-.promo-tag-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: calc(-0.5 * var(--bs-gutter-x) - 30px);
-    margin-left: calc(-0.5 * var(--bs-gutter-x));
-
-    @include media-breakpoint-down(lg) {
-        margin-top: 40px;
-    }
-
-    @include media-breakpoint-down(sm) {
-        margin-right: -30px;
-        margin-left: 0;
-    }
+.promo-item:not(:last-child) {
+	margin-bottom: 70px;
 }
 
-.promo-tag {
-    width: calc(100% - 30px);
-    margin-bottom: 50px;
-    margin-right: 30px;
-    display: flex;
-    padding: 1.5em;
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    border: 1px solid rgba($accent-color, 0.4);
-
-    @include media-breakpoint-down(lg) {
-        width: calc(50% - 30px);
-        margin-bottom: 30px;
-        flex-direction: column;
-    }
-
-    @include media-breakpoint-down(md) {
-        width: calc(100% - 30px);
-    }
+.promo-item-wrapper {
+	display: flex;
 }
 
-.promo-tag-image {
-    flex-shrink: 0;
-    height: 250px;
-    width: 350px;
-    object-fit: cover;
-    border-radius: 3px;
+.promo-image {
+	width: 50%;
+	height: auto;
 
-    @include media-breakpoint-down(lg) {
-        height: 210px;
-        // width: 300px;
-    }
+	@include media-breakpoint-down('md') {
+		width: 100%;
+	}
+}
+.promo-content {
+	width: 50%;
+	padding-left: 25px;
+	margin-bottom: 25px;
 
-    @include media-breakpoint-down(md) {
-        width: 100%;
-        height: 345px;
-    }
+	@include media-breakpoint-down('md') {
+		width: 100%;
+	}
 
-    @include media-breakpoint-down(sm) {
-        height: 64vw;
-    }
+	h2 {
+		margin-bottom: 25px;
+	}
+
+	h3 {
+		font-size: 16px;
+		font-weight: bold;
+	}
 }
 
-.product-tag-content {
-    padding: 0 1.5em;
-    flex-grow: 1;
+.promo-shop-link {
+	margin-top: 30px;
+	display: block;
+	padding: 9px 30px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 700;
+	color: $accent-color;
+	background-color: $white;
+	box-shadow: inset 0 0 2px $accent-color;
+	border-radius: 3px;
+	transition: 0.3s;
 
-    h2 {
-        font-size: 20px;
-        transition: 0.3s;
-
-        &:hover {
-            color: $accent-color;
-        }
-
-        @include media-breakpoint-down(lg) {
-            font-size: 16px;
-        }
-    }
-
-    @include media-breakpoint-down(lg) {
-        padding: 1.5em 0;
-    }
+	&:hover {
+		color: $white;
+		background-color: $accent-color-hover;
+	}
 }
 
-.product-tag-product {
-    width: 25%;
-    flex-shrink: 0;
-    padding-left: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-left: 1px solid $accent-color-alter;
-
-    @include media-breakpoint-down(lg) {
-        width: 100%;
-        padding-left: 0;
-        padding-top: 1em;
-        border-left: none;
-        border-top: 1px solid $accent-color-alter;
-    }
-}
-
-.product-tag-img-link img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-
-    @include media-breakpoint-down(lg) {
-        width: 100px;
-        height: 100px;
-    }
-}
-
-.product-tag-title-link {
-    margin-bottom: 20px;
-    text-align: center;
-
-    h3 {
-        font-size: 16px;
-
-        @include media-breakpoint-down(lg) {
-            font-size: 14px;
-        }
-    }
-}
-
-.product-tag-shop-link {
-    color: $accent-color;
-    transition: 0.3s;
-
-    &:hover {
-        color: $accent-color-hover;
-    }
-}
-
-.promo-preview-wrapper {
-    margin-top: 50px;
-    display: flex;
-
-    @include media-breakpoint-down(lg) {
-        flex-direction: column;
-    }
-}
-
-.promo-preview-image {
-    border-radius: 3px;
-    height: 325px;
-    object-fit: contain;
-}
-
-.promo-preview-products {
-    margin-left: 30px;
-    flex-grow: 0;
-    width: 450px;
-
-    @include media-breakpoint-down(lg) {
-        width: auto;
-        margin-left: 0;
-    }
-
-    header {
-        margin-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        h3 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        a {
-            color: $accent-color;
-            transition: 0.3s;
-
-            &:hover {
-                color: $accent-color-hover;
-            }
-        }
-    }
-
-    .woocommerce {
-        ul.products[class*="columns-"] {
-            @include media-breakpoint-down(lg) {
-                flex-wrap: nowrap;
-                margin-bottom: 0;
-            }
-            li.product {
-                margin-right: 0;
-
-                @include media-breakpoint-down(xl) {
-                    width: auto;
-                }
-
-                @include media-breakpoint-down(lg) {
-                    margin-bottom: 0;
-                    width: 250px;
-                    flex-shrink: 0;
-                }
-            }
-        }
-
-        @include media-breakpoint-down(lg) {
-            width: 100%;
-            overflow-y: auto;
-        }
-    }
-}
