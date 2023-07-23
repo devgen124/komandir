@@ -703,3 +703,41 @@ add_filter('woocommerce_cart_totals_coupon_html', function ($coupon_html, $coupo
 // 	}
 // 	return $product;
 // }, 10, 2 );
+
+// таксономия "Акции" для товаров
+
+add_action( 'init', function () {
+	register_taxonomy( 'promotion', 'product', [
+		'labels'                => [
+			'name'              => 'Акции',
+			'singular_name'     => 'Акция',
+			'search_items'      => 'Найти акции',
+			'all_items'         => 'Все акции',
+			'view_item '        => 'Посмотреть акцию',
+			'edit_item'         => 'Редактировать акцию',
+			'update_item'       => 'Обновить акцию',
+			'add_new_item'      => 'Добавить новую акцию',
+			'new_item_name'     => 'Название новой акции',
+			'back_to_items'     => '← Перейти к акциям',
+		],
+		'description'           => 'Промоакции для товаров', // описание таксономии
+		'public'                => true,
+		// 'publicly_queryable'    => null, // равен аргументу public
+		// 'show_in_nav_menus'     => true, // равен аргументу public
+		// 'show_ui'               => true, // равен аргументу public
+		// 'show_in_menu'          => true, // равен аргументу show_ui
+		// 'show_tagcloud'         => true, // равен аргументу show_ui
+		// 'show_in_quick_edit'    => null, // равен аргументу show_ui
+		'hierarchical'          => false,
+
+		'rewrite'               => true,
+		//'query_var'             => $taxonomy, // название параметра запроса
+		'capabilities'          => array(),
+		'meta_box_cb'           => null, // html метабокса. callback: `post_categories_meta_box` или `post_tags_meta_box`. false — метабокс отключен.
+		'show_admin_column'     => false, // авто-создание колонки таксы в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_rest'          => true, // добавить в REST API
+		'rest_base'             => null, // $taxonomy
+		// '_builtin'              => false,
+		//'update_count_callback' => '_update_post_term_count',
+	] );
+} );

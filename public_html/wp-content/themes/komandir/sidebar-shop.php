@@ -9,11 +9,10 @@
 
 ?>
 
-<?php if ( is_product_category() || is_product_tag() || isset( $_GET['s'] ) ): ?>
+<?php if ( is_product_category() || is_tax( 'promotion' ) || isset( $_GET['s'] ) ): ?>
 
 	<aside id="woo-sidebar" class="widget-area filters-sidebar">
 		<h2>Фильтры</h2>
-		<?php //echo do_shortcode( '[br_filter_single filter_id=14543]' ); ?>
 		<button class="filters-close" aria-label="Закрыть"></button>
 		<div class="filters-sidebar-inner">
 			<?= do_shortcode( '[br_filters_group group_id=14536]' ); ?>
