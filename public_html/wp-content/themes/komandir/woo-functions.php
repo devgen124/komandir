@@ -684,7 +684,7 @@ add_action( 'woocommerce_new_order', function ( $order_id, $order ) {
 // 	return $array;
 // });
 
-// убирает кнопку ссылку Убрать у "псевдокупона (скидка из плагина Woo Discounts)
+// убирает кнопку ссылку "Убрать" у "псевдокупона" (скидка из плагина Woo Discounts)
 
 add_filter('woocommerce_cart_totals_coupon_html', function ($coupon_html, $coupon, $discount_amount_html) {
 	if ( is_null( $coupon->get_status() ) ) {
