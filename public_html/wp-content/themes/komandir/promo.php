@@ -16,7 +16,7 @@ global $svg;
 			<?php
 			$promotions = get_terms( [
 				'taxonomy'   => 'promotion',
-				'orderby'    => 'term_id',
+				'orderby'    => 'id',
 				'order'      => 'ASC',
 				'hide_empty' => false,
 				'meta_query' => [
