@@ -12,6 +12,7 @@ import initPassViewSwitcher from './pass-view-switcher.js';
 import mobileSideMenu from './mobile_menu.js';
 import mobileSearch from './mobile_search.js';
 import modalInit from './modal.js';
+import salesSlider from './sales-mobile-slider.js';
 
 ajax_wishlist();
 new CatalogMobileSlider();
@@ -26,3 +27,4 @@ initPassViewSwitcher(document);
 mobileSideMenu();
 mobileSearch();
 modalInit();
+salesSlider();
