@@ -51,6 +51,7 @@
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.5",
     "select-custom": "^1.1.9",
+    "tiny-slider": "^2.9.4",
     "tippy.js": "^6.3.7"
   }
 }
