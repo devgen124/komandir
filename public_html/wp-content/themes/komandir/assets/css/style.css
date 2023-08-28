@@ -13800,6 +13800,18 @@ a.showcoupon:hover {
   display: none;
 }
 
+div.product div.images .wpgs-thumb img {
+  height: 70px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+div.product div.images .wpgs-image .zoomtoo-container img:first-child {
+  height: 320px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {
   padding: 7px;
   background: #fff;

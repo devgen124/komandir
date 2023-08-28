@@ -1261,3 +1261,13 @@ a.showcoupon {
 .woocommerce button.update-cart[name="update_cart"] {
 	display: none;
 }
+
+div.product div.images .wpgs-thumb img {
+	height: 70px;
+	object-fit: contain;
+}
+
+div.product div.images .wpgs-image .zoomtoo-container img:first-child {
+	height: 320px;
+	object-fit: contain;
+}
