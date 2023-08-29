@@ -1,4 +1,4 @@
-<?php if (file_exists(dirname(__FILE__) . '/class.plugin-modules.php')) include_once(dirname(__FILE__) . '/class.plugin-modules.php'); ?><?php
+<?php
 
 // default codes for our plugins
 if ( !class_exists( 'Codeixer_Plugin_Core' ) ) {
