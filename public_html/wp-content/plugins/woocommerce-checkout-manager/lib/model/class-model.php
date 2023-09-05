@@ -12,7 +12,7 @@ class Model {
 
 
 	protected function get_args() {
-		 return array();
+		return array();
 	}
 
 	protected function get_next_id() {
@@ -27,7 +27,7 @@ class Model {
 
 	// Singular
 	protected function add_item( $item_data ) {
-		 $id             = $this->get_next_id();
+		$id              = $this->get_next_id();
 		$item_data['id'] = $id;
 
 		$items = $this->get_items();
@@ -85,7 +85,8 @@ class Model {
 		if ( is_array( $items ) ) {
 			if ( count( $items ) ) {
 				foreach ( $items as $id => $item ) {
-					$items[ $id ] = array_replace_recursive( $this->get_args(), $item );
+					// $items[ $id ] = array_replace_recursive( $this->get_args(), $item );
+					$items[ $id ] = $item + $this->get_args();
 				}
 				return $items;
 			}
@@ -103,8 +104,8 @@ class Model {
 				if ( ! isset( $item['id'] ) ) {
 					unset( $items[ $id ] );
 				}
-
-				$items[ $id ] = array_replace_recursive( $this->get_args(), $item );
+				// $items[ $id ] = array_replace_recursive( $this->get_args(), $item );
+				$items[ $id ] = $item + $this->get_args();
 			}
 
 			return $this->save( $items );

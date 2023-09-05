@@ -136,7 +136,7 @@ class Fields_Register {
 					if ( in_array( "{$load_address}_country", $keys ) ) {
 						unset( $fields[ $field_id ]['country'] );
 					}
-					$fields[ $field_id ]['value'] = get_user_meta( get_current_user_id(), $field['key'], true );
+					$fields[ $field_id ]['value'] = user_meta( get_current_user_id(), $field['key'], true );
 				}
 			}
 

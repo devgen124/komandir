@@ -206,4 +206,29 @@
 		<input class="short" type="text" name="extra_class" value="{{data.extra_class}}">
 		</p>
 	</div>
+	<div class="options_group">
+		<p class="form-field wooccm-premium-field">
+			<label><?php esc_html_e( 'Autocomplete attribute', 'woocommerce-checkout-manager' ); ?></label>
+			<select class="select short" name="autocomplete">
+				<?php foreach ( QuadLayers\WOOCCM\Helpers::get_autocomplete_options() as $autocomplete_option ) : ?>
+					<option <# if ( data.autocomplete=='<?php echo esc_attr( $autocomplete_option ); ?>' ) { #>selected="selected"<# } #> value="<?php echo esc_attr( $autocomplete_option ); ?>"><?php echo sprintf( esc_html__( '%s', 'woocommerce-checkout-manager' ), esc_html( $autocomplete_option ) ); ?></option>
+				<?php endforeach; ?>
+			</select>
+			<span class="description"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete">HTML autocomplete attribute</a>.</span>
+			<span class="description premium">(<?php esc_html_e( 'This is a premium feature', 'woocommerce-checkout-manager' ); ?>)</span>
+		</p>
+	</div>
+	<?php if ( $is_billing_shipping ) : ?>
+	<div class="options_group">
+		<p class="form-field wooccm-premium-field">
+			<label><?php esc_html_e( 'Previous selection', 'woocommerce-checkout-manager' ); ?></label>
+			<select class="select short" name="user_meta">
+				<option <# if ( data.user_meta==true ) { #>selected="selected"<# } #> value="true"><?php esc_html_e( 'Yes', 'woocommerce-checkout-manager' ); ?></option>
+				<option <# if ( data.user_meta==false ) { #>selected="selected"<# } #> value="false"><?php esc_html_e( 'No', 'woocommerce-checkout-manager' ); ?></option>
+			</select>
+			<span span class="woocommerce-help-tip" data-tip="<?php esc_html_e( 'Complete the field with previous user data on checkout load.', 'woocommerce-checkout-manager' ); ?>"></span>
+			<span class="description premium">(<?php esc_html_e( 'This is a premium feature', 'woocommerce-checkout-manager' ); ?>)</span>
+		</p>
+	</div>
+	<?php endif; ?>
 </div>

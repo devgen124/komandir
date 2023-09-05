@@ -31,6 +31,7 @@ use MailPoet\Tasks\Sending as SendingTask;
 use MailPoet\Tasks\Subscribers\BatchIterator;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Carbon\Carbon;
+use MailPoetVendor\Doctrine\ORM\EntityManager;
 
 class SendingQueue {
   /** @var MailerTask */
@@ -85,6 +86,9 @@ class SendingQueue {
   /*** @var SendingQueuesRepository */
   private $sendingQueuesRepository;
 
+  /** @var EntityManager */
+  private $entityManager;
+
   public function __construct(
     SendingErrorHandler $errorHandler,
     SendingThrottlingHandler $throttlingHandler,
@@ -100,6 +104,7 @@ class SendingQueue {
     MailerTask $mailerTask,
     SubscribersRepository $subscribersRepository,
     SendingQueuesRepository $sendingQueuesRepository,
+    EntityManager $entityManager,
     $newsletterTask = false
   ) {
     $this->errorHandler = $errorHandler;
@@ -118,6 +123,7 @@ class SendingQueue {
     $this->scheduledTasksRepository = $scheduledTasksRepository;
     $this->subscribersRepository = $subscribersRepository;
     $this->sendingQueuesRepository = $sendingQueuesRepository;
+    $this->entityManager = $entityManager;
   }
 
   public function process($timer = false) {
@@ -181,6 +187,11 @@ class SendingQueue {
     if (!$newsletter) {
       return;
     }
+
+    $isTransactional = in_array($newsletter->type, [
+      NewsletterEntity::TYPE_AUTOMATION_TRANSACTIONAL,
+      NewsletterEntity::TYPE_WC_TRANSACTIONAL_EMAIL,
+    ]);
 
     // clone the original object to be used for processing
     $_newsletter = (object)$newsletter->asArray();
@@ -269,6 +280,14 @@ class SendingQueue {
           $foundSubscribers,
           $timer
         );
+        if (!$isTransactional) {
+          $this->entityManager->wrapInTransaction(function() use ($foundSubscribersIds) {
+            $now = Carbon::createFromTimestamp((int)current_time('timestamp'));
+            $this->subscribersRepository->bulkUpdateLastSendingAt($foundSubscribersIds, $now);
+            // We're nullifying this value so these subscribers' engagement score will be recalculated the next time the cron runs
+            $this->subscribersRepository->bulkUpdateEngagementScoreUpdatedAt($foundSubscribersIds, null);
+          });
+        }
         $this->loggerFactory->getLogger(LoggerFactory::TOPIC_NEWSLETTERS)->info(
           'after queue chunk processing',
           ['newsletter_id' => $newsletter->id, 'task_id' => $queue->taskId]
@@ -339,7 +358,7 @@ class SendingQueue {
       $unsubscribeUrls[] = $this->links->getUnsubscribeUrl($queue->id, $subscriberEntity);
       $oneClickUnsubscribeUrls[] = $this->links->getOneClickUnsubscribeUrl($queue->id, $subscriberEntity);
 
-      $metasForSubscriber = $this->mailerMetaInfo->getNewsletterMetaInfo($newsletter, $subscriberEntity);
+      $metasForSubscriber = $this->mailerMetaInfo->getNewsletterMetaInfo($newsletterEntity, $subscriberEntity);
       if ($campaignId) {
         $metasForSubscriber['campaign_id'] = $campaignId;
       }

@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Cron\CronTrigger;
 use MailPoet\Cron\Workers\AuthorizedSendingEmailsCheck;
+use MailPoet\Cron\Workers\BackfillEngagementData;
 use MailPoet\Cron\Workers\Beamer;
 use MailPoet\Cron\Workers\InactiveSubscribers;
 use MailPoet\Cron\Workers\NewsletterTemplateThumbnails;
@@ -183,6 +184,7 @@ class Populator {
     $this->detectReferral();
     $this->scheduleSubscriberLastEngagementDetection();
     $this->scheduleNewsletterTemplateThumbnails();
+    $this->scheduleBackfillEngagementData();
   }
 
   private function createMailPoetPage() {
@@ -232,9 +234,11 @@ class Populator {
     // parse current user name if an email is used
     $senderName = explode('@', $currentUserName);
     $senderName = reset($senderName);
+    // If current user is not set, default to admin email
+    $senderAddress = $currentUser->user_email ?: $this->wp->getOption('admin_email'); // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
     $defaultSender = [
       'name' => $senderName,
-      'address' => $currentUser->user_email ?: '', // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+      'address' => $senderAddress ?: '',
     ];
     $savedSender = $this->settings->fetch('sender', []);
 
@@ -711,6 +715,21 @@ class Populator {
       NewsletterTemplateThumbnails::TASK_TYPE,
       Carbon::createFromTimestamp($this->wp->currentTime('timestamp')),
       ScheduledTaskEntity::PRIORITY_LOW
+    );
+  }
+
+  private function scheduleBackfillEngagementData(): void {
+    $existingTask = $this->scheduledTasksRepository->findOneBy(
+      [
+        'type' => BackfillEngagementData::TASK_TYPE,
+      ]
+    );
+    if ($existingTask) {
+      return;
+    }
+    $this->scheduleTask(
+      BackfillEngagementData::TASK_TYPE,
+      Carbon::createFromTimestamp($this->wp->currentTime('timestamp'))
     );
   }
 }

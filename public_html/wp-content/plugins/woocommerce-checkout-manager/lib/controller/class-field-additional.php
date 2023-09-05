@@ -38,6 +38,8 @@ class Field_Additional extends Field {
 		$fields = Plugin::instance()->additional->get_fields();
 		if ( count( $fields ) ) {
 
+			$order = wc_get_order( $order_id );
+
 			foreach ( $fields as $field_id => $field ) {
 
 				$key = sprintf( '_%s', $field['key'] );
@@ -45,16 +47,17 @@ class Field_Additional extends Field {
 				if ( ! empty( $data[ $field['key'] ] ) ) {
 
 					$value = $data[ $field['key'] ];
-
 					if ( 'textarea' == $field['type'] ) {
-						update_post_meta( $order_id, $key, wp_kses( $value, false ) );
+						$order->update_meta_data( $key, wp_kses( $value, false ) );
 					} elseif ( is_array( $value ) ) {
-						update_post_meta( $order_id, $key, implode( ',', array_map( 'sanitize_text_field', $value ) ) );
+						$order->update_meta_data( $key, implode( ',', array_map( 'sanitize_text_field', $value ) ) );
 					} else {
-						update_post_meta( $order_id, $key, sanitize_text_field( $value ) );
+						$order->update_meta_data( $key, sanitize_text_field( $value ) );
 					}
 				}
 			}
+
+			$order->save();
 		}
 	}
 
@@ -98,96 +101,97 @@ class Field_Additional extends Field {
 			$options  = Plugin::instance()->additional->get_option_types();
 			$multiple = Plugin::instance()->additional->get_multiple_types();
 			?>
-	  </div>
-	  <style>
-		#order_data .order_data_column {
-		  width: 23%;
-		}
-		#order_data .order_data_column_additional .form-field {
-		  width: 100%;
-		  clear: both;
-		}
-	  </style>
-	  <div class="order_data_column order_data_column_additional">
-		<h3>
-			<?php esc_html_e( 'Additional', 'woocommerce-checkout-manager' ); ?>
-		  <a href="#" class="edit_address"><?php esc_html_e( 'Edit', 'woocommerce-checkout-manager' ); ?></a>
-		  <span>
-			<a href="<?php echo esc_url( WOOCCM_PREMIUM_SELL_URL ); ?>" class="load_customer_additional" target="_blank" style="display:none;font-size: 13px;font-weight: 400;">
-			  <?php esc_html_e( 'This is a premium feature.', 'woocommerce-checkout-manager' ); ?>
-			</a>
-		  </span>
-		</h3>
-		<div class="address">
-			<?php
-			foreach ( $fields as $field_id => $field ) {
-
-				$key = sprintf( '_%s', $field['key'] );
-
-				$value = get_post_meta( $order->get_id(), $key, true );
-				if ( ! $value ) {
-
-					$value = maybe_unserialize( get_post_meta( $order->get_id(), sprintf( '%s', $field['name'] ), true ) );
-
-					if ( is_array( $value ) ) {
-						$value = implode( ',', $value );
-					}
-
-					update_post_meta( $order->get_id(), $key, $value );
-					delete_post_meta( $order->get_id(), sprintf( '%s', $field['name'] ) );
+			  </div>
+			<style>
+				#order_data .order_data_column {
+				width: 23%;
 				}
-
-				if ( $value ) {
-					?>
-			  <p id="<?php echo esc_attr( $field['key'] ); ?>" class="form-field form-field-wide form-field-type-<?php echo esc_attr( $field['type'] ); ?>">
-				<strong title="<?php echo esc_attr( sprintf( esc_html__( 'ID: %1$s | Field Type: %2$s', 'woocommerce-checkout-manager' ), $key, esc_html__( 'Generic', 'woocommerce-checkout-manager' ) ) ); ?>">
-					<?php printf( '%s', esc_html( $field['label'] ) ? esc_html( $field['label'] ) : sprintf( esc_html__( 'Field %s', 'woocommerce-checkout-manager' ), esc_html( $field_id ) ) ); ?>
-				</strong>
-					<?php echo esc_html( $value ); ?>
-			  </p>
+				#order_data .order_data_column_additional .form-field {
+				width: 100%;
+				clear: both;
+				}
+			</style>
+			<div class="order_data_column order_data_column_additional">
+				<h3>
+					<?php esc_html_e( 'Additional', 'woocommerce-checkout-manager' ); ?>
+				<a href="#" class="edit_address"><?php esc_html_e( 'Edit', 'woocommerce-checkout-manager' ); ?></a>
+				<span>
+					<a href="<?php echo esc_url( WOOCCM_PREMIUM_SELL_URL ); ?>" class="load_customer_additional" target="_blank" style="display:none;font-size: 13px;font-weight: 400;">
+					<?php esc_html_e( 'This is a premium feature.', 'woocommerce-checkout-manager' ); ?>
+					</a>
+				</span>
+				</h3>
+				<div class="address">
 					<?php
-				}
-			}
-			?>
-		</div>
-		<div class="edit_address">
-			<?php
-			foreach ( $fields as $field_id => $field ) {
+					foreach ( $fields as $field_id => $field ) {
 
-				if ( in_array( $field['type'], $template ) ) {
-					continue;
-				}
+						$key = sprintf( '_%s', $field['key'] );
 
-				$key = sprintf( '_%s', $field['key'] );
+						$value = get_post_meta( $order->get_id(), $key, true );
+						if ( ! $value ) {
 
-				$field['id']            = sprintf( '_%s', $field['key'] );
-				$field['name']          = $field['key'];
-				$field['value']         = null;
-				$field['class']         = join( ' ', $field['class'] );
-				$field['wrapper_class'] = 'wooccm-premium-field';
+							$value = maybe_unserialize( get_post_meta( $order->get_id(), sprintf( '%s', $field['name'] ), true ) );
 
-				$field['value'] = get_post_meta( $order->get_id(), $key, true );
-				if ( ! $field['value'] ) {
+							if ( is_array( $value ) ) {
+								$value = implode( ',', $value );
+							}
 
-					$field['value'] = maybe_unserialize( get_post_meta( $order->get_id(), sprintf( '%s', $field['name'] ), true ) );
+							$order->update_meta_data( $key, $value );
+							$order->delete_meta_data( sprintf( '%s', $field['name'] ) );
+						}
 
-					if ( is_array( $field['value'] ) ) {
-						$field['value'] = implode( ',', $field['value'] );
+						if ( $value ) {
+							?>
+							<p id="<?php echo esc_attr( $field['key'] ); ?>" class="form-field form-field-wide form-field-type-<?php echo esc_attr( $field['type'] ); ?>">
+								<strong title="<?php echo esc_attr( sprintf( esc_html__( 'ID: %1$s | Field Type: %2$s', 'woocommerce-checkout-manager' ), $key, esc_html__( 'Generic', 'woocommerce-checkout-manager' ) ) ); ?>">
+									<?php printf( '%s', esc_html( $field['label'] ) ? esc_html( $field['label'] ) : sprintf( esc_html__( 'Field %s', 'woocommerce-checkout-manager' ), esc_html( $field_id ) ) ); ?>
+								</strong>
+									<?php echo esc_html( $value ); ?>
+							</p>
+							<?php
+						}
 					}
-				}
+					$order->save();
+					?>
+				</div>
+				<div class="edit_address">
+					<?php
+					foreach ( $fields as $field_id => $field ) {
 
-				switch ( $field['type'] ) {
-					case 'textarea':
-						woocommerce_wp_textarea_input( $field );
-						break;
-					default:
-						$field['type'] = 'text';
-						woocommerce_wp_text_input( $field );
-						break;
-				}
-			}
-			?>
-		</div>
+						if ( in_array( $field['type'], $template ) ) {
+							continue;
+						}
+
+						$key = sprintf( '_%s', $field['key'] );
+
+						$field['id']            = sprintf( '_%s', $field['key'] );
+						$field['name']          = $field['key'];
+						$field['value']         = null;
+						$field['class']         = join( ' ', $field['class'] );
+						$field['wrapper_class'] = 'wooccm-premium-field';
+
+						$field['value'] = get_post_meta( $order->get_id(), $key, true );
+						if ( ! $field['value'] ) {
+
+							$field['value'] = maybe_unserialize( get_post_meta( $order->get_id(), sprintf( '%s', $field['name'] ), true ) );
+
+							if ( is_array( $field['value'] ) ) {
+								$field['value'] = implode( ',', $field['value'] );
+							}
+						}
+
+						switch ( $field['type'] ) {
+							case 'textarea':
+								woocommerce_wp_textarea_input( $field );
+								break;
+							default:
+								$field['type'] = 'text';
+								woocommerce_wp_text_input( $field );
+								break;
+						}
+					}
+					?>
+				</div>
 			<?php
 		}
 	}
@@ -218,6 +222,22 @@ class Field_Additional extends Field {
 			$disabled           = Plugin::instance()->additional->get_disabled_types();
 			$product_categories = $this->get_product_categories();
 			$settings           = $this->get_settings();
+
+			$product_types = wc_get_product_types();
+
+			// This type can not setted because it is not added to to cart
+			unset( $product_types['external'] );
+
+			// This type can not setted because it is not added to to cart. It add every child to cart as simple product
+			unset( $product_types['grouped'] );
+
+			$product_subtypes_options = array(
+				'virtual' => __( 'Virtual', 'woocommerce-checkout-manager' ),
+				'downloadable' => __( 'Downloadable', 'woocommerce-checkout-manager' ),
+				'virtual-downloadable' => __( 'Virtual & Downloadable', 'woocommerce-checkout-manager' ),
+			);
+
+			$is_billing_shipping = false;
 
 			include_once WOOCCM_PLUGIN_DIR . 'lib/view/backend/pages/additional.php';
 		}
