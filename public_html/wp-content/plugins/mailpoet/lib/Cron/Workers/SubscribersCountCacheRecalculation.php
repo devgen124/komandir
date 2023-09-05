@@ -49,7 +49,10 @@ class SubscribersCountCacheRecalculation extends SimpleWorker {
     // update cache for subscribers without segment
     $this->recalculateSegmentCache($timer, 0);
 
+    $this->recalculateHomepageCache($timer);
+
     // remove redundancies from cache
+    $this->cronHelper->enforceExecutionLimit($timer);
     $this->subscribersCountsController->removeRedundancyFromStatisticsCache();
 
     return true;
@@ -62,12 +65,19 @@ class SubscribersCountCacheRecalculation extends SimpleWorker {
     if ($item === null || !isset($item['created_at']) || $now->diffInMinutes($item['created_at']) > self::EXPIRATION_IN_MINUTES) {
       if ($segment) {
         $this->subscribersCountsController->recalculateSegmentStatisticsCache($segment);
-        if ($segment->isStatic()) {
-          $this->subscribersCountsController->recalculateSegmentGlobalStatusStatisticsCache($segment);
-        }
       } else {
         $this->subscribersCountsController->recalculateSubscribersWithoutSegmentStatisticsCache();
       }
+    }
+  }
+
+  private function recalculateHomepageCache($timer): void {
+    $this->cronHelper->enforceExecutionLimit($timer);
+    $now = Carbon::now();
+    $item = $this->transientCache->getItem(TransientCache::SUBSCRIBERS_HOMEPAGE_STATISTICS_COUNT_KEY, 0);
+    if ($item === null || !isset($item['created_at']) || $now->diffInMinutes($item['created_at']) > self::EXPIRATION_IN_MINUTES) {
+      $this->cronHelper->enforceExecutionLimit($timer);
+      $this->subscribersCountsController->recalculateHomepageStatisticsCache();
     }
   }
 

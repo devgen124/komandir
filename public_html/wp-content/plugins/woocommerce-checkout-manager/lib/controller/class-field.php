@@ -180,6 +180,8 @@ class Field extends Controller {
 			$field_data_sanitized['description'] = wp_kses_post( $field_data['description'] );
 
 			if ( is_array( $field_data_sanitized ) ) {
+
+				$field_data_sanitized = $this->order_options( $field_data_sanitized );
 				if ( isset( $field_data_sanitized['id'] ) ) {
 
 					unset( $field_data_sanitized['show_product_selected'] );
@@ -193,6 +195,19 @@ class Field extends Controller {
 		}
 
 		return parent::error_reload_page();
+	}
+
+	public function order_options( $field ) {
+		if ( count( $field['options'] ) < 2 ) {
+			return $field;
+		}
+		usort(
+			$field['options'],
+			function ( $item1, $item2 ) {
+			return intval( $item1['order'] ) <=> intval( $item2['order'] );
+			}
+		);
+		return $field;
 	}
 
 	public function ajax_delete_field() {

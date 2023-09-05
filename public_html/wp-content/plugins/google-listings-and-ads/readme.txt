@@ -2,10 +2,10 @@
 Contributors: automattic, google, woocommerce
 Tags: woocommerce, google, listings, ads
 Requires at least: 5.9
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 7.4
 Requires PHP Architecture: 64 Bits
-Stable tag: 2.4.5
+Stable tag: 2.5.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -111,25 +111,27 @@ Yes, you can run both at the same time, and we recommend it! In the US, advertis
 
 == Changelog ==
 
-= 2.4.5 - 2023-05-09 =
-* Fix - Bug in Attribute Mapping with Taxonomy based rules not being applied in variations.
-* Fix - Missing spaces between the card layouts on the Get Started page.
-* Tweak - WC 7.7 compatibility.
+= 2.5.4 - 2023-08-29 =
+* Dev - Override vulnerability packages: xmlhttprequest-ssl and ws.
+* Dev - Update trigger method in Hooks Generator Workflow.
 
-= 2.4.4 - 2023-05-02 =
-* Dev - Fix SEMGREP warnings.
-* Fix - Prefix Psr\Container package to prevent conflicts with other plugins.
+= 2.5.3 - 2023-08-22 =
+* Dev - Add Action for Hooks Documentation Generator.
+* Dev - Allow E2E testing with Release Candidates.
+* Dev - Convert E2E tests from Puppeteer to Playwright.
+* Dev - Externalize all WordPress JavaScript packages via Dependency Extraction Webpack Plugin (DEWP).
+* Dev - Fetch WooCommerce L-1 versions for our tests.
+* Dev - Remove legacy HooksDocsGenerator.php file.
+* Dev - Use `merge-trunk-develop-pr` action.
+* Tweak - Apply consistent admin theme colors to common UI components.
+* Update - Google API Client Services package to v0.312.
+* Update - Google Ads library to API V14. (package v19.2.0).
 
-= 2.4.3 - 2023-04-25 =
-* Dev - Add PHP Code coverage report as GitHub action.
-* Dev - Unit test support for PHP 8.2.
-* Dev - Use "willReturnOnConsecutiveCalls" instead of "at" for unit tests.
-* Fix - Prevent creating assets for non-Performance Max campaigns.
-* Fix - The fatal errors caused by adding any US Armed Forces location to WooCommerce Shipping setting.
-* Fix - Use Ads account currency in the WooCommerce marketing dashboard.
-* Tweak - Redirect users between Dashboard and Get Started pages as required.
-
-= 2.4.2 - 2023-03-29 =
-* Tweak - WC 7.6 compatibility.
+= 2.5.2 - 2023-08-08 =
+* Fix - Remove `add_woocommerce_extended_task_list_item` and `remove_woocommerce_extended_task_list_item` hooks.
+* Fix - WordPress 6.3 compatibility: The forms and image selector may not work due to "setImmediate" deprecation.
+* Tweak - Use the latest API to add an item to the WC tasks list.
+* Tweak - WC 8.0 compatibility.
+* Tweak - WP 6.3 compatibility.
 
 [See changelog for all versions](https://raw.githubusercontent.com/woocommerce/google-listings-and-ads/trunk/changelog.txt).

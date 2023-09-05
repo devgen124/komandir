@@ -10,7 +10,6 @@ class Fields_Additional {
 	protected static $_instance;
 
 	public function __construct() {
-		add_action( 'woocommerce_checkout_process', array( $this, 'add_required_notice' ) );
 
 		// Compatibility
 		// -----------------------------------------------------------------------
@@ -45,51 +44,6 @@ class Fields_Additional {
 		}
 		return self::$_instance;
 	}
-
-	public function add_required_notice() {
-
-		if ( isset( $_POST['woocommerce-process-checkout-nonce'] ) && wp_verify_nonce( wc_clean( wp_unslash( $_POST['woocommerce-process-checkout-nonce'] ) ), 'woocommerce-process_checkout' ) ) {
-
-			$fields = WC()->checkout->get_checkout_fields();
-
-			if ( ! empty( $fields['additional'] ) ) {
-
-				foreach ( $fields['additional'] as $key => $field ) {
-
-					if ( ! empty( $field['required'] ) && empty( $field['disabled'] ) && ! isset( $_POST[ $key ] ) ) {
-
-						$message = sprintf( esc_html__( '%s is a required field.', 'woocommerce-checkout-manager' ), '<strong>' . esc_html( $field['label'] ) . '</strong>' );
-
-						wc_add_notice( $message, 'error' );
-					}
-				}
-			}
-		}
-	}
-
-	/*
-	function add_order_meta($order_id = 0, $data) {
-
-		if (count($fields = WC()->checkout->get_checkout_fields('additional'))) {
-
-			foreach ($fields as $key => $field) {
-
-				if (!empty($data[$key])) {
-
-					$value = $data[$key];
-
-					if ($field['type'] == 'textarea') {
-						update_post_meta($order_id, sprintf('_%s', $key), wp_kses($value, false));
-					} else if (is_array($value)) {
-						update_post_meta($order_id, sprintf('_%s', $key), implode(',', array_map('sanitize_text_field', $value)));
-					} else {
-						update_post_meta($order_id, sprintf('_%s', $key), sanitize_text_field($value));
-					}
-				}
-			}
-		}
-	}
-	*/
 
 	public function add_additional_fields( $checkout ) {
 		?>

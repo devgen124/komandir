@@ -31,8 +31,8 @@
   <div class="options_group">
 	<p class="form-field">
 	  <label><?php esc_html_e( 'More', 'woocommerce-checkout-manager' ); ?></label>
-	  <input <# if (data.more_product) { #>checked="checked"<# } #> type="checkbox" name="more_product" value="1">
-		<span class="description"><?php esc_html_e( 'Apply conditions event it there is more than one product', 'woocommerce-checkout-manager' ); ?></span>
+	  <input <# if (data.apply_conditions_if_more_than_one_product) { #>checked="checked"<# } #> type="checkbox" name="apply_conditions_if_more_than_one_product" value="1">
+		<span class="description"><?php esc_html_e( 'Apply conditions even if there is more than one product', 'woocommerce-checkout-manager' ); ?></span>
 	</p>
   </div>
 
@@ -75,6 +75,57 @@
 		  <?php endforeach; ?>
 		<?php endif; ?>
 	  </select>
+	</p>
+  </div>
+
+  <div class="options_group">
+	<p class="form-field">
+	  <label><?php esc_html_e( 'Show for product type', 'woocommerce-checkout-manager' ); ?></label>
+	  <select class="wooccm-enhanced-select" name="show_product_type[]" data-placeholder="<?php esc_attr_e( 'Filter by product type', 'woocommerce-checkout-manager' ); ?>" data-selected="{{data.show_product_type}}" data-allow_clear="true" multiple="multiple">
+		<?php if ( $product_types ) : ?>
+			<?php foreach ( $product_types as $key => $label ) : ?>
+			<option <# if ( _.contains(data.show_product_type, '<?php echo esc_attr( $key ); ?>' ) ) { #>selected="selected"<# } #> value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></option>
+		  <?php endforeach; ?>
+		<?php endif; ?>
+	  </select>
+	</p>
+	<p class="form-field">
+	  <label><?php esc_html_e( 'Hide for product type', 'woocommerce-checkout-manager' ); ?></label>
+	  <select class="wooccm-enhanced-select" name="hide_product_type[]" data-placeholder="<?php esc_attr_e( 'Filter by product type', 'woocommerce-checkout-manager' ); ?>" data-selected="{{data.hide_product_type}}" data-allow_clear="true" multiple="multiple">
+		<?php if ( $product_types ) : ?>
+			<?php foreach ( $product_types as $key => $label ) : ?>
+			<option <# if ( _.contains(data.hide_product_type, '<?php echo esc_attr( $key ); ?>' ) ) { #>selected="selected"<# } #> value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></option>
+		  <?php endforeach; ?>
+		<?php endif; ?>
+	  </select>
+	</p>
+  </div>
+
+  <div class="options_group wooccm-premium-field">
+	<p class="form-field">
+	  <label><?php esc_html_e( 'Show for subtype/s', 'woocommerce-checkout-manager' ); ?></label>
+	  <select class="wooccm-enhanced-select" name="show_product_subtype" data-placeholder="<?php esc_attr_e( 'Filter by product subtype', 'woocommerce-checkout-manager' ); ?>" data-selected="{{data.show_product_subtype}}" data-allow_clear="true">
+		<?php if ( $product_subtypes_options ) : ?>
+			<option></option>
+			<?php foreach ( $product_subtypes_options as $key => $label ) : ?>
+			<option <# if ( data.show_product_subtype == '<?php echo esc_attr( $key ); ?>' ) { #>selected="selected"<# } #> value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></option>
+		  <?php endforeach; ?>
+		<?php endif; ?>
+	  </select>
+		<span class="description premium">(<?php esc_html_e( 'This is a premium feature', 'woocommerce-checkout-manager' ); ?>)</span>
+	</p>
+
+	<p class="form-field">
+	  <label><?php esc_html_e( 'Hide for subtype/s', 'woocommerce-checkout-manager' ); ?></label>
+	  <select class="wooccm-enhanced-select" name="hide_product_subtype" data-placeholder="<?php esc_attr_e( 'Filter by product subtype', 'woocommerce-checkout-manager' ); ?>" data-selected="{{data.hide_product_subtype}}" data-allow_clear="true">
+		<?php if ( $product_subtypes_options ) : ?>
+			<option></option>
+			<?php foreach ( $product_subtypes_options as $key => $label ) : ?>
+			<option <# if ( data.hide_product_subtype == '<?php echo esc_attr( $key ); ?>' ) { #>selected="selected"<# } #> value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></option>
+		  <?php endforeach; ?>
+		<?php endif; ?>
+	  </select>
+		<span class="description premium">(<?php esc_html_e( 'This is a premium feature', 'woocommerce-checkout-manager' ); ?>)</span>
 	</p>
   </div>
 </div>

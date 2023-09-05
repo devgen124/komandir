@@ -54,6 +54,22 @@ class Field_Shipping extends Field {
 			$disabled           = Plugin::instance()->billing->get_disabled_types();
 			$product_categories = $this->get_product_categories();
 
+			$product_types = wc_get_product_types();
+
+			// This type can not setted because it is not added to to cart
+			unset( $product_types['external'] );
+
+			// This type can not setted because it is not added to to cart. It add every child to cart as simple product
+			unset( $product_types['grouped'] );
+
+			$product_subtypes_options = array(
+				'virtual' => __( 'Virtual', 'woocommerce-checkout-manager' ),
+				'downloadable' => __( 'Downloadable', 'woocommerce-checkout-manager' ),
+				'virtual-downloadable' => __( 'Virtual & Downloadable', 'woocommerce-checkout-manager' ),
+			);
+
+			$is_billing_shipping = true;
+
 			include_once WOOCCM_PLUGIN_DIR . 'lib/view/backend/pages/shipping.php';
 		}
 	}

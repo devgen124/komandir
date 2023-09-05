@@ -80,12 +80,10 @@ class AutomationEditor {
       exit();
     }
 
-    $roles = new \WP_Roles();
     $this->pageRenderer->displayPage('automation/editor.html', [
       'registry' => $this->buildRegistry(),
       'context' => $this->buildContext(),
       'automation' => $this->automationMapper->buildAutomation($automation),
-      'sub_menu' => 'mailpoet-automation',
       'locale_full' => $this->wp->getLocale(),
       'api' => [
         'root' => rtrim($this->wp->escUrlRaw($this->wp->restUrl()), '/'),
@@ -94,7 +92,6 @@ class AutomationEditor {
       'jsonapi' => [
         'root' => rtrim($this->wp->escUrlRaw(admin_url('admin-ajax.php')), '/'),
       ],
-      'user_roles' => $roles->get_names(),
     ]);
   }
 
@@ -143,7 +140,6 @@ class AutomationEditor {
       $filters[$fieldType] = [
         'field_type' => $filter->getFieldType(),
         'conditions' => $conditions,
-        'args_schema' => $filter->getArgsSchema()->toArray(),
       ];
     }
 

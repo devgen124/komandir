@@ -3,7 +3,7 @@
 		<div class="options_group wooccm-premium-field">
 			<p class="form-field">
 			<label><?php esc_html_e( 'Enhance', 'woocommerce-checkout-manager' ); ?></label>
-			<input <# if ( data.select2 ) { #>checked="checked"<# } #> class="media-modal-render-panels" type="checkbox" name="select2" value="1">
+			<input id="datepicker-enhance-bahaviour" <# if ( data.select2 ) { #>checked="checked"<# } #> class="media-modal-render-panels" type="checkbox" name="select2" value="1">
 				<span class="description hidden"><?php esc_html_e( 'Enhance date behaviour with datepicker.', 'woocommerce-checkout-manager' ); ?></span>
 				<span class="description premium">(<?php esc_html_e( 'This is a premium feature', 'woocommerce-checkout-manager' ); ?>)</span>
 			</p>
@@ -19,7 +19,7 @@
 		<div class="options_group wooccm-premium-field">
 			<p class="form-field">
 			<label><?php esc_html_e( 'Date limit', 'woocommerce-checkout-manager' ); ?></label>
-			<select <# if ( !data.select2 ) { #>disabled="disabled"<# } #> class="media-modal-render-panels select short" name="date_limit">
+			<select id="datepicker-date-limit" <# if ( !data.select2 ) { #>disabled="disabled"<# } #> class="media-modal-render-panels select short" name="date_limit">
 				<option <# if ( data.date_limit=='variable' ) { #>selected="selected"<# } #> value="variable"><?php esc_html_e( 'Since current date', 'woocommerce-checkout-manager' ); ?></option>
 				<option <# if ( data.date_limit=='fixed' ) { #>selected="selected"<# } #> value="fixed"><?php esc_html_e( 'Between fixed dates', 'woocommerce-checkout-manager' ); ?></option>
 			</select>

@@ -268,7 +268,16 @@ class WCProductAdapter extends GoogleProduct implements Validatable {
 	 * @return string
 	 */
 	public static function get_google_product_offer_id( string $slug, int $product_id ): string {
-		return "{$slug}_{$product_id}";
+		/**
+		 * Filters a WooCommerce product ID to be used as the Merchant Center product ID.
+		 *
+		 * @param string $mc_product_id Default generated Merchant Center product ID.
+		 * @param int    $product_id    WooCommerce product ID.
+		 * @since 2.4.6
+		 *
+		 * @return string Merchant Center product ID corresponding to the given WooCommerce product ID.
+		 */
+		return apply_filters( 'woocommerce_gla_get_google_product_offer_id', "{$slug}_{$product_id}", $product_id );
 	}
 
 	/**
@@ -747,7 +756,17 @@ class WCProductAdapter extends GoogleProduct implements Validatable {
 	 * @return bool
 	 */
 	public function is_virtual(): bool {
-		return false !== $this->wc_product->is_virtual();
+		$is_virtual = $this->wc_product->is_virtual();
+
+		/**
+		 * Filters the virtual property value of a product.
+		 *
+		 * @param bool       $is_virtual Whether a product is virtual
+		 * @param WC_Product $product    WooCommerce product
+		 */
+		$is_virtual = apply_filters( 'woocommerce_gla_product_property_value_is_virtual', $is_virtual, $this->wc_product );
+
+		return false !== $is_virtual;
 	}
 
 	/**

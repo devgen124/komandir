@@ -147,7 +147,7 @@ class MSP_Admin_Assets {
       $slider_type = empty( $slider_type ) ? 'custom' : $slider_type;
 
       $msp_data = isset( $slider_data[ 'params' ] ) ? $slider_data[ 'params' ] : '';
-      $msp_data = empty( $slider_data[ 'params' ] ) ? '' : '"' . $slider_data[ 'params' ] . '"';
+      $msp_data = empty( $slider_data[ 'params' ] ) ? '' : $slider_data[ 'params' ];
 
       $msp_preset_style  = msp_get_option( 'preset_style' , '' );
       $msp_preset_effect = msp_get_option( 'preset_effect', '' );
@@ -158,7 +158,7 @@ class MSP_Admin_Assets {
       $msp_buttons_style = empty( $msp_buttons_style ) ? '' : $msp_buttons_style;
 
 
-      wp_add_inline_script( $this->panel_js_handler, 'var __MSP_DATA = ' . $msp_data );
+      wp_add_inline_script( $this->panel_js_handler, 'var __MSP_DATA = "' . $msp_data . '";' );
       wp_add_inline_script( $this->panel_js_handler, 'var __MSP_PRESET_STYLE = "' . $msp_preset_style . '";');
       wp_add_inline_script( $this->panel_js_handler, 'var __MSP_PRESET_EFFECT = "' . $msp_preset_effect . '";');
       wp_add_inline_script( $this->panel_js_handler, 'var __MSP_TYPE = "' . $slider_type . '";' );

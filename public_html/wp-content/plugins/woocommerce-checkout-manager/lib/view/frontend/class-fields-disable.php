@@ -21,6 +21,8 @@ class Fields_Disable {
 		add_filter( 'wooccm_checkout_field_filter', array( $this, 'disable_by_category' ), 30 );
 		// Remove by role
 		add_filter( 'wooccm_checkout_field_filter', array( $this, 'disable_by_role' ), 40 );
+		// Remove by product type
+		add_filter( 'wooccm_checkout_field_filter', array( $this, 'disable_by_product_type' ), 50 );
 	}
 
 	public static function instance() {
@@ -79,6 +81,80 @@ class Fields_Disable {
 		return $field;
 	}
 
+	public function disable_by_product_type( $field ) {
+		if ( empty( $field['disabled'] ) && ( ! empty( $field['hide_product_type'] ) || ! empty( $field['show_product_type'] ) ) ) {
+			if ( is_object( WC()->cart ) ) {
+				$cart_contents = WC()->cart->get_cart_contents();
+				if ( count( $cart_contents ) ) {
+
+					$hide_product_type_array = (array) $field['hide_product_type'];
+
+					$show_product_type_array = (array) $field['show_product_type'];
+
+					$apply_conditions_if_more_than_one_product = empty( $field['apply_conditions_if_more_than_one_product'] );
+
+					$products_types = array();
+					foreach ( $cart_contents as $key => $values ) {
+						$product      = wc_get_product( $values['product_id'] );
+						$product_type = $product->get_type();
+
+						if ( $product_type && ! in_array( $product_type, $products_types ) ) {
+							array_push( $products_types, $product_type );
+						}
+					}
+
+					// field without more
+					// -------------------------------------------------------------------
+					if ( $apply_conditions_if_more_than_one_product && count( $cart_contents ) < 2 ) {
+						// hide field
+						// -----------------------------------------------------------------
+						if ( count( $hide_product_type_array ) ) {
+							if ( array_intersect( $products_types, $hide_product_type_array ) ) {
+								$field['disabled'] = true;
+							}
+						}
+
+						// show field
+						// -----------------------------------------------------------------
+						if ( count( $show_product_type_array ) ) {
+							if ( ! array_intersect( $products_types, $show_product_type_array ) ) {
+								$field['disabled'] = true;
+							} else {
+								$field['disabled'] = false;
+							}
+						}
+					}
+
+					// field with more
+					// -------------------------------------------------------------------
+					if ( ! $apply_conditions_if_more_than_one_product ) {
+
+						// hide field
+						// -------------------------------------------------------------
+						if ( count( $hide_product_type_array ) ) {
+							if ( array_intersect( $products_types, $hide_product_type_array ) ) {
+								$field['disabled'] = true;
+							}
+						}
+
+						// show field
+						// ---------------------------------------------------------------
+						if ( count( $show_product_type_array ) ) {
+
+							if ( ! array_intersect( $products_types, $show_product_type_array ) ) {
+								$field['disabled'] = true;
+							} else {
+								$field['disabled'] = false;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return $field;
+	}
+
 	public function disable_by_category( $field ) {
 		if ( empty( $field['disabled'] ) && ( ! empty( $field['hide_product_cat'] ) || ! empty( $field['show_product_cat'] ) ) ) {
 
@@ -90,7 +166,7 @@ class Fields_Disable {
 
 					$show_cats_array = (array) $field['show_product_cat'];
 
-					$more_product = empty( $field['more_product'] );
+					$apply_conditions_if_more_than_one_product = empty( $field['apply_conditions_if_more_than_one_product'] );
 
 					$product_cats = array();
 
@@ -103,7 +179,7 @@ class Fields_Disable {
 
 					// field without more
 					// -------------------------------------------------------------------
-					if ( $more_product && count( $cart_contents ) < 2 ) {
+					if ( $apply_conditions_if_more_than_one_product && count( $cart_contents ) < 2 ) {
 						// hide field
 						// -----------------------------------------------------------------
 						if ( count( $hide_cats_array ) ) {
@@ -125,7 +201,7 @@ class Fields_Disable {
 
 					// field with more
 					// -------------------------------------------------------------------
-					if ( ! $more_product ) {
+					if ( ! $apply_conditions_if_more_than_one_product ) {
 
 						// hide field
 						// -------------------------------------------------------------
@@ -163,13 +239,13 @@ class Fields_Disable {
 
 					$show_ids_array = (array) $field['show_product'];
 
-					$more_product = empty( $field['more_product'] );
+					$apply_conditions_if_more_than_one_product = empty( $field['apply_conditions_if_more_than_one_product'] );
 
 					$product_ids = array_column( $cart_contents, 'product_id' );
 
 					// field without more
 					// -------------------------------------------------------------------
-					if ( $more_product && count( $cart_contents ) < 2 ) {
+					if ( $apply_conditions_if_more_than_one_product && count( $cart_contents ) < 2 ) {
 						// hide field
 						// -----------------------------------------------------------------
 						if ( count( $hide_ids_array ) ) {
@@ -191,7 +267,7 @@ class Fields_Disable {
 
 					// field with more
 					// -------------------------------------------------------------------
-					if ( ! $more_product ) {
+					if ( ! $apply_conditions_if_more_than_one_product ) {
 
 						// hide field
 						// -------------------------------------------------------------
