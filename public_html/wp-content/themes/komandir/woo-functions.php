@@ -594,14 +594,7 @@ add_filter( 'woocommerce_my_account_edit_address_field_value', function ( $value
 
 // change product placeholder
 
-add_filter( 'woocommerce_placeholder_img_src', function ( $src ) {
-	$upload_dir = wp_upload_dir();
-	$uploads = untrailingslashit( $upload_dir['baseurl'] );
-	// replace with path to your image
-	$src = $uploads . '/2022/04/komandir-placeholder.svg';
-
-	return $src;
-} );
+add_filter( 'woocommerce_placeholder_img_src', fn ( $src ) => get_template_directory_uri() . '/assets/images/placeholder.svg' );
 
 // add placeholder in aws results output
 
