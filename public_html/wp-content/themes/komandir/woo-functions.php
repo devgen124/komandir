@@ -734,3 +734,81 @@ add_action( 'init', function () {
 		//'update_count_callback' => '_update_post_term_count',
 	] );
 } );
+
+// автоматическое добавление Акции к товарам при сохранении Акции
+
+add_action('saved_promotion', function ($term_id, $tt_id, $update, $args) {
+	$categories = [];
+	$products = [];
+	$target_products = [];
+
+	foreach ( $args as $arg_key => $arg_value ) {
+		if ( $arg_key === 'acf' ) {
+			foreach ( $arg_value as $field_key => $field_value ) {
+				if ( preg_match( '/field_.*/', $field_key ) ) {
+					$acf = get_field_object( $field_key, $term_id );
+
+					if ( $acf ) {
+						if ( $acf['name'] === 'related_categories' ) {
+							$categories = $field_value;
+						}
+						if ( $acf['name'] === 'related_products' ) {
+							$products = $field_value;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if ( $categories ) {
+		$target_products = array_merge( $target_products, get_posts( [
+			'post_type' => 'product',
+			'posts_per_page' => -1,
+			'tax_query' => [
+				[
+					'taxonomy' => 'product_cat',
+					'terms' => $categories,
+				]
+			]
+		] ) );
+	}
+
+	if ( $products ) {
+		$target_products = array_merge( $target_products, get_posts( [
+			'post_type' => 'product',
+			'posts_per_page' => -1,
+			'post__in' => $products
+		] ) );
+	}
+
+	if ( $target_products ) {
+		$current_products = get_posts( [
+			'post_type' => 'product',
+			'posts_per_page' => -1,
+			'tax_query' => [
+				[
+					'taxonomy' => 'promotion',
+					'terms' => $term_id,
+				]
+			]
+		] );
+
+		$depricated_products = array_diff( $current_products, $target_products );
+		$old_products = array_intersect( $current_products, $target_products );
+		$new_products = array_diff( $target_products, $old_products );
+		$term_name = get_term( $term_id )->name;
+
+		if ( $new_products ) {
+			foreach ( $new_products as $post ) {
+				wp_set_object_terms( $post->ID, $term_name, 'promotion', true );
+			}
+		}
+
+		if ( $depricated_products ) {
+			foreach ( $depricated_products as $post ) {
+				wp_remove_object_terms( $post->ID, $term_name, 'promotion' );
+			}
+		}
+	}
+}, 10, 4 );
