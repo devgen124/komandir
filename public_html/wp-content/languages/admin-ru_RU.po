@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.3.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-08-29 11:43:02+0000\n"
+"PO-Revision-Date: 2023-09-19 07:21:59+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10706,11 +10706,11 @@ msgstr "Введите ссылку или нажмите одну из кноп
 
 #: wp-admin/includes/media.php:1413
 msgid "Link URL"
-msgstr "Ссылка"
+msgstr "URL ссылки"
 
 #: wp-admin/includes/meta-boxes.php:913
 msgid "No comments yet."
-msgstr "Комментариев нет."
+msgstr "Комментариев пока нет."
 
 #: wp-admin/includes/class-wp-theme-install-list-table.php:519
 #: wp-admin/includes/class-wp-themes-list-table.php:278
@@ -11930,7 +11930,7 @@ msgstr "Установка сети"
 
 #: wp-admin/menu.php:371
 msgid "Available Tools"
-msgstr "Все инструменты"
+msgstr "Доступные инструменты"
 
 #: wp-admin/includes/credits.php:104
 msgctxt "Translate this to be the equivalent of English Translators in your language for the credits page Translators section"
