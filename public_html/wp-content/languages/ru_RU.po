@@ -863,23 +863,23 @@ msgstr "Убедитесь, что расширение PHP %s установл�
 msgid "When using the %1$s constant, make sure to set these globals to an array: %2$s."
 msgstr "При использовании константы %1$s обязательно задайте эти глобальные переменные как массив: %2$s."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:2195
+#: wp-includes/html-api/class-wp-html-tag-processor.php:2241
 msgid "The query argument must be an array or a tag name."
 msgstr "Аргумент запроса должен быть массивом или именем метки."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:1891
+#: wp-includes/html-api/class-wp-html-tag-processor.php:1937
 msgid "Invalid attribute name."
 msgstr "Недопустимое имя атрибута."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:1544
+#: wp-includes/html-api/class-wp-html-tag-processor.php:1590
 msgid "Too many calls to seek() - this can lead to performance issues."
 msgstr "Слишком много вызовов функции seek() , это может приводить к проблемам с производительностью."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:1535
+#: wp-includes/html-api/class-wp-html-tag-processor.php:1581
 msgid "Unknown bookmark name."
 msgstr "Неизвестное имя закладки."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:679
+#: wp-includes/html-api/class-wp-html-tag-processor.php:707
 msgid "Too many bookmarks: cannot create any more."
 msgstr "Слишком много закладок: нельзя создать новую закладку."
 
