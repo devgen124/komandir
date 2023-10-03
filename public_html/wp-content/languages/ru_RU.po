@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the WordPress - 6.3.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-09-13 09:04:14+0000\n"
+"PO-Revision-Date: 2023-10-02 16:07:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.0-alpha.7\n"
+"X-Generator: GlotPress/4.0.0-alpha.9\n"
 "Language: ru\n"
 "Project-Id-Version: WordPress - 6.3.x - Development\n"
 
@@ -863,23 +863,23 @@ msgstr "Убедитесь, что расширение PHP %s установл�
 msgid "When using the %1$s constant, make sure to set these globals to an array: %2$s."
 msgstr "При использовании константы %1$s обязательно задайте эти глобальные переменные как массив: %2$s."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:2241
+#: wp-includes/html-api/class-wp-html-tag-processor.php:2282
 msgid "The query argument must be an array or a tag name."
 msgstr "Аргумент запроса должен быть массивом или именем метки."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:1937
+#: wp-includes/html-api/class-wp-html-tag-processor.php:1967
 msgid "Invalid attribute name."
 msgstr "Недопустимое имя атрибута."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:1590
+#: wp-includes/html-api/class-wp-html-tag-processor.php:1620
 msgid "Too many calls to seek() - this can lead to performance issues."
 msgstr "Слишком много вызовов функции seek() , это может приводить к проблемам с производительностью."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:1581
+#: wp-includes/html-api/class-wp-html-tag-processor.php:1611
 msgid "Unknown bookmark name."
 msgstr "Неизвестное имя закладки."
 
-#: wp-includes/html-api/class-wp-html-tag-processor.php:707
+#: wp-includes/html-api/class-wp-html-tag-processor.php:717
 msgid "Too many bookmarks: cannot create any more."
 msgstr "Слишком много закладок: нельзя создать новую закладку."
 
@@ -7474,7 +7474,7 @@ msgstr "Версия формата блоков содержимого испо
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2323
 msgid "Slug automatically generated from the post title."
-msgstr "Ярлык автоматически создан из заголовка объекта."
+msgstr "Ярлык автоматически создан из заголовка записи."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2316
 msgid "Permalink template for the post."
@@ -14010,7 +14010,7 @@ msgstr "Авто"
 
 #: wp-includes/media.php:4821
 msgid "Cropping&hellip;"
-msgstr "Обработка&hellip;"
+msgstr "Кадрирование&hellip;"
 
 #: wp-includes/media-template.php:1472 wp-includes/media-template.php:1488
 #: wp-includes/widgets/class-wp-widget-media-video.php:87
@@ -14330,7 +14330,7 @@ msgstr "Сведения об аудиофайле"
 
 #: wp-includes/media.php:4820
 msgid "Crop your image"
-msgstr "Обрезать изображение"
+msgstr "Кадрировать изображение"
 
 #: wp-includes/media.php:4819
 msgid "Crop image"
@@ -15243,7 +15243,7 @@ msgstr "Атрибут alt"
 
 #: wp-includes/media-template.php:652 wp-admin/upload.php:188
 msgid "Attachment Details"
-msgstr "Параметры файла"
+msgstr "Детали вложения"
 
 #. translators: %s: Digit to indicate multiple of sizing, eg. 2X-Large.
 #: wp-includes/block-editor.php:173 wp-includes/class-wp-theme-json.php:3437
@@ -15608,17 +15608,17 @@ msgstr "Пожалуйста, введите заголовок сайта."
 #: wp-includes/ms-functions.php:669
 msgid "Site name must be at least %s character."
 msgid_plural "Site name must be at least %s characters."
-msgstr[0] "Имя сайта должно быть не короче %s символа"
-msgstr[1] "Имя сайта должно быть не короче %s символов"
-msgstr[2] "Имя сайта должно быть не короче %s символов"
+msgstr[0] "Название сайта должно быть не короче %s символа."
+msgstr[1] "Название сайта должно быть не короче %s символов."
+msgstr[2] "Название сайта должно быть не короче %s символов."
 
 #: wp-includes/ms-functions.php:655
 msgid "That name is not allowed."
-msgstr "Это имя недопустимо."
+msgstr "Это название недопустимо."
 
 #: wp-includes/ms-functions.php:647
 msgid "Please enter a site name."
-msgstr "Пожалуйста, введите имя сайта."
+msgstr "Введите название сайта."
 
 #: wp-includes/ms-functions.php:499
 msgid "Username must be at least 4 characters."
@@ -15861,7 +15861,7 @@ msgstr "Ваши последние записи"
 #: wp-includes/js/dist/edit-site.js:15464
 #: wp-includes/js/dist/edit-site.js:23799 wp-admin/index.php:57
 msgid "Navigation"
-msgstr "навигация"
+msgstr "Навигация"
 
 #: wp-includes/class-wp-xmlrpc-server.php:1455
 #: wp-includes/class-wp-xmlrpc-server.php:5765
@@ -18001,7 +18001,7 @@ msgstr "На весь экран"
 #: wp-includes/media-template.php:1076 wp-includes/media-template.php:1140
 #: wp-includes/js/dist/block-editor.js:15533
 msgid "Align"
-msgstr "Расположение"
+msgstr "Выравнивание"
 
 #: wp-includes/media-template.php:1362 wp-includes/media-template.php:1461
 #: wp-includes/widgets/class-wp-widget-media-audio.php:77
