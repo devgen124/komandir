@@ -15,18 +15,18 @@ remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wra
 add_action( 'woocommerce_before_main_content', function () {
 	?>
 	<main id="primary" class="site-main">
-		<div class="container">
-			<?php
+	<div class="container">
+	<?php
 }, 10 );
 
 add_action( 'woocommerce_after_main_content', function () {
 	?>
-		</div>
+	</div>
 	</main><!-- #main -->
 	<?php
 }, 20 );
 
-add_filter( 'woocommerce_add_to_cart_message', fn () => 'success' );
+add_filter( 'woocommerce_add_to_cart_message', fn() => 'success' );
 
 //ajax add to cart
 
@@ -39,7 +39,7 @@ function komandir_header_add_to_cart_fragment( $fragments ) {
 
 	?>
 	<a class="cart-header-link" href="<?php echo get_permalink( get_page_by_path( 'cart' ) ); ?>"
-		title="<?php _e( 'Показать корзину' ); ?>">
+	   title="<?php _e( 'Показать корзину' ); ?>">
 		<svg width="21" height="20">
 			<use xlink:href="<?= get_template_directory_uri() ?>/assets/images/sprite.svg#cart"></use>
 		</svg>
@@ -55,6 +55,7 @@ function komandir_header_add_to_cart_fragment( $fragments ) {
 	</a>
 	<?php
 	$fragments['a.cart-header-link'] = ob_get_clean();
+
 	return $fragments;
 }
 
@@ -86,7 +87,7 @@ function komandir_woocommerce_template_rating() {
 }
 
 function komandir_get_rating_html( $rating, $count = 0 ) {
-	$html = '';
+	$html   = '';
 	$rating = round( $rating, 1 );
 
 	$label = esc_attr( sprintf( __( 'Rated %s out of 5', 'woocommerce' ), $rating ) );
@@ -139,7 +140,7 @@ add_action( 'woocommerce_single_product_summary', 'komandir_get_template_price',
 
 function komandir_get_template_price() {
 	global $product;
-	$sale_price = $product->get_sale_price();
+	$sale_price    = $product->get_sale_price();
 	$regular_price = $product->get_regular_price();
 
 	if ( $product->get_price() ) : ?>
@@ -192,12 +193,12 @@ function get_wishlist_count() {
 	$user = get_current_user_id();
 	if ( $user != 0 ) {
 		$table_name = $wpdb->prefix . 'wt_wishlists';
-		$count = $wpdb->get_var( "SELECT COUNT(*) FROM `$table_name` where `user_id` = '$user'" );
+		$count      = $wpdb->get_var( "SELECT COUNT(*) FROM `$table_name` where `user_id` = '$user'" );
 	} else {
 
 		$table_name = $wpdb->prefix . 'wt_guest_wishlists';
 		$session_id = WC()->session->get( 'sessionid' );
-		$count = $wpdb->get_var( "SELECT COUNT(*) FROM `$table_name` where `session_id` = '$session_id'" );
+		$count      = $wpdb->get_var( "SELECT COUNT(*) FROM `$table_name` where `session_id` = '$session_id'" );
 	}
 
 	return $count;
@@ -207,16 +208,17 @@ function get_wishlist_count() {
 
 add_filter( 'woocommerce_breadcrumb_defaults', function ( $defaults ) {
 	$defaults['delimiter'] = ' &gt; ';
+
 	return $defaults;
 } );
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
-add_filter( 'woocommerce_get_image_size_gallery_thumbnail', function ($size) {
+add_filter( 'woocommerce_get_image_size_gallery_thumbnail', function ( $size ) {
 	return array(
-		'width' => 150,
+		'width'  => 150,
 		'height' => 150,
-		'crop' => 1,
+		'crop'   => 1,
 	);
 } );
 
@@ -227,13 +229,17 @@ add_filter( 'wishlist_table_heading', '__return_null' );
 // removes my account menu items
 
 add_filter( 'woocommerce_account_menu_items', function ( $items ) {
-	return array_filter( $items, fn($k) => ! in_array( $k, [ 'dashboard', 'downloads', 'edit-address' ] ), ARRAY_FILTER_USE_KEY );
+	return array_filter( $items, fn( $k ) => ! in_array( $k, [
+		'dashboard',
+		'downloads',
+		'edit-address'
+	] ), ARRAY_FILTER_USE_KEY );
 } );
 
 // redirect default account page to my orders
 
 add_action( 'template_redirect', function () {
-	if( is_account_page() && empty( WC()->query->get_current_endpoint() ) ){
+	if ( is_account_page() && empty( WC()->query->get_current_endpoint() ) ) {
 		wp_safe_redirect( wc_get_account_endpoint_url( 'orders' ) );
 		exit;
 	}
@@ -251,7 +257,7 @@ function render_children_cat_list() {
 
 	$child_categories = get_categories( [
 		'taxonomy' => 'product_cat',
-		'parent' => $cat_id
+		'parent'   => $cat_id
 	] );
 	?>
 
@@ -265,13 +271,14 @@ function render_children_cat_list() {
 			<?php foreach ( $child_categories as $child ) :
 				$grandchild_categories = get_categories( [
 					'taxonomy' => 'product_cat',
-					'parent' => $child->term_id
+					'parent'   => $child->term_id
 				] );
 
 				$this_cat_id = $grandchild_categories ? $child->term_id : '';
 				?>
 				<li class="catalog-slide-item">
-					<a href="<?= get_term_link( $child->slug, 'product_cat' ) ?>" data-product-cat="<?= $this_cat_id; ?>">
+					<a href="<?= get_term_link( $child->slug, 'product_cat' ) ?>"
+					   data-product-cat="<?= $this_cat_id; ?>">
 						<?= $child->name; ?>
 					</a>
 				</li>
@@ -290,8 +297,8 @@ add_filter( 'woocommerce_catalog_orderby', function () {
 	return array(
 		'menu_order' => __( 'Default sorting', 'woocommerce' ),
 		'popularity' => __( 'Sort by popularity', 'woocommerce' ),
-		'rating' => __( 'Sort by average rating', 'woocommerce' ),
-		'price' => __( 'Sort by price: low to high', 'woocommerce' ),
+		'rating'     => __( 'Sort by average rating', 'woocommerce' ),
+		'price'      => __( 'Sort by price: low to high', 'woocommerce' ),
 		'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
 	);
 } );
@@ -306,12 +313,12 @@ add_filter( 'woocommerce_get_breadcrumb', function ( $crumbs ) {
 	if ( ! empty( $crumbs ) ) {
 		if ( is_product_tag() ) {
 			global $wp_query;
-			$this_query = $wp_query->query;
+			$this_query  = $wp_query->query;
 			$product_tag = get_term_by( 'slug', $this_query['product_tag'], 'product_tag' );
 			if ( isset( $_GET['preview'] ) ) {
 				$crumbs[1][0] = 'Акция "' . $product_tag->name . '"';
-				$crumbs = array_merge(
-					array_slice( $crumbs, 0, -1 ),
+				$crumbs       = array_merge(
+					array_slice( $crumbs, 0, - 1 ),
 					[ [ 'Акции', get_permalink( get_page_by_path( 'promotion' ) ) ] ],
 					[ $crumbs[1] ]
 				);
@@ -322,8 +329,8 @@ add_filter( 'woocommerce_get_breadcrumb', function ( $crumbs ) {
 
 		if ( ! isset( $_GET['s'] ) ) {
 			$catalog_page_id = wc_get_page_id( 'shop' );
-			$catalog_page = get_post( $catalog_page_id );
-			$catalog = array( get_the_title( $catalog_page ), get_permalink( $catalog_page ) );
+			$catalog_page    = get_post( $catalog_page_id );
+			$catalog         = array( get_the_title( $catalog_page ), get_permalink( $catalog_page ) );
 			array_splice( $crumbs, 1, 0, array( $catalog ) );
 		}
 
@@ -343,8 +350,8 @@ add_action( 'woocommerce_before_shop_loop', function () {
 	<div class="filters-mobile">
 		<button class="filters-btn">
 			<?= $svg->view_from_sprite( [
-				'title' => 'filters',
-				'width' => 18,
+				'title'  => 'filters',
+				'width'  => 18,
 				'height' => 18
 			] ); ?>
 		</button>
@@ -360,15 +367,15 @@ add_action( 'woocommerce_before_shop_loop', function () {
 	<div class="grid-switcher">
 		<button class="grid-view grid-view--list" data-grid="list">
 			<?= $svg->view_from_sprite( [
-				'title' => 'view-list',
-				'width' => 18,
+				'title'  => 'view-list',
+				'width'  => 18,
 				'height' => 14
 			] ); ?>
 		</button>
 		<button class="grid-view grid-view--grid grid-view--active" data-grid="grid">
 			<?= $svg->view_from_sprite( [
-				'title' => 'view-grid',
-				'width' => 18,
+				'title'  => 'view-grid',
+				'width'  => 18,
 				'height' => 18
 			] ); ?>
 		</button>
@@ -388,24 +395,24 @@ add_action( 'woocommerce_before_shop_loop', function () {
 
 // woocommerce columns layout (aside filters + products)
 
-add_action('woocommerce_before_shop_loop', function () {
+add_action( 'woocommerce_before_shop_loop', function () {
 	echo '<div class="woocommerce-main-wrapper">';
 }, 50 );
 
-add_action('woocommerce_after_main_content', function () {
+add_action( 'woocommerce_after_main_content', function () {
 	echo '</div>';
 }, 10 );
 
 add_action( 'widgets_init', function () {
 	register_sidebar(
 		array(
-			'name' => esc_html__( 'Woo Sidebar', 'komandir' ),
-			'id' => 'shop',
-			'description' => 'Sidebar for WC filters',
+			'name'          => esc_html__( 'Woo Sidebar', 'komandir' ),
+			'id'            => 'shop',
+			'description'   => 'Sidebar for WC filters',
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget' => '</section>',
-			'before_title' => '<h2 class="widget-title">',
-			'after_title' => '</h2>',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
 		)
 	);
 } );
@@ -416,7 +423,7 @@ add_action( 'woocommerce_products_wrapper_start', function () {
 	echo '<div class="products-wrapper">';
 } );
 
-add_action('woocommerce_products_wrapper_end', function () {
+add_action( 'woocommerce_products_wrapper_end', function () {
 	echo '</div>';
 } );
 
@@ -424,6 +431,7 @@ add_action('woocommerce_products_wrapper_end', function () {
 
 add_filter( 'woocommerce_output_related_products_args', function ( $args ) {
 	$args['columns'] = 5;
+
 	return $args;
 }, 20 );
 
@@ -460,7 +468,7 @@ function komandir_archive_additional_info() {
 
 		if ( $attribute->is_taxonomy() ) {
 			$attribute_taxonomy = $attribute->get_taxonomy_object();
-			$attribute_values = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'all' ) );
+			$attribute_values   = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'all' ) );
 
 			foreach ( $attribute_values as $attribute_value ) {
 				$value_name = esc_html( $attribute_value->name );
@@ -510,20 +518,22 @@ function komandir_archive_additional_info() {
 	<?php
 }
 
-add_action('woocommerce_after_shop_loop_item', function () {
+add_action( 'woocommerce_after_shop_loop_item', function () {
 	echo '<div class="woocommerce-add-cart-wrapper">';
 }, 7 );
-add_action('woocommerce_after_shop_loop_item', function () {
+add_action( 'woocommerce_after_shop_loop_item', function () {
 	echo '</div>';
 }, 15 );
 
 // customize single product tabs
 
 add_filter( 'woocommerce_product_tabs', function ( $tabs ) {
-	if ( isset( $tabs['description'] ) )
+	if ( isset( $tabs['description'] ) ) {
 		$tabs['description']['title'] = 'О товаре';
-	if ( isset( $tabs['additional_information'] ) )
+	}
+	if ( isset( $tabs['additional_information'] ) ) {
 		$tabs['additional_information']['title'] = 'Характеристики';
+	}
 
 	return $tabs;
 } );
@@ -580,6 +590,7 @@ add_action( 'woocommerce_save_account_details', function () {
 
 add_filter( 'woocommerce_formatted_address_replacements', function ( $replacements, $args ) {
 	$replacements['{phone}'] = $args['phone'];
+
 	return $replacements;
 }, 10, 2 );
 
@@ -589,12 +600,13 @@ add_filter( 'woocommerce_my_account_edit_address_field_value', function ( $value
 	if ( $key === 'billing_phone' ) {
 		$value = get_user_meta( get_current_user_id(), 'phone_number', true );
 	}
+
 	return $value;
 }, 10, 3 );
 
 // change product placeholder
 
-add_filter( 'woocommerce_placeholder_img_src', fn ( $src ) => get_template_directory_uri() . '/assets/images/placeholder.svg' );
+add_filter( 'woocommerce_placeholder_img_src', fn( $src ) => get_template_directory_uri() . '/assets/images/placeholder.svg' );
 
 // add placeholder in aws results output
 
@@ -610,7 +622,8 @@ add_filter( 'aws_search_pre_filter_single_product', function ( $result ) {
 
 add_action( 'woocommerce_checkout_order_review', function () {
 	?>
-	<p><b>По вопросу получения товара мы с Вами свяжемся после оформления заказа. С условиями доставки можно ознакомиться на странице <a href="/shipping">Доставка</a></b></p>
+	<p><b>По вопросу получения товара мы с Вами свяжемся после оформления заказа. С условиями доставки можно
+			ознакомиться на странице <a href="/shipping">Доставка</a></b></p>
 	<?php
 } );
 
@@ -634,7 +647,7 @@ function log_error( $var ) {
 }
 
 add_action( 'woocommerce_new_order', function ( $order_id, $order ) {
-	$user = $order->get_user();
+	$user  = $order->get_user();
 	$phone = get_user_meta( $order->get_user_id(), 'billing_phone', true );
 	update_post_meta( $order_id, '_billing_phone', $phone );
 	update_post_meta( $order_id, '_billing_first_name', $user->first_name );
@@ -665,7 +678,6 @@ add_action( 'woocommerce_new_order', function ( $order_id, $order ) {
 // }, 10, 2 );
 
 
-
 // убирает display name из обязательных полей в личном кабинете
 
 // add_filter('woocommerce_save_account_details_required_fields', function ($array) {
@@ -679,10 +691,11 @@ add_action( 'woocommerce_new_order', function ( $order_id, $order ) {
 
 // убирает кнопку ссылку "Убрать" у "псевдокупона" (скидка из плагина Woo Discounts)
 
-add_filter('woocommerce_cart_totals_coupon_html', function ($coupon_html, $coupon, $discount_amount_html) {
+add_filter( 'woocommerce_cart_totals_coupon_html', function ( $coupon_html, $coupon, $discount_amount_html ) {
 	if ( is_null( $coupon->get_status() ) ) {
 		$coupon_html = $discount_amount_html;
 	}
+
 	return $coupon_html;
 }, 10, 3 );
 
@@ -701,35 +714,40 @@ add_filter('woocommerce_cart_totals_coupon_html', function ($coupon_html, $coupo
 
 add_action( 'init', function () {
 	register_taxonomy( 'promotion', 'product', [
-		'labels'                => [
-			'name'              => 'Акции',
-			'singular_name'     => 'Акция',
-			'search_items'      => 'Найти акции',
-			'all_items'         => 'Все акции',
-			'view_item '        => 'Посмотреть акцию',
-			'edit_item'         => 'Редактировать акцию',
-			'update_item'       => 'Обновить акцию',
-			'add_new_item'      => 'Добавить новую акцию',
-			'new_item_name'     => 'Название новой акции',
-			'back_to_items'     => '← Перейти к акциям',
+		'labels'       => [
+			'name'          => 'Акции',
+			'singular_name' => 'Акция',
+			'search_items'  => 'Найти акции',
+			'all_items'     => 'Все акции',
+			'view_item '    => 'Посмотреть акцию',
+			'edit_item'     => 'Редактировать акцию',
+			'update_item'   => 'Обновить акцию',
+			'add_new_item'  => 'Добавить новую акцию',
+			'new_item_name' => 'Название новой акции',
+			'back_to_items' => '← Перейти к акциям',
 		],
-		'description'           => 'Промоакции для товаров', // описание таксономии
-		'public'                => true,
+		'description'  => 'Промоакции для товаров',
+		// описание таксономии
+		'public'       => true,
 		// 'publicly_queryable'    => null, // равен аргументу public
 		// 'show_in_nav_menus'     => true, // равен аргументу public
 		// 'show_ui'               => true, // равен аргументу public
 		// 'show_in_menu'          => true, // равен аргументу show_ui
 		// 'show_tagcloud'         => true, // равен аргументу show_ui
 		// 'show_in_quick_edit'    => null, // равен аргументу show_ui
-		'hierarchical'          => false,
+		'hierarchical' => false,
 
-		'rewrite'               => true,
+		'rewrite'           => true,
 		//'query_var'             => $taxonomy, // название параметра запроса
-		'capabilities'          => array(),
-		'meta_box_cb'           => null, // html метабокса. callback: `post_categories_meta_box` или `post_tags_meta_box`. false — метабокс отключен.
-		'show_admin_column'     => false, // авто-создание колонки таксы в таблице ассоциированного типа записи. (с версии 3.5)
-		'show_in_rest'          => true, // добавить в REST API
-		'rest_base'             => null, // $taxonomy
+		'capabilities'      => array(),
+		'meta_box_cb'       => null,
+		// html метабокса. callback: `post_categories_meta_box` или `post_tags_meta_box`. false — метабокс отключен.
+		'show_admin_column' => false,
+		// авто-создание колонки таксы в таблице ассоциированного типа записи. (с версии 3.5)
+		'show_in_rest'      => true,
+		// добавить в REST API
+		'rest_base'         => null,
+		// $taxonomy
 		// '_builtin'              => false,
 		//'update_count_callback' => '_update_post_term_count',
 	] );
@@ -737,9 +755,9 @@ add_action( 'init', function () {
 
 // автоматическое добавление Акции к товарам при сохранении Акции
 
-add_action('saved_promotion', function ($term_id, $tt_id, $update, $args) {
-	$categories = [];
-	$products = [];
+add_action( 'saved_promotion', function ( $term_id, $tt_id, $update, $args ) {
+	$categories      = [];
+	$products        = [];
 	$target_products = [];
 
 	foreach ( $args as $arg_key => $arg_value ) {
@@ -763,12 +781,12 @@ add_action('saved_promotion', function ($term_id, $tt_id, $update, $args) {
 
 	if ( $categories ) {
 		$target_products = array_merge( $target_products, get_posts( [
-			'post_type' => 'product',
-			'posts_per_page' => -1,
-			'tax_query' => [
+			'post_type'      => 'product',
+			'posts_per_page' => - 1,
+			'tax_query'      => [
 				[
 					'taxonomy' => 'product_cat',
-					'terms' => $categories,
+					'terms'    => $categories,
 				]
 			]
 		] ) );
@@ -776,28 +794,28 @@ add_action('saved_promotion', function ($term_id, $tt_id, $update, $args) {
 
 	if ( $products ) {
 		$target_products = array_merge( $target_products, get_posts( [
-			'post_type' => 'product',
-			'posts_per_page' => -1,
-			'post__in' => $products
+			'post_type'      => 'product',
+			'posts_per_page' => - 1,
+			'post__in'       => $products
 		] ) );
 	}
 
 	if ( $target_products ) {
 		$current_products = get_posts( [
-			'post_type' => 'product',
-			'posts_per_page' => -1,
-			'tax_query' => [
+			'post_type'      => 'product',
+			'posts_per_page' => - 1,
+			'tax_query'      => [
 				[
 					'taxonomy' => 'promotion',
-					'terms' => $term_id,
+					'terms'    => $term_id,
 				]
 			]
 		] );
 
 		$depricated_products = array_diff( $current_products, $target_products );
-		$old_products = array_intersect( $current_products, $target_products );
-		$new_products = array_diff( $target_products, $old_products );
-		$term_name = get_term( $term_id )->name;
+		$old_products        = array_intersect( $current_products, $target_products );
+		$new_products        = array_diff( $target_products, $old_products );
+		$term_name           = get_term( $term_id )->name;
 
 		if ( $new_products ) {
 			foreach ( $new_products as $post ) {
@@ -812,3 +830,42 @@ add_action('saved_promotion', function ($term_id, $tt_id, $update, $args) {
 		}
 	}
 }, 10, 4 );
+
+add_filter( 'woocommerce_get_stock_html', function ( $html, $product ) {
+	$availability = $product->get_availability();
+	$warehouses   = get_option( 'all_1c_stocks' );
+	$stock_meta   = get_post_meta( $product->get_id(), '_separate_warehouse_stock', true );
+
+	$stock_data = [];
+
+	foreach ( $stock_meta as $warehouse_id => $count ) {
+		$name                                                  = $warehouses[ $warehouse_id ]['Наименование'];
+		$stock_data[ komandir_format_warehouse_name( $name ) ] = $count;
+	}
+
+	$html = "<div class=\"stock {$availability['class']}\">";
+	$html .= 'в наличии:';
+	$html .= '<ul>';
+
+	foreach ( $stock_data as $warehouse => $count ) {
+		$html .= "<li>$warehouse - $count шт</li>";
+	}
+	$html .= '</ul></div>';
+
+//	var_dump( $stock_data );
+
+	return $html;
+}, 10, 2 );
+
+function komandir_format_warehouse_name( $name ) {
+	$dict = [
+		'ТД Арбат' => 'ТД Арбат | Победы 25',
+		'ТЦ 20-й'  => 'ТЦ 20-й | Горького 84А'
+	];
+
+	foreach ( $dict as $key => $value ) {
+		if ( str_contains( $name, $key ) ) {
+			return $value;
+		}
+	}
+}
