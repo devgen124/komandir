@@ -14244,6 +14244,23 @@ input.irs-input-min,
   margin-bottom: 0;
 }
 
+.bapf_from {
+  margin-right: 4px;
+}
+
+.bapf_from,
+.bapf_to {
+  width: calc(50% - 2px);
+}
+.bapf_from input[type=text],
+.bapf_to input[type=text] {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #bfbfbf;
+  border-radius: 3px;
+  color: #696969;
+}
+
 .wishlist-form {
   display: flex;
   flex-direction: column;
