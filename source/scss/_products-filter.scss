@@ -1,125 +1,142 @@
 .products-filter {
 
-    @include media-breakpoint-down(xl) {
-        width: calc(25% - 13px);
-    }
+	@include media-breakpoint-down(xl) {
+		width: calc(25% - 13px);
+	}
 
-    @include media-breakpoint-down(lg) {
-        width: calc(33.3% - 13px);
-    }
+	@include media-breakpoint-down(lg) {
+		width: calc(33.3% - 13px);
+	}
 
-    @include media-breakpoint-down(md) {
-        width: calc(50% - 13px);
-    }
+	@include media-breakpoint-down(md) {
+		width: calc(50% - 13px);
+	}
 
-    @include media-breakpoint-down(sm) {
-        margin: 0;
-        width: 100%;
-        max-width: 296px;
-    }
+	@include media-breakpoint-down(sm) {
+		margin: 0;
+		width: 100%;
+		max-width: 296px;
+	}
 }
 
 
 .irs-inputs {
-    display: flex;
+	display: flex;
 }
 
 .irs-input-min {
-    margin-right: 8px;
+	margin-right: 8px;
 }
 
 input.irs-input-min,
 .irs-input-max {
-    width: calc(50% - 4px);
+	width: calc(50% - 4px);
 }
 
 .bapf_head h3,
 .bapf_hascolarr {
-    margin-bottom: 22px;
-    font-size: 14px;
-    font-weight: 700;
+	margin-bottom: 22px;
+	font-size: 14px;
+	font-weight: 700;
 }
 
 .bapf_tbprice {
-    display: none;
+	display: none;
 }
 
 .bapf_colaps_smb.fa-chevron {
 
-    &-up::before,
-    &-down::before {
-        content: "";
-        display: inline-block;
-        width: 19px;
-        height: 19px;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+	&-up::before,
+	&-down::before {
+		content: "";
+		display: inline-block;
+		width: 19px;
+		height: 19px;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
 
-    &-up::before {
-        background-image: url("../images/chevron-up.svg");
-    }
+	&-up::before {
+		background-image: url("../images/chevron-up.svg");
+	}
 
-    &-down::before {
-        background-image: url("../images/chevron-down.svg");
-    }
+	&-down::before {
+		background-image: url("../images/chevron-down.svg");
+	}
 }
 
 .bapf_slidr_main.ui-widget-content {
-    .ui-slider-handle {
-        top: -4px;
-        width: 12px;
-        height: 12px;
-        box-shadow: inset 0 0 0 2px $accent-color;
-    }
+	.ui-slider-handle {
+		top: -4px;
+		width: 12px;
+		height: 12px;
+		box-shadow: inset 0 0 0 2px $accent-color;
+	}
 
-    .ui-slider-range {
-        background-color: $accent-color;
-    }
+	.ui-slider-range {
+		background-color: $accent-color;
+	}
 }
 
 .bapf_button.bapf_update {
-    margin-top: 31px;
-    padding: 9px 30px;
-    max-width: 130px;
-    align-self: flex-start;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 700;
-    color: $white;
-    background-color: $accent-color;
-    border-radius: 3px;
-    border: none;
-    transition: 0.3s;
+	margin-top: 31px;
+	padding: 9px 30px;
+	max-width: 130px;
+	align-self: flex-start;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 700;
+	color: $white;
+	background-color: $accent-color;
+	border-radius: 3px;
+	border: none;
+	transition: 0.3s;
 
-    &:hover {
-        background-color: $accent-color-hover;
-    }
+	&:hover {
+		background-color: $accent-color-hover;
+	}
 
-    @include media-breakpoint-down(lg) {
-        width: 100%;
-        max-width: none;
-        padding: 9px;
-    }
+	@include media-breakpoint-down(lg) {
+		width: 100%;
+		max-width: none;
+		padding: 9px;
+	}
 }
 
 .bapf_sfilter ul li {
-    line-height: 16px;
+	line-height: 16px;
 
-    &:not(:last-child) {
-        margin-bottom: 18px !important;
-    }
+	&:not(:last-child) {
+		margin-bottom: 18px !important;
+	}
 }
 
 .bapf_reset {
-    margin-left: 30px;
-    padding: 0;
-    font-size: 14px;
-    border: none;
-    border-bottom: 1px solid #000;
-    background-color: transparent;
+	margin-left: 30px;
+	padding: 0;
+	font-size: 14px;
+	border: none;
+	border-bottom: 1px solid #000;
+	background-color: transparent;
 }
 
 .bapf_rst_nofltr {
-    margin-bottom: 0;
+	margin-bottom: 0;
+}
+
+.bapf_from {
+	margin-right: 4px;
+}
+
+.bapf_from,
+.bapf_to {
+	width: calc(50% - 2px);
+
+	input[type="text"] {
+		width: 100%;
+		padding: 6px;
+		border: 1px solid #bfbfbf;
+		border-radius: 3px;
+		color: #696969;
+	}
 }
