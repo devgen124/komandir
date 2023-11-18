@@ -23,11 +23,35 @@ global $wp_query;
 
 $cat_children = get_terms( [
 	'taxonomy' => 'product_cat',
-	'parent' => $wp_query->queried_object->term_id
+	'parent'   => $wp_query->queried_object->term_id
 ] );
 
+$cat_children = array_filter( $cat_children, function ( $cat ) {
+	$products = get_posts( [
+		'post_type'      => 'product',
+		'posts_per_page' => - 1,
+		'tax_query'      => [
+			[
+				'taxonomy' => 'product_cat',
+				'terms'    => $cat->term_id,
+				'operator' => 'IN'
+			]
+		],
+		'meta_query'     => [
+			[
+				'key'   => '_stock_status',
+				'value' => 'instock'
+			]
+		]
+	] );
+
+	if ( ! empty( $products ) ) {
+		return $cat;
+	}
+} );
+
 if ( ! empty( $cat_children ) ) {
-    ?>
+	?>
 
 	<main id="primary" class="site-main">
 		<div class="container">
@@ -58,7 +82,7 @@ if ( ! empty( $cat_children ) ) {
 		</div>
 	</main>
 
-<?php
+	<?php
 
 } else {
 
@@ -105,9 +129,13 @@ if ( ! empty( $cat_children ) ) {
 
 		woocommerce_product_loop_start();
 
+		$counter = 0;
+
 		if ( wc_get_loop_prop( 'total' ) ) {
 			while ( have_posts() ) {
 				the_post();
+
+				$counter ++;
 
 				/**
 				 * Hook: woocommerce_shop_loop.
@@ -117,6 +145,8 @@ if ( ! empty( $cat_children ) ) {
 				wc_get_template_part( 'content', 'product' );
 			}
 		}
+
+		$GLOBALS['hide_filters'] = $counter === 1;
 
 		woocommerce_product_loop_end();
 
@@ -136,6 +166,9 @@ if ( ! empty( $cat_children ) ) {
 		 * @hooked wc_no_products_found - 10
 		 */
 		do_action( 'woocommerce_no_products_found' );
+
+		// флаг для сайдбара с фильтром
+		$GLOBALS['hide_filters'] = true;
 	}
 
 	/**
