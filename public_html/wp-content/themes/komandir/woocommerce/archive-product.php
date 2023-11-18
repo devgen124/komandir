@@ -120,7 +120,7 @@ if ( isset( $_GET['s'] ) || is_tax( 'promotion' ) ) {
 
 					$parent_cats = get_categories( [
 						'taxonomy' => 'product_cat',
-						'parent' => 0
+						'parent'   => 0
 					] );
 
 					?>
@@ -133,11 +133,11 @@ if ( isset( $_GET['s'] ) || is_tax( 'promotion' ) ) {
 
 									<li class="categories-parent-list-item">
 										<a href="<?= get_term_link( $cat->slug, 'product_cat' ) ?>"
-											data-product-cat="<?= $cat->term_id; ?>">
+										   data-product-cat="<?= $cat->term_id; ?>">
 											<span>
 												<?= $svg->view_from_sprite( [
-													'title' => $item['icon']['title'],
-													'width' => $item['icon']['width'],
+													'title'  => $item['icon']['title'],
+													'width'  => $item['icon']['width'],
 													'height' => $item['icon']['height']
 												] ); ?>
 											</span>
@@ -146,7 +146,7 @@ if ( isset( $_GET['s'] ) || is_tax( 'promotion' ) ) {
 										<?php
 										$child_cats = get_categories( [
 											'taxonomy' => 'product_cat',
-											'parent' => $cat->term_id
+											'parent'   => $cat->term_id
 										] );
 										if ( $child_cats ) : ?>
 											<ul class="categories-child-list">
@@ -157,31 +157,31 @@ if ( isset( $_GET['s'] ) || is_tax( 'promotion' ) ) {
 														<?php
 														$grandchild_cats = get_categories( [
 															'taxonomy' => 'product_cat',
-															'parent' => $child_cat->term_id,
+															'parent'   => $child_cat->term_id,
 															'hasEmpty' => false
 														] );
 
-														$grandchild_cats = array_filter( $grandchild_cats, function ($grandchild_cat) {
+														$grandchild_cats = array_filter( $grandchild_cats, function ( $grandchild_cat ) {
 															$products = get_posts( [
-																'post_type' => 'product',
-																'posts_per_page' => -1,
-																'meta_query' => [
+																'post_type'      => 'product',
+																'posts_per_page' => - 1,
+																'meta_query'     => [
 																	[
-																		'key' => '_stock_status',
+																		'key'   => '_stock_status',
 																		'value' => 'instock'
 																	]
 																],
-																'tax_query' => [
+																'tax_query'      => [
 																	[
 																		'taxonomy' => 'product_cat',
-																		'field' => 'term_id',
-																		'terms' => [ $grandchild_cat->term_id ],
+																		'field'    => 'term_id',
+																		'terms'    => [ $grandchild_cat->term_id ],
 																		'operator' => 'IN'
 																	]
 																]
 															] );
 
-															return $products ? true : false;
+															return (bool) $products;
 														} );
 
 														if ( $grandchild_cats ) : ?>
