@@ -987,11 +987,11 @@ add_action( 'woocommerce_order_details_after_customer_details', function ( $orde
 } );
 
 add_filter( 'itglx_wc1c_xml_order_info_custom', function ( $mainOrderInfo, $order_id ) {
-	$method = get_post_meta( $order_id, 'Способ получения' );
+	$method = get_post_meta( $order_id, 'Способ получения', true );
 
 	$mainOrderInfo['СпособПолученияЗаказа'] = $method;
 
 	if ( $method == 'Самовывоз' ) {
-		$mainOrderInfo['Магазин'] = get_post_meta( $order_id, 'Магазин' );
+		$mainOrderInfo['Магазин'] = get_post_meta( $order_id, 'Магазин', true );
 	}
 } );
