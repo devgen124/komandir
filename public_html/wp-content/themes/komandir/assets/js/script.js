@@ -15050,8 +15050,6 @@ __webpack_require__.r(__webpack_exports__);
 const isMobile = document.documentElement.clientWidth < 992;
 
 function salesSlider() {
-	console.log(tiny_slider_src_tiny_slider_js__WEBPACK_IMPORTED_MODULE_0__.tns);
-
 	if (isMobile) {
 		let slider = (0,tiny_slider_src_tiny_slider_js__WEBPACK_IMPORTED_MODULE_0__.tns)({
 			container: '.sales-inner .products',

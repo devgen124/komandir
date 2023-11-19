@@ -1271,3 +1271,13 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
 	height: 320px;
 	object-fit: contain;
 }
+
+.woocommerce div.form-row.warehouse-checkout {
+	margin-bottom: 25px;
+}
+
+.shipping-required {
+	input {
+		margin: 0 1em 0 0;
+	}
+}

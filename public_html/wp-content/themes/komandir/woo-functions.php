@@ -15,13 +15,13 @@ remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wra
 add_action( 'woocommerce_before_main_content', function () {
 	?>
 	<main id="primary" class="site-main">
-	<div class="container">
-	<?php
-}, 10 );
+		<div class="container">
+			<?php
+			}, 10 );
 
-add_action( 'woocommerce_after_main_content', function () {
-	?>
-	</div>
+			add_action( 'woocommerce_after_main_content', function () {
+			?>
+		</div>
 	</main><!-- #main -->
 	<?php
 }, 20 );
@@ -618,15 +618,6 @@ add_filter( 'aws_search_pre_filter_single_product', function ( $result ) {
 	return $result;
 }, 10 );
 
-// add shipping warning
-
-add_action( 'woocommerce_checkout_order_review', function () {
-	?>
-	<p><b>По вопросу получения товара мы с Вами свяжемся после оформления заказа. С условиями доставки можно
-			ознакомиться на странице <a href="/shipping">Доставка</a></b></p>
-	<?php
-} );
-
 // remove product attributes links
 
 // add_filter( 'woocommerce_display_product_attributes', 'komandir_remove_product_attributes_links' );
@@ -869,3 +860,138 @@ function komandir_format_warehouse_name( $name ) {
 		}
 	}
 }
+
+function komandir_get_warehouses() {
+	$warehouses = get_option( 'all_1c_stocks' );
+	$output     = [];
+
+	foreach ( $warehouses as $id => $data ) {
+		$name = komandir_format_warehouse_name( $data['Наименование'] );
+		if ( $name ) {
+			$output[ $id ] = $name;
+		}
+	}
+
+	return $output;
+}
+
+function komandir_get_warehouse_name_by_id( $this_id ) {
+	foreach ( komandir_get_warehouses() as $id => $name ) {
+		if ( $this_id == $id ) {
+			return $name;
+		}
+	}
+}
+
+// shipping and warehouse  choise in checkout form
+
+add_action( 'woocommerce_checkout_order_review', function () {
+
+	?>
+	<div class="shipping-required form-row">
+		<p><b>Выберите способ получения заказа</b> (С условиями доставки можно ознакомиться на странице <a
+				href="/shipping">Доставка</a>)
+		</p>
+		<ul>
+			<li>
+				<label>
+					<input type="radio" name="shipping-required" value="1">
+					<span>Доставка</span>
+				</label>
+			</li>
+			<li>
+				<label>
+					<input type="radio" name="shipping-required" value="0" checked>
+					<span>Самовывоз</span>
+				</label>
+			</li>
+		</ul>
+
+	</div>
+	<div class="warehouse-checkout form-row">
+		<p><b>Выберите магазин для получения заказа</b></p>
+
+		<select name="warehouse-id" class="warehouse-select">
+			<?php foreach ( komandir_get_warehouses() as $id => $name ) : ?>
+				<option value="<?= $id ?>"><?= $name ?></option>
+			<?php endforeach; ?>
+		</select>
+	</div>
+	<script>
+		$(function () {
+			$('input[name="shipping-required"]').on('change', function () {
+				const $warehouse = $('.warehouse-checkout');
+
+				if (this.value == 1) {
+					$warehouse.slideUp();
+				} else {
+					$warehouse.slideDown();
+				}
+			});
+		});
+	</script>
+
+	<?php
+} );
+
+add_action( 'woocommerce_checkout_update_order_meta', function ( $order_id ) {
+	if ( isset( $_POST['shipping-required'] ) ) {
+		if ( $_POST['shipping-required'] == 1 ) {
+			update_post_meta( $order_id, 'Способ получения', 'Доставка' );
+		} else {
+			update_post_meta( $order_id, 'Способ получения', 'Самовывоз' );
+			if ( isset( $_POST['warehouse-id'] ) ) {
+				update_post_meta( $order_id, 'Магазин', $_POST['warehouse-id'] );
+			}
+		}
+	}
+} );
+
+add_filter( 'woocommerce_email_order_meta_fields', function ( $fields, $sent_to_admin, $order ) {
+	$method   = $order->get_meta( 'Способ получения' );
+	$fields[] = [
+		'label' => 'Способ получения заказа',
+		'value' => $method
+	];
+
+	if ( $method === 'Самовывоз' ) {
+		$fields[] = [
+			'label' => 'Магазин',
+			'value' => komandir_get_warehouse_name_by_id( $order->get_meta( 'Магазин' ) )
+		];
+	}
+
+	return $fields;
+}, 10, 3 );
+
+add_action( 'woocommerce_order_details_after_customer_details', function ( $order ) {
+	$method = $order->get_meta( 'Способ получения' );
+	?>
+
+	<table class="shop_table" style="margin-top: 30px;">
+		<tr>
+			<th>Способ получения заказа</th>
+			<th><?= $method ?></th>
+		</tr>
+
+		<?php if ( $method == 'Самовывоз' ) : ?>
+			<tr>
+				<th>Магазин</th>
+				<th><?= komandir_get_warehouse_name_by_id( $order->get_meta( 'Магазин' ) ) ?></th>
+			</tr>
+		<?php endif; ?>
+
+	</table>
+
+	<?php
+} );
+
+add_filter( 'itglx_wc1c_xml_order_info_custom', function ( $mainOrderInfo, $order_id ) {
+	$method = get_post_meta( $order_id, 'Способ получения' );
+
+	$mainOrderInfo['СпособПолученияЗаказа'] = $method;
+
+	if ( $method == 'Самовывоз' ) {
+		$mainOrderInfo['Магазин'] = get_post_meta( $order_id, 'Магазин' );
+	}
+} );

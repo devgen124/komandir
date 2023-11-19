@@ -12449,6 +12449,14 @@ input[type=checkbox]:checked + label::before {
   display: block;
 }
 
+.warehouse-checkout .custom-select__opener {
+  border: 1px solid #00a9b4;
+  border-radius: 3px;
+}
+.warehouse-checkout .custom-select__panel {
+  border-color: #707070;
+}
+
 form.mailpoet-manage-subscription .mailpoet_text_label,
 form.mailpoet-manage-subscription .mailpoet_select_label,
 form.mailpoet-manage-subscription .mailpoet_segment_label {
@@ -13810,6 +13818,14 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
   height: 320px;
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.woocommerce div.form-row.warehouse-checkout {
+  margin-bottom: 25px;
+}
+
+.shipping-required input {
+  margin: 0 1em 0 0;
 }
 
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {
