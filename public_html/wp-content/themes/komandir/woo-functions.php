@@ -994,4 +994,7 @@ add_filter( 'itglx_wc1c_xml_order_info_custom', function ( $mainOrderInfo, $orde
 	if ( $method == 'Самовывоз' ) {
 		$mainOrderInfo['Магазин'] = get_post_meta( $order_id, 'Магазин', true );
 	}
-} );
+
+	return $mainOrderInfo;
+}, 10, 2 );
+
