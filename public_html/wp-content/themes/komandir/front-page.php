@@ -24,62 +24,62 @@ global $svg;
 
 $parent_cats = get_categories( [
 	'taxonomy' => 'product_cat',
-	'parent' => 0
+	'parent'   => 0
 ] );
 ?>
 
-<main id="primary" class="site-main">
-	<div class="container">
-		<div class="row">
-			<div class="col-12 d-lg-flex site-main-top">
+	<main id="primary" class="site-main">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 d-xl-flex site-main-top">
 
-				<aside class="d-none d-lg-block flex-shrink-0 supercategories-sidebar">
-					<ul class="supercategories-sidebar-list">
+					<aside class="d-none d-xl-block flex-shrink-0 supercategories-sidebar">
+						<ul class="supercategories-sidebar-list">
 
-						<li>
-							<a href="<?= get_permalink( get_page_by_path( 'promotion' ) ); ?>">
+							<li>
+								<a href="<?= get_permalink( get_page_by_path( 'promotion' ) ); ?>">
 								<span>
 									<?= $svg->view_from_sprite( [
-										'title' => $promotion['icon']['title'],
-										'width' => $promotion['icon']['width'],
+										'title'  => $promotion['icon']['title'],
+										'width'  => $promotion['icon']['width'],
 										'height' => $promotion['icon']['height']
 									] ); ?>
 								</span>
-								Акции</a>
-						</li>
+									Акции</a>
+							</li>
 
-						<?php foreach ( $parent_cats as $cat ) : ?>
-							<?php foreach ( $shop_icons as $item ) : ?>
-								<?php if ( $item['name'] == $cat->cat_name ) : ?>
-									<li>
-										<a href="<?= get_term_link( $cat->slug, 'product_cat' ); ?>">
+							<?php foreach ( $parent_cats as $cat ) : ?>
+								<?php foreach ( $shop_icons as $item ) : ?>
+									<?php if ( $item['name'] == $cat->cat_name ) : ?>
+										<li>
+											<a href="<?= get_term_link( $cat->slug, 'product_cat' ); ?>">
 											<span>
 												<?= $svg->view_from_sprite( [
-													'title' => $item['icon']['title'],
-													'width' => $item['icon']['width'],
+													'title'  => $item['icon']['title'],
+													'width'  => $item['icon']['width'],
 													'height' => $item['icon']['height']
 												] ) ?>
 											</span>
-											<?= $cat->cat_name; ?>
-										</a>
-									</li>
-								<?php endif; ?>
+												<?= $cat->cat_name; ?>
+											</a>
+										</li>
+									<?php endif; ?>
+								<?php endforeach; ?>
 							<?php endforeach; ?>
-						<?php endforeach; ?>
-					</ul>
-				</aside>
-				<section class="flex-grow-1 promo-slider">
-					<?php masterslider( 1 ); ?>
-				</section>
+						</ul>
+					</aside>
+					<section class="flex-grow-1 promo-slider">
+						<?php masterslider( 1 ); ?>
+					</section>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<?php get_template_part( 'template-parts/sales' )?>
+		<div class="container">
+			<div class="row">
+				<?php get_template_part( 'template-parts/sales' ) ?>
+			</div>
 		</div>
-	</div>
-</main><!-- #main -->
+	</main><!-- #main -->
 
 <?php
 get_footer();

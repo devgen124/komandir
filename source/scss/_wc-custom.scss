@@ -76,8 +76,8 @@
     font: 700 24px/34px $font-family-main;
 
     @include media-breakpoint-down(lg) {
-        font-size: 11px;
-        line-height: 15px;
+        font-size: 14px;
+        line-height: 16px;
     }
 }
 
@@ -98,7 +98,7 @@
     font: 700 32px/45px $font-family-main;
 
     @include media-breakpoint-down(lg) {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 20px;
     }
 }
@@ -373,7 +373,7 @@ $cols: (1, 2, 3, 4, 5, 6);
 
                     @include media-breakpoint-down(lg) {
                         margin-bottom: 7px;
-                        font-size: 10px;
+                        font-size: 14px;
                         line-height: 14px;
                     }
                 }
