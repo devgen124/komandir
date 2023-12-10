@@ -13,17 +13,11 @@ remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wr
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
 
 add_action( 'woocommerce_before_main_content', function () {
-	?>
-	<main id="primary" class="site-main">
-		<div class="container">
-			<?php
-			}, 10 );
+	echo '<main id="primary" class="site-main"><div class="container">';
+}, 10 );
 
-			add_action( 'woocommerce_after_main_content', function () {
-			?>
-		</div>
-	</main><!-- #main -->
-	<?php
+add_action( 'woocommerce_after_main_content', function () {
+	echo '</div></main>';
 }, 20 );
 
 add_filter( 'woocommerce_add_to_cart_message', fn() => 'success' );
