@@ -1,13 +1,17 @@
 @use "sass:math";
 
 .sales {
+	margin-top: 35px;
+
     &-heading {
         margin-bottom: 36px;
+		display: flex;
+		align-items: baseline;
     }
 
     h2 {
         margin-bottom: 0;
-        line-height: 1;
+		margin-right: 15px;
 
         +p {
             font-size: 16px;

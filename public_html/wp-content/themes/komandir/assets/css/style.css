@@ -12597,12 +12597,17 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   }
 }
 
+.sales {
+  margin-top: 35px;
+}
 .sales-heading {
   margin-bottom: 36px;
+  display: flex;
+  align-items: baseline;
 }
 .sales h2, .sales .h2 {
   margin-bottom: 0;
-  line-height: 1;
+  margin-right: 15px;
 }
 .sales h2 + p, .sales .h2 + p {
   font-size: 16px;
@@ -14275,6 +14280,10 @@ input.irs-input-min,
   border: 1px solid #bfbfbf;
   border-radius: 3px;
   color: #696969;
+}
+
+.bapf_body li > ul {
+  margin-top: 10px;
 }
 
 .wishlist-form {

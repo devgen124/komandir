@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-if ( isset( $_GET['s'] ) || is_tax( 'promotion' ) ) {
+if ( isset( $_GET['s'] ) || is_tax( 'promotion' ) || is_woocommerce_sale_page() ) {
 	do_action( 'woocommerce_before_main_content' );
 
 	?>
