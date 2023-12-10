@@ -441,7 +441,6 @@ function komandir_archive_additional_info() {
 	global $product;
 
 	$product_attributes = array();
-
 	// Display weight and dimensions before attribute list.
 	$display_dimensions = apply_filters( 'wc_product_enable_dimensions_display', $product->has_weight() || $product->has_dimensions() );
 
@@ -843,8 +842,6 @@ add_filter( 'woocommerce_get_stock_html', function ( $html, $product ) {
 	}
 	$html .= '</ul></div>';
 
-//	var_dump( $stock_data );
-
 	return $html;
 }, 10, 2 );
 
@@ -998,3 +995,26 @@ add_filter( 'itglx_wc1c_xml_order_info_custom', function ( $mainOrderInfo, $orde
 	return $mainOrderInfo;
 }, 10, 2 );
 
+// brand attribute processing
+
+add_action( 'itglx_wc1c_after_product_info_resolve', function ( $product_id, $element ) {
+	if ( isset( $element->ТорговаяМарка ) ) {
+		$brand_attr  = 'pa_brand';
+		$brand_value = (string) $element->ТорговаяМарка;
+		wp_set_object_terms( $product_id, $brand_value, $brand_attr, true );
+		$attrs_to_append = [
+			$brand_attr => [
+				'name'         => $brand_attr,
+				'value'        => $brand_value,
+				'is_visible'   => 1,
+				'is_taxonomy'  => 1,
+				'position'     => 0,
+				'is_variation' => 0
+			]
+		];
+
+		$attributes = get_post_meta( $product_id, '_product_attributes', true ) ?: [];
+
+		update_post_meta( $product_id, '_product_attributes', array_merge( $attributes, $attrs_to_append ) );
+	}
+}, 10, 2 );
