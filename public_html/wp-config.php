@@ -48,14 +48,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '/J2+5][K={8*L,QJL>7KIfmGn9[vT%`}HMC*+{~nI0>#z}MqnAlr YKO4?v<]6t ' );
-define( 'SECURE_AUTH_KEY',  'Q7%5Xd,+k@HwDBkZJ*}`S>s/,Sy:S4i%{~&R|/g7drX*Sgp5e}ZJgocftO5z{hxa' );
-define( 'LOGGED_IN_KEY',    'QaGx:HmAeQ@S.EoUF{7`-FR*_3a6KLH,FFjY|K.I$W{_>Z4/`0-n+,nh4r.ZZwUc' );
-define( 'NONCE_KEY',        'o<m]&%#LS5AwUu8%,mIIGa,i2?hg6F{$gkH y})zdL,HK|B~YsPC(]nx^4*Tq;|y' );
-define( 'AUTH_SALT',        '*%t);a-,FF;ooBr;K#j;3#xE0Q?;%^BG8JqJU)mgB${Y~*So)[(ZYRQt1#_%<ukE' );
+define( 'AUTH_KEY', '/J2+5][K={8*L,QJL>7KIfmGn9[vT%`}HMC*+{~nI0>#z}MqnAlr YKO4?v<]6t ' );
+define( 'SECURE_AUTH_KEY', 'Q7%5Xd,+k@HwDBkZJ*}`S>s/,Sy:S4i%{~&R|/g7drX*Sgp5e}ZJgocftO5z{hxa' );
+define( 'LOGGED_IN_KEY', 'QaGx:HmAeQ@S.EoUF{7`-FR*_3a6KLH,FFjY|K.I$W{_>Z4/`0-n+,nh4r.ZZwUc' );
+define( 'NONCE_KEY', 'o<m]&%#LS5AwUu8%,mIIGa,i2?hg6F{$gkH y})zdL,HK|B~YsPC(]nx^4*Tq;|y' );
+define( 'AUTH_SALT', '*%t);a-,FF;ooBr;K#j;3#xE0Q?;%^BG8JqJU)mgB${Y~*So)[(ZYRQt1#_%<ukE' );
 define( 'SECURE_AUTH_SALT', ':*[TXt;inC?&g<]ayMOP`]LY)cb->jw{$4EIsWz@-GYqH;+iIe#8mpGrdHb>Yf4T' );
-define( 'LOGGED_IN_SALT',   '5e?t`UM: GKZVn=Zq*#|_*lmUZ=fM:[=r<N[&/qTCxTA.d{n7}w55K_P86*b]hF7' );
-define( 'NONCE_SALT',       'JSYeb$ywZ|T?_D6=IkW%5H1S2={qW><H2`%sa!RL9Uf{r{+@E{[Zjm.`(8S~+G#u' );
+define( 'LOGGED_IN_SALT', '5e?t`UM: GKZVn=Zq*#|_*lmUZ=fM:[=r<N[&/qTCxTA.d{n7}w55K_P86*b]hF7' );
+define( 'NONCE_SALT', 'JSYeb$ywZ|T?_D6=IkW%5H1S2={qW><H2`%sa!RL9Uf{r{+@E{[Zjm.`(8S~+G#u' );
 
 /**#@-*/
 
@@ -79,7 +79,7 @@ $table_prefix = 'wp_';
  * @link https://ru.wordpress.org/support/article/debugging-in-wordpress/
  */
 
-define('WP_DEBUG', true);
+define( 'WP_DEBUG', false );
 
 
 /* Произвольные значения добавляйте между этой строкой и надписью "дальше не редактируем". */
@@ -90,7 +90,9 @@ define( 'WP_DEBUG_LOG', true );
 
 // @ini_set( 'display_errors', 0 );
 
-define('WP_MEMORY_LIMIT','64M');
+error_reporting( E_ALL ^ E_WARNING );
+
+define( 'WP_MEMORY_LIMIT', '64M' );
 
 
 // Отключаем автообновление
