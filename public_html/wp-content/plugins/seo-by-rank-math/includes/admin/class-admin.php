@@ -12,12 +12,11 @@ namespace RankMath\Admin;
 
 use RankMath\Runner;
 use RankMath\Helper;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -41,7 +40,7 @@ class Admin implements Runner {
 		$this->action( 'cmb2_save_options-page_fields', 'update_is_configured_value', 10, 2 );
 		$this->filter( 'action_scheduler_pastdue_actions_check_pre', 'as_exclude_pastdue_actions' );
 		$this->action( 'rank_math/pro_badge', 'offer_icon' );
-		$this->action( 'admin_init', 'update_wp_notification' );
+		$this->filter( 'load_script_translation_file', 'load_script_translation_file', 10, 3 );
 
 		// AJAX.
 		$this->ajax( 'is_keyword_new', 'is_keyword_new' );
@@ -109,7 +108,7 @@ class Admin implements Runner {
 		$post_type  = get_post_type( $post_id );
 		$is_allowed = in_array( $post_type, Helper::get_allowed_post_types(), true );
 
-		if ( ! $is_allowed || Conditional::is_autosave() || Conditional::is_ajax() || isset( $_REQUEST['bulk_edit'] ) ) {
+		if ( ! $is_allowed || Helper::is_autosave() || Helper::is_ajax() || isset( $_REQUEST['bulk_edit'] ) ) {
 			return $post_id;
 		}
 
@@ -248,22 +247,6 @@ class Admin implements Runner {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Add an admin notice informing users to update WordPress to v6.3 or higher.
-	 *
-	 * @return void
-	 */
-	public function update_wp_notification() {
-		if ( ! Str::starts_with( 'rank-math', Param::get( 'page' ) ) || version_compare( get_bloginfo( 'version' ), '6.0', '>=' ) ) {
-			return;
-		}
-
-		Helper::add_notification(
-			esc_html__( 'Please update to WordPress v6.0 or higher as Rank Math SEO will soon stop supporting lower versions.', 'rank-math' ),
-			[ 'type' => 'error' ]
-		);
 	}
 
 	/**
@@ -450,5 +433,22 @@ class Admin implements Runner {
 			})(jQuery);
 		</script>
 		<?php
+	}
+
+	/**
+	 * Function to replace domain with seo-by-rank-math in translation file.
+	 *
+	 * @param string|false $file   Path to the translation file to load. False if there isn't one.
+	 * @param string       $handle Name of the script to register a translation domain to.
+	 * @param string       $domain The text domain.
+	 */
+	public function load_script_translation_file( $file, $handle, $domain ) {
+		if ( 'rank-math' !== $domain ) {
+			return $file;
+		}
+
+		$data                       = explode( '/', $file );
+		$data[ count( $data ) - 1 ] = preg_replace( '/rank-math/', 'seo-by-rank-math', $data[ count( $data ) - 1 ], 1 );
+		return implode( '/', $data );
 	}
 }

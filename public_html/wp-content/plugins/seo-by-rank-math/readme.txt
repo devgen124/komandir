@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.3
-Requires at least: 5.6
+Tested up to: 6.4.1
+Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.122
+Stable tag: 1.0.208.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,12 +583,15 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.122 [Aug 23, 2023] =
-- Added: New option in [Webmaster Tools](https://rankmath.com/kb/general-settings/#webmaster-tools) to add additional verification tags
-- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#modify-link-counter-content) to modify the content passed to the [Link Counter](https://rankmath.com/kb/link-counter/)
-- Fixed: PHP Warning with WP CLI command `wp rankmath sitemap generate`
-- Fixed: Setup Wizard was not updating [Person/Organization Name](https://rankmath.com/kb/how-to-setup/#your-site)
-- Fixed: PHP warnings on the [Redirections](https://rankmath.com/kb/setting-up-redirections/) page in PHP 8.1, occurring when no Redirections are present on the site
+= 1.0.208 [Dec 07, 2023] =
+- Improved: Content AI is now optimized to deliver results quickly
+- Improved: [Bulk Generate SEO Meta tags](https://rankmath.com/kb/bulk-generate-seo-meta-tags/) feature is now restricted to Paid Content AI users
+- Fixed: [Sitemap Index](https://rankmath.com/kb/sitemaps-seo-benefits/#xml-sitemap) was incorrectly using noindexed post data for `Last Modified` date
+- Fixed: [Update SEO Score tool](https://rankmath.com/kb/seo-score-not-available/#update-seo-scores) now handles encoded characters in Post URL correctly
+- Removed: Google Mobile-Friendly tool from the [Quick Actions admin menu](https://rankmath.com/kb/quick-actions/) as Google deprecated it
+
+= 1.0.208.1 [Dec 07, 2023] =
+- Fixed: Cache issue was causing Content AI to not work properly.
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

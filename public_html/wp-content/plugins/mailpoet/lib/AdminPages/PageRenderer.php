@@ -15,7 +15,6 @@ use MailPoet\Cron\Workers\SubscribersCountCacheRecalculation;
 use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\TagEntity;
 use MailPoet\Features\FeaturesController;
-use MailPoet\Form\AssetsController;
 use MailPoet\Referrals\ReferralDetector;
 use MailPoet\Segments\SegmentsRepository;
 use MailPoet\Services\Bridge;
@@ -81,6 +80,9 @@ class PageRenderer {
   /** @var WooCommerce\Helper */
   private $wooCommerceHelper;
 
+  /** @var WooCommerce\WooCommerceSubscriptions\Helper */
+  private $wooCommerceSubscriptionsHelper;
+
   public function __construct(
     Bridge $bridge,
     Renderer $renderer,
@@ -97,7 +99,8 @@ class PageRenderer {
     TransientCache $transientCache,
     WPFunctions $wp,
     AssetsController $assetsController,
-    WooCommerce\Helper $wooCommerceHelper
+    WooCommerce\Helper $wooCommerceHelper,
+    WooCommerce\WooCommerceSubscriptions\Helper $wooCommerceSubscriptionsHelper
   ) {
     $this->bridge = $bridge;
     $this->renderer = $renderer;
@@ -115,6 +118,7 @@ class PageRenderer {
     $this->wp = $wp;
     $this->assetsController = $assetsController;
     $this->wooCommerceHelper = $wooCommerceHelper;
+    $this->wooCommerceSubscriptionsHelper = $wooCommerceSubscriptionsHelper;
   }
 
   /**
@@ -139,7 +143,10 @@ class PageRenderer {
     if ($this->subscribersFeature->isSubscribersCountEnoughForCache($subscriberCount)) {
       $subscribersCacheCreatedAt = $this->transientCache->getOldestCreatedAt(TransientCache::SUBSCRIBERS_STATISTICS_COUNT_KEY) ?: Carbon::now();
     }
-
+    // Automations are hidden when the subscription is part of a bundle and AutomateWoo is active
+    $showAutomations = !($this->wp->isPluginActive('automatewoo/automatewoo.php') &&
+      $this->servicesChecker->isBundledSubscription());
+    $hideAutomations = !$this->wp->applyFilters('mailpoet_show_automations', $showAutomations);
     $defaults = [
       'current_page' => sanitize_text_field(wp_unslash($_GET['page'] ?? '')),
       'site_name' => $this->wp->wpSpecialcharsDecode($this->wp->getOption('blogname'), ENT_QUOTES),
@@ -161,6 +168,7 @@ class PageRenderer {
       'send_transactional_emails' => (bool)$this->settings->get('send_transactional_emails'),
       'transactional_emails_opt_in_notice_dismissed' => (bool)$this->userFlags->get('transactional_emails_opt_in_notice_dismissed'),
       'track_wizard_loaded_via_woocommerce' => (bool)$this->settings->get(WelcomeWizard::TRACK_LOADDED_VIA_WOOCOMMERCE_SETTING_NAME),
+      'track_wizard_loaded_via_woocommerce_marketing_dashboard' => (bool)$this->settings->get(WelcomeWizard::TRACK_LOADDED_VIA_WOOCOMMERCE_MARKETING_DASHBOARD_SETTING_NAME),
       'mail_function_enabled' => function_exists('mail') && is_callable('mail'),
       'admin_plugins_url' => WPFunctions::get()->adminUrl('plugins.php'),
 
@@ -180,7 +188,7 @@ class PageRenderer {
       'mss_key_pending_approval' => $this->servicesChecker->isMailPoetAPIKeyPendingApproval(),
       'mss_active' => $this->bridge->isMailpoetSendingServiceEnabled(),
       'plugin_partial_key' => $this->servicesChecker->generatePartialApiKey(),
-      'mailpoet_hide_automations' => $this->servicesChecker->isBundledSubscription() && $this->wp->isPluginActive('automatewoo/automatewoo.php'),
+      'mailpoet_hide_automations' => $hideAutomations,
       'subscriber_count' => $subscriberCount,
       'subscribers_counts_cache_created_at' => $subscribersCacheCreatedAt->format('Y-m-d\TH:i:sO'),
       'subscribers_limit' => $this->subscribersFeature->getSubscribersLimit(),
@@ -200,6 +208,8 @@ class PageRenderer {
         'name' => $tag->getName(),
         ];
       }, $this->tagRepository->findAll()),
+      'display_docsbot_widget' => $this->displayDocsBotWidget(),
+      'is_woocommerce_subscriptions_active' => $this->wooCommerceSubscriptionsHelper->isWooCommerceSubscriptionsActive(),
     ];
 
     if (!$defaults['premium_plugin_active']) {
@@ -217,7 +227,11 @@ class PageRenderer {
         $this->subscribersCountCacheRecalculation->schedule();
       }
 
+      // If the page didn't enqueue any assets, this will act as a fallback.
+      // If some assets were enqueued, this won't change the queue ordering.
       $this->assetsController->setupAdminPagesDependencies();
+      $this->wp->doAction('mailpoet_styles_admin_after');
+
       // We are in control of the template and the data can be considered safe at this point
       // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPressDotOrg.sniffs.OutputEscaping.UnescapedOutputParameter
       echo $this->renderer->render($template, $data + $defaults);
@@ -239,5 +253,10 @@ class PageRenderer {
       'priceFormat' => $this->wooCommerceHelper->getWoocommercePriceFormat(),
 
     ];
+  }
+
+  public function displayDocsBotWidget(): bool {
+    $display = $this->wp->applyFilters('mailpoet_display_docsbot_widget', $this->settings->get('3rd_party_libs.enabled') === '1');
+    return (bool)$display;
   }
 }

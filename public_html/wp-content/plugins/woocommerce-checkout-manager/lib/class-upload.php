@@ -74,7 +74,6 @@ class Upload {
 	}
 
 	public function ajax_delete_attachment() {
-		// $test = wp_verify_nonce( wc_clean( $_REQUEST['nonce'] ),  'wooccm_upload' );
 		if ( ! empty( $_REQUEST ) && check_admin_referer( 'wooccm_upload', 'nonce' ) ) {
 
 			$array1 = explode( ',', sanitize_text_field( isset( $_REQUEST['all_attachments_ids'] ) ? wp_unslash( $_REQUEST['all_attachments_ids'] ) : '' ) );
@@ -101,10 +100,39 @@ class Upload {
 					if ( empty( $post_parent ) ) {
 						continue;
 					} else {
-						if ( get_post_type( $post_parent ) <> 'shop_order' ) {
+						// if ( get_post_type( $post_parent ) <> 'shop_order' && get_post_type( $post_parent ) <> 'shop_order_placehold' ) {
+						if ( ! in_array( get_post_type( $post_parent ), array( 'shop_order', 'shop_order_placehold' ) ) ) {
 							continue;
 						}
 					}
+
+					$order = wc_get_order( $post_parent );
+
+					$current_user = wp_get_current_user();
+
+					$session_handler = WC()->session;
+
+					$is_user_logged = 0 === $current_user->ID;
+
+					$order_email            = $order->get_billing_email();
+					$session_customer_email = $session_handler->get( 'customer' )['email'];
+
+					$is_session_email_equal_order_email = $order_email === $session_customer_email;
+
+					if ( ! $is_user_logged && ! $is_session_email_equal_order_email ) {
+						wp_send_json_error( esc_html__( 'You must be logged in.', 'woocommerce-checkout-manager' ) );
+					}
+
+					$order_user_id = $order->get_user_id();
+
+					$user_has_capabilities = current_user_can( 'administrator' ) || current_user_can( 'edit_others_shop_orders' ) || current_user_can( 'delete_others_shop_orders' );
+
+					$is_current_user_order_equal_user_id = $current_user->ID === $order_user_id;
+
+					if ( ! $user_has_capabilities && ! $is_current_user_order_equal_user_id ) {
+						wp_send_json_error( esc_html__( 'This is not your order.', 'woocommerce-checkout-manager' ) );
+					}
+
 					wp_delete_attachment( $attachtoremove );
 				}
 			}

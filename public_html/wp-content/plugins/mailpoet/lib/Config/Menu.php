@@ -10,6 +10,7 @@ use MailPoet\AdminPages\Pages\AutomationAnalytics;
 use MailPoet\AdminPages\Pages\AutomationEditor;
 use MailPoet\AdminPages\Pages\AutomationTemplates;
 use MailPoet\AdminPages\Pages\DynamicSegments;
+use MailPoet\AdminPages\Pages\EmailEditor as EmailEditorPage;
 use MailPoet\AdminPages\Pages\ExperimentalFeatures;
 use MailPoet\AdminPages\Pages\FormEditor;
 use MailPoet\AdminPages\Pages\Forms;
@@ -35,10 +36,12 @@ use MailPoet\WP\Functions as WPFunctions;
 
 class Menu {
   const MAIN_PAGE_SLUG = self::HOMEPAGE_PAGE_SLUG;
+  const NO_PARENT_PAGE_SLUG = 'mailpoet-no-parent';
 
   const EMAILS_PAGE_SLUG = 'mailpoet-newsletters';
   const FORMS_PAGE_SLUG = 'mailpoet-forms';
   const EMAIL_EDITOR_PAGE_SLUG = 'mailpoet-newsletter-editor';
+  const EMAIL_EDITOR_V2_PAGE_SLUG = 'mailpoet-email-editor';
   const FORM_EDITOR_PAGE_SLUG = 'mailpoet-form-editor';
   const HOMEPAGE_PAGE_SLUG = 'mailpoet-homepage';
   const FORM_TEMPLATES_PAGE_SLUG = 'mailpoet-form-editor-template-selection';
@@ -191,7 +194,7 @@ class Menu {
 
     // Welcome wizard page
     $this->wp->addSubmenuPage(
-      '',
+      self::NO_PARENT_PAGE_SLUG,
       $this->setPageTitle(__('Welcome Wizard', 'mailpoet')),
       esc_html__('Welcome Wizard', 'mailpoet'),
       AccessControl::PERMISSION_ACCESS_PLUGIN_ADMIN,
@@ -204,7 +207,7 @@ class Menu {
 
     // Landingpage
     $this->wp->addSubmenuPage(
-      '',
+      self::NO_PARENT_PAGE_SLUG,
       $this->setPageTitle(__('MailPoet', 'mailpoet')),
       esc_html__('MailPoet', 'mailpoet'),
       AccessControl::PERMISSION_ACCESS_PLUGIN_ADMIN,
@@ -267,6 +270,19 @@ class Menu {
       [
         $this,
         'newletterEditor',
+      ]
+    );
+
+    // newsletter editor
+    $this->wp->addSubmenuPage(
+      self::EMAILS_PAGE_SLUG,
+      $this->setPageTitle(__('Email', 'mailpoet')),
+      esc_html__('Email Editor', 'mailpoet'),
+      AccessControl::PERMISSION_MANAGE_EMAILS,
+      self::EMAIL_EDITOR_V2_PAGE_SLUG,
+      [
+        $this,
+        'emailEditor',
       ]
     );
 
@@ -475,7 +491,7 @@ class Menu {
 
     // WooCommerce Setup
     $this->wp->addSubmenuPage(
-      '',
+      self::NO_PARENT_PAGE_SLUG,
       $this->setPageTitle(__('WooCommerce Setup', 'mailpoet')),
       esc_html__('WooCommerce Setup', 'mailpoet'),
       AccessControl::PERMISSION_ACCESS_PLUGIN_ADMIN,
@@ -510,8 +526,12 @@ class Menu {
   private function registerAutomationMenu() {
     $parentSlug = self::MAIN_PAGE_SLUG;
     // Automations menu is hidden when the subscription is part of a bundle and AutomateWoo is active but pages can be accessed directly
-    if ($this->wp->isPluginActive('automatewoo/automatewoo.php') && $this->servicesChecker->isBundledSubscription()) {
-      $parentSlug = '';
+    $showAutomations = !($this->wp->isPluginActive('automatewoo/automatewoo.php') &&
+      $this->servicesChecker->isBundledSubscription());
+    if (
+      !$this->wp->applyFilters('mailpoet_show_automations', $showAutomations)
+    ) {
+      $parentSlug = self::NO_PARENT_PAGE_SLUG;
     }
 
     $automationPage = $this->wp->addSubmenuPage(
@@ -649,6 +669,10 @@ class Menu {
     $this->container->get(NewsletterEditor::class)->render();
   }
 
+  public function emailEditor() {
+    $this->container->get(EmailEditorPage::class)->render();
+  }
+
   public function import() {
     $this->container->get(SubscribersImport::class)->render();
   }
@@ -703,7 +727,7 @@ class Menu {
       }
     }
 
-    if ($parentSlug) {
+    if ($parentSlug && $parentSlug !== self::NO_PARENT_PAGE_SLUG) {
       // highlight parent submenu item
       $plugin_page = $parentSlug;
     } else {
@@ -763,7 +787,7 @@ class Menu {
       return false;
     }
     WPFunctions::get()->addSubmenuPage(
-      '',
+      self::NO_PARENT_PAGE_SLUG,
       'MailPoet',
       'MailPoet',
       AccessControl::PERMISSION_ACCESS_PLUGIN_ADMIN,

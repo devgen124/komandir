@@ -80,7 +80,7 @@ class Backend {
 
 		wp_register_script( 'wooccm-admin-js', plugins_url( 'build/backend/js/index.js', WOOCCM_PLUGIN_FILE ), $admin['dependencies'], $admin['version'], true );
 
-		if ( ( isset( $_GET['tab'] ) && WOOCCM_PREFIX === $_GET['tab'] ) || in_array( $screen->id, array( /* 'product', 'edit-product', */'shop_order', 'edit-shop_order' ) ) ) {
+		if ( ( isset( $_GET['tab'] ) && WOOCCM_PREFIX === $_GET['tab'] ) || in_array( $screen->id, array( /* 'product', 'edit-product', */'shop_order', 'edit-shop_order', 'woocommerce_page_wc-orders' ) ) ) {
 			wp_enqueue_style( 'wooccm-admin-css' );
 			wp_enqueue_script( 'wooccm-admin-js' );
 			wp_localize_script(

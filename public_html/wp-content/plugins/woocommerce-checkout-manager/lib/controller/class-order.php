@@ -21,6 +21,7 @@ class Order extends Upload {
 		// Order
 		// --------------------------------------------------------------------------
 		add_action( 'add_meta_boxes', array( $this, 'add_metabox' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_metabox_woocommerce_page_wc_orders' ) );
 
 		// Panel
 		// -------------------------------------------------------------------------
@@ -67,7 +68,7 @@ class Order extends Upload {
 		$screen = get_current_screen();
 		if ( is_admin() && $screen ) {
 
-			if ( in_array( $screen->id, array( /* 'product', 'edit-product', */'shop_order', 'edit-shop_order' ) ) ) {
+			if ( in_array( $screen->id, array( /* 'product', 'edit-product', */'shop_order', 'edit-shop_order', 'woocommerce_page_wc-orders' ) ) ) {
 
 				Plugin::instance()->register_scripts();
 
@@ -79,6 +80,39 @@ class Order extends Upload {
 	public function ajax_order_attachment_upload() {
 		if ( ! empty( $_REQUEST ) && check_admin_referer( 'wooccm_upload', 'nonce' ) ) {
 
+			$order_id = ( isset( $_REQUEST['order_id'] ) ? absint( $_REQUEST['order_id'] ) : false );
+
+			if ( empty( $order_id ) ) {
+				wp_send_json_error( esc_html__( 'Empty order id.', 'woocommerce-checkout-manager' ) );
+			}
+
+			$order = wc_get_order( $order_id );
+
+			$current_user = wp_get_current_user();
+
+			$session_handler = WC()->session;
+
+			$is_user_logged = 0 !== $current_user->ID;
+
+			$order_email            = $order->get_billing_email();
+			$session_customer_email = $session_handler->get( 'customer' )['email'];
+
+			$is_session_email_equal_order_email = $order_email === $session_customer_email;
+
+			if ( ! $is_user_logged && ! $is_session_email_equal_order_email ) {
+				wp_send_json_error( esc_html__( 'You must be logged in.', 'woocommerce-checkout-manager' ) );
+			}
+
+			$order_user_id = $order->get_user_id();
+
+			$user_has_capabilities = current_user_can( 'administrator' ) || current_user_can( 'edit_others_shop_orders' ) || current_user_can( 'delete_others_shop_orders' );
+
+			$is_current_user_order_equal_user_id = $current_user->ID === $order_user_id;
+
+			if ( ! $user_has_capabilities && ! $is_current_user_order_equal_user_id ) {
+				wp_send_json_error( esc_html__( 'This is not your order.', 'woocommerce-checkout-manager' ) );
+			}
+
 			// It can not be wp_unslash becouse it has images paths
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$files = isset( $_FILES['wooccm_order_attachment_upload'] ) ? wc_clean( $_FILES['wooccm_order_attachment_upload'] ) : false;
@@ -86,12 +120,6 @@ class Order extends Upload {
 			if ( empty( $files ) ) {
 				// wc_order_notice(esc_html__('No uploads were recognised. Files were not uploaded.', 'woocommerce-checkout-manager'), 'error');
 				wp_send_json_error( esc_html__( 'No uploads were recognised. Files were not uploaded.', 'woocommerce-checkout-manager' ), 'error' );
-			}
-
-			$order_id = ( isset( $_REQUEST['order_id'] ) ? absint( $_REQUEST['order_id'] ) : false );
-
-			if ( empty( $order_id ) ) {
-				wp_send_json_error( esc_html__( 'Empty order id.', 'woocommerce-checkout-manager' ) );
 			}
 
 			$post = get_post( $order_id );
@@ -184,6 +212,10 @@ class Order extends Upload {
 
 	public function add_metabox() {
 		add_meta_box( 'wooccm-order-files', esc_html__( 'Order Files', 'woocommerce-checkout-manager' ), array( $this, 'add_metabox_content' ), 'shop_order', 'normal', 'default' );
+	}
+
+	public function add_metabox_woocommerce_page_wc_orders() {
+		add_meta_box( 'wooccm-order-files', esc_html__( 'Order Files', 'woocommerce-checkout-manager' ), array( $this, 'add_metabox_content' ), 'woocommerce_page_wc-orders', 'normal', 'default' );
 	}
 
 	// Panel
@@ -317,4 +349,3 @@ class Order extends Upload {
 		return $value;
 	}
 }
-

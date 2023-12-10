@@ -63,8 +63,8 @@ class Field_Shipping extends Field {
 			unset( $product_types['grouped'] );
 
 			$product_subtypes_options = array(
-				'virtual' => __( 'Virtual', 'woocommerce-checkout-manager' ),
-				'downloadable' => __( 'Downloadable', 'woocommerce-checkout-manager' ),
+				'virtual'              => __( 'Virtual', 'woocommerce-checkout-manager' ),
+				'downloadable'         => __( 'Downloadable', 'woocommerce-checkout-manager' ),
 				'virtual-downloadable' => __( 'Virtual & Downloadable', 'woocommerce-checkout-manager' ),
 			);
 

@@ -1,25 +1,25 @@
 ﻿=== Checkout Field Manager (Checkout Manager) for WooCommerce ===
 Contributors: quadlayers
-Donate link: https://quadlayers.com/portfolio/woocommerce-checkout-manager/
+Donate link: https://quadlayers.com/products/woocommerce-checkout-manager/
 Tags: checkout field editor, woocommerce checkout field editor, checkout manager, woocommerce checkout manager, checkout field customizer, checkout form editor, checkout form customizer, checkout, WooCommerce checkout, checkout form designer, woocommerce checkout fields, woocommerce checkout addons
 Requires at least: 4.7
 Requires PHP: 5.6
 Tested up to: 6.3
-Stable tag: 7.2.3
+Stable tag: 7.3.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 WC requires at least: 4.7.0
-WC tested up to: 8.0
+WC tested up to: 8.2
 
 Checkout Field Manager (Checkout Manager) for WooCommerce is the best plugin most advanced "Checkout Manager" to customize checkout fields on your WooCommerce checkout page.
 
-== Presentation ==
+== Description ==
 
-[Premium](https://quadlayers.com/portfolio/woocommerce-checkout-manager/) | [Demo](https://quadlayers.com/woocommerce-checkout-manager/checkout/?add-to-cart=32) | [Documentation](https://quadlayers.com/documentation/woocommerce-checkout-manager/) | [Community](https://www.facebook.com/groups/quadlayers/)
+[Premium](https://quadlayers.com/products/woocommerce-checkout-manager/) | [Demo](https://quadlayers.com/woocommerce-checkout-manager/checkout/?add-to-cart=32) | [Documentation](https://quadlayers.com/documentation/woocommerce-checkout-manager/) | [Community](https://www.facebook.com/groups/quadlayers/)
 
 WooCommerce Checkout Manager is the best checkout form customizer and editor for WooCommerce. This plugin allows you to delete, change and re-order the WooCommerce checkout fields and create more than 20 custom fields inside the billing or shipping checkout forms.
 
-== Description ==
+== Presentation ==
 
 Checkout Field Manager (Checkout Manager) for WooCommerce  allows you to include custom fields to the checkout page, related to billing, Shipping or Additional fields sections.
 
@@ -152,6 +152,30 @@ Your Order data can be reviewed in each order within the default WooCommerce Ord
 10. Handle uploaded files in order admin dashboard.
 
 == Changelog ==
+
+=  7.3.1
+* Fix security issues on checkour and order image upload
+
+=  7.3.0
+* Fix checkout state field conditional
+
+=  7.2.9
+* Fix nested conditional fields
+
+=  7.2.8
+* WooCommerce compatibility
+
+=  7.2.7
+* Fix regex validation
+
+=  7.2.6
+* Update readme.txt
+
+=  7.2.5
+* Update portfolio link
+
+=  7.2.4
+* WooCommerce compatibility
 
 =  7.2.3
 * WooCommerce compatibility

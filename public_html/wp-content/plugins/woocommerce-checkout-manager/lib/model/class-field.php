@@ -137,23 +137,23 @@ class Field extends Model {
 
 	public function get_args() {
 		return array(
-			'id'                       => null,
-			'key'                      => '',
-			'name'                     => '',
-			'type'                     => 'text',
-			'disabled'                 => false,
-			'order'                    => null,
-			'priority'                 => null,
-			'label'                    => '',
-			'placeholder'              => '',
-			'validate_regex'           => '',
-			'description'              => '',
-			'default'                  => '',
-			'position'                 => '',
-			'clear'                    => false,
-			'autocomplete'             => 'off',
-			'user_meta'            => true,
-			'options'                  => array(
+			'id'                                        => null,
+			'key'                                       => '',
+			'name'                                      => '',
+			'type'                                      => 'text',
+			'disabled'                                  => false,
+			'order'                                     => null,
+			'priority'                                  => null,
+			'label'                                     => '',
+			'placeholder'                               => '',
+			'validate_regex'                            => '',
+			'description'                               => '',
+			'default'                                   => '',
+			'position'                                  => '',
+			'clear'                                     => false,
+			'autocomplete'                              => 'off',
+			'user_meta'                                 => true,
+			'options'                                   => array(
 				0 => array(
 					'label'           => esc_html__( 'Option', 'woocommerce-checkout-manager' ),
 					'add_price_total' => 0,
@@ -163,87 +163,87 @@ class Field extends Model {
 					'order'           => 0,
 				),
 			),
-			'required'                 => false,
-			'message_type'             => 'info',
-			'button_type'              => '',
-			'button_link'              => '',
-			'class'                    => array(),
+			'required'                                  => false,
+			'message_type'                              => 'info',
+			'button_type'                               => '',
+			'button_link'                               => '',
+			'class'                                     => array(),
 			// Input/Textarea
-			'maxlength'                => null,
-			'minlength'                => null,
+			'maxlength'                                 => null,
+			'minlength'                                 => null,
 			// Display
 			// -------------------------------------------------------------------
-			'show_cart_minimum'        => 0,
-			'show_cart_maximun'        => 0,
-			'show_role'                => array(),
-			'hide_role'                => array(),
-			'apply_conditions_if_more_than_one_product'             => false,
-			'show_product'             => array(),
-			'hide_product'             => array(),
-			'show_product_cat'         => array(),
-			'hide_product_cat'         => array(),
-			'show_product_type'        => array(),
-			'hide_product_type'        => array(),
-			'show_product_subtype'     => '',
-			'hide_product_subtype'     => '',
-			'is_downloadable'          => false,
-			'is_virtual'               => false,
-			'hide_account'             => false,
-			'hide_checkout'            => false,
-			'hide_email'               => false,
-			'hide_order'               => false,
-			'hide_invoice'             => false,
+			'show_cart_minimum'                         => 0,
+			'show_cart_maximun'                         => 0,
+			'show_role'                                 => array(),
+			'hide_role'                                 => array(),
+			'apply_conditions_if_more_than_one_product' => false,
+			'show_product'                              => array(),
+			'hide_product'                              => array(),
+			'show_product_cat'                          => array(),
+			'hide_product_cat'                          => array(),
+			'show_product_type'                         => array(),
+			'hide_product_type'                         => array(),
+			'show_product_subtype'                      => '',
+			'hide_product_subtype'                      => '',
+			'is_downloadable'                           => false,
+			'is_virtual'                                => false,
+			'hide_account'                              => false,
+			'hide_checkout'                             => false,
+			'hide_email'                                => false,
+			'hide_order'                                => false,
+			'hide_invoice'                              => false,
 			// Pickers
 			// -------------------------------------------------------------------
-			'time_format_ampm'         => true,
-			'time_limit_start'         => null,
-			'time_limit_end'           => null,
-			'time_limit_interval'      => null,
-			'date_limit'               => 'fixed',
-			'date_format'              => 'mm/dd/yy',
-			'date_limit_variable_min'  => -1,
-			'date_limit_variable_max'  => 1,
-			'date_limit_fixed_min'     => gmdate( 'Y-m-d' ),
-			'date_limit_fixed_max'     => gmdate( 'Y-m-d' ),
-			'date_limit_days'          => array(),
+			'time_format_ampm'                          => true,
+			'time_limit_start'                          => null,
+			'time_limit_end'                            => null,
+			'time_limit_interval'                       => null,
+			'date_limit'                                => 'fixed',
+			'date_format'                               => 'mm/dd/yy',
+			'date_limit_variable_min'                   => -1,
+			'date_limit_variable_max'                   => 1,
+			'date_limit_fixed_min'                      => gmdate( 'Y-m-d' ),
+			'date_limit_fixed_max'                      => gmdate( 'Y-m-d' ),
+			'date_limit_days'                           => array(),
 			// Price
 			// -------------------------------------------------------------------
-			'add_price'                => false,
-			'add_price_name'           => '',
-			'add_price_total'          => null,
-			'add_price_type'           => 'fixed',
-			'add_price_tax'            => false,
-			'extra_class'              => '',
+			'add_price'                                 => false,
+			'add_price_name'                            => '',
+			'add_price_total'                           => null,
+			'add_price_type'                            => 'fixed',
+			'add_price_tax'                             => false,
+			'extra_class'                               => '',
 			// Conditional
 			// -------------------------------------------------------------------
-			'conditional'              => false,
-			'conditional_parent_key'   => '',
-			'conditional_parent_value' => '',
+			'conditional'                               => false,
+			'conditional_parent_key'                    => '',
+			'conditional_parent_value'                  => '',
 			// State
 			// -------------------------------------------------------------------
-			'country'                  => '',
+			'country'                                   => '',
 			// Select 2
 			// -------------------------------------------------------------------
-			'select2'                  => false,
-			'select2_allowclear'       => false,
-			'select2_selectonclose'    => false,
-			'select2_closeonselect'    => false,
-			'select2_search'           => false,
+			'select2'                                   => false,
+			'select2_allowclear'                        => false,
+			'select2_selectonclose'                     => false,
+			'select2_closeonselect'                     => false,
+			'select2_search'                            => false,
 			// Upload
 			// -------------------------------------------------------------------
-			'file_limit'               => 4,
-			'file_types'               => array(),
-			'file_max_size'            => wp_max_upload_size() / 1024,
+			'file_limit'                                => 4,
+			'file_types'                                => array(),
+			'file_max_size'                             => wp_max_upload_size() / 1024,
 			// Color
 			// -------------------------------------------------------------------
-			'pickertype'               => '',
+			'pickertype'                                => '',
 			// Listing
 			// -------------------------------------------------------------------
-			'listable'                 => false,
-			'sortable'                 => false,
-			'filterable'               => false,
-			'max'                      => '',
-			'min'                      => '',
+			'listable'                                  => false,
+			'sortable'                                  => false,
+			'filterable'                                => false,
+			'max'                                       => '',
+			'min'                                       => '',
 		);
 	}
 
@@ -414,6 +414,14 @@ class Field extends Model {
 			uasort( $field['options'], array( __CLASS__, 'order_fields' ) );
 		}
 
-		return wp_unslash( $field );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+		$regex = $field['validate_regex'];
+
+		wp_unslash( $field );
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+		$field['validate_regex'] = $regex;
+
+		return $field;
 	}
 }
