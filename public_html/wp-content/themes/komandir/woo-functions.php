@@ -1012,3 +1012,11 @@ add_action( 'itglx_wc1c_after_product_info_resolve', function ( $product_id, $el
 		update_post_meta( $product_id, '_product_attributes', array_merge( $attributes, $attrs_to_append ) );
 	}
 }, 10, 2 );
+
+// order received custom text
+
+add_filter( 'woocommerce_thankyou_order_received_text', function ( $message ) {
+	$message = 'Заказ принят благодарим Вас. Заказы обрабатываются в течении 20 минут, с 10:00 до 19:00 по местному времени';
+
+	return $message;
+} );
