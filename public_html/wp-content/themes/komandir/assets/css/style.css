@@ -13833,6 +13833,11 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
   margin: 0 1em 0 0;
 }
 
+.stock.in-stock ul {
+  margin-left: 2em;
+  margin-bottom: 12px;
+}
+
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {
   padding: 7px;
   background: #fff;
