@@ -14971,7 +14971,7 @@ function initPopups() {
 
     document.addEventListener("DOMContentLoaded", () => {
 
-        const $accountLink = $('.account-link.logged-out, .login-link');
+        const $accountLink = $('.account-link.logged-out, .login-link, .checkout-login-link');
 
         const loginPopup = new Popup();
 
