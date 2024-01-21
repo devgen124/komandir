@@ -12733,6 +12733,10 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 .woocommerce input.button.loading {
   opacity: 0.4;
 }
+.woocommerce .woocommerce-result-count {
+  margin-bottom: 0;
+  font-size: 14px;
+}
 
 .woocommerce ul.products.columns-1.grid li.product,
 .woocommerce-page ul.products.columns-1.grid li.product {
@@ -13211,9 +13215,14 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 }
 .woocommerce .grid-view,
 .woocommerce-page .grid-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   background: transparent;
   border: none;
+  width: 24px;
+  height: 24px;
 }
 .woocommerce .grid-view svg,
 .woocommerce-page .grid-view svg {
