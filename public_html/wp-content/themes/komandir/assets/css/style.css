@@ -15280,6 +15280,12 @@ button.button.edit-account-button:hover {
 
 .promo-item-wrapper {
   display: flex;
+  align-items: start;
+}
+@media (max-width: 767.98px) {
+  .promo-item-wrapper {
+    flex-direction: column;
+  }
 }
 
 .promo-image {
@@ -15294,12 +15300,13 @@ button.button.edit-account-button:hover {
 
 .promo-content {
   width: 50%;
-  padding-left: 25px;
+  padding: 0 0 0 25px;
   margin-bottom: 25px;
 }
 @media (max-width: 767.98px) {
   .promo-content {
     width: 100%;
+    padding: 20px 0 0;
   }
 }
 .promo-content h2, .promo-content .h2 {
