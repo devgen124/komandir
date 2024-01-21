@@ -1,0 +1,38 @@
+.tns-outer {
+	position: relative;
+}
+
+.tns-controls {
+	position: absolute;
+	top: 50%;
+	left: -30px;
+	right: -30px;
+	transform: translateY(-50%);
+	z-index: 2;
+	display: flex;
+	justify-content: space-between;
+
+	@include media-breakpoint-down(sm) {
+		top: 75px;
+		left: 30px;
+		right: 30px;
+		transform: none;
+	}
+
+	button {
+		width: 40px;
+		height: 40px;
+		background-color: #fff;
+		background-repeat: no-repeat;
+		background-position: center;
+		font-size: 0;
+
+		&[data-controls="prev"] {
+			background-image: url("../images/arrow-left-hover.svg");
+		}
+
+		&[data-controls="next"] {
+			background-image: url("../images/arrow-right-hover.svg");
+		}
+	}
+}

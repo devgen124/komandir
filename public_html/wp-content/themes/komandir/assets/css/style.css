@@ -12737,6 +12737,11 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   margin-bottom: 0;
   font-size: 14px;
 }
+@media (max-width: 767.98px) {
+  .woocommerce .woocommerce-result-count {
+    display: none;
+  }
+}
 
 .woocommerce ul.products.columns-1.grid li.product,
 .woocommerce-page ul.products.columns-1.grid li.product {
@@ -13238,9 +13243,6 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 }
 
 @media (max-width: 991.98px) {
-  .sales-inner {
-    overflow-x: hidden;
-  }
   .sales-inner .woocommerce ul.products.grid li.product, .sales-inner .woocommerce ul.products[class*=columns-].grid li.product {
     margin: auto;
   }
@@ -13291,7 +13293,7 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 }
 @media (max-width: 575.98px) {
   .woocommerce .woocommerce-breadcrumb {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 }
 .woocommerce div.product .product_title {
@@ -13575,6 +13577,7 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 }
 @media (max-width: 991.98px) {
   .woocommerce-main-wrapper .filters-sidebar {
+    padding-top: 50px;
     transform: translateX(-100%);
     width: 100%;
     position: absolute;
@@ -13590,7 +13593,7 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   .woocommerce-main-wrapper .filters-sidebar-inner {
     margin: 0 -17px;
     padding: 0 17px;
-    height: calc(100% - 45px);
+    height: calc(100% - 190px);
     overflow-y: auto;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
@@ -13622,6 +13625,10 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 }
 
 .filters-btn {
+  margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   padding: 0;
   border: none;
@@ -13845,6 +13852,10 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
 .stock.in-stock ul {
   margin-left: 2em;
   margin-bottom: 12px;
+}
+
+.wc_payment_method label {
+  display: inline;
 }
 
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {
@@ -14235,9 +14246,9 @@ input.irs-input-min,
 }
 
 .bapf_button.bapf_update {
+  width: 100%;
   margin-top: 31px;
   padding: 9px 30px;
-  max-width: 130px;
   align-self: flex-start;
   font-size: 14px;
   line-height: 20px;
@@ -14267,7 +14278,6 @@ input.irs-input-min,
 }
 
 .bapf_reset {
-  margin-left: 30px;
   padding: 0;
   font-size: 14px;
   border: none;
@@ -15432,5 +15442,42 @@ button.button.edit-account-button:hover {
   position: relative;
   padding: 5px 9px;
   z-index: 1;
+}
+
+.tns-outer {
+  position: relative;
+}
+
+.tns-controls {
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  right: -30px;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 575.98px) {
+  .tns-controls {
+    top: 75px;
+    left: 30px;
+    right: 30px;
+    transform: none;
+  }
+}
+.tns-controls button {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 0;
+}
+.tns-controls button[data-controls=prev] {
+  background-image: url("../images/arrow-left-hover.svg");
+}
+.tns-controls button[data-controls=next] {
+  background-image: url("../images/arrow-right-hover.svg");
 }
 /*# sourceMappingURL=style.css.map */

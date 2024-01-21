@@ -129,13 +129,9 @@ if ( ! empty( $cat_children ) ) {
 
 		woocommerce_product_loop_start();
 
-		$counter = 0;
-
 		if ( wc_get_loop_prop( 'total' ) ) {
 			while ( have_posts() ) {
 				the_post();
-
-				$counter ++;
 
 				/**
 				 * Hook: woocommerce_shop_loop.
@@ -145,8 +141,6 @@ if ( ! empty( $cat_children ) ) {
 				wc_get_template_part( 'content', 'product' );
 			}
 		}
-
-		$GLOBALS['hide_filters'] = $counter === 1;
 
 		woocommerce_product_loop_end();
 

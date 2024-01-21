@@ -137,6 +137,10 @@
 	.woocommerce-result-count {
 		margin-bottom: 0;
 		font-size: 14px;
+
+		@include media-breakpoint-down(md) {
+			display: none;
+		}
 	}
 }
 
@@ -614,7 +618,6 @@ $cols: (1, 2, 3, 4, 5, 6);
 
 .sales-inner {
 	@include media-breakpoint-down(lg) {
-		overflow-x: hidden;
 
 		.woocommerce ul.products {
 			&,
@@ -680,7 +683,7 @@ $cols: (1, 2, 3, 4, 5, 6);
         color: #a7a7a7;
 
 		@include media-breakpoint-down(sm) {
-			margin-bottom: 20px;
+			margin-bottom: 30px;
 		}
     }
 
@@ -1010,6 +1013,7 @@ $cols: (1, 2, 3, 4, 5, 6);
         }
 
         @include media-breakpoint-down(lg) {
+			padding-top: 50px;
             transform: translateX(-100%);
             width: 100%;
             position: absolute;
@@ -1026,7 +1030,7 @@ $cols: (1, 2, 3, 4, 5, 6);
             &-inner {
                 margin: 0 -17px;
                 padding: 0 17px;
-                height: calc(100% - 45px);
+                height: calc(100% - 190px);
                 overflow-y: auto;
                 @include hide-scroll();
             }
@@ -1057,6 +1061,10 @@ $cols: (1, 2, 3, 4, 5, 6);
 }
 
 .filters-btn {
+	margin-left: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
     background: none;
     padding: 0;
     border: none;
@@ -1301,4 +1309,8 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
 		margin-left: 2em;
 		margin-bottom: 12px;
 	}
+}
+
+.wc_payment_method label {
+	display: inline;
 }

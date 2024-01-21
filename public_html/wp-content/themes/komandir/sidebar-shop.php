@@ -35,7 +35,7 @@ $filter_ids = [
 
 ?>
 
-<?php if ( ( is_product_category() || is_tax( 'promotion' ) || isset( $_GET['s'] ) || is_woocommerce_sale_page() ) && ( ! isset( $GLOBALS['hide_filters'] ) || $GLOBALS['hide_filters'] === false ) ): ?>
+<?php if ( ( is_product_category() || is_tax( 'promotion' ) || isset( $_GET['s'] ) || is_woocommerce_sale_page() ) ): ?>
 
 	<aside id="woo-sidebar" class="widget-area filters-sidebar">
 		<h2>Фильтры</h2>

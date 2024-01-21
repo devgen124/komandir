@@ -14379,22 +14379,28 @@ const isMobile = document.documentElement.clientWidth < 992;
 
 function initSidebarToggler() {
 
-    togglesidebar();
+	togglesidebar();
 
-    $(document).on('berocket_ajax_products_loaded', togglesidebar);
+	$(document).on('berocket_ajax_products_loaded', togglesidebar);
 
-    function togglesidebar() {
-        if (filtersBtn && filtersSidebar && isMobile) {
-            const toggleSidebarVisibility = () => {
-                filtersSidebar.classList.toggle('filters-sidebar-visible');
-                document.body.classList.toggle('scroll-lock');
-            }
+	function togglesidebar() {
+		if (filtersBtn && filtersSidebar && isMobile) {
+			console.log('toggled')
+			const toggleSidebarVisibility = () => {
+				filtersSidebar.classList.toggle('filters-sidebar-visible');
+				document.body.classList.toggle('scroll-lock');
+			}
 
-            filtersBtn.addEventListener('click', toggleSidebarVisibility);
-            const closeBtn = filtersSidebar.querySelector('.filters-close');
-            closeBtn.addEventListener('click', toggleSidebarVisibility);
-        }
-    }
+			filtersBtn.addEventListener('click', toggleSidebarVisibility);
+			const closeBtn = filtersSidebar.querySelector('.filters-close');
+			closeBtn.addEventListener('click', toggleSidebarVisibility);
+
+			if (filtersSidebar.classList.contains('filters-sidebar-visible')) {
+				filtersSidebar.classList.remove('filters-sidebar-visible');
+				document.body.classList.remove('scroll-lock');
+			}
+		}
+	}
 }
 
 
@@ -15048,12 +15054,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const isMobile = document.documentElement.clientWidth < 992;
+const container = document.querySelector('.sales-inner .products');
 
 function salesSlider() {
-	if (isMobile) {
+	if (isMobile && container) {
 		let slider = (0,tiny_slider_src_tiny_slider_js__WEBPACK_IMPORTED_MODULE_0__.tns)({
 			container: '.sales-inner .products',
-			controls: false,
+			controlsText: [
+				'', ''
+			],
 			nav: false,
 			responsive: {
 				576: {
