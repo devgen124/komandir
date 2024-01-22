@@ -12365,6 +12365,7 @@ input[type=checkbox]:checked + label::before {
 
 .site-main {
   margin-top: 68px;
+  position: relative;
 }
 @media (min-width: 992px) {
   .site-main {
@@ -13577,12 +13578,12 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
 }
 @media (max-width: 991.98px) {
   .woocommerce-main-wrapper .filters-sidebar {
-    padding-top: 50px;
+    padding: 20px 17px 95px;
     transform: translateX(-100%);
     width: 100%;
     position: absolute;
-    height: 100vh;
-    top: 68px;
+    height: calc(100vh - 95px);
+    top: 0;
     left: 0;
     z-index: 10;
     transition: transform 0.3s;
@@ -13593,7 +13594,7 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   .woocommerce-main-wrapper .filters-sidebar-inner {
     margin: 0 -17px;
     padding: 0 17px;
-    height: calc(100% - 190px);
+    height: calc(100% - 95px);
     overflow-y: auto;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
@@ -14247,7 +14248,7 @@ input.irs-input-min,
 
 .bapf_button.bapf_update {
   width: 100%;
-  margin-top: 31px;
+  margin-top: 30px;
   padding: 9px 30px;
   align-self: flex-start;
   font-size: 14px;
@@ -14265,6 +14266,7 @@ input.irs-input-min,
 @media (max-width: 991.98px) {
   .bapf_button.bapf_update {
     width: 100%;
+    margin-top: 15px;
     max-width: none;
     padding: 9px;
   }

@@ -80,7 +80,7 @@ input.irs-input-min,
 
 .bapf_button.bapf_update {
 	width: 100%;
-	margin-top: 31px;
+	margin-top: 30px;
 	padding: 9px 30px;
 	align-self: flex-start;
 	font-size: 14px;
@@ -98,6 +98,7 @@ input.irs-input-min,
 
 	@include media-breakpoint-down(lg) {
 		width: 100%;
+		margin-top: 15px;
 		max-width: none;
 		padding: 9px;
 	}
