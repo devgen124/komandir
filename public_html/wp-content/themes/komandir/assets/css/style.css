@@ -11750,6 +11750,7 @@ body {
   min-width: 320px;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -12365,10 +12366,12 @@ input[type=checkbox]:checked + label::before {
 
 .site-main {
   margin-top: 68px;
+  overflow-x: hidden;
 }
 @media (min-width: 992px) {
   .site-main {
     margin-top: 0;
+    overflow-x: visible;
   }
 }
 
@@ -13850,12 +13853,15 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
 }
 
 .stock.in-stock ul {
-  margin-left: 2em;
   margin-bottom: 12px;
 }
 
 .wc_payment_method label {
   display: inline;
+}
+
+.woocommerce div.product .stock {
+  color: #00a9b4;
 }
 
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {

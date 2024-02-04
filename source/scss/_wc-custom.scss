@@ -1306,11 +1306,14 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
 
 .stock.in-stock {
 	ul {
-		margin-left: 2em;
 		margin-bottom: 12px;
 	}
 }
 
 .wc_payment_method label {
 	display: inline;
+}
+
+.woocommerce div.product .stock {
+	color: $accent-color;
 }

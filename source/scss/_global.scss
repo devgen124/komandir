@@ -1,70 +1,70 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html,
 body {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    width: 100%;
-    min-height: 100vh;
-    height: 100%;
-    min-width: 320px;
-    display: flex;
-    flex-direction: column;
+	width: 100%;
+	min-height: 100vh;
+	height: 100%;
+	min-width: 320px;
+	display: flex;
+	flex-direction: column;
+	overflow-x: hidden;
 
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    font-family: $font-family-main;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 24px;
+	font-family: $font-family-main;
 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: $black-alter-color;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: $black-alter-color;
 
-    &.scroll-lock {
-        overflow: hidden;
-    }
+	&.scroll-lock {
+		overflow: hidden;
+	}
 }
 
 main {
-    flex: 1 1 auto;
+	flex: 1 1 auto;
 }
 
 
-
 a {
-    color: $accent-color;
-    text-decoration: none;
+	color: $accent-color;
+	text-decoration: none;
 
-    &:focus {
-        outline: none;
-    }
+	&:focus {
+		outline: none;
+	}
 
-    &:hover {
-        color: $accent-color-hover;
-    }
+	&:hover {
+		color: $accent-color-hover;
+	}
 }
 
 img,
 video {
-    display: block;
-    max-width: 100%;
-    height: auto;
+	display: block;
+	max-width: 100%;
+	height: auto;
 }
 
 textarea {
-    resize: none;
+	resize: none;
 }
 
 // chrome autofill background removal
@@ -74,65 +74,65 @@ textarea {
 // если в стилях уже используется box-shadow есть другое решение -
 // задать к списку транзишенов `background-color 10000000s ease-out`
 input:-webkit-autofill {
-    box-shadow: inset 0 0 0 1000px $white;
+	box-shadow: inset 0 0 0 1000px $white;
 
-    -webkit-text-fill-color: $black;
+	-webkit-text-fill-color: $black;
 }
 
 // firefox placeholder \ invalid fix + ios bdrs
 input,
 textarea {
-    border-radius: 0;
-    font-family: $font-family-main;
+	border-radius: 0;
+	font-family: $font-family-main;
 
-    &::placeholder {
-        opacity: 1;
-    }
+	&::placeholder {
+		opacity: 1;
+	}
 
-    &:invalid {
-        box-shadow: none;
-    }
+	&:invalid {
+		box-shadow: none;
+	}
 }
 
 select {
-    border-radius: 0;
+	border-radius: 0;
 }
 
 // ie11 X removal
 input {
 
-    &::-ms-clear,
-    &::-ms-reveal {
-        display: none;
-    }
+	&::-ms-clear,
+	&::-ms-reveal {
+		display: none;
+	}
 
-    &:focus {
-        outline: none;
-    }
+	&:focus {
+		outline: none;
+	}
 
-    // input[number] arrows remova
+	// input[number] arrows remova
 
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-        margin: 0;
-        appearance: none;
-    }
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		margin: 0;
+		appearance: none;
+	}
 
-    // chrome search X removal
+	// chrome search X removal
 
-    &[type="search"] {
+	&[type="search"] {
 
-        &::-webkit-search-decoration,
-        &::-webkit-search-cancel-button,
-        &::-webkit-search-results-button,
-        &::-webkit-search-results-decoration {
-            appearance: none;
-        }
-    }
+		&::-webkit-search-decoration,
+		&::-webkit-search-cancel-button,
+		&::-webkit-search-results-button,
+		&::-webkit-search-results-decoration {
+			appearance: none;
+		}
+	}
 
-    &[type="number"] {
-        appearance: textfield;
-    }
+	&[type="number"] {
+		appearance: textfield;
+	}
 
 }
 
@@ -146,43 +146,43 @@ input[type="search"],
 input[type="tel"],
 input[type="text"],
 input[type="url"] {
-    appearance: none;
+	appearance: none;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 input[type=number] {
-    -moz-appearance: textfield;
+	-moz-appearance: textfield;
 }
 
 button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-    appearance: none;
+	appearance: none;
 }
 
 ul {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 
-    li {
-        list-style: none;
-    }
+	li {
+		list-style: none;
+	}
 }
 
 h2 {
-    font-size: 24px;
-    line-height: 1.4;
-    font-weight: 700;
+	font-size: 24px;
+	line-height: 1.4;
+	font-weight: 700;
 
-    @include media-breakpoint-down(lg) {
-        font-size: 14px;
-    }
+	@include media-breakpoint-down(lg) {
+		font-size: 14px;
+	}
 }
 
 input[type="email"],
@@ -191,42 +191,42 @@ input[type="password"],
 input[type="tel"],
 input[type="text"],
 input[type="url"] {
-    padding: 7px;
-    border: 1px solid #BFBFBF;
-    font-size: 14px;
-    line-height: 20px;
-    color: $black-alter-color;
-    transition: 0.3s;
+	padding: 7px;
+	border: 1px solid #BFBFBF;
+	font-size: 14px;
+	line-height: 20px;
+	color: $black-alter-color;
+	transition: 0.3s;
 }
 
 input[type="checkbox"] {
-    display: none;
+	display: none;
 
-    +label {
-        position: relative;
-        padding-left: 22px;
-        font-size: 13px;
-        line-height: 1.2;
-        color: #000;
+	+ label {
+		position: relative;
+		padding-left: 22px;
+		font-size: 13px;
+		line-height: 1.2;
+		color: #000;
 
-        &::before {
-            content: "";
-            position: absolute;
-            top: 2px;
-            left: 0;
-            width: 14px;
-            height: 14px;
-            background: #fff url("../images/mark.svg") center no-repeat;
-            border-radius: 2px;
-            box-shadow: inset 0 0 0 1px #BFBFBF;
-            transition: 0.2s;
-        }
-    }
+		&::before {
+			content: "";
+			position: absolute;
+			top: 2px;
+			left: 0;
+			width: 14px;
+			height: 14px;
+			background: #fff url("../images/mark.svg") center no-repeat;
+			border-radius: 2px;
+			box-shadow: inset 0 0 0 1px #BFBFBF;
+			transition: 0.2s;
+		}
+	}
 
-    &:checked+label::before {
-        background: $accent-color url("../images/mark.svg") center no-repeat;
-        box-shadow: none;
-    }
+	&:checked + label::before {
+		background: $accent-color url("../images/mark.svg") center no-repeat;
+		box-shadow: none;
+	}
 }
 
 // #wpadminbar {
