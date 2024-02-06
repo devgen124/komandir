@@ -804,7 +804,7 @@ $cols: (1, 2, 3, 4, 5, 6);
     #content div.product,
     div.product {
         div.images {
-            width: 30%;
+            width: 55%;
 
             @include media-breakpoint-down(lg) {
                 width: 100%;
@@ -812,7 +812,7 @@ $cols: (1, 2, 3, 4, 5, 6);
         }
 
         div.summary {
-            width: 60%;
+            width: 38%;
 
             @include media-breakpoint-down(lg) {
                 width: 100%;
@@ -1316,4 +1316,52 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
 
 .woocommerce div.product .stock {
 	color: $accent-color;
+}
+
+.woo-product-gallery-slider {
+	.slick-track {
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+
+	.slick-slide {
+		float: none;
+
+		a {
+			display: block;
+			height: 100%;
+		}
+
+		img {
+			width: 100% !important;
+			height: 100% !important;
+			object-fit: contain;
+		}
+	}
+
+}
+
+.wpgs-for {
+	.slick-list {
+		height: 400px;
+	}
+}
+
+.wpgs-nav {
+	margin-top: 30px;
+
+	.slick-list {
+		height: 100px;
+	}
+
+	.slick-slide {
+		height: calc(100% - 10px);
+	}
+
+	&.slick-initialized {
+		@include media-breakpoint-down(md) {
+			display: none !important;
+		}
+	}
 }
