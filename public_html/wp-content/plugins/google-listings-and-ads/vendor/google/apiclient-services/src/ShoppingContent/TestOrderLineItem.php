@@ -19,14 +19,26 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class TestOrderLineItem extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var TestOrderLineItemProduct
+   */
+  public $product;
   protected $productType = TestOrderLineItemProduct::class;
   protected $productDataType = '';
   /**
    * @var string
    */
   public $quantityOrdered;
+  /**
+   * @var OrderLineItemReturnInfo
+   */
+  public $returnInfo;
   protected $returnInfoType = OrderLineItemReturnInfo::class;
   protected $returnInfoDataType = '';
+  /**
+   * @var OrderLineItemShippingDetails
+   */
+  public $shippingDetails;
   protected $shippingDetailsType = OrderLineItemShippingDetails::class;
   protected $shippingDetailsDataType = '';
 

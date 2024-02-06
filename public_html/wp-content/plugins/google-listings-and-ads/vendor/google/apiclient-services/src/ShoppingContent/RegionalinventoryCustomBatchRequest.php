@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class RegionalinventoryCustomBatchRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'entries';
+  /**
+   * @var RegionalinventoryCustomBatchRequestEntry[]
+   */
+  public $entries;
   protected $entriesType = RegionalinventoryCustomBatchRequestEntry::class;
   protected $entriesDataType = 'array';
 

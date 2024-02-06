@@ -19,12 +19,20 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class AccountstatusesCustomBatchResponseEntry extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var AccountStatus
+   */
+  public $accountStatus;
   protected $accountStatusType = AccountStatus::class;
   protected $accountStatusDataType = '';
   /**
    * @var string
    */
   public $batchId;
+  /**
+   * @var Errors
+   */
+  public $errors;
   protected $errorsType = Errors::class;
   protected $errorsDataType = '';
 

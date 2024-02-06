@@ -127,10 +127,10 @@ class Field_Additional extends Field {
 
 						$key = sprintf( '_%s', $field['key'] );
 
-						$value = get_post_meta( $order->get_id(), $key, true );
+						$value = $order->get_meta( $key, true );
 						if ( ! $value ) {
 
-							$value = maybe_unserialize( get_post_meta( $order->get_id(), sprintf( '%s', $field['name'] ), true ) );
+							$value = maybe_unserialize( $order->get_meta( sprintf( '%s', $field['name'] ), true ) );
 
 							if ( is_array( $value ) ) {
 								$value = implode( ',', $value );
@@ -170,10 +170,10 @@ class Field_Additional extends Field {
 						$field['class']         = join( ' ', $field['class'] );
 						$field['wrapper_class'] = 'wooccm-premium-field';
 
-						$field['value'] = get_post_meta( $order->get_id(), $key, true );
+						$field['value'] = $order->get_meta( $key, true );
 						if ( ! $field['value'] ) {
 
-							$field['value'] = maybe_unserialize( get_post_meta( $order->get_id(), sprintf( '%s', $field['name'] ), true ) );
+							$field['value'] = maybe_unserialize( $order->get_meta( sprintf( '%s', $field['name'] ), true ) );
 
 							if ( is_array( $field['value'] ) ) {
 								$field['value'] = implode( ',', $field['value'] );
@@ -217,6 +217,7 @@ class Field_Additional extends Field {
 			$types              = Plugin::instance()->additional->get_types();
 			$conditionals       = Plugin::instance()->additional->get_conditional_types();
 			$option             = Plugin::instance()->additional->get_option_types();
+			$price              = Plugin::instance()->additional->get_price_types();
 			$multiple           = Plugin::instance()->additional->get_multiple_types();
 			$template           = Plugin::instance()->additional->get_template_types();
 			$disabled           = Plugin::instance()->additional->get_disabled_types();

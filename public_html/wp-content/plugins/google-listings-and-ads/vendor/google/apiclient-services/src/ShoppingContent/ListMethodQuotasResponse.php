@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ListMethodQuotasResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'methodQuotas';
+  /**
+   * @var MethodQuota[]
+   */
+  public $methodQuotas;
   protected $methodQuotasType = MethodQuota::class;
   protected $methodQuotasDataType = 'array';
   /**

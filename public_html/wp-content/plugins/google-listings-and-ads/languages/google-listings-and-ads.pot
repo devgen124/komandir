@@ -1,15 +1,15 @@
-# Copyright (C) 2023 WooCommerce
+# Copyright (C) 2024 WooCommerce
 # This file is distributed under the same license as the Google Listings and Ads plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Listings and Ads 2.5.13\n"
+"Project-Id-Version: Google Listings and Ads 2.5.16\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/google-listings-and-ads\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-06T12:54:57+00:00\n"
+"POT-Creation-Date: 2024-01-30T08:21:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: google-listings-and-ads\n"
@@ -38,23 +38,23 @@ msgstr ""
 msgid "No action matching %s was found."
 msgstr ""
 
-#: src/Admin/Admin.php:202
+#: src/Admin/Admin.php:208
 #: src/Menu/Settings.php:25
 #: js/build/commons.js:34
 #: js/build/index.js:17
 msgid "Settings"
 msgstr ""
 
-#: src/Admin/Admin.php:208
+#: src/Admin/Admin.php:214
 msgid "Get Started"
 msgstr ""
 
-#: src/Admin/Admin.php:215
+#: src/Admin/Admin.php:221
 msgid "Documentation"
 msgstr ""
 
 #. translators: 1) HTML anchor open tag 2) HTML anchor closing tag
-#: src/Admin/Admin.php:276
+#: src/Admin/Admin.php:282
 msgid "By using this extension, you may be storing personal data or sharing data with an external service. %1$sLearn more about what data is collected by Google and what you may want to include in your privacy policy%2$s."
 msgstr ""
 
@@ -336,19 +336,19 @@ msgid "Error editing campaign: %s"
 msgstr ""
 
 #. translators: %s Error message
-#: src/API/Google/AdsCampaign.php:339
+#: src/API/Google/AdsCampaign.php:342
 msgid "Error deleting campaign: %s"
 msgstr ""
 
-#: src/API/Google/AdsCampaign.php:342
+#: src/API/Google/AdsCampaign.php:345
 msgid "This campaign has already been deleted"
 msgstr ""
 
-#: src/API/Google/AdsCampaign.php:602
+#: src/API/Google/AdsCampaign.php:605
 msgid "Invalid campaign ID"
 msgstr ""
 
-#: src/API/Google/AdsCampaign.php:618
+#: src/API/Google/AdsCampaign.php:621
 msgid "Invalid geo target location ID"
 msgstr ""
 
@@ -663,53 +663,53 @@ msgstr ""
 msgid "Campaign %s"
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:160
+#: src/API/Site/Controllers/Ads/CampaignController.php:184
 msgid "Campaign is not available."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:187
+#: src/API/Site/Controllers/Ads/CampaignController.php:211
 msgid "Invalid edit data."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:197
+#: src/API/Site/Controllers/Ads/CampaignController.php:241
 msgid "Successfully edited campaign."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:218
+#: src/API/Site/Controllers/Ads/CampaignController.php:276
 msgid "Successfully deleted campaign."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:260
+#: src/API/Site/Controllers/Ads/CampaignController.php:318
 msgid "Exclude removed campaigns."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:277
+#: src/API/Site/Controllers/Ads/CampaignController.php:335
 #: src/API/Site/Controllers/Ads/ReportsController.php:145
 msgid "ID number."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:283
+#: src/API/Site/Controllers/Ads/CampaignController.php:341
 msgid "Descriptive campaign name."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:291
+#: src/API/Site/Controllers/Ads/CampaignController.php:349
 #: src/API/Site/Controllers/Ads/ReportsController.php:156
 msgid "Campaign status."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:298
+#: src/API/Site/Controllers/Ads/CampaignController.php:356
 msgid "Campaign type."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:304
+#: src/API/Site/Controllers/Ads/CampaignController.php:362
 msgid "Daily budget amount in the local currency."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:311
+#: src/API/Site/Controllers/Ads/CampaignController.php:369
 msgid "Country code of sale country in ISO 3166-1 alpha-2 format."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/CampaignController.php:319
+#: src/API/Site/Controllers/Ads/CampaignController.php:377
 msgid "The locations that an Ads campaign is targeting in ISO 3166-1 alpha-2 format."
 msgstr ""
 
@@ -769,7 +769,7 @@ msgstr ""
 msgid "Conversions."
 msgstr ""
 
-#: src/API/Site/Controllers/Ads/SetupCompleteController.php:51
+#: src/API/Site/Controllers/Ads/SetupCompleteController.php:85
 msgid "Successfully marked Ads setup as completed."
 msgstr ""
 
@@ -1196,7 +1196,7 @@ msgstr ""
 msgid "Whether the phone number, email, and/or address are visible on the website."
 msgstr ""
 
-#: src/API/Site/Controllers/MerchantCenter/SettingsSyncController.php:74
+#: src/API/Site/Controllers/MerchantCenter/SettingsSyncController.php:91
 msgid "Successfully synchronized settings with Google."
 msgstr ""
 
@@ -5106,6 +5106,10 @@ msgid "Google will review your product listings within 3-5 days. Once approved, 
 msgstr ""
 
 #: js/build/setup-mc.js:3
+msgid "A Google Ads account is required to create paid campaigns with your product listings"
+msgstr ""
+
+#: js/build/setup-mc.js:3
 msgid "Promote your products across Google Search, YouTube, Display, Discover, Maps, Gmail, and more."
 msgstr ""
 
@@ -5135,10 +5139,6 @@ msgstr ""
 
 #: js/build/setup-mc.js:3
 msgid "Using free listings and paid ads together can double impressions and increase clicks by 50%*"
-msgstr ""
-
-#: js/build/setup-mc.js:3
-msgid "A Google Ads account is required to create paid campaigns with your product listings"
 msgstr ""
 
 #: js/build/setup-mc.js:3

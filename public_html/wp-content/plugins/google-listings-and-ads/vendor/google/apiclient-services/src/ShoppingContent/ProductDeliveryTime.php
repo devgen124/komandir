@@ -20,8 +20,16 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ProductDeliveryTime extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'areaDeliveryTimes';
+  /**
+   * @var ProductDeliveryTimeAreaDeliveryTime[]
+   */
+  public $areaDeliveryTimes;
   protected $areaDeliveryTimesType = ProductDeliveryTimeAreaDeliveryTime::class;
   protected $areaDeliveryTimesDataType = 'array';
+  /**
+   * @var ProductId
+   */
+  public $productId;
   protected $productIdType = ProductId::class;
   protected $productIdDataType = '';
 

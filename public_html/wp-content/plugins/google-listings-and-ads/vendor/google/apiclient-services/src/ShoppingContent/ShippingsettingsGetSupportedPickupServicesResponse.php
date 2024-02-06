@@ -24,6 +24,10 @@ class ShippingsettingsGetSupportedPickupServicesResponse extends \Automattic\Woo
    * @var string
    */
   public $kind;
+  /**
+   * @var PickupServicesPickupService[]
+   */
+  public $pickupServices;
   protected $pickupServicesType = PickupServicesPickupService::class;
   protected $pickupServicesDataType = 'array';
 

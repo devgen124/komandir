@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class MinimumOrderValueTable extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'storeCodeSetWithMovs';
+  /**
+   * @var MinimumOrderValueTableStoreCodeSetWithMov[]
+   */
+  public $storeCodeSetWithMovs;
   protected $storeCodeSetWithMovsType = MinimumOrderValueTableStoreCodeSetWithMov::class;
   protected $storeCodeSetWithMovsDataType = 'array';
 

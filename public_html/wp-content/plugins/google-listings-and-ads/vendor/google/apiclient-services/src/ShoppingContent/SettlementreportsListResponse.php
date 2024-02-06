@@ -28,6 +28,10 @@ class SettlementreportsListResponse extends \Automattic\WooCommerce\GoogleListin
    * @var string
    */
   public $nextPageToken;
+  /**
+   * @var SettlementReport[]
+   */
+  public $resources;
   protected $resourcesType = SettlementReport::class;
   protected $resourcesDataType = 'array';
 

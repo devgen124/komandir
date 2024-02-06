@@ -28,6 +28,10 @@ class AccountstatusesListResponse extends \Automattic\WooCommerce\GoogleListings
    * @var string
    */
   public $nextPageToken;
+  /**
+   * @var AccountStatus[]
+   */
+  public $resources;
   protected $resourcesType = AccountStatus::class;
   protected $resourcesDataType = 'array';
 

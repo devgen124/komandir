@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class RegionPostalCodeArea extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'postalCodes';
+  /**
+   * @var RegionPostalCodeAreaPostalCodeRange[]
+   */
+  public $postalCodes;
   protected $postalCodesType = RegionPostalCodeAreaPostalCodeRange::class;
   protected $postalCodesDataType = 'array';
   /**

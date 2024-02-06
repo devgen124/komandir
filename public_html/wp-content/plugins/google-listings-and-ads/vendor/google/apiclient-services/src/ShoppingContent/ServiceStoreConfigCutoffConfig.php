@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class ServiceStoreConfigCutoffConfig extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var ServiceStoreConfigCutoffConfigLocalCutoffTime
+   */
+  public $localCutoffTime;
   protected $localCutoffTimeType = ServiceStoreConfigCutoffConfigLocalCutoffTime::class;
   protected $localCutoffTimeDataType = '';
   /**

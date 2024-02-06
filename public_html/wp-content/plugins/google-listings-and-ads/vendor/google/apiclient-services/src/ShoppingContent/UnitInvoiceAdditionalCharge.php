@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class UnitInvoiceAdditionalCharge extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var Amount
+   */
+  public $additionalChargeAmount;
   protected $additionalChargeAmountType = Amount::class;
   protected $additionalChargeAmountDataType = '';
   /**

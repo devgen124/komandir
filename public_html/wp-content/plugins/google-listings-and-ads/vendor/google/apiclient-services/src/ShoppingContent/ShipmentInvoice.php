@@ -20,8 +20,16 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ShipmentInvoice extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'lineItemInvoices';
+  /**
+   * @var InvoiceSummary
+   */
+  public $invoiceSummary;
   protected $invoiceSummaryType = InvoiceSummary::class;
   protected $invoiceSummaryDataType = '';
+  /**
+   * @var ShipmentInvoiceLineItemInvoice[]
+   */
+  public $lineItemInvoices;
   protected $lineItemInvoicesType = ShipmentInvoiceLineItemInvoice::class;
   protected $lineItemInvoicesDataType = 'array';
   /**

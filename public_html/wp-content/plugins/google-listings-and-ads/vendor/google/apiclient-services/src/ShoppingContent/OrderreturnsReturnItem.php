@@ -19,8 +19,16 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class OrderreturnsReturnItem extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var OrderreturnsRefundOperation
+   */
+  public $refund;
   protected $refundType = OrderreturnsRefundOperation::class;
   protected $refundDataType = '';
+  /**
+   * @var OrderreturnsRejectOperation
+   */
+  public $reject;
   protected $rejectType = OrderreturnsRejectOperation::class;
   protected $rejectDataType = '';
   /**

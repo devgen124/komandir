@@ -84,6 +84,7 @@ class NewslettersResponseBuilder {
       'unsubscribe_token' => $newsletter->getUnsubscribeToken(),
       'ga_campaign' => $newsletter->getGaCampaign(),
       'wp_post_id' => $newsletter->getWpPostId(),
+      'campaign_name' => $newsletter->getCampaignName(),
     ];
 
     foreach ($relations as $relation) {
@@ -138,7 +139,6 @@ class NewslettersResponseBuilder {
     $couponBlockLogs = array_map(function ($item) {
       return "Coupon block: $item";
     }, $this->logRepository->getRawMessagesForNewsletter($newsletter, LoggerFactory::TOPIC_COUPONS));
-
     $data = [
       'id' => (string)$newsletter->getId(), // (string) for BC
       'hash' => $newsletter->getHash(),
@@ -162,6 +162,7 @@ class NewslettersResponseBuilder {
           : null
       ),
       'logs' => $couponBlockLogs,
+      'campaign_name' => $newsletter->getCampaignName(),
     ];
 
     if ($newsletter->getType() === NewsletterEntity::TYPE_STANDARD) {
@@ -245,8 +246,6 @@ class NewslettersResponseBuilder {
     if ($task === null) {
       return null;
     }
-    // the following crazy mix of '$queue' and '$task' comes from 'array_merge($task, $queue)'
-    // (MailPoet\Tasks\Sending) which means all equal-named fields will be taken from '$queue'
     return [
       'id' => (string)$queue->getId(), // (string) for BC
       'type' => $task->getType(),

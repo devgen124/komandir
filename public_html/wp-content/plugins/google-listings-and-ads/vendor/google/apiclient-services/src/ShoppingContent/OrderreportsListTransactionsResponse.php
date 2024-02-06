@@ -28,6 +28,10 @@ class OrderreportsListTransactionsResponse extends \Automattic\WooCommerce\Googl
    * @var string
    */
   public $nextPageToken;
+  /**
+   * @var OrderReportTransaction[]
+   */
+  public $transactions;
   protected $transactionsType = OrderReportTransaction::class;
   protected $transactionsDataType = 'array';
 

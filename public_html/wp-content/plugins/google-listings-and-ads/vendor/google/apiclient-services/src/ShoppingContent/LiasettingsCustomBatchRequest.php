@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class LiasettingsCustomBatchRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'entries';
+  /**
+   * @var LiasettingsCustomBatchRequestEntry[]
+   */
+  public $entries;
   protected $entriesType = LiasettingsCustomBatchRequestEntry::class;
   protected $entriesDataType = 'array';
 

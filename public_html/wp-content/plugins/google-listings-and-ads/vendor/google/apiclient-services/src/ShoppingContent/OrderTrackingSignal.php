@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class OrderTrackingSignal extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'shippingInfo';
+  /**
+   * @var PriceAmount
+   */
+  public $customerShippingFee;
   protected $customerShippingFeeType = PriceAmount::class;
   protected $customerShippingFeeDataType = '';
   /**
@@ -30,12 +34,20 @@ class OrderTrackingSignal extends \Automattic\WooCommerce\GoogleListingsAndAds\V
    * @var string
    */
   public $deliveryRegionCode;
+  /**
+   * @var OrderTrackingSignalLineItemDetails[]
+   */
+  public $lineItems;
   protected $lineItemsType = OrderTrackingSignalLineItemDetails::class;
   protected $lineItemsDataType = 'array';
   /**
    * @var string
    */
   public $merchantId;
+  /**
+   * @var DateTime
+   */
+  public $orderCreatedTime;
   protected $orderCreatedTimeType = DateTime::class;
   protected $orderCreatedTimeDataType = '';
   /**
@@ -46,8 +58,16 @@ class OrderTrackingSignal extends \Automattic\WooCommerce\GoogleListingsAndAds\V
    * @var string
    */
   public $orderTrackingSignalId;
+  /**
+   * @var OrderTrackingSignalShipmentLineItemMapping[]
+   */
+  public $shipmentLineItemMapping;
   protected $shipmentLineItemMappingType = OrderTrackingSignalShipmentLineItemMapping::class;
   protected $shipmentLineItemMappingDataType = 'array';
+  /**
+   * @var OrderTrackingSignalShippingInfo[]
+   */
+  public $shippingInfo;
   protected $shippingInfoType = OrderTrackingSignalShippingInfo::class;
   protected $shippingInfoDataType = 'array';
 

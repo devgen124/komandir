@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class ReturnAddress extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var ReturnAddressAddress
+   */
+  public $address;
   protected $addressType = ReturnAddressAddress::class;
   protected $addressDataType = '';
   /**

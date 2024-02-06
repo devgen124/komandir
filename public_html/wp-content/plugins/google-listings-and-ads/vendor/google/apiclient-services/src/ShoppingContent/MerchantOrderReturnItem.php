@@ -20,18 +20,38 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class MerchantOrderReturnItem extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'returnShipmentIds';
+  /**
+   * @var CustomerReturnReason
+   */
+  public $customerReturnReason;
   protected $customerReturnReasonType = CustomerReturnReason::class;
   protected $customerReturnReasonDataType = '';
   /**
    * @var string
    */
   public $itemId;
+  /**
+   * @var MerchantRejectionReason
+   */
+  public $merchantRejectionReason;
   protected $merchantRejectionReasonType = MerchantRejectionReason::class;
   protected $merchantRejectionReasonDataType = '';
+  /**
+   * @var RefundReason
+   */
+  public $merchantReturnReason;
   protected $merchantReturnReasonType = RefundReason::class;
   protected $merchantReturnReasonDataType = '';
+  /**
+   * @var OrderLineItemProduct
+   */
+  public $product;
   protected $productType = OrderLineItemProduct::class;
   protected $productDataType = '';
+  /**
+   * @var MonetaryAmount
+   */
+  public $refundableAmount;
   protected $refundableAmountType = MonetaryAmount::class;
   protected $refundableAmountDataType = '';
   /**

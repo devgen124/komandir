@@ -23,12 +23,20 @@ class Region extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\
    * @var string
    */
   public $displayName;
+  /**
+   * @var RegionGeoTargetArea
+   */
+  public $geotargetArea;
   protected $geotargetAreaType = RegionGeoTargetArea::class;
   protected $geotargetAreaDataType = '';
   /**
    * @var string
    */
   public $merchantId;
+  /**
+   * @var RegionPostalCodeArea
+   */
+  public $postalCodeArea;
   protected $postalCodeAreaType = RegionPostalCodeArea::class;
   protected $postalCodeAreaDataType = '';
   /**

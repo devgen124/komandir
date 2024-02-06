@@ -252,7 +252,10 @@ class Fields_Handler {
 		}
 
 		// Fix for required address field
-		if ( get_option( 'woocommerce_ship_to_destination' ) == 'billing_only' ) {
+		if (
+			get_option( 'wooccm_checkout_force_shipping_address', 'no' ) === 'no' && // FixWarning: Undefined array key "shipping" in /wp-content/plugins/woocommerce/includes/class-wc-checkout.php on line 230
+			get_option( 'woocommerce_ship_to_destination' ) == 'billing_only'
+		) {
 			unset( $fields['shipping'] );
 		}
 
@@ -264,7 +267,15 @@ class Fields_Handler {
 	// }
 
 	public function remove_fields_priority( $fields ) {
+
+		if ( ! is_array( $fields ) ) {
+			return $fields;
+		}
+
 		foreach ( $fields as $key => $field ) {
+			if ( ! is_array( $fields[ $key ] ) ) {
+				continue;
+			}
 			unset( $fields[ $key ]['label'] );
 			unset( $fields[ $key ]['placeholder'] );
 			unset( $fields[ $key ]['priority'] );

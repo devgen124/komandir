@@ -52,17 +52,28 @@ class SendingQueuesRepository extends Repository {
     return SendingQueueEntity::class;
   }
 
-  public function findOneByNewsletterAndTaskStatus(NewsletterEntity $newsletter, string $status): ?SendingQueueEntity {
-    return $this->entityManager->createQueryBuilder()
+  /**
+   * @param NewsletterEntity $newsletter
+   * @param string|null $status
+   * @return SendingQueueEntity|null
+   * @throws \MailPoetVendor\Doctrine\ORM\NonUniqueResultException
+   */
+  public function findOneByNewsletterAndTaskStatus(NewsletterEntity $newsletter, $status): ?SendingQueueEntity {
+    $queryBuilder = $this->entityManager->createQueryBuilder()
       ->select('s')
       ->from(SendingQueueEntity::class, 's')
       ->join('s.task', 't')
-      ->where('t.status = :status')
       ->andWhere('s.newsletter = :newsletter')
-      ->setParameter('status', $status)
-      ->setParameter('newsletter', $newsletter)
-      ->getQuery()
-      ->getOneOrNullResult();
+      ->setParameter('newsletter', $newsletter);
+
+    if (is_null($status)) {
+      $queryBuilder->andWhere('t.status IS NULL');
+    } else {
+      $queryBuilder->andWhere('t.status = :status')
+        ->setParameter('status', $status);
+    }
+
+    return $queryBuilder->getQuery()->getOneOrNullResult();
   }
 
   public function countAllByNewsletterAndTaskStatus(NewsletterEntity $newsletter, string $status): int {
@@ -141,7 +152,7 @@ class SendingQueuesRepository extends Repository {
     if (!$task instanceof ScheduledTaskEntity) return;
 
     if ($queue->getCountProcessed() === $queue->getCountTotal()) {
-      $processedAt = Carbon::createFromTimestamp($this->wp->currentTime('mysql'));
+      $processedAt = Carbon::createFromTimestamp($this->wp->currentTime('timestamp'));
       $task->setProcessedAt($processedAt);
       $task->setStatus(ScheduledTaskEntity::STATUS_COMPLETED);
       // Update also status of newsletter if necessary
@@ -229,5 +240,21 @@ class SendingQueuesRepository extends Repository {
       $queue->setCountTotal($processed + $unprocessed);
     }
     $this->entityManager->flush();
+  }
+
+  /** @param int[] $ids */
+  public function deleteByNewsletterIds(array $ids): void {
+    $this->entityManager->createQueryBuilder()
+      ->delete(SendingQueueEntity::class, 'q')
+      ->where('q.newsletter IN (:ids)')
+      ->setParameter('ids', $ids)
+      ->getQuery()
+      ->execute();
+
+    // delete was done via DQL, make sure the entities are also detached from the entity manager
+    $this->detachAll(function (SendingQueueEntity $entity) use ($ids) {
+      $newsletter = $entity->getNewsletter();
+      return $newsletter && in_array($newsletter->getId(), $ids, true);
+    });
   }
 }

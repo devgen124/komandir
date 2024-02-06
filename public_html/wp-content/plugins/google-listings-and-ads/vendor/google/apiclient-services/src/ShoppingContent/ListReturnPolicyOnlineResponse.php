@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ListReturnPolicyOnlineResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'returnPolicies';
+  /**
+   * @var ReturnPolicyOnline[]
+   */
+  public $returnPolicies;
   protected $returnPoliciesType = ReturnPolicyOnline::class;
   protected $returnPoliciesDataType = 'array';
 

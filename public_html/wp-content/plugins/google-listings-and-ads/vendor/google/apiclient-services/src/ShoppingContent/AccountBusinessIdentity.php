@@ -19,18 +19,38 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class AccountBusinessIdentity extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var AccountIdentityType
+   */
+  public $blackOwned;
   protected $blackOwnedType = AccountIdentityType::class;
   protected $blackOwnedDataType = '';
   /**
    * @var bool
    */
   public $includeForPromotions;
+  /**
+   * @var AccountIdentityType
+   */
+  public $latinoOwned;
   protected $latinoOwnedType = AccountIdentityType::class;
   protected $latinoOwnedDataType = '';
+  /**
+   * @var AccountIdentityType
+   */
+  public $smallBusiness;
   protected $smallBusinessType = AccountIdentityType::class;
   protected $smallBusinessDataType = '';
+  /**
+   * @var AccountIdentityType
+   */
+  public $veteranOwned;
   protected $veteranOwnedType = AccountIdentityType::class;
   protected $veteranOwnedDataType = '';
+  /**
+   * @var AccountIdentityType
+   */
+  public $womenOwned;
   protected $womenOwnedType = AccountIdentityType::class;
   protected $womenOwnedDataType = '';
 

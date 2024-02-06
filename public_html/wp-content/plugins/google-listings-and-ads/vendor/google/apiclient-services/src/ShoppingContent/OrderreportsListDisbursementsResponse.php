@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class OrderreportsListDisbursementsResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'disbursements';
+  /**
+   * @var OrderReportDisbursement[]
+   */
+  public $disbursements;
   protected $disbursementsType = OrderReportDisbursement::class;
   protected $disbursementsDataType = 'array';
   /**

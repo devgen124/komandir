@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class Row extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'cells';
+  /**
+   * @var Value[]
+   */
+  public $cells;
   protected $cellsType = Value::class;
   protected $cellsDataType = 'array';
 

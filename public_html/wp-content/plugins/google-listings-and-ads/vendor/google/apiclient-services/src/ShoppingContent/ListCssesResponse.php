@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ListCssesResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'csses';
+  /**
+   * @var Css[]
+   */
+  public $csses;
   protected $cssesType = Css::class;
   protected $cssesDataType = 'array';
   /**

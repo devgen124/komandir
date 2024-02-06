@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class UnitInvoiceTaxLine extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var Price
+   */
+  public $taxAmount;
   protected $taxAmountType = Price::class;
   protected $taxAmountDataType = '';
   /**

@@ -25,6 +25,7 @@
 		  <option <# if ( _.contains(data.hide_role, '<?php echo esc_attr( $key ); ?>' ) ) { #>selected="selected"<# } #> value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value['name'] ); ?></option>
 		<?php endforeach; ?>
 	  </select>
+	  <span span class="woocommerce-help-tip" data-tip="<?php esc_html_e( 'If user is not logged in will appear as customer.', 'woocommerce-checkout-manager' ); ?>"></span>
 	</p>
   </div>
 

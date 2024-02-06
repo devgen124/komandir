@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class TransitTableTransitTimeRow extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'values';
+  /**
+   * @var TransitTableTransitTimeRowTransitTimeValue[]
+   */
+  public $values;
   protected $valuesType = TransitTableTransitTimeRowTransitTimeValue::class;
   protected $valuesDataType = 'array';
 

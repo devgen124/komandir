@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class ActionReason extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var Action
+   */
+  public $action;
   protected $actionType = Action::class;
   protected $actionDataType = '';
   /**

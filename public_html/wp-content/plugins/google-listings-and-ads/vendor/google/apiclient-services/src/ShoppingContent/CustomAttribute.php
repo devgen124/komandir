@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class CustomAttribute extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'groupValues';
+  /**
+   * @var CustomAttribute[]
+   */
+  public $groupValues;
   protected $groupValuesType = CustomAttribute::class;
   protected $groupValuesDataType = 'array';
   /**

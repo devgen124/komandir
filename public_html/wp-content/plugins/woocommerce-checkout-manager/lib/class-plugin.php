@@ -13,6 +13,10 @@ final class Plugin {
 
 	protected static $_instance;
 
+	public $billing;
+	public $shipping;
+	public $additional;
+
 	private function __construct() {
 
 		/**

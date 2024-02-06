@@ -35,6 +35,7 @@ class Content_AI {
 		$this->action( 'rest_api_init', 'init_rest_api' );
 
 		new Content_AI_Page();
+		new Bulk_Actions();
 		if ( ! Helper::has_cap( 'content_ai' ) ) {
 			return;
 		}
@@ -258,6 +259,9 @@ class Content_AI {
 		Helper::add_json( 'registerWriteShortcut', version_compare( get_bloginfo( 'version' ), '6.2', '>=' ) );
 		Helper::add_json( 'contentAiMigrating', get_site_transient( 'rank_math_content_ai_migrating_user' ) );
 		Helper::add_json( 'contentAiUrl', CONTENT_AI_URL . '/ai/' );
+
+		$refresh_date = Helper::get_content_ai_refresh_date();
+		Helper::add_json( 'contentAIRefreshDate', $refresh_date ? wp_date( 'Y-m-d g:ia', $refresh_date ) : '' );
 	}
 
 	/**

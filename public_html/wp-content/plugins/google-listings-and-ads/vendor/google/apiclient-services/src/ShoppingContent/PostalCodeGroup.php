@@ -28,6 +28,10 @@ class PostalCodeGroup extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendo
    * @var string
    */
   public $name;
+  /**
+   * @var PostalCodeRange[]
+   */
+  public $postalCodeRanges;
   protected $postalCodeRangesType = PostalCodeRange::class;
   protected $postalCodeRangesDataType = 'array';
 

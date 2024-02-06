@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ListAccountReturnCarrierResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'accountReturnCarriers';
+  /**
+   * @var AccountReturnCarrier[]
+   */
+  public $accountReturnCarriers;
   protected $accountReturnCarriersType = AccountReturnCarrier::class;
   protected $accountReturnCarriersDataType = 'array';
 

@@ -23,6 +23,10 @@ class OrderreturnsRefundOperation extends \Automattic\WooCommerce\GoogleListings
    * @var bool
    */
   public $fullRefund;
+  /**
+   * @var OrderreturnsPartialRefund
+   */
+  public $partialRefund;
   protected $partialRefundType = OrderreturnsPartialRefund::class;
   protected $partialRefundDataType = '';
   /**

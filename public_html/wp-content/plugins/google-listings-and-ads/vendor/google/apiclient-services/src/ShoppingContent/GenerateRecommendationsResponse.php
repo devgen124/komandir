@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class GenerateRecommendationsResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'recommendations';
+  /**
+   * @var Recommendation[]
+   */
+  public $recommendations;
   protected $recommendationsType = Recommendation::class;
   protected $recommendationsDataType = 'array';
   /**

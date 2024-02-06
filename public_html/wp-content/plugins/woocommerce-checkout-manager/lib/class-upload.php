@@ -180,7 +180,10 @@ class Upload {
 
 					if ( isset( $field['type'] ) && 'file' == $field['type'] ) {
 
-						$attachments = get_post_meta( $order_id, sprintf( '_%s', $key ), true );
+						$order = wc_get_order( $order_id );
+						$key   = sprintf( '_%s', $field['key'] );
+
+						$attachments = $order->get_meta( $key, true );
 
 						if ( $attachments ) {
 

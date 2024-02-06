@@ -79,6 +79,12 @@ class Field extends Model {
 		);
 	}
 
+	public function get_price_types() {
+		return array(
+			'file',
+		);
+	}
+
 	public function get_multiple_types() {
 		return array(
 			'multicheckbox',

@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ListConversionSourcesResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'conversionSources';
+  /**
+   * @var ConversionSource[]
+   */
+  public $conversionSources;
   protected $conversionSourcesType = ConversionSource::class;
   protected $conversionSourcesDataType = 'array';
   /**

@@ -18,7 +18,7 @@
 		  <li class="media-modal-tab">
 			<a href="#display"><span><?php esc_html_e( 'Display', 'woocommerce-checkout-manager' ); ?></span></a>
 		  </li>
-		  <# if ( !_.contains(<?php echo json_encode( array_merge( $option, $template ) ); ?>, data.type)) { #>
+		  <# if ( !_.contains(<?php echo json_encode( array_merge( $option, $template, $price ) ); ?>, data.type)) { #>
 			<li class="media-modal-tab">
 			  <a href="#price"><span><?php esc_html_e( 'Price', 'woocommerce-checkout-manager' ); ?></span></a>
 			</li>

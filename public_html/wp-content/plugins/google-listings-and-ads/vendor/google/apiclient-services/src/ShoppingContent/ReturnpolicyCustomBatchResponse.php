@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ReturnpolicyCustomBatchResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'entries';
+  /**
+   * @var ReturnpolicyCustomBatchResponseEntry[]
+   */
+  public $entries;
   protected $entriesType = ReturnpolicyCustomBatchResponseEntry::class;
   protected $entriesDataType = 'array';
   /**

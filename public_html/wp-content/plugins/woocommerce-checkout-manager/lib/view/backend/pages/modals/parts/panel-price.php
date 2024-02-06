@@ -8,7 +8,7 @@
 	  </p>
 	  <p class="form-field">
 		<label><?php esc_html_e( 'Name', 'woocommerce-checkout-manager' ); ?></label>
-		<input class="short" name="add_price_name" type="text" value="{{data.add_price_name}}" placeholder="<?php esc_html_e( 'My Custom Charge', 'woocommerce-checkout-manager' ); ?>">
+		<input class="short" name="add_price_name" type="text" value="{{data.add_price_name}}" placeholder="<?php esc_html_e( 'billing_wooccmID' ); ?>">
 		<span class="description premium">(<?php esc_html_e( 'This is a premium feature', 'woocommerce-checkout-manager' ); ?>)</span>
 	  </p>
 	  <p class="form-field">

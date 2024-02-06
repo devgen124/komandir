@@ -20,8 +20,16 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class InvoiceSummary extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'additionalChargeSummaries';
+  /**
+   * @var InvoiceSummaryAdditionalChargeSummary[]
+   */
+  public $additionalChargeSummaries;
   protected $additionalChargeSummariesType = InvoiceSummaryAdditionalChargeSummary::class;
   protected $additionalChargeSummariesDataType = 'array';
+  /**
+   * @var Amount
+   */
+  public $productTotal;
   protected $productTotalType = Amount::class;
   protected $productTotalDataType = '';
 

@@ -23,6 +23,10 @@ class DeliveryArea extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\G
    * @var string
    */
   public $countryCode;
+  /**
+   * @var DeliveryAreaPostalCodeRange
+   */
+  public $postalCodeRange;
   protected $postalCodeRangeType = DeliveryAreaPostalCodeRange::class;
   protected $postalCodeRangeDataType = '';
   /**

@@ -48,10 +48,11 @@ class Field_Shipping extends Field {
 			$defaults           = Plugin::instance()->shipping->get_defaults();
 			$types              = Plugin::instance()->shipping->get_types();
 			$conditionals       = Plugin::instance()->shipping->get_conditional_types();
-			$option             = Plugin::instance()->billing->get_option_types();
-			$multiple           = Plugin::instance()->billing->get_multiple_types();
-			$template           = Plugin::instance()->billing->get_template_types();
-			$disabled           = Plugin::instance()->billing->get_disabled_types();
+			$option             = Plugin::instance()->shipping->get_option_types();
+			$price              = Plugin::instance()->shipping->get_price_types();
+			$multiple           = Plugin::instance()->shipping->get_multiple_types();
+			$template           = Plugin::instance()->shipping->get_template_types();
+			$disabled           = Plugin::instance()->shipping->get_disabled_types();
 			$product_categories = $this->get_product_categories();
 
 			$product_types = wc_get_product_types();

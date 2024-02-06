@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class AccountImageImprovements extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var AccountImageImprovementsSettings
+   */
+  public $accountImageImprovementsSettings;
   protected $accountImageImprovementsSettingsType = AccountImageImprovementsSettings::class;
   protected $accountImageImprovementsSettingsDataType = '';
   /**

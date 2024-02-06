@@ -20,8 +20,16 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class RenderProductIssuesResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'issues';
+  /**
+   * @var AlternateDisputeResolution
+   */
+  public $alternateDisputeResolution;
   protected $alternateDisputeResolutionType = AlternateDisputeResolution::class;
   protected $alternateDisputeResolutionDataType = '';
+  /**
+   * @var ProductIssue[]
+   */
+  public $issues;
   protected $issuesType = ProductIssue::class;
   protected $issuesDataType = 'array';
 

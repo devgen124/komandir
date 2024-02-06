@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class OrderDeliveryDetails extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var OrderAddress
+   */
+  public $address;
   protected $addressType = OrderAddress::class;
   protected $addressDataType = '';
   /**

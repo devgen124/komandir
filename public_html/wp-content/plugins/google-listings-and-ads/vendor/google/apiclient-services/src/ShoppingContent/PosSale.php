@@ -35,6 +35,10 @@ class PosSale extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google
    * @var string
    */
   public $kind;
+  /**
+   * @var Price
+   */
+  public $price;
   protected $priceType = Price::class;
   protected $priceDataType = '';
   /**

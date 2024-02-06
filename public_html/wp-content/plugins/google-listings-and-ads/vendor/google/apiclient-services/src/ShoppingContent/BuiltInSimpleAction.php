@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class BuiltInSimpleAction extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var BuiltInSimpleActionAdditionalContent
+   */
+  public $additionalContent;
   protected $additionalContentType = BuiltInSimpleActionAdditionalContent::class;
   protected $additionalContentDataType = '';
   /**

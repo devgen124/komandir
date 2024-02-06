@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class InsertCheckoutSettingsRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var UrlSettings
+   */
+  public $uriSettings;
   protected $uriSettingsType = UrlSettings::class;
   protected $uriSettingsDataType = '';
 

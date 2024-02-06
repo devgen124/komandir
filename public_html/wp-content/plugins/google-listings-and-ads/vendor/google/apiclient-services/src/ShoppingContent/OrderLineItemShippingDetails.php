@@ -23,6 +23,10 @@ class OrderLineItemShippingDetails extends \Automattic\WooCommerce\GoogleListing
    * @var string
    */
   public $deliverByDate;
+  /**
+   * @var OrderLineItemShippingDetailsMethod
+   */
+  public $method;
   protected $methodType = OrderLineItemShippingDetailsMethod::class;
   protected $methodDataType = '';
   /**

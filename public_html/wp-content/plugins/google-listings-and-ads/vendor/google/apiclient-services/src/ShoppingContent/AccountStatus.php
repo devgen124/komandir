@@ -24,6 +24,10 @@ class AccountStatus extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\
    * @var string
    */
   public $accountId;
+  /**
+   * @var AccountStatusAccountLevelIssue[]
+   */
+  public $accountLevelIssues;
   protected $accountLevelIssuesType = AccountStatusAccountLevelIssue::class;
   protected $accountLevelIssuesDataType = 'array';
   /**
@@ -34,6 +38,10 @@ class AccountStatus extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\
    * @var string
    */
   public $kind;
+  /**
+   * @var AccountStatusProducts[]
+   */
+  public $products;
   protected $productsType = AccountStatusProducts::class;
   protected $productsDataType = 'array';
   /**

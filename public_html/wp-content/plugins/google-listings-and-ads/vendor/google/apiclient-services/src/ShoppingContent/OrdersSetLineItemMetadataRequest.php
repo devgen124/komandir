@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class OrdersSetLineItemMetadataRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'annotations';
+  /**
+   * @var OrderMerchantProvidedAnnotation[]
+   */
+  public $annotations;
   protected $annotationsType = OrderMerchantProvidedAnnotation::class;
   protected $annotationsDataType = 'array';
   /**

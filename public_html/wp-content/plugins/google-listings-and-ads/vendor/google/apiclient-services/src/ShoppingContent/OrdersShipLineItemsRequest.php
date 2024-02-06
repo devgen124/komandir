@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class OrdersShipLineItemsRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'shipmentInfos';
+  /**
+   * @var OrderShipmentLineItemShipment[]
+   */
+  public $lineItems;
   protected $lineItemsType = OrderShipmentLineItemShipment::class;
   protected $lineItemsDataType = 'array';
   /**
@@ -30,6 +34,10 @@ class OrdersShipLineItemsRequest extends \Automattic\WooCommerce\GoogleListingsA
    * @var string
    */
   public $shipmentGroupId;
+  /**
+   * @var OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo[]
+   */
+  public $shipmentInfos;
   protected $shipmentInfosType = OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo::class;
   protected $shipmentInfosDataType = 'array';
 

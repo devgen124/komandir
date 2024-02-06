@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class OrderreturnsCreateOrderReturnRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'lineItems';
+  /**
+   * @var OrderreturnsLineItem[]
+   */
+  public $lineItems;
   protected $lineItemsType = OrderreturnsLineItem::class;
   protected $lineItemsDataType = 'array';
   /**

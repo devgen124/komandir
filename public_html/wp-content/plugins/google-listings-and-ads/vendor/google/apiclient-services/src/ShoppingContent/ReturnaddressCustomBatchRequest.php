@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ReturnaddressCustomBatchRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'entries';
+  /**
+   * @var ReturnaddressCustomBatchRequestEntry[]
+   */
+  public $entries;
   protected $entriesType = ReturnaddressCustomBatchRequestEntry::class;
   protected $entriesDataType = 'array';
 

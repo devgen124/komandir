@@ -27,6 +27,10 @@ class OrdersReturnRefundLineItemRequest extends \Automattic\WooCommerce\GoogleLi
    * @var string
    */
   public $operationId;
+  /**
+   * @var Price
+   */
+  public $priceAmount;
   protected $priceAmountType = Price::class;
   protected $priceAmountDataType = '';
   /**
@@ -45,6 +49,10 @@ class OrdersReturnRefundLineItemRequest extends \Automattic\WooCommerce\GoogleLi
    * @var string
    */
   public $reasonText;
+  /**
+   * @var Price
+   */
+  public $taxAmount;
   protected $taxAmountType = Price::class;
   protected $taxAmountDataType = '';
 

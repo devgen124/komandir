@@ -20,8 +20,16 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ServiceStoreConfig extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'storeCodes';
+  /**
+   * @var ServiceStoreConfigCutoffConfig
+   */
+  public $cutoffConfig;
   protected $cutoffConfigType = ServiceStoreConfigCutoffConfig::class;
   protected $cutoffConfigDataType = '';
+  /**
+   * @var Distance
+   */
+  public $serviceRadius;
   protected $serviceRadiusType = Distance::class;
   protected $serviceRadiusDataType = '';
   /**

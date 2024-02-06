@@ -20,14 +20,26 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class Table extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'rows';
+  /**
+   * @var Headers
+   */
+  public $columnHeaders;
   protected $columnHeadersType = Headers::class;
   protected $columnHeadersDataType = '';
   /**
    * @var string
    */
   public $name;
+  /**
+   * @var Headers
+   */
+  public $rowHeaders;
   protected $rowHeadersType = Headers::class;
   protected $rowHeadersDataType = '';
+  /**
+   * @var Row[]
+   */
+  public $rows;
   protected $rowsType = Row::class;
   protected $rowsDataType = 'array';
 

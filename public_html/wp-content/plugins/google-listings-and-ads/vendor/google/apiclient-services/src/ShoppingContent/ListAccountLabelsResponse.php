@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ListAccountLabelsResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'accountLabels';
+  /**
+   * @var AccountLabel[]
+   */
+  public $accountLabels;
   protected $accountLabelsType = AccountLabel::class;
   protected $accountLabelsDataType = 'array';
   /**

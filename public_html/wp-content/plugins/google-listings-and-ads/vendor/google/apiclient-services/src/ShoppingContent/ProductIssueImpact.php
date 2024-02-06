@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ProductIssueImpact extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'breakdowns';
+  /**
+   * @var Breakdown[]
+   */
+  public $breakdowns;
   protected $breakdownsType = Breakdown::class;
   protected $breakdownsDataType = 'array';
   /**

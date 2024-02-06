@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class OrdersRefundItemRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'items';
+  /**
+   * @var OrdersCustomBatchRequestEntryRefundItemItem[]
+   */
+  public $items;
   protected $itemsType = OrdersCustomBatchRequestEntryRefundItemItem::class;
   protected $itemsDataType = 'array';
   /**
@@ -34,6 +38,10 @@ class OrdersRefundItemRequest extends \Automattic\WooCommerce\GoogleListingsAndA
    * @var string
    */
   public $reasonText;
+  /**
+   * @var OrdersCustomBatchRequestEntryRefundItemShipping
+   */
+  public $shipping;
   protected $shippingType = OrdersCustomBatchRequestEntryRefundItemShipping::class;
   protected $shippingDataType = '';
 

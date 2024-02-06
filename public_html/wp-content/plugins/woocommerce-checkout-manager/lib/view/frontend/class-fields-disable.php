@@ -58,7 +58,7 @@ class Fields_Disable {
 	public function disable_by_role( $field ) {
 		global $current_user;
 
-		$user_roles = (array) $current_user->roles;
+		$user_roles = ! empty( (array) $current_user->roles ) ? (array) $current_user->roles : array( 'customer' );
 
 		if ( ! empty( $field['hide_role'] ) ) {
 

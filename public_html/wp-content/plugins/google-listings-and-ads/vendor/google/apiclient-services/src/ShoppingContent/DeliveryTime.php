@@ -20,10 +20,22 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class DeliveryTime extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'warehouseBasedDeliveryTimes';
+  /**
+   * @var CutoffTime
+   */
+  public $cutoffTime;
   protected $cutoffTimeType = CutoffTime::class;
   protected $cutoffTimeDataType = '';
+  /**
+   * @var BusinessDayConfig
+   */
+  public $handlingBusinessDayConfig;
   protected $handlingBusinessDayConfigType = BusinessDayConfig::class;
   protected $handlingBusinessDayConfigDataType = '';
+  /**
+   * @var HolidayCutoff[]
+   */
+  public $holidayCutoffs;
   protected $holidayCutoffsType = HolidayCutoff::class;
   protected $holidayCutoffsDataType = 'array';
   /**
@@ -42,10 +54,22 @@ class DeliveryTime extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\G
    * @var string
    */
   public $minTransitTimeInDays;
+  /**
+   * @var BusinessDayConfig
+   */
+  public $transitBusinessDayConfig;
   protected $transitBusinessDayConfigType = BusinessDayConfig::class;
   protected $transitBusinessDayConfigDataType = '';
+  /**
+   * @var TransitTable
+   */
+  public $transitTimeTable;
   protected $transitTimeTableType = TransitTable::class;
   protected $transitTimeTableDataType = '';
+  /**
+   * @var WarehouseBasedDeliveryTime[]
+   */
+  public $warehouseBasedDeliveryTimes;
   protected $warehouseBasedDeliveryTimesType = WarehouseBasedDeliveryTime::class;
   protected $warehouseBasedDeliveryTimesDataType = 'array';
 

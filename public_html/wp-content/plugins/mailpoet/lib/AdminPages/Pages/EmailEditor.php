@@ -62,6 +62,7 @@ class EmailEditor {
         'current_wp_user_email' => esc_js($currentUserEmail),
         'editor_settings' => $this->settingsController->getSettings(),
         'email_layout_styles' => $this->settingsController->getEmailLayoutStyles(),
+        'editor_layout' => $this->settingsController->getLayout(),
       ]
     );
 
@@ -71,6 +72,6 @@ class EmailEditor {
     // Enqueue media library scripts
     $this->wp->wpEnqueueMedia();
 
-    echo '<div id="mailpoet-email-editor"></div>';
+    echo '<div id="mailpoet-email-editor" class="block-editor"></div>';
   }
 }

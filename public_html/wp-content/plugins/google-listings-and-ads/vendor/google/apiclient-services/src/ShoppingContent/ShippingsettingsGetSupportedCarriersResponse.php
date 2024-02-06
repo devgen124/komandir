@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ShippingsettingsGetSupportedCarriersResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'carriers';
+  /**
+   * @var CarriersCarrier[]
+   */
+  public $carriers;
   protected $carriersType = CarriersCarrier::class;
   protected $carriersDataType = 'array';
   /**

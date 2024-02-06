@@ -19,7 +19,8 @@ $title = get_option( 'wooccm_order_custom_fields_title', esc_html__( 'Order extr
 						?>
 						<?php if ( ! in_array( $key, $defaults ) && empty( $field['hide_order'] ) ) : ?>
 							<?php
-							$value = get_post_meta( $order_id, sprintf( '_%s', $key ), true );
+							$key   = sprintf( '_%s', $key );
+							$value = $order->get_meta( $key, true );
 							if ( $value ) :
 								?>
 								<tr id="tr-<?php echo esc_attr( $key ); ?>">

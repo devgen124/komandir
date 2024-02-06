@@ -20,8 +20,16 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class AccountIssue extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'actions';
+  /**
+   * @var Action[]
+   */
+  public $actions;
   protected $actionsType = Action::class;
   protected $actionsDataType = 'array';
+  /**
+   * @var AccountIssueImpact
+   */
+  public $impact;
   protected $impactType = AccountIssueImpact::class;
   protected $impactDataType = '';
   /**

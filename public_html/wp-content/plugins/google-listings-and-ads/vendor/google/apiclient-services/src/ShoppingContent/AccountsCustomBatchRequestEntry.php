@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class AccountsCustomBatchRequestEntry extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'labelIds';
+  /**
+   * @var Account
+   */
+  public $account;
   protected $accountType = Account::class;
   protected $accountDataType = '';
   /**
@@ -38,6 +42,10 @@ class AccountsCustomBatchRequestEntry extends \Automattic\WooCommerce\GoogleList
    * @var string[]
    */
   public $labelIds;
+  /**
+   * @var AccountsCustomBatchRequestEntryLinkRequest
+   */
+  public $linkRequest;
   protected $linkRequestType = AccountsCustomBatchRequestEntryLinkRequest::class;
   protected $linkRequestDataType = '';
   /**

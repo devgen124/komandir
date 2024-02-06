@@ -24,6 +24,10 @@ class ListRegionsResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\V
    * @var string
    */
   public $nextPageToken;
+  /**
+   * @var Region[]
+   */
+  public $regions;
   protected $regionsType = Region::class;
   protected $regionsDataType = 'array';
 

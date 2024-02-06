@@ -19,12 +19,20 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class ProductViewItemIssue extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var ProductViewItemIssueItemIssueType
+   */
+  public $issueType;
   protected $issueTypeType = ProductViewItemIssueItemIssueType::class;
   protected $issueTypeDataType = '';
   /**
    * @var string
    */
   public $resolution;
+  /**
+   * @var ProductViewItemIssueItemIssueSeverity
+   */
+  public $severity;
   protected $severityType = ProductViewItemIssueItemIssueSeverity::class;
   protected $severityDataType = '';
 

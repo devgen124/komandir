@@ -19,12 +19,20 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class AccounttaxCustomBatchResponseEntry extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var AccountTax
+   */
+  public $accountTax;
   protected $accountTaxType = AccountTax::class;
   protected $accountTaxDataType = '';
   /**
    * @var string
    */
   public $batchId;
+  /**
+   * @var Errors
+   */
+  public $errors;
   protected $errorsType = Errors::class;
   protected $errorsDataType = '';
   /**

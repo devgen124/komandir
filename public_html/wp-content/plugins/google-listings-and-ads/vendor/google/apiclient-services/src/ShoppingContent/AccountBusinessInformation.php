@@ -19,8 +19,16 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class AccountBusinessInformation extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var AccountAddress
+   */
+  public $address;
   protected $addressType = AccountAddress::class;
   protected $addressDataType = '';
+  /**
+   * @var AccountCustomerService
+   */
+  public $customerService;
   protected $customerServiceType = AccountCustomerService::class;
   protected $customerServiceDataType = '';
   /**

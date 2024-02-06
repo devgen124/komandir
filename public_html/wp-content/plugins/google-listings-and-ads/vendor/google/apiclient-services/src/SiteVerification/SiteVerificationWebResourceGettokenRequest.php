@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Site
 
 class SiteVerificationWebResourceGettokenRequest extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var SiteVerificationWebResourceGettokenRequestSite
+   */
+  public $site;
   protected $siteType = SiteVerificationWebResourceGettokenRequestSite::class;
   protected $siteDataType = '';
   /**

@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class OrderReportDisbursement extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var Price
+   */
+  public $disbursementAmount;
   protected $disbursementAmountType = Price::class;
   protected $disbursementAmountDataType = '';
   /**

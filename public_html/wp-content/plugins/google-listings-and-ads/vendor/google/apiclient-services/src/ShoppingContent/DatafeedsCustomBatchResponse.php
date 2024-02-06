@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class DatafeedsCustomBatchResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'entries';
+  /**
+   * @var DatafeedsCustomBatchResponseEntry[]
+   */
+  public $entries;
   protected $entriesType = DatafeedsCustomBatchResponseEntry::class;
   protected $entriesDataType = 'array';
   /**

@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class OrdersCustomBatchRequestEntryRefundItemShipping extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var Price
+   */
+  public $amount;
   protected $amountType = Price::class;
   protected $amountDataType = '';
   /**

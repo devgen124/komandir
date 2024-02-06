@@ -28,6 +28,10 @@ class SiteVerificationWebResourceResource extends \Automattic\WooCommerce\Google
    * @var string[]
    */
   public $owners;
+  /**
+   * @var SiteVerificationWebResourceResourceSite
+   */
+  public $site;
   protected $siteType = SiteVerificationWebResourceResourceSite::class;
   protected $siteDataType = '';
 

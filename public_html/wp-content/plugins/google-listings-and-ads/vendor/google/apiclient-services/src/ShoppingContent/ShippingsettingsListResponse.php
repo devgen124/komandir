@@ -28,6 +28,10 @@ class ShippingsettingsListResponse extends \Automattic\WooCommerce\GoogleListing
    * @var string
    */
   public $nextPageToken;
+  /**
+   * @var ShippingSettings[]
+   */
+  public $resources;
   protected $resourcesType = ShippingSettings::class;
   protected $resourcesDataType = 'array';
 

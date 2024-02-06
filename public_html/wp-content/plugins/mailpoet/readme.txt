@@ -1,9 +1,9 @@
 === MailPoet - Newsletters, Email Marketing, and Automation ===
 Contributors: mailpoet, woocommerce, automattic
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
-Requires at least: 6.2
-Tested up to: 6.3
-Stable tag: 4.39.0
+Requires at least: 6.3
+Tested up to: 6.4
+Stable tag: 4.43.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -148,15 +148,24 @@ Have a question for us? Reach us at security@ our domain, or report security iss
 
 = Use of 3rd Party Services =
 
+MailPoet uses the following services that are necessary for its full functionality:
+
+* [Translate WordPress.com](https://translate.wordpress.com/) - used to download translations for the plugin.
+
 To improve user experience, MailPoet may use the following 3rd party libraries if the _Load 3rd-party libraries_ setting is enabled:
 
-* Google Fonts - used in Form Editor which you can use to customize your forms, and in the Email Editor to style emails. This can be individually [disabled by a filter](https://kb.mailpoet.com/article/332-how-to-disable-google-fonts)
+* [Google Fonts](https://fonts.google.com/) - used in Form Editor which you can use to customize your forms, and in the Email Editor to style emails. This can be individually [disabled by a filter](https://kb.mailpoet.com/article/332-how-to-disable-google-fonts). [TOS](https://policies.google.com/terms?hl=en) and [Privacy Policy](https://policies.google.com/privacy?hl=en)
 
-* DocsBot - used for searching in Knowledge Base with the help of AI. This functionality may load scripts from [https://widget.docsbot.ai/chat.js](https://widget.docsbot.ai/chat.js)
+* [DocsBot](https://docsbot.ai) - used for searching in Knowledge Base with the help of AI. This functionality may load scripts from [https://widget.docsbot.ai/chat.js](https://widget.docsbot.ai/chat.js). [TOS and Privacy Policy](https://docsbot.ai/legal)
 
-* Mixpanel - used to send data about the usage of the MailPoet plugin when you [agree with sharing usage data with us](https://kb.mailpoet.com/article/130-sharing-your-data-with-us)
+* [Mixpanel](https://mixpanel.com/) - used to send data about the usage of the MailPoet plugin when you [agree with sharing usage data with us](https://kb.mailpoet.com/article/130-sharing-your-data-with-us). [TOS](https://mixpanel.com/legal/terms-of-use/) and [Privacy Policy](https://mixpanel.com/legal/privacy-policy/)
 
-* Satismeter - used to ask for feedback.
+* [Satismeter](https://www.satismeter.com/) - used to ask for feedback. [TOS](https://www.satismeter.com/terms/) and [Privacy Policy](https://www.satismeter.com/privacy-policy/)
+
+* [Beamer](https://www.getbeamer.com/) - used to load our latest blogposts and announcements. [TOS](https://www.getbeamer.com/terms) and [Privacy Policy](https://www.getbeamer.com/privacy)
+
+* [Crowdsignal](https://crowdsignal.com/) - used to load our deactivation poll to improve our plugin. [TOS](https://crowdsignal.com/terms/) and [Privacy Policy](https://automattic.com/privacy/)
+
 
 Loading all these libraries is disabled by default. The option can be enabled in the _MailPoet's Settings > Advanced > Load 3rd-party libraries_.
 
@@ -218,6 +227,59 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 4.43.0 - 2024-02-05 =
+* Improved: during import, "Update existing subscriber status" no longer requires "Update existing subscriber info" to be enabled;
+* Fixed: error "EntityManager is Closed" during sending on MySQL 8;
+* Fixed: error "new entity was found through the relationship" during email sending;
+* Fixed: Some strings where not translateable;
+* Fixed: errors when sending some emails;
+* Fixed: automation listing trash and delete action UI behavior.
+
+= 4.42.1 - 2024-01-30 =
+* Improved: Display sender domain authentication notices in Automations;
+* Improved: Added Domain Authentication to the onboarding tasks;
+* Fixed: Post notification emails can become stuck;
+* Fixed: Some legacy automatic emails where not visible in the new automations listing page.
+
+= 4.42.0 - 2024-01-22 =
+* Updated: minimum required WooCommerce version to 8.4;
+* Improved: Made it obvious that list names may be visible to subscribers;
+* Improved: Sending rules for big senders;
+* Improved: AutomateWoo and MailPoet work now together in the Checkout-Block of WooCommerce;
+* Fixed: A notice was not closeable;
+* Fixed: In some instances sending seemed blocked by a SendingQueue error related to a NewsletterLinkEntity.
+
+= 4.41.3 - 2024-01-16 =
+* Added: a new segment for "Number of orders with coupon code";
+* Improved: move legacy Welcome and WooCommerce emails to Automations;
+* Improved: Sender email input validation for DMARC and other verification records;
+* Fixed: Some HTML markup fixes in the admin;
+* Fixed: Do not attempt to queue a newsletter notification for already published posts;
+* Fixed: The trash button on the newsletter stats page deleted a newsletter permanently.
+
+= 4.41.2 - 2024-01-11 =
+* Improved: notices in the banners now indicate that the new sending rules will be enforced on February 1st.
+
+= 4.41.1 - 2024-01-10 =
+* Fixed: Partially verified domains could not be re-verified
+
+= 4.41.0 - 2024-01-03 =
+* Added: notices about new sender domain requirements;
+* Added: support for DMARC record on sender domains;
+* Updated: minimum required WooCommerce version to 8.3;
+* Fixed: incorrect results for "was sent" segment;
+* Fixed: incorrect "Sent on" time displayed on Email listing page;
+* Fixed: error when activating an invalid automation;
+* Fixed: emoji support in email body for DBs with utf8 encoding;
+* Fixed: incorrect results when using "all of" condition for "purchased in category" segment.
+
+= 4.40.0 - 2023-12-12 =
+* Added: MailPoet integration with WooCommerce Multi-Channel dashboard;
+* Added: automation template detail with steps preview;
+* Updated: minimum required WordPress version to 6.3;
+* Fixed: Email editor text toolbox overlay when browser is zoomed in;
+* Fixed: an error when searching stats for emails sent to large lists.
 
 = 4.39.0 - 2023-12-04 =
 * Improved: Some translations got rephrased;

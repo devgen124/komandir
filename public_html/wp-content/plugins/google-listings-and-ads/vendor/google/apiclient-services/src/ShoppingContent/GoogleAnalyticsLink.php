@@ -19,6 +19,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 
 class GoogleAnalyticsLink extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Model
 {
+  /**
+   * @var AttributionSettings
+   */
+  public $attributionSettings;
   protected $attributionSettingsType = AttributionSettings::class;
   protected $attributionSettingsDataType = '';
   /**

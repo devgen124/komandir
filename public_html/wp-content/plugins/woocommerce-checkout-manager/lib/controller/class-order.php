@@ -184,7 +184,7 @@ class Order extends Upload {
 
 				if ( in_array( "wc-{$order->get_status()}", array_values( get_option( 'wooccm_order_custom_fields_status', array_keys( wc_get_order_statuses() ) ) ) ) ) {
 
-					wc_get_template( 'templates/order/order-custom-fields.php', array( 'order_id' => $order_id ), '', WOOCCM_PLUGIN_DIR );
+					wc_get_template( 'templates/order/order-custom-fields.php', array( 'order' => $order ), '', WOOCCM_PLUGIN_DIR );
 				}
 			}
 		}

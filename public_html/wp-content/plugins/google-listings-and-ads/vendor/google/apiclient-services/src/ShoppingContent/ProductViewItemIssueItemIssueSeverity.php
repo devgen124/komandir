@@ -24,6 +24,10 @@ class ProductViewItemIssueItemIssueSeverity extends \Automattic\WooCommerce\Goog
    * @var string
    */
   public $aggregatedSeverity;
+  /**
+   * @var ProductViewItemIssueIssueSeverityPerDestination[]
+   */
+  public $severityPerDestination;
   protected $severityPerDestinationType = ProductViewItemIssueIssueSeverityPerDestination::class;
   protected $severityPerDestinationDataType = 'array';
 

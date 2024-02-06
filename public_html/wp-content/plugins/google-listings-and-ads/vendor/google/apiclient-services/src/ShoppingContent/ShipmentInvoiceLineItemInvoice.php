@@ -32,6 +32,10 @@ class ShipmentInvoiceLineItemInvoice extends \Automattic\WooCommerce\GoogleListi
    * @var string[]
    */
   public $shipmentUnitIds;
+  /**
+   * @var UnitInvoice
+   */
+  public $unitInvoice;
   protected $unitInvoiceType = UnitInvoice::class;
   protected $unitInvoiceDataType = '';
 

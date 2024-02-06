@@ -27,6 +27,10 @@ class CheckoutSettings extends \Automattic\WooCommerce\GoogleListingsAndAds\Vend
    * @var string
    */
   public $effectiveReviewState;
+  /**
+   * @var UrlSettings
+   */
+  public $effectiveUriSettings;
   protected $effectiveUriSettingsType = UrlSettings::class;
   protected $effectiveUriSettingsDataType = '';
   /**
@@ -41,6 +45,10 @@ class CheckoutSettings extends \Automattic\WooCommerce\GoogleListingsAndAds\Vend
    * @var string
    */
   public $reviewState;
+  /**
+   * @var UrlSettings
+   */
+  public $uriSettings;
   protected $uriSettingsType = UrlSettings::class;
   protected $uriSettingsDataType = '';
 

@@ -44,6 +44,7 @@ class Field_Billing extends Field {
 			$types              = Plugin::instance()->billing->get_types();
 			$conditionals       = Plugin::instance()->billing->get_conditional_types();
 			$option             = Plugin::instance()->billing->get_option_types();
+			$price              = Plugin::instance()->billing->get_price_types();
 			$multiple           = Plugin::instance()->billing->get_multiple_types();
 			$template           = Plugin::instance()->billing->get_template_types();
 			$disabled           = Plugin::instance()->billing->get_disabled_types();

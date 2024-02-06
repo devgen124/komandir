@@ -23,6 +23,10 @@ class OrderRefund extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Go
    * @var string
    */
   public $actor;
+  /**
+   * @var Price
+   */
+  public $amount;
   protected $amountType = Price::class;
   protected $amountDataType = '';
   /**

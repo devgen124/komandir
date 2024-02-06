@@ -20,6 +20,10 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Service\Shop
 class ShippingsettingsGetSupportedHolidaysResponse extends \Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Collection
 {
   protected $collection_key = 'holidays';
+  /**
+   * @var HolidaysHoliday[]
+   */
+  public $holidays;
   protected $holidaysType = HolidaysHoliday::class;
   protected $holidaysDataType = 'array';
   /**
