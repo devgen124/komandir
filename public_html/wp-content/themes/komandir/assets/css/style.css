@@ -13372,7 +13372,6 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   }
 }
 .woocommerce div.product .woocommerce-tabs .panel[id=tab-description] h2, .woocommerce div.product .woocommerce-tabs .panel[id=tab-description] .h2 {
-  width: 20%;
   padding-right: 0.5em;
 }
 @media (max-width: 991.98px) {
@@ -13381,7 +13380,6 @@ form.mailpoet-manage-subscription .mailpoet_submit:hover {
   }
 }
 .woocommerce div.product .woocommerce-tabs .panel[id=tab-description] p {
-  width: 80%;
   font-size: 18px;
   line-height: 1.4;
   color: #000;

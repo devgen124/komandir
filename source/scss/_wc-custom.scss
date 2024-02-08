@@ -773,7 +773,6 @@ $cols: (1, 2, 3, 4, 5, 6);
                     }
 
                     h2 {
-                        width: 20%;
                         padding-right: 0.5em;
 
                         @include media-breakpoint-down(lg) {
@@ -782,7 +781,6 @@ $cols: (1, 2, 3, 4, 5, 6);
                     }
 
                     p {
-                        width: 80%;
                         font-size: 18px;
                         line-height: 1.4;
                         color: $black;
