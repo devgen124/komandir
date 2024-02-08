@@ -1020,3 +1020,10 @@ add_filter( 'woocommerce_thankyou_order_received_text', function ( $message ) {
 
 	return $message;
 } );
+
+// related products count = 5
+
+add_filter ( 'woocommerce_output_related_products_args', function ($args) {
+	$args['posts_per_page'] = 5;
+	return $args;
+} );
