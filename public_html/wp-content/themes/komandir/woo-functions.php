@@ -784,33 +784,54 @@ add_action( 'saved_promotion', function ( $term_id, $tt_id, $update, $args ) {
 		] ) );
 	}
 
-	if ( $target_products ) {
-		$current_products = get_posts( [
-			'post_type'      => 'product',
-			'posts_per_page' => - 1,
-			'tax_query'      => [
-				[
-					'taxonomy' => 'promotion',
-					'terms'    => $term_id,
-				]
+	if ( ! $target_products ) {
+		return;
+	}
+
+	$current_products = get_posts( [
+		'post_type'      => 'product',
+		'posts_per_page' => - 1,
+		'tax_query'      => [
+			[
+				'taxonomy' => 'promotion',
+				'terms'    => $term_id,
 			]
-		] );
+		]
+	] );
 
-		$depricated_products = array_diff( $current_products, $target_products );
-		$old_products        = array_intersect( $current_products, $target_products );
-		$new_products        = array_diff( $target_products, $old_products );
-		$term_name           = get_term( $term_id )->name;
+	$new_products        = [];
+	$depricated_products = [];
 
-		if ( $new_products ) {
-			foreach ( $new_products as $post ) {
-				wp_set_object_terms( $post->ID, $term_name, 'promotion', true );
+	if ( $current_products ) {
+		foreach ( $current_products as $current ) {
+			if ( ! in_array( $current->ID, $target_products ) ) {
+				$depricated_products[] = $current;
 			}
 		}
 
-		if ( $depricated_products ) {
-			foreach ( $depricated_products as $post ) {
-				wp_remove_object_terms( $post->ID, $term_name, 'promotion' );
+		foreach ( $target_products as $target ) {
+			if ( ! in_array( $target->ID, $current_products ) ) {
+				$new_products[] = $target;
 			}
+		}
+
+	} else {
+		$new_products = $target_products;
+	}
+
+	unset( $current_products, $target_products );
+
+	$term_name = get_term( $term_id )->name;
+
+	if ( $new_products ) {
+		foreach ( $new_products as $post ) {
+			wp_set_object_terms( $post->ID, $term_name, 'promotion', true );
+		}
+	}
+
+	if ( $depricated_products ) {
+		foreach ( $depricated_products as $post ) {
+			wp_remove_object_terms( $post->ID, $term_name, 'promotion' );
 		}
 	}
 }, 10, 4 );
@@ -1023,7 +1044,8 @@ add_filter( 'woocommerce_thankyou_order_received_text', function ( $message ) {
 
 // related products count = 5
 
-add_filter ( 'woocommerce_output_related_products_args', function ($args) {
+add_filter( 'woocommerce_output_related_products_args', function ( $args ) {
 	$args['posts_per_page'] = 5;
+
 	return $args;
 } );
