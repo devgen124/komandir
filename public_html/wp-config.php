@@ -92,7 +92,7 @@ define( 'WP_DEBUG_LOG', true );
 
 error_reporting( E_ALL ^ E_WARNING );
 
-define( 'WP_MEMORY_LIMIT', '64M' );
+define( 'WP_MEMORY_LIMIT', '256M' );
 
 
 // Отключаем автообновление
