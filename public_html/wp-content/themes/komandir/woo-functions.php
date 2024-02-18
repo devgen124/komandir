@@ -743,6 +743,7 @@ add_action( 'saved_promotion', function ( $term_id, $tt_id, $update, $args ) {
 	$categories      = [];
 	$products        = [];
 	$target_products = [];
+	$onsale_only     = false;
 
 	foreach ( $args as $arg_key => $arg_value ) {
 		if ( $arg_key === 'acf' ) {
@@ -757,81 +758,78 @@ add_action( 'saved_promotion', function ( $term_id, $tt_id, $update, $args ) {
 						if ( $acf['name'] === 'related_products' ) {
 							$products = $field_value;
 						}
+						if ( $acf['name'] === 'onsale_only' ) {
+							$onsale_only = $field_value;
+						}
 					}
 				}
 			}
 		}
 	}
 
+	$query = [
+		'post_type'      => 'product',
+		'posts_per_page' => - 1,
+		'fields'         => 'ids'
+	];
+
+	$onsale_query = $onsale_only ? [
+		'meta_query' => [
+			[
+				'key'     => '_sale_price',
+				'value'   => '',
+				'compare' => '!='
+			]
+		]
+	] : array();
+
 	if ( $categories ) {
-		$target_products = array_merge( $target_products, get_posts( [
-			'post_type'      => 'product',
-			'posts_per_page' => - 1,
-			'tax_query'      => [
+		$target_products = array_merge( $target_products, get_posts( array_merge( $query, $onsale_query, [
+			'tax_query' => [
 				[
 					'taxonomy' => 'product_cat',
 					'terms'    => $categories,
 				]
 			]
-		] ) );
+		] ) ) );
 	}
 
 	if ( $products ) {
-		$target_products = array_merge( $target_products, get_posts( [
-			'post_type'      => 'product',
-			'posts_per_page' => - 1,
-			'post__in'       => $products
-		] ) );
+		$query['post__in'] = $products;
+		$target_products   = array_merge( $target_products, get_posts( array_merge( $query, $onsale_query, [
+			'post__in' => $products
+		] ) ) );
 	}
 
 	if ( ! $target_products ) {
 		return;
 	}
 
-	$current_products = get_posts( [
-		'post_type'      => 'product',
-		'posts_per_page' => - 1,
-		'tax_query'      => [
+	$current_products = get_posts( array_merge( $query, [
+		'tax_query' => [
 			[
 				'taxonomy' => 'promotion',
 				'terms'    => $term_id,
 			]
 		]
-	] );
+	] ) );
 
-	$new_products        = [];
-	$depricated_products = [];
-
-	if ( $current_products ) {
-		foreach ( $current_products as $current ) {
-			if ( ! in_array( $current->ID, $target_products ) ) {
-				$depricated_products[] = $current;
-			}
-		}
-
-		foreach ( $target_products as $target ) {
-			if ( ! in_array( $target->ID, $current_products ) ) {
-				$new_products[] = $target;
-			}
-		}
-
-	} else {
-		$new_products = $target_products;
-	}
+	$new_products        = array_diff( $target_products, $current_products );
+	$depricated_products = array_diff( $current_products, $target_products );
 
 	unset( $current_products, $target_products );
 
 	$term_name = get_term( $term_id )->name;
 
 	if ( $new_products ) {
-		foreach ( $new_products as $post ) {
-			wp_set_object_terms( $post->ID, $term_name, 'promotion', true );
+		foreach ( $new_products as $product_id ) {
+			wp_set_object_terms( $product_id, $term_name, 'promotion', true );
 		}
 	}
 
 	if ( $depricated_products ) {
-		foreach ( $depricated_products as $post ) {
-			wp_remove_object_terms( $post->ID, $term_name, 'promotion' );
+		foreach ( $depricated_products as $product_id ) {
+			wp_remove_object_terms( $product_id, $term_name, 'promotion' );
 		}
 	}
 }, 10, 4 );
