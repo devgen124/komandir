@@ -14587,14 +14587,15 @@ p.outstock {
 .woocommerce-custom-cart-item .product-name {
   margin-right: 5%;
   flex-grow: 1;
-}
-.woocommerce-custom-cart-item .product-name a {
   font-size: 24px;
   font-weight: 700;
   color: #000;
 }
+.woocommerce-custom-cart-item .product-name a {
+  color: #000;
+}
 @media (max-width: 1199.98px) {
-  .woocommerce-custom-cart-item .product-name a {
+  .woocommerce-custom-cart-item .product-name {
     font-size: 20px;
   }
 }
@@ -14610,7 +14611,7 @@ p.outstock {
   }
 }
 @media (max-width: 575.98px) {
-  .woocommerce-custom-cart-item .product-name a {
+  .woocommerce-custom-cart-item .product-name {
     font-size: 14px;
     font-weight: 400;
   }
