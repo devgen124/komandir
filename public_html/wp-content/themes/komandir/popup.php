@@ -27,26 +27,26 @@ class PopupController {
 		check_ajax_referer( 'komandir-nonce', 'nonce_code' );
 
 		$response = [
-			'error_message' 	=> [],
-			'error_fields' 		=> [],
-			'success' 			=> false,
-			'phone_number' 		=> null,
-			'console_message' 	=> null
+			'error_message'   => [],
+			'error_fields'    => [],
+			'success'         => false,
+			'phone_number'    => null,
+			'console_message' => null
 		];
 
 		if ( empty( $_POST['phone'] ) || empty( trim( $_POST['phone'] ) ) ) {
 
 			$response['error_message'][] = 'Введите номер телефона';
-			$response['error_fields'][] = 'phone';
+			$response['error_fields'][]  = 'phone';
 
 		} elseif ( self::is_phone( $_POST['phone'] ) ) {
 
-			$phone = wc_sanitize_phone_number( $_POST['phone'] );
-			$timestamp = WC()->session->get('sms_timestamp');
+			$phone     = wc_sanitize_phone_number( $_POST['phone'] );
+			$timestamp = WC()->session->get( 'sms_timestamp' );
 			$last_time = $timestamp ? (int) $timestamp : 0;
 
 			$now_time = time();
-			$diff = $now_time - $last_time;
+			$diff     = $now_time - $last_time;
 
 			if ( $diff < 45 ) {
 
@@ -59,9 +59,9 @@ class PopupController {
 				try {
 
 					self::send_code( $phone );
-					$response['success'] = true;
+					$response['success']      = true;
 					$response['phone_number'] = $phone;
-				} catch (Exception $e) {
+				} catch ( Exception $e ) {
 					$response['console_message'] = $e->getMessage();
 				}
 			}
@@ -69,7 +69,7 @@ class PopupController {
 		} else {
 
 			$response['error_message'][] = 'Неверный формат';
-			$response['error_fields'][] = 'phone';
+			$response['error_fields'][]  = 'phone';
 		}
 
 		echo json_encode( $response );
@@ -82,17 +82,17 @@ class PopupController {
 		check_ajax_referer( 'komandir-nonce', 'nonce_code' );
 
 		$response = [
-			'error_message' 	=> [],
-			'error_fields' 		=> [],
-			'success' 			=> false,
-			'phone_number' 		=> null,
-			'console_message' 	=> null
+			'error_message'   => [],
+			'error_fields'    => [],
+			'success'         => false,
+			'phone_number'    => null,
+			'console_message' => null
 		];
 
 		if ( empty( $_POST['phone'] ) || empty( trim( $_POST['phone'] ) ) ) {
 
 			$response['error_message'][] = 'Введите номер телефона';
-			$response['error_fields'][] = 'phone';
+			$response['error_fields'][]  = 'phone';
 
 		} elseif ( self::is_phone( wc_sanitize_phone_number( $_POST['phone'] ) ) ) {
 
@@ -105,17 +105,17 @@ class PopupController {
 			if ( self::get_user_by_phone( $phone ) ) {
 
 				$response['error_message'][] = 'Номер телефона занят';
-				$response['error_fields'][] = 'phone';
+				$response['error_fields'][]  = 'phone';
 			} else if ( $current_user_phone == $phone ) {
 
 				$response['error_message'][] = 'Указан текущий номер телефона';
-				$response['error_fields'][] = 'phone';
+				$response['error_fields'][]  = 'phone';
 			} else {
 
 				$last_time = WC()->session->get( 'sms_timestamp' ) ? (int) WC()->session->get( 'sms_timestamp' ) : 0;
 
 				$now_time = time();
-				$diff = $now_time - $last_time;
+				$diff     = $now_time - $last_time;
 
 				if ( $diff > 0 && $diff < 45 ) {
 
@@ -126,9 +126,9 @@ class PopupController {
 					try {
 
 						self::send_code( $phone );
-						$response['success'] = true;
+						$response['success']      = true;
 						$response['phone_number'] = $phone;
-					} catch (Exception $e) {
+					} catch ( Exception $e ) {
 						$response['console_message'] = $e->getMessage();
 					}
 				}
@@ -136,7 +136,7 @@ class PopupController {
 		} else {
 
 			$response['error_message'][] = ! trim( $_POST['phone'] ) ? 'Заполните поле' : 'Неверный формат';
-			$response['error_fields'][] = 'phone';
+			$response['error_fields'][]  = 'phone';
 		}
 
 		echo json_encode( $response );
@@ -176,7 +176,7 @@ class PopupController {
 
 				WC()->session->set( 'sms_code', $code );
 
-			} catch (Exception $e) {
+			} catch ( Exception $e ) {
 
 				throw new Exception( $e->getMessage() );
 			}
@@ -190,15 +190,15 @@ class PopupController {
 
 		$response = [
 			'error_message' => [],
-			'error_fields' 	=> [],
-			'success' 		=> false,
-			'phone_number' 	=> null,
-			'reload' 		=> false
+			'error_fields'  => [],
+			'success'       => false,
+			'phone_number'  => null,
+			'reload'        => false
 		];
 
-		if ( ! isset( $_POST['sms'] ) )
+		if ( ! isset( $_POST['sms'] ) ) {
 			wp_die();
-
+		}
 
 
 		if ( preg_match( '/\d{4}/', $_POST['sms'] ) ) {
@@ -208,7 +208,7 @@ class PopupController {
 			if ( $sms != WC()->session->get( 'sms_code' ) ) {
 
 				$response['error_message'][] = 'Неверный код';
-				$response['error_fields'][] = 'sms';
+				$response['error_fields'][]  = 'sms';
 			} else {
 
 				$phone_number = WC()->session->get( 'phone_number' );
@@ -231,14 +231,14 @@ class PopupController {
 					WC()->session->__unset( 'sms_code' );
 					WC()->session->__unset( 'sms_timestamp' );
 
-					$response['success'] = true;
+					$response['success']      = true;
 					$response['phone_number'] = $phone_number;
 				}
 			}
 		} else {
 
 			$response['error_message'][] = empty( $_POST['sms'] ) ? 'Заполните поле' : 'Неверный формат';
-			$response['error_fields'][] = 'sms';
+			$response['error_fields'][]  = 'sms';
 		}
 
 		echo json_encode( $response );
@@ -252,13 +252,14 @@ class PopupController {
 
 		$response = [
 			'error_message' => [],
-			'error_fields' 	=> [],
-			'success' 		=> false,
-			'reload' 		=> false
+			'error_fields'  => [],
+			'success'       => false,
+			'reload'        => false
 		];
 
-		if ( ! isset( $_POST['sms'] ) )
+		if ( ! isset( $_POST['sms'] ) ) {
 			wp_die();
+		}
 
 		if ( preg_match( '/\d{4}/', $_POST['sms'] ) ) {
 
@@ -267,7 +268,7 @@ class PopupController {
 			if ( $sms != WC()->session->get( 'sms_code' ) ) {
 
 				$response['error_message'][] = 'Неверный код';
-				$response['error_fields'][] = 'sms';
+				$response['error_fields'][]  = 'sms';
 			} else {
 
 				$phone_number = WC()->session->get( 'phone_number' );
@@ -284,7 +285,7 @@ class PopupController {
 		} else {
 
 			$response['error_message'][] = empty( $_POST['sms'] ) ? 'Заполните поле' : 'Неверный формат';
-			$response['error_fields'][] = 'sms';
+			$response['error_fields'][]  = 'sms';
 		}
 
 		echo json_encode( $response );
@@ -295,7 +296,7 @@ class PopupController {
 	private static function get_user_by_phone( $phone ) {
 
 		$users = get_users( [
-			'meta_key' => 'billing_phone',
+			'meta_key'   => 'billing_phone',
 			'meta_value' => $phone
 		] );
 
@@ -309,9 +310,9 @@ class PopupController {
 
 		$response = [
 			'error_message' => [],
-			'error_fields' 	=> [],
-			'success' 		=> false,
-			'reload' 		=> false
+			'error_fields'  => [],
+			'success'       => false,
+			'reload'        => false
 		];
 
 		$email = filter_input( INPUT_POST, 'login-email', FILTER_VALIDATE_EMAIL );
@@ -323,11 +324,11 @@ class PopupController {
 			if ( $user_data ) {
 
 				$response['error_message'][] = 'Пользователь с данной электронной почтой уже существует';
-				$response['error_fields'][] = 'login-email';
+				$response['error_fields'][]  = 'login-email';
 			} else {
 
 				$firstname_not_match_text = 'Имя должно состоять только из букв';
-				$name_regexp = '/[А-я,Ё,ё,A-z]/';
+				$name_regexp              = '/[А-я,Ё,ё,A-z]/';
 
 				if ( ! preg_match( $name_regexp, $_POST['login-firstname'] ) ) {
 
@@ -343,7 +344,7 @@ class PopupController {
 				if ( ! preg_match( $password_regexp, $_POST['login-pass-first'] ) ) {
 
 					$response['error_message'][] = $password_not_match_text;
-					$response['error_fields'][] = 'login-pass-first';
+					$response['error_fields'][]  = 'login-pass-first';
 				}
 
 				if ( ! preg_match( $password_regexp, $_POST['login-pass-second'] ) ) {
@@ -358,14 +359,16 @@ class PopupController {
 				if ( $_POST['login-pass-first'] != $_POST['login-pass-second'] ) {
 
 					$response['error_message'][] = 'Пароли не совпадают';
-					$response['error_fields'][] = 'login-pass-first';
-					$response['error_fields'][] = 'login-pass-second';
+					$response['error_fields'][]  = 'login-pass-first';
+					$response['error_fields'][]  = 'login-pass-second';
 				}
 
 				$required_fields = [
-					'Email' => 'login-email',
-					'Логин' => 'login-display-name',
-					'Пароль' => 'login-pass-first',
+					'Email'            => 'login-email',
+					'Логин'            => 'login-display-name',
+					'Имя'              => 'login-firstname',
+					'Фамилия'          => 'login-lastname',
+					'Пароль'           => 'login-pass-first',
 					'Повторите пароль' => 'login-pass-second'
 				];
 
@@ -374,18 +377,18 @@ class PopupController {
 					if ( ! trim( $_POST[ $field ] ) ) {
 
 						$response['error_message'][] = "Поле $text должно быть заполнено";
-						$response['error_fields'][] = $field;
+						$response['error_fields'][]  = $field;
 					}
 				}
 
 				if ( empty( $response['error_message'] ) && empty( $response['error_fields'] ) ) {
 
-					$account_login = ! empty( $_POST['login-display-name'] ) ? wc_clean( wp_unslash( $_POST['login-display-name'] ) ) : '';
+					$account_login      = ! empty( $_POST['login-display-name'] ) ? wc_clean( wp_unslash( $_POST['login-display-name'] ) ) : '';
 					$account_first_name = ! empty( $_POST['login-firstname'] ) ? wc_clean( wp_unslash( $_POST['login-firstname'] ) ) : '';
-					$account_last_name = ! empty( $_POST['login-lastname'] ) ? wc_clean( wp_unslash( $_POST['login-lastname'] ) ) : '';
-					$account_email = ! empty( $_POST['login-email'] ) ? wc_clean( wp_unslash( $_POST['login-email'] ) ) : '';
-					$account_password = ! empty( $_POST['login-pass-first'] ) ? $_POST['login-pass-first'] : '';
-					$phone_number = ! empty( $_POST['login-phone'] ) ? wc_clean( wp_unslash( $_POST['login-phone'] ) ) : '';
+					$account_last_name  = ! empty( $_POST['login-lastname'] ) ? wc_clean( wp_unslash( $_POST['login-lastname'] ) ) : '';
+					$account_email      = ! empty( $_POST['login-email'] ) ? wc_clean( wp_unslash( $_POST['login-email'] ) ) : '';
+					$account_password   = ! empty( $_POST['login-pass-first'] ) ? $_POST['login-pass-first'] : '';
+					$phone_number       = ! empty( $_POST['login-phone'] ) ? wc_clean( wp_unslash( $_POST['login-phone'] ) ) : '';
 
 					$new_customer_id = wc_create_new_customer( $account_email, $account_login, $account_password );
 
@@ -396,10 +399,10 @@ class PopupController {
 
 						$current_user = get_user_by( 'id', $new_customer_id );
 
-						$user = new stdClass();
-						$user->ID = $current_user->ID;
+						$user             = new stdClass();
+						$user->ID         = $current_user->ID;
 						$user->first_name = $account_first_name;
-						$user->last_name = $account_last_name;
+						$user->last_name  = $account_last_name;
 
 						wp_update_user( $user );
 
@@ -416,7 +419,7 @@ class PopupController {
 		} else {
 
 			$response['error_message'][] = 'Некорректный email';
-			$response['error_fields'][] = 'login-email';
+			$response['error_fields'][]  = 'login-email';
 		}
 
 		echo json_encode( $response );
@@ -430,9 +433,9 @@ class PopupController {
 
 		$response = [
 			'error_message' => [],
-			'error_fields' 	=> [],
-			'phone' 		=> null,
-			'reload' 		=> false
+			'error_fields'  => [],
+			'phone'         => null,
+			'reload'        => false
 		];
 
 		$login = trim( wp_unslash( $_POST['login'] ) );
@@ -440,7 +443,7 @@ class PopupController {
 		if ( ! $login ) {
 
 			$response['error_message'][] = 'Поле Логин не заполнено';
-			$response['error_fields'][] = 'login';
+			$response['error_fields'][]  = 'login';
 		} else {
 
 			$user = null;
@@ -449,7 +452,7 @@ class PopupController {
 
 			if ( preg_match( $phone_regexp, $login ) ) {
 
-				$phone = '+7' . substr( preg_replace( '/[\-\s\(\)]/', '', $login ), -10 );
+				$phone = '+7' . substr( preg_replace( '/[\-\s\(\)]/', '', $login ), - 10 );
 
 				$user = self::get_user_by_phone( $phone );
 
@@ -470,19 +473,19 @@ class PopupController {
 					if ( ! $pass_input ) {
 
 						$response['error_message'][] = 'Поле Пароль не заполнено';
-						$response['error_fields'][] = 'pass';
+						$response['error_fields'][]  = 'pass';
 					} else {
 
 						if ( ! wp_check_password( $_POST['pass'], $user_pass_hash ) ) {
 
 							$response['error_message'][] = 'Пароль неверен';
-							$response['error_fields'][] = 'pass';
+							$response['error_fields'][]  = 'pass';
 						} else {
 
 							$cur_user = wp_signon( [
-								'user_login' => $user->data->user_login,
+								'user_login'    => $user->data->user_login,
 								'user_password' => $_POST['pass'],
-								'remember' => true
+								'remember'      => true
 							], is_ssl() );
 
 							if ( is_wp_error( $cur_user ) ) {
@@ -497,7 +500,7 @@ class PopupController {
 				}
 			} else {
 				$response['error_message'][] = 'Пользователь не найден';
-				$response['error_fields'][] = 'login';
+				$response['error_fields'][]  = 'login';
 			}
 		}
 
@@ -521,7 +524,7 @@ class PopupController {
 			self::send_code( $phone );
 			$response['success'] = true;
 
-		} catch (Exception $e) {
+		} catch ( Exception $e ) {
 			$response['console_message'] = $e->getMessage();
 		}
 
