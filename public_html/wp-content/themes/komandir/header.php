@@ -27,6 +27,11 @@ global $svg;
 	<base href="<?= get_home_url(); ?>/">
 	</base>
 
+	<style>
+		.grecaptcha-badge {
+			visibility: hidden;
+		}
+	</style>
 	<?php wp_head(); ?>
 </head>
 
