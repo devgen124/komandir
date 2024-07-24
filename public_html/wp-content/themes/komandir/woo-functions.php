@@ -836,8 +836,11 @@ add_action( 'saved_promotion', function ( $term_id, $tt_id, $update, $args ) {
 
 add_filter( 'woocommerce_get_stock_html', function ( $html, $product ) {
 	$availability = $product->get_availability();
-	$warehouses   = get_option( 'all_1c_stocks' );
-	$stock_meta   = get_post_meta( $product->get_id(), '_separate_warehouse_stock', true );
+	if ( $availability['class'] == 'out-of-stock' ) {
+		return "нет в наличии";
+	}
+	$warehouses = get_option( 'all_1c_stocks' );
+	$stock_meta = get_post_meta( $product->get_id(), '_separate_warehouse_stock', true );
 
 	$stock_data = [];
 

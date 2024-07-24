@@ -1312,8 +1312,12 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
 	display: inline;
 }
 
-.woocommerce div.product .stock {
+.woocommerce div.product .in-stock {
 	color: $accent-color;
+}
+
+.woocommerce div.product .out-of-stock {
+	color: $error-color;
 }
 
 .woo-product-gallery-slider {
