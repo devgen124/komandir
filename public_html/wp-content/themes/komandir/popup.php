@@ -77,6 +77,46 @@ class PopupController {
 		wp_die();
 	}
 
+	private static function is_phone( $phone ) {
+
+		return preg_match( '/\+7\s\d{3}\s\d{3}\s\d{2}\s\d{2}/', $phone );
+
+	}
+
+	private static function send_code( $phone, $testMode = false ) {
+
+		if ( $testMode ) {
+
+			$code = '1234';
+
+			WC()->session->set( 'sms_code', $code );
+			WC()->session->set( 'sms_timestamp', time() );
+
+		} else {
+
+			$smsAuth = new SmsAuthController( 'komandir124', 'Kom24A22' );
+
+			try {
+
+				$result = $smsAuth->generateCode(
+					$phone,
+					'komandir124',
+					4,
+					'Ваш код авторизации: {код}'
+				);
+
+				$code = (string) $result->success->attributes()['code'];
+
+				WC()->session->set( 'sms_code', $code );
+
+			} catch ( Exception $e ) {
+
+				throw new Exception( $e->getMessage() );
+			}
+
+		}
+	}
+
 	public static function komandir_change_phone_send_code() {
 
 		check_ajax_referer( 'komandir-nonce', 'nonce_code' );
@@ -144,44 +184,14 @@ class PopupController {
 		wp_die();
 	}
 
-	private static function is_phone( $phone ) {
+	private static function get_user_by_phone( $phone ) {
 
-		return preg_match( '/\+7\s\d{3}\s\d{3}\s\d{2}\s\d{2}/', $phone );
+		$users = get_users( [
+			'meta_key'   => 'billing_phone',
+			'meta_value' => $phone
+		] );
 
-	}
-
-	private static function send_code( $phone, $testMode = false ) {
-
-		if ( $testMode ) {
-
-			$code = '1234';
-
-			WC()->session->set( 'sms_code', $code );
-			WC()->session->set( 'sms_timestamp', time() );
-
-		} else {
-
-			$smsAuth = new SmsAuthController( 'komandir124', 'Kom24A22' );
-
-			try {
-
-				$result = $smsAuth->generateCode(
-					$phone,
-					'komandir124',
-					4,
-					'Ваш код авторизации: {код}'
-				);
-
-				$code = (string) $result->success->attributes()['code'];
-
-				WC()->session->set( 'sms_code', $code );
-
-			} catch ( Exception $e ) {
-
-				throw new Exception( $e->getMessage() );
-			}
-
-		}
+		return $users ? $users[0] : null;
 	}
 
 	public static function komandir_login_send_sms() {
@@ -293,16 +303,6 @@ class PopupController {
 		wp_die();
 	}
 
-	private static function get_user_by_phone( $phone ) {
-
-		$users = get_users( [
-			'meta_key'   => 'billing_phone',
-			'meta_value' => $phone
-		] );
-
-		return $users ? $users[0] : null;
-	}
-
 	public static function komandir_create_customer() {
 		check_ajax_referer( 'komandir-nonce', 'nonce_code' );
 
@@ -367,6 +367,7 @@ class PopupController {
 					'Email'            => 'login-email',
 					'Логин'            => 'login-display-name',
 					'Имя'              => 'login-firstname',
+					'Отчество'         => 'login-patronymic',
 					'Фамилия'          => 'login-lastname',
 					'Пароль'           => 'login-pass-first',
 					'Повторите пароль' => 'login-pass-second'
@@ -385,6 +386,7 @@ class PopupController {
 
 					$account_login      = ! empty( $_POST['login-display-name'] ) ? wc_clean( wp_unslash( $_POST['login-display-name'] ) ) : '';
 					$account_first_name = ! empty( $_POST['login-firstname'] ) ? wc_clean( wp_unslash( $_POST['login-firstname'] ) ) : '';
+					$account_first_name .= ' ' . ! empty( $_POST['login-patronymic'] ) ? wc_clean( wp_unslash( $_POST['login-patronymic'] ) ) : '';
 					$account_last_name  = ! empty( $_POST['login-lastname'] ) ? wc_clean( wp_unslash( $_POST['login-lastname'] ) ) : '';
 					$account_email      = ! empty( $_POST['login-email'] ) ? wc_clean( wp_unslash( $_POST['login-email'] ) ) : '';
 					$account_password   = ! empty( $_POST['login-pass-first'] ) ? $_POST['login-pass-first'] : '';

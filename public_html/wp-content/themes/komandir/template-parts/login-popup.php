@@ -5,7 +5,7 @@
 		<h2>Войти или зарегистрироваться</h2>
 		<form class="form-send-code" method="post">
 			<label class="custom-popup-form-label">
-				<input type="tel" placeholder="Телефон" name="phone" />
+				<input type="tel" placeholder="Телефон" name="phone"/>
 				<button class="input-tip" id="phone-tip" aria-label="Подсказка"></button>
 			</label>
 			<?php wp_nonce_field( 'komandir-send-code', 'komandir-send-code-nonce' ); ?>
@@ -25,11 +25,11 @@
 		<h2>Войти с паролем</h2>
 		<form class="form-pass" method="post">
 			<label class="custom-popup-form-label">
-				<input type="text" placeholder="Телефон или email" name="login" />
+				<input type="text" placeholder="Телефон или email" name="login"/>
 				<button class="input-tip" id="phone-tip" aria-label="Подсказка"></button>
 			</label>
 			<label class="custom-popup-form-label">
-				<input type="password" placeholder="Пароль" name="pass" />
+				<input type="password" placeholder="Пароль" name="pass"/>
 				<button class="show-pass" aria-label="Показать пароль"></button>
 			</label>
 			<a href="<?php echo wc_lostpassword_url(); ?>" class="recover-link">Забыли пароль?</a>
@@ -45,7 +45,7 @@
 		<h2>Введите SMS-код</h2>
 		<form class="form-sms" method="post">
 			<label class="custom-popup-form-label">
-				<input type="text" placeholder="Код из SMS" name="sms" maxlength="4" autocomplete="off" />
+				<input type="text" placeholder="Код из SMS" name="sms" maxlength="4" autocomplete="off"/>
 			</label>
 			<?php wp_nonce_field( 'komandir-sms', 'komandir-sms-nonce' ); ?>
 			<button type="submit" class="custom-popup-submit form-sms-submit"></button>
@@ -61,27 +61,31 @@
 		<h2>Мой профиль</h2>
 		<form class="form-profile" method="post" autocomplete="off">
 			<label class="custom-popup-form-label">
-				<input type="tel" placeholder="Телефон" name="login-phone" disabled />
+				<input type="tel" placeholder="Телефон" name="login-phone" disabled/>
 			</label>
 			<label class="custom-popup-form-label">
-				<input type="email" placeholder="Email" name="login-email" />
+				<input type="email" placeholder="Email" name="login-email"/>
 			</label>
 			<label class="custom-popup-form-label">
-				<input type="text" placeholder="Логин" name="login-display-name" />
+				<input type="text" placeholder="Логин" name="login-display-name"/>
 			</label>
 			<label class="custom-popup-form-label">
-				<input type="text" placeholder="Имя" name="login-firstname" />
+				<input type="text" placeholder="Имя" name="login-firstname"/>
 			</label>
 			<label class="custom-popup-form-label">
-				<input type="text" placeholder="Фамилия" name="login-lastname" />
+				<input type="text" placeholder="Отчество" name="login-patronymic"/>
+			</label>
+			<label class="custom-popup-form-label">
+				<input type="text" placeholder="Фамилия" name="login-lastname"/>
 			</label>
 			<div class="form-profile-pass-row">
 				<label class="custom-popup-form-label">
-					<input type="password" placeholder="Пароль" name="login-pass-first" autocomplete="off" />
+					<input type="password" placeholder="Пароль" name="login-pass-first" autocomplete="off"/>
 					<button class="show-pass" aria-label="Показать пароль"></button>
 				</label>
 				<label class="custom-popup-form-label">
-					<input type="password" placeholder="Подтвердить пароль" name="login-pass-second" autocomplete="off" />
+					<input type="password" placeholder="Подтвердить пароль" name="login-pass-second"
+						   autocomplete="off"/>
 					<button class="show-pass" aria-label="Показать пароль"></button>
 				</label>
 			</div>
