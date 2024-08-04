@@ -898,76 +898,15 @@ function komandir_get_warehouse_name_by_id( $this_id ) {
 
 // shipping and warehouse  choise in checkout form
 
-add_action( 'woocommerce_checkout_order_review', function () {
-
-	?>
-	<div class="shipping-required form-row">
-		<p><b>Выберите способ получения заказа</b> (С условиями доставки можно ознакомиться на странице <a
-				href="/shipping">Доставка</a>)
-		</p>
-		<ul>
-			<li>
-				<label>
-					<input type="radio" name="shipping-required" value="1">
-					<span>Доставка</span>
-				</label>
-			</li>
-			<li>
-				<label>
-					<input type="radio" name="shipping-required" value="0" checked>
-					<span>Самовывоз</span>
-				</label>
-			</li>
-		</ul>
-
-	</div>
-	<div class="warehouse-checkout form-row">
-		<p><b>Выберите магазин для получения заказа</b></p>
-
-		<select name="warehouse-id" class="warehouse-select">
-			<?php foreach ( komandir_get_warehouses() as $id => $name ) : ?>
-				<option value="<?= $id ?>"><?= $name ?></option>
-			<?php endforeach; ?>
-		</select>
-	</div>
-	<script>
-		$(function () {
-			$('input[name="shipping-required"]').on('change', function () {
-				const $warehouse = $('.warehouse-checkout');
-
-				if (this.value == 1) {
-					$warehouse.slideUp();
-				} else {
-					$warehouse.slideDown();
-				}
-			});
-		});
-	</script>
-
-	<?php
-} );
-
 add_action( 'woocommerce_checkout_update_order_meta', function ( $order_id ) {
-	if ( isset( $_POST['shipping-required'] ) ) {
-		if ( $_POST['shipping-required'] == 1 ) {
-			update_post_meta( $order_id, 'Способ получения', 'Доставка' );
-		} else {
-			update_post_meta( $order_id, 'Способ получения', 'Самовывоз' );
-			if ( isset( $_POST['warehouse-id'] ) ) {
-				update_post_meta( $order_id, 'Магазин', $_POST['warehouse-id'] );
-			}
-		}
+	$order = wc_get_order( $order_id );
+	if ( $order->get_shipping_method() === 'Самовывоз' && isset( $_POST['warehouse-id'] ) ) {
+		update_post_meta( $order_id, 'Магазин', $_POST['warehouse-id'] );
 	}
 } );
 
 add_filter( 'woocommerce_email_order_meta_fields', function ( $fields, $sent_to_admin, $order ) {
-	$method   = $order->get_meta( 'Способ получения' );
-	$fields[] = [
-		'label' => 'Способ получения заказа',
-		'value' => $method
-	];
-
-	if ( $method === 'Самовывоз' ) {
+	if ( $order->get_shipping_method() === 'Самовывоз' ) {
 		$fields[] = [
 			'label' => 'Магазин',
 			'value' => komandir_get_warehouse_name_by_id( $order->get_meta( 'Магазин' ) )
@@ -978,16 +917,10 @@ add_filter( 'woocommerce_email_order_meta_fields', function ( $fields, $sent_to_
 }, 10, 3 );
 
 add_action( 'woocommerce_order_details_after_customer_details', function ( $order ) {
-	$method = $order->get_meta( 'Способ получения' );
 	?>
 
 	<table class="shop_table" style="margin-top: 30px;">
-		<tr>
-			<th>Способ получения заказа</th>
-			<th><?= $method ?></th>
-		</tr>
-
-		<?php if ( $method == 'Самовывоз' ) : ?>
+		<?php if ( $order->get_shipping_method() === 'Самовывоз' ) : ?>
 			<tr>
 				<th>Магазин</th>
 				<th><?= komandir_get_warehouse_name_by_id( $order->get_meta( 'Магазин' ) ) ?></th>
@@ -1000,11 +933,11 @@ add_action( 'woocommerce_order_details_after_customer_details', function ( $orde
 } );
 
 add_filter( 'itglx_wc1c_xml_order_info_custom', function ( $mainOrderInfo, $order_id ) {
-	$method = get_post_meta( $order_id, 'Способ получения', true );
+	$method = wc_get_order( $order_id )->get_shipping_method();
 
 	$mainOrderInfo['СпособПолученияЗаказа'] = $method;
 
-	if ( $method == 'Самовывоз' ) {
+	if ( $method === 'Самовывоз' ) {
 		$mainOrderInfo['Магазин'] = get_post_meta( $order_id, 'Магазин', true );
 	}
 
@@ -1049,4 +982,71 @@ add_filter( 'woocommerce_output_related_products_args', function ( $args ) {
 	$args['posts_per_page'] = 5;
 
 	return $args;
+} );
+
+// checkout shipping custom title
+
+add_filter( 'woocommerce_shipping_package_name', function () {
+	return 'Доставка <span style="font-weight:normal">(С условиями доставки можно ознакомиться на странице <a href="/shipping">Доставка</a>)</span>';
+}, 10, 2 );
+
+// checkout fields setup specifically for shipping methods
+
+add_filter( 'woocommerce_checkout_fields', function ( $fields ) {
+	$chosen_methods = WC()->session->get( 'chosen_shipping_methods' );
+
+	foreach ( $chosen_methods as $method ) {
+		if ( str_contains( $method, 'local_pickup' ) ) {
+			$required_fields = [
+				'shipping_country',
+				'shipping_state',
+				'shipping_city',
+				'shipping_address_1'
+			];
+
+			foreach ( $required_fields as &$field ) {
+				$fields['shipping'][ $field ]['required'] = false;
+			}
+		}
+	}
+
+	return $fields;
+
+}, 1100 );
+
+add_action( 'woocommerce_checkout_order_review', function () {
+	?>
+	<div class="woocommerce-checkout-shipping"></div>
+	<?php
+}, 15 );
+
+add_filter( 'woocommerce_update_order_review_fragments', function ( $fragments ) {
+	ob_start();
+	wc_get_template( 'checkout/form-shipping.php', [
+		'checkout'        => WC()->checkout,
+		'shipping_method' => WC()->session->get( 'chosen_shipping_methods' )[0]
+	] );
+	$fragments['.woocommerce-checkout-shipping'] = ob_get_clean();
+
+	return $fragments;
+} );
+
+// custom shipping zone and city
+
+add_filter( 'woocommerce_states', function ( $states ) {
+	$states['RU'] = [
+		'24' => 'Красноярский край'
+	];
+
+	return $states;
+} );
+
+add_filter( 'wc_city_select_cities', function ( $cities ) {
+	$cities['RU'] = [
+		'24' => [
+			'Лесосибирск'
+		]
+	];
+
+	return $cities;
 } );
