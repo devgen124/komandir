@@ -582,7 +582,7 @@ add_action( 'woocommerce_save_account_details', function () {
 // }
 
 add_filter( 'woocommerce_formatted_address_replacements', function ( $replacements, $args ) {
-	$replacements['{phone}'] = $args['phone'];
+	$replacements['{phone}'] = $args['phone'] ?? '';
 
 	return $replacements;
 }, 10, 2 );
