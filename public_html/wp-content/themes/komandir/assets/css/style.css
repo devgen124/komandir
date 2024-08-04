@@ -13902,6 +13902,32 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
   }
 }
 
+@media (max-width: 767.98px) {
+  .woocommerce table.shop_table:not(.woocommerce-checkout-review-order-table) tbody tr {
+    display: flex;
+  }
+  .woocommerce table.shop_table:not(.woocommerce-checkout-review-order-table) tbody th {
+    display: block;
+  }
+  .woocommerce table.shop_table:not(.woocommerce-checkout-review-order-table) tbody td {
+    flex-grow: 1;
+  }
+  .woocommerce table.shop_table:not(.woocommerce-checkout-review-order-table) tbody td::before {
+    display: none;
+  }
+}
+@media (max-width: 575.98px) {
+  .woocommerce table.shop_table:not(.woocommerce-checkout-review-order-table) tbody tr {
+    flex-direction: column;
+  }
+  .woocommerce table.shop_table:not(.woocommerce-checkout-review-order-table) tbody th {
+    width: auto !important;
+  }
+  .woocommerce table.shop_table:not(.woocommerce-checkout-review-order-table) tbody td {
+    text-align: left !important;
+  }
+}
+
 .wpcf7-form input[type=text], .wpcf7-form input[type=email], .wpcf7-form input[type=number] {
   padding: 7px;
   background: #fff;
@@ -14650,7 +14676,7 @@ p.outstock {
   .woocommerce-custom-cart-item .product-quantity {
     position: absolute;
     bottom: 20px;
-    left: 20px;
+    right: 20px;
     font-size: 14px;
     margin-right: 0;
   }

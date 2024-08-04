@@ -1367,3 +1367,36 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
 		}
 	}
 }
+
+.woocommerce table.shop_table:not(.woocommerce-checkout-review-order-table) tbody {
+	@include media-breakpoint-down(md) {
+		tr {
+			display: flex;
+		}
+		th {
+			display: block;
+		}
+
+		td {
+			flex-grow: 1;
+
+			&::before {
+				display: none;
+			}
+		}
+	}
+
+	@include media-breakpoint-down(sm) {
+		tr {
+			flex-direction: column;
+		}
+
+		th {
+			width: auto !important;
+		}
+
+		td {
+			text-align: left !important;
+		}
+	}
+}
