@@ -1,0 +1,861 @@
+# Translation of Plugins - CDEKDelivery - Stable (latest release) in Russian
+# This file is distributed under the same license as the Plugins - CDEKDelivery - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2024-08-09 05:21:39+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - CDEKDelivery - Stable (latest release)\n"
+
+#: src/Validator/CheckoutProcessValidator.php:57
+msgid "Phone number is required."
+msgstr "Необходимо указать номер телефона."
+
+#: src/CdekShippingMethod.php:234
+msgid "Plugin will wait for selected gateways to finish payments before auto-creation of waybill in CDEK. If order is working with non selected payment gateway, CDEK waybill will be created right after order placement"
+msgstr "Плагин будет ждать, пока выбранные шлюзы завершат платежи перед автоматическим созданием накладной в CDEK. Если заказ работает с платежным шлюзом, который не был выбран, накладная CDEK будет создана сразу после размещения заказа"
+
+#: src/CdekShippingMethod.php:231
+msgid "Wait for gateways"
+msgstr "Ожидать платежные шлюзы"
+
+#: src/CdekShippingMethod.php:220
+msgid "Automation"
+msgstr "Автоматизация"
+
+#. translators: 1: tracking number
+#: src/Actions/CreateOrderAction.php:84
+msgid "Tracking number: %1$s"
+msgstr "Номер для отслеживания: %1$s"
+
+#: src/Actions/CreateOrderAction.php:43
+msgid "Order already exists"
+msgstr "Накладная уже существует"
+
+#: templates/admin/order_created.php:61
+msgid "Cancel the courier request"
+msgstr "Отменить вызов курьера"
+
+#: templates/admin/order_created.php:56
+msgid "Request number"
+msgstr "Номер заявки"
+
+#: templates/admin/order_created.php:35
+msgid "Get waybill"
+msgstr "Получить накладную"
+
+#: templates/admin/call_courier_form.php:76
+msgid "Telephone call required"
+msgstr "Необходимо позвонить"
+
+#: src/Validator/ValidateCourierFormData.php:54
+msgid "Full name is required"
+msgstr "Необходимо ФИО"
+
+#: src/Controllers/RestController.php:72 src/Controllers/RestController.php:86
+msgid "CDEK Order ID"
+msgstr "ID Заказа в СДЭК"
+
+#: src/CdekShippingMethod.php:131 templates/admin/call_courier_form.php:48
+msgid "Full name"
+msgstr "ФИО"
+
+#: src/Blocks/CheckoutMapBlock.php:95
+msgid "Code of selected CDEK office for delivery"
+msgstr "Код выбранного офиса СДЭК"
+
+#: src/Blocks/CheckoutMapBlock.php:83
+msgid "JSONifiend array of available CDEK offices"
+msgstr "Массив доступных офисов СДЭК в JSON"
+
+#: src/Actions/GenerateBarcodeAction.php:35
+#: src/Actions/GenerateBarcodeAction.php:64
+msgid ""
+"Failed to create barcode.\n"
+"Try re-creating the order.\n"
+"You may need to cancel existing one (if that button exists)"
+msgstr ""
+"Не удалось создать шк.\n"
+"Необходимо попробовать пересоздать заказ.\n"
+"Возможно, потребуется отменить существующий (если такая кнопка есть)"
+
+#. translators: %s: uuid of application
+#: src/Actions/CallCourier.php:106
+msgid "Request number: %s"
+msgstr "Номер заявки: %s"
+
+#. Description of the plugin
+#: cdek.php
+msgid "CDEK delivery integration for WooCommerce"
+msgstr "Интеграция доставки СДЭК для Woocommerce"
+
+#: build/Frontend/CheckoutMapBlock/block.json
+msgctxt "block description"
+msgid "Adds a map on checkout to allow user select office to pickup from."
+msgstr "Добавляет на страницу оформления заказа карту, позволяющую выбрать ПВЗ получения заказа"
+
+#: build/Frontend/CheckoutMapBlock/block.json
+msgctxt "block title"
+msgid "CDEK Delivery Map"
+msgstr "Карта доставки СДЭК"
+
+#: templates/public/open-map.php:14 build/cdek-checkout-map-block-frontend.js:1
+#: build/cdek-checkout-map.js:1
+msgid "Choose pick-up"
+msgstr "Выберите ПВЗ"
+
+#: templates/admin/status_list.php:12
+msgid "Order statuses"
+msgstr "Статусы заказа"
+
+#: templates/admin/status_list.php:8
+msgid "No order statuses found. Try reloading the page later"
+msgstr "Статусы заказа не найдены. Попробуйте перезагрузить страницу позднее"
+
+#: templates/admin/order_created.php:79
+msgid "Cancel the order"
+msgstr "Отменить заказ"
+
+#: templates/admin/order_created.php:44
+msgid "Call the courier"
+msgstr "Вызвать курьера"
+
+#: templates/admin/order_created.php:39
+msgid "Get barcode"
+msgstr "Получить ШК"
+
+#: templates/admin/order_created.php:23
+msgid "Order created"
+msgstr "Заказ создан"
+
+#: templates/admin/form_package_many.php:80
+msgid "Create an order"
+msgstr "Создать заказ"
+
+#: templates/admin/form_package_many.php:72
+msgid "Save"
+msgstr "Сохранить"
+
+#: templates/admin/form_package_many.php:21
+msgid "Select product"
+msgstr "Выберите товар"
+
+#: templates/admin/form_package.php:34
+msgid "Send an order to CDEK"
+msgstr "Отправить заказ в СДЕК"
+
+#: templates/admin/form_package.php:17 templates/admin/form_package_many.php:18
+msgid "Packaging dimensions"
+msgstr "Габариты упаковки"
+
+#: templates/admin/call_courier_form.php:80
+msgid "Send"
+msgstr "Отправить"
+
+#: templates/admin/call_courier_form.php:71 templates/admin/form_package.php:28
+#: templates/admin/form_package_many.php:60
+msgid "Height in cm"
+msgstr "Высота в см"
+
+#: templates/admin/call_courier_form.php:70 templates/admin/form_package.php:24
+#: templates/admin/form_package_many.php:56
+msgid "Width in cm"
+msgstr "Ширина в см"
+
+#: templates/admin/call_courier_form.php:69 templates/admin/form_package.php:20
+#: templates/admin/form_package_many.php:52
+msgid "Length in cm"
+msgstr "Длина в см"
+
+#: templates/admin/call_courier_form.php:68
+msgid "Weight in kg"
+msgstr "Вес в кг"
+
+#: templates/admin/call_courier_form.php:65
+msgid "For warehouse tariffs, you can send several orders at once. Therefore, the dimensions may differ from those indicated when creating the order. For door tariffs, you can duplicate those that were specified when creating the order."
+msgstr "Для тарифов \"От склада\" можно отправить сразу несколько заказов. Поэтому габариты могут отличаться от тех что указывались при создании заказа. Для тарифов \"От двери\" можно продублировать те что указывались при создании заказа"
+
+#: templates/admin/call_courier_form.php:60
+msgid "Description of cargo"
+msgstr "Описание груза"
+
+#: templates/admin/call_courier_form.php:57
+msgid "Comment"
+msgstr "Комментарий"
+
+#: templates/admin/call_courier_form.php:55
+msgid "The city is taken from the plugin settings. In the Address field, enter only the street, house, apartment"
+msgstr "Город берется из настроек плагина. В поле \"Адрес\" вводится только улица, дом, квартира"
+
+#: templates/admin/call_courier_form.php:28
+msgid "to"
+msgstr "по"
+
+#: templates/admin/call_courier_form.php:26
+msgid "from"
+msgstr "с"
+
+#: templates/admin/call_courier_form.php:25
+msgid "Courier awaiting time"
+msgstr "Время ожидания курьера"
+
+#: templates/admin/call_courier_form.php:19
+msgid "Courier waiting date"
+msgstr "Дата ожидания курьера"
+
+#. translators: %s: Order number
+#: src/Validator/ValidateGetOrder.php:26
+msgid "An error occurred while deleting the order. Order number %s was not found."
+msgstr "При удалении заказа произошла ошибка. Заказ c номером %s не найден."
+
+#. translators: %s: Order number
+#: src/Validator/ValidateGetOrder.php:20
+msgid "An attempt to delete order number %s failed with an error. Order not found."
+msgstr "Попытка удаления заказа с номером %s завершилась с ошибкой. Заказ не найден."
+
+#. translators: %s: Order number
+#: src/Validator/ValidateDeleteOrder.php:26
+msgid "An error occurred while deleting the order. Order number %s was not deleted."
+msgstr "При удалении заказа произошла ошибка. Заказ c номером %s не удален."
+
+#. translators: %s: Order number
+#: src/Validator/ValidateDeleteOrder.php:20
+msgid "An attempt to delete order number %s failed with an error. Error code: %s"
+msgstr "Попытка удаления накладной с номером %s завершилась с ошибкой. Код ошибки: %s"
+
+#: src/Validator/ValidateCourierFormData.php:103
+msgid "Height must be a number"
+msgstr "Высота должна быть числом"
+
+#: src/Validator/ValidateCourierFormData.php:99
+msgid "Height is required"
+msgstr "Высота обязательна для заполнения"
+
+#: src/Validator/ValidateCourierFormData.php:95
+msgid "Width must be a number"
+msgstr "Ширина должна быть числом"
+
+#: src/Validator/ValidateCourierFormData.php:91
+msgid "Width is required"
+msgstr "Ширина обязательна для заполнения"
+
+#: src/Validator/ValidateCourierFormData.php:87
+msgid "Length must be a number"
+msgstr "Длина должна быть числом"
+
+#: src/Validator/ValidateCourierFormData.php:83
+msgid "Length is required"
+msgstr "Длина обязательна для заполнения"
+
+#: src/Validator/ValidateCourierFormData.php:79
+msgid "Weight must be a number"
+msgstr "Вес должен быть числом"
+
+#: src/Validator/ValidateCourierFormData.php:75
+msgid "Weight is required"
+msgstr "Вес обязателен для заполнения"
+
+#: src/Validator/ValidateCourierFormData.php:71
+msgid "Cargo description is required"
+msgstr "Описание груза обязательно для заполнения"
+
+#: src/Validator/ValidateCourierFormData.php:62
+msgid "Address is required"
+msgstr "Адрес обязателен для заполнения"
+
+#: src/Validator/ValidateCourierFormData.php:58
+msgid "Phone is required"
+msgstr "Телефон обязателен для заполнения"
+
+#: src/Validator/ValidateCourierFormData.php:49
+msgid "The start of the courier waiting time cannot start later than the end time"
+msgstr "Начало времени ожидания курьера не может начинаться позже времени окончания"
+
+#: src/Validator/ValidateCourierFormData.php:41
+msgid "No courier waiting time selected"
+msgstr "Время ожидания курьера не выбрано"
+
+#: src/Validator/ValidateCourierFormData.php:36
+msgid "The courier waiting date cannot be later than the 31st of the current date"
+msgstr "Дата ожидания курьера не может быть позднее на 31 текущей даты"
+
+#: src/Validator/ValidateCourierFormData.php:30
+msgid "The courier waiting date cannot be earlier than the current date"
+msgstr "Дата ожидания курьера не может быть раньше текущей даты"
+
+#: src/Validator/ValidateCourierFormData.php:19
+msgid "The courier waiting date has not been selected"
+msgstr "Дата ожидания курьера не выбрана"
+
+#: src/Validator/ValidateCourier.php:29
+msgid "Application deleted"
+msgstr "Заявка удалена"
+
+#. translators: %s: Error message
+#: src/Validator/ValidateCourier.php:18
+msgid "Error. The courier request has not been created. (%s)"
+msgstr "Ошибка. Заявка на вызов курьера не создана. (%s)"
+
+#: src/Validator/CheckoutProcessValidator.php:53
+msgid "No shipping address."
+msgstr "Нет адреса доставки."
+
+#: src/Validator/CheckoutProcessValidator.php:50
+msgid "Order pickup point not selected."
+msgstr "Не выбран ПВЗ для доставки заказа."
+
+#. translators: 1: Name of a city 2: ZIP code
+#: src/Validator/CheckoutProcessValidator.php:41
+msgid "Failed to determine locality in %1$s %2$s"
+msgstr "Не удалось определить населенный пункт %1$s %2$s"
+
+#: src/UI/MetaBoxes.php:184
+msgid "Editing the order is not available due to a change in the order status in the CDEK system"
+msgstr "Редактирование заказа недоступно из-за смены статуса заказа в системе CDEK"
+
+#. translators: %s: Name of the plugin
+#: src/UI/MetaBoxes.php:124
+msgid "Enter the correct client ID and secret key in <a>the settings</a> plugin named %s"
+msgstr "Введите корректные идентификатор и секретный ключ клиента в <a>настройках</a> плагина %s"
+
+#: src/UI/MetaBoxes.php:120
+msgid "Authorization failed"
+msgstr "Авторизация не пройдена"
+
+#. translators: %s: Name of the plugin
+#: src/UI/MetaBoxes.php:90 src/UI/MetaBoxes.php:107
+msgid "Select the correct sending address in <a>the settings</a> plugin named %s"
+msgstr "Выберите корректный адрес отправки в <a>настройках</a> плагина %s"
+
+#: src/UI/MetaBoxes.php:86 src/UI/MetaBoxes.php:103
+msgid "Shipping address not specified"
+msgstr "Не задан адрес отправки"
+
+#. translators: %s: Code of selected tariff
+#: src/UI/AdminShippingFields.php:117
+msgid "Tariff code: %s"
+msgstr "Код тарифа: %s"
+
+#. translators: %s: Code of selected point
+#: src/UI/AdminShippingFields.php:109
+msgid "Selected pickup point: %s"
+msgstr "Выбранный ПВЗ: %s"
+
+#. translators: %s: Amount with measurement
+#: src/UI/AdminShippingFields.php:101
+msgid "Height: %s"
+msgstr "Высота: %s"
+
+#. translators: %s: Amount with measurement
+#: src/UI/AdminShippingFields.php:93
+msgid "Width: %s"
+msgstr "Ширина: %s"
+
+#. translators: %s: Amount with measurement
+#: src/UI/AdminShippingFields.php:85
+msgid "Length: %s"
+msgstr "Длина: %s"
+
+#. translators: %s: Amount with measurement
+#: src/UI/AdminShippingFields.php:77
+msgid "Weight: %s"
+msgstr "Вес: %s"
+
+#: src/UI/AdminShippingFields.php:55 src/UI/AdminShippingFields.php:61
+msgid "Not available for order"
+msgstr "Недоступен для заказа"
+
+#: src/UI/AdminNotices.php:28
+msgid ""
+"CDEKDelivery: The selected weight unit %s is not supported by this plugin.\n"
+"You can use the default value for product dimensions.\n"
+"You can also contact plugin support for more information.\n"
+"Otherwise, the unit of measurement will be automatically treated as grams."
+msgstr ""
+"CDEKDelivery: Выбранная единица измерения веса %s не поддерживается данным плагином.\n"
+"Вы можете использовать значение для габаритов товара по умолчанию.\n"
+"Также вы можете обратиться в поддержку плагина для дополнительной информации.\n"
+"В противном случае, единица измерения будет автоматически обрабатываться как граммы."
+
+#: src/UI/Admin.php:44
+msgid "FAQ"
+msgstr "ЧаВО"
+
+#: src/UI/Admin.php:38
+msgid "Docs"
+msgstr "Документация"
+
+#: src/UI/Admin.php:23
+msgid "Settings"
+msgstr "Настройки"
+
+#: src/Fieldsets/GeneralOrderFields.php:53
+msgid "First name"
+msgstr "Имя"
+
+#: src/Fieldsets/GeneralOrderFields.php:46
+msgid "Town / City"
+msgstr "Город"
+
+#: src/Fieldsets/GeneralOrderFields.php:30
+msgid "Apartment, suite, unit, etc. (optional)"
+msgstr "Квартира, корпус, строение и тп. (опционально)"
+
+#: src/Fieldsets/GeneralOrderFields.php:28
+msgid "Apartment, suite, unit, etc."
+msgstr "Квартира, корпус, строение и тп."
+
+#: src/Fieldsets/GeneralOrderFields.php:21
+msgid "House number and street name"
+msgstr "Улица и номер дома"
+
+#: src/Fieldsets/GeneralOrderFields.php:20
+#: templates/admin/call_courier_form.php:52
+msgid "Street address"
+msgstr "Адрес"
+
+#. translators: %s: Recipient phone number
+#: src/Exceptions/PhoneNotValidException.php:15
+msgid "Incorrect phone number: %s"
+msgstr "Некорректный номер телефона: %s"
+
+#: src/Controllers/OrderController.php:87
+msgid "Quantity of goods in packaging"
+msgstr "Количество товара в упаковке"
+
+#: src/Controllers/OrderController.php:82
+msgid "Product ID"
+msgstr "ID товара"
+
+#: src/Controllers/OrderController.php:74
+msgid "Products in packaging"
+msgstr "Товары в упаковке"
+
+#: src/Controllers/OrderController.php:69
+msgid "Packing height"
+msgstr "Высота упаковки"
+
+#: src/Controllers/OrderController.php:64
+msgid "Packing width"
+msgstr "Ширина упаковки"
+
+#: src/Controllers/OrderController.php:59
+msgid "Packing length"
+msgstr "Длина упаковки"
+
+#: src/Controllers/OrderController.php:49
+msgid "Packages"
+msgstr "Упаковки"
+
+#: src/Controllers/CourierController.php:56
+#: src/Controllers/CourierController.php:70
+#: src/Controllers/OrderController.php:44
+#: src/Controllers/OrderController.php:107
+msgid "Order number"
+msgstr "Номер заказа"
+
+#: src/CdekShippingMethod.php:427
+msgid "Barcode format"
+msgstr "Формат ШК"
+
+#: src/CdekShippingMethod.php:423
+msgid "Print settings"
+msgstr "Настройки печати"
+
+#: src/CdekShippingMethod.php:410
+msgid "Calculated from the cost of the order. Changes the total amount on the receipt.%s The surcharge will only appear on the receipt.%s Therefore, it is recommended to inform the user on the checkout page about extra charges when sending by cash on delivery."
+msgstr "Рассчитывается от стоимости заказа. Меняет итоговую сумму в квитанции.%s Наценка отобразится только в квитанции.%s Поэтому рекомендуется на странице оформления заказа проинформировать пользователя о наценке при отправке наложенным платежом."
+
+#: src/CdekShippingMethod.php:408
+msgid "Extra charge on order as a percentage"
+msgstr "Наценка к заказу в процентах"
+
+#: src/CdekShippingMethod.php:404
+msgid "Cash on delivery settings are applied only when sending an order from the admin panels and for the user on the checkout page are not displayed"
+msgstr "Настройки для наложенного платежа применяются только во время отправки заказа из админ панели и для пользователя на странице чекаута не отображаются"
+
+#: src/CdekShippingMethod.php:402
+msgid "Cash on delivery settings"
+msgstr "Настройки наложенного платежа"
+
+#: src/CdekShippingMethod.php:394
+msgid "Calculated based on the amount of goods in the order"
+msgstr "Расчитывается по сумме товаров в заказе"
+
+#: src/CdekShippingMethod.php:391
+msgid "Add insurance quote to shipping cost"
+msgstr "Добавить расчет страховки к стоимости доставки"
+
+#: src/CdekShippingMethod.php:390
+msgid "Insurance"
+msgstr "Страховка"
+
+#: src/CdekShippingMethod.php:385
+msgid "Delivery cost"
+msgstr "Cтоимость доставки"
+
+#: src/CdekShippingMethod.php:379
+msgid "Partial delivery"
+msgstr "Частичная доставка"
+
+#: src/CdekShippingMethod.php:373
+msgid "Trying on"
+msgstr "Примерка"
+
+#: src/CdekShippingMethod.php:367
+msgid "This service is not available for tariffs to the parcel locker and is only available to clients with an IM type agreement.\\n\\r Also, the prohibition on inspecting the attachment does not work when the services of fitting at home and partial delivery are included."
+msgstr "Эта услуга недоступна для тарифов до постамата и доступна только для клиентов с договором типа ИМ. Также запрет осмотра вложения не работает при включенных услугах примерка на дому и частичная доставка."
+
+#: src/CdekShippingMethod.php:366
+msgid "Prohibition of inspection of attachment"
+msgstr "Запрет осмотра вложения"
+
+#: src/CdekShippingMethod.php:361
+msgid "Services"
+msgstr "Услуги"
+
+#: src/CdekShippingMethod.php:354
+msgid "Force the use of product dimensions (length, width and height) by default for all products"
+msgstr "Принудительно использовать габариты товара (длину, ширину и высоту) по умолчанию для всех товаров"
+
+#: src/CdekShippingMethod.php:353
+msgid "Product dimensions on/off"
+msgstr "Габариты товара вкл/выкл"
+
+#: src/CdekShippingMethod.php:343
+msgid "Default product height in cm"
+msgstr "Высота товара по умолчанию в см"
+
+#: src/CdekShippingMethod.php:342
+msgid "Item height"
+msgstr "Высота товара"
+
+#: src/CdekShippingMethod.php:332
+msgid "Default product width in cm"
+msgstr "Ширина товара по умолчанию в см"
+
+#: src/CdekShippingMethod.php:331
+msgid "Item width"
+msgstr "Ширина товара"
+
+#: src/CdekShippingMethod.php:321
+msgid "Default product length in cm"
+msgstr "Длина товара по умолчанию в см"
+
+#: src/CdekShippingMethod.php:320
+msgid "Item length"
+msgstr "Длина товара"
+
+#: src/CdekShippingMethod.php:310
+msgid "All goods must have their weight indicated, if there are goods without %s a specified weight, then for such goods the value from this field will be substituted. %s This will affect the accuracy of the delivery calculation. The default value is 1 weight unit specified in the settings."
+msgstr "У всех товаров должен быть указан вес, если есть товары без указанного %s веса то для таких товаров будет подставляться значение из этого поля. %s Это повлияет на точность расчета доставки. Значение по умолчанию 1 единица измерения веса заданная в настройках."
+
+#: src/CdekShippingMethod.php:305
+msgid "Default weight of one item in"
+msgstr "Вес одной единицы товара по умолчанию в"
+
+#: src/CdekShippingMethod.php:300 templates/admin/call_courier_form.php:63
+msgid "Dimensions"
+msgstr "Габариты"
+
+#: src/CdekShippingMethod.php:288
+msgid "Select addresses to send on the map"
+msgstr "Выбрать адреса для отправки на карте"
+
+#: src/CdekShippingMethod.php:282
+msgid "If this setting is enabled, then after selecting a pick-up point on the checkout page, the card will automatically close."
+msgstr "Если включена эта настройка, то после выбора ПВЗ на странице оформления заказа, карта автоматически закроется."
+
+#: src/CdekShippingMethod.php:279
+msgid "Close the map after selecting pick-up"
+msgstr "Закрыть карту после выбора пвз"
+
+#: src/CdekShippingMethod.php:270
+msgid "Number of days will be added to the estimated delivery time"
+msgstr "Колличество дней будет добавлено к расчетному времени доставки"
+
+#: src/CdekShippingMethod.php:267
+msgid "Add days for delivery"
+msgstr "Доп. дни к доставке"
+
+#: src/CdekShippingMethod.php:262
+msgid "When the \"Multi-seat\" mode is enabled, the detailed order page will display the ability to create several packages for one order and distribute goods among the created packages"
+msgstr "При включенном режиме 'Многоместка', на детальной странице заказа появится возможность создать несколько упаковок для одного заказа и распределить товары по созданным упаковкам"
+
+#: src/CdekShippingMethod.php:259
+msgid "Multi-seater"
+msgstr "Многоместка"
+
+#: src/CdekShippingMethod.php:254
+msgid "In the list of tariffs in the field \"Tariffs\" the tariff code is indicated in brackets.\\n\\r To change the name of the tariff, an entry in the code-name format is added to the field; for multiple changes,\\n\\r tariffs are separated by a semicolon, for example, an entry that will change the name of tariff 136 and 137 looks like this:%s If the value is not specified, the tariff names will be standard."
+msgstr "В списке тарифов, в поле \"Тарифы\" в скобках указан код тарифа. Для изменения названия тарифа в поле добавляется запись в формате код-название, для множественного изменения тарифы отделяются точкой с запятой, например запись которая изменит название 136 и 137 тарифа, выглядит так: %s Если значение не задано то названия тарифов будут стандартными."
+
+#: src/CdekShippingMethod.php:252
+msgid "Change tariff name"
+msgstr "Изменить название тарифа"
+
+#: src/CdekShippingMethod.php:247
+msgid "To select multiple tariffs, hold down the \"CTRL\" key and select tariffs with the left mouse button."
+msgstr "Для выбора нескольких тарифов удерживайте клавишу \"CTRL\" и левой кнопкой мыши выберите тарифы."
+
+#: src/CdekShippingMethod.php:243
+msgid "Tariff"
+msgstr "Тарифы"
+
+#: src/CdekShippingMethod.php:227
+msgid "If you have information about the dimensions and correctly filled in shipping addresses, CDEK waybills will be created automatically"
+msgstr "При наличии информации о габаритах и корректно заполненных адресах отправки, накладная СДЭК будет создана автоматически"
+
+#: src/CdekShippingMethod.php:225
+msgid "Automatically create waybills in CDEK"
+msgstr "Автоматически создавать накладные в СДЭК"
+
+#: src/CdekShippingMethod.php:238
+msgid "Delivery"
+msgstr "Доставка"
+
+#: src/CdekShippingMethod.php:215 src/Fieldsets/InternationalOrderFields.php:61
+msgid "Birthday"
+msgstr "Дата рождения"
+
+#: src/CdekShippingMethod.php:207 src/Fieldsets/InternationalOrderFields.php:51
+msgid "TIN"
+msgstr "ИНН"
+
+#: src/CdekShippingMethod.php:203 src/Fieldsets/InternationalOrderFields.php:45
+msgid "Passport organization"
+msgstr "Орган выдачи паспорта"
+
+#: src/CdekShippingMethod.php:198 src/Fieldsets/InternationalOrderFields.php:39
+msgid "Passport date of issue"
+msgstr "Дата выдачи паспорта"
+
+#: src/CdekShippingMethod.php:191 src/Fieldsets/InternationalOrderFields.php:29
+msgid "Passport number"
+msgstr "Номер паспорта"
+
+#: src/CdekShippingMethod.php:187 src/Fieldsets/InternationalOrderFields.php:20
+msgid "Passport Series"
+msgstr "Серия паспорта"
+
+#: src/CdekShippingMethod.php:184
+msgid "Shipping company address for international orders"
+msgstr "Адрес компании грузоотправителя для международных заказов"
+
+#: src/CdekShippingMethod.php:181
+msgid "Shipper`s address"
+msgstr "Адрес грузоотправителя"
+
+#: src/CdekShippingMethod.php:178
+msgid "Shipper`s company name for international orders"
+msgstr "Название компании грузоотправителя для международных заказов"
+
+#: src/CdekShippingMethod.php:175
+msgid "Shipper"
+msgstr "Грузоотправитель"
+
+#: src/CdekShippingMethod.php:171
+msgid "Address of the actual seller. Used when printing invoices to display the address of the present seller of the product or trade name. For international orders"
+msgstr "Адрес истинного продавца. Используется при печати инвойсов для отображения адреса настоящего продавца товара, либо торгового названия. Для международных заказов"
+
+#: src/CdekShippingMethod.php:168
+msgid "True seller address"
+msgstr "Адрес истинного продавца"
+
+#: src/CdekShippingMethod.php:163
+msgid "When the international orders mode is enabled, additional fields will appear on the checkout page: passport series, passport number, date of issue, department, TIN, date of birth."
+msgstr "При включенном режиме международных заказов, на странице оформления заказа появятся дополнительные поля: серия паспорта, номер паспорта, дата выдачи, отдел, ИНН, дата рождения."
+
+#: src/CdekShippingMethod.php:160
+msgid "Enable international order mode"
+msgstr "Включить режим международных заказов"
+
+#: src/CdekShippingMethod.php:156
+msgid "International orders"
+msgstr "Международные заказы"
+
+#: src/CdekShippingMethod.php:148
+msgid "Company email address"
+msgstr "Электронный адрес почты компании"
+
+#: src/CdekShippingMethod.php:141 templates/admin/call_courier_form.php:51
+msgid "Must be transmitted in international format: country code (for Russia +7) and the number itself (10 or more digits)"
+msgstr "Должен передаваться в международном формате: код страны (для России +7) и сам номер (10 и более цифр)"
+
+#: src/CdekShippingMethod.php:138 src/Fieldsets/GeneralOrderFields.php:37
+#: templates/admin/call_courier_form.php:49
+msgid "Phone"
+msgstr "Телефон"
+
+#: src/CdekShippingMethod.php:124
+msgid "Company name"
+msgstr "Название компании"
+
+#: src/CdekShippingMethod.php:119
+msgid "Client"
+msgstr "Клиент"
+
+#: src/CdekShippingMethod.php:112
+msgid "Yandex API access key. The generation process is described on <a>the page</a>"
+msgstr "Ключ доступа к API Яндекс. Процесс генерации описан на <a>странице</a>"
+
+#: src/CdekShippingMethod.php:104
+msgid "Yandex map key"
+msgstr "Ключ Яндекс.Карты"
+
+#: src/CdekShippingMethod.php:96
+msgid "The secret key"
+msgstr "Секретный ключ"
+
+#: src/CdekShippingMethod.php:89
+msgid "Identifier"
+msgstr "Идентификатор"
+
+#: src/CdekShippingMethod.php:86
+msgid "When enabled, the test API is used"
+msgstr "При включенном режиме используется тестовое апи"
+
+#: src/CdekShippingMethod.php:82
+msgid "Test mode"
+msgstr "Тестовый режим"
+
+#: src/CdekShippingMethod.php:77
+msgid "Authorization"
+msgstr "Авторизация"
+
+#: src/CdekShippingMethod.php:55 src/CdekShippingMethod.php:397
+msgid "Rules for displaying the delivery amount"
+msgstr "Правила отображения суммы доставки"
+
+#: src/CdekShippingMethod.php:51
+msgid "Use delivery amount display rules for a zone"
+msgstr "Использовать правила отображения суммы доставки для зоны"
+
+#: src/CdekShippingMethod.php:27 src/CdekShippingMethod.php:40
+msgid "CDEK Shipping"
+msgstr "Доставка СДЭК"
+
+#: src/CdekShippingMethod.php:28
+msgid "Official Shipping Method for Cdek"
+msgstr "Официальный метод доставки компанией СДЭК"
+
+#: src/CdekApi.php:266
+msgid "In this locality, delivery is available only for \"door-to-door\" tariffs. Select another locality to gain access to \"from warehouse\" tariffs."
+msgstr "В этом населенном пункте (НП) доступна доставка только для тарифов \"от двери\". Выберите другой НП, чтобы получить доступ к тарифам \"от склада\"."
+
+#. translators: %s tariff codes
+#: src/Actions/RecalculateShippingAction.php:66
+msgid "The selected CDEK tariff is not available with the specified parameters. Available tariffs with codes: %s"
+msgstr "Выбранный тариф СДЭК при заданных параметрах недоступен. Доступны тарифы с кодами: %s"
+
+#: src/Actions/GenerateWaybillAction.php:84
+msgid ""
+"A request for a waybill was sent, but no response was received.\n"
+"Wait for 1 hour before trying again"
+msgstr ""
+"Запрос на накладную был отправлен, но ответ по нему не пришел.\n"
+"Необходимо подождать 1 час перед повторной попыткой"
+
+#: src/Actions/GenerateWaybillAction.php:75
+msgid ""
+"Failed to create waybill.\n"
+"Try again"
+msgstr ""
+"Не удалось создать накладную.\n"
+"Необходимо попробовать еще раз"
+
+#: src/Actions/GenerateWaybillAction.php:33
+msgid ""
+"Failed to create waybill.\n"
+"To solve the problem, try re-creating the order.\n"
+"You may need to cancel existing one (if that button exists)"
+msgstr ""
+"Не удалось создать накладную.\n"
+"Необходимо попробовать пересоздать заказ.\n"
+"Возможно, потребуется отменить существующий (если такая кнопка есть)"
+
+#: src/Actions/GenerateBarcodeAction.php:93
+msgid ""
+"A request for a barcode was sent, but no response was received.\n"
+"Wait for 1 hour before trying again"
+msgstr ""
+"Запрос на шк был отправлен, но ответ по нему не пришел.\n"
+"Необходимо подождать 1 час перед повторной попыткой"
+
+#: src/Actions/GenerateBarcodeAction.php:84
+msgid ""
+"Failed to create barcode.\n"
+"Try again"
+msgstr ""
+"Не удалось создать шк.\n"
+"Необходимо попробовать еще раз"
+
+#: src/Actions/GenerateWaybillAction.php:54
+msgid ""
+"Failed to create waybill.\n"
+"Try re-creating the order.\n"
+"You may need to cancel existing one (if that button exists)"
+msgstr ""
+"Не удалось создать накладную.\n"
+"Необходимо попробовать пересоздать заказ.\n"
+"Возможно, потребуется отменить существующий (если такая кнопка есть)"
+
+#: src/Actions/DeleteOrderAction.php:50
+msgid "Order has been deleted."
+msgstr "Заказ удален."
+
+#: src/Actions/CreateOrderAction.php:333
+msgid "inventory attached"
+msgstr "приложена опись"
+
+#. translators: 1: error message
+#: src/Actions/CreateOrderAction.php:99
+msgid "Cdek shipping error: %1$s"
+msgstr "Ошибка оформления сдек: %1$s"
+
+#: src/Actions/CallCourier.php:216
+msgid "Request has been deleted."
+msgstr "Заявка на вызов курьера была удалена"
+
+#. translators: %s: request number
+#: src/Actions/CallCourier.php:210
+msgid "Deleting a request to call a courier: %s"
+msgstr "Удаляется заявка на вызов курьера: %s"
+
+#. translators: 1: number of request 2: uuid of request
+#: src/Actions/CallCourier.php:102
+msgid "Request has been created to call a courier: Number: %1$s | Uuid: %2$s"
+msgstr "Зявка на вызов курьера создана: Нмер: %1$s | Uuid: %2$s"
+
+#. translators: %s: uuid of request
+#: src/Actions/CallCourier.php:87
+msgid "Request has been created, but an error occurred while obtaining the request number. Request uuid: %s"
+msgstr "Заявка создана, но при получении номера заявки произошла ошибка. Uuid запроса: %s"
+
+#: src/Actions/CallCourier.php:62
+msgid "An error occurred while creating request. Request to call a courier for this invoice already exists"
+msgstr "Во время создания заявки произошла ошибка. Заявка на вызов курьера к данной накладной уже существует"
+
+#. Author URI of the plugin
+#: cdek.php
+msgid "https://cdek.ru"
+msgstr "https://cdek.ru"
+
+#. Author of the plugin
+#: cdek.php
+msgid "CDEKIT"
+msgstr "CDEKIT"
+
+#. Plugin URI of the plugin
+#: cdek.php
+msgid "https://www.cdek.ru/ru/integration/modules/33"
+msgstr "https://www.cdek.ru/ru/integration/modules/33"
+
+#. Plugin Name of the plugin
+#: cdek.php
+msgid "CDEKDelivery"
+msgstr "CDEKDelivery"
