@@ -11,19 +11,21 @@ export default function customizeSelects() {
 
 		if (selects.length) {
 			selects.forEach((el) => {
-				const select = new Select(el, {
-					optionBuilder: undefined,
-					panelItem: {position: '', item: '', className: ''},
-					changeOpenerText: true,
-					multipleSelectionOnSingleClick: false,
-					multipleSelectOpenerText: {labels: false, array: false},
-					allowPanelClick: false,
-					openOnHover: false,
-					closeOnMouseleave: false,
-					wrapDataAttributes: false,
-					openerLabel: false,
-				});
-				select.init();
+				if (!el.parentElement.classList.contains('custom-select')) {
+					const select = new Select(el, {
+						optionBuilder: undefined,
+						panelItem: {position: '', item: '', className: ''},
+						changeOpenerText: true,
+						multipleSelectionOnSingleClick: false,
+						multipleSelectOpenerText: {labels: false, array: false},
+						allowPanelClick: false,
+						openOnHover: false,
+						closeOnMouseleave: false,
+						wrapDataAttributes: false,
+						openerLabel: false,
+					});
+					select.init();
+				}
 			});
 		}
 	}
