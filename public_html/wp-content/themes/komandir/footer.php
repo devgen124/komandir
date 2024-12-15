@@ -42,32 +42,32 @@
 						$social_list = [
 							[
 								'title' => 'Мы в ВК',
-								'link' => 'https://vk.com/komandir124',
-								'icon' => 'vk.svg'
+								'link'  => 'https://vk.com/komandir124',
+								'icon'  => 'vk.svg'
 							],
 							[
 								'title' => 'Мы в Telegram',
-								'link' => 'https://t.me/komandir_124',
-								'icon' => 'telegram.svg'
+								'link'  => 'https://t.me/komandir_124',
+								'icon'  => 'telegram.svg'
 							],
 							[
 								'title' => 'Мы в WhatsApp',
-								'link' => 'https://wa.me/79232999688',
-								'icon' => 'whatsapp.svg'
+								'link'  => 'https://wa.me/79232999688',
+								'icon'  => 'whatsapp.svg'
 							],
-							[
-								'title' => 'Мы в Viber',
-								'link' => 'viber://chat?number=%2B79232999688',
-								'icon' => 'viber.svg'
-							],
+//							[
+//								'title' => 'Мы в Viber',
+//								'link' => 'viber://chat?number=%2B79232999688',
+//								'icon' => 'viber.svg'
+//							],
 						];
 
 						foreach ( $social_list as $item ) { ?>
 							<li>
 								<a href="<?= $item['link'] ?>" aria-label="<?= $item['title'] ?>">
 									<img width="26" height="26"
-										src="<?= get_template_directory_uri() ?>/assets/images/<?= $item['icon'] ?>"
-										alt="<?= $item['title'] ?>">
+										 src="<?= get_template_directory_uri() ?>/assets/images/<?= $item['icon'] ?>"
+										 alt="<?= $item['title'] ?>">
 								</a>
 							</li>
 						<?php }
@@ -81,25 +81,25 @@
 						$social_list = [
 							[
 								'title' => 'Mastercard',
-								'icon' => 'mastercard.svg',
-								'size' => [
-									'width' => 21,
+								'icon'  => 'mastercard.svg',
+								'size'  => [
+									'width'  => 21,
 									'height' => 21
 								]
 							],
 							[
 								'title' => 'Visa',
-								'icon' => 'visa.svg',
-								'size' => [
-									'width' => 34,
+								'icon'  => 'visa.svg',
+								'size'  => [
+									'width'  => 34,
 									'height' => 11
 								]
 							],
 							[
 								'title' => 'Мир',
-								'icon' => 'mir.svg',
-								'size' => [
-									'width' => 38,
+								'icon'  => 'mir.svg',
+								'size'  => [
+									'width'  => 38,
 									'height' => 11
 								]
 							],
@@ -109,8 +109,8 @@
 							<li>
 								<a aria-label="<?= $item['title'] ?>">
 									<img width="<?= $item['size']['width'] ?>" height="<?= $item['size']['height'] ?>"
-										src="<?= get_template_directory_uri() ?>/assets/images/<?= $item['icon'] ?>"
-										alt="<?= $item['title'] ?>">
+										 src="<?= get_template_directory_uri() ?>/assets/images/<?= $item['icon'] ?>"
+										 alt="<?= $item['title'] ?>">
 								</a>
 							</li>
 
