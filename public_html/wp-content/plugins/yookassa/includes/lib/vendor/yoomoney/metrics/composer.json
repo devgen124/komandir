@@ -1,0 +1,30 @@
+{
+  "name": "yoomoney/metrics",
+  "type": "package",
+  "license": "MIT",
+  "authors": [
+    {"name": "YooMoney", "email": "cms@yoomoney.ru"}
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "yoomoney/yookassa-sdk-php": "^2.0|^3.0"
+  },
+  "require-dev": {
+    "ext-xml": "*",
+    "phpunit/phpunit": "^4.8 || ^5.7 || ^6.9 || ^7.5 || ^8.5 || ^9.6",
+    "phpunit/php-token-stream": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cmssdk\\Metrics\\": "./src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Cmssdk\\Metrics\\": "tests/"
+    }
+  },
+  "scripts": {
+    "phpunit": "vendor/bin/phpunit -derror_reporting=32759 -dxdebug.mode=coverage --configuration=phpunit.xml.dist --coverage-text"
+  }
+}
