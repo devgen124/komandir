@@ -987,7 +987,7 @@ add_filter( 'woocommerce_output_related_products_args', function ( $args ) {
 // checkout shipping custom title
 
 add_filter( 'woocommerce_shipping_package_name', function () {
-	return 'Доставка <span style="font-weight:normal">(С условиями доставки можно ознакомиться на странице <a href="/shipping">Доставка</a>)</span>';
+	return 'Способ получения <span style="font-weight:normal">(<a href="/shipping" target="_blank">подробнее</a>)</span>';
 }, 10, 2 );
 
 // checkout fields setup specifically for shipping methods
