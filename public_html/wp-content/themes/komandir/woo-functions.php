@@ -1050,3 +1050,38 @@ add_filter( 'wc_city_select_cities', function ( $cities ) {
 
 	return $cities;
 } );
+
+//// mail.ru recipients fix
+//
+//add_filter( 'woocommerce_mail_callback_params', function ( $params ) {
+//	$sender    = WC_Emails::instance()->get_from_address();
+//	$params[3] .= " envelope-from: <$sender>";
+//
+//	return $params;
+//} );
+
+
+// удаление информации о доставке из чека в Юкассе, если она бесплатная или не указан адрес
+add_filter( 'woocommerce_yookassa_create_payment_request', function ( $paymentRequest ) {
+	$receipt = $paymentRequest->getReceipt();
+
+	if ( $receipt !== null ) {
+		// Получаем все товары и услуги из чека
+		$items = $receipt->getItems();
+
+		// Фильтруем позиции: оставляем только те, которые НЕ являются доставкой или имеют стоимость > 0
+		$filteredItems = array_filter( $items, function ( $item ) {
+			return ! $item->isShipping() || $item->getAmount() > 0;
+		} );
+
+		// Обновляем список позиций в чеке
+		$receipt->setItems( $filteredItems );
+	}
+
+	if ( $receipt->getShippingAmountValue() == 0 ) {
+		$paymentRequest->setShipping( null );
+	}
+
+	return $paymentRequest;
+} );
+
