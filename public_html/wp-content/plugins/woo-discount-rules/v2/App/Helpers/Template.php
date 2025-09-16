@@ -52,7 +52,7 @@ class Template
      */
     function display()
     {
-        echo $this->templateContents();
+        echo $this->templateContents();//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 
     /**

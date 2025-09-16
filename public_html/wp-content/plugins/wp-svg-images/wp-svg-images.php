@@ -1,14 +1,15 @@
 <?php
 /*
-	Plugin Name:	WP SVG Images
+	Plugin Name:		WP SVG Images
 	Plugin URI:		https://shortpixel.com/
-	Description:	Full SVG Media support in WordPress
-	Version:		4.2
-	Author:			ShortPixel
+	Description:		Full SVG Media support in WordPress
+	Version:	  	4.4
+	Author:		  	ShortPixel
 	Author URI:		https://shortpixel.com/
-    GitHub Plugin URI: https://github.com/short-pixel-optimizer/wp-svg-images
-	Text Domain:	wpsvg
-	Domain Path:	/languages
+ 	GitHub Plugin URI:	https://github.com/short-pixel-optimizer/wp-svg-images
+	Primary Branch: 	main
+	Text Domain:		wpsvg
+	Domain Path:		/languages
 */
 
 defined( 'ABSPATH' ) ||	exit;
@@ -70,6 +71,14 @@ if( ! class_exists('WPSVG') ){
 			add_action( 'wp_ajax_wpsvg_notice_dismissed', array( $this, 'wpsvg_notice_dismissed' ) );
 
 			add_action( 'admin_init', array( $this, 'upsell' ) );
+			add_filter( 'wp_all_import_image_mime_type', array( $this, 'wp_all_import_svgs' ), 10, 2 );
+		}
+
+		function wp_all_import_svgs( $mime_type, $image_filepath ){
+			if( empty( $mime_type ) && ( substr( $image_filepath, -4 ) == '.svg' || substr( $image_filepath, -5 ) == '.svgz' ) ){
+				return 'image/svg+xml';
+			}
+			return $mime_type;
 		}
 
 		function upsell(){
@@ -90,6 +99,9 @@ if( ! class_exists('WPSVG') ){
 		}
 
 		function admin_notices(){
+			if (! current_user_can('manage_options')) {
+				 return false;
+			}
 			if( ! get_user_meta( get_current_user_id(), 'wpsvg_notice_dismissed' ) ){
 				if( function_exists('get_current_screen') && isset( get_current_screen()->id ) && in_array( get_current_screen()->id, array( 'plugins', 'plugin-install', 'upload', 'attachment' ) ) ){ ?>
 					<div class="wpsvg-notice notice notice-success is-dismissible">
@@ -109,7 +121,14 @@ if( ! class_exists('WPSVG') ){
 		}
 
 		function wp_handle_upload_prefilter( $file ){
-			if( $file['type'] === 'image/svg+xml' ){
+
+			// Security:  form data can be faked, including the filetype. Check tmpfile.
+			$file_type = mime_content_type($file['tmp_name']);
+
+			$svgTypes = ['image/svg+xml', 'image/svg'];
+
+			if( in_array($file_type, $svgTypes) )
+			{
 				$user = wp_get_current_user();
 				$roles = (array)$user->roles;
 				$unrestricted = false;
@@ -210,9 +229,9 @@ if( ! class_exists('WPSVG') ){
 			} ?>
 			<div class="wrap">
 				<h2><?php _e( 'SVG images', 'wpsvg' ) ?></h2>
-				
+
 				<?php if( $show_update_notice ) echo '<div class="below-h2 updated"><p>' . __( 'Settings saved.', 'wpsvg' ) . '</p></div>'; ?>
-				
+
 				<div class="postbox" style="margin-top:10px">
 					<div class="inside" style="padding-bottom:2px">
 						<h3><?php esc_html_e( 'Security notice', 'wpsvg' ) ?></h3>

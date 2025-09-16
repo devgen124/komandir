@@ -5,10 +5,10 @@ namespace MailPoet\Form;
 if (!defined('ABSPATH')) exit;
 
 
+use MailPoet\Captcha\CaptchaConstants;
 use MailPoet\Config\Env;
 use MailPoet\Config\Renderer as BasicRenderer;
 use MailPoet\Settings\SettingsController;
-use MailPoet\Subscription\Captcha\CaptchaConstants;
 use MailPoet\WP\Functions as WPFunctions;
 
 class AssetsController {
@@ -41,7 +41,7 @@ class AssetsController {
     ob_start();
     $captcha = $this->settings->get('captcha');
     if (!empty($captcha['type']) && CaptchaConstants::isReCaptcha($captcha['type'])) {
-      echo '<script src="' . esc_attr(self::RECAPTCHA_API_URL) . '" async defer></script>';
+      echo '<script src="' . esc_url(self::RECAPTCHA_API_URL) . '" async defer></script>';
     }
 
     $this->wp->wpPrintScripts('jquery');

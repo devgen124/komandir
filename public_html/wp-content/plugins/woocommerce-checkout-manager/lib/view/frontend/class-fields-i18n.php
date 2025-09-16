@@ -2,7 +2,8 @@
 
 namespace QuadLayers\WOOCCM\View\Frontend;
 
-use QuadLayers\WOOCCM\Plugin as Plugin;
+use PHP_CodeSniffer\Standards\PSR12\Sniffs\Classes\ClosingBraceSniff;
+use QuadLayers\WOOCCM\Plugin;
 
 /**
  * Fields_I18n Class
@@ -130,19 +131,11 @@ class Fields_I18n {
 		}
 
 		// phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
-		return esc_html__( $string, 'woocommerce' );
+		return __( $string, 'woocommerce' );
 	}
 
 	public function translate( $value ) {
 		if ( ! empty( $value ) ) {
-
-			if ( is_array( $value ) ) {
-				foreach ( $value as $key => $name ) {
-					if ( is_string( $name ) ) {
-						$value[ $key ] = $this->i18n( $name );
-					}
-				}
-			}
 
 			if ( is_string( $value ) ) {
 				$value = $this->i18n( $value );
@@ -151,7 +144,6 @@ class Fields_I18n {
 
 		return $value;
 	}
-
 
 	public function translate_field( $field ) {
 		// ii18n
@@ -165,8 +157,20 @@ class Fields_I18n {
 			$field['placeholder'] = $this->translate( $field['placeholder'] );
 		}
 
+		if ( ! empty( $field['description'] ) ) {
+			$field['description'] = $this->translate( $field['description'] );
+		}
+
 		if ( ! empty( $field['conditional_parent_value'] ) ) {
 			$field['conditional_parent_value'] = $this->translate( $field['conditional_parent_value'] );
+		}
+
+		if ( isset( $field['options'] ) ) {
+			foreach ( $field['options'] as $key => $option_data ) {
+				if ( isset( $option_data['label'] ) && ! is_numeric( $option_data['label'] ) && is_string( $option_data['label'] ) ) {
+					$field['options'][ $key ]['label'] = $this->i18n( $option_data['label'] );
+				}
+			}
 		}
 
 		return $field;
@@ -179,4 +183,3 @@ class Fields_I18n {
 		return self::$_instance;
 	}
 }
-

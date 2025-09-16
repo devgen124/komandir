@@ -213,7 +213,8 @@ class Migration
             Woocommerce::setSession('awdr_v1_to_v2_total_migrated', $total_migrated);
         }
         $percentage = $percentage.'%';
-        $return_status['display_text'] = sprintf(esc_html__('%s Completed. Please wait..', 'woo-discount-rules'), $percentage);
+		/* translators: %s used to display percentage */
+        $return_status['display_text'] = esc_html(sprintf(__('%s Completed. Please wait..', 'woo-discount-rules'), $percentage));
 
         return $return_status;
     }

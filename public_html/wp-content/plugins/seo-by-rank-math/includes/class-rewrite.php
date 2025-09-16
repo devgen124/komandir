@@ -15,6 +15,7 @@ namespace RankMath;
 
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Sitepress;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -82,7 +83,7 @@ class Rewrite {
 			return $query_vars;
 		}
 
-		$author_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key='rank_math_permalink' AND meta_value = %s", $query_vars['author_name'] ) );
+		$author_id = DB_Helper::get_var( $wpdb->prepare( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key='rank_math_permalink' AND meta_value = %s", $query_vars['author_name'] ) );
 		if ( $author_id ) {
 			$query_vars['author'] = $author_id;
 			unset( $query_vars['author_name'] );
@@ -230,7 +231,7 @@ class Rewrite {
 
 	/**
 	 * Adds required category rewrites rules.
-	 * 
+	 *
 	 * @param array  $category_rewrite   The current set of rules.
 	 * @param string $category_nicename   Category nicename.
 	 * @param string $blog_prefix     Multisite blog prefix.
@@ -240,9 +241,9 @@ class Rewrite {
 	 */
 	private function add_category_rewrites( $category_rewrite, $category_nicename, $blog_prefix, $pagination_base ) {
 
-		$category_rewrite[ $blog_prefix . '(' . $category_nicename . ')/(?:feed/)?(feed|rdf|rss|rss2|atom)/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
+		$category_rewrite[ $blog_prefix . '(' . $category_nicename . ')/(?:feed/)?(feed|rdf|rss|rss2|atom)/?$' ]    = 'index.php?category_name=$matches[1]&feed=$matches[2]';
 		$category_rewrite[ $blog_prefix . '(' . $category_nicename . ')/' . $pagination_base . '/?([0-9]{1,})/?$' ] = 'index.php?category_name=$matches[1]&paged=$matches[2]';
-		$category_rewrite[ $blog_prefix . '(' . $category_nicename . ')/?$' ] = 'index.php?category_name=$matches[1]';                                     
+		$category_rewrite[ $blog_prefix . '(' . $category_nicename . ')/?$' ]                                       = 'index.php?category_name=$matches[1]';
 
 		return $category_rewrite;
 	}
@@ -250,7 +251,7 @@ class Rewrite {
 	/**
 	 * Walks through category nicename and convert encoded parts
 	 * into uppercase using $this->encode_to_upper().
-	 * 
+	 *
 	 * @param string $name The encoded category URI string.
 	 *
 	 * @return string The convered URI string.
@@ -269,7 +270,7 @@ class Rewrite {
 
 	/**
 	 * Converts the encoded URI string to uppercase.
-	 * 
+	 *
 	 * @param string $encoded The encoded string.
 	 *
 	 * @return string The uppercased string.

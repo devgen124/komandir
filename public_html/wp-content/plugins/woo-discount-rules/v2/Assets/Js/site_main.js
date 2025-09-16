@@ -131,6 +131,8 @@
                                         $price_place.html(response.original_price_html)
                                     }
                                 }
+                                // Trigger the custom price_updated event
+                                $(document).trigger('wdr_dynamic_price_update', [response]);
                             },
                             error: function (response) {
                                 $price_place.html("")

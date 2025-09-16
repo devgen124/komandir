@@ -6,7 +6,6 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Entities\NewsletterEntity;
-use MailPoet\Features\FeaturesController;
 use MailPoet\Services\Bridge;
 use MailPoet\Settings\TrackingConfig;
 use MailPoet\Validator\ValidationException;
@@ -19,28 +18,23 @@ class NewsletterValidator {
   /** @var TrackingConfig */
   private $trackingConfig;
 
-  /** @var FeaturesController */
-  private $featuresController;
-
   public function __construct(
     Bridge $bridge,
-    TrackingConfig $trackingConfig,
-    FeaturesController $featuresController
+    TrackingConfig $trackingConfig
   ) {
     $this->bridge = $bridge;
     $this->trackingConfig = $trackingConfig;
-    $this->featuresController = $featuresController;
   }
 
   public function validate(NewsletterEntity $newsletterEntity): ?string {
     if (
-      $this->featuresController->isSupported(FeaturesController::GUTENBERG_EMAIL_EDITOR)
-      && $newsletterEntity->getWpPostId() !== null
+      $newsletterEntity->getWpPostId() !== null
     ) {
       // Temporarily skip validation for emails created via Gutenberg editor
       return null;
     }
     try {
+      $this->validateSegments($newsletterEntity);
       $this->validateBody($newsletterEntity);
       $this->validateUnsubscribeRequirements($newsletterEntity);
       $this->validateReEngagementRequirements($newsletterEntity);
@@ -61,6 +55,22 @@ class NewsletterValidator {
 
     if (!$hasUnsubscribeLink && !$hasUnsubscribeUrl) {
       throw new ValidationException(__('All emails must include an "Unsubscribe" link. Add a footer widget to your email to continue.', 'mailpoet'));
+    }
+  }
+
+  private function validateSegments(NewsletterEntity $newsletterEntity): void {
+    if (
+      $newsletterEntity->getType() !== NewsletterEntity::TYPE_NOTIFICATION
+      && $newsletterEntity->getType() !== NewsletterEntity::TYPE_RE_ENGAGEMENT
+    ) {
+      return;
+    }
+
+    $emptySegmentsErrorMessage = __('You need to select a list to send to.', 'mailpoet');
+    $segmentIds = $newsletterEntity->getSegmentIds();
+
+    if (empty($segmentIds)) {
+      throw new ValidationException($emptySegmentsErrorMessage);
     }
   }
 

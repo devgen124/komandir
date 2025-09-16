@@ -41,6 +41,15 @@ class CheckoutOrder extends AbstractCartRoute {
 	 * @return string
 	 */
 	public function get_path() {
+		return self::get_path_regex();
+	}
+
+	/**
+	 * Get the path of this rest route.
+	 *
+	 * @return string
+	 */
+	public static function get_path_regex() {
 		return '/checkout/(?P<id>[\d]+)';
 	}
 
@@ -128,7 +137,7 @@ class CheckoutOrder extends AbstractCartRoute {
 		 *
 		 * This logic ensures the order is valid before payment is attempted.
 		 */
-		$this->order_controller->validate_order_before_payment( $this->order );
+		$this->order_controller->validate_existing_order_before_payment( $this->order );
 
 		/**
 		 * Fires before an order is processed by the Checkout Block/Store API.
@@ -167,6 +176,14 @@ class CheckoutOrder extends AbstractCartRoute {
 			$request
 		);
 	}
+
+	/**
+	 * Since this endpoint only operates on existing orders, we don't need to do updates based on
+	 * the cart data.
+	 *
+	 * @param \WP_REST_Request $request Request object.
+	 */
+	protected function cart_updated( \WP_REST_Request $request ) {}
 
 	/**
 	 * Updates the current customer session using data from the request (e.g. address data).

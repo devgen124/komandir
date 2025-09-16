@@ -48,6 +48,7 @@ class PaymentDataFactory
         PaymentMethodType::TINKOFF_BANK   => 'PaymentDataTinkoffBank',
         PaymentMethodType::SBP            => 'PaymentDataSbp',
         PaymentMethodType::SBER_LOAN      => 'PaymentDataSberLoan',
+        PaymentMethodType::SBER_BNPL      => 'PaymentDataSberBnpl',
     );
 
     /**

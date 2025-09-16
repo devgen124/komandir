@@ -84,6 +84,11 @@ class Validator
     protected $stop_on_first_fail = false;
 
     /**
+     * @var bool
+     */
+    protected $prepend_labels = true;
+
+    /**
      * Setup validation
      *
      * @param  array $data
@@ -145,6 +150,14 @@ class Validator
     }
 
     /**
+     * @param bool $prepend_labels
+     */
+    public function setPrependLabels($prepend_labels = true)
+    {
+        $this->prepend_labels = $prepend_labels;
+    }
+
+    /**
      * Required field validator
      *
      * @param  string $field
@@ -159,9 +172,7 @@ class Validator
             return $find[1];
         }
 
-        if (is_null($value)) {
-            return false;
-        } elseif (is_string($value) && trim($value) === '') {
+        if (is_null($value) || (is_string($value) && trim($value) === '')) {
             return false;
         }
 
@@ -409,9 +420,13 @@ class Validator
      */
     protected function validateIn($field, $value, $params)
     {
-        $isAssoc = array_values($params[0]) !== $params[0];
-        if ($isAssoc) {
-            $params[0] = array_keys($params[0]);
+        $forceAsAssociative = false;
+        if (isset($params[2])) {
+            $forceAsAssociative = (bool) $params[2];
+        }
+
+        if ($forceAsAssociative || $this->isAssociativeArray($params[0])) {
+           $params[0] = array_keys($params[0]);
         }
 
         $strict = false;
@@ -432,8 +447,12 @@ class Validator
      */
     protected function validateListContains($field, $value, $params)
     {
-        $isAssoc = array_values($value) !== $value;
-        if ($isAssoc) {
+        $forceAsAssociative = false;
+        if (isset($params[2])) {
+            $forceAsAssociative = (bool) $params[2];
+        }
+
+        if ($forceAsAssociative || $this->isAssociativeArray($value)) {
             $value = array_keys($value);
         }
 
@@ -611,12 +630,17 @@ class Validator
      */
     protected function validateEmailDNS($field, $value)
     {
+        if (!is_string($value)) {
+            return false;
+        }
+
         if ($this->validateEmail($field, $value)) {
             $domain = ltrim(stristr($value, '@'), '@') . '.';
             if (function_exists('idn_to_ascii') && defined('INTL_IDNA_VARIANT_UTS46')) {
                 $domain = idn_to_ascii($domain, 0, INTL_IDNA_VARIANT_UTS46);
             }
-            return checkdnsrr($domain, 'ANY');
+
+            return checkdnsrr($domain, 'MX');
         }
 
         return false;
@@ -631,6 +655,10 @@ class Validator
      */
     protected function validateUrl($field, $value)
     {
+        if (!is_string($value)) {
+            return false;
+        }
+
         foreach ($this->validUrlPrefixes as $prefix) {
             if (strpos($value, $prefix) !== false) {
                 return filter_var($value, \FILTER_VALIDATE_URL) !== false;
@@ -649,6 +677,10 @@ class Validator
      */
     protected function validateUrlActive($field, $value)
     {
+        if (!is_string($value)) {
+            return false;
+        }
+
         foreach ($this->validUrlPrefixes as $prefix) {
             if (strpos($value, $prefix) !== false) {
                 $host = parse_url(strtolower($value), PHP_URL_HOST);
@@ -877,11 +909,9 @@ class Validator
                 } elseif (isset($cards)) {
                     // if we have cards, check our users card against only the ones we have
                     foreach ($cards as $card) {
-                        if (in_array($card, array_keys($cardRegex))) {
+                        if (in_array($card, array_keys($cardRegex)) && preg_match($cardRegex[$card], $value) === 1) {
                             // if the card is valid, we want to stop looping
-                            if (preg_match($cardRegex[$card], $value) === 1) {
-                                return true;
-                            }
+                            return true;
                         }
                     }
                 } else {
@@ -941,8 +971,8 @@ class Validator
             $emptyFields = 0;
             foreach ($reqParams as $requiredField) {
                 // check the field is set, not null, and not the empty string
-                if (isset($fields[$requiredField]) && !is_null($fields[$requiredField])
-                    && (is_string($fields[$requiredField]) ? trim($fields[$requiredField]) !== '' : true)) {
+                list($requiredFieldValue, $multiple) = $this->getPart($fields, explode('.', $requiredField));
+                if (isset($requiredFieldValue) && (!is_string($requiredFieldValue) || trim($requiredFieldValue) !== '')) {
                     if (!$allRequired) {
                         $conditionallyReq = true;
                         break;
@@ -985,8 +1015,8 @@ class Validator
             $filledFields = 0;
             foreach ($reqParams as $requiredField) {
                 // check the field is NOT set, null, or the empty string, in which case we are requiring this value be present
-                if (!isset($fields[$requiredField]) || (is_null($fields[$requiredField])
-                    || (is_string($fields[$requiredField]) && trim($fields[$requiredField]) === ''))) {
+                list($requiredFieldValue, $multiple) = $this->getPart($fields, explode('.', $requiredField));
+                if (!isset($requiredFieldValue) || (is_string($requiredFieldValue) && trim($requiredFieldValue) === '')) {
                     if (!$allEmpty) {
                         $conditionallyReq = true;
                         break;
@@ -1089,10 +1119,8 @@ class Validator
                 }
             }
             // Use custom label instead of field name if set
-            if (is_string($params[0])) {
-                if (isset($this->_labels[$param])) {
-                    $param = $this->_labels[$param];
-                }
+            if (is_string($params[0]) && isset($this->_labels[$param])) {
+                $param = $this->_labels[$param];
             }
             $values[] = $param;
         }
@@ -1278,10 +1306,8 @@ class Validator
     protected function hasRule($name, $field)
     {
         foreach ($this->_validations as $validation) {
-            if ($validation['rule'] == $name) {
-                if (in_array($field, $validation['fields'])) {
-                    return true;
-                }
+            if ($validation['rule'] == $name && in_array($field, $validation['fields'])) {
+                return true;
             }
         }
 
@@ -1471,7 +1497,9 @@ class Validator
                 }
             }
         } else {
-            $message = str_replace('{field}', ucwords(str_replace('_', ' ', $field)), $message);
+            $message = $this->prepend_labels
+                ? str_replace('{field}', ucwords(str_replace('_', ' ', $field)), $message)
+                : str_replace('{field} ', '', $message);
         }
 
         return $message;
@@ -1557,5 +1585,10 @@ class Validator
         array_map(function ($field) use ($rules, $me) {
             $me->mapFieldRules($field, $rules[$field]);
         }, array_keys($rules));
+    }
+
+    private function isAssociativeArray($input){
+        //array contains at least one key that's not an can not be cast to an integer
+        return count(array_filter(array_keys($input), 'is_string')) > 0;
     }
 }

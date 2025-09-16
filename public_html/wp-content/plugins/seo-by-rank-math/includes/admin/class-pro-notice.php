@@ -22,7 +22,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Pro_Notice {
 
-	use Hooker, Ajax;
+	use Hooker;
+	use Ajax;
 
 	/**
 	 * Now.
@@ -49,7 +50,7 @@ class Pro_Notice {
 	 * Constructor method.
 	 */
 	public function __construct() {
-		$this->current_time = current_time( 'timestamp' );
+		$this->current_time = Helper::get_current_time();
 		$this->record_date  = strtotime( $this->record_date );
 		$this->install_date = get_option( 'rank_math_install_date' );
 		if ( false === $this->install_date ) {
@@ -180,6 +181,7 @@ class Pro_Notice {
 	/**
 	 * Add admin notice.
 	 *
+	 * @param int $variant Notice variant.
 	 * @return void
 	 */
 	public function add_notice( $variant = 0 ) {
@@ -261,7 +263,7 @@ class Pro_Notice {
 
 		// If it has already been delayed once then dismiss it forever.
 		if ( get_option( 'rank_math_pro_notice_delayed' ) ) {
-			update_option( 'rank_math_already_upgraded', current_time( 'timestamp' ) );
+			update_option( 'rank_math_already_upgraded', Helper::get_current_time() );
 			return;
 		}
 
@@ -300,8 +302,8 @@ class Pro_Notice {
 		check_ajax_referer( 'rank-math-ajax-nonce', 'security' );
 		$this->has_cap_ajax( 'onpage_general' );
 
-		update_option( 'rank_math_already_upgraded', current_time( 'timestamp' ) );
-		update_option( 'rank_math_already_reviewed', current_time( 'timestamp' ) );
+		update_option( 'rank_math_already_upgraded', Helper::get_current_time() );
+		update_option( 'rank_math_already_reviewed', Helper::get_current_time() );
 
 		$this->success( 'success' );
 	}

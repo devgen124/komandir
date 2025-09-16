@@ -1,43 +1,298 @@
-# Translation of Plugins - Discount Rules for WooCommerce &#8211; Create Smart WooCommerce Coupons &amp; Discounts - Stable (latest release) in Russian
-# This file is distributed under the same license as the Plugins - Discount Rules for WooCommerce &#8211; Create Smart WooCommerce Coupons &amp; Discounts - Stable (latest release) package.
+# Translation of Plugins - Discount Rules for WooCommerce - Stable (latest release) in Russian
+# This file is distributed under the same license as the Plugins - Discount Rules for WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-06-02 08:19:37+0000\n"
+"PO-Revision-Date: 2023-10-01 11:51:32+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.0-alpha.4\n"
+"X-Generator: GlotPress/4.0.1\n"
 "Language: ru\n"
-"Project-Id-Version: Plugins - Discount Rules for WooCommerce &#8211; Create Smart WooCommerce Coupons &amp; Discounts - Stable (latest release)\n"
+"Project-Id-Version: Plugins - Discount Rules for WooCommerce - Stable (latest release)\n"
+
+#: v2/App/Views/Admin/review-notice.php:8
+msgid "Could you please share us with your feedback and a 5-star review on the WordPress repository? Your support will help us continually improve."
+msgstr "Не могли бы вы добавить свой отзыв с 5 звездами в репозитории WordPress? Ваша поддержка помогает нам постоянно совершенствовать этот плагин."
+
+#: v2/App/Views/Admin/review-notice.php:6
+msgid "Fantastic! You have got 100+ sales with the Discount Rules plugin!"
+msgstr "Фантастика! Вы получили более 100 продаж с плагином Discount Rules!"
+
+#: v2/App/Views/Admin/Tabs/settings.php:609
+msgid "Exclude out of stock products"
+msgstr "Исключить товары, которых нет в наличии"
+
+#: v2/App/Views/Admin/Tabs/pagination.php:33
+msgid "Of"
+msgstr "Из"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:133
+msgid "Re - Order"
+msgstr "Обратный порядок"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:84
+msgid "Limit"
+msgstr "Лимит"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:183
+msgid "No available addons"
+msgstr "Доступных расширений нет"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:176
+msgid "Activate"
+msgstr "Активировать"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:168
+msgid "More info"
+msgstr "Подробнее"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:166
+msgid "Get this addon"
+msgstr "Получить это расширение"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:160
+msgid "Download"
+msgstr "Скачать"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:145
+msgid "Requires PRO"
+msgstr "Требуется ПРО"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:131
+msgid "Available Add-Ons"
+msgstr "Доступные расширения"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:126
+msgid "No Active Add-Ons"
+msgstr "Активированных расширений нет"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:119
+msgid "Deactivate"
+msgstr "Деактивировать"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:109
+msgid "Open"
+msgstr "Открыть"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:142
+msgid "Paid"
+msgstr "Оплачено"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:88
+msgid "Active Add-Ons"
+msgstr "Активные расширения"
+
+#: v2/App/Views/Admin/Tabs/Addons.php:83
+msgid "Unable to load addons! Try again later."
+msgstr "Невозможно загрузить расширения! Попробуйте позже."
+
+#: v2/App/Views/Admin/Tabs/Addons.php:71
+msgid "Addon deactivate failed."
+msgstr "Деактивировать расширение не удалось."
+
+#: v2/App/Views/Admin/Tabs/Addons.php:70
+msgid "Addon deactivated successfully."
+msgstr "Расширение успешно деактивировано."
+
+#: v2/App/Views/Admin/Tabs/Addons.php:66
+msgid "Addon activate failed."
+msgstr "Активировать расширение не удалось."
+
+#: v2/App/Views/Admin/Tabs/Addons.php:65
+msgid "Addon activated successfully."
+msgstr "Расширение успешно активировано."
+
+#: v2/App/Views/Admin/review-notice.php:18
+msgid "I already did"
+msgstr "Я уже сделал"
+
+#: v2/App/Views/Admin/review-notice.php:15
+msgid "Nope, maybe later"
+msgstr "Нет, может позже"
+
+#: v2/App/Views/Admin/review-notice.php:12
+msgid "Ok, you deserve it"
+msgstr "Хорошо, вы это заслужили"
+
+#: v2/App/Views/Admin/release-message.php:20
+msgid "The latest update includes some substantial changes across different areas of the plugin. We highly recommend you backup your site before upgrading, and make sure you first update in a staging environment"
+msgstr "Последнее обновление включает в себя некоторые существенные изменения плагина. Мы настоятельно рекомендуем вам сделать резервную копию вашего сайта перед обновлением и для начала попробовать обновить на тестовом сайте."
+
+#: v2/App/Views/Admin/release-message.php:17
+msgid "Heads up, Please backup before upgrade!"
+msgstr "Внимание, сделайте резервную копию перед обновлением!"
+
+#: v2/App/Controllers/Admin/Tabs/Addons.php:51
+msgid "Requires PRO plugin"
+msgstr "Требуется версия плагина ПРО"
+
+#. translators: %s is the required version of the PRO plugin.
+#: v2/App/Controllers/Admin/Tabs/Addons.php:47
+msgid "Requires at least v%s of PRO plugin"
+msgstr "Требуется ПРО версия не менее %s"
+
+#. translators: %s is the required version of the Core plugin.
+#: v2/App/Controllers/Admin/Tabs/Addons.php:39
+msgid "Requires at least v%s of Core plugin"
+msgstr "Требуется последняя версия %s основного плагина"
+
+#: v2/App/Controllers/Admin/Tabs/Addons.php:22
+msgid "Add-Ons"
+msgstr "Расширения"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:168
+#: v2/App/Views/Admin/Tabs/Statistics.php:239
+msgid "Update"
+msgstr "Обновить"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:121
+msgid "Coupon Statistics"
+msgstr "Статистика купона"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:120
+msgid "Rule statistics"
+msgstr "Статистика правила"
+
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:82
+msgid "All Cart discounts (discount label)"
+msgstr "Все скидки корзины (ярлык скидки)"
+
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:80
+msgid "All coupons"
+msgstr "Все купоны"
+
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:77
+msgid "Coupon Label"
+msgstr "Ярлык купона"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:187
+msgid "Orders with free shipping"
+msgstr "Заказы с бесплатной доставкой"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:182
+#: v2/App/Views/Admin/Tabs/Statistics.php:251
+msgid "Discounted amount"
+msgstr "Сумма скидок"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:178
+msgid "Total sales"
+msgstr "Сумма продаж"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:174
+#: v2/App/Views/Admin/Tabs/Statistics.php:250
+msgid "Discounted orders"
+msgstr "Заказов со скидкой"
+
+#: v2/App/Controllers/Admin/Tabs/Reports/RuleAmount.php:15
+#: v2/App/Controllers/Admin/Tabs/Reports/RuleAmountWithCartDiscount.php:11
+#: v2/App/Controllers/Admin/Tabs/Reports/RuleNameDiscount.php:25
+msgid "Discounted amount shown in default store currency"
+msgstr "Сумма скидок показана в валюте магазина по умолчанию"
+
+#: v2/App/Helpers/Validation.php:379
+msgid "Invalid zipcode"
+msgstr "Неверный почтовый индекс"
+
+#: v2/App/Helpers/Validation.php:376
+msgid "Invalid city name"
+msgstr "Недопустимое название города"
+
+#: v2/App/Helpers/Validation.php:373
+msgid "Invalid domain"
+msgstr "Недействительный домен"
+
+#: v2/App/Helpers/Validation.php:326 v2/App/Helpers/Validation.php:334
+msgid "Percentage discount value must be no more than 100"
+msgstr "Процентное значение скидки должно быть не более 100"
+
+#: v2/App/Helpers/Validation.php:289 v2/App/Helpers/Validation.php:339
+#: v2/App/Helpers/Validation.php:361
+msgid "Invalid input range"
+msgstr "Недопустимый диапазон"
+
+#: v2/App/Helpers/Validation.php:285 v2/App/Helpers/Validation.php:300
+#: v2/App/Helpers/Validation.php:369
+msgid "Invalid date range"
+msgstr "Недействительный диапазон дат"
+
+#. translators: %s used to display currency code
+#: v2/App/Controllers/ManageDiscount.php:1125
+msgid "Coupon \"%s\" is currently not available!"
+msgstr "Купон «%s» в настоящее время недоступен!"
+
+#: v2/App/Controllers/Admin/Settings.php:682
+msgid "Coupon url copied!"
+msgstr "Ссылка на купон скопирована!"
+
+#: v2/App/Controllers/Admin/Settings.php:680
+msgid "Copy URL"
+msgstr "Копировать URL-адрес"
+
+#: v2/App/Compatibility/PriceBasedOnCountryByOscarGare.php:47
+msgid "Add compatible for WooCommerce Price Based on Country"
+msgstr "Добавлена совместимость для WooCommerce Price Based on Country"
+
+#: v2/App/Compatibility/MultiCurrencyByWPML.php:49
+msgid "Add additional compatible for WPML (Multi-Currency)"
+msgstr "Добавлена дополнительная совместимость для WPML (Multi-Currency)"
+
+#: v2/App/Compatibility/MultiCurrencyByTivNet.php:60
+msgid "Add compatible for WooCommerce Multi-Currency."
+msgstr "Добавлена совместимость для WooCommerce Multi-Currency."
+
+#: v2/App/Views/Admin/Tabs/settings.php:56
+msgid "This apply the discount rules in a sequential order."
+msgstr "Правила скидок будут применяться в последовательном порядке."
+
+#: v2/App/Views/Admin/Tabs/settings.php:55
+msgid "Apply discount sequentially"
+msgstr "Применить скидку последовательно"
+
+#. translators: %s used to display current server date and time
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:152
+msgid "Current server date and time: %s"
+msgstr "Текущая дата и время сервера: %s"
+
+#: v2/App/Compatibility/FacebookForWoocommerceByFacebook.php:44
+msgid "Add compatible for Facebook for WooCommerce"
+msgstr "Добавлена совместимость для Facebook for WooCommerce"
+
+#: v2/App/Views/Admin/Tabs/settings.php:220
+msgid "{{percentage}}%"
+msgstr "{{percentage}}%"
+
+#: v2/App/Views/Admin/Tabs/settings.php:181
+msgid "I would like to display percentage in sale badge (Displays only when rule matches else displays default sale badge content)."
+msgstr "Я хотел бы отображать процент в значке распродажи (отображается только тогда, когда правило соответствует, в противном случае отображается содержимое значка распродажи по умолчанию)."
 
 #: v2/App/Controllers/ManageDiscount.php:163
 msgid "<span class=\"onsale\">{{percentage}}%</span>"
 msgstr "<span class=\"onsale\">{{percentage}}%</span>"
 
-#: v2/App/Views/Admin/Tabs/settings.php:196
-msgid "{{percentage}}%"
-msgstr "{{percentage}}%"
+#: v2/App/Views/Admin/Tabs/Recipe.php:14
+msgid "Use the sample recipes below to create discount rules easily. These are example rules for some of the popular discount scenarios. You can use these recipes to get started quickly."
+msgstr "Используйте примеры скидок ниже, чтобы легко создавать правила скидок. Это примеры правил для некоторых популярных сценариев скидок. Вы можете использовать эти примеры, чтобы быстро приступить к работе."
 
-#: v2/App/Views/Admin/Tabs/settings.php:112
-msgid "Use minified CSS and JS"
-msgstr "Использовать минимизированные файлы CSS и JS"
+#: v2/App/Views/Admin/Tabs/help.php:135
+msgid " Shipping address based discount"
+msgstr " Скидка по адресу доставки"
 
-#: v2/App/Views/Admin/Tabs/settings.php:37
-msgid "<p class=\"wdr_settings_desc_text   text-warning\"><strong>Note</strong> : Priority will not work for free shipping rule.</p>"
-msgstr "<p class=\"wdr_settings_desc_text   text-warning\"><strong>Примечание</strong> : Приоритет не действует для правила бесплатной доставки.</p>"
+#: v2/App/Views/Admin/Tabs/help.php:94
+msgid "Learn how to offer Buy 2 from Category A and get 1 free from the same Category A"
+msgstr "Узнайте, как предложить купить 2 штуки из категории A и получить 1 бесплатно из той же категории A"
 
-#: v2/App/Views/Admin/Tabs/settings.php:586
-msgid "IMPORTANT: Please consult with our support team by opening a ticket at <a href=\"https://www.flycart.org/support\" target=\"_blank\">https://www.flycart.org/support</a> before you use these options."
-msgstr "ВАЖНО: проконсультируйтесь с нашей службой поддержки, создав обращение на <a href=\"https://www.flycart.org/support\" target=\"_blank\">https://www.flycart.org/support</a> перед тем как использовать эти параметры."
+#: v2/App/Views/Admin/Tabs/help.php:93
+msgid "Buy One Get One Discount for Products from Same Category"
+msgstr "Купите один и получите одну скидку на товары из этой же категории"
 
-#: v2/App/Views/Admin/Tabs/settings.php:585
-msgid "Use these advanced options ONLY when you use a third party plugin that interacts with product pricing & discounts and only when you DONT see the discounts applying. Otherwise these options should be left as NO."
-msgstr "Используйте эти расширенные параметры ТОЛЬКО, когда вы используете сторонний плагин, который взаимодействует с ценами и скидками на товары, и только когда вы НЕ видите применяемые скидки. В противном случае эти параметры следует оставить как НЕТ."
+#: v2/App/Views/Admin/Tabs/help.php:47
+msgid "Let's Learn how to decide on setting up a discount and configuring the same"
+msgstr "Давайте узнаем, как принять решение о настройке скидки и ее настройке"
 
-#: v2/App/Views/Admin/Tabs/settings.php:626
-msgid "This will be useful, if you see the discounts being removed after the coupon applies... or the discount does not work after applying a coupon."
-msgstr "Это будет полезно, если вы видите, что скидки удаляются после применения купона... или если скидка не работает после применения купона."
+#: v2/App/Views/Admin/Tabs/help.php:24
+msgid "Installation of Advanced discount rules"
+msgstr "Установка расширенных правил скидок"
 
 #: v2/App/Views/Admin/Tabs/help.php:23
 msgid "Installation"
@@ -47,6 +302,20 @@ msgstr "Установка"
 msgid " Installation & Introduction"
 msgstr "Установка и введение"
 
+#: v2/App/Views/Admin/Tabs/AdvancedOptions.php:46
+#: v2/App/Views/Admin/Tabs/AdvancedOptions.php:47
+msgid "Disable recalculate when coupon apply"
+msgstr "Отключить перерасчет при применении купона"
+
+#: v2/App/Views/Admin/Tabs/AdvancedOptions.php:31
+#: v2/App/Views/Admin/Tabs/AdvancedOptions.php:32
+msgid "Disable recalculate total"
+msgstr "Отключить перерасчет общей суммы"
+
+#: v2/App/Views/Admin/Tabs/AdvancedOptions.php:17
+msgid "Apply discount for the products which already have custom price or discount"
+msgstr "Применить скидку для товаров, которые уже имеют пользовательскую цену или скидку"
+
 #: v2/App/Views/Admin/Tabs/AdvancedOptions.php:16
 msgid "Enable when discount not applied (custom price) "
 msgstr "Включить, если скидка не применяется (произвольная цена)"
@@ -55,13 +324,17 @@ msgstr "Включить, если скидка не применяется (п�
 msgid "Advanced Options"
 msgstr "Дополнительные параметры"
 
-#: v2/App/Views/Admin/Tabs/RecipeTypes/BogoDiscountRecipe.php:9
-#: v2/App/Views/Admin/Tabs/RecipeTypes/BogoDiscountRecipe.php:15
-#: v2/App/Views/Admin/Tabs/RecipeTypes/BundleDiscountRecipe.php:9
-#: v2/App/Views/Admin/Tabs/RecipeTypes/SimpleDiscountRecipe.php:10
-#: v2/App/Views/Admin/Tabs/RecipeTypes/SimpleDiscountRecipe.php:16
-msgid "Create"
-msgstr "Создать"
+#: v2/App/Controllers/Admin/Tabs/Recipe.php:24
+msgid "Recipe"
+msgstr "Примеры скидок"
+
+#: v2/App/Views/Admin/Tabs/RecipeTypes/BogoDiscountRecipe.php:14
+msgid "Buy X get Y - Buy 2 get 1 free - sample"
+msgstr "Купи X получи Y - Купи 2 получи 1 бесплатно - пример"
+
+#: v2/App/Views/Admin/Tabs/RecipeTypes/BogoDiscountRecipe.php:8
+msgid "Buy X get X - Buy 1 get 1 free - sample"
+msgstr "Купи X получи X - Купи 1 получи 1 бесплатно - пример"
 
 #: v2/App/Views/Admin/Tabs/RecipeTypes/BogoDiscountRecipe.php:10
 #: v2/App/Views/Admin/Tabs/RecipeTypes/BogoDiscountRecipe.php:16
@@ -71,86 +344,179 @@ msgstr "Создать"
 msgid "View & edit Rule"
 msgstr "Просмотреть и изменить правило"
 
+#: v2/App/Views/Admin/Tabs/RecipeTypes/BogoDiscountRecipe.php:9
+#: v2/App/Views/Admin/Tabs/RecipeTypes/BogoDiscountRecipe.php:15
+#: v2/App/Views/Admin/Tabs/RecipeTypes/BundleDiscountRecipe.php:9
+#: v2/App/Views/Admin/Tabs/RecipeTypes/SimpleDiscountRecipe.php:10
+#: v2/App/Views/Admin/Tabs/RecipeTypes/SimpleDiscountRecipe.php:16
+msgid "Create"
+msgstr "Создать"
+
 #: v2/App/Views/Admin/Tabs/Recipe.php:33
 msgid "BOGO Discount"
 msgstr "Скидка BOGO"
 
-#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:21
-msgid "0"
-msgstr "0"
-
-#. Author of the plugin
-msgid "Flycart"
-msgstr "Flycart"
-
-#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:32
-msgid "{{difference_quantity}} -> Difference amount to get discount"
-msgstr "{{difference_quantity}} -> Сумма разницы для получения скидки"
+#: v2/App/Views/Admin/Tabs/Recipe.php:22
+msgid "Product adjustment "
+msgstr "Скидка на товар "
 
 #: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:33
 msgid "<b>Eg:</b> Buy {{difference_quantity}} more products and get 10% discount"
 msgstr "<b>Например:</b> купите еще {{difference_quantity}} товара и получите скидку 10%"
 
+#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:32
+msgid "{{difference_quantity}} -> Difference amount to get discount"
+msgstr "{{difference_quantity}} -> Сумма разницы для получения скидки"
+
+#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:31
+msgid "Buy {{difference_quantity}} more products and get 10% discount"
+msgstr "Купите более {{difference_quantity}} товаров и получите скидку 10%"
+
+#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:24
+msgid "<b>Example:</b> Let's say you offer a 10% discount for 5 quantities and above. you may want to set 3 here. So that the customer can see the promo text when his cart quantities reaches 3"
+msgstr "<b>Пример:</b> Допустим, вы предлагаете скидку 10% на 5 и более штук товара. вы можете установить здесь 3. Так клиент сможет увидеть рекламный текст, когда количество его корзины достигнет 3"
+
+#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:21
+msgid "0"
+msgstr "0"
+
+#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:17
+msgid "Quantity from"
+msgstr "Количество от"
+
+#. Author of the plugin
+#: woo-discount-rules.php
+msgid "Flycart"
+msgstr "Flycart"
+
+#: v2/App/Views/Admin/Tabs/settings.php:106
+msgid "Change this option only if recommended."
+msgstr "Изменяйте этот параметр, только если это рекомендовано."
+
+#: v2/App/Controllers/Admin/Settings.php:679
+msgid "Select State"
+msgstr "Выберите область"
+
 #: v2/App/Controllers/ManageDiscount.php:174
 msgid "<span class=\"onsale\">Sale!</span>"
 msgstr "<span class=\"onsale\">Распродажа!</span>"
 
-#: v2/App/Controllers/Admin/Settings.php:649
-msgid "Select State"
-msgstr "Выберите область"
+#: v2/App/Views/Admin/Tabs/settings.php:342
+msgid "Fee"
+msgstr "Комиссия"
 
-#: v2/App/Controllers/ManageDiscount.php:1762
-#: v2/App/Views/Admin/Tabs/settings.php:441
-msgid "Discount <strong>{{title}}</strong> has been applied to your cart."
-msgstr "Скидка <strong>{{title}}</strong> была применена к вашей корзине."
-
-#: v2/App/Controllers/ManageDiscount.php:1892
-msgid "You saved {{total_discount}}"
-msgstr "Вы сэкономили {{total_discount}}"
-
-#: v2/App/Views/Admin/Tabs/settings.php:313
+#: v2/App/Views/Admin/Tabs/settings.php:337
 msgid "Apply cart discount as"
 msgstr "Применить скидку в корзине как"
 
-#: v2/App/Views/Admin/Tabs/settings.php:314
-msgid "Apply cart discount as fee/coupon"
-msgstr "Применить скидку в корзине как комиссию/купон"
-
-#: v2/App/Views/Admin/Tabs/settings.php:657
+#: v2/App/Views/Admin/Tabs/settings.php:735
 msgid "Oops! Something went wrong."
 msgstr "Ой! Что-то пошло не так."
+
+#: v2/App/Helpers/Validation.php:636
+msgid "Validation error"
+msgstr "Ошибка проверки"
+
+#: v2/App/Helpers/Validation.php:150
+msgid "Accepts only hex color code"
+msgstr "Допускается только шестнадцатеричный код цвета"
+
+#: v2/App/Helpers/Validation.php:149
+msgid "Accepts only 0 or 1"
+msgstr "Допускается только 0 или 1"
+
+#: v2/App/Helpers/Validation.php:148
+msgid "Accepts only numbers 0-9 and one dot"
+msgstr "Допускаются только цифры 0-9 и одна точка"
+
+#: v2/App/Helpers/Validation.php:147
+msgid "Accepts only letters a-z, numbers 0-9 and spaces with special characters"
+msgstr "Допускаются только буквы a-z, цифры 0-9 и пробелы со специальными символами"
 
 #: v2/App/Helpers/Validation.php:146 v2/App/Helpers/Validation.php:151
 #: v2/App/Helpers/Validation.php:463 v2/App/Helpers/Validation.php:663
 msgid "Invalid characters"
 msgstr "Недопустимые символы"
 
-#: v2/App/Helpers/Validation.php:636
-msgid "Validation error"
-msgstr "Ошибка проверки"
-
-#: v2/App/Controllers/Admin/Settings.php:367
+#: v2/App/Controllers/Admin/Settings.php:372
 msgid "Searching…"
 msgstr "Поиск..."
 
-#: v2/App/Helpers/Helper.php:339
-msgid "Update now"
-msgstr "Обновить сейчас"
-
-#: v2/App/Helpers/Helper.php:344
+#. translators: %s used to display update now link
+#: v2/App/Helpers/Helper.php:347
 msgid "You are using a lower version of our <b>Woo Discount Rules PRO 2.0</b> plugin. Please update the plugin to latest version to run smoothly. %s"
 msgstr "Вы используете более раннюю версию нашего плагина <b>Woo Discount Rules PRO 2.0</b>. Пожалуйста, обновите плагин до последней версии, чтобы он работал нормально. %s"
 
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:137
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:166
-#: v2/App/Controllers/Admin/WDRAjax.php:71
-#: v2/App/Controllers/Admin/WDRAjax.php:74
+#: v2/App/Helpers/Helper.php:340
+msgid "Update now"
+msgstr "Обновить сейчас"
+
+#: v1/index.php:85 v2/App/Helpers/Helper.php:326
+msgid "Invalid token"
+msgstr "Токен недействителен"
+
+#: v2/App/Compatibility/AeliaCurrencySwitcherByAelia.php:49
+msgid "Add compatible for Aelia Currency Switcher"
+msgstr "Добавлена совместимость для Aelia Currency Switcher"
+
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:141
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:171
+#: v2/App/Controllers/Admin/WDRAjax.php:73
+#: v2/App/Controllers/Admin/WDRAjax.php:76
 msgid "Authentication required"
 msgstr "Требуется авторизация"
 
-#: v2/App/Helpers/Helper.php:163
-msgid "User role"
-msgstr "Роль пользователя"
+#: v2/App/Helpers/Helper.php:216
+msgid ""
+"All variants in each product together :\n"
+"            Useful when applying discounts based on variable products and you want the quantity to be counted based on the parent product.\n"
+"            Example:\n"
+"            Say, you have Product A - Small, Medium, Large.\n"
+"            If a customer buys  2 of Product A - Small,  4 of Product A - Medium,  6 of Product A - Large, then the count will be: 6+4+2 = 12\n"
+msgstr ""
+"Все варианты в каждом товаре вместе :\n"
+"            Полезно при применении скидок на основе вариативных товаров, и вы хотите, чтобы количество учитывалось на основе родительского товара.\n"
+"            Пример:\n"
+"            Скажем, у вас есть товар А - маленький, средний, большой.\n"
+"            Если клиент покупает 2 штуки товара A - маленький, 4 штуки товара A - средний, 6 штук товара A - большой, то количество будет равно: 6+4+2 = 12\n"
+
+#: v2/App/Helpers/Helper.php:204
+msgid ""
+"Filter set above :\n"
+"             This will count the quantities of products set in the 'Filter' section.\n"
+"             Example: If you selected a few categories there, it will count the quantities of products in those categories added in cart. If you selected a few products in the filters section, then it will count the quantities together.\n"
+"            Example: Let’s say, you wanted to offer a Bulk Quantity discount for Category A and chosen Category A in the filters. So when a customer adds 1 quantity each of X, Y and Z from Category A, then the count here is 3."
+msgstr ""
+"Фильтр установлен выше :\n"
+"             При этом будет подсчитано количество товаров, указанное в разделе «Фильтр».\n"
+"             Пример: Если вы выбрали там несколько категорий, будет подсчитано количество товаров в этих категориях, добавленных в корзину. Если вы выбрали несколько товаров в разделе фильтра, то будет подсчитано общее количество.\n"
+"            Пример: Допустим, вы хотели предложить оптовую скидку для категории А и выбрали категорию А в фильтре. Таким образом, когда клиент добавляет по 1 штуки каждого товара А, Б и В из категории A, то количество будет равно 3."
+
+#: v2/App/Helpers/Helper.php:189
+msgid ""
+"Individual Product : \n"
+"            This counts the total quantity of each product / line item separately.\n"
+"            Example:\n"
+"             If a customer wanted to buy 2 quantities of Product A,  3 quantities of Product B, then count will be maintained at the product level.\n"
+"            2 - count of Product A\n"
+"            3 - Count of Product B\n"
+"            In case of variable products, the count will be based on each variant because WooCommerce considers a variant as a product itself."
+msgstr ""
+"Индивидуальный товар : \n"
+"            Это подсчитывает общее количество каждого товара / позиции отдельно.\n"
+"            Пример:\n"
+"             Если клиент хочет купить 2 количества товара А,  3 количества товара Б, тогда подсчет товара будет на уровне товара.\n"
+"            2 - количество товара A\n"
+"            3 - количество товара Б\n"
+"            В случае вариативных товаров, подсчет будет основываться на каждом варианте, поскольку WooCommerce рассматривает вариант как отдельный товар."
+
+#: v2/App/Helpers/Helper.php:174
+msgid "Product Combination"
+msgstr "Комбинация товаров"
+
+#: v2/App/Helpers/Helper.php:172
+msgid "Shipping Address"
+msgstr "Адрес доставки"
 
 #: v2/App/Helpers/Helper.php:166
 msgid "Payment Method"
@@ -160,77 +526,190 @@ msgstr "Способ оплаты"
 msgid "Days & Time"
 msgstr "Дни и время"
 
-#: v2/App/Views/Admin/Tabs/ImportExport.php:158
-msgid "Unlock this feature by <a href=\"https://www.flycart.org/products/wordpress/woocommerce-discount-rules\" target=\"_blank\">Upgrading to Pro</a>"
-msgstr "Разблокируйте эту функцию <a href=\"https://www.flycart.org/products/wordpress/woocommerce-discount-rules\" target=\"_blank\">обновившись до Про</a>"
+#: v2/App/Helpers/Helper.php:163
+msgid "User role"
+msgstr "Роль пользователя"
 
 #: v2/App/Helpers/Helper.php:158
 msgid "Popular conditions:"
 msgstr "Популярные условия:"
 
-#: v2/App/Helpers/Helper.php:172
-msgid "Shipping Address"
-msgstr "Адрес доставки"
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:59
+msgid ""
+"Useful when applying discounts based on variable products and you want the quantity to be counted based on the parent product.\n"
+"Example: \n"
+"Say, you have Product A - Small, Medium, Large.\n"
+"If a customer buys  2 of Product A - Small,  4 of Product A - Medium,  6 of Product A - Large, then the count will be: 6+4+2 = 12"
+msgstr ""
+"Полезно при применении скидок на основе вариативных товаров, и вы хотите, чтобы количество учитывалось на основе родительского товара.\n"
+"Пример: \n"
+"Скажем, у вас есть товар А — маленький, средний, большой.\n"
+"Если покупатель покупает 2 товара А — маленький, 4 товара А — средний, 6 товаров А — большой, то количество будет: 6+4+2 = 12"
+
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:50
+msgid ""
+"This counts the total quantity of each product / line item separately.\n"
+"Example : If a customer wanted to buy 2 quantities of Product A,  3 quantities of Product B, then count will be maintained at the product level. \n"
+"2 - count of Product A\n"
+"3 - Count of Product B\n"
+"\n"
+"In case of variable products, the count will be based on each variant because WooCommerce considers a variant as a product itself.  \n"
+msgstr ""
+"Будет подсчитано общее количество каждого товара / позиции отдельно.\n"
+"Пример : Если клиент хочет купить 2 штуки товара А и 3 штуки товара Б, то подсчет будет вестись на уровне товара. \n"
+"2 - штуки товара A\n"
+"3 - штуки товара Б\n"
+"\n"
+"В случае вариативных товаров подсчет будет основываться на каждом варианте, поскольку WooCommerce рассматривает вариант как отдельный товар.  \n"
+
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:42
+msgid ""
+"This will count the quantities of products set in the “Filter” section.\n"
+"Example: If you selected a few categories there, it will count the quantities of products in those categories added in cart. If you selected a few products in the filters section, then it will count the quantities together.\n"
+"\n"
+"Example: Let’s say, you wanted to offer a Bulk Quantity discount for Category A and chosen Category A in the filters.\n"
+"\n"
+"So when a customer adds 1 quantity each of X, Y and Z from Category A, then the count here is 3."
+msgstr ""
+"Будет подсчитано количество товаров, указанное в разделе «Фильтр».\n"
+"Пример: Если вы выбрали несколько категорий, будет подсчитано количество товаров в этих категориях, добавленных в корзину. Если вы выбрали несколько товаров в разделе фильтра, то будет подсчитано общее количество.\n"
+"\n"
+"Пример: Допустим, вы хотите предложить оптовую скидку для категории А и выбрали категорию А в фильтре.\n"
+"\n"
+"Таким образом, когда клиент добавляет по 1 штуке каждого товара из Б, В и Г из категории A, то количество будет равно 3."
+
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:17
+msgid ""
+"Filter set above : \n"
+"This will count the quantities of products set in the “Filter” section.\n"
+"Example: If you selected a few categories there, it will count the quantities of products in those categories added in cart. If you selected a few products in the filters section, then it will count the quantities together.\n"
+"\n"
+"Example: Let’s say, you wanted to offer a Bulk Quantity discount for Category A and chosen Category A in the filters.\n"
+"\n"
+"So when a customer adds 1 quantity each of X, Y and Z from Category A, then the count here is 3. \n"
+"\n"
+"Individual Product :\n"
+"\n"
+"This counts the total quantity of each product / line item separately.\n"
+"Example : If a customer wanted to buy 2 quantities of Product A,  3 quantities of Product B, then count will be maintained at the product level. \n"
+"2 - count of Product A\n"
+"3 - Count of Product B\n"
+"\n"
+"In case of variable products, the count will be based on each variant because WooCommerce considers a variant as a product itself.  \n"
+"\n"
+"All variants in each product together :\n"
+"Useful when applying discounts based on variable products and you want the quantity to be counted based on the parent product.\n"
+"Example: \n"
+"Say, you have Product A - Small, Medium, Large.\n"
+"If a customer buys  2 of Product A - Small,  4 of Product A - Medium,  6 of Product A - Large, then the count will be: 6+4+2 = 12\n"
+msgstr ""
+"Фильтр установлен выше : \n"
+"Будет подсчитано количество товаров, указанное в разделе «Фильтр».\n"
+"Пример: Если вы выбрали несколько категорий, будет подсчитано количество товаров в этих категориях, добавленных в корзину. Если вы выбрали несколько товаров в разделе фильтра, то будет подсчитано общее  количество.\n"
+"\n"
+"Пример: Допустим, вы хотите предложить оптовую скидку для категории А и выбрали категорию А в фильтре.\n"
+"\n"
+"Таким образом, когда клиент добавляет по 1 штуке каждого товара Б, В и Г из категории A, то количество будет равно 3.\n"
+"\n"
+"Индивидуальный товар :\n"
+"\n"
+"Будет подсчитано общее количество каждого товара / позиции отдельно.\n"
+"Пример : Если клиент хочет купить 2 штуки товара А и 3 штуки товара Б, то подсчет будет вестись на уровне товара. \n"
+"2 - штуки товара A\n"
+"3 - штуки товара Б\n"
+"\n"
+"В случае вариативных товаров подсчет будет основываться на каждом варианте, поскольку WooCommerce рассматривает вариант как отдельный товар.\n"
+"\n"
+"Все варианты в каждом товаре вместе :\n"
+"Полезно при применении скидок на основе вариативных товаров, и вы хотите, чтобы количество учитывалось на основе родительского товара.\n"
+"Пример: \n"
+"Скажем, у вас есть товар А — маленький, средний, большой.\n"
+"Если покупатель покупает 2 штуки товара А — маленький, 4 штуки товара А — средний, 6 штук товаров А — большой, то количество будет равно: 6+4+2 = 12.\n"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:30
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:128
+msgid "Match Any"
+msgstr "Совпадение с любым"
 
 #: v2/App/Views/Admin/Tabs/Recipe.php:54
-#: v2/App/Views/Admin/Tabs/settings.php:532
 msgid "Unlock this feature by <a href='https://www.flycart.org/products/wordpress/woocommerce-discount-rules?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=unlock_pro' target='_blank'>Upgrading to Pro</a>"
 msgstr "Разблокируйте эту функцию с помощью <a href='https://www.flycart.org/products/wordpress/woocommerce-discount-rules?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=unlock_pro' target='_blank'>Обновления до версии Про</a>"
 
-#: v2/App/Helpers/Helper.php:174
-msgid "Product Combination"
-msgstr "Комбинация товаров"
+#: v2/App/Views/Admin/Tabs/ImportExport.php:178
+msgid "Unlock this feature by <a href=\"https://www.flycart.org/products/wordpress/woocommerce-discount-rules\" target=\"_blank\">Upgrading to Pro</a>"
+msgstr "Разблокируйте эту функцию <a href=\"https://www.flycart.org/products/wordpress/woocommerce-discount-rules\" target=\"_blank\">обновившись до Про</a>"
 
-#: v2/App/Controllers/Admin/Settings.php:592
-msgid "Discount - <a href=\"https://docs.flycart.org/en/articles/3914904-bulk-discounts-tiered-pricing-discounts-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bulk_documentation\" style=\"font-size: 12px;\" target=\"_blank\">Read Docs</a>"
-msgstr "Скидка - <a href=\"https://docs.flycart.org/en/articles/3914904-bulk-discounts-tiered-pricing-discounts-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bulk_documentation\" style=\"font-size: 12px;\" target=\"_blank\">Изучить документацию</a>"
+#: v2/App/Controllers/Admin/Settings.php:614
+msgid ""
+"<p>Select discount type and its value (percentage/price/fixed price)</p><div class=\"awdr-count-by-description\"><b>All variants in each product together :</b><p>Useful when applying discounts based on variable products and you want the quantity to be counted based on the parent product.</p>\n"
+"<p><b>Example:</b>\n"
+"Say, you have Product A - Small, Medium, Large.\n"
+"If a customer buys  2 of Product A - Small,  4 of Product A - Medium,  6 of Product A - Large, then the count will be: 6+4+2 = 12\n"
+"</p></div>"
+msgstr ""
+"<p>Выберите тип скидки и ее значение (процент/цена/фиксированная цена)</p><div class=\"awdr-count-by-description\"><b>Все варианты в каждом товаре вместе\n"
+" :</b><p>Полезно при применении скидок на основе вариативных товаров, и вы хотите, чтобы количество учитывалось на основе родительского товара.</p>\n"
+"<p><b>Пример:</b>\n"
+"Скажем, у вас есть товар А - маленький, средний, большой.\n"
+"Если клиент покупает 2 штуки товара A - маленький, 4 штуки товара A - средний, 6 штук товара A - большой, то количество будет равно: 6+4+2 = 12\n"
+"</p></div>"
 
-#: v2/App/Controllers/Admin/Settings.php:594
-msgid "Discount - <a href=\"https://docs.flycart.org/en/articles/3810570-buy-x-get-y-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bxgy\" style=\"font-size: 12px;\" target=\"_blank\">Read Docs</a>"
-msgstr "Скидка - <a href=\"https://docs.flycart.org/en/articles/3810570-buy-x-get-y-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bxgy\" style=\"font-size: 12px;\" target=\"_blank\">Изучить документацию</a>"
+#: v2/App/Controllers/Admin/Settings.php:608
+msgid ""
+"<p>Select discount type and its value (percentage/price/fixed price)</p> <div class=\"awdr-count-by-description\"><b>Individual Product :</b><p>This counts the total quantity of each product / line item separately.</p>\n"
+"<p><b>Example:</b> If a customer wanted to buy 2 quantities of Product A,  3 quantities of Product B, then count will be maintained at the product level. </p>\n"
+"<span>2 - count of Product A</span></br>\n"
+"<span>3 - Count of Product B</span>\n"
+"<p>In case of variable products, the count will be based on each variant because WooCommerce considers a variant as a product itself.  </p></div>"
+msgstr ""
+"<p>Выберите тип скидки и ее значение (процент/цена/фиксированная цена)</p> <div class=\"awdr-count-by-description\"><b>Индивидуальный товар :</b><p>Будет подсчитано общее количество каждого товара / позиции отдельно.</p>\n"
+"<p><b>Пример:</b> Если клиент хочет купить 2 штуки товара А и 3 штуки товара Б, то подсчет будет вестись на уровне товара. </p>\n"
+"<span>2 - штуки товара A</span></br>\n"
+"<span>3 - штуки товара Б</span>\n"
+"<p>В случае вариативных товаров подсчет будет основываться на каждом варианте, поскольку WooCommerce рассматривает вариант как отдельный товар.  </p></div>"
 
-#: v2/App/Controllers/Admin/Settings.php:595
-msgid "Discount - <a href=\"https://docs.flycart.org/en/articles/3810071-buy-one-get-one-free-buy-x-get-x-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bxgx\" style=\"font-size: 12px;\" target=\"_blank\">Read Docs</a>"
-msgstr "Скидка - <a href=\"https://docs.flycart.org/en/articles/3810071-buy-one-get-one-free-buy-x-get-x-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bxgx\" style=\"font-size: 12px;\" target=\"_blank\">Изучить документацию</a>"
+#: v2/App/Controllers/Admin/Settings.php:602
+msgid ""
+"<p>Select discount type and its value (percentage/price/fixed price)</p> <div class=\"awdr-count-by-description\"><b>Filter set above :</b><p> This will count the quantities of products set in the “Filter” section.</p>\n"
+"<p><b>Example:</b> If you selected a few categories there, it will count the quantities of products in those categories added in cart. If you selected a few products in the filters section, then it will count the quantities together.</p>\n"
+"<p><b>Example:</b> Let’s say, you wanted to offer a Bulk Quantity discount for Category A and chosen Category A in the filters. So when a customer adds 1 quantity each of X, Y and Z from Category A, then the count here is 3.</p></div>"
+msgstr ""
+"<p>Выберите тип скидки и ее значение (процент/цена/фиксированная цена)</p> <div class=\"awdr-count-by-description\"><b>Фильтр установлен выше :</b><p> Будет подсчитано количество товаров, указанное в разделе «Фильтр».</p>\n"
+"<p><b>Пример:</b> Если вы выбрали несколько категорий, будет подсчитано количество товаров в этих категориях, добавленных в корзину. Если вы выбрали несколько товаров в разделе фильтра, то будет подсчитано общее количество.</p>\n"
+"<p><b>Пример:</b> Допустим, вы хотите предложить оптовую скидку для категории А и выбрали категорию А в фильтре. Таким образом, когда клиент добавляет по 1 штуке каждого товара из Б, В и Г из категории A, то количество будет равно 3.</p></div>"
 
-#: v2/App/Controllers/Admin/Settings.php:593
-msgid "Discount - <a href=\"https://docs.flycart.org/en/articles/3809899-bundle-set-discount-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bundle_set\" style=\"font-size: 12px;\" target=\"_blank\">Read Docs</a>"
-msgstr "Скидка - <a href=\"https://docs.flycart.org/en/articles/3809899-bundle-set-discount-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bundle_set\" style=\"font-size: 12px;\" target=\"_blank\">Изучить документацию</a>"
-
-#: v2/App/Views/Admin/Tabs/ImportExport.php:148
-msgid "Import"
-msgstr "Импорт"
-
-#: v2/App/Controllers/Admin/Tabs/ImportExport.php:19
-msgid "Import/Export"
-msgstr "Импорт/Экспорт"
-
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:46
-msgid "All Rules"
-msgstr "Все правила"
-
-#: v2/App/Views/Admin/Tabs/ImportExport.php:29
-#: v2/App/Views/Admin/Tabs/ImportExport.php:157
-msgid "Import Tool"
-msgstr "Инструмент импорта"
-
-#: v2/App/Views/Admin/Tabs/ImportExport.php:132
-msgid "<b style=\"color: green;\">Rules Imported successfully</b>"
-msgstr "<b style=\"color: green;\">Правила успешно импортированы</b>"
-
-#: v2/App/Views/Admin/Tabs/ImportExport.php:135
-msgid "<b style=\"color: red;\">Problem in Importing CSV Data</b>"
-msgstr "<b style=\"color: red;\">Проблема при импорте данных CSV</b>"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:290
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:305
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:304
 #: v2/App/Views/Admin/Tabs/DiscountRule.php:321
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:337
+msgid "Rule reached maximum usage limit"
+msgstr "Правило достигло максимального предела использования"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:303
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:318
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:334
 msgid " - ( Not running )"
 msgstr " - ( Не запущено )"
 
-#: v2/App/Controllers/Admin/Settings.php:645
-msgid "Invalid File. Upload : <b style='color:red;'>.csv</b> File. </br>"
-msgstr "Неверный файл. Загрузите : файл <b style='color:red;'>.csv</b>. </br>"
+#: v2/App/Views/Admin/Tabs/ImportExport.php:168
+msgid "Import"
+msgstr "Импорт"
+
+#: v2/App/Views/Admin/Tabs/ImportExport.php:29
+#: v2/App/Views/Admin/Tabs/ImportExport.php:177
+msgid "Import Tool"
+msgstr "Инструмент импорта"
+
+#: v2/App/Views/Admin/Tabs/settings.php:90
+msgid "Useful when you have purchase history/shipping address based discount."
+msgstr "Полезно, когда у вас есть скидка на основе истории покупок/адреса доставки."
+
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:49
+msgid "Filters set above"
+msgstr "Фильтры, установленные выше"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:156
+msgid "Rule Used: "
+msgstr "Правило использовалось: "
 
 #: v2/App/Views/Admin/Rules/Manage.php:24
 #: v2/App/Views/Admin/Rules/Manage.php:36
@@ -238,321 +717,164 @@ msgstr "Неверный файл. Загрузите : файл <b style='color
 msgid " Rule reached maximum usage limit  "
 msgstr "Правило достигло максимального лимита использования  "
 
-#: v2/App/Views/Admin/Rules/Manage.php:148
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:52
+msgid "All Rules (except cart adjustment type)"
+msgstr "Все правила (за исключением типа Содержимое корзины)"
+
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:46
+msgid "All Rules"
+msgstr "Все правила"
+
+#: v2/App/Controllers/Admin/Tabs/ImportExport.php:19
+msgid "Import/Export"
+msgstr "Импорт/Экспорт"
+
+#: v2/App/Controllers/Admin/Settings.php:678
+msgid "<b>This rule is not running currently:</b> Validity expired"
+msgstr "<b>Это правило в настоящее время не работает:</b> Срок действия истек"
+
+#: v2/App/Controllers/Admin/Settings.php:677
+msgid "<b>This rule is not running currently:</b> Start date and time is set in the future date"
+msgstr "<b>Это правило в настоящее время не работает:</b> Дата и время начала установлены в будущем времени"
+
+#: v2/App/Controllers/Admin/Settings.php:676
+msgid "<b>This rule is not running currently:</b> Rule reached maximum usage limit"
+msgstr "<b>Это правило сейчас не работает:</b> Правило достигло максимального предела использования"
+
+#: v2/App/Controllers/Admin/Settings.php:675
+msgid "Invalid File. Upload : <b style='color:red;'>.csv</b> File. </br>"
+msgstr "Неверный файл. Загрузите : файл <b style='color:red;'>.csv</b>. </br>"
+
+#: v2/App/Views/Admin/Rules/Manage.php:149
 msgid "Choose a discount type"
 msgstr "Выберите тип скидки"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:205
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:209
-msgid " On: "
-msgstr "В: "
+#: v2/App/Views/Admin/Rules/Others/SubtotalPromotion.php:26
+msgid "<b>Example:</b> Let's say you offer a 10% discount for 1000 and above. you may want to set 900 here. So that the customer can see the promo text when his cart subtotal reaches 900"
+msgstr "<b>Пример:</b> Допустим, вы предлагаете скидку 10% за 1000 и выше. вы можете установить здесь 900. И тогда покупатель сможет увидеть рекламный текст, когда сумма в его корзине достигнет 900"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:204
-msgid "Created by: "
-msgstr "Создал:"
+#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:15
+#: v2/App/Views/Admin/Rules/Others/SubtotalPromotion.php:17
+msgid "Promotion Message"
+msgstr "Рекламное сообщение"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:208
-msgid "Modified by: "
-msgstr "Изменил: "
+#: v2/App/Views/Admin/Tabs/settings.php:424
+msgid "Select the page to display promotion message"
+msgstr "Выберите страницу для отображения рекламного сообщения"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:233
-msgid "Buy X get X"
-msgstr "Купи X, получи X"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:236
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:249
 msgid "Buy X get Y"
 msgstr "Купи X, получи Y"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:230
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:246
+msgid "Buy X get X"
+msgstr "Купи X, получи X"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:243
 msgid "Set Discount"
-msgstr "Установить скидку"
+msgstr "Добавление скидки"
 
-#: v2/App/Helpers/Woocommerce.php:1092
-msgid "Tuesday"
-msgstr "Вторник"
+#. translators: %s used to display percentage
+#: v2/App/Helpers/Migration.php:217
+msgid "%s Completed. Please wait.."
+msgstr "Выполнено %s. Пожалуйста, подождите.."
 
-#: v2/App/Helpers/Woocommerce.php:1094
-msgid "Thursday"
-msgstr "Четверг"
+#: v2/App/Helpers/Woocommerce.php:1144
+msgid "Woocommerce after order notes"
+msgstr "После комментария к заказу Woocommerce"
 
-#: v2/App/Views/Admin/Tabs/Statistics.php:130
-#: v2/App/Views/Admin/Tabs/Statistics.php:200
-msgid "This Week"
-msgstr "Эта неделя"
+#: v2/App/Helpers/Woocommerce.php:1137
+msgid "Woocommerce before checkout form"
+msgstr "После формы оформления заказа Woocommerce"
 
-#: v2/App/Helpers/Woocommerce.php:1090
-msgid "Sunday"
-msgstr "Воскресенье"
+#: v2/App/Helpers/Woocommerce.php:1136
+msgid "Woocommerce after cart"
+msgstr "После корзины Woocommerce"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:50
-#: v2/App/Views/Admin/welcome-text.php:15
-msgid "Skip"
-msgstr "Пропустить"
+#: v2/App/Helpers/Woocommerce.php:1135
+msgid "Woocommerce after cart table"
+msgstr "После таблицы корзины Woocommerce"
 
-#: v2/App/Views/Admin/Tabs/compatible.php:24
-msgid "Save Changes"
-msgstr "Сохранить изменения"
+#: v2/App/Helpers/Woocommerce.php:1134
+msgid "Woocommerce after cart contents"
+msgstr "После содержимого корзины Woocommerce"
 
-#: v2/App/Helpers/Woocommerce.php:1096
+#: v2/App/Helpers/Woocommerce.php:1133
+msgid "Woocommerce cart contents"
+msgstr "Содержимое корзины Woocommerce"
+
+#: v2/App/Helpers/Woocommerce.php:1132
+msgid "Woocommerce before cart contents"
+msgstr "Перед содержимым корзины Woocommerce"
+
+#: v2/App/Helpers/Woocommerce.php:1131
+msgid "Woocommerce before cart table"
+msgstr "Перед таблицей корзины Woocommerce"
+
+#: v2/App/Helpers/Woocommerce.php:1130
+msgid "Woocommerce before cart"
+msgstr "Перед корзиной Woocommerce"
+
+#: v2/App/Helpers/Woocommerce.php:1110
 msgid "Saturday"
 msgstr "Суббота"
 
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:47
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:53
-msgid "Rule"
-msgstr "Правило"
-
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:29
-msgid "Reports"
-msgstr "Отчеты"
-
-#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:18
-msgid "Preview"
-msgstr "Предварительный просмотр"
-
-#: v2/App/Helpers/Woocommerce.php:1091
-msgid "Monday"
-msgstr "Понедельник"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:299
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:315
-msgid "Your server current date and time:"
-msgstr "Текущая дата и время вашего сервера:"
-
-#: v2/App/Views/Admin/Tabs/Statistics.php:131
-#: v2/App/Views/Admin/Tabs/Statistics.php:201
-msgid "This Month"
-msgstr "Этот месяц"
-
-#: v2/App/Controllers/Base.php:43 v2/App/Controllers/Base.php:48
-#: v2/App/Helpers/ProOptions.php:34 v2/App/Helpers/ProOptions.php:40
-#: v2/App/Helpers/ProOptions.php:46 v2/App/Helpers/ProOptions.php:52
-#: v2/App/Helpers/ProOptions.php:58 v2/App/Views/Admin/Tabs/settings.php:131
-msgid "Product"
-msgstr "Товар"
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:16
-msgid "min"
-msgstr "мин"
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:28
-msgid "max"
-msgstr "макс"
-
-#: v2/App/Helpers/Woocommerce.php:1095
+#: v2/App/Helpers/Woocommerce.php:1109
 msgid "Friday"
 msgstr "Пятница"
 
-#: v2/App/Views/Admin/Tabs/ImportExport.php:19
-msgid "Export"
-msgstr "Экспорт"
+#: v2/App/Helpers/Woocommerce.php:1108
+msgid "Thursday"
+msgstr "Четверг"
 
-#: v2/App/Controllers/Admin/Tabs/Reports/RuleAmount.php:30
-#: v2/App/Controllers/Admin/Tabs/Reports/RuleNameDiscount.php:41
-msgid "Date"
-msgstr "Дата"
-
-#: v2/App/Helpers/ProOptions.php:239
-msgid "City - PRO -"
-msgstr "Город - ПРО -"
-
-#: v2/App/Views/Admin/Rules/Manage.php:139
-msgid "Cancel"
-msgstr "Отмена"
-
-#: v2/App/Conditions/CartLineItemsCount.php:17
-#: v2/App/Conditions/CartSubTotal.php:19 v2/App/Controllers/Base.php:162
-#: v2/App/Helpers/ProOptions.php:80 v2/App/Helpers/ProOptions.php:136
-#: v2/App/Helpers/ProOptions.php:144 v2/App/Helpers/ProOptions.php:152
-#: v2/App/Views/Admin/Tabs/settings.php:292
-msgid "Cart"
-msgstr "Корзина"
-
-#: v2/App/Controllers/Base.php:42
-msgid "All Products"
-msgstr "Все товары"
-
-#: v2/App/Views/Admin/Tabs/settings.php:884
-msgid "70 - 80"
-msgstr "70 - 80"
-
-#: v2/App/Views/Admin/Tabs/settings.php:929
-msgid "600 - 700"
-msgstr "600 - 700"
-
-#: v2/App/Views/Admin/Tabs/settings.php:862
-msgid "50 - 60"
-msgstr "50 - 60"
-
-#: v2/App/Views/Admin/Tabs/settings.php:951
-msgid "5"
-msgstr "5"
-
-#: v2/App/Views/Admin/Tabs/settings.php:906
-msgid "450 - 500"
-msgstr "450 - 500"
-
-#: v2/App/Views/Admin/Tabs/settings.php:995
-msgid "15"
-msgstr "15"
-
-#: v2/App/Views/Admin/Tabs/settings.php:839
-msgid "11 - 15"
-msgstr "11 - 15"
-
-#: v2/App/Views/Admin/Tabs/settings.php:973
-msgid "10"
-msgstr "10"
-
-#: v2/App/Views/Admin/Tabs/settings.php:816
-msgid "1 - 5"
-msgstr "1 - 5"
-
-#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:22
-msgid "1"
-msgstr "1"
-
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:23
-#: v2/App/Views/Admin/Rules/Others/SubtotalPromotion.php:23
-msgid "0.00"
-msgstr "0.00"
-
-#: v2/App/Helpers/ProOptions.php:263
-msgid "Zipcode - PRO -"
-msgstr "Индекс - ПРО -"
-
-#: v2/App/Helpers/Woocommerce.php:1093
+#: v2/App/Helpers/Woocommerce.php:1107
 msgid "Wednesday"
 msgstr "Среда"
 
-#: v2/App/Helpers/ProOptions.php:279
-msgid "User - PRO -"
-msgstr "Пользователь - ПРО -"
+#: v2/App/Helpers/Woocommerce.php:1106
+msgid "Tuesday"
+msgstr "Вторник"
 
-#: v2/App/Helpers/ProOptions.php:143
-msgid "Total weight - PRO -"
-msgstr "Общий вес- ПРО -"
+#: v2/App/Helpers/Woocommerce.php:1105
+msgid "Monday"
+msgstr "Понедельник"
 
-#: v2/App/Helpers/ProOptions.php:183
-msgid "Time - PRO -"
-msgstr "Время - ПРО -"
+#: v2/App/Helpers/Woocommerce.php:1104
+msgid "Sunday"
+msgstr "Воскресенье"
 
-#: v2/App/Helpers/ProOptions.php:45 v2/App/Helpers/ProOptions.php:127
-msgid "Tags - PRO -"
-msgstr "Метки - ПРО -"
+#: v2/App/Helpers/Rule.php:1305 v2/App/Helpers/Rule.php:1404
+#: v2/App/Views/Admin/Tabs/ImportExport.php:120
+msgid "Untitled Rule"
+msgstr "Правило без названия"
 
-#: v2/App/Views/Admin/Rules/Manage.php:136
-msgid "Save & Close"
-msgstr "Сохранить и закрыть"
+#: v2/App/Helpers/ProOptions.php:331
+msgid "Free Shipping - PRO -"
+msgstr "Бесплатная доставка - ПРО -"
 
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:148
-msgid "Rule Limits"
-msgstr "Лимиты правила"
+#: v2/App/Helpers/ProOptions.php:324
+msgid "Buy X get Y - PRO -"
+msgstr "Купи X, получи Y - ПРО -"
 
-#: v2/App/Helpers/ProOptions.php:111
-msgid "Products - PRO -"
-msgstr "Товары - ПРО -"
+#: v2/App/Helpers/ProOptions.php:318 v2/App/Helpers/ProOptions.php:325
+msgid "Bogo Discount"
+msgstr "Скидка BOGO"
+
+#: v2/App/Helpers/ProOptions.php:317
+msgid "Buy X get X - PRO -"
+msgstr "Купи X, получи X - ПРО -"
 
 #: v2/App/Helpers/ProOptions.php:295
 msgid "User role - PRO -"
 msgstr "Роль пользователя - ПРО -"
 
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:11
-msgid "Rules (Optional)"
-msgstr "Правила (необязательно)"
+#: v2/App/Helpers/ProOptions.php:287
+msgid "Is logged in - PRO -"
+msgstr "Авторизован - PRO -"
 
-#: v2/App/Controllers/Admin/Settings.php:615
-msgid "Rules (optional)"
-msgstr "Правила (необязательно)"
-
-#: v2/App/Helpers/ProOptions.php:151
-msgid "Payment Method - PRO -"
-msgstr "Способ оплаты - ПРО -"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:354
-msgid "No rules found."
-msgstr "Правил не найдено."
-
-#: v2/App/Helpers/ProOptions.php:199
-msgid "Last order - PRO -"
-msgstr "Последний заказ - ПРО -"
-
-#: v2/App/Views/Admin/Rules/Filters/Main.php:54
-#: v2/App/Views/Admin/Rules/Filters/Products.php:10
-msgid "In List"
-msgstr "В списке"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:447
-#: v2/App/Views/Admin/Tabs/help.php:179
-msgid "Go PRO"
-msgstr "Получить ПРО"
-
-#: v2/App/Views/Admin/Rules/Manage.php:99
-#: v2/App/Views/Admin/Rules/Manage.php:115
-msgid "Enable?"
-msgstr "Включить?"
-
-#: v2/App/Controllers/Admin/Tabs/DiscountRules.php:24
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:16
-msgid "Discount Rules"
-msgstr "Правила скидок"
-
-#: v2/App/Helpers/ProOptions.php:159
-msgid "Date - PRO -"
-msgstr "Дата - ПРО -"
-
-#: v2/App/Helpers/ProOptions.php:175
-msgid "Days - PRO -"
-msgstr "Дни - ПРО -"
-
-#: v2/App/Helpers/ProOptions.php:247
-msgid "Country - PRO -"
-msgstr "Страна - ПРО -"
-
-#: v2/App/Controllers/Admin/Tabs/Compatible.php:23
-msgid "Compatibility"
-msgstr "Совместимость"
-
-#: v2/App/Views/Admin/Tabs/settings.php:506
-msgid "All active rules"
-msgstr "Все активные правила"
-
-#: v2/App/Controllers/Admin/Settings.php:578
-msgid "No data for this period"
-msgstr "Для указанного периода данных нет"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:143
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:378
-msgid "Language(s)"
-msgstr "Язык(и) "
-
-#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:50
-#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:71
-#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:92
-#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:126
-msgid "Unlock this feature by <a href='https://www.flycart.org/products/wordpress/woocommerce-discount-rules' target='_blank'>Upgrading to Pro</a>"
-msgstr "Разблокируйте эту функцию <a href='https://www.flycart.org/products/wordpress/woocommerce-discount-rules' target='_blank'>обновившись до Про</a>"
-
-#: v2/App/Controllers/Admin/Settings.php:585
-msgid "Discount value"
-msgstr "Значение скидки"
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:63
-#: v2/App/Views/Admin/Tabs/settings.php:724
-msgid "Discount Value"
-msgstr "Значение скидки"
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:53
-#: v2/App/Views/Admin/Rules/Discounts/Cart.php:24
-#: v2/App/Views/Admin/Rules/Discounts/simple.php:23
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:134
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:369
-msgid "Discount Type"
-msgstr "Тип скидки"
-
-#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:111
-msgid "Discount Text"
-msgstr "Текст скидки"
+#: v2/App/Helpers/ProOptions.php:279
+msgid "User - PRO -"
+msgstr "Пользователь - ПРО -"
 
 #: v2/App/Controllers/Base.php:183 v2/App/Helpers/ProOptions.php:272
 #: v2/App/Helpers/ProOptions.php:280 v2/App/Helpers/ProOptions.php:288
@@ -560,265 +882,62 @@ msgstr "Текст скидки"
 msgid "Customer"
 msgstr "Клиент"
 
-#: v2/App/Helpers/ProOptions.php:79
-msgid "Coupons - PRO -"
-msgstr "Купоны - ПРО -"
+#: v2/App/Helpers/ProOptions.php:271
+msgid "Email - PRO -"
+msgstr "Email - ПРО -"
 
-#: v2/App/Controllers/Admin/Settings.php:581
-#: v2/App/Views/Admin/Tabs/settings.php:578
-msgid "Copy ShortCode"
-msgstr "Копировать шорткод"
+#: v2/App/Helpers/ProOptions.php:263
+msgid "Zipcode - PRO -"
+msgstr "Индекс - ПРО -"
 
-#: v2/App/Controllers/Admin/Settings.php:580
-#: v2/App/Controllers/Admin/Settings.php:651
-msgid "Copied!"
-msgstr "Скопировано!"
+#: v2/App/Helpers/ProOptions.php:255
+msgid "State - PRO -"
+msgstr "Область - ПРО -"
 
-#: v2/App/Views/Admin/Tabs/settings.php:35
-msgid "Apply discount"
-msgstr "Применить скидку"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:279
-msgid "Enabled"
-msgstr "Вкл."
-
-#: v2/App/Helpers/Rule.php:1305 v2/App/Helpers/Rule.php:1406
-#: v2/App/Views/Admin/Tabs/ImportExport.php:101
-msgid "Untitled Rule"
-msgstr "Правило без названия"
-
-#: v2/App/Helpers/ProOptions.php:119
-msgid "SKU - PRO -"
-msgstr "АРТИКУЛ - ПРО -"
-
-#: v2/App/Controllers/Base.php:202 v2/App/Controllers/Base.php:208
-#: v2/App/Helpers/ProOptions.php:332 v2/App/Views/Admin/Tabs/Recipe.php:21
-msgid "Simple Discount"
-msgstr "Простая скидка"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:81
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:89
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:103
-msgid "Search Rules"
-msgstr "Поиск правил"
-
-#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:17
-msgid "Read docs."
-msgstr "Изучить документацию."
-
-#: v2/App/Controllers/Admin/Settings.php:568
-msgid "Oops!! something went wrong!"
-msgstr "Ой!! Что-то пошло не так!"
-
-#: v2/App/Views/Admin/Rules/Filters/Main.php:55
-#: v2/App/Views/Admin/Rules/Filters/Products.php:11
-msgid "Not In List"
-msgstr "Нет в списке"
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:22
-msgid "Minimum Quantity "
-msgstr "Минимальное количество "
-
-#: v2/App/Controllers/Admin/Settings.php:584
-msgid "Minimum Quantity"
-msgstr "Минимальное количество "
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:30
-msgid "Migration"
-msgstr "Миграция"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:34
-#: v2/App/Views/Admin/welcome-text.php:9
-msgid "Migrate rules from v1 to v2"
-msgstr "Перенести правила с версии 1 на версию 2"
-
-#: v2/App/Views/Admin/Rules/Filters/Products.php:18
-msgid "Select Products"
-msgstr "Выберите товары"
-
-#: v2/App/Views/Admin/Rules/Filters/Main.php:82
-msgid "Select "
-msgstr "Выбрать "
-
-#: v2/App/Views/Admin/Tabs/settings.php:436
-msgid "Text to show when rule applied"
-msgstr "Текст, отображаемый при применении правила"
-
-#: v2/App/Helpers/ProOptions.php:51
-msgid "SKUs - PRO -"
-msgstr "АРТИКУЛЫ - ПРО -"
-
-#: v2/App/Views/Admin/Tabs/settings.php:719
-msgid "Show Discount value/price in table"
-msgstr "Показать значение скидки/цены в таблице"
-
-#: v2/App/Views/Admin/Tabs/settings.php:203
-msgid "Show discount table "
-msgstr "Показать таблицу скидок "
-
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:200
-msgid "Select values"
-msgstr "Выберите значения"
-
-#: v2/App/Controllers/Admin/Settings.php:366
-msgid "Select Values"
-msgstr "Выберите значения"
-
-#: v2/App/Views/Admin/Rules/Manage.php:152
-msgid "Select Discount Type"
-msgstr "Выберите тип скидки"
-
-#: v2/App/Views/Admin/Rules/Manage.php:244
-msgid "Select discount type and its value (percentage/price/fixed price)"
-msgstr "Выберите тип скидки и ее значение (процент/цена/фиксированная цена)"
-
-#: common.php:193
-msgid "This plugin can not be activated because it requires minimum PHP version of "
-msgstr "Этот плагин нельзя активировать, так как для его работы требуется PHP версии не ниже "
-
-#: v2/App/Views/Admin/Tabs/settings.php:96
-msgid "Suppress third party discount plugins"
-msgstr "Запретить сторонние плагины скидок"
-
-#: v2/App/Views/Admin/Tabs/settings.php:274
-msgid "Show Strikeout when"
-msgstr "Показывать зачеркивание, когда"
-
-#: v2/App/Views/Admin/Tabs/settings.php:656
-msgid "Settings Saved"
-msgstr "Настройки сохранены"
-
-#: v2/App/Controllers/Admin/Settings.php:575
-msgid "Settings saved successfully!"
-msgstr "Настройки успешно сохранены!"
-
-#: v2/App/Controllers/Admin/Settings.php:642
-msgid "Processing please wait.."
-msgstr "Обработка, пожалуйста, подождите.."
-
-#: v2/App/Controllers/Admin/Settings.php:579
-msgid "Oops! Coupon already exists in Woocommerce"
-msgstr "Ой! Купон уже существует в Woocommerce"
-
-#: v2/App/Views/Admin/Rules/Manage.php:199
-msgid "Note : You can also exclude products/categories."
-msgstr "Примечание : Вы также можете исключить товары/категории."
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:34
-msgid "Maximum Quantity "
-msgstr "Максимальное количество "
-
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:165
-msgid "Maximum usage limit"
-msgstr "Максимальный лимит использования"
-
-#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:12
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:13
-msgid "Less than ( &lt; )"
-msgstr "Меньше, чем ( &lt; )"
-
-#: v2/App/Views/Templates/discount_table.php:137
-msgid " (in cart)"
-msgstr " (в корзине)"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:295
-msgid " - ( Will run in future)"
-msgstr "- (Будет запущено в будущем)"
-
-#: v2/App/Controllers/Admin/Settings.php:567
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:327
-msgid " - (Running)"
-msgstr " - (Запущено)"
-
-#: v2/App/Views/Admin/Rules/Manage.php:129
-msgid "#Rule ID: "
-msgstr "#ИД правила: "
-
-#: v2/App/Views/Admin/Tabs/settings.php:23
-msgid "Calculate discount from"
-msgstr "Рассчитывать скидку для"
-
-#: v2/App/Views/Admin/Tabs/settings.php:393
-msgid "Display you saved text"
-msgstr "Отображать текст Вы сэкономили"
-
-#: v2/App/Views/Admin/Tabs/settings.php:394
-msgid "Display you saved text when rule applied"
-msgstr "Отображать текст Вы сэкономили когда применяется правило"
-
-#: v2/App/Views/Admin/Tabs/settings.php:325
-msgid "Combine all cart discounts"
-msgstr "Объединять все скидки в корзине"
-
-#: v2/App/Views/Admin/Tabs/ImportExport.php:13
-msgid "Export tool"
-msgstr "Инструмент экспорта"
-
-#: v2/App/Helpers/Helper.php:157
-msgid "Include additional conditions (if necessary)"
-msgstr "Добавьте дополнительные условия (при необходимости)"
-
-#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:14
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:15
-msgid "Greater than or equal ( &gt;= )"
-msgstr "Больше или равно ( &gt;= )"
-
-#: common.php:20
-msgid "Discount Rules 2.0 requires minimum PHP version of "
-msgstr "Для Discount Rules 2.0 требуется PHP версии не ниже"
-
-#: v2/App/Controllers/Admin/Settings.php:596
-msgid "<p>Select discount type and its value (percentage/price/fixed price)</p>"
-msgstr "<p>Выберите тип скидки и ее значение (процент/цена/фиксированная цена)</p>"
+#: v2/App/Helpers/ProOptions.php:247
+msgid "Country - PRO -"
+msgstr "Страна - ПРО -"
 
 #: v2/App/Helpers/ProOptions.php:240 v2/App/Helpers/ProOptions.php:248
 #: v2/App/Helpers/ProOptions.php:256 v2/App/Helpers/ProOptions.php:264
 msgid "Shipping"
 msgstr "Доставка"
 
-#: v2/App/Controllers/Admin/Settings.php:574
-msgid "Rule saved successfully!"
-msgstr "Правило успешно сохранено!"
+#: v2/App/Helpers/ProOptions.php:239
+msgid "City - PRO -"
+msgstr "Город - ПРО -"
 
-#: v2/App/Views/Admin/Tabs/settings.php:265
-msgid "On product page?"
-msgstr "На странице товара?"
+#: v2/App/Helpers/ProOptions.php:231
+msgid "Spent - PRO -"
+msgstr "Потрачено - ПРО -"
 
-#: v2/App/Views/Admin/Tabs/settings.php:268
-msgid "On category page?"
-msgstr "На странице категории?"
+#: v2/App/Helpers/ProOptions.php:223
+msgid "Number of orders made with following products - PRO -"
+msgstr "Количество заказов, сделанных со следующими товарами - PRO -"
+
+#: v2/App/Helpers/ProOptions.php:215
+msgid "Number of orders made - PRO -"
+msgstr "Количество сделанных заказов - ПРО -"
 
 #: v2/App/Helpers/ProOptions.php:207
 msgid "Last order amount - PRO -"
 msgstr "Сумма последнего заказа - ПРО -"
 
-#: common.php:9 v2/App/Controllers/Admin/WDRAjax.php:845
-msgid "Invalid request"
-msgstr "Неверный запрос"
-
-#: v2/App/Controllers/Admin/Settings.php:619
-#: v2/App/Controllers/Admin/Settings.php:621
-msgid "Get Discount"
-msgstr "Получить скидку"
-
-#: v2/App/Views/Admin/Tabs/Statistics.php:139
-#: v2/App/Views/Admin/Tabs/Statistics.php:209
-msgid "From: yyyy/mm/dd"
-msgstr "С: yyyy/mm/dd"
-
-#: v2/App/Helpers/ProOptions.php:331
-msgid "Free Shipping - PRO -"
-msgstr "Бесплатная доставка - ПРО -"
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:44
-#: v2/App/Views/Admin/Rules/Discounts/Cart.php:15
-#: v2/App/Views/Admin/Rules/Discounts/simple.php:14
-msgid "Fixed discount"
-msgstr "Фиксированная скидка"
+#: v2/App/Helpers/ProOptions.php:199
+msgid "Last order - PRO -"
+msgstr "Последний заказ - ПРО -"
 
 #: v2/App/Helpers/ProOptions.php:191
 msgid "First order - PRO -"
 msgstr "Первый заказ - ПРО -"
+
+#: v2/App/Helpers/ProOptions.php:183
+msgid "Time - PRO -"
+msgstr "Время - ПРО -"
+
+#: v2/App/Helpers/ProOptions.php:175
+msgid "Days - PRO -"
+msgstr "Дни - ПРО -"
 
 #: v2/App/Helpers/ProOptions.php:167
 msgid "Date and Time - PRO -"
@@ -829,259 +948,189 @@ msgstr "Дата и время - ПРО -"
 msgid "Date & Time"
 msgstr "Дата и время"
 
-#: common.php:71
-msgid "Click here to Switch back"
-msgstr "Нажмите здесь, чтобы вернуться назад"
+#: v2/App/Helpers/ProOptions.php:159
+msgid "Date - PRO -"
+msgstr "Дата - ПРО -"
 
-#: v2/App/Views/Admin/Tabs/settings.php:65
-msgid "Choose how discount rules should work"
-msgstr "Выберите, как должны работать правила скидок"
+#: v2/App/Helpers/ProOptions.php:151
+msgid "Payment Method - PRO -"
+msgstr "Способ оплаты - ПРО -"
 
-#: v2/App/Helpers/ProOptions.php:33 v2/App/Helpers/ProOptions.php:95
-msgid "Category - PRO -"
-msgstr "Категория - ПРО -"
+#: v2/App/Helpers/ProOptions.php:143
+msgid "Total weight - PRO -"
+msgstr "Общий вес- ПРО -"
+
+#: v2/App/Helpers/ProOptions.php:135
+msgid "Cart items quantity - PRO -"
+msgstr "Количество позиций в корзине -ПРО-"
+
+#: v2/App/Helpers/ProOptions.php:119
+msgid "SKU - PRO -"
+msgstr "АРТИКУЛ - ПРО -"
+
+#: v2/App/Helpers/ProOptions.php:111
+msgid "Products - PRO -"
+msgstr "Товары - ПРО -"
+
+#: v2/App/Helpers/ProOptions.php:88 v2/App/Helpers/ProOptions.php:96
+#: v2/App/Helpers/ProOptions.php:104 v2/App/Helpers/ProOptions.php:112
+#: v2/App/Helpers/ProOptions.php:120 v2/App/Helpers/ProOptions.php:128
+msgid "Cart Items"
+msgstr "Товары в корзине"
+
+#: v2/App/Helpers/ProOptions.php:79
+msgid "Coupons - PRO -"
+msgstr "Купоны - ПРО -"
+
+#: v2/App/Helpers/ProOptions.php:57
+msgid "On sale products - PRO -"
+msgstr "Распродажа товаров -ПРО-"
+
+#: v2/App/Helpers/ProOptions.php:51
+msgid "SKUs - PRO -"
+msgstr "АРТИКУЛЫ - ПРО -"
+
+#: v2/App/Helpers/ProOptions.php:45 v2/App/Helpers/ProOptions.php:127
+msgid "Tags - PRO -"
+msgstr "Метки - ПРО -"
 
 #: v2/App/Helpers/ProOptions.php:39 v2/App/Helpers/ProOptions.php:87
 msgid "Attributes - PRO -"
 msgstr "Атрибуты - ПРО -"
 
+#: v2/App/Helpers/ProOptions.php:33 v2/App/Helpers/ProOptions.php:95
+msgid "Category - PRO -"
+msgstr "Категория - ПРО -"
+
+#: v2/App/Compatibility/WholesalePricesByRymeraWebCo.php:51
+msgid "Add compatible for WooCommerce Wholesale Prices"
+msgstr "Добавлена совместимость для WooCommerce Wholesale Prices"
+
+#: v2/App/Compatibility/CompositeProductsBySomewhereWarm.php:51
+msgid "Add compatible for WooCommerce Composite Products"
+msgstr "Добавлена совместимость для WooCommerce Composite Products"
+
+#: v2/App/Compatibility/CurrencySwitcherByRealmag777.php:60
+#: v2/App/Compatibility/CurrencySwitcherByVillatheme.php:58
+#: v2/App/Compatibility/CurrencySwitcherByWPWham.php:46
+msgid "Add compatible for WooCommerce Currency Switcher"
+msgstr "Добавлена совместимость для WooCommerce Currency Switcher"
+
+#: v2/App/Compatibility/ExtraProductOptionsProByThemeHigh.php:54
+msgid "Add compatible for WooCommerce Extra Product Options"
+msgstr "Добавлена совместимость для WooCommerce Extra Product Options"
+
+#: v2/App/Controllers/Admin/Settings.php:601
+#: v2/App/Views/Admin/Rules/Manage.php:245
+msgid "Select discount type and its value (percentage/price/fixed price)"
+msgstr "Выберите тип скидки и ее значение (процент/цена/фиксированная цена)"
+
+#: v2/App/Views/Admin/Rules/Manage.php:200
+msgid "Note : You can also exclude products/categories."
+msgstr "Примечание : Вы также можете исключить товары/категории."
+
+#: v2/App/Views/Admin/Rules/Manage.php:199
+msgid "Choose which <b>gets</b> discount (products/categories/attributes/SKU and so on )"
+msgstr "Выберите, какие <b>получают</b> скидки (товары/категории/атрибуты/артикулы и т. д.)"
+
+#: v2/App/Views/Admin/Rules/Manage.php:153
+msgid "Select Discount Type"
+msgstr "Выберите тип скидки"
+
+#: v2/App/Views/Admin/Rules/Manage.php:140
+msgid "Cancel"
+msgstr "Отмена"
+
+#: v2/App/Views/Admin/Rules/Manage.php:137
+msgid "Save & Close"
+msgstr "Сохранить и закрыть"
+
+#: v2/App/Views/Admin/Rules/Manage.php:129
+msgid "#Rule ID: "
+msgstr "#ИД правила: "
+
+#: v2/App/Views/Admin/Rules/Manage.php:108
+#: v2/App/Views/Admin/Rules/Manage.php:122
+msgid "Apply this rule if matched and ignore all other rules"
+msgstr "Применить это правило, если оно подходит, и игнорировать все остальные правила"
+
+#: v2/App/Views/Admin/Rules/Manage.php:99
+#: v2/App/Views/Admin/Rules/Manage.php:115
+msgid "Enable?"
+msgstr "Включить?"
+
+#: v2/App/Views/Admin/Rules/Manage.php:32
+msgid " Validity expired"
+msgstr " Срок действия истек"
+
+#: v2/App/Views/Admin/Rules/Manage.php:20
+msgid " Start date and time is set in the future date"
+msgstr " Дата и время начала установлены в будущем времени"
+
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:118
+msgid " Discounted Product Price,"
+msgstr " Цена товара со скидкой,"
+
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:117
+msgid " Discount (if percentage eg: 20% or Flat, Fixed Price eg:$20),"
+msgstr " Скидка (если процент, например: 20% или фиксированная цена, например: $20),"
+
 #: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:113
 msgid " Rule Title,"
 msgstr "Название правила,"
 
-#: common.php:70
-msgid "Would you like to switch to older Woo Discount Rules?"
-msgstr "Хотите перейти на старую версию Woo Discount Rules?"
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:111
+msgid "Discount Text"
+msgstr "Текст скидки"
 
-#: v2/App/Views/Admin/Tabs/Statistics.php:149
-#: v2/App/Views/Admin/Tabs/Statistics.php:219
-msgid "To: yyyy/mm/dd"
-msgstr "По: yyyy/mm/dd"
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:101
+msgid "Customise the text that you want to display. <br><b>Note</b> : You can also use shortcodes to show discount amount."
+msgstr "Настройте текст, который вы хотите показать. <br><b>Примечание</b> : Вы также можете использовать шорткоды, чтобы показать сумму скидки."
 
-#: v2/App/Views/Admin/Tabs/settings.php:498
-msgid "Type the name of the rule to select it"
-msgstr "Введите имя правила, чтобы выбрать его"
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:100
+msgid "Badge Text "
+msgstr "Текст значка "
 
-#. Description of the plugin
-msgid "Simple to complex discount rules for your WooCommerce store. Core package."
-msgstr "От простых до сложных правил скидок для вашего магазина WooCommerce. Основной пакет."
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:79
+msgid "Choose text color to be shown in product pages."
+msgstr "Выберите цвет текста, который будет отображаться на страницах товара."
 
-#: v2/App/Views/Admin/Tabs/settings.php:419
-msgid "Show message in cart page on rule applied"
-msgstr "Показывать сообщение на странице корзины при применении правила"
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:78
+msgid "Badge Text Color"
+msgstr "Цвет текста значка"
 
-#: v2/App/Views/Admin/Tabs/settings.php:204
-msgid "Show discount table on product page"
-msgstr "Показать таблицу скидок на странице товара"
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:58
+msgid "Choose background color to be shown in product pages."
+msgstr "Выберите цвет фона, который будет отображаться на страницах товара."
 
-#: v2/App/Controllers/Admin/Settings.php:570
-msgid "Rule deleted successfully!"
-msgstr "Правило успешно удалено!"
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:18
+msgid "Preview"
+msgstr "Предварительный просмотр"
 
-#: v2/App/Views/Admin/Rules/Filters/Main.php:173
-msgid "Add filter"
-msgstr "Добавить фильтр"
-
-#: v2/App/Views/Admin/Tabs/settings.php:409
-msgid "You save text to show when rule applied"
-msgstr "Текст Вы сэкономили, который появляется когда применяется правило скидки"
-
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:79
-#: v2/App/Views/Admin/Rules/Others/CommonTemplates.php:87
-msgid "Condition Type"
-msgstr "Тип условия"
-
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:18
-msgid "Subtotal should be"
-msgstr "Подытог должен быть"
-
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:24
-msgid "Subtotal Amount "
-msgstr "Сумма подытога"
-
-#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:15
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:16
-msgid "Greater than ( &gt; )"
-msgstr "Больше чем ( &gt; )"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:114
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:407
-msgid "items"
-msgstr "элементов"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:114
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:407
-msgid "item"
-msgstr "элемент"
-
-#: v2/App/Views/Admin/Tabs/settings.php:24
-msgid "sale price or regular price"
-msgstr "цена распродажи или базовая цена"
-
-#: v2/App/Controllers/Admin/Settings.php:569
-msgid "Rule duplicated successfully!"
-msgstr "Правило успешно скопировано!"
-
-#: v2/App/Controllers/Admin/Settings.php:573
-msgid "Rule enabled successfully!"
-msgstr "Правило успешно включено!"
-
-#: v2/App/Controllers/Admin/Settings.php:572
-msgid "Rule disabled successfully!"
-msgstr "Правило успешно отключено!"
-
-#: v2/App/Helpers/ProOptions.php:324
-msgid "Buy X get Y - PRO -"
-msgstr "Купи X, получи Y - ПРО -"
-
-#: v2/App/Helpers/ProOptions.php:317
-msgid "Buy X get X - PRO -"
-msgstr "Купи X, получи X - ПРО -"
-
-#: v2/App/Controllers/Admin/Settings.php:588
-#: v2/App/Views/Admin/Rules/Manage.php:196
-msgid "Filter"
-msgstr "Фильтр"
-
-#: v2/App/Controllers/Admin/Settings.php:589
-msgid ""
-"<p>Choose <b>what gets discount</b> (products/categories/attributes/SKU and so on )</p>\n"
-"<p>Note : You can also exclude products/categories.</p>"
-msgstr ""
-"<p>Выберите <b>на что распространяется скидка</b> (товары/категории/атрибуты/артикулы и так далее )</p>\n"
-"<p>Примечание: Вы также можете исключить товары/категории.</p>"
-
-#: v2/App/Views/Admin/Rules/Filters/Main.php:116
-#: v2/App/Views/Admin/Rules/Filters/Main.php:162
-msgid "Discount applies to all eligible products in the store"
-msgstr "Скидка распространяется на все подходящие товары в магазине"
-
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:116
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:136
-msgid "Add condition"
-msgstr "Добавить условие"
-
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:185
-msgid "Rule Valid To"
-msgstr "Правило действительно до"
-
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:173
-msgid "Rule Vaild From"
-msgstr "Правило действительно c"
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:41
-#: v2/App/Views/Admin/Rules/Discounts/Cart.php:14
-#: v2/App/Views/Admin/Rules/Discounts/simple.php:13
-msgid "Percentage discount"
-msgstr "Скидка в процентах"
-
-#: v2/App/Views/Admin/Rules/Discounts/Main.php:95
-#: v2/App/Views/Admin/Rules/Discounts/simple.php:41
-msgid "Show discount in cart as coupon instead of changing the product price ?"
-msgstr "Показывать скидку в корзине как купон вместо изменения цены товара?"
-
-#: v2/App/Views/Admin/Rules/Discounts/Cart.php:40
-msgid "Discount label"
-msgstr "Ярлык скидки"
-
-#: v2/App/Views/Admin/Rules/Discounts/Cart.php:42
-#: v2/App/Views/Admin/Rules/Discounts/Main.php:102
-#: v2/App/Views/Admin/Rules/Discounts/simple.php:48
-#: v2/App/Views/Admin/Tabs/Statistics.php:249
-msgid "Discount Label"
-msgstr "Ярлык скидки"
-
-#: common.php:24
-msgid "Discount Rules 2.0 requires at least Woocommerce"
-msgstr "Для Discount Rules 2.0 требуется Woocommerce версии"
-
-#: v2/App/Controllers/ManageDiscount.php:1362
-msgid "Coupon code applied successfully."
-msgstr "Код купона успешно применен."
-
-#: v2/App/Helpers/ProOptions.php:318 v2/App/Helpers/ProOptions.php:325
-msgid "Bogo Discount"
-msgstr "Скидка BOGO"
-
-#: common.php:44
-msgid "Since 2.0, you need BOTH Core and Pro (2.0) packages installed and activated.  Please download the Pro 2.0 pack from My Downloads page in our site, install and activate it. <a href=\"https://docs.flycart.org/en/articles/4006520-switching-to-2-0-from-v1-x-versions?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=switch_to_v2\" target=\"_blank\">Here is a guide and video tutorial</a>"
-msgstr "Начиная с версии 2.0 вам необходимо установить и активировать оба пакета: Основной и Про.  Загрузите пакет Про 2.0 на странице «Мои загрузки» на нашем сайте, установите и активируйте его. <a href=\"https://docs.flycart.org/en/articles/4006520-switching-to-2-0-from-v1-x-versions?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=switch_to_v2\" target=\"_blank\">Посмотрите руководство и видеоурок</a>"
-
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:189
-msgid "Vaild to"
-msgstr "Действительно по"
-
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:178
-msgid "Vaild from"
-msgstr "Действительно с"
-
-#: v2/App/Helpers/ProOptions.php:271
-msgid "Email - PRO -"
-msgstr "Email - ПРО -"
-
-#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:22
-#: v2/App/Views/Admin/Tabs/settings.php:658
-msgid "Note:"
-msgstr "Примечание: "
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:17
+msgid "Read docs."
+msgstr "Изучить документацию."
 
 #: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:17
 msgid "It helps to display discount information in product pages."
 msgstr "Это помогает отображать информацию о скидках на страницах товаров."
 
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:32
-msgid "How to calculate the subtotal"
-msgstr "Как рассчитывать подытог"
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:86
+msgid "Add Range"
+msgstr "Добавить диапазон"
 
-#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:27
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:29
-msgid "Count all items in cart"
-msgstr "Количество всех элементов в корзине"
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:64
+msgid "All variants in each product together"
+msgstr "Все варианты в каждом товаре вместе"
 
-#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:28
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:30
-msgid "Only count items chosen in the filters set for this rule"
-msgstr "Учитывать только элементы, выбранные в фильтрах, установленных для этого правила"
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:58
+msgid "Individual product"
+msgstr "Индивидуальный товар"
 
-#: v2/App/Views/Admin/Tabs/settings.php:262
-msgid "On shop page?"
-msgstr "На странице магазина?"
-
-#: v2/App/Controllers/Admin/Settings.php:365
-msgid "no results"
-msgstr "результатов нет"
-
-#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:13
-#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:14
-msgid "Less than or equal ( &lt;= )"
-msgstr "Меньше или равно ( &lt;= )"
-
-#: v2/App/Views/Admin/Tabs/compatible.php:12
-msgid "Compatibility for Woo Discount Rules"
-msgstr "Совместимость с Woo Discount Rules"
-
-#: v2/App/Views/Admin/Tabs/compatible.php:30
-msgid ""
-"This section lists plugins that require a compatibility with discount rules to resolve conflicts. \n"
-"Please tick them (by checking the box) and then save. This will help discount rules to run smoothly along with these plugins"
-msgstr ""
-"В этом разделе перечислены плагины, которым для исправления конфликтов требуется совместимость с правилами скидок. \n"
-"Пожалуйста, отметьте их (установив флажок), а затем сохраните. Это поможет обеспечить бесперебойную работу правил скидок вместе с этими плагинами"
-
-#: v2/App/Helpers/ProOptions.php:215
-msgid "Number of orders made - PRO -"
-msgstr "Количество сделанных заказов - ПРО -"
-
-#: v2/App/Views/Admin/Tabs/settings.php:97
-msgid "Suppress third party plugins from modifying the prices. other discount plugins may not works!"
-msgstr "Запретить сторонним плагинам изменять цены, другие плагины для работы со скидками могут перестать работать!"
-
-#: v2/App/Helpers/ProOptions.php:255
-msgid "State - PRO -"
-msgstr "Область - ПРО -"
-
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:48
-msgid "Fixed price for item"
-msgstr "Фиксированная цена для позиции"
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:95
+#: v2/App/Views/Admin/Rules/Discounts/simple.php:41
+msgid "Show discount in cart as coupon instead of changing the product price ?"
+msgstr "Показывать скидку в корзине как купон вместо изменения цены товара?"
 
 #: v2/App/Views/Admin/Rules/Discounts/simple.php:19
 msgid "Fixed price per item -PRO-"
@@ -1091,45 +1140,691 @@ msgstr "Фиксированная цена для позиции - ПРО -"
 msgid "Fixed price per item"
 msgstr "Фиксированная цена для позиции"
 
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:68
+msgid "Label"
+msgstr "Ярлык"
+
 #: v2/App/Views/Admin/Rules/Discounts/Bulk.php:50
 msgid "Fixed price for item - PRO -"
 msgstr "Фиксированная цена для позиции - ПРО -"
 
-#: v2/App/Helpers/ProOptions.php:88 v2/App/Helpers/ProOptions.php:96
-#: v2/App/Helpers/ProOptions.php:104 v2/App/Helpers/ProOptions.php:112
-#: v2/App/Helpers/ProOptions.php:120 v2/App/Helpers/ProOptions.php:128
-msgid "Cart Items"
-msgstr "Товары в корзине"
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:48
+msgid "Fixed price for item"
+msgstr "Фиксированная цена для позиции"
 
-#: v2/App/Controllers/Admin/Settings.php:571
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:34
+msgid "Maximum Quantity "
+msgstr "Максимальное количество "
+
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:28
+msgid "max"
+msgstr "макс"
+
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:22
+msgid "Minimum Quantity "
+msgstr "Минимальное количество "
+
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:16
+msgid "min"
+msgstr "мин"
+
+#: v2/App/Views/Admin/Rules/Discounts/Cart.php:42
+#: v2/App/Views/Admin/Rules/Discounts/Main.php:102
+#: v2/App/Views/Admin/Rules/Discounts/simple.php:48
+#: v2/App/Views/Admin/Tabs/Statistics.php:249
+msgid "Discount Label"
+msgstr "Ярлык скидки"
+
+#: v2/App/Views/Admin/Rules/Discounts/Cart.php:40
+msgid "Discount label"
+msgstr "Ярлык скидки"
+
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:53
+#: v2/App/Views/Admin/Rules/Discounts/Cart.php:24
+#: v2/App/Views/Admin/Rules/Discounts/simple.php:23
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:138
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:382
+msgid "Discount Type"
+msgstr "Тип скидки"
+
+#: v2/App/Views/Admin/Rules/Discounts/Cart.php:20
+msgid "Fixed discount per product -PRO-"
+msgstr "Фиксированная скидка на товар -ПРО-"
+
+#: v2/App/Views/Admin/Rules/Discounts/Cart.php:17
+msgid "Fixed discount per product"
+msgstr "Фиксированная скидка на товар"
+
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:44
+#: v2/App/Views/Admin/Rules/Discounts/Cart.php:15
+#: v2/App/Views/Admin/Rules/Discounts/simple.php:14
+msgid "Fixed discount"
+msgstr "Фиксированная скидка"
+
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:41
+#: v2/App/Views/Admin/Rules/Discounts/Cart.php:14
+#: v2/App/Views/Admin/Rules/Discounts/simple.php:13
+msgid "Percentage discount"
+msgstr "Скидка в процентах"
+
+#: v2/App/Views/Admin/Rules/Filters/Main.php:178
+msgid "Add filter"
+msgstr "Добавить фильтр"
+
+#: v2/App/Controllers/Admin/Settings.php:663
+#: v2/App/Views/Admin/Rules/Filters/Main.php:121
+#: v2/App/Views/Admin/Rules/Filters/Main.php:167
+msgid "Discount applies to all eligible products in the store"
+msgstr "Скидка распространяется на все подходящие товары в магазине"
+
+#: v2/App/Controllers/Admin/Settings.php:668
+#: v2/App/Views/Admin/Rules/Filters/Main.php:115
+msgid "Choose SKUs that get the discount using \"In List\". If you want to exclude a few SKUs, choose \"Not In List\" and select the SKUs you wanted to exclude from discount. (You can add multiple filters of same type)"
+msgstr "Выберите артикулы, которые получают скидку, используя «В списке». Если вы хотите исключить несколько артикулов, выберите «Не в списке» и выберите артикулы, которые вы хотите исключить из скидки. (Вы можете добавить несколько фильтров одного типа)"
+
+#: v2/App/Views/Admin/Rules/Filters/Products.php:17
+msgid "Select Products"
+msgstr "Выберите товары"
+
+#: v2/App/Views/Admin/Rules/Filters/Main.php:55
+#: v2/App/Views/Admin/Rules/Filters/Products.php:11
+msgid "Not In List"
+msgstr "Нет в списке"
+
+#: v2/App/Views/Admin/Rules/Filters/Main.php:54
+#: v2/App/Views/Admin/Rules/Filters/Products.php:10
+msgid "In List"
+msgstr "В списке"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:203
+msgid "Select values"
+msgstr "Выберите значения"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:192
+msgid "Vaild to"
+msgstr "Действительно по"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:188
+msgid "Rule Valid To"
+msgstr "Правило действительно до"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:181
+msgid "Vaild from"
+msgstr "Действительно с"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:176
+msgid "Rule Vaild From"
+msgstr "Правило действительно c"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:168
+msgid "Maximum usage limit"
+msgstr "Максимальный лимит использования"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:148
+msgid "Rule Limits"
+msgstr "Лимиты правила"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:124
+msgid "Conditions Relationship"
+msgstr "Проверка нескольких условий"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:116
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:136
+msgid "Add condition"
+msgstr "Добавить условие"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:79
+#: v2/App/Views/Admin/Rules/Others/CommonTemplates.php:111
+msgid "Condition Type"
+msgstr "Тип условия"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:28
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:126
+msgid "Match All"
+msgstr "Совпадение со всеми"
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:25
+msgid "Conditions Relationship "
+msgstr "Проверка нескольких условий "
+
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:11
+msgid "Rules (Optional)"
+msgstr "Правила (необязательно)"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:30
+msgid "How to calculate the line item count"
+msgstr "Как рассчитать количество позиций"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:22
+msgid "1"
+msgstr "1"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:32
+msgid "How to calculate the subtotal"
+msgstr "Как рассчитывать подытог"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:28
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:30
+msgid "Only count items chosen in the filters set for this rule"
+msgstr "Учитывать только элементы, выбранные в фильтрах, установленных для этого правила"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:27
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:29
+msgid "Count all items in cart"
+msgstr "Количество всех элементов в корзине"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:24
+msgid "Subtotal Amount "
+msgstr "Сумма подытога"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:23
+#: v2/App/Views/Admin/Rules/Others/SubtotalPromotion.php:23
+msgid "0.00"
+msgstr "0.00"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:18
+msgid "Subtotal should be"
+msgstr "Подытог должен быть"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:15
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:16
+msgid "Greater than ( &gt; )"
+msgstr "Больше чем ( &gt; )"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:14
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:15
+msgid "Greater than or equal ( &gt;= )"
+msgstr "Больше или равно ( &gt;= )"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:13
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:14
+msgid "Less than or equal ( &lt;= )"
+msgstr "Меньше или равно ( &lt;= )"
+
+#: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:12
+#: v2/App/Views/Admin/Rules/Conditions/Cart/Subtotal.php:13
+msgid "Less than ( &lt; )"
+msgstr "Меньше, чем ( &lt; )"
+
+#: v2/App/Views/Admin/Tabs/settings.php:1075
+msgid "15"
+msgstr "15"
+
+#: v2/App/Views/Admin/Tabs/settings.php:1053
+msgid "10"
+msgstr "10"
+
+#: v2/App/Views/Admin/Tabs/settings.php:1040
+msgid "Fixed discount for set"
+msgstr "Фиксированная скидка на комплект"
+
+#: v2/App/Views/Admin/Tabs/settings.php:1031
+msgid "5"
+msgstr "5"
+
+#: v2/App/Views/Admin/Tabs/settings.php:1017
+msgid "set percentage discount"
+msgstr "установите скидку в процентах"
+
+#: v2/App/Views/Admin/Tabs/settings.php:1007
+msgid "600 - 700"
+msgstr "600 - 700"
+
+#: v2/App/Views/Admin/Tabs/settings.php:984
+msgid "450 - 500"
+msgstr "450 - 500"
+
+#: v2/App/Views/Admin/Tabs/settings.php:962
+msgid "70 - 80"
+msgstr "70 - 80"
+
+#: v2/App/Views/Admin/Tabs/settings.php:940
+msgid "50 - 60"
+msgstr "50 - 60"
+
+#: v2/App/Views/Admin/Tabs/settings.php:917
+msgid "11 - 15"
+msgstr "11 - 15"
+
+#: v2/App/Views/Admin/Tabs/settings.php:894
+msgid "1 - 5"
+msgstr "1 - 5"
+
+#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:63
+#: v2/App/Views/Admin/Tabs/settings.php:802
+msgid "Discount Value"
+msgstr "Размер скидки"
+
+#: v2/App/Views/Admin/Tabs/settings.php:797
+msgid "Show Discount value/price in table"
+msgstr "Показать значение скидки/цены в таблице"
+
+#: v2/App/Views/Admin/Tabs/settings.php:796
+msgid "Discount column value on table"
+msgstr "Столбец со значением скидки в таблице"
+
+#: v2/App/Views/Admin/Tabs/settings.php:785
+msgid "Give name for range column"
+msgstr "Задайте название для столбца диапазона"
+
+#: v2/App/Views/Admin/Tabs/settings.php:773
+msgid "Give name for discount column"
+msgstr "Задайте название для столбца скидки"
+
+#: v2/App/Views/Admin/Tabs/settings.php:761
+msgid "Give name for rule title column"
+msgstr "Задайте название для столбца с названием правила"
+
+#: v2/App/Views/Admin/Tabs/settings.php:746
+msgid "Table Header"
+msgstr "Заголовок таблицы"
+
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:22
+#: v2/App/Views/Admin/Tabs/settings.php:736
+msgid "Note:"
+msgstr "Примечание: "
+
+#: v2/App/Views/Admin/Tabs/settings.php:734
+msgid "Settings Saved"
+msgstr "Настройки сохранены"
+
+#: v2/App/Views/Admin/Tabs/settings.php:570
+msgid "All active rules"
+msgstr "Все активные правила"
+
+#: v2/App/Views/Admin/Tabs/settings.php:562
+msgid "Type the name of the rule to select it"
+msgstr "Введите имя правила, чтобы выбрать его"
+
+#: v2/App/Views/Admin/Tabs/settings.php:542
+msgid "On-Sale page"
+msgstr "Страница распродажи"
+
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:50
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:71
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:92
+#: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:126
+msgid "Unlock this feature by <a href='https://www.flycart.org/products/wordpress/woocommerce-discount-rules' target='_blank'>Upgrading to Pro</a>"
+msgstr "Разблокируйте эту функцию <a href='https://www.flycart.org/products/wordpress/woocommerce-discount-rules' target='_blank'>обновившись до Про</a>"
+
+#: v2/App/Views/Admin/Tabs/settings.php:450
+msgid "You save text to show when rule applied"
+msgstr "Текст Вы сэкономили, который появляется когда применяется правило скидки"
+
+#: v2/App/Views/Admin/Tabs/settings.php:280
+msgid "Show strikeout price"
+msgstr "Показать зачеркнутую цену"
+
+#: v2/App/Views/Admin/Tabs/settings.php:252
+#: v2/App/Views/Admin/Tabs/settings.php:270
+msgid "Woocommerce after add to cart form"
+msgstr "После формы добавления в корзину Woocommerce"
+
+#: v2/App/Views/Admin/Tabs/settings.php:249
+#: v2/App/Views/Admin/Tabs/settings.php:267
+msgid "Woocommerce before add to cart form"
+msgstr "Перед формой добавить в корзину Woocommerce"
+
+#: v2/App/Views/Admin/Tabs/settings.php:237
+#: v2/App/Views/Admin/Tabs/settings.php:731
+msgid "Customize Discount Table"
+msgstr "Настройка таблицы скидок"
+
+#: v2/App/Views/Admin/Tabs/settings.php:162
+msgid "Customize the sale badge"
+msgstr "Настройка значка распродажи"
+
+#: v2/App/Views/Admin/Tabs/settings.php:154
+msgid "Show on products that are covered under any discount rule in the plugin"
+msgstr "Показывать товары, на которые распространяется любое правило скидки в плагине"
+
+#: v2/App/Views/Admin/Tabs/settings.php:145
+msgid "On-sale badge"
+msgstr "Значок Распродажа"
+
+#: v2/App/Views/Admin/Tabs/settings.php:104
+msgid "Suppress third party discount plugins"
+msgstr "Запретить сторонние плагины скидок"
+
+#: v2/App/Views/Admin/Tabs/settings.php:49
+msgid "All matched rules"
+msgstr "Все совпадающие правила"
+
+#: v2/App/Views/Admin/Tabs/settings.php:48
+msgid "First matched rules"
+msgstr "Первое совпавшее правило"
+
+#: v2/App/Views/Admin/Tabs/settings.php:47
+msgid "Lowest one from matched rules"
+msgstr "Самые маленькие из совпавших правил"
+
+#: v2/App/Views/Admin/Tabs/settings.php:23
+msgid "Calculate discount from"
+msgstr "Рассчитывать скидку для"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:477
+#: v2/App/Views/Admin/Tabs/help.php:193
+msgid "Go PRO"
+msgstr "Получить ПРО"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:367
+msgid "No rules found."
+msgstr "Правил не найдено."
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:324
+msgid " - ( Not running - validity expired)"
+msgstr " - (Не работает - срок действия истек)"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:312
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:328
+msgid "Your server current date and time:"
+msgstr "Текущая дата и время вашего сервера:"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:308
+msgid " - ( Will run in future)"
+msgstr "- (Будет запущено в будущем)"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:292
+msgid "Enabled"
+msgstr "Вкл."
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:179
+msgid "Exclusive"
+msgstr "Эксклюзивный"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:147
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:391
+msgid "Language(s)"
+msgstr "Язык(и) "
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:118
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:420
+msgid "items"
+msgstr "элементов"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:118
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:420
+msgid "item"
+msgstr "элемент"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:82
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:90
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:104
+msgid "Search Rules"
+msgstr "Поиск правил"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:47
+#: v2/App/Views/Admin/welcome-text.php:15
+msgid "Skip"
+msgstr "Пропустить"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:46
+#: v2/App/Views/Admin/welcome-text.php:14
+msgid "Migrate"
+msgstr "Перенести"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:41
+msgid "Once migration is completed, please open the rules and check their configuration once again to make sure it meets your discount scenario. If required, please adjust the rule configuration. If you need any help, just open a ticket at <a href=\"https://www.flycart.org/support\" target=\"_blank\">https://www.flycart.org/support</a>"
+msgstr "После завершения перехода откройте правила и еще раз проверьте их конфигурацию, чтобы убедиться, что они соответствуют вашему сценарию скидок. При необходимости измените конфигурацию правила. Если вам нужна помощь, просто создайте обращение на <a href=\"https://www.flycart.org/support\" target=\"_blank\">https://www.flycart.org/support</a>"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:38
+msgid "Available cart rules"
+msgstr "Доступные правила корзины"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:31
+#: v2/App/Views/Admin/welcome-text.php:9
+msgid "Migrate rules from v1 to v2"
+msgstr "Перенести правила с версии 1 на версию 2"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:27
+msgid "Migration"
+msgstr "Миграция"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:19
+msgid "Migrate rules from v1"
+msgstr "Перенести правила из версии 1"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:149
+#: v2/App/Views/Admin/Tabs/Statistics.php:219
+msgid "To: yyyy/mm/dd"
+msgstr "По: yyyy/mm/dd"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:139
+#: v2/App/Views/Admin/Tabs/Statistics.php:209
+msgid "From: yyyy/mm/dd"
+msgstr "С: yyyy/mm/dd"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:132
+#: v2/App/Views/Admin/Tabs/Statistics.php:202
+msgid "Custom Range"
+msgstr "Произвольный диапазон"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:131
+#: v2/App/Views/Admin/Tabs/Statistics.php:201
+msgid "This Month"
+msgstr "Этот месяц"
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:130
+#: v2/App/Views/Admin/Tabs/Statistics.php:200
+msgid "This Week"
+msgstr "Эта неделя"
+
+#: v2/App/Views/Admin/Tabs/compatible.php:32
+msgid ""
+"This section lists plugins that require a compatibility with discount rules to resolve conflicts. \n"
+"Please tick them (by checking the box) and then save. This will help discount rules to run smoothly along with these plugins"
+msgstr ""
+"В этом разделе перечислены плагины, которым для исправления конфликтов требуется совместимость с правилами скидок. \n"
+"Пожалуйста, отметьте их (установив флажок), а затем сохраните. Это поможет обеспечить бесперебойную работу правил скидок вместе с этими плагинами"
+
+#: v2/App/Views/Admin/Tabs/compatible.php:26
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#: v2/App/Views/Admin/Tabs/ImportExport.php:13
+msgid "Export tool"
+msgstr "Инструмент экспорта"
+
+#: v2/App/Views/Templates/discount_table.php:137
+msgid " (in cart)"
+msgstr " (в корзине)"
+
+#: v2/App/Controllers/Admin/Settings.php:674
+msgid "Please select the rules to build index"
+msgstr "Пожалуйста, выберите правила для создания индекса"
+
+#: v2/App/Controllers/Admin/Settings.php:672
+msgid "Processing please wait.."
+msgstr "Обработка, пожалуйста, подождите.."
+
+#: v2/App/Helpers/Helper.php:157
+msgid "Include additional conditions (if necessary)"
+msgstr "Добавьте дополнительные условия (при необходимости)"
+
+#: v2/App/Controllers/Admin/Settings.php:624
+#: v2/App/Controllers/Admin/Settings.php:629
+msgid "Get Discount"
+msgstr "Получить скидку"
+
+#: v2/App/Controllers/Admin/Settings.php:620
+msgid "Rules (optional)"
+msgstr "Правила (необязательно)"
+
+#: v2/App/Controllers/Admin/Settings.php:593
+#: v2/App/Views/Admin/Rules/Manage.php:197
+msgid "Filter"
+msgstr "Фильтр"
+
+#: v2/App/Controllers/Admin/Settings.php:590
+msgid "Discount value"
+msgstr "Значение скидки"
+
+#: v2/App/Controllers/Admin/Settings.php:589
+msgid "Minimum Quantity"
+msgstr "Минимальное количество "
+
+#: v2/App/Controllers/Admin/Settings.php:587
+msgid "If you make this recursive other row(s) will be removed!"
+msgstr "Если вы сделаете это рекурсивным, другие строки будут удалены!"
+
+#: v2/App/Controllers/Admin/Settings.php:586
+#: v2/App/Views/Admin/Tabs/settings.php:648
+msgid "Copy ShortCode"
+msgstr "Копировать шорткод"
+
+#: v2/App/Controllers/Admin/Settings.php:585
+#: v2/App/Controllers/Admin/Settings.php:681
+msgid "Copied!"
+msgstr "Скопировано!"
+
+#: v2/App/Controllers/Admin/Settings.php:584
+msgid "Oops! Coupon already exists in Woocommerce"
+msgstr "Ой! Купон уже существует в Woocommerce"
+
+#: v2/App/Controllers/Admin/Settings.php:583
+msgid "No data for this period"
+msgstr "Для указанного периода данных нет"
+
+#: v2/App/Controllers/Admin/Settings.php:582
+msgid "Rule priority not changed !"
+msgstr "Приоритет правила не изменен !"
+
+#: v2/App/Controllers/Admin/Settings.php:581
+msgid "Rule priority changed successfully!"
+msgstr "Приоритет правила успешно изменен!"
+
+#: v2/App/Controllers/Admin/Settings.php:580
+msgid "Settings saved successfully!"
+msgstr "Настройки успешно сохранены!"
+
+#: v2/App/Controllers/Admin/Settings.php:579
+msgid "Rule saved successfully!"
+msgstr "Правило успешно сохранено!"
+
+#: v2/App/Controllers/Admin/Settings.php:578
+msgid "Rule enabled successfully!"
+msgstr "Правило успешно включено!"
+
+#: v2/App/Controllers/Admin/Settings.php:577
+msgid "Rule disabled successfully!"
+msgstr "Правило успешно отключено!"
+
+#: v2/App/Controllers/Admin/Settings.php:576
 msgid "Are you sure want to delete this rule!"
 msgstr "Вы действительно хотите удалить это правило!"
 
-#: v2/App/Views/Admin/Rules/Discounts/Main.php:86
-msgid "Add Range"
-msgstr "Добавить диапазон"
+#: v2/App/Controllers/Admin/Settings.php:575
+msgid "Rule deleted successfully!"
+msgstr "Правило успешно удалено!"
 
-#: v2/App/Controllers/Admin/Settings.php:628
-msgid "<p>Processing migration, please wait...</p>"
-msgstr "<p>Выполняется переход, подождите...</p>"
+#: v2/App/Controllers/Admin/Settings.php:574
+msgid "Rule duplicated successfully!"
+msgstr "Правило успешно скопировано!"
 
-#: v2/App/Controllers/Admin/Settings.php:630
-msgid "<p>Migration skipped.</p>"
-msgstr "<p>Переход пропущен.</p>"
+#: v2/App/Controllers/Admin/Settings.php:573
+msgid "Oops!! something went wrong!"
+msgstr "Ой!! Что-то пошло не так!"
 
-#: v2/App/Controllers/Admin/Settings.php:629
-msgid "<p>Migration completed.</p>"
-msgstr "<p>Переход завершен.</p>"
+#: v2/App/Controllers/Admin/Settings.php:572
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:340
+msgid " - (Running)"
+msgstr " - (Запущено)"
 
-#: v2/App/Helpers/Migration.php:216
-msgid "%s Completed. Please wait.."
-msgstr "Выполнено %s. Пожалуйста, подождите.."
+#: v2/App/Controllers/Admin/Settings.php:371
+msgid "Select Values"
+msgstr "Выберите значения"
 
-#: v2/App/Views/Admin/Rules/Discounts/Bulk.php:68
-msgid "Label"
-msgstr "Этикетка"
+#: v2/App/Controllers/Admin/Settings.php:370
+msgid "no results"
+msgstr "результатов нет"
 
-#: v2/App/Controllers/ManageDiscount.php:1348
+#: v2/App/Controllers/Admin/Settings.php:284
+msgid "We found that your were using our old \"Woo discount rules\" plugin, Please disable it!"
+msgstr "Мы обнаружили, что вы используете наш старый плагин «Woo discount rules». Пожалуйста, отключите его!"
+
+#: v1/index.php:27 v1/index.php:28 v1/menu-html.php:97
+#: v2/App/Controllers/Admin/Settings.php:46
+#: v2/App/Controllers/Admin/Settings.php:47
+#: v2/App/Controllers/Admin/Tabs/DiscountRules.php:25
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:13
+msgid "Discount Rules"
+msgstr "Правила скидок"
+
+#: v2/App/Controllers/Admin/Tabs/Reports/RuleAmount.php:30
+#: v2/App/Controllers/Admin/Tabs/Reports/RuleNameDiscount.php:41
+msgid "Date"
+msgstr "Дата"
+
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:47
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:53
+msgid "Rule"
+msgstr "Правило"
+
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:29
+msgid "Reports"
+msgstr "Отчеты"
+
+#: v2/App/Controllers/Admin/Tabs/Compatible.php:23
+msgid "Compatibility"
+msgstr "Совместимость"
+
+#: v2/App/Views/Admin/Tabs/ImportExport.php:19
+msgid "Export"
+msgstr "Экспорт"
+
+#: v2/App/Controllers/ManageDiscount.php:1361
+msgid "Coupon code applied successfully."
+msgstr "Код купона успешно применен."
+
+#: v2/App/Controllers/Base.php:213 v2/App/Controllers/Base.php:214
+#: v2/App/Helpers/ProOptions.php:338
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:240
+msgid "Bulk Discount"
+msgstr "Групповая скидка"
+
+#: v2/App/Controllers/Base.php:207 v2/App/Views/Admin/Tabs/DiscountRule.php:234
+msgid "Cart Adjustment"
+msgstr "Содержимое корзины"
+
+#: v2/App/Controllers/Base.php:202 v2/App/Controllers/Base.php:208
+#: v2/App/Helpers/ProOptions.php:332 v2/App/Views/Admin/Tabs/Recipe.php:21
+msgid "Simple Discount"
+msgstr "Простая скидка"
+
+#: v2/App/Controllers/Base.php:201 v2/App/Views/Admin/Tabs/DiscountRule.php:231
+msgid "Product Adjustment"
+msgstr "Скидка на товар"
+
+#: v2/App/Controllers/Base.php:43 v2/App/Controllers/Base.php:48
+#: v2/App/Helpers/ProOptions.php:34 v2/App/Helpers/ProOptions.php:40
+#: v2/App/Helpers/ProOptions.php:46 v2/App/Helpers/ProOptions.php:52
+#: v2/App/Helpers/ProOptions.php:58 v2/App/Views/Admin/Tabs/settings.php:139
+msgid "Product"
+msgstr "Товар"
+
+#: v2/App/Controllers/Base.php:42
+msgid "All Products"
+msgstr "Все товары"
+
+#: v2/App/Conditions/CartLineItemsCount.php:17
+#: v2/App/Conditions/CartSubTotal.php:19 v2/App/Controllers/Base.php:162
+#: v2/App/Helpers/ProOptions.php:80 v2/App/Helpers/ProOptions.php:136
+#: v2/App/Helpers/ProOptions.php:144 v2/App/Helpers/ProOptions.php:152
+#: v2/App/Views/Admin/Tabs/settings.php:316
+msgid "Cart"
+msgstr "Корзина"
+
+#: v2/App/Controllers/Admin/WDRAjax.php:878
+msgid "Invalid request"
+msgstr "Неверный запрос"
+
+#. Description of the plugin
+#: woo-discount-rules.php
+msgid "Simple to complex discount rules for your WooCommerce store. Core package."
+msgstr "От простых до сложных правил скидок для вашего магазина WooCommerce. Основной пакет."
+
+#. translators: %s used to display coupon code
+#: v2/App/Controllers/ManageDiscount.php:1347
 msgid "Sorry, it is not possible to apply coupon <b>\"%s\"</b> as you already have a discount applied in cart."
 msgstr "К сожалению, применить купон <b>«%s»</b> невозможно, так как у вас уже есть скидка в корзине."
 
@@ -1137,132 +1832,146 @@ msgstr "К сожалению, применить купон <b>«%s»</b> не�
 msgid "<b>Eg:</b> Spend {{difference_amount}} more and get 10% discount"
 msgstr "<b>Например:</b> Потратьте на {{difference_amount}} больше и получите скидку 10%"
 
-#: v2/App/Views/Admin/Tabs/settings.php:384
-msgid "Shop page"
-msgstr "Страница магазина"
+#: v2/App/Views/Admin/Rules/Others/SubtotalPromotion.php:33
+msgid "Spend {{difference_amount}} more and get 10% discount"
+msgstr "Потратьте на {{difference_amount}} больше и получите скидку 10%"
 
-#: v2/App/Views/Admin/Tabs/settings.php:385
-msgid "Product page"
-msgstr "Страница товара"
-
-#: v2/App/Views/Admin/Tabs/settings.php:387
+#: v2/App/Views/Admin/Tabs/settings.php:428
 msgid "Checkout page"
 msgstr "Страница оформления заказа"
 
-#: v2/App/Views/Admin/Tabs/settings.php:386
+#: v2/App/Views/Admin/Tabs/settings.php:427
 msgid "Cart page"
 msgstr "Страница корзины"
+
+#: v2/App/Views/Admin/Tabs/settings.php:426
+msgid "Product page"
+msgstr "Страница товара"
+
+#: v2/App/Views/Admin/Tabs/settings.php:425
+msgid "Shop page"
+msgstr "Страница магазина"
 
 #: v2/App/Views/Admin/Rules/Others/SubtotalPromotion.php:34
 msgid "{{difference_amount}} -> Difference amount to get discount"
 msgstr "{{difference_amount}} -> Сумма разницы для получения скидки"
 
-#: v2/App/Helpers/SurveyForm.php:240
-msgid "Upgrading to PRO."
-msgstr "Обновление до версии ПРО."
+#: v2/App/Helpers/Woocommerce.php:1712
+msgid "Coupon already exists in WooCommerce. Please select another name"
+msgstr "Купон уже существует в WooCommerce. Пожалуйста, выберите другое имя"
 
-#: v2/App/Helpers/SurveyForm.php:326
-msgid "Submit & Deactivate"
-msgstr "Отправить и деактивировать"
-
-#: v2/App/Helpers/SurveyForm.php:328
-msgid "Skip & Deactivate"
-msgstr "Пропустить и деактивировать"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:430
-#: v2/App/Views/Admin/Tabs/help.php:165
-msgid "With PRO version, you can create:"
-msgstr "В версии ПРО вы можете создавать:"
-
-#: v2/App/Helpers/SurveyForm.php:298
+#. Plugin Name of the plugin
+#: woo-discount-rules.php
 msgid "Discount Rules for WooCommerce"
 msgstr "Правила скидок для WooCommerce"
 
-#. translators: %s - plugin name.
-#: v2/App/Helpers/SurveyForm.php:297
-msgid "If you have a moment, please share why you are deactivating %s:"
-msgstr "Если у вас есть минутка, расскажите, почему вы деактивируете %s:"
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:471
+#: v2/App/Views/Admin/Tabs/help.php:187
+msgid "- Offer fixed price on certain conditions"
+msgstr "- Предлагайте фиксированную цену на определенных условиях"
 
-#: v2/App/Helpers/SurveyForm.php:264
-msgid "I was instructed to deactivate by Flycart Support."
-msgstr "Служба поддержки Flycart попросила меня деактивировать."
-
-#: v2/App/Helpers/SurveyForm.php:268
-msgid "I no longer use this plugin."
-msgstr "Я больше не использую этот плагин."
-
-#: v2/App/Helpers/SurveyForm.php:244
-msgid "I am switching to a different discount plugin."
-msgstr "Я перехожу на другой плагин для скидок."
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:435
-#: v2/App/Views/Admin/Tabs/help.php:170
-msgid "- Buy 2, get 1 at 50% discount"
-msgstr "- Купи 2, получи 1 со скидкой 50%"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:439
-#: v2/App/Views/Admin/Tabs/help.php:174
-msgid "- Free product / gift"
-msgstr "- Бесплатный товар / подарок"
-
-#: v2/App/Helpers/SurveyForm.php:276
-msgid "Other"
-msgstr "Другое"
-
-#: v2/App/Helpers/SurveyForm.php:278
-msgid "Please share the reason"
-msgstr "Пожалуйста, расскажите причину"
-
-#: v2/App/Helpers/SurveyForm.php:272
-msgid "It's a temporary deactivation."
-msgstr "Это временная деактивация."
-
-#: v2/App/Helpers/SurveyForm.php:260
-msgid "I'm trying to troubleshoot the plugin."
-msgstr "Я пытаюсь устранить неполадки с плагином."
-
-#: v2/App/Helpers/SurveyForm.php:288
-msgid "Quick Feedback"
-msgstr "Быстрая обратная связь"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:441
-#: v2/App/Views/Admin/Tabs/help.php:176
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:469
+#: v2/App/Views/Admin/Tabs/help.php:185
 msgid "- Conditional discounts"
 msgstr "- Скидки с условиями"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:440
-#: v2/App/Views/Admin/Tabs/help.php:175
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:468
+#: v2/App/Views/Admin/Tabs/help.php:184
 msgid "- Discount for variants"
 msgstr "- Скидки для вариаций"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:432
-#: v2/App/Views/Admin/Tabs/help.php:167
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:467
+#: v2/App/Views/Admin/Tabs/help.php:183
+msgid "- Free product / gift"
+msgstr "- Бесплатный товар / подарок"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:466
+#: v2/App/Views/Admin/Tabs/help.php:182
+msgid "- Purchase history based discounts"
+msgstr "- Скидки на основе истории покупок"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:465
+#: v2/App/Views/Admin/Tabs/help.php:181
+msgid "- Different discounts with one coupon code"
+msgstr "- Различные скидки с одним кодом купона"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:463
+#: v2/App/Views/Admin/Tabs/help.php:179
+msgid "- Buy 2, get 1 at 50% discount"
+msgstr "- Купи 2, получи 1 со скидкой 50%"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:462
+#: v2/App/Views/Admin/Tabs/help.php:178
+msgid "- Buy X Get Y deals"
+msgstr "- Предложения Купи X Получи Y"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:461
+#: v2/App/Views/Admin/Tabs/help.php:177
+msgid "- Buy One Get One Free deals"
+msgstr "- Предложения Купи один, Получи один бесплатно"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:460
+#: v2/App/Views/Admin/Tabs/help.php:176
 msgid "- User roles based discounts"
 msgstr "- Скидки на основе ролей пользователей"
 
-#: v2/App/Helpers/SurveyForm.php:252
-msgid "It does not meet my discount requirements."
-msgstr "Плагин не поддерживает требуемые скидки."
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:457
+#: v2/App/Views/Admin/Tabs/help.php:173
+msgid "With PRO version, you can create:"
+msgstr "В версии ПРО вы можете создавать:"
 
 #: v2/App/Controllers/Base.php:47 v2/App/Views/Admin/Rules/Filters/Main.php:68
 msgid "Products"
 msgstr "Товары"
 
-#: v2/App/Views/Admin/Tabs/settings.php:281
-msgid "Shown on quantity update (dynamic)"
-msgstr "Отображается при обновлении количества (динамически)"
-
-#: v2/App/Views/Admin/Tabs/settings.php:184
+#: v2/App/Views/Admin/Tabs/settings.php:199
+#: v2/App/Views/Admin/Tabs/settings.php:214
 #: v2/App/Views/Templates/loop/sale-flash.php:23
 #: v2/App/Views/Templates/single-product/sale-flash.php:23
 msgid "Sale!"
 msgstr "Распродажа!"
 
-#: v2/App/Views/Admin/Tabs/settings.php:66
+#: v2/App/Views/Admin/Tabs/settings.php:176
+msgid "Force override the label for sale badge (useful when your theme has override for sale badge)."
+msgstr "Принудительно переопределить ярлык для значка распродажи (полезно, когда ваша тема переопределяет значок для распродажи)."
+
+#: v2/App/Helpers/Helper.php:173 v2/App/Views/Admin/Tabs/help.php:145
+msgid "Category Combination"
+msgstr "Комбинация категорий"
+
+#: v2/App/Views/Admin/Tabs/help.php:136
+msgid "How to provide a automatic adding free product in cart under certain conditions"
+msgstr "Как обеспечить автоматическое добавление бесплатного товара в корзину при определенных условиях"
+
+#: v2/App/Views/Admin/Tabs/help.php:113
+msgid "Learn how to create a free shipping cart based rule"
+msgstr "Узнайте, как создать правило бесплатной доставки на основе содержимого корзины"
+
+#: v2/App/Views/Admin/Tabs/settings.php:82
+msgid "Disable the coupons (discount rules will work)"
+msgstr "Отключить купоны (будут работать правила скидок)"
+
+#: v2/App/Views/Admin/Tabs/settings.php:83
+msgid "Disable the discount rules (coupons will work)"
+msgstr "Отключить правила скидок (будут работать купоны)"
+
+#: v2/App/Views/Admin/Tabs/settings.php:81
+msgid "Let both coupons and discount rules run together"
+msgstr "Купоны и правила скидок работают вместе"
+
+#: v2/App/Views/Admin/Tabs/settings.php:71
 msgid "Choose how discount rules should work when WooCommerce coupons (or third party) coupons are used?"
 msgstr "Выберите, как должны работать правила скидок при использовании купонов WooCommerce (или купонов других плагинов)?"
 
-#: v2/App/Views/Admin/Tabs/settings.php:147
+#: v2/App/Views/Admin/Tabs/settings.php:172
+msgid "Yes, I would like to customize the sale badge"
+msgstr "Да, я хотел бы настроить значок распродажи"
+
+#: v2/App/Views/Admin/Tabs/settings.php:153
+msgid "Show only after a rule condition is matched exactly"
+msgstr "Показывать только после точного совпадения условия правила"
+
+#: v2/App/Views/Admin/Tabs/settings.php:155
 msgid "Do not show"
 msgstr "Не показывать"
 
@@ -1274,19 +1983,9 @@ msgstr "Базовая цена"
 msgid "Sale price"
 msgstr "Цена распродажи"
 
-#: v2/App/Views/Admin/Rules/Conditions/Main.php:213
+#: v2/App/Views/Admin/Rules/Conditions/Main.php:216
 msgid "Language"
 msgstr "Язык"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:151
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:386
-msgid "Status"
-msgstr "Статус"
-
-#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:27
-#: v2/App/Views/Admin/Rules/Others/SubtotalPromotion.php:29
-msgid "Message"
-msgstr "Сообщение"
 
 #: v2/App/Views/Admin/Rules/Manage.php:20
 #: v2/App/Views/Admin/Rules/Manage.php:24
@@ -1296,181 +1995,212 @@ msgstr "Сообщение"
 msgid "This rule is not running currently: "
 msgstr "Это правило в настоящее время не работает:"
 
+#: v2/App/Views/Admin/Rules/Others/QuantityPromotion.php:27
+#: v2/App/Views/Admin/Rules/Others/SubtotalPromotion.php:29
+msgid "Message"
+msgstr "Сообщение"
+
+#: v2/App/Views/Admin/Tabs/settings.php:449
+msgid "Savings text to show"
+msgstr "Текст «Вы сэкономили» для отображения"
+
 #: v2/App/Views/Admin/Tabs/help.php:40
 msgid "Learn how to update to latest versions"
 msgstr "Узнайте, как обновиться до последних версий"
-
-#: v2/App/Views/Admin/Tabs/help.php:31
-msgid "License Key activation"
-msgstr "Активация лицензионного ключа"
 
 #: v2/App/Views/Admin/Tabs/help.php:39
 msgid "Version Updates!"
 msgstr "Обновление версии!"
 
-#: v2/App/Controllers/Admin/Settings.php:586
+#: v2/App/Views/Admin/Tabs/help.php:32
+msgid "Learn how to obtain the license key and activate it"
+msgstr "Узнайте, как получить лицензионный ключ и активировать его"
+
+#: v2/App/Views/Admin/Tabs/help.php:31
+msgid "License Key activation"
+msgstr "Активация лицензионного ключа"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:155
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:399
+msgid "Status"
+msgstr "Статус"
+
+#: v2/App/Controllers/Admin/Settings.php:591
 msgid "Discount percentage"
 msgstr "Процент скидки"
 
-#: v2/App/Views/Admin/Tabs/settings.php:408
-msgid "Savings text to show"
-msgstr "Текст «Вы сэкономили» для отображения"
+#: v2/App/Controllers/Admin/Settings.php:570
+msgid "Active"
+msgstr "Активен"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:132
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:366
+#: v2/App/Views/Admin/Tabs/settings.php:382
+msgid "Promotion"
+msgstr "Продвижение"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:136
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:379
 msgid "Title"
 msgstr "Название"
+
+#: v2/App/Views/Admin/Tabs/help.php:76
+msgid "Buy One Get One deals can be simple to complex. Learn how to get them working correct in your online store"
+msgstr "Предложения Купите один и получите еще один могут быть простыми и сложными. Узнайте, как правильно настроить их в вашем интернет-магазине"
 
 #: v2/App/Views/Admin/Tabs/help.php:75
 msgid "How to create a perfect BOGO discount rule in WooCommerce"
 msgstr "Как создать идеальное правило скидки BOGO в WooCommerce"
 
 #: v2/App/Views/Admin/Rules/Conditions/Main.php:11
-#: v2/App/Views/Admin/Rules/Manage.php:181
 #: v2/App/Views/Admin/Rules/Manage.php:182
 #: v2/App/Views/Admin/Rules/Manage.php:183
 #: v2/App/Views/Admin/Rules/Manage.php:184
 #: v2/App/Views/Admin/Rules/Manage.php:185
 #: v2/App/Views/Admin/Rules/Manage.php:186
 #: v2/App/Views/Admin/Rules/Manage.php:187
+#: v2/App/Views/Admin/Rules/Manage.php:188
 #: v2/App/Views/Admin/Tabs/settings.php:24
-#: v2/App/Views/Admin/Tabs/settings.php:65
-#: v2/App/Views/Admin/Tabs/settings.php:138
-#: v2/App/Views/Admin/Tabs/settings.php:204
-#: v2/App/Views/Admin/Tabs/settings.php:275
-#: v2/App/Views/Admin/Tabs/settings.php:394
-#: v2/App/Views/Admin/Tabs/settings.php:478
+#: v2/App/Views/Admin/Tabs/settings.php:72
+#: v2/App/Views/Admin/Tabs/settings.php:146
+#: v2/App/Views/Admin/Tabs/settings.php:228
+#: v2/App/Views/Admin/Tabs/settings.php:299
+#: v2/App/Views/Admin/Tabs/settings.php:435
+#: v2/App/Views/Admin/Tabs/settings.php:542
 msgid "Read Docs"
 msgstr "Изучить документацию"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:338
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:351
 msgid "Duplicate"
 msgstr "Копировать"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:97
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:98
 msgid "Apply"
 msgstr "Применить"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:91
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:92
 msgid "Bulk Actions"
 msgstr "Действия"
 
-#: v2/App/Controllers/Admin/Settings.php:107
+#: v2/App/Controllers/Admin/Settings.php:98
 #: v2/App/Controllers/Admin/Tabs/GeneralSettings.php:23
-#: v2/App/Views/Admin/Tabs/Addons.php:121
+#: v2/App/Views/Admin/Tabs/Addons.php:114
 msgid "Settings"
 msgstr "Настройки"
 
-#: v2/App/Views/Admin/Rules/Manage.php:134
+#: v2/App/Views/Admin/Rules/Manage.php:135
 msgid "Save"
 msgstr "Сохранить"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:94
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:343
-msgid "Delete"
-msgstr "Удалить"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:18
-msgid "Add New Rule"
-msgstr "Добавить новое правило"
-
-#: v2/App/Helpers/SurveyForm.php:289
-msgid "Close"
-msgstr "Закрыть"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:136
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:371
-msgid "Start Date"
-msgstr "Дата начала"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:138
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:373
-msgid "Expired On"
-msgstr "Истекает"
+#: v2/App/Controllers/Admin/Settings.php:645
+#: v2/App/Controllers/Admin/Settings.php:654
+msgid "Free quantity"
+msgstr "Свободное количество"
 
 #: v2/App/Controllers/Admin/Tabs/Statistics.php:39
 msgid "Rule Name"
 msgstr "Имя правила"
 
-#: v2/App/Controllers/Admin/Settings.php:566
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:92
-msgid "Enable"
-msgstr "Включить"
-
-#: v2/App/Controllers/Admin/Settings.php:564
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:93
-msgid "Disable"
-msgstr "Отключить"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:153
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:388
-msgid "Action"
-msgstr "Действие"
-
 #: v2/App/Views/Admin/Tabs/settings.php:15
 msgid "General"
 msgstr "Общие"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:335
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:95
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:356
+msgid "Delete"
+msgstr "Удалить"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:348
 msgid "Edit"
 msgstr "Изменить"
 
-#: v2/App/Conditions/CartSubTotal.php:18 v2/App/Helpers/Helper.php:162
-msgid "Subtotal"
-msgstr "Подытог"
+#: v2/App/Controllers/Admin/Settings.php:571
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:93
+msgid "Enable"
+msgstr "Включить"
+
+#: v2/App/Controllers/Admin/Settings.php:569
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:94
+msgid "Disable"
+msgstr "Отключить"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:157
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:401
+msgid "Action"
+msgstr "Действие"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:142
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:386
+msgid "Expired On"
+msgstr "Истекает"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:140
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:384
+msgid "Start Date"
+msgstr "Дата начала"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:15
+msgid "Add New Rule"
+msgstr "Добавить новое правило"
 
 #: v2/App/Views/Admin/Rules/Conditions/Cart/LineItemCount.php:23
 msgid "Line item count"
 msgstr "Фиксированное количество элементов"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:224
+#: v2/App/Conditions/CartSubTotal.php:18 v2/App/Helpers/Helper.php:162
+msgid "Subtotal"
+msgstr "Подытог"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:113
+msgid "All"
+msgstr "Все"
+
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:237
 #: v2/App/Views/Admin/Tabs/help.php:112
 msgid "Free Shipping"
 msgstr "Бесплатная доставка"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:279
-#: v2/App/Views/Admin/Tabs/settings.php:398
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:292
+#: v2/App/Views/Admin/Tabs/settings.php:439
 msgid "Disabled"
 msgstr "Откл."
 
 #: v2/App/Controllers/Admin/Tabs/Statistics.php:76
-#: v2/App/Helpers/Helper.php:171 v2/App/Views/Admin/Tabs/settings.php:319
+#: v2/App/Helpers/Helper.php:171 v2/App/Views/Admin/Tabs/settings.php:343
 #: v2/App/Views/Admin/Tabs/Statistics.php:230
 msgid "Coupon"
 msgstr "Купон"
 
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:453
+#: v2/App/Views/Admin/Tabs/help.php:169
+msgid "Looking for more features? Upgrade to PRO"
+msgstr "Нужно больше возможностей? Обновитесь до ПРО"
+
 #: v2/App/Controllers/Admin/Tabs/Help.php:17
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:69
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:66
 #: v2/App/Views/Admin/Tabs/help.php:8
 msgid "Documentation"
 msgstr "Документация"
 
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:65
+#: v2/App/Views/Admin/Tabs/DiscountRule.php:62
 msgid "View Examples"
 msgstr "Посмотреть примеры"
-
-#: v2/App/Views/Admin/Tabs/DiscountRule.php:425
-#: v2/App/Views/Admin/Tabs/help.php:160
-msgid "Looking for more features? Upgrade to PRO"
-msgstr "Нужно больше возможностей? Обновитесь до ПРО"
 
 #: v2/App/Views/Admin/Rules/DiscountBatch/Main.php:48
 #: v2/App/Views/Admin/Tabs/AdvancedOptions.php:26
 #: v2/App/Views/Admin/Tabs/AdvancedOptions.php:41
 #: v2/App/Views/Admin/Tabs/AdvancedOptions.php:56
-#: v2/App/Views/Admin/Tabs/settings.php:60
-#: v2/App/Views/Admin/Tabs/settings.php:91
-#: v2/App/Views/Admin/Tabs/settings.php:107
-#: v2/App/Views/Admin/Tabs/settings.php:122
-#: v2/App/Views/Admin/Tabs/settings.php:212
-#: v2/App/Views/Admin/Tabs/settings.php:308
-#: v2/App/Views/Admin/Tabs/settings.php:339
-#: v2/App/Views/Admin/Tabs/settings.php:430
-#: v2/App/Views/Admin/Tabs/settings.php:552
-#: v2/App/Views/Admin/Tabs/settings.php:569
-#: v2/App/Views/Admin/Tabs/settings.php:603
-#: v2/App/Views/Admin/Tabs/settings.php:620
-#: v2/App/Views/Admin/Tabs/settings.php:637
+#: v2/App/Views/Admin/Tabs/settings.php:65
+#: v2/App/Views/Admin/Tabs/settings.php:99
+#: v2/App/Views/Admin/Tabs/settings.php:115
+#: v2/App/Views/Admin/Tabs/settings.php:130
+#: v2/App/Views/Admin/Tabs/settings.php:236
+#: v2/App/Views/Admin/Tabs/settings.php:332
+#: v2/App/Views/Admin/Tabs/settings.php:363
+#: v2/App/Views/Admin/Tabs/settings.php:471
+#: v2/App/Views/Admin/Tabs/settings.php:622
+#: v2/App/Views/Admin/Tabs/settings.php:639
+#: v2/App/Views/Admin/Tabs/settings.php:681
+#: v2/App/Views/Admin/Tabs/settings.php:698
+#: v2/App/Views/Admin/Tabs/settings.php:715
 msgid "No"
 msgstr "Нет"
 
@@ -1478,48 +2208,40 @@ msgstr "Нет"
 #: v2/App/Views/Admin/Tabs/AdvancedOptions.php:22
 #: v2/App/Views/Admin/Tabs/AdvancedOptions.php:37
 #: v2/App/Views/Admin/Tabs/AdvancedOptions.php:52
-#: v2/App/Views/Admin/Tabs/settings.php:56
-#: v2/App/Views/Admin/Tabs/settings.php:87
-#: v2/App/Views/Admin/Tabs/settings.php:103
-#: v2/App/Views/Admin/Tabs/settings.php:118
-#: v2/App/Views/Admin/Tabs/settings.php:209
-#: v2/App/Views/Admin/Tabs/settings.php:304
-#: v2/App/Views/Admin/Tabs/settings.php:333
-#: v2/App/Views/Admin/Tabs/settings.php:425
-#: v2/App/Views/Admin/Tabs/settings.php:547
-#: v2/App/Views/Admin/Tabs/settings.php:564
-#: v2/App/Views/Admin/Tabs/settings.php:598
-#: v2/App/Views/Admin/Tabs/settings.php:615
-#: v2/App/Views/Admin/Tabs/settings.php:632
+#: v2/App/Views/Admin/Tabs/settings.php:61
+#: v2/App/Views/Admin/Tabs/settings.php:95
+#: v2/App/Views/Admin/Tabs/settings.php:111
+#: v2/App/Views/Admin/Tabs/settings.php:126
+#: v2/App/Views/Admin/Tabs/settings.php:233
+#: v2/App/Views/Admin/Tabs/settings.php:328
+#: v2/App/Views/Admin/Tabs/settings.php:357
+#: v2/App/Views/Admin/Tabs/settings.php:466
+#: v2/App/Views/Admin/Tabs/settings.php:617
+#: v2/App/Views/Admin/Tabs/settings.php:634
+#: v2/App/Views/Admin/Tabs/settings.php:676
+#: v2/App/Views/Admin/Tabs/settings.php:693
+#: v2/App/Views/Admin/Tabs/settings.php:710
 msgid "Yes"
 msgstr "Да"
 
-#: v2/App/Controllers/Admin/Settings.php:456
+#: v2/App/Controllers/Admin/Settings.php:461
 msgid "Guest"
 msgstr "Гость"
-
-#: v2/App/Controllers/Admin/Settings.php:583
-msgid "Quantity"
-msgstr "Количество"
 
 #: v2/App/Views/Admin/Rules/Discounts/Cart.php:33
 #: v2/App/Views/Admin/Rules/Discounts/simple.php:31
 msgid "Value"
 msgstr "Значение"
 
-#: v2/App/Controllers/Admin/Settings.php:591 v2/App/Helpers/Rule.php:1227
+#: v2/App/Controllers/Admin/Settings.php:588
+msgid "Quantity"
+msgstr "Количество"
+
+#: v2/App/Controllers/Admin/Settings.php:596 v2/App/Helpers/Rule.php:1227
 #: v2/App/Views/Admin/Rules/Discounts/Bulk.php:59
-#: v2/App/Views/Admin/Rules/Manage.php:242
+#: v2/App/Views/Admin/Rules/Manage.php:243
 msgid "Discount"
 msgstr "Скидка"
-
-#: v2/App/Views/Admin/Tabs/settings.php:677
-msgid "Don't Show"
-msgstr "Не показывать"
-
-#: v2/App/Views/Admin/Tabs/settings.php:674
-msgid "Show"
-msgstr "Показывать"
 
 #: v2/App/Helpers/Helper.php:165 v2/App/Helpers/ProOptions.php:192
 #: v2/App/Helpers/ProOptions.php:200 v2/App/Helpers/ProOptions.php:208
@@ -1528,14 +2250,16 @@ msgstr "Показывать"
 msgid "Purchase History"
 msgstr "История покупок"
 
+#: v2/App/Views/Admin/Tabs/settings.php:755
+msgid "Don't Show"
+msgstr "Не показывать"
+
+#: v2/App/Views/Admin/Tabs/settings.php:752
+msgid "Show"
+msgstr "Показывать"
+
 #. Plugin URI of the plugin
 #. Author URI of the plugin
+#: woo-discount-rules.php
 msgid "https://www.flycart.org"
 msgstr "https://www.flycart.org"
-
-#. Plugin Name of the plugin
-#: v1/index.php:27 v1/index.php:28 v1/menu-html.php:97
-#: v2/App/Controllers/Admin/Settings.php:46
-#: v2/App/Controllers/Admin/Settings.php:47
-msgid "Woo Discount Rules"
-msgstr "Woo Discount Rules"

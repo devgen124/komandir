@@ -11,7 +11,7 @@ use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Util\DBCollationChecker;
 use MailPoet\Util\Security;
 use MailPoetVendor\Carbon\Carbon;
-use MailPoetVendor\Doctrine\DBAL\Connection;
+use MailPoetVendor\Doctrine\DBAL\ArrayParameterType;
 use MailPoetVendor\Doctrine\DBAL\Query\QueryBuilder;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 
@@ -66,8 +66,8 @@ class WooCommerceNumberOfOrders implements Filter {
     $date = Carbon::now()->subDays($days);
 
     $joinCondition = $isAllTime
-      ? 'customer.customer_id = orderStats.customer_id AND orderStats.status IN (:allowedStatuses' . $parameterSuffix . ')'
-      : 'customer.customer_id = orderStats.customer_id AND orderStats.date_created >= :date' . $parameterSuffix . ' AND orderStats.status IN (:allowedStatuses' . $parameterSuffix . ')';
+      ? 'customer.customer_id = orderStats.customer_id AND orderStats.status NOT IN (:excludedStatuses' . $parameterSuffix . ')'
+      : 'customer.customer_id = orderStats.customer_id AND orderStats.date_created >= :date' . $parameterSuffix . ' AND orderStats.status NOT IN (:excludedStatuses' . $parameterSuffix . ')';
 
     $subQuery = $this->entityManager->getConnection()
       ->createQueryBuilder()
@@ -101,7 +101,7 @@ class WooCommerceNumberOfOrders implements Filter {
       ],
     ], \true)
       ->setParameter('date' . $parameterSuffix, $date->toDateTimeString())
-      ->setParameter('allowedStatuses' . $parameterSuffix, $this->wooFilterHelper->defaultIncludedStatuses(), Connection::PARAM_STR_ARRAY)
+      ->setParameter('excludedStatuses' . $parameterSuffix, $this->wooFilterHelper->defaultExcludedStatuses(), ArrayParameterType::STRING)
       ->groupBy('inner_subscriber_id');
 
     if ($type === '=') {

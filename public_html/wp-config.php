@@ -79,14 +79,14 @@ $table_prefix = 'wp_';
  * @link https://ru.wordpress.org/support/article/debugging-in-wordpress/
  */
 
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
 
 
 /* Произвольные значения добавляйте между этой строкой и надписью "дальше не редактируем". */
 
 define( 'WP_DEBUG_LOG', true );
 
-// define( 'WP_DEBUG_DISPLAY', false );
+define( 'WP_DEBUG_DISPLAY', false );
 
 // @ini_set( 'display_errors', 0 );
 
@@ -97,6 +97,9 @@ define( 'WP_MEMORY_LIMIT', '256M' );
 
 // Отключаем автообновление
 define( 'WP_AUTO_UPDATE_CORE', false );
+
+// Увеличиваем память
+define( 'WP_MAX_MEMORY_LIMIT', '1024M' );
 
 /* Это всё, дальше не редактируем. Успехов! */
 

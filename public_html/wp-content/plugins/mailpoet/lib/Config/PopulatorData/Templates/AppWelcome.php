@@ -1,10 +1,8 @@
 <?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
+
 namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
-
-
-use MailPoet\WP\Functions as WPFunctions;
 
 
 class AppWelcome {
@@ -12,7 +10,9 @@ class AppWelcome {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/app_welcome';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -319,17 +319,17 @@ class AppWelcome {
                                 <p style="text-align: center; font-size: 12px;"><span>Address Line 1</span></p>
                                 <p style="text-align: center; font-size: 12px;"><span>Address Line 2</span></p>
                                 <p style="text-align: center; font-size: 12px;"><span>City</span></p>
-                                <p style="text-align: center; font-size: 12px;"><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a><span> | </span><a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a></p>',
+                                <p style="text-align: center; font-size: 12px;"><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a><span> | </span><a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a></p>',
                   ],
                   [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-color',
+                    'iconSet' => 'official',
                     'icons' => [
                       [
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/06-full-symbol-color/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -338,7 +338,7 @@ class AppWelcome {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/06-full-symbol-color/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -347,7 +347,7 @@ class AppWelcome {
                         'type' => 'socialIcon',
                         'iconType' => 'youtube',
                         'link' => 'http://www.youtube.com',
-                        'image' => $this->social_icon_url . '/06-full-symbol-color/Youtube.png',
+                        'image' => $this->social_icon_url . '/11-official/Youtube.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Youtube',
@@ -356,7 +356,7 @@ class AppWelcome {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/06-full-symbol-color/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -416,5 +416,4 @@ class AppWelcome {
   private function getThumbnail() {
     return $this->template_image_url . '/thumbnail.20190411-1500.jpg';
   }
-
 }

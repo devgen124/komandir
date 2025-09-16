@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunkwebpackWcBlocksJsonp=self.webpackChunkwebpackWcBlocksJsonp||[]).push([[1259],{57119:(e,s,c)=>{c.r(s),c.d(s,{default:()=>a});var t=c(80721),k=c(56253),p=c(96626);const a=(0,t.withFilteredAttributes)(p.Z)(k.Z)}}]);
+"use strict";(globalThis.webpackChunkwebpackWcBlocksStylingJsonp=globalThis.webpackChunkwebpackWcBlocksStylingJsonp||[]).push([[8262],{92947:(s,t,c)=>{c.r(t),c.d(t,{default:()=>i});var l=c(41616),e=c(35916),a=c(99972);const i=(0,l.withFilteredAttributes)(a.A)(e.A)}}]);

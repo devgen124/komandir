@@ -8,9 +8,9 @@ if (!defined('ABSPATH')) {
 $is_pro = \Wdr\App\Helpers\Helper::hasPro();
 ?>
 <div class="wdr-rule-menu">
-    <h2><?php _e('Rules (Optional)', 'woo-discount-rules'); ?> - <span><a href="https://docs.flycart.org/en/articles/3834240-conditions-rules?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=rule_condition" target="_blank" style="font-size: 12px;"><?php _e('Read Docs', 'woo-discount-rules'); ?></a></span></h2>
+    <h2><?php esc_html_e('Rules (Optional)', 'woo-discount-rules'); ?> - <span><a href="https://docs.flycart.org/en/articles/3834240-conditions-rules?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=rule_condition" target="_blank" style="font-size: 12px;"><?php esc_html_e('Read Docs', 'woo-discount-rules'); ?></a></span></h2>
     <div class="awdr-rules-content">
-        <?php echo Helper::ruleConditionDescription();?>
+        <?php echo wp_kses_post(Helper::ruleConditionDescription());?>
     </div>
 </div>
 <div class="wdr-rule-options-con"><?php
@@ -22,12 +22,12 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
         <div class="wdr-condition-template">
         <div class="wdr-block">
             <div class="wdr-conditions-relationship">
-                <label><b><?php _e('Conditions Relationship ', 'woo-discount-rules'); ?></b></label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <label><b><?php esc_html_e('Conditions Relationship ', 'woo-discount-rules'); ?></b></label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <label><input type="radio" name="additional[condition_relationship]"
                               value="and" <?php echo ($condition_relationship == 'and') ? 'checked' : '' ?>
-                    ><?php _e('Match All', 'woo-discount-rules'); ?></label>
+                    ><?php esc_html_e('Match All', 'woo-discount-rules'); ?></label>
                 <label><input type="radio" name="additional[condition_relationship]"
-                              value="or" <?php echo ($condition_relationship == 'or') ? 'checked' : '' ?>><?php _e('Match Any', 'woo-discount-rules'); ?>
+                              value="or" <?php echo ($condition_relationship == 'or') ? 'checked' : '' ?>><?php esc_html_e('Match Any', 'woo-discount-rules'); ?>
                 </label>
             </div>
             <div class="wdr-condition-group-items">
@@ -54,7 +54,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                                             foreach ($wdr_product_conditions as $wdr_condition_key => $wdr_condition_value) {
                                                 ?>
                                                 <optgroup
-                                                label="<?php _e($wdr_condition_key, 'woo-discount-rules'); ?>"><?php
+                                                label="<?php esc_html_e($wdr_condition_key, 'woo-discount-rules');//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>"><?php
                                                 foreach ($wdr_condition_value as $key => $value) {?>
                                                     <option class="<?php echo ($awdr_discount_type != 'wdr_free_shipping' && $key == 'cart_item_product_onsale') ? 'wdr-hide awdr-free-shipping-special-condition' : 'awdr-free-shipping-special-condition'; ?>"
                                                     <?php
@@ -70,13 +70,13 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                                                     ?>
                                                     <?php if ($key == $type) {
                                                         echo 'selected';
-                                                    } ?>><?php _e($value['label'], 'woo-discount-rules'); ?></option><?php
+                                                    } ?>><?php esc_html_e($value['label'], 'woo-discount-rules');//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?></option><?php
                                                 } ?>
                                                 </optgroup><?php
                                             }
                                         } ?>
                                     </select>
-                                    <span class="wdr_desc_text awdr-clear-both"><?php _e('Condition Type', 'woo-discount-rules'); ?></span>
+                                    <span class="wdr_desc_text awdr-clear-both"><?php esc_html_e('Condition Type', 'woo-discount-rules'); ?></span>
                                 </div><?php
                                 extract($extra_params);
                                 $render_saved_condition = true;
@@ -113,7 +113,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
             </div>
             <div class="add-condition add-condition-and-filters">
                 <button type="button"
-                        class="button add-product-condition"><?php _e('Add condition', 'woo-discount-rules'); ?></button>
+                        class="button add-product-condition"><?php esc_html_e('Add condition', 'woo-discount-rules'); ?></button>
             </div>
         </div>
         </div><?php
@@ -121,11 +121,11 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
         <div class="wdr-condition-template">
             <div class="wdr-block">
                 <div class="wdr-conditions-relationship">
-                    <label><b><?php _e('Conditions Relationship', 'woo-discount-rules'); ?></b></label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><b><?php esc_html_e('Conditions Relationship', 'woo-discount-rules'); ?></b></label>&nbsp;&nbsp;&nbsp;&nbsp;
                     <label><input type="radio" name="additional[condition_relationship]"
-                                  value="and" checked><?php _e('Match All', 'woo-discount-rules'); ?></label>
+                                  value="and" checked><?php esc_html_e('Match All', 'woo-discount-rules'); ?></label>
                     <label><input type="radio" name="additional[condition_relationship]"
-                                  value="or"><?php _e('Match Any', 'woo-discount-rules'); ?>
+                                  value="or"><?php esc_html_e('Match Any', 'woo-discount-rules'); ?>
                     </label>
                 </div>
                 <div class="wdr-condition-group-items">
@@ -133,7 +133,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                 </div>
                 <div class="wdp-block add-condition">
                     <button type="button"
-                            class="button add-product-condition"><?php _e('Add condition', 'woo-discount-rules'); ?></button>
+                            class="button add-product-condition"><?php esc_html_e('Add condition', 'woo-discount-rules'); ?></button>
                 </div>
             </div>
         </div>
@@ -145,12 +145,15 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
             <div class="wdr-conditions-relationship"><?php
                 $usage_limits = $rule->getUsageLimits();
                 $used_limits = $rule->getUsedLimits(); ?>
-                <label><b><?php _e('Rule Limits', 'woo-discount-rules'); ?></b>
+                <label><b><?php esc_html_e('Rule Limits', 'woo-discount-rules'); ?></b>
                     <span class="awdr-rule-limit-timestamp"><?php
-                        if(!empty($current_time)) echo sprintf(esc_html__('Current server date and time: %s', 'woo-discount-rules'), '<b>' . date('Y-m-d H:i', $current_time) . '</b>'); ?>
+                        if(!empty($current_time)){
+                            /* translators: %s used to display current server date and time */
+	                        echo wp_kses_post(sprintf(__('Current server date and time: %s', 'woo-discount-rules'), '<b>' . gmdate('Y-m-d H:i', $current_time) . '</b>'));
+                        }  ?>
                     </span>
                     <span class="awdr-rule-limit-timestamp "> <?php
-                        _e('Rule Used: ', 'woo-discount-rules');
+                        esc_html_e('Rule Used: ', 'woo-discount-rules');
                         echo "<b class='awdr-used-limit-total'>". esc_html($used_limits) ."</b>"; ?>
                     </span>
                 </label>
@@ -162,7 +165,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
 
                         <input type="number" name="usage_limits" value="<?php echo (!empty($usage_limits)) ? esc_attr($usage_limits) : '';?>" min="1" class="wdr-title number_only_field" id="select_usage_limits" placeholder="Unlimited">
 
-                        <span class="wdr_desc_text"><?php _e('Maximum usage limit', 'woo-discount-rules'); ?></span>
+                        <span class="wdr_desc_text"><?php esc_html_e('Maximum usage limit', 'woo-discount-rules'); ?></span>
                     </div>
                     <div class="wdr-rule-date-valid">
                         <div class="wdr-dateandtime-value">
@@ -175,7 +178,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                                    autocomplete="off"
                                    id="rule_datetime_from"
                                    value="<?php echo esc_attr($rule->getStartDate(false, 'Y-m-d H:i')); ?>">
-                            <span class="wdr_desc_text"><?php _e('Vaild from', 'woo-discount-rules'); ?></span>
+                            <span class="wdr_desc_text"><?php esc_html_e('Vaild from', 'woo-discount-rules'); ?></span>
                         </div>
                         <div class="wdr-dateandtime-value">
                             <input type="text"
@@ -186,7 +189,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                                    data-field="date" autocomplete="off"
                                    id="rule_datetime_to"
                                    value="<?php echo esc_attr($rule->getEndDate(false, 'Y-m-d H:i')); ?>">
-                            <span class="wdr_desc_text"><?php _e('Vaild to', 'woo-discount-rules'); ?></span>
+                            <span class="wdr_desc_text"><?php esc_html_e('Vaild to', 'woo-discount-rules'); ?></span>
                         </div>
                     </div>
                     <?php
@@ -210,7 +213,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                                 }
                                 ?>
                             </select>
-                            <span class="wdr_desc_text"><?php _e('Language', 'woo-discount-rules'); ?></span>
+                            <span class="wdr_desc_text"><?php esc_html_e('Language', 'woo-discount-rules'); ?></span>
                         </div>
                         <?php
                     } ?>

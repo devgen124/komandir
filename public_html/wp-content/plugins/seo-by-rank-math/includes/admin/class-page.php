@@ -11,6 +11,7 @@
 namespace RankMath\Admin;
 
 use RankMath\Helpers\Param;
+use RankMath\Helper;
 
 /**
  * Page class.
@@ -67,6 +68,13 @@ class Page {
 	public $position = -1;
 
 	/**
+	 * The init hook priority.
+	 *
+	 * @var int
+	 */
+	public $priority = 25;
+
+	/**
 	 * The function/file that displays the page content for the menu page.
 	 *
 	 * @var string|callable
@@ -109,6 +117,13 @@ class Page {
 	public $classes = null;
 
 	/**
+	 * Hold localized data.
+	 *
+	 * @var array
+	 */
+	public $json = null;
+
+	/**
 	 * The Constructor.
 	 *
 	 * @param string $id     Admin page unique id.
@@ -119,11 +134,11 @@ class Page {
 
 		// Early bail!
 		if ( ! $id ) {
-			wp_die( esc_html__( '$id variable required' ), esc_html__( 'Variable Required' ) );
+			wp_die( esc_html__( '$id variable required', 'rank-math' ), esc_html__( 'Variable Required', 'rank-math' ) );
 		}
 
 		if ( ! $title ) {
-			wp_die( esc_html__( '$title variable required' ), esc_html__( 'Variable Required' ) );
+			wp_die( esc_html__( '$title variable required', 'rank-math' ), esc_html__( 'Variable Required', 'rank-math' ) );
 		}
 
 		$this->id    = $id;
@@ -136,7 +151,7 @@ class Page {
 			$this->menu_title = $title;
 		}
 
-		add_action( 'init', [ $this, 'init' ], 25 );
+		add_action( 'init', [ $this, 'init' ], $this->priority ?? 25 );
 	}
 
 	/**
@@ -201,6 +216,7 @@ class Page {
 	public function enqueue() {
 		$this->enqueue_styles();
 		$this->enqueue_scripts();
+		$this->add_localized_data();
 	}
 
 	/**
@@ -250,6 +266,10 @@ class Page {
 			return;
 		}
 
+		if ( 'settings' === $this->render ) {
+			return $this->display_settings();
+		}
+
 		if ( is_callable( $this->render ) ) {
 			call_user_func( $this->render, $this );
 			return;
@@ -295,6 +315,9 @@ class Page {
 		}
 
 		foreach ( $this->assets['scripts'] as $handle => $src ) {
+			if ( $handle === 'media-editor' ) {
+				wp_enqueue_media();
+			}
 			wp_enqueue_script( $handle, $src, null, rank_math()->version, true );
 		}
 	}
@@ -322,5 +345,34 @@ class Page {
 		}
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * Localized data.
+	 */
+	private function add_localized_data() {
+		if ( empty( $this->assets['json'] ) ) {
+			return;
+		}
+
+		foreach ( $this->assets['json'] as $key => $value ) {
+			Helper::add_json( $key, $value );
+		}
+
+		Helper::add_json(
+			'settings',
+			[
+				'general' => Helper::get_settings( 'general' ),
+				'titles'  => Helper::get_settings( 'titles' ),
+				'sitemap' => Helper::get_settings( 'sitemap' ),
+			]
+		);
+	}
+
+	/**
+	 * Display settings.
+	 */
+	private function display_settings() {
+		echo '<div id="rank-math-settings" class="' . esc_attr( $this->id ) . '"></div>';
 	}
 }

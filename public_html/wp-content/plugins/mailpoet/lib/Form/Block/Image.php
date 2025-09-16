@@ -33,7 +33,7 @@ class Image {
   private function renderImage(array $params): string {
     $attributes = [];
     $styles = [];
-    $attributes[] = 'src="' . $this->wp->escAttr($params['url']) . '"';
+    $attributes[] = 'src="' . $this->wp->escUrl($params['url']) . '"';
     $attributes[] = $params['alt'] ? 'alt="' . $this->wp->escAttr($params['alt']) . '"' : 'alt';
     if ($params['title']) {
       $attributes[] = 'title="' . $this->wp->escAttr($params['title']) . '"';
@@ -66,7 +66,7 @@ class Image {
     if ($params['href']) {
       $img = $this->wrapToLink($params, $img);
     }
-    $caption = $params['caption'] ? "<figcaption>{$this->htmlSanitizer->sanitize($params['caption'])}</figcaption>" : '';
+    $caption = isset($params['caption']) && $params['caption'] ? "<figcaption>{$this->htmlSanitizer->sanitize($params['caption'])}</figcaption>" : '';
     $figure = '<figure class="' . $this->wp->escAttr(implode(' ', $figureClasses)) . '">' . $img . $caption . '</figure>';
     // Main wrapper
     $divClasses = ['mailpoet_form_image'];
@@ -77,7 +77,7 @@ class Image {
   }
 
   private function wrapToLink(array $params, string $img): string {
-    $attributes = ['href="' . $this->wp->escAttr($params['href']) . '"'];
+    $attributes = ['href="' . $this->wp->escUrl($params['href']) . '"'];
     if ($params['link_class']) {
       $attributes[] = 'class="' . $this->wp->escAttr($params['link_class']) . '"';
     }

@@ -4,14 +4,15 @@ namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
 
-use MailPoet\WP\Functions as WPFunctions;
 
 class RenewableEnergy {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/renewable-energy';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -31,7 +32,7 @@ class RenewableEnergy {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
        [
         'type' => 'container',
@@ -265,7 +266,7 @@ class RenewableEnergy {
                   1 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-grey',
+                    'iconSet' => 'official-white',
                     'icons' =>
                      [
                       0 =>
@@ -273,7 +274,7 @@ class RenewableEnergy {
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Facebook.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -283,7 +284,7 @@ class RenewableEnergy {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Twitter.png',
+                        'image' => $this->social_icon_url . '/12-official-white/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -293,7 +294,7 @@ class RenewableEnergy {
                         'type' => 'socialIcon',
                         'iconType' => 'linkedin',
                         'link' => 'http://www.linkedin.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/LinkedIn.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Linkedin.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'LinkedIn',
@@ -939,7 +940,7 @@ class RenewableEnergy {
                   2 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-grey',
+                    'iconSet' => 'official-white',
                     'icons' =>
                      [
                       0 =>
@@ -947,7 +948,7 @@ class RenewableEnergy {
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Facebook.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -957,7 +958,7 @@ class RenewableEnergy {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Twitter.png',
+                        'image' => $this->social_icon_url . '/12-official-white/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -967,7 +968,7 @@ class RenewableEnergy {
                         'type' => 'socialIcon',
                         'iconType' => 'linkedin',
                         'link' => 'http://www.linkedin.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/LinkedIn.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Linkedin.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'LinkedIn',
@@ -977,7 +978,7 @@ class RenewableEnergy {
                   3 =>
                    [
                     'type' => 'text',
-                    'text' => '<p style="text-align: center;"><span style="color: #fdb323;"><a href="[link:subscription_unsubscribe_url]" style="color: #fdb323;">'.__("Unsubscribe", 'mailpoet').'</a>&nbsp;|&nbsp;<a href="[link:subscription_manage_url]" style="color: #fdb323;">'.__("Manage your subscription", 'mailpoet').'</a></span><br /><span style="color: #999999;">'.__("Add your postal address here!", 'mailpoet').'</span></p>',
+                    'text' => '<p style="text-align: center;"><span style="color: #fdb323;"><a href="[link:subscription_unsubscribe_url]" style="color: #fdb323;">' . __("Unsubscribe", 'mailpoet') . '</a>&nbsp;|&nbsp;<a href="[link:subscription_manage_url]" style="color: #fdb323;">' . __("Manage your subscription", 'mailpoet') . '</a></span><br /><span style="color: #999999;">' . __("Add your postal address here!", 'mailpoet') . '</span></p>',
                    ],
                  ],
                ],
@@ -1191,7 +1192,7 @@ class RenewableEnergy {
          ],
         'footer' =>
          [
-          'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+          'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
           'styles' =>
            [
             'block' =>
@@ -1277,7 +1278,7 @@ class RenewableEnergy {
          ],
         'social' =>
          [
-          'iconSet' => 'full-symbol-grey',
+          'iconSet' => 'official-white',
           'icons' =>
            [
             0 =>
@@ -1285,7 +1286,7 @@ class RenewableEnergy {
               'type' => 'socialIcon',
               'iconType' => 'facebook',
               'link' => 'http://www.facebook.com',
-              'image' => $this->social_icon_url . '/08-full-symbol-grey/Facebook.png',
+              'image' => $this->social_icon_url . '/12-official-white/Facebook.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Facebook',
@@ -1295,7 +1296,7 @@ class RenewableEnergy {
               'type' => 'socialIcon',
               'iconType' => 'twitter',
               'link' => 'http://www.twitter.com',
-              'image' => $this->social_icon_url . '/08-full-symbol-grey/Twitter.png',
+              'image' => $this->social_icon_url . '/12-official-white/X.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Twitter',
@@ -1305,7 +1306,7 @@ class RenewableEnergy {
               'type' => 'socialIcon',
               'iconType' => 'linkedin',
               'link' => 'http://www.linkedin.com',
-              'image' => $this->social_icon_url . '/08-full-symbol-grey/LinkedIn.png',
+              'image' => $this->social_icon_url . '/12-official-white/Linkedin.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'LinkedIn',
@@ -1327,7 +1328,7 @@ class RenewableEnergy {
          ],
         'header' =>
          [
-          'text' => '<a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a>',
+          'text' => '<a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a>',
           'styles' =>
            [
             'block' =>
@@ -1352,5 +1353,4 @@ class RenewableEnergy {
        ],
     ];
   }
-
 }

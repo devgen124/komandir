@@ -59,12 +59,14 @@ class Segment {
     foreach ($options as $option) {
       if (!isset($option['id']) || !isset($segmentsNamesMap[$option['id']])) continue;
 
+      $id = $this->wp->wpUniqueId('mailpoet_segment_');
       $isChecked = (isset($option['is_checked']) && $option['is_checked']) ? 'checked="checked"' : '';
 
-      $html .= '<label class="mailpoet_checkbox_label" '
+      $html .= '<label class="mailpoet_checkbox_label" for="' . $id . '" '
         . $this->rendererHelper->renderFontStyle($formSettings)
         . '>';
       $html .= '<input type="checkbox" class="mailpoet_checkbox" ';
+      $html .= 'id="' . $id . '" ';
       $html .= 'name="' . $fieldName . '[]" ';
       $html .= 'value="' . $option['id'] . '" ' . $isChecked . ' ';
       $html .= $fieldValidation;
@@ -72,7 +74,7 @@ class Segment {
       $html .= '</label>';
     }
 
-    $html .= '<span class="mailpoet_error_' . $block['id'] . ($formId ? '_' . $formId : '') . '"></span>';
+    $html .= $this->rendererHelper->renderErrorsContainer($block, $formId);
 
     // End fieldset around checkboxes
     $html .= '</fieldset>';

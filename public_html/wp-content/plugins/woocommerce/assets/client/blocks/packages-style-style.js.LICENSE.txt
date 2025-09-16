@@ -1,16 +1,27 @@
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
+/*! @license DOMPurify 2.5.7 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/2.5.7/LICENSE */
 
-/*!
-  Copyright (c) 2018 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
+/**
+ * @license React
+ * react-dom-test-utils.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-/** @license React v0.20.2
+/**
+ * @license React
+ * react-test-renderer.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @license React
  * scheduler-unstable_mock.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -19,7 +30,8 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v0.20.2
+/**
+ * @license React
  * scheduler.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -28,8 +40,18 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * @license React
+ * use-sync-external-store-shim.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 /** @license React v17.0.2
- * react-test-renderer.production.min.js
+ * react-is.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
  *

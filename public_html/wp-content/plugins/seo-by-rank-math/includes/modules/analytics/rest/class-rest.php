@@ -37,40 +37,136 @@ class Rest extends WP_REST_Controller {
 	 */
 	public function register_routes() {
 		$routes = [
-			'dashboard'          => [
+			'dashboard'           => [
 				'callback' => [ $this, 'get_dashboard' ],
 			],
-			'keywordsOverview'   => [
+			'keywordsOverview'    => [
 				'callback' => [ $this, 'get_keywords_overview' ],
 			],
-			'postsSummary'       => [
+			'postsSummary'        => [
 				'callback' => [ Stats::get(), 'get_posts_summary' ],
 			],
-			'postsRowsByObjects' => [
+			'postsRowsByObjects'  => [
 				'callback' => [ Stats::get(), 'get_posts_rows_by_objects' ],
 			],
-			'post/(?P<id>\d+)'   => [
+			'post/(?P<id>\d+)'    => [
 				'callback' => [ $this, 'get_post' ],
+				'args'     => [
+					'id' => [
+						'description' => esc_html__( 'Post ID.', 'rank-math' ),
+						'type'        => 'integer',
+						'required'    => true,
+					],
+				],
 			],
-			'keywordsSummary'    => [
+			'keywordsSummary'     => [
 				'callback' => [ Stats::get(), 'get_analytics_summary' ],
 			],
-			'analyticsSummary'   => [
+			'analyticsSummary'    => [
 				'callback' => [ $this, 'get_analytics_summary' ],
+				'args'     => [
+					'postType' => [
+						'description' => esc_html__( 'Post Type.', 'rank-math' ),
+						'type'        => 'string',
+					],
+				],
 			],
-			'keywordsRows'       => [
+			'keywordsRows'        => [
 				'callback' => [ Stats::get(), 'get_keywords_rows' ],
+				'args'     => [
+					'page'    => [
+						'description' => esc_html__( 'Page number.', 'rank-math' ),
+						'type'        => 'integer',
+						'required'    => false,
+					],
+					'perPage' => [
+						'description' => esc_html__( 'Results per page.', 'rank-math' ),
+						'type'        => 'integer',
+						'required'    => false,
+					],
+					'orderBy' => [
+						'description' => esc_html__( 'Order by.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => false,
+					],
+					'order'   => [
+						'description' => esc_html__( 'Order.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => false,
+					],
+					'search'  => [
+						'description' => esc_html__( 'Search.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => false,
+					],
+				],
 			],
-			'userPreferences'    => [
+			'userPreferences'     => [
 				'callback' => [ $this, 'update_user_preferences' ],
 				'methods'  => WP_REST_Server::CREATABLE,
+				'args'     => [
+					'preferences' => [
+						'description' => esc_html__( 'User preferences.', 'rank-math' ),
+						'type'        => 'object',
+						'required'    => true,
+					],
+				],
 			],
-			'inspectionResults'  => [
+			'inspectionResults'   => [
 				'callback' => [ $this, 'get_inspection_results' ],
+				'args'     => [
+					'page'       => [
+						'description' => esc_html__( 'Page number.', 'rank-math' ),
+						'type'        => 'integer',
+						'required'    => false,
+					],
+					'perPage'    => [
+						'description' => esc_html__( 'Results per page.', 'rank-math' ),
+						'type'        => 'integer',
+						'required'    => false,
+					],
+					'orderBy'    => [
+						'description' => esc_html__( 'Order by.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => false,
+					],
+					'order'      => [
+						'description' => esc_html__( 'Order.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => false,
+					],
+					'search'     => [
+						'description' => esc_html__( 'Search.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => false,
+					],
+					'filter'     => [
+						'description' => esc_html__( 'Filter.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => false,
+					],
+					'filterType' => [
+						'description' => esc_html__( 'Filter type.', 'rank-math' ),
+						'type'        => 'string',
+						'required'    => false,
+					],
+				],
 			],
-			'removeFrontendStats'  => [
+			'removeFrontendStats' => [
 				'callback' => [ $this, 'remove_frontend_stats' ],
 				'methods'  => WP_REST_Server::CREATABLE,
+				'args'     => [
+					'toggleBar' => [
+						'description' => esc_html__( 'Toggle bar.', 'rank-math' ),
+						'type'        => 'boolean',
+						'required'    => false,
+					],
+					'hide'      => [
+						'description' => esc_html__( 'Hide.', 'rank-math' ),
+						'type'        => 'boolean',
+						'required'    => false,
+					],
+				],
 			],
 		];
 
@@ -152,11 +248,9 @@ class Rest extends WP_REST_Controller {
 	/**
 	 * Get dashboard data.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
-	public function get_dashboard( WP_REST_Request $request ) { // phpcs:ignore
+	public function get_dashboard() {
 		return rest_ensure_response(
 			[
 				'stats'        => Stats::get()->get_analytics_summary(),
@@ -185,11 +279,9 @@ class Rest extends WP_REST_Controller {
 	/**
 	 * Get keywords overview.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
-	public function get_keywords_overview( WP_REST_Request $request ) { // phpcs:ignore
+	public function get_keywords_overview() {
 		return rest_ensure_response(
 			apply_filters(
 				'rank_math/analytics/keywords_overview',
@@ -244,7 +336,7 @@ class Rest extends WP_REST_Controller {
 
 			return delete_user_meta( $user_id, 'rank_math_hide_frontend_stats' );
 		}
-		
+
 		$all_opts                   = rank_math()->settings->all_raw();
 		$general                    = $all_opts['general'];
 		$general['analytics_stats'] = 'off';

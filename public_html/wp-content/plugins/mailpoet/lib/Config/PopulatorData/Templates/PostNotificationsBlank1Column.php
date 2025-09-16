@@ -5,8 +5,6 @@ namespace MailPoet\Config\PopulatorData\Templates;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\WP\Functions as WPFunctions;
-
 class PostNotificationsBlank1Column {
 
   private $assets_url;
@@ -14,7 +12,9 @@ class PostNotificationsBlank1Column {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->assets_url = $assets_url;
     $this->external_template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/post-notifications-blank-1-column';
     $this->template_image_url = $this->assets_url . '/img/blank_templates';
@@ -257,7 +257,7 @@ class PostNotificationsBlank1Column {
                         "type" => "socialIcon",
                         "iconType" => "facebook",
                         "link" => "http://www.facebook.com",
-                        "image" => $this->social_icon_url . "/02-grey/Facebook.png",
+                        "image" => $this->social_icon_url . "/11-official/Facebook.png",
                         "height" => "32px",
                         "width" => "32px",
                         "text" => "Facebook",
@@ -266,7 +266,7 @@ class PostNotificationsBlank1Column {
                         "type" => "socialIcon",
                         "iconType" => "twitter",
                         "link" => "http://www.twitter.com",
-                        "image" => $this->social_icon_url . "/02-grey/Twitter.png",
+                        "image" => $this->social_icon_url . "/11-official/X.png",
                         "height" => "32px",
                         "width" => "32px",
                         "text" => "Twitter",

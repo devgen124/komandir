@@ -5,6 +5,7 @@ namespace Automattic\WooCommerce\Internal\Orders;
 
 use Automattic\Jetpack\Constants;
 use Automattic\WooCommerce\Internal\Features\FeaturesController;
+use Automattic\WooCommerce\Internal\Integrations\WPConsentAPI;
 use Automattic\WooCommerce\Internal\RegisterHooksInterface;
 use Automattic\WooCommerce\Internal\Traits\ScriptDebug;
 use Automattic\WooCommerce\Internal\Traits\OrderAttributionMeta;
@@ -15,7 +16,6 @@ use WC_Customer;
 use WC_Log_Levels;
 use WC_Logger_Interface;
 use WC_Order;
-use WC_Tracks;
 
 /**
  * Class OrderAttributionController
@@ -26,8 +26,15 @@ class OrderAttributionController implements RegisterHooksInterface {
 
 	use ScriptDebug;
 	use OrderAttributionMeta {
-		get_prefixed_field as public;
+		get_prefixed_field_name as public;
 	}
+
+	/**
+	 * The WPConsentAPI integration instance.
+	 *
+	 * @var WPConsentAPI
+	 */
+	private $consent;
 
 	/**
 	 * The FeatureController instance.
@@ -51,20 +58,28 @@ class OrderAttributionController implements RegisterHooksInterface {
 	private $proxy;
 
 	/**
+	 *  Whether the `stamp_checkout_html_element` method has been called.
+	 *
+	 * @var bool
+	 */
+	private static $is_stamp_checkout_html_called = false;
+
+	/**
 	 * Initialization method.
 	 *
 	 * Takes the place of the constructor within WooCommerce Dependency injection.
 	 *
 	 * @internal
 	 *
-	 * @param LegacyProxy         $proxy      The legacy proxy.
-	 * @param FeaturesController  $controller The feature controller.
-	 * @param WC_Logger_Interface $logger     The logger object. If not provided, it will be obtained from the proxy.
+	 * @param LegacyProxy        $proxy      The legacy proxy.
+	 * @param FeaturesController $controller The feature controller.
+	 * @param WPConsentAPI       $consent    The WPConsentAPI integration.
 	 */
-	final public function init( LegacyProxy $proxy, FeaturesController $controller, ?WC_Logger_Interface $logger = null ) {
+	final public function init( LegacyProxy $proxy, FeaturesController $controller, WPConsentAPI $consent ) {
 		$this->proxy              = $proxy;
 		$this->feature_controller = $controller;
-		$this->logger             = $logger ?? $proxy->call_function( 'wc_get_logger' );
+		$this->consent            = $consent;
+		$this->logger             = $proxy->call_function( 'wc_get_logger' );
 		$this->set_fields_and_prefix();
 	}
 
@@ -79,40 +94,71 @@ class OrderAttributionController implements RegisterHooksInterface {
 			return;
 		}
 
+		add_action( 'init', array( $this, 'on_init' ) );
+	}
+
+	/**
+	 * Hook into WordPress on init.
+	 */
+	public function on_init() {
 		// Bail if the feature is not enabled.
 		if ( ! $this->feature_controller->feature_is_enabled( 'order_attribution' ) ) {
 			return;
 		}
 
+		// Register WPConsentAPI integration.
+		$this->consent->register();
+
 		add_action(
 			'wp_enqueue_scripts',
-			function() {
+			function () {
 				$this->enqueue_scripts_and_styles();
 			}
 		);
 
 		add_action(
 			'admin_enqueue_scripts',
-			function() {
+			function () {
 				$this->enqueue_admin_scripts_and_styles();
 			}
 		);
 
-		// Include our hidden fields on order notes and registration form.
-		$source_form_fields = function() {
-			$this->source_form_fields();
-		};
+		/**
+		 * Filter set of actions used to stamp the unique checkout order attribution HTML container element.
+		 *
+		 * @since 9.0.0
+		 *
+		 * @param array $stamp_checkout_html_actions The set of actions used to stamp the unique checkout order attribution HTML container element.
+		 */
+		$stamp_checkout_html_actions = apply_filters(
+			'wc_order_attribution_stamp_checkout_html_actions',
+			array(
+				'woocommerce_checkout_billing',
+				'woocommerce_after_checkout_billing_form',
+				'woocommerce_checkout_shipping',
+				'woocommerce_after_order_notes',
+				'woocommerce_checkout_after_customer_details',
+			)
+		);
+		foreach ( $stamp_checkout_html_actions as $action ) {
+			add_action( $action, array( $this, 'stamp_checkout_html_element_once' ) );
+		}
 
-		add_action( 'woocommerce_after_order_notes', $source_form_fields );
-		add_action( 'woocommerce_register_form', $source_form_fields );
+		add_action( 'woocommerce_register_form', array( $this, 'stamp_html_element' ) );
 
 		// Update order based on submitted fields.
 		add_action(
 			'woocommerce_checkout_order_created',
-			function( $order ) {
+			function ( $order ) {
+
+				// Check if this order already has any attribution data to prevent duplicates attribution data.
+				if ( $this->has_attribution( $order ) ) {
+					return;
+				}
+
 				// Nonce check is handled by WooCommerce before woocommerce_checkout_order_created hook.
 				// phpcs:ignore WordPress.Security.NonceVerification
-				$params = $this->get_unprefixed_fields( $_POST );
+				$params = $this->get_unprefixed_field_values( $_POST );
 				/**
 				 * Run an action to save order attribution data.
 				 *
@@ -127,7 +173,7 @@ class OrderAttributionController implements RegisterHooksInterface {
 
 		add_action(
 			'woocommerce_order_save_attribution_data',
-			function( $order, $data ) {
+			function ( $order, $data ) {
 				$source_data = $this->get_source_values( $data );
 				$this->send_order_tracks( $source_data, $order );
 				$this->set_order_source_data( $source_data, $order );
@@ -138,7 +184,7 @@ class OrderAttributionController implements RegisterHooksInterface {
 
 		add_action(
 			'user_register',
-			function( $customer_id ) {
+			function ( $customer_id ) {
 				try {
 					$customer = new WC_Customer( $customer_id );
 					$this->set_customer_source_data( $customer );
@@ -151,14 +197,14 @@ class OrderAttributionController implements RegisterHooksInterface {
 		// Add origin data to the order table.
 		add_action(
 			'admin_init',
-			function() {
+			function () {
 				$this->register_order_origin_column();
 			}
 		);
 
 		add_action(
 			'woocommerce_new_order',
-			function( $order_id, $order ) {
+			function ( $order_id, $order ) {
 				$this->maybe_set_admin_source( $order );
 			},
 			2,
@@ -168,25 +214,37 @@ class OrderAttributionController implements RegisterHooksInterface {
 
 	/**
 	 * If the order is created in the admin, set the source type and origin to admin/Web admin.
+	 * Only execute this if the order is created in the admin interface (or via ajax in the admin interface).
 	 *
 	 * @param WC_Order $order The recently created order object.
 	 *
 	 * @since 8.5.0
 	 */
 	private function maybe_set_admin_source( WC_Order $order ) {
-		if ( function_exists( 'is_admin' ) && is_admin() ) {
-			$order->add_meta_data( $this->get_meta_prefixed_field( 'type' ), 'admin' );
-			$order->save();
+
+		// For ajax requests, bail if the referer is not an admin page.
+		$http_referer     = esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ?? '' ) );
+		$referer_is_admin = 0 === strpos( $http_referer, get_admin_url() );
+		if ( ! $referer_is_admin && wp_doing_ajax() ) {
+			return;
 		}
+
+		// If not admin interface page, bail.
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		$order->add_meta_data( $this->get_meta_prefixed_field_name( 'source_type' ), 'admin' );
+		$order->save();
 	}
 
 	/**
-	 * Get all of the fields.
+	 * Get all of the field names.
 	 *
 	 * @return array
 	 */
-	public function get_fields(): array {
-		return $this->fields;
+	public function get_field_names(): array {
+		return $this->field_names;
 	}
 
 	/**
@@ -213,6 +271,9 @@ class OrderAttributionController implements RegisterHooksInterface {
 		wp_enqueue_script(
 			'wc-order-attribution',
 			plugins_url( "assets/js/frontend/order-attribution{$this->get_script_suffix()}.js", WC_PLUGIN_FILE ),
+			// Technically we do depend on 'wp-data', 'wc-blocks-checkout' for blocks checkout,
+			// but as implementing conditional dependency on the server-side would be too complex,
+			// we resolve this condition at the client-side.
 			array( 'sourcebuster-js' ),
 			Constants::get_constant( 'WC_VERSION' ),
 			true
@@ -239,6 +300,15 @@ class OrderAttributionController implements RegisterHooksInterface {
 		$session_length = (int) apply_filters( 'wc_order_attribution_session_length_minutes', 30 );
 
 		/**
+		 * Filter to enable base64 encoding for cookie values.
+		 *
+		 * @since 9.0.0
+		 *
+		 * @param bool $use_base64_cookies True to enable base64 encoding, default is false.
+		 */
+		$use_base64_cookies = apply_filters( 'wc_order_attribution_use_base64_cookies', false );
+
+		/**
 		 * Filter to allow tracking.
 		 *
 		 * @since 8.5.0
@@ -252,10 +322,12 @@ class OrderAttributionController implements RegisterHooksInterface {
 			'params' => array(
 				'lifetime'      => $lifetime,
 				'session'       => $session_length,
+				'base64'        => $use_base64_cookies,
 				'ajaxurl'       => admin_url( 'admin-ajax.php' ),
 				'prefix'        => $this->field_prefix,
-				'allowTracking' => $allow_tracking,
+				'allowTracking' => 'yes' === $allow_tracking,
 			),
+			'fields' => $this->fields,
 		);
 
 		wp_localize_script( 'wc-order-attribution', 'wc_order_attribution', $namespace );
@@ -308,22 +380,35 @@ class OrderAttributionController implements RegisterHooksInterface {
 	 * @return void
 	 */
 	private function output_origin_column( WC_Order $order ) {
-		$source_type = $order->get_meta( $this->get_meta_prefixed_field( 'type' ) );
-		$source      = $order->get_meta( $this->get_meta_prefixed_field( 'utm_source' ) );
+		$source_type = $order->get_meta( $this->get_meta_prefixed_field_name( 'source_type' ) );
+		$source      = $order->get_meta( $this->get_meta_prefixed_field_name( 'utm_source' ) );
 		$origin      = $this->get_origin_label( $source_type, $source );
-		if ( empty( $origin ) ) {
-			$origin = __( 'Unknown', 'woocommerce' );
-		}
 		echo esc_html( $origin );
 	}
 
 	/**
-	 * Add attribution hidden input fields for checkout & customer register froms.
+	 * Handles the `<wc-order-attribution-inputs>` element for checkout forms, ensuring that the field is only output once.
+	 *
+	 * @since 9.0.0
+	 *
+	 * @return void
 	 */
-	private function source_form_fields() {
-		foreach ( $this->fields as $field ) {
-			printf( '<input type="hidden" name="%s" value="" />', esc_attr( $this->get_prefixed_field( $field ) ) );
+	public function stamp_checkout_html_element_once() {
+		if ( self::$is_stamp_checkout_html_called ) {
+			return;
 		}
+		$this->stamp_html_element();
+		self::$is_stamp_checkout_html_called = true;
+	}
+
+	/**
+	 * Output `<wc-order-attribution-inputs>` element that contributes the order attribution values to the enclosing form.
+	 * Used customer register forms, and for checkout forms through `stamp_checkout_html_element()`.
+	 *
+	 * @return void
+	 */
+	public function stamp_html_element() {
+		printf( '<wc-order-attribution-inputs></wc-order-attribution-inputs>' );
 	}
 
 	/**
@@ -336,8 +421,8 @@ class OrderAttributionController implements RegisterHooksInterface {
 	private function set_customer_source_data( WC_Customer $customer ) {
 		// Nonce check is handled before user_register hook.
 		// phpcs:ignore WordPress.Security.NonceVerification
-		foreach ( $this->get_source_values( $this->get_unprefixed_fields( $_POST ) ) as $key => $value ) {
-			$customer->add_meta_data( $this->get_meta_prefixed_field( $key ), $value );
+		foreach ( $this->get_source_values( $this->get_unprefixed_field_values( $_POST ) ) as $key => $value ) {
+			$customer->add_meta_data( $this->get_meta_prefixed_field_name( $key ), $value );
 		}
 
 		$customer->save_meta_data();
@@ -352,8 +437,12 @@ class OrderAttributionController implements RegisterHooksInterface {
 	 * @return void
 	 */
 	private function set_order_source_data( array $source_data, WC_Order $order ) {
+		// If all the values are empty, bail.
+		if ( empty( array_filter( $source_data ) ) ) {
+			return;
+		}
 		foreach ( $source_data as $key => $value ) {
-			$order->add_meta_data( $this->get_meta_prefixed_field( $key ), $value );
+			$order->add_meta_data( $this->get_meta_prefixed_field_name( $key ), $value );
 		}
 
 		$order->save_meta_data();
@@ -394,28 +483,28 @@ class OrderAttributionController implements RegisterHooksInterface {
 	 * @return void
 	 */
 	private function send_order_tracks( array $source_data, WC_Order $order ) {
-		$origin_label        = $this->get_origin_label(
-			$source_data['type'] ?? '',
+		$origin_label = $this->get_origin_label(
+			$source_data['source_type'] ?? '',
 			$source_data['utm_source'] ?? '',
 			false
 		);
-		$customer_identifier = $order->get_customer_id() ? $order->get_customer_id() : $order->get_billing_email();
-		$customer_info       = $this->get_customer_history( $customer_identifier );
-		$tracks_data         = array(
-			'order_id'             => $order->get_id(),
-			'type'                 => $source_data['type'] ?? '',
-			'medium'               => $source_data['utm_medium'] ?? '',
-			'source'               => $source_data['utm_source'] ?? '',
-			'device_type'          => strtolower( $source_data['device_type'] ?? '(unknown)' ),
-			'origin_label'         => strtolower( $origin_label ),
-			'session_pages'        => $source_data['session_pages'] ?? 0,
-			'session_count'        => $source_data['session_count'] ?? 0,
-			'order_total'          => $order->get_total(),
-			// Add 1 to include the current order (which is currently still Pending when the event is sent).
-			'customer_order_count' => $customer_info['order_count'] + 1,
-			'customer_registered'  => $order->get_customer_id() ? 'yes' : 'no',
+
+		$tracks_data = array(
+			'order_id'            => $order->get_id(),
+			'source_type'         => $source_data['source_type'] ?? '',
+			'medium'              => $source_data['utm_medium'] ?? '',
+			'source'              => $source_data['utm_source'] ?? '',
+			'device_type'         => strtolower( $source_data['device_type'] ?? 'unknown' ),
+			'origin_label'        => strtolower( $origin_label ),
+			'session_pages'       => $source_data['session_pages'] ?? 0,
+			'session_count'       => $source_data['session_count'] ?? 0,
+			'order_total'         => $order->get_total(),
+			'customer_registered' => $order->get_customer_id() ? 'yes' : 'no',
 		);
-		$this->proxy->call_static( WC_Tracks::class, 'record_event', 'order_attribution', $tracks_data );
+
+		if ( function_exists( 'wc_admin_record_tracks_event' ) ) {
+			wc_admin_record_tracks_event( 'order_attribution', $tracks_data );
+		}
 	}
 
 	/**
@@ -437,7 +526,7 @@ class OrderAttributionController implements RegisterHooksInterface {
 	private function register_order_origin_column() {
 		$screen_id = $this->get_order_screen_id();
 
-		$add_column = function( $columns ) {
+		$add_column = function ( $columns ) {
 			$columns['origin'] = esc_html__( 'Origin', 'woocommerce' );
 
 			return $columns;
@@ -446,7 +535,7 @@ class OrderAttributionController implements RegisterHooksInterface {
 		add_filter( "manage_{$screen_id}_columns", $add_column );
 		add_filter( "manage_edit-{$screen_id}_columns", $add_column );
 
-		$display_column = function( $column_name, $order_id ) {
+		$display_column = function ( $column_name, $order_id ) {
 			if ( 'origin' !== $column_name ) {
 				return;
 			}
@@ -455,5 +544,22 @@ class OrderAttributionController implements RegisterHooksInterface {
 		// HPOS and non-HPOS use different hooks.
 		add_action( "manage_{$screen_id}_custom_column", $display_column, 10, 2 );
 		add_action( "manage_{$screen_id}_posts_custom_column", $display_column, 10, 2 );
+	}
+
+	/**
+	 * Check if this order already has any attribution data
+	 *
+	 * @param WC_Order $order The order object.
+	 *
+	 * @return bool
+	 * @since 9.8.0
+	 */
+	public function has_attribution( $order ) {
+		foreach ( $this->field_names as $field ) {
+			if ( $order->meta_exists( $this->get_meta_prefixed_field_name( $field ) ) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

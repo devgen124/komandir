@@ -84,12 +84,12 @@ class Str {
 	 */
 	public static function comparison( $needle, $haystack, $comparison = '' ) {
 
-		$hash = array(
+		$hash = [
 			'regex'    => 'preg_match',
-			'end'      => array( __CLASS__, 'ends_with' ),
-			'start'    => array( __CLASS__, 'starts_with' ),
-			'contains' => array( __CLASS__, 'contains' ),
-		);
+			'end'      => [ __CLASS__, 'ends_with' ],
+			'start'    => [ __CLASS__, 'starts_with' ],
+			'contains' => [ __CLASS__, 'contains' ],
+		];
 
 		if ( $comparison && isset( $hash[ $comparison ] ) ) {
 			return call_user_func( $hash[ $comparison ], $needle, $haystack );
@@ -122,7 +122,7 @@ class Str {
 	 * @return array
 	 */
 	public static function to_arr_no_empty( $str, $sep_pattern = '\r\n|[\r\n]' ) {
-		$array = empty( $str ) ? array() : preg_split( '/' . $sep_pattern . '/', $str, -1, PREG_SPLIT_NO_EMPTY );
+		$array = empty( $str ) ? [] : preg_split( '/' . $sep_pattern . '/', $str, -1, PREG_SPLIT_NO_EMPTY );
 		$array = array_filter( array_map( 'trim', $array ) );
 
 		return $array;
@@ -166,13 +166,12 @@ class Str {
 	 * @return string
 	 */
 	public static function human_number( $number, $precision = 1 ) {
-
 		if ( ! is_numeric( $number ) ) {
 			return 0;
 		}
 
 		$negative = '';
-		if ( abs( $number ) != $number ) {
+		if ( abs( $number ) != $number ) { //phpcs:ignore -- Loose comparison is needed here due to the negative value.
 			$negative = '-';
 			$number   = abs( $number );
 		}
@@ -182,7 +181,7 @@ class Str {
 		}
 
 		$unit  = intval( log( $number, 1000 ) );
-		$units = array( '', 'K', 'M', 'B', 'T', 'Q' );
+		$units = [ '', 'K', 'M', 'B', 'T', 'Q' ];
 
 		if ( array_key_exists( $unit, $units ) ) {
 			return sprintf( '%s%s%s', $negative, rtrim( number_format( $number / pow( 1000, $unit ), $precision ), '.0' ), $units[ $unit ] );
@@ -222,14 +221,14 @@ class Str {
 	/**
 	 * Multibyte ucwords.
 	 *
-	 * @param string $string String to convert.
+	 * @param string $value String to convert.
 	 */
-	public static function mb_ucwords( $string ) {
-		if ( ! function_exists( 'mb_convert_case' ) || ! function_exists( 'mb_detect_encoding' ) || mb_detect_encoding( $string ) !== 'UTF-8' ) {
-			return ucwords( $string );
+	public static function mb_ucwords( $value ) {
+		if ( ! function_exists( 'mb_convert_case' ) || ! function_exists( 'mb_detect_encoding' ) || mb_detect_encoding( $value ) !== 'UTF-8' ) {
+			return ucwords( $value );
 		}
 
-		$words   = preg_split( '/([\s]+)/u', $string, -1, PREG_SPLIT_DELIM_CAPTURE );
+		$words   = preg_split( '/([\s]+)/u', $value, -1, PREG_SPLIT_DELIM_CAPTURE );
 		$ucwords = '';
 		foreach ( $words as $word ) {
 			if ( is_numeric( $word ) ) {
@@ -237,7 +236,7 @@ class Str {
 				continue;
 			}
 
-			if ( ! empty( $word[0] ) ) {
+			if ( isset( $word[0] ) ) {
 				$ucwords .= preg_match( '/[\p{L}]/u', $word[0] ) ? mb_strtoupper( $word[0], 'UTF-8' ) . mb_substr( $word, 1, mb_strlen( $word ), 'UTF-8' ) : $word;
 			}
 		}

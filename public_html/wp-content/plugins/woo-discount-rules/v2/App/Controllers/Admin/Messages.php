@@ -41,16 +41,16 @@ class Messages extends ManageDiscount
      * @return void
      */
     function setReviewData($time_difference_for_review,$review_status) {
-
+        /* phpcs:ignore WordPress.Security.NonceVerification.Recommended */
         if (isset($_GET['awdr_review'])) {
-            $review_action = $_GET['awdr_review'];
+            $review_action = sanitize_text_field( wp_unslash( $_GET['awdr_review'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
             switch ($review_action) {
                 case $review_action == "add":
                     if ($review_status != $review_action || $time_difference_for_review > 24 * 60 * 60) {
                         $this->saveReviewData("add");
                     }
-                    wp_redirect("https://wordpress.org/support/plugin/woo-discount-rules/reviews/?filter=5");
+                    wp_redirect("https://wordpress.org/support/plugin/woo-discount-rules/reviews/");
                     exit();
 
                 case $review_action == "later":

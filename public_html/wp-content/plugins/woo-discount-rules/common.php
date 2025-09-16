@@ -2,11 +2,11 @@
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 add_action('wp_ajax_awdr_switch_version', function (){
-    $version = isset($_REQUEST['version'])? $_REQUEST['version']: '';
-    $page = isset($_REQUEST['page'])? $_REQUEST['page']: '';
-    $wdr_nonce = isset($_REQUEST['wdr_nonce'])? $_REQUEST['wdr_nonce']: '';
+    $version = isset($_REQUEST['version'])? sanitize_text_field(wp_unslash($_REQUEST['version'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    $page = isset($_REQUEST['page'])? sanitize_text_field(wp_unslash($_REQUEST['page'])): ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    $wdr_nonce = isset($_REQUEST['wdr_nonce'])? sanitize_text_field(wp_unslash($_REQUEST['wdr_nonce'])): ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
     $return['status'] = false;
-    $return['message'] = esc_html__('Invalid request', 'woo-discount-rules');
+    $return['message'] = esc_html('Invalid request');
     if($version == "v1"){
         \Wdr\App\Helpers\Helper::validateRequest('wdr_ajax_switch_version', $wdr_nonce);
     } else {
@@ -17,11 +17,11 @@ add_action('wp_ajax_awdr_switch_version', function (){
             $url = esc_url(admin_url('admin.php?page=' . $page . '&awdr_switch_plugin_to=' . $version));
             $do_switch = true;
             if (!isAWDREnvironmentCompatible()) {
-                $return['message'] = __('Discount Rules 2.0 requires minimum PHP version of ', 'woo-discount-rules') . ' ' . WDR_REQUIRED_PHP_VERSION;
+                $return['message'] = 'Discount Rules 2.0 requires minimum PHP version of ' . ' ' . WDR_REQUIRED_PHP_VERSION;
                 wp_send_json_success($return);
             }
             if (!isAWDRWooCompatible()) {
-                $return['message'] = __('Discount Rules 2.0 requires at least Woocommerce', 'woo-discount-rules') . ' ' . WDR_WC_REQUIRED_VERSION;
+                $return['message'] = 'Discount Rules 2.0 requires at least Woocommerce' . ' ' . WDR_WC_REQUIRED_VERSION;
                 wp_send_json_success($return);
             }
             if (defined('WDR_BACKWARD_COMPATIBLE')) {
@@ -41,7 +41,7 @@ add_action('wp_ajax_awdr_switch_version', function (){
                 $return['message'] = '';
                 $return['url'] = $url;
             } else {
-                $return['message'] = __('Since 2.0, you need BOTH Core and Pro (2.0) packages installed and activated.  Please download the Pro 2.0 pack from My Downloads page in our site, install and activate it. <a href="https://docs.flycart.org/en/articles/4006520-switching-to-2-0-from-v1-x-versions?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=switch_to_v2" target="_blank">Here is a guide and video tutorial</a>', 'woo-discount-rules');
+                $return['message'] = 'Since 2.0, you need BOTH Core and Pro (2.0) packages installed and activated.  Please download the Pro 2.0 pack from My Downloads page in our site, install and activate it.';
                 $return['type'] = 'manual_install';
             }
         }
@@ -57,18 +57,19 @@ add_action('wp_ajax_awdr_switch_version', function (){
 add_action('advanced_woo_discount_rules_on_settings_head', function () {
     $has_switch = true;
     $page = NULL;
+    /* phpcs:ignore WordPress.Security.NonceVerification.Recommended */
     if (isset($_GET['page'])) {
-        $page = sanitize_text_field($_GET['page']);
+        $page = sanitize_text_field(wp_unslash($_GET['page'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
     }
     global $awdr_load_version;
     $version = ($awdr_load_version == "v1") ? "v2" : "v1";
     $url = esc_url(admin_url('admin.php?page=' . $page . '&awdr_switch_plugin_to=' . $version));
-    $message = __('Discount Rules V2 comes with a better UI and advanced options.', 'woo-discount-rules');
-    $button_text = __("Switch to New User Interface", 'woo-discount-rules');
+    $message = 'Discount Rules V2 comes with a better UI and advanced options.';
+    $button_text = "Switch to New User Interface";
     if($version == "v1"){
         $has_switch = \Wdr\App\Helpers\Migration::hasSwitchBackOption();
-        $message = __('Would you like to switch to older Woo Discount Rules?', 'woo-discount-rules');
-        $button_text = __("Click here to Switch back", 'woo-discount-rules');
+        $message = 'Would you like to switch to older Woo Discount Rules?';
+        $button_text = "Click here to Switch back";
     }
     if($has_switch){
         if($version == "v1"){
@@ -81,7 +82,7 @@ add_action('advanced_woo_discount_rules_on_settings_head', function () {
 Click the "Switch" button to start using the new interface.</p>
             </div>';
 
-        echo '<div style="background: #fff;padding: 20px;font-size: 13px;font-weight: bold;">' . $message . ' <button class="btn btn-info awdr-switch-version-button" data-version="' . esc_attr($version) . '" data-page="' . esc_attr($page) . '" data-nonce="' . esc_attr($nounce) . '">' . $button_text . '</button></div>';
+        echo '<div style="background: #fff;padding: 20px;font-size: 13px;font-weight: bold;">' . esc_html($message) . ' <button class="btn btn-info awdr-switch-version-button" data-version="' . esc_attr($version) . '" data-page="' . esc_attr($page) . '" data-nonce="' . esc_attr($nounce) . '">' . esc_html($button_text) . '</button></div>';
         echo "<div class='wdr_switch_message' style='color:#a00;font-weight: bold;'></div>";
     }
 });
@@ -103,7 +104,7 @@ Click the "Switch" button to start using the new interface.</p>
         $nounce = WDRV1Deprecated::createNonce('wdr_ajax_switch_version');
     }
     if($has_switch){
-        $button_text = __("Switch back to Discount Rules 1.x", 'woo-discount-rules');
+        $button_text = "Switch back to Discount Rules 1.x";
         echo '<button class="btn btn-info awdr-switch-version-button awdr-switch-version-button-on-tab" data-version="' . $version . '" data-page="'.$page.'" data-nonce="'.$nounce.'">' . $button_text . '</button>';
     }
 });*/
@@ -190,13 +191,13 @@ if(!function_exists('isAWDRWpCompatible')){
 if(!function_exists('awdr_check_compatible')){
     function awdr_check_compatible(){
         if (!isAWDREnvironmentCompatible()) {
-            exit(__('This plugin can not be activated because it requires minimum PHP version of ', 'woo-discount-rules') . ' ' . WDR_REQUIRED_PHP_VERSION);
+            exit(esc_html('This plugin can not be activated because it requires minimum PHP version of ') . ' ' . esc_html(WDR_REQUIRED_PHP_VERSION));
         }
         if (!isAWDRWooActive()) {
-            exit(__('Woocommerce must installed and activated in-order to use Advanced woo discount rules!', 'woo-discount-rules'));
+            exit(esc_html('Woocommerce must installed and activated in-order to use Advanced woo discount rules!'));
         }
         if (!isAWDRWooCompatible()) {
-            exit(__(' Advanced woo discount rules requires at least Woocommerce', 'woo-discount-rules') . ' ' . WDR_WC_REQUIRED_VERSION);
+            exit(esc_html(' Advanced woo discount rules requires at least Woocommerce') . ' ' . esc_html(WDR_WC_REQUIRED_VERSION));
         }
     }
 }
@@ -206,6 +207,6 @@ if(!function_exists('awdr_check_compatible')){
  * */
 add_action( 'plugins_loaded', function (){
     if(function_exists('load_plugin_textdomain')){
-        load_plugin_textdomain( 'woo-discount-rules', FALSE, basename( dirname( __FILE__ ) ) . '/i18n/languages/' );
+        load_plugin_textdomain( 'woo-discount-rules', false, basename( dirname( __FILE__ ) ) . '/i18n/languages/' );
     }
 });

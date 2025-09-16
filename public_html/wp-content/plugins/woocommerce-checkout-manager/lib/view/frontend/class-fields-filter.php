@@ -93,8 +93,13 @@ class Fields_Filter {
 
 					foreach ( $args['options'] as $option_key => $option_text ) {
 						$option_key = is_numeric( $option_key ) ? $option_text : $option_key;
-						$field     .= '<input type="radio" class="input-checkbox" value="' . esc_attr( $option_key ) . '" name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '_' . esc_attr( $option_key ) . '"' . checked( $value, $option_text, false ) . ' />';
-						$field     .= '<label for="' . esc_attr( $key ) . '_' . esc_attr( $option_key ) . '" class="checkbox ' . implode( ' ', $args['label_class'] ) . '">' . $option_text . '</label><br>';
+						$option_id  = sanitize_html_class( "{$key}_{$option_key}" );
+						// Remove double quotes from the value
+						$option_value = htmlspecialchars( $option_key, ENT_QUOTES, 'UTF-8' );
+
+						// Sanitize $option_id to prevent quotes
+						$field .= '<input type="radio" class="input-checkbox" value="' . esc_attr( $option_value ) . '" name="' . esc_attr( $key ) . '" id="' . esc_attr( $option_id ) . '" ' . checked( $value, $option_text, false ) . ' />';
+						$field .= '<label for="' . esc_attr( $option_id ) . '" class="checkbox ' . implode( ' ', $args['label_class'] ) . '">' . $option_text . '</label><br>';
 					}
 
 					$field .= ' </span>';
@@ -155,11 +160,10 @@ class Fields_Filter {
 				break;
 
 			case 'file':
-				$field = '';
-
+				$field  = '';
 				$field .= '<button style="width:100%" class="wooccm-file-button button alt" type="button" class="button alt" id="' . esc_attr( $key ) . '_button">' . esc_html( $args['placeholder'] ) . '</button>';
 				// $field .= '<input class="wooccm-file-field" type="text" name="' . esc_attr($key) . '" id="' . esc_attr($key) . '" value="test" />';
-				$field .= '<input class="wooccm-file-field" type="hidden" name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" value="" ' . implode( ' ', $custom_attributes ) . ' />';
+				$field .= '<input class="wooccm-file-field" type="hidden" name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" value="' . $value . '" ' . implode( ' ', $custom_attributes ) . ' />';
 				$field .= '<input style="display:none;" class="fileinput-button" type="file" name="' . esc_attr( $key ) . '_file" id="' . esc_attr( $key ) . '_file" multiple="multiple" />';
 				$field .= '<span style="display:none;" class="wooccm-file-list"></span>';
 
@@ -238,7 +242,7 @@ class Fields_Filter {
 			return $field;
 		}
 
-		$instance++;
+		++$instance;
 
 		ob_start();
 
@@ -262,7 +266,7 @@ class Fields_Filter {
 			return $field;
 		}
 
-		$instance++;
+		++$instance;
 
 		ob_start();
 
@@ -284,7 +288,7 @@ class Fields_Filter {
 			return $field;
 		}
 
-		$instance++;
+		++$instance;
 
 		$field .= '<input type="hidden" name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" value="' . esc_html( $value ) . '" ' . implode( ' ', $args['custom_attributes'] ) . ' readonly="readonly" />';
 
@@ -304,4 +308,3 @@ class Fields_Filter {
 		add_filter( 'woocommerce_form_field_hidden', array( $this, 'hidden_field' ), 10, 4 );
 	}
 }
-

@@ -1,5 +1,5 @@
 <?php
-use QuadLayers\WOOCCM\Helpers as Helpers;
+use QuadLayers\WOOCCM\Helpers;
 ?>
 <div class="wooccm_order_attachments_wrapper" class="wc-metaboxes-wrapper">
 	<table cellpadding="0" cellspacing="0" class="wooccm_order_attachments">
@@ -17,7 +17,7 @@ use QuadLayers\WOOCCM\Helpers as Helpers;
 		if ( ! empty( $attachments ) ) :
 			foreach ( $attachments as $attachment_id ) :
 				$image_attributes  = wp_get_attachment_url( $attachment_id );
-				$image_attributes2 = wp_get_attachment_image_src( $attachment_id );
+				$image_attributes2 = wp_get_attachment_image_src( $attachment_id, 'full-size' );
 				$filename          = basename( $image_attributes );
 				$wp_filetype       = wp_check_filetype( $filename );
 				?>

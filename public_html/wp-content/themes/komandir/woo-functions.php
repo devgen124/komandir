@@ -971,7 +971,7 @@ add_action( 'itglx_wc1c_after_product_info_resolve', function ( $product_id, $el
 // order received custom text
 
 add_filter( 'woocommerce_thankyou_order_received_text', function ( $message ) {
-	$message = 'Заказ принят благодарим Вас. Заказы обрабатываются в течении 20 минут, с 10:00 до 19:00 по местному времени';
+	$message = 'Спасибо за ваш заказ! Заказы обрабатываются в течении 15 минут, с 10:00 до 19:00 по местному времени. Срок резерва неоплаченного товара составляет 3 дня с даты получения уведомления о готовности к выдаче.';
 
 	return $message;
 } );
@@ -1069,17 +1069,11 @@ add_filter( 'woocommerce_yookassa_create_payment_request', function ( $paymentRe
 		// Получаем все товары и услуги из чека
 		$items = $receipt->getItems();
 
-		// Фильтруем позиции: оставляем только те, которые НЕ являются доставкой или имеют стоимость > 0
-		$filteredItems = array_filter( $items, function ( $item ) {
-			return ! $item->isShipping() || $item->getAmount() > 0;
-		} );
+		// Фильтруем позиции: оставляем только те, которые НЕ являются доставкой
+		$filteredItems = array_filter( $items, fn( $item ) => $item->getDescription() !== 'Доставка' );
 
 		// Обновляем список позиций в чеке
 		$receipt->setItems( $filteredItems );
-	}
-
-	if ( $receipt->getShippingAmountValue() == 0 ) {
-		$paymentRequest->setShipping( null );
 	}
 
 	return $paymentRequest;

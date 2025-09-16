@@ -113,26 +113,31 @@ class DBTable
                  INDEX `index_created_at` (`created_at`),
                  INDEX `index_rule_order_id` (`rule_id`, `order_id`)
 			) $charset_collate;";
-        if(strtolower($wpdb->get_var("show tables like '$rules_table_name'")) != strtolower($rules_table_name)){
-            dbDelta($rules_table_query);
-        }
-        if(strtolower($wpdb->get_var("show tables like '$order_discount_table_name'")) != strtolower($order_discount_table_name)){
-            dbDelta($order_discount_table_query);
-        }
-        if(strtolower($wpdb->get_var("show tables like '$order_item_discount_table_name'")) != strtolower($order_item_discount_table_name)){
-            dbDelta($order_item_discount_table_query);
-        }
+	    $rule_table = $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s",$rules_table_name));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
+	    if(!empty($rules_table_name) && (empty($rule_table) || (strtolower($rule_table) != strtolower($rules_table_name)))){
+		    dbDelta($rules_table_query);
+	    }
+	    $order_discount_table = $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s",$order_discount_table_name));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
+	    if(!empty($order_discount_table_name) && (empty($order_discount_table) || (strtolower($order_discount_table) != strtolower($order_discount_table_name)))){
+		    dbDelta($order_discount_table_query);
+	    }
+	    $order_item_discount_table = $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s",$order_item_discount_table_name));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
+	    if(!empty($order_item_discount_table_name) && (empty($order_item_discount_table) || (strtolower($order_item_discount_table) != strtolower($order_item_discount_table_name)))){
+		    dbDelta($order_item_discount_table_query);
+	    }
     }
 
     protected static function isFrontEndRequest(){
         $is_front_end_request = false;
         if(Woocommerce::is_ajax()){
             $is_front_end_request = true;
-            if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'wdr_ajax'){
+			$action = isset($_REQUEST['action']) ? sanitize_text_field(wp_unslash($_REQUEST['action'])) : '';//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	        $method = isset($_REQUEST['method']) ? sanitize_text_field(wp_unslash($_REQUEST['method'])) : '';//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if($action == 'wdr_ajax'){
                 $wdr_ajax_methods = array('get_price_html', 'get_variable_product_bulk_table');
                 $wdr_ajax_methods = apply_filters('advanced_woo_discount_rules_wdr_ajax_methods_for_frontend', $wdr_ajax_methods);
-                if(isset($_REQUEST['method']) && is_array($wdr_ajax_methods) && !empty($wdr_ajax_methods)){
-                    if(!in_array($_REQUEST['method'], $wdr_ajax_methods)){
+                if(!empty($method) && is_array($wdr_ajax_methods) && !empty($wdr_ajax_methods)){
+                    if(!in_array($method, $wdr_ajax_methods)){
                         $is_front_end_request = false;
                     }
                 }
@@ -140,8 +145,8 @@ class DBTable
             $back_end_ajax_actions = array('wdr_admin_statistics');
             $back_end_ajax_actions = apply_filters('advanced_woo_discount_rules_backend_end_ajax_actions', $back_end_ajax_actions);
             if(!empty($back_end_ajax_actions) && is_array($back_end_ajax_actions)){
-                if(isset($_REQUEST['action'])){
-                    if(in_array($_REQUEST['action'], $back_end_ajax_actions)){
+                if(!empty($action)){
+                    if(in_array($action, $back_end_ajax_actions)){
                         $is_front_end_request = false;
                     }
                 }
@@ -153,10 +158,8 @@ class DBTable
 
     public function getRulesCount(){
         global $wpdb;
-        $wpdb->hide_errors();
-
-        $rules_table_name = $wpdb->prefix . self::RULES_TABLE_NAME;
-        return $wpdb->get_var("SELECT COUNT(*) as total  FROM {$rules_table_name};");
+        $wpdb->hide_errors();//
+        return $wpdb->get_var("SELECT COUNT(*) as total  FROM {$wpdb->prefix}wdr_rules");//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
     }
 
     /**
@@ -171,7 +174,7 @@ class DBTable
         global $wpdb;
         $wpdb->hide_errors();
 
-        $rules_table_name = $wpdb->prefix . self::RULES_TABLE_NAME;
+        $rules_table_name = $wpdb->prefix . self::RULES_TABLE_NAME;//{$wpdb->prefix}wdr_rules
 
         $is_front_end_request = self::isFrontEndRequest();
 
@@ -182,18 +185,17 @@ class DBTable
             if(isset(self::$rules['front_end']) && $cache === true){
                 return self::$rules['front_end'];
             }
-            if(strtolower($wpdb->get_var("show tables like '$rules_table_name'")) != strtolower($rules_table_name)){
+            if(strtolower($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s",$rules_table_name))) != strtolower($rules_table_name)){//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
                 return false;
             }
             $current_time = current_time('timestamp');
             $current_language = Language::getCurrentLanguage();
-            $language_query = '';
+            $language_query = ' ORDER BY priority ASC';
             if (!empty($current_language)) {
-                $current_language = esc_sql($current_language);
-                $language_query = ' AND (rule_language IS NULL OR rule_language = "[]" OR rule_language LIKE \'%"' . $current_language . '"%\')';
+                $language_query = $wpdb->prepare(' AND (rule_language IS NULL OR rule_language = \'[]\' OR rule_language LIKE %s)','%' . $wpdb->esc_like($current_language) . '%').$language_query;
             }
-            $query = "SELECT * FROM {$rules_table_name} WHERE  enabled = %d AND deleted = %d AND (date_from <= %d OR date_from IS NULL) AND (date_to >= %d OR date_to IS NULL) AND (usage_limits > used_limits OR used_limits IS NULL OR usage_limits = 0) {$language_query} ORDER BY priority ASC";
-            return self::$rules['front_end'] = $wpdb->get_results($wpdb->prepare($query, array(1, 0, $current_time, $current_time)), OBJECT);
+			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
+            return self::$rules['front_end'] = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wdr_rules WHERE  enabled = %d AND deleted = %d AND (date_from <= %d OR date_from IS NULL) AND (date_to >= %d OR date_to IS NULL) AND (usage_limits > used_limits OR used_limits IS NULL OR usage_limits = 0)", array(1, 0, $current_time, $current_time)).$language_query, OBJECT);
         }
         /**
          * Need for Admin
@@ -203,34 +205,34 @@ class DBTable
                 if(isset(self::$rules['admin_based_on_rule_id']) && $cache === true){
                     return self::$rules['admin_based_on_rule_id'];
                 }
-                if(strtolower($wpdb->get_var("show tables like '$rules_table_name'")) != strtolower($rules_table_name)){
+                if(strtolower($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s",$rules_table_name))) != strtolower($rules_table_name)){//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
                     return false;
                 }
                 if(is_array($rule_id)){
                     $rule_id = array_map('absint', $rule_id);
-                    $rule_id = implode(",", $rule_id);
-                    return self::$rules['admin_based_on_rule_id'] = $wpdb->get_results("SELECT * FROM {$rules_table_name} WHERE id IN ({$rule_id})");
+                    //$rule_id = implode(",", $rule_id);
+					$rule_id_placeholder = implode(', ',array_fill(0, count($rule_id), '%d'));
+                    return self::$rules['admin_based_on_rule_id'] = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wdr_rules WHERE id > %d AND id IN ($rule_id_placeholder)",array_merge([0],$rule_id)));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
                 } else {
                     $rule_id = intval($rule_id);
-                    return self::$rules['admin_based_on_rule_id'] = $wpdb->get_row("SELECT * FROM {$rules_table_name} WHERE id={$rule_id}");
+                    return self::$rules['admin_based_on_rule_id'] = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wdr_rules WHERE id=%d",$rule_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
                 }
             } elseif (is_null($rule_id) && !is_null($rule_name) && is_null($export)) {
                 if(isset(self::$rules['admin_based_on_rule_name']) && $cache === true){
                     return self::$rules['admin_based_on_rule_name'];
                 }
-                if(strtolower($wpdb->get_var("show tables like '$rules_table_name'")) != strtolower($rules_table_name)){
+                if(strtolower($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s",$rules_table_name))) != strtolower($rules_table_name)){//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
                     return false;
                 }
-                $rule_name = esc_sql($rule_name);
-                return self::$rules['admin_based_on_rule_name'] = $wpdb->get_results("SELECT * FROM {$rules_table_name} WHERE deleted = 0 AND title LIKE '%{$rule_name}%'");
+                return self::$rules['admin_based_on_rule_name'] = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wdr_rules WHERE deleted = 0 AND title LIKE %s",'%'.$wpdb->esc_like($rule_name).'%'));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
             } else {
                 if(isset(self::$rules['admin_all']) && $cache === true){
                     return self::$rules['admin_all'];
                 }
-                if(strtolower($wpdb->get_var("show tables like '$rules_table_name'")) != strtolower($rules_table_name)){
+                if(strtolower($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s",$rules_table_name))) != strtolower($rules_table_name)){//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
                     return false;
                 }
-                return self::$rules['admin_all'] = $wpdb->get_results("SELECT * FROM {$rules_table_name} WHERE deleted = 0 ORDER BY priority ASC");
+                return self::$rules['admin_all'] = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wdr_rules WHERE deleted = %d ORDER BY priority ASC",0));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
             }
         }
         return false;
@@ -245,6 +247,7 @@ class DBTable
     {
         global $wpdb;
         $wpdb->hide_errors();
+        $current_user = get_current_user_id();
         $rules_table_name = $wpdb->prefix . self::RULES_TABLE_NAME;
         /**
          * Need for Admin
@@ -252,19 +255,32 @@ class DBTable
         if (!is_admin()) {
             return array();
         }
-        $where = "deleted = 0";
+        $where = $wpdb->prepare("deleted = %d",0);
         if (!empty($name)){
-            $where .= " AND title LIKE '%{$name}%'";
+            $where .= $wpdb->prepare(" AND title LIKE %s",'%'.$wpdb->esc_like($name).'%');
         }
-        $query['count'] = $wpdb->get_var("SELECT COUNT(*) as total FROM {$rules_table_name} WHERE {$where} ORDER BY created_on DESC");
-        if ($sort == 1){
+        $awdr_filters = array(
+            'limit' => $limit,
+            'reorder' => ($sort === 1) ? 1 : 0,
+        );
+        $pagination = '';
+        if ($limit != 'all'){
+            $pagination.= $wpdb->prepare("LIMIT %d OFFSET %d",[$limit,$offset]);
+        }
+        $query['count'] = $wpdb->get_var("SELECT COUNT(*) as total FROM {$wpdb->prefix}wdr_rules WHERE {$where} ORDER BY created_on DESC");//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        update_user_meta($current_user, 'awdr_filters', $awdr_filters);
+        $default_filter = get_user_meta($current_user, 'awdr_filters', true);
+        $default_sort = !empty($default_filter['reorder']) ? $default_filter['reorder'] : 0 ;
+        if ($sort == 1 || $default_sort == 1){
             if((int)get_option('awdr_priority_reset',0) === 0){
                 self::resetRulePriorities();
                 update_option('awdr_priority_reset', 1);
             }
-            $query['result'] = $wpdb->get_results("SELECT * FROM {$rules_table_name} WHERE {$where} ORDER BY priority ASC LIMIT {$limit} OFFSET {$offset}");
+            $query['result'] = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wdr_rules WHERE {$where} ORDER BY priority ASC {$pagination}");//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         } else {
-            $query['result'] = $wpdb->get_results("SELECT * FROM {$rules_table_name} WHERE {$where} ORDER BY created_on DESC LIMIT {$limit} OFFSET {$offset}");
+            $current_user = get_current_user_id();
+            update_user_meta($current_user, 'awdr_filters', $awdr_filters);
+            $query['result'] = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wdr_rules WHERE {$where} ORDER BY created_on DESC {$pagination}");//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         }
         return $query;
     }
@@ -285,13 +301,13 @@ class DBTable
         $rule_query = '';
         if (!$all && is_array($rule_ids)) {
             $rule_ids = array_map('absint', $rule_ids);
-            $rule_ids = implode(",", $rule_ids);
-            $rule_query = "AND id IN ({$rule_ids})";
+            //$rule_ids = implode(",", $rule_ids);
+	        $rule_id_placeholder = implode(', ',array_fill(0, count($rule_ids), '%d'));
+            $rule_query = $wpdb->prepare("AND id > %d AND id IN ($rule_id_placeholder)",array_merge([0],$rule_ids));//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         }
         $current_time = current_time('timestamp');
 
-        $query = "SELECT * FROM {$rules_table_name} WHERE enabled = %d AND deleted = %d {$rule_query} AND (date_from <= %d OR date_from IS NULL) AND (date_to >= %d OR date_to IS NULL) AND (usage_limits > used_limits OR used_limits IS NULL OR usage_limits = 0)";
-        return self::$rules['on_sale_list'] = $wpdb->get_results($wpdb->prepare($query, array(1, 0, $current_time, $current_time)), OBJECT);
+        return self::$rules['on_sale_list'] = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wdr_rules WHERE enabled = %d AND deleted = %d {$rule_query} AND (date_from <= %d OR date_from IS NULL) AND (date_to >= %d OR date_to IS NULL) AND (usage_limits > used_limits OR used_limits IS NULL OR usage_limits = 0)", array(1, 0, $current_time, $current_time)), OBJECT);//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
     }
 
     /**
@@ -308,12 +324,12 @@ class DBTable
         $rules_table_name = $wpdb->prefix.self::RULES_TABLE_NAME;
         if (!is_null($rule_id) && !empty($rule_id)) {
             $rule_id = intval($rule_id);
-            $wpdb->update($rules_table_name, $values, array('id' => $rule_id), $format, array('%d'));
+            $wpdb->update($rules_table_name, $values, array('id' => $rule_id), $format, array('%d'));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
         } else {
-            $wpdb->insert($rules_table_name, $values, $format);
+            $wpdb->insert($rules_table_name, $values, $format);//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
             $rule_id = $wpdb->insert_id;
-            $update_query = "UPDATE {$rules_table_name} as rule JOIN (SELECT (CASE WHEN (MAX(priority) IS NOT NULL) THEN MAX(priority) +1 ELSE 1 END) as max_priority FROM {$rules_table_name} WHERE deleted = 0) as rule_priority  SET rule.priority = rule_priority.max_priority WHERE id = {$rule_id}";
-            $wpdb->query($update_query);
+
+            $wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}wdr_rules as rule JOIN (SELECT (CASE WHEN (MAX(priority) IS NOT NULL) THEN MAX(priority) +1 ELSE 1 END) as max_priority FROM {$wpdb->prefix}wdr_rules WHERE deleted = 0) as rule_priority  SET rule.priority = rule_priority.max_priority WHERE id = %d",$rule_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
         }
         return $rule_id;
     }
@@ -331,9 +347,8 @@ class DBTable
         } else {
             global $wpdb;
             $rules_table_name = $wpdb->prefix.self::RULES_TABLE_NAME;
-            $priority = $wpdb->get_var("SELECT priority FROM {$rules_table_name} WHERE id = {$rule_id}");
-            $update_query = "UPDATE {$rules_table_name} SET priority = priority - 1 WHERE priority > {$priority} AND deleted = 0 AND id != {$rule_id}";
-            $wpdb->query($update_query);
+            $priority = $wpdb->get_var($wpdb->prepare("SELECT priority FROM {$wpdb->prefix}wdr_rules WHERE id = %d",$rule_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
+            $wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}wdr_rules SET priority = priority - 1 WHERE priority > %d AND deleted = 0 AND id != %d",$priority,$rule_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
         }
     }
 
@@ -345,9 +360,8 @@ class DBTable
     {
         global $wpdb;
         $rules_table_name = $wpdb->prefix.self::RULES_TABLE_NAME;
-        $update_query = "UPDATE {$rules_table_name} AS t JOIN (SELECT @rownum:=@rownum+1 rownum, id, priority deleted FROM {$rules_table_name}
-        CROSS JOIN (select @rownum := 0) rn WHERE deleted = 0 ORDER BY priority) AS r ON t.id = r.id SET t.priority = r.rownum";
-        $wpdb->query($update_query);
+
+        $wpdb->query("UPDATE {$wpdb->prefix}wdr_rules AS t JOIN (SELECT @rownum:=@rownum+1 rownum, id, priority deleted FROM {$wpdb->prefix}wdr_rules CROSS JOIN (select @rownum := 0) rn WHERE deleted = 0 ORDER BY priority) AS r ON t.id = r.id SET t.priority = r.rownum");//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
     }
 
     /**
@@ -365,28 +379,25 @@ class DBTable
 
         $old_priority = $position['drag_position'];
         $new_priority = $position['drop_position'];
-        $rule_id = $wpdb->get_var("SELECT id FROM {$rules_table_name} WHERE priority = {$position['drag_position']} AND deleted = 0");
+        $rule_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$wpdb->prefix}wdr_rules WHERE priority = %d AND deleted = 0",$position['drag_position']));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
         $old_rule_id = (int)$rule_id;
 
         // Moving small to high priority
         if ($old_rule_id){
+			$result1 = false;
+			$result2 = false;
             if ($old_priority < $new_priority){
-                $update = "UPDATE {$rules_table_name} SET priority = {$new_priority} WHERE id={$old_rule_id}";
-                $update_query = "UPDATE {$rules_table_name} SET priority = priority - 1 WHERE priority > {$old_priority} AND priority <= {$new_priority} AND id != {$old_rule_id}";
+	            $result1 = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}wdr_rules SET priority = %d WHERE id=%d",$new_priority,$old_rule_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
+                $result2 = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}wdr_rules SET priority = priority - 1 WHERE priority > %d AND priority <= %d AND id != %d",$old_priority,$new_priority,$old_rule_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
             }
 
 //        // Moving high to small priority
             elseif ($old_priority > $new_priority) {
-                $update = "UPDATE {$rules_table_name} SET priority = '{$new_priority}' WHERE id={$old_rule_id}";
-                $update_query = "UPDATE {$rules_table_name} SET priority = priority + 1 WHERE priority >= {$new_priority} AND priority < {$old_priority} AND id != {$old_rule_id}";
+	            $result1 = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}wdr_rules SET priority = %d WHERE id=%d",$new_priority,$old_rule_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
+	            $result2 = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}wdr_rules SET priority = priority + 1 WHERE priority >= %d AND priority < %d AND id != %d",$new_priority,$old_priority,$old_rule_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
             }
-            $result1 = $wpdb->query($update);
-            $result2 = $wpdb->query($update_query);
-            if($result1 != false && $result2 != false){
-                return true;
-            } else {
-                return false;
-            }
+
+			return ( $result1 && $result2 );
         } else {
             return false;
         }
@@ -404,17 +415,14 @@ class DBTable
         $order_id = intval($order_id);
         $free_shipping = esc_sql($free_shipping);
         $order_discount_table_name = $wpdb->prefix . self::ORDER_DISCOUNT_TABLE_NAME;
-        $select_query = "SELECT id FROM {$order_discount_table_name} WHERE order_id=" . $order_id;
-        $order_discounts = $wpdb->get_row($select_query, OBJECT);
+        $order_discounts = $wpdb->get_row($wpdb->prepare("SELECT id FROM {$wpdb->prefix}wdr_order_discounts WHERE order_id= %d",$order_id), OBJECT);//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
         $current_time = current_time('mysql', true);
         if (empty($order_discounts)) {
-            $insert_query = "INSERT INTO {$order_discount_table_name} (order_id, has_free_shipping, discounts, created_at) VALUES ({$order_id}, '{$free_shipping}', '{$discounts}', '{$current_time}')";
-            $wpdb->query($insert_query);
+            $wpdb->query($wpdb->prepare("INSERT INTO {$wpdb->prefix}wdr_order_discounts (order_id, has_free_shipping, discounts, created_at) VALUES (%d, %s, %s, %s)",$order_id,$free_shipping,$discounts,$current_time));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
             $row_id = $wpdb->insert_id;
         } else {
             $row_id = $order_discounts->id;
-            $update_query = "UPDATE {$order_discount_table_name} SET has_free_shipping = '{$free_shipping}', discounts = '{$discounts}', updated_at = '{$current_time}' WHERE id={$row_id}";
-            $wpdb->query($update_query);
+            $wpdb->query($wpdb->prepare("UPDATE {$wpdb->prefix}wdr_order_discounts SET has_free_shipping = %s, discounts = %s, updated_at = %s WHERE id=%d",$free_shipping,$discounts,$current_time,$row_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
         }
         return $row_id;
     }
@@ -427,7 +435,7 @@ class DBTable
     static function updateRuleUsedCount($rule_id, $used_count)
     {
         global $wpdb;
-        $wpdb->update($wpdb->prefix . self::RULES_TABLE_NAME, array('used_limits' => intval($used_count)), array('id' => intval($rule_id)), array('%d'), array('%d'));
+        $wpdb->update($wpdb->prefix . self::RULES_TABLE_NAME, array('used_limits' => intval($used_count)), array('id' => intval($rule_id)), array('%d'), array('%d'));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
     }
 
     /**
@@ -441,7 +449,7 @@ class DBTable
     {
         global $wpdb;
         $rules_table = $wpdb->prefix.self::RULES_TABLE_NAME;
-        return $wpdb->update($rules_table, array('additional' => (string) $new_additional), array('id' => (int) $rule_id), array('%s'), array('%d'));
+        return $wpdb->update($rules_table, array('additional' => (string) $new_additional), array('id' => (int) $rule_id), array('%s'), array('%d'));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
     }
 
     /**
@@ -481,19 +489,57 @@ class DBTable
         $cart_discount = floatval($cart_discount);
         $other_discount = floatval($other_discount);
         $cart_discount_label = esc_sql($cart_discount_label);
-        $has_free_shipping = $is_free_shipping ? "yes" : "no";
-        $select_query = "SELECT id FROM {$order_item_discount_table_name} WHERE order_id={$order_id} AND item_id={$item_id} AND rule_id={$rule_id}";
-        $order_discounts = $wpdb->get_row($select_query, OBJECT);
+        $has_free_shipping = $is_free_shipping ? "yes" : "no";//{$wpdb->prefix}wdr_order_item_discounts
+        $order_discounts = $wpdb->get_row($wpdb->prepare("SELECT id FROM {$wpdb->prefix}wdr_order_item_discounts WHERE order_id=%d AND item_id=%d AND rule_id=%d", array($order_id, $item_id, $rule_id)), OBJECT);//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
         $current_time = current_time('mysql', true);
 
         if (empty($order_discounts)) {
-            $insert_query = "INSERT INTO {$order_item_discount_table_name} (order_id, order_item_id, rule_id, item_id, item_price, discounted_price, discount, quantity, simple_discount, bulk_discount, set_discount, cart_discount, other_discount, has_free_shipping, cart_discount_label, created_at, updated_at) VALUES ({$order_id}, {$order_item_id}, {$rule_id}, {$item_id}, {$item_price}, {$discounted_price}, {$discount}, {$quantity}, {$simple_discount}, {$bulk_discount}, {$set_discount}, {$cart_discount}, {$other_discount}, '{$has_free_shipping}', '{$cart_discount_label}', '{$current_time}', '{$current_time}')";
-            $wpdb->query($insert_query);
+			$data = [
+				'order_id' => $order_id,
+				'order_item_id' => $order_item_id,
+				'rule_id' => $rule_id,
+				'item_id' => $item_id,
+				'item_price' => $item_price,
+				'discounted_price' => $discounted_price,
+				'discount' => $discount,
+				'quantity' => $quantity,
+				'simple_discount' => $simple_discount,
+				'bulk_discount' => $bulk_discount,
+				'set_discount' => $set_discount,
+				'cart_discount' => $cart_discount,
+				'other_discount' => $other_discount,
+				'has_free_shipping' => $has_free_shipping,
+				'cart_discount_label' => $cart_discount_label,
+				'created_at' => $current_time,
+				'updated_at' => $current_time
+			];
+			$wpdb->insert($order_item_discount_table_name, $data);//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
+            /*$wpdb->query("INSERT INTO {$wpdb->prefix}wdr_order_item_discounts (order_id, order_item_id, rule_id, item_id, item_price, discounted_price, discount, quantity,
+                                           simple_discount, bulk_discount, set_discount, cart_discount, other_discount, has_free_shipping, cart_discount_label, created_at, updated_at) VALUES ({$order_id}, {$order_item_id}, {$rule_id}, {$item_id}, {$item_price}, {$discounted_price}, {$discount}, {$quantity}, {$simple_discount}, {$bulk_discount}, {$set_discount}, {$cart_discount}, {$other_discount}, '{$has_free_shipping}', '{$cart_discount_label}', '{$current_time}', '{$current_time}')");//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery*/
             $row_id = $wpdb->insert_id;
         } else {
             $row_id = $order_discounts->id;
-            $update_query = "UPDATE {$order_item_discount_table_name} SET order_id={$order_id}, order_item_id={$order_item_id}, rule_id={$rule_id}, item_id={$item_id}, item_price={$item_price}, discounted_price={$discounted_price}, discount={$discount}, quantity={$quantity}, simple_discount={$simple_discount}, bulk_discount={$bulk_discount}, set_discount={$set_discount}, cart_discount={$cart_discount}, other_discount={$other_discount}, has_free_shipping='{$has_free_shipping}', cart_discount_label='{$cart_discount_label}', updated_at='{$current_time}' WHERE id={$row_id}";
-            $wpdb->query($update_query);
+			$data = [
+				'order_id' => $order_id,
+				'order_item_id' => $order_item_id,
+				'rule_id' => $rule_id,
+				'item_id' => $item_id,
+				'item_price' => $item_price,
+				'discounted_price' => $discounted_price,
+				'discount' => $discount,
+				'quantity' => $quantity,
+				'simple_discount' => $simple_discount,
+				'bulk_discount' => $bulk_discount,
+				'set_discount' => $set_discount,
+				'cart_discount' => $cart_discount,
+				'other_discount' => $other_discount,
+				'has_free_shipping' => $has_free_shipping,
+				'cart_discount_label' => $cart_discount_label,
+				'updated_at' => $current_time
+			];
+			$wpdb->update($order_item_discount_table_name, $data, array('id' => $row_id));//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
+            /*$wpdb->query("UPDATE {$wpdb->prefix}wdr_order_item_discounts SET order_id={$order_id}, order_item_id={$order_item_id}, rule_id={$rule_id}, item_id={$item_id}, item_price={$item_price},
+                                         discounted_price={$discounted_price}, discount={$discount}, quantity={$quantity}, simple_discount={$simple_discount}, bulk_discount={$bulk_discount}, set_discount={$set_discount}, cart_discount={$cart_discount}, other_discount={$other_discount}, has_free_shipping='{$has_free_shipping}', cart_discount_label='{$cart_discount_label}', updated_at='{$current_time}' WHERE id={$row_id}");//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery*/
         }
         return $row_id;
     }
@@ -531,57 +577,22 @@ class DBTable
         if ( empty( $summary_components ) ) {
             return false;
         }
-        $summary_field = implode( '+', $summary_components );
+	    $summary_field = implode( '+', $summary_components );
         $table_items = $wpdb->prefix.self::RULES_TABLE_NAME;
         $table_stats = $wpdb->prefix.self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
-
-        $query_total = $wpdb->prepare(
-            "SELECT rules.id AS rule_id, SUM({$summary_field}) AS value
-			FROM {$table_items} AS rules LEFT JOIN {$table_stats} AS rules_stats
-			ON rules.id = rules_stats.rule_id
-			WHERE DATE(rules_stats.created_at) BETWEEN %s AND %s
-			GROUP BY rules.id
-			HAVING value>0
-			ORDER BY value DESC
-			LIMIT %d",
-            array( $params['from'], $params['to'], (int) $params['limit'] )
-        );
-        $top = $wpdb->get_col( $query_total );
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $top = $wpdb->get_col( $wpdb->prepare("SELECT rules.id AS rule_id, SUM({$summary_field}) AS value FROM {$table_items} AS rules LEFT JOIN {$table_stats} AS rules_stats ON rules.id = rules_stats.rule_id WHERE DATE(rules_stats.created_at) BETWEEN %s AND %s GROUP BY rules.id HAVING value>0 ORDER BY value DESC LIMIT %d", array( $params['from'], $params['to'], (int) $params['limit'] )) );
         if ( empty( $top ) ) {
             return false;
         }
 
         $placeholders = array_fill( 0, count( $top ), '%d' );
         $placeholders = implode( ', ', $placeholders );
-        $query = $wpdb->prepare(
-            "SELECT DATE(rules_stats.created_at) as date_rep, rules.id AS rule_id, CONCAT('#', rules.id, ' ', rules.title) AS title, SUM({$summary_field}) AS value
-			FROM {$table_items} AS rules LEFT JOIN {$table_stats} AS rules_stats
-			ON rules.id = rules_stats.rule_id
-			WHERE DATE(rules_stats.created_at) BETWEEN %s AND %s AND rules.id IN ({$placeholders})
-			GROUP BY date_rep, rule_id
-			HAVING value>0
-			ORDER BY value DESC",
-            array_merge( array( $params['from'], $params['to'] ), $top )
-        );
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber
+        $rows = $wpdb->get_results( $wpdb->prepare("SELECT DATE(rules_stats.created_at) as date_rep, rules.id AS rule_id, CONCAT('#', rules.id, ' ', rules.title) AS title, SUM({$summary_field}) AS value FROM {$table_items} AS rules LEFT JOIN {$table_stats} AS rules_stats ON rules.id = rules_stats.rule_id WHERE DATE(rules_stats.created_at) BETWEEN %s AND %s AND rules.id IN ({$placeholders}) GROUP BY date_rep, rule_id HAVING value>0 ORDER BY value DESC", array_merge( array( $params['from'], $params['to'] ), $top )) );
 
-        $rows = $wpdb->get_results( $query );
-
-        $query_info = $wpdb->prepare(
-            "SELECT COUNT(results.order_id) AS total_orders, 
-                SUM(results.discounted_amount) AS discounted_amount,
-                SUM(results.revenue) AS revenue, SUM(results.free_shipping) as total_free_shipping
-            FROM (
-                SELECT rules_stats.order_id, 
-                       SUM({$summary_field}) AS discounted_amount, post_meta.meta_value as revenue, 
-                       SUM(CASE WHEN rules_stats.has_free_shipping = 'yes' THEN 1 ELSE 0 END) as free_shipping
-                FROM {$table_stats} AS rules_stats LEFT JOIN {$wpdb->postmeta} as post_meta
-			    ON (rules_stats.order_id = post_meta.post_id AND post_meta.meta_key = '_order_total')
-			    WHERE DATE(rules_stats.created_at) BETWEEN %s AND %s
-			    GROUP BY rules_stats.order_id
-            ) AS results",
-            array( $params['from'], $params['to'])
-        );
-        $info = $wpdb->get_row( $query_info );
+	    //phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $info = $wpdb->get_row( $wpdb->prepare("SELECT COUNT(results.order_id) AS total_orders,SUM(results.discounted_amount) AS discounted_amount, SUM(results.revenue) AS revenue, SUM(results.free_shipping) as total_free_shipping FROM (SELECT rules_stats.order_id, SUM({$summary_field}) AS discounted_amount, post_meta.meta_value as revenue, SUM(CASE WHEN rules_stats.has_free_shipping = 'yes' THEN 1 ELSE 0 END) as free_shipping FROM {$table_stats} AS rules_stats LEFT JOIN {$wpdb->postmeta} as post_meta ON (rules_stats.order_id = post_meta.post_id AND post_meta.meta_key = '_order_total') WHERE DATE(rules_stats.created_at) BETWEEN %s AND %s GROUP BY rules_stats.order_id ) AS results", array( $params['from'], $params['to'])) );
 
         return ['stats' => $rows, 'other' => $info];
     }
@@ -619,35 +630,10 @@ class DBTable
         $summary_field = implode( '+', $summary_components );
         $table_items = $wpdb->prefix.self::RULES_TABLE_NAME;
         $table_stats = $wpdb->prefix.self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
-
-        $query = $wpdb->prepare(
-            "SELECT DATE(rules_stats.created_at) as date_rep, rules.id AS rule_id, CONCAT('#', rules.id, ' ', rules.title) AS title, SUM({$summary_field}) AS value
-			FROM {$table_items} AS rules LEFT JOIN {$table_stats} AS rules_stats
-			ON rules.id = rules_stats.rule_id
-			WHERE rules.id={$rule_id} AND DATE(rules_stats.created_at) BETWEEN %s AND %s
-			GROUP BY date_rep, rule_id, title
-			ORDER BY value DESC",
-            array( $params['from'], $params['to'] )
-        );
-
-        $rows = $wpdb->get_results( $query );
-
-        $query_info = $wpdb->prepare(
-            "SELECT COUNT(results.order_id) AS total_orders, 
-                SUM(results.discounted_amount) AS discounted_amount,
-                SUM(results.revenue) AS revenue, SUM(results.free_shipping) as total_free_shipping
-            FROM (
-                SELECT rules_stats.order_id, 
-                       SUM({$summary_field}) AS discounted_amount, post_meta.meta_value as revenue, 
-                       SUM(CASE WHEN rules_stats.has_free_shipping = 'yes' THEN 1 ELSE 0 END) as free_shipping
-                FROM {$table_stats} AS rules_stats LEFT JOIN {$wpdb->postmeta} as post_meta
-			    ON (rules_stats.order_id = post_meta.post_id AND post_meta.meta_key = '_order_total')
-			    WHERE rules_stats.rule_id={$rule_id} AND DATE(rules_stats.created_at) BETWEEN %s AND %s
-			    GROUP BY rules_stats.order_id
-            ) AS results",
-            array($params['from'], $params['to'])
-        );
-        $info = $wpdb->get_row( $query_info );
+	    //phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $rows = $wpdb->get_results( $wpdb->prepare("SELECT DATE(rules_stats.created_at) as date_rep, rules.id AS rule_id, CONCAT('#', rules.id, ' ', rules.title) AS title, SUM({$summary_field}) AS value FROM {$table_items} AS rules LEFT JOIN {$table_stats} AS rules_stats ON rules.id = rules_stats.rule_id WHERE rules.id={$rule_id} AND DATE(rules_stats.created_at) BETWEEN %s AND %s GROUP BY date_rep, rule_id, title ORDER BY value DESC", array( $params['from'], $params['to'] )) );
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $info = $wpdb->get_row( $wpdb->prepare("SELECT COUNT(results.order_id) AS total_orders, SUM(results.discounted_amount) AS discounted_amount, SUM(results.revenue) AS revenue, SUM(results.free_shipping) as total_free_shipping FROM (SELECT rules_stats.order_id, SUM({$summary_field}) AS discounted_amount, post_meta.meta_value as revenue, SUM(CASE WHEN rules_stats.has_free_shipping = 'yes' THEN 1 ELSE 0 END) as free_shipping FROM {$table_stats} AS rules_stats LEFT JOIN {$wpdb->postmeta} as post_meta ON (rules_stats.order_id = post_meta.post_id AND post_meta.meta_key = '_order_total') WHERE rules_stats.rule_id={$rule_id} AND DATE(rules_stats.created_at) BETWEEN %s AND %s GROUP BY rules_stats.order_id ) AS results", array($params['from'], $params['to']) ) );
 
         return ['stats' => $rows, 'other' => $info];
     }
@@ -658,8 +644,8 @@ class DBTable
     public static function get_coupons_for_report()
     {
         global $wpdb;
-        $table_stats = $wpdb->prefix.self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
-        $coupons = $wpdb->get_results("SELECT cart_discount_label FROM {$table_stats} WHERE cart_discount_label != '' GROUP BY cart_discount_label LIMIT 1000");
+        $table_stats = $wpdb->prefix.self::ORDER_ITEM_DISCOUNT_TABLE_NAME;//{$wpdb->prefix}wdr_order_item_discounts
+        $coupons = $wpdb->get_results("SELECT cart_discount_label FROM {$wpdb->prefix}wdr_order_item_discounts WHERE cart_discount_label != '' GROUP BY cart_discount_label LIMIT 1000");//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
         if ($coupons) {
             return $coupons;
         }
@@ -694,26 +680,11 @@ class DBTable
                 $where_query = "cart_discount_label != '' AND cart_discount != 0";
                 break;
             default:
-                $where_query = $wpdb->prepare("cart_discount_label = '%s'", array($type));
+                $where_query = $wpdb->prepare("cart_discount_label = %s", array($type));
         }
 
-        $query = $wpdb->prepare(
-            "SELECT results.cart_discount_label as coupon_name,
-                COUNT(results.order_id) AS total_orders,
-                SUM(results.discounted_amount) AS discounted_amount
-            FROM (
-                SELECT order_id, SUM(`cart_discount`) AS discounted_amount, cart_discount_label
-                FROM {$table_stats}
-			    WHERE {$where_query} AND DATE(created_at) BETWEEN %s AND %s
-			    GROUP BY order_id, cart_discount_label
-            ) AS results 
-            GROUP BY results.cart_discount_label 
-            ORDER BY {$order_by}
-            LIMIT 10",
-            array( $params['from'], $params['to'])
-        );
-
-        $data = $wpdb->get_results( $query );
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $data = $wpdb->get_results( $wpdb->prepare("SELECT results.cart_discount_label as coupon_name, COUNT(results.order_id) AS total_orders, SUM(results.discounted_amount) AS discounted_amount FROM (SELECT order_id, SUM(`cart_discount`) AS discounted_amount, cart_discount_label FROM {$table_stats} WHERE {$where_query} AND DATE(created_at) BETWEEN %s AND %s GROUP BY order_id, cart_discount_label ) AS results GROUP BY results.cart_discount_label ORDER BY {$order_by} LIMIT 10", array( $params['from'], $params['to'])) );
         if ($data) {
             return $data;
         }
@@ -841,8 +812,8 @@ class DBTable
             return $order_count_from_transient;
         } else {
             global $wpdb;
-            $order_item_discount_table_name = $wpdb->prefix . self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
-            $sale_result = $wpdb->get_results("SELECT count(order_id) FROM $order_item_discount_table_name GROUP BY order_id ");
+            $order_item_discount_table_name = $wpdb->prefix . self::ORDER_ITEM_DISCOUNT_TABLE_NAME;//{$wpdb->prefix}wdr_order_item_discounts
+            $sale_result = $wpdb->get_results("SELECT count(order_id) FROM {$wpdb->prefix}wdr_order_item_discounts GROUP BY order_id ");//phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.DirectQuery
             $sale_count_result = isset($sale_result) ? count($sale_result) : 0 ;
             set_transient('awdr_sale_count', $sale_count_result, 24 * 60 * 60);
             return $sale_count_result;

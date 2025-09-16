@@ -1,10 +1,8 @@
 <?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
+
 namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
-
-
-use MailPoet\WP\Functions as WPFunctions;
 
 
 class Fitness {
@@ -12,7 +10,9 @@ class Fitness {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/fitness';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -164,7 +164,7 @@ class Fitness {
                               1 =>
                                  [
                                   'type' => 'social',
-                                  'iconSet' => 'full-symbol-color',
+                                  'iconSet' => 'official',
                                   'styles' =>
                                      [
                                       'block' =>
@@ -179,7 +179,7 @@ class Fitness {
                                           'type' => 'socialIcon',
                                           'iconType' => 'facebook',
                                           'link' => 'http://www.facebook.com',
-                                          'image' => $this->social_icon_url . '/06-full-symbol-color/Facebook.png',
+                                          'image' => $this->social_icon_url . '/11-official/Facebook.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Facebook',
@@ -189,7 +189,7 @@ class Fitness {
                                           'type' => 'socialIcon',
                                           'iconType' => 'twitter',
                                           'link' => 'http://www.twitter.com',
-                                          'image' => $this->social_icon_url . '/06-full-symbol-color/Twitter.png',
+                                          'image' => $this->social_icon_url . '/11-official/X.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Twitter',
@@ -199,7 +199,7 @@ class Fitness {
                                           'type' => 'socialIcon',
                                           'iconType' => 'instagram',
                                           'link' => 'http://instagram.com',
-                                          'image' => $this->social_icon_url . '/06-full-symbol-color/Instagram.png',
+                                          'image' => $this->social_icon_url . '/11-official/Instagram.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Instagram',
@@ -672,7 +672,7 @@ class Fitness {
                               2 =>
                                  [
                                   'type' => 'social',
-                                  'iconSet' => 'grey',
+                                  'iconSet' => 'official',
                                   'styles' =>
                                      [
                                       'block' =>
@@ -687,7 +687,7 @@ class Fitness {
                                           'type' => 'socialIcon',
                                           'iconType' => 'facebook',
                                           'link' => 'http://www.facebook.com',
-                                          'image' => $this->social_icon_url . '/02-grey/Facebook.png',
+                                          'image' => $this->social_icon_url . '/11-official/Facebook.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Facebook',
@@ -697,7 +697,7 @@ class Fitness {
                                           'type' => 'socialIcon',
                                           'iconType' => 'twitter',
                                           'link' => 'http://www.twitter.com',
-                                          'image' => $this->social_icon_url . '/02-grey/Twitter.png',
+                                          'image' => $this->social_icon_url . '/11-official/X.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Twitter',
@@ -707,7 +707,7 @@ class Fitness {
                                           'type' => 'socialIcon',
                                           'iconType' => 'instagram',
                                           'link' => 'http://instagram.com',
-                                          'image' => $this->social_icon_url . '/02-grey/Instagram.png',
+                                          'image' => $this->social_icon_url . '/11-official/Instagram.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Instagram',
@@ -718,7 +718,7 @@ class Fitness {
                                  [
                                   'type' => 'text',
                                   'text' => '<p style="text-align: center;"><span style="color: #999999;">Address Line 1, Address Line 2, City, Country</span></p>
-<p style="text-align: center;"><span style="color: #999999;"><strong><a href="[link:subscription_unsubscribe_url]" style="color: #999999;">'.__("Unsubscribe", 'mailpoet').'</a><span>&nbsp;</span>|<span>&nbsp;</span><a href="[link:subscription_manage_url]" style="color: #999999;">'.__("Manage your subscription", 'mailpoet').'</a></strong></span></p>',
+<p style="text-align: center;"><span style="color: #999999;"><strong><a href="[link:subscription_unsubscribe_url]" style="color: #999999;">' . __("Unsubscribe", 'mailpoet') . '</a><span>&nbsp;</span>|<span>&nbsp;</span><a href="[link:subscription_manage_url]" style="color: #999999;">' . __("Manage your subscription", 'mailpoet') . '</a></strong></span></p>',
                                  ],
                               4 =>
                                  [
@@ -992,7 +992,7 @@ class Fitness {
              ],
           'footer' =>
              [
-              'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+              'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
               'styles' =>
                  [
                   'block' =>
@@ -1137,7 +1137,7 @@ class Fitness {
             ],
           'social' =>
              [
-              'iconSet' => 'default',
+              'iconSet' => 'official',
               'icons' =>
                  [
                   0 =>
@@ -1145,7 +1145,7 @@ class Fitness {
                       'type' => 'socialIcon',
                       'iconType' => 'facebook',
                       'link' => 'http://www.facebook.com',
-                      'image' => $this->social_icon_url . '/01-social/Facebook.png',
+                      'image' => $this->social_icon_url . '/11-official/Facebook.png',
                       'height' => '32px',
                       'width' => '32px',
                       'text' => 'Facebook',
@@ -1155,7 +1155,7 @@ class Fitness {
                       'type' => 'socialIcon',
                       'iconType' => 'twitter',
                       'link' => 'http://www.twitter.com',
-                      'image' => $this->social_icon_url . '/01-social/Twitter.png',
+                      'image' => $this->social_icon_url . '/11-official/X.png',
                       'height' => '32px',
                       'width' => '32px',
                       'text' => 'Twitter',
@@ -1175,7 +1175,7 @@ class Fitness {
              ],
           'header' =>
              [
-              'text' => '<a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a>',
+              'text' => '<a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a>',
               'styles' =>
                  [
                   'block' =>

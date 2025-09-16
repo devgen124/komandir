@@ -5,14 +5,14 @@ namespace MailPoet\Config\PopulatorData\Templates;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\WP\Functions as WPFunctions;
-
 class JazzClub {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/jazz-club';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -32,7 +32,7 @@ class JazzClub {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
        [
         'type' => 'container',
@@ -105,7 +105,7 @@ class JazzClub {
                   1 =>
                    [
                     'type' => 'header',
-                    'text' => '<p><a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a></p>',
+                    'text' => '<p><a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a></p>',
                     'styles' =>
                      [
                       'block' =>
@@ -212,7 +212,7 @@ class JazzClub {
                   0 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-grey',
+                    'iconSet' => 'official-white',
                     'styles' =>
                      [
                       'block' =>
@@ -227,7 +227,7 @@ class JazzClub {
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Facebook.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -237,7 +237,7 @@ class JazzClub {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Twitter.png',
+                        'image' => $this->social_icon_url . '/12-official-white/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -247,7 +247,7 @@ class JazzClub {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Instagram.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -257,7 +257,7 @@ class JazzClub {
                         'type' => 'socialIcon',
                         'iconType' => 'youtube',
                         'link' => 'http://www.youtube.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Youtube.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Youtube.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Youtube',
@@ -1188,7 +1188,7 @@ class JazzClub {
          ],
         'social' =>
          [
-          'iconSet' => 'full-symbol-grey',
+          'iconSet' => 'official-white',
           'icons' =>
            [
             0 =>
@@ -1196,7 +1196,7 @@ class JazzClub {
               'type' => 'socialIcon',
               'iconType' => 'facebook',
               'link' => 'http://www.facebook.com',
-              'image' => $this->social_icon_url . '/08-full-symbol-grey/Facebook.png',
+              'image' => $this->social_icon_url . '/12-official-white/Facebook.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Facebook',
@@ -1206,7 +1206,7 @@ class JazzClub {
               'type' => 'socialIcon',
               'iconType' => 'twitter',
               'link' => 'http://www.twitter.com',
-              'image' => $this->social_icon_url . '/08-full-symbol-grey/Twitter.png',
+              'image' => $this->social_icon_url . '/12-official-white/X.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Twitter',
@@ -1216,7 +1216,7 @@ class JazzClub {
               'type' => 'socialIcon',
               'iconType' => 'instagram',
               'link' => 'http://instagram.com',
-              'image' => $this->social_icon_url . '/08-full-symbol-grey/Instagram.png',
+              'image' => $this->social_icon_url . '/12-official-white/Instagram.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Instagram',
@@ -1226,7 +1226,7 @@ class JazzClub {
               'type' => 'socialIcon',
               'iconType' => 'youtube',
               'link' => 'http://www.youtube.com',
-              'image' => $this->social_icon_url . '/08-full-symbol-grey/Youtube.png',
+              'image' => $this->social_icon_url . '/12-official-white/Youtube.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Youtube',

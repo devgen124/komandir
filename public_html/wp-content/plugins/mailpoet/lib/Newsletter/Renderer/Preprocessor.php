@@ -9,6 +9,7 @@ use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\SendingQueueEntity;
 use MailPoet\Newsletter\Renderer\Blocks\AbandonedCartContent;
 use MailPoet\Newsletter\Renderer\Blocks\AutomatedLatestContentBlock;
+use MailPoet\Newsletter\Renderer\Blocks\DynamicProductsBlock;
 use MailPoet\WooCommerce\CouponPreProcessor;
 use MailPoet\WooCommerce\TransactionalEmails\ContentPreprocessor;
 
@@ -34,16 +35,21 @@ class Preprocessor {
   /*** @var CouponPreProcessor */
   private $couponPreProcessor;
 
+  /** @var DynamicProductsBlock */
+  private $dynamicProductsBlock;
+
   public function __construct(
     AbandonedCartContent $abandonedCartContent,
     AutomatedLatestContentBlock $automatedLatestContent,
     ContentPreprocessor $wooCommerceContentPreprocessor,
-    CouponPreProcessor $couponPreProcessor
+    CouponPreProcessor $couponPreProcessor,
+    DynamicProductsBlock $dynamicProductsBlock
   ) {
     $this->abandonedCartContent = $abandonedCartContent;
     $this->automatedLatestContent = $automatedLatestContent;
     $this->wooCommerceContentPreprocessor = $wooCommerceContentPreprocessor;
     $this->couponPreProcessor = $couponPreProcessor;
+    $this->dynamicProductsBlock = $dynamicProductsBlock;
   }
 
   /**
@@ -51,29 +57,40 @@ class Preprocessor {
    * @param NewsletterEntity $newsletter
    * @return array
    */
-  public function process(NewsletterEntity $newsletter, $content, bool $preview = false, SendingQueueEntity $sendingQueue = null) {
+  public function process(NewsletterEntity $newsletter, $content, bool $preview = false, ?SendingQueueEntity $sendingQueue = null) {
     if (!array_key_exists('blocks', $content)) {
       return $content;
     }
-    $blocks = [];
     $contentBlocks = $content['blocks'];
-    $contentBlocks = $this->couponPreProcessor->processCoupons($newsletter, $contentBlocks, $preview);
-    foreach ($contentBlocks as $block) {
-      $processedBlock = $this->processBlock($newsletter, $block, $preview, $sendingQueue);
-      if (!empty($processedBlock)) {
-        $blocks = array_merge($blocks, $processedBlock);
-      }
-    }
-    $content['blocks'] = $blocks;
+    $contentBlocks = $this->couponPreProcessor->processCoupons($newsletter, $contentBlocks, $preview, $sendingQueue);
+    $content['blocks'] = $this->processContainer($newsletter, $contentBlocks, $preview, $sendingQueue);
     return $content;
   }
 
-  public function processBlock(NewsletterEntity $newsletter, array $block, bool $preview = false, SendingQueueEntity $sendingQueue = null): array {
+  public function processContainer(NewsletterEntity $newsletter, $blocks, bool $preview, ?SendingQueueEntity $sendingQueue): array {
+    $containerBlocks = [];
+    foreach ($blocks as $block) {
+      if ($block['type'] === 'container' && isset($block['blocks'])) {
+        $block['blocks'] = $this->processContainer($newsletter, $block['blocks'], $preview, $sendingQueue);
+        $containerBlocks = array_merge($containerBlocks, [$block]);
+      } else {
+        $processedBlock = $this->processBlock($newsletter, $block, $preview, $sendingQueue);
+        if (!empty($processedBlock)) {
+          $containerBlocks = array_merge($containerBlocks, $processedBlock);
+        }
+      }
+    }
+    return $containerBlocks;
+  }
+
+  public function processBlock(NewsletterEntity $newsletter, array $block, bool $preview = false, ?SendingQueueEntity $sendingQueue = null): array {
     switch ($block['type']) {
       case 'abandonedCartContent':
         return $this->abandonedCartContent->render($newsletter, $block, $preview, $sendingQueue);
       case 'automatedLatestContentLayout':
         return $this->automatedLatestContent->render($newsletter, $block);
+      case 'dynamicProducts':
+        return $this->dynamicProductsBlock->render($newsletter, $block, $preview, $sendingQueue);
       case 'woocommerceHeading':
         return $this->wooCommerceContentPreprocessor->preprocessHeader();
       case 'woocommerceContent':

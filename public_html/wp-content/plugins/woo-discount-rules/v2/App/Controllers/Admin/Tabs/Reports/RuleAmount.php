@@ -37,7 +37,7 @@ class RuleAmount extends Base {
 
 		}
 		foreach ( $rule_amount_stats as $rule_amount_item ) {
-			$date = date( 'Y-m-d', strtotime( $rule_amount_item->date_rep ) );
+			$date = gmdate( 'Y-m-d', strtotime( $rule_amount_item->date_rep ) );
 			if ( ! isset( $rows[ $date ] ) ) {
 				continue;
 			}
@@ -76,6 +76,9 @@ class RuleAmount extends Base {
 
 	protected function load_raw_data( $params ) {
 		$data = DBTable::get_rules_rows_summary( $params );
+        if (empty($data)) {
+            $data = []; // to avoid false to array conversion warnings
+        }
 		if ( empty( $data['stats'] ) ) {
             $data['stats'] = array();
 		}
@@ -100,7 +103,7 @@ class RuleAmount extends Base {
 
 		$to = strtotime( $to );
 		for ( $current = strtotime( $from ); $current <= $to; $current += 60 * 60 * 24 ) {
-			$ret[] = date( 'Y-m-d', $current );
+			$ret[] = gmdate( 'Y-m-d', $current );
 		}
 
 		return $ret;

@@ -4,14 +4,15 @@ namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
 
-use MailPoet\WP\Functions as WPFunctions;
 
 class TakeAHike {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
      $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/take_a_hike';
      $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -525,13 +526,13 @@ class TakeAHike {
                   ],
                   6 => [
                     'type' => 'social',
-                    'iconSet' => 'circles',
+                    'iconSet' => 'official',
                     'icons' => [
                       0 => [
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/03-circles/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -540,7 +541,7 @@ class TakeAHike {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/03-circles/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -549,25 +550,16 @@ class TakeAHike {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/03-circles/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
                       ],
                       3 => [
                         'type' => 'socialIcon',
-                        'iconType' => 'google-plus',
-                        'link' => 'http://plus.google.com',
-                        'image' => $this->social_icon_url . '/03-circles/Google-Plus.png',
-                        'height' => '32px',
-                        'width' => '32px',
-                        'text' => 'Google Plus',
-                      ],
-                      4 => [
-                        'type' => 'socialIcon',
                         'iconType' => 'youtube',
                         'link' => 'http://www.youtube.com',
-                        'image' => $this->social_icon_url . '/03-circles/Youtube.png',
+                        'image' => $this->social_icon_url . '/11-official/Youtube.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Youtube',
@@ -647,7 +639,7 @@ class TakeAHike {
                 'blocks' => [
                   0 => [
                     'type' => 'footer',
-                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a></p>',
+                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a></p>',
                     'styles' => [
                       'block' => [
                         'backgroundColor' => 'transparent',
@@ -677,7 +669,7 @@ class TakeAHike {
                 'blocks' => [
                   0 => [
                     'type' => 'footer',
-                    'text' => '<p>'.__("Add your postal address here!", 'mailpoet').'</p>',
+                    'text' => '<p>' . __("Add your postal address here!", 'mailpoet') . '</p>',
                     'styles' => [
                       'block' => [
                         'backgroundColor' => 'transparent',
@@ -769,5 +761,4 @@ class TakeAHike {
   private function getThumbnail() {
     return $this->template_image_url . '/thumbnail.20190411-1500.jpg';
   }
-
 }

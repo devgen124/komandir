@@ -48,7 +48,7 @@ class ScheduledTaskSubscriberEntity {
   private $error;
 
   /**
-   * @ORM\Id @ORM\ManyToOne(targetEntity="MailPoet\Entities\ScheduledTaskEntity", inversedBy="scheduledTaskSubscribers")
+   * @ORM\Id @ORM\ManyToOne(targetEntity="MailPoet\Entities\ScheduledTaskEntity", inversedBy="subscribers")
    * @var ScheduledTaskEntity|null
    */
   private $task;
@@ -64,7 +64,7 @@ class ScheduledTaskSubscriberEntity {
     SubscriberEntity $subscriber,
     int $processed = 0,
     int $failed = 0,
-    string $error = null
+    ?string $error = null
   ) {
     $this->task = $task;
     $this->subscriber = $subscriber;

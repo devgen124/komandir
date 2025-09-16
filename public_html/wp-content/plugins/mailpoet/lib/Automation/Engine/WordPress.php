@@ -12,14 +12,8 @@ use WP_Locale;
 use WP_Post;
 use WP_Term;
 use WP_User;
-use wpdb;
 
 class WordPress {
-  public function getWpdb(): wpdb {
-    global $wpdb;
-    return $wpdb;
-  }
-
   public function addAction(string $hookName, callable $callback, int $priority = 10, int $acceptedArgs = 1): bool {
     return add_action($hookName, $callback, $priority, $acceptedArgs);
   }
@@ -31,6 +25,10 @@ class WordPress {
   /** @param mixed ...$arg */
   public function doAction(string $hookName, ...$arg): void {
     do_action($hookName, ...$arg);
+  }
+
+  public function addFilter(string $hookName, callable $callback, int $priority = 10, int $acceptedArgs = 1): bool {
+    return add_filter($hookName, $callback, $priority, $acceptedArgs);
   }
 
   /**
@@ -73,7 +71,7 @@ class WordPress {
   }
 
   /** @return WP_Post[]|int[] */
-  public function getPosts(array $args = null): array {
+  public function getPosts(?array $args = null): array {
     return get_posts($args);
   }
 
@@ -103,11 +101,10 @@ class WordPress {
 
   /**
    * @param array|string $args
-   * @param array|string $deprecated
    * @return WP_Term[]|int[]|string[]|string|WP_Error
    */
-  public function getTerms($args = [], $deprecated = '') {
-    return get_terms($args, $deprecated);
+  public function getTerms($args = []) {
+    return get_terms($args);
   }
 
   /**
@@ -126,6 +123,15 @@ class WordPress {
    */
   public function getOption(string $optionName, $default = false) {
     return get_option($optionName, $default);
+  }
+
+  /**
+   * @param int|\WP_Post $post
+   * @param bool $leavename
+   * @return string|false
+   */
+  public function getPermalink($post, bool $leavename = false) {
+    return get_permalink($post, $leavename);
   }
 
   /**
@@ -155,6 +161,7 @@ class WordPress {
   }
 
   /**
+   * @param 'names'|'objects' $output
    * @return string[]|\WP_Post_Type[]
    */
   public function getPostTypes(array $args = [], string $output = 'names', string $operator = 'and'): array {
@@ -166,6 +173,7 @@ class WordPress {
   }
 
   /**
+   * @param 'names'|'objects' $output
    * @param 'and'|'or' $operator
    * @return string[]|\WP_Taxonomy[]
    */
@@ -208,5 +216,13 @@ class WordPress {
    */
   public function getUserBy(string $field, $value) {
     return get_user_by($field, $value);
+  }
+
+  public function humanTimeDiff(int $from, int $to = 0): string {
+    return human_time_diff($from, $to);
+  }
+
+  public function sanitizeFileName(string $filename): string {
+    return sanitize_file_name($filename);
   }
 }

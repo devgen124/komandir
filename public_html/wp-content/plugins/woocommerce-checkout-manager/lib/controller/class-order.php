@@ -2,8 +2,8 @@
 
 namespace QuadLayers\WOOCCM\Controller;
 
-use QuadLayers\WOOCCM\Upload as Upload;
-use QuadLayers\WOOCCM\Plugin as Plugin;
+use QuadLayers\WOOCCM\Upload;
+use QuadLayers\WOOCCM\Plugin;
 
 /**
  * Order Class
@@ -113,13 +113,13 @@ class Order extends Upload {
 				wp_send_json_error( esc_html__( 'This is not your order.', 'woocommerce-checkout-manager' ) );
 			}
 
-			// It can not be wp_unslash becouse it has images paths
+			// It cannot be wp_unslash becouse it has images paths
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$files = isset( $_FILES['wooccm_order_attachment_upload'] ) ? wc_clean( $_FILES['wooccm_order_attachment_upload'] ) : false;
 
 			if ( empty( $files ) ) {
-				// wc_order_notice(esc_html__('No uploads were recognised. Files were not uploaded.', 'woocommerce-checkout-manager'), 'error');
-				wp_send_json_error( esc_html__( 'No uploads were recognised. Files were not uploaded.', 'woocommerce-checkout-manager' ), 'error' );
+				// wc_order_notice(esc_html__('No uploads were recognized. Files were not uploaded.', 'woocommerce-checkout-manager'), 'error');
+				wp_send_json_error( esc_html__( 'No uploads were recognized. Files were not uploaded.', 'woocommerce-checkout-manager' ), 'error' );
 			}
 
 			$post = get_post( $order_id );
@@ -140,7 +140,7 @@ class Order extends Upload {
 
 				wp_send_json_success( ob_get_clean() );
 			}
-			wp_send_json_error( esc_html__( 'Unknow error.', 'woocommerce-checkout-manager' ) );
+			wp_send_json_error( esc_html__( 'Unknown error.', 'woocommerce-checkout-manager' ) );
 		}
 	}
 
@@ -191,7 +191,12 @@ class Order extends Upload {
 	}
 
 	public function add_metabox_content( $post ) {
-		$order = wc_get_order( $post->ID );
+		$order = null;
+		if ( method_exists( $post, 'get_id' ) ) {
+			$order = wc_get_order( $post->get_id() );
+		} else {
+			$order = wc_get_order( $post->ID );
+		}
 		if ( $order ) {
 
 			$attachments = get_posts(
@@ -333,7 +338,11 @@ class Order extends Upload {
 		$options = get_option( 'wccs_settings' );
 
 		if ( ! empty( $options['checkness']['upload_os'] ) ) {
-			return (array) @implode( ',', $options['checkness']['upload_os'] );
+			$upload_os_option = $options['checkness']['upload_os'];
+			if ( ! is_array( $upload_os_option ) ) {
+				$upload_os_option = array( $upload_os_option );
+			}
+			return (array) @implode( ',', $upload_os_option );
 		}
 
 		return $value;

@@ -45,6 +45,10 @@ class Subscribers {
     $this->wp = $wp;
   }
 
+  /**
+   * Checks if the subscribers limit is reached
+   * @return bool True if subscribers limit reached or restriction set, false otherwise
+   */
   public function check(): bool {
     $limit = $this->getSubscribersLimit();
     $subscribersCount = $this->getSubscribersCount();
@@ -84,7 +88,7 @@ class Subscribers {
     return $count;
   }
 
-  public function isSubscribersCountEnoughForCache(int $count = null): bool {
+  public function isSubscribersCountEnoughForCache(?int $count = null): bool {
     if (is_null($count) && func_num_args() === 0) {
       $count = $this->getSubscribersCount();
     }

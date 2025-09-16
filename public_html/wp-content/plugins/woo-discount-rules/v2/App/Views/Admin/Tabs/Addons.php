@@ -80,12 +80,12 @@ if (!defined('ABSPATH')) {
 
     <?php if (empty($active_addons) && empty($available_addons)) { ?>
         <div class="notice notice-error">
-            <p><?php _e("Unable to load addons! Try again later.", 'woo-discount-rules'); ?></p>
+            <p><?php esc_html_e("Unable to load addons! Try again later.", 'woo-discount-rules'); ?></p>
         </div>
         <div class="clear"></div>
     <?php } ?>
 
-    <h2><?php _e("Active Add-Ons", 'woo-discount-rules'); ?></h2>
+    <h2><?php esc_html_e("Active Add-Ons", 'woo-discount-rules'); ?></h2>
     <div class="awdr-addons" style="padding: 10px;">
         <?php if (!empty($active_addons)): ?>
             <?php foreach ($active_addons as $slug => $addon) { ?>
@@ -94,15 +94,8 @@ if (!defined('ABSPATH')) {
                     <?php if (!empty($addon['is_pro'])): ?>
 
                     <?php endif; ?>
-                    <div class="addon-badge" style="background: <?php echo !empty($addon['is_pro']) ? '#257AF0' : '#349832'; ?>">
-                        <?php if (!empty($addon['is_pro'])) {
-                            _e("Paid", 'woo-discount-rules');
-                        } else {
-                            _e("Free", 'woo-discount-rules');
-                        } ?>
-                    </div>
                     <a class="addon-image" <?php if (!empty($addon['product_url'])) echo 'href="' . esc_url($addon['product_url']) .'"'; ?>>
-                        <img src="<?php echo esc_url($addon['icon_url']); ?>" alt="<?php echo esc_attr($addon['name']); ?>"/>
+                        <img src="<?php echo esc_url($addon['icon_url']); //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>" alt="<?php echo esc_attr($addon['name']); ?>"/>
                     </a>
                     <div class="addon-info">
                         <p><?php echo esc_html($addon['description']); ?></p>
@@ -113,29 +106,29 @@ if (!defined('ABSPATH')) {
                     <div class="addon-actions">
                         <?php if (!empty($addon['page_url'])): ?>
                             <a href="<?php echo esc_url($addon['page_url']); ?>" title="<?php echo esc_attr($addon['name']); ?>" class="button-primary">
-                                <?php _e("Open", 'woo-discount-rules'); ?>
+                                <?php esc_html_e("Open", 'woo-discount-rules'); ?>
                             </a>
                         <?php endif; ?>
                         <?php if (!empty($addon['settings_url'])): ?>
                             <a href="<?php echo esc_url($addon['settings_url']); ?>" class="button-secondary">
-                                <?php _e("Settings", 'woo-discount-rules'); ?>
+                                <?php esc_html_e("Settings", 'woo-discount-rules'); ?>
                             </a>
                         <?php endif; ?>
                         <?php if (!empty($addon['is_installed'])): ?>
                             <a style="float: right;" href="<?php echo esc_url(add_query_arg(['deactivate_addon' => $slug, 'nonce' => wp_create_nonce('awdr_addon_deactivate')])); ?>" class="button-secondary">
-                                <?php _e("Deactivate", 'woo-discount-rules'); ?>
+                                <?php esc_html_e("Deactivate", 'woo-discount-rules'); ?>
                             </a>
                         <?php endif; ?>
                     </div>
                 </div>
             <?php } ?>
         <?php else: ?>
-            <p class="no-addons"><?php _e("No Active Add-Ons", 'woo-discount-rules'); ?></p>
+            <p class="no-addons"><?php esc_html_e("No Active Add-Ons", 'woo-discount-rules'); ?></p>
         <?php endif; ?>
     </div>
     <div class="clear"></div>
 
-    <h2><?php _e("Available Add-Ons", 'woo-discount-rules'); ?></h2>
+    <h2><?php esc_html_e("Available Add-Ons", 'woo-discount-rules'); ?></h2>
     <div class="awdr-addons" style="padding: 10px;">
         <?php if (!empty($available_addons)): ?>
             <?php foreach ($available_addons as $slug => $addon) { ?>
@@ -146,14 +139,14 @@ if (!defined('ABSPATH')) {
                             if (isset($addon['price']) && !empty($addon['price'])) {
                                 echo esc_html($addon['price']);
                             } else {
-                                _e("Paid", 'woo-discount-rules');
+	                            esc_html_e("Paid", 'woo-discount-rules');
                             }
                         } else {
-                            _e("Requires PRO", 'woo-discount-rules');
+	                        esc_html_e("Requires PRO", 'woo-discount-rules');
                         } ?>
                     </div>
                     <a class="addon-image" <?php if (!empty($addon['product_url'])) echo 'href="' . esc_url($addon['product_url']) .'"'; ?>>
-                        <img src="<?php echo esc_url($addon['icon_url']); ?>" alt="<?php echo esc_attr($addon['name']); ?>"/>
+                        <img src="<?php echo esc_url($addon['icon_url']);//phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>" alt="<?php echo esc_attr($addon['name']); ?>"/>
                     </a>
                     <div class="addon-info">
                         <p><?php echo esc_html($addon['description']); ?></p>
@@ -164,15 +157,15 @@ if (!defined('ABSPATH')) {
                     <div class="addon-actions">
                         <?php if (!empty($addon['download_url']) && empty($addon['is_installed'])): ?>
                             <a href="<?php echo esc_url($addon['download_url']); ?>" title="<?php echo esc_attr($addon['name']); ?>" class="button-primary">
-                                <?php _e("Download", 'woo-discount-rules'); ?>
+                                <?php esc_html_e("Download", 'woo-discount-rules'); ?>
                             </a>
                         <?php endif; ?>
                         <?php if (!empty($addon['product_url'])): ?>
                             <a href="<?php echo esc_url($addon['product_url']); ?>" target="_blank" class="button-secondary">
                                 <?php if (empty($addon['download_url']) && empty($addon['is_installed'])) {
-                                    _e("Get this addon", 'woo-discount-rules');
+	                                esc_html_e("Get this addon", 'woo-discount-rules');
                                 } else {
-                                    _e("More info", 'woo-discount-rules');
+	                                esc_html_e("More info", 'woo-discount-rules');
                                 } ?>
                             </a>
                         <?php endif; ?>
@@ -180,14 +173,14 @@ if (!defined('ABSPATH')) {
                             <a href="<?php echo esc_url(add_query_arg(['activate_addon' => $slug, 'nonce' => wp_create_nonce('awdr_addon_activate')])); ?>"
                                class="button-primary"  style="float: right; <?php if (empty($addon['is_activatable'])) echo 'pointer-events: none;'; ?>"
                                <?php if (empty($addon['is_activatable'])) echo 'disabled'; ?>>
-                                <?php _e("Activate", 'woo-discount-rules'); ?>
+                                <?php esc_html_e("Activate", 'woo-discount-rules'); ?>
                             </a>
                         <?php endif; ?>
                     </div>
                 </div>
             <?php } ?>
         <?php else: ?>
-            <p class="no-addons"><?php _e("No available addons", 'woo-discount-rules'); ?></p>
+            <p class="no-addons"><?php esc_html_e("No available addons", 'woo-discount-rules'); ?></p>
         <?php endif; ?>
     </div>
     <div class="clear"></div>

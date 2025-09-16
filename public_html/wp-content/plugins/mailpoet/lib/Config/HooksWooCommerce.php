@@ -76,6 +76,14 @@ class HooksWooCommerce {
     }
   }
 
+  public function hideAutomateWooOptinCheckbox() {
+    try {
+      $this->woocommerceSubscription->hideAutomateWooOptinCheckbox();
+    } catch (\Throwable $e) {
+      $this->logError($e, 'WooCommerce Subscription');
+    }
+  }
+
   public function subscribeOnCheckout($orderId, $data) {
     try {
       $this->woocommerceSubscription->subscribeOnCheckout($orderId, $data);
@@ -140,7 +148,7 @@ class HooksWooCommerce {
     }
   }
 
-  public function onRegister($errors, string $userLogin, string $userEmail = null) {
+  public function onRegister($errors, string $userLogin, ?string $userEmail = null) {
     try {
       if (empty($errors->errors)) {
         $this->subscriberRegistration->onRegister($errors, $userLogin, $userEmail);
@@ -174,7 +182,7 @@ class HooksWooCommerce {
     }
     try {
       \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', Env::$pluginPath);
-      \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', Env::$pluginPath );
+      \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('cart_checkout_blocks', Env::$pluginPath);
     } catch (\Throwable $e) {
       $this->logError($e, 'WooCommerce Compatibility');
     }

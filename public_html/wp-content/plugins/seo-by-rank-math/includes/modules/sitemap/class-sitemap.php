@@ -11,6 +11,7 @@
 namespace RankMath\Sitemap;
 
 use RankMath\Helper;
+use RankMath\Helpers\DB as DB_Helper;
 use RankMath\Helpers\Sitepress;
 use RankMath\Traits\Hooker;
 use RankMath\Sitemap\Html\Sitemap as Html_Sitemap;
@@ -114,7 +115,12 @@ class Sitemap {
 	 * @return string
 	 */
 	public function rank_math_build_sitemap_filter( $type ) {
+		if ( Sitepress::get()->is_per_domain() ) {
+			return $type;
+		}
+
 		global $sitepress_settings;
+
 		// Before to build the sitemap and as we are on front-end just make sure the links won't be translated. The setting should not be updated in DB.
 		$sitepress_settings['auto_adjust_ids'] = 0;
 
@@ -149,7 +155,7 @@ class Sitemap {
 	 * Hit sitemap index to pre-generate the cache.
 	 */
 	public static function hit_index() {
-		wp_remote_get( Router::get_base_url( Sitemap::get_sitemap_index_slug() . '.xml' ) );
+		wp_remote_get( Router::get_base_url( self::get_sitemap_index_slug() . '.xml' ) );
 	}
 
 	/**
@@ -157,9 +163,9 @@ class Sitemap {
 	 *
 	 * @param  int     $object_id   Object id.
 	 * @param  string  $object_type Object type. Accetps: post, term, user.
-	 * @param  boolean $include     Add or Remove object.
+	 * @param  boolean $is_include  Add or Remove object.
 	 */
-	public static function exclude_object( $object_id, $object_type, $include ) {
+	public static function exclude_object( $object_id, $object_type, $is_include ) {
 		$field_id = "exclude_{$object_type}s";
 		$ids      = Helper::get_settings( 'sitemap.' . $field_id );
 
@@ -169,12 +175,12 @@ class Sitemap {
 			$ids = array_filter( wp_parse_id_list( $ids ) );
 
 			// Add object.
-			if ( $include && ! in_array( $object_id, $ids, true ) ) {
+			if ( $is_include && ! in_array( $object_id, $ids, true ) ) {
 				$ids[] = $object_id;
 			}
 
 			// Remove object.
-			if ( ! $include && in_array( $object_id, $ids, true ) ) {
+			if ( ! $is_include && in_array( $object_id, $ids, true ) ) {
 				$ids = array_diff( $ids, [ $object_id ] );
 			}
 
@@ -232,7 +238,7 @@ class Sitemap {
 				GROUP BY p.post_type
 				ORDER BY p.post_modified_gmt DESC";
 
-				foreach ( $wpdb->get_results( $sql ) as $obj ) { // phpcs:ignore
+				foreach ( DB_Helper::get_results( $sql ) as $obj ) {
 					$post_type_dates[ $obj->post_type ] = $obj->date;
 				}
 			}
@@ -269,12 +275,12 @@ class Sitemap {
 	/**
 	 * Check if `object` is indexable.
 	 *
-	 * @param int/object $object Post|Term Object.
-	 * @param string     $type   Object Type.
+	 * @param int/object $data_object Post|Term Object.
+	 * @param string     $type        Object Type.
 	 *
 	 * @return boolean
 	 */
-	public static function is_object_indexable( $object, $type = 'post' ) {
+	public static function is_object_indexable( $data_object, $type = 'post' ) {
 		/**
 		 * Filter: 'rank_math/sitemap/include_noindex' - Include noindex data in Sitemap.
 		 *
@@ -289,7 +295,7 @@ class Sitemap {
 
 		$method = 'post' === $type ? 'is_post_indexable' : 'is_term_indexable';
 
-		return Helper::$method( $object );
+		return Helper::$method( $data_object );
 	}
 
 	/**
@@ -306,7 +312,7 @@ class Sitemap {
 		}
 
 		if ( $count < $max_entries && $current_page ) {
-			Helper::redirect( preg_replace( '/' . preg_quote( $current_page ) . '\.xml$/', '.xml', Helper::get_current_page_url() ) );
+			Helper::redirect( preg_replace( '/' . preg_quote( $current_page, '/' ) . '\.xml$/', '.xml', Helper::get_current_page_url() ) );
 			die();
 		}
 	}

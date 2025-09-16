@@ -88,7 +88,7 @@ class Schedule
     public static function runRebuildOnSaleIndex()
     {
         if (!self::hasEvent('advanced_woo_discount_rules_scheduled_rebuild_on_sale_index_event')) {
-            $time = strtotime(get_gmt_from_date(date('Y-m-d 00:00:00')));
+            $time = strtotime(get_gmt_from_date(gmdate('Y-m-d 00:00:00')));
             $recurrence = apply_filters('advanced_woo_discount_rules_scheduled_rebuild_on_sale_index_event_recurrence', 'daily');
             return (bool) self::addEvent($time, $recurrence, 'advanced_woo_discount_rules_scheduled_rebuild_on_sale_index_event');
         }

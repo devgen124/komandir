@@ -27,8 +27,6 @@ class Bridge {
     self::WPCOM_BUNDLE_SUBSCRIPTION_TYPE,
   ];
 
-  const AUTHORIZED_EMAIL_ADDRESSES_ERROR_SETTING_NAME = 'authorized_emails_addresses_check';
-
   const PREMIUM_KEY_SETTING_NAME = 'premium.premium_key';
   const PREMIUM_KEY_STATE_SETTING_NAME = 'premium.premium_key_state';
 
@@ -57,7 +55,7 @@ class Bridge {
   private $settings;
 
   public function __construct(
-    SettingsController $settingsController = null
+    ?SettingsController $settingsController = null
   ) {
     if ($settingsController === null) {
       $settingsController = SettingsController::getInstance();
@@ -66,8 +64,8 @@ class Bridge {
   }
 
   /**
-   * @deprecated Use non static function isMailpoetSendingServiceEnabled instead
    * @return bool
+   * @deprecated Use non-static function isMailpoetSendingServiceEnabled instead
    */
   public static function isMPSendingServiceEnabled() {
     try {
@@ -79,6 +77,9 @@ class Bridge {
     }
   }
 
+  /**
+   * @return bool
+   */
   public function isMailpoetSendingServiceEnabled() {
     try {
       $mailerConfig = SettingsController::getInstance()->get(Mailer::MAILER_CONFIG_SETTING_NAME);
@@ -101,14 +102,24 @@ class Bridge {
     return !empty($key);
   }
 
-  public static function pingBridge() {
+  /**
+   * @return array|\WP_Error
+   */
+  public function pingBridge() {
     $params = [
       'blocking' => true,
       'timeout' => 10,
     ];
     $wp = new WPFunctions();
-    $result = $wp->wpRemoteGet(self::BRIDGE_URL, $params);
-    return $wp->wpRemoteRetrieveResponseCode($result) === 200;
+    return $wp->wpRemoteGet(self::BRIDGE_URL, $params);
+  }
+
+  /**
+   * @return bool
+   */
+  public function validateBridgePingResponse($response) {
+    $wp = new WPFunctions();
+    return $wp->wpRemoteRetrieveResponseCode($response) === 200;
   }
 
   /**
@@ -131,14 +142,10 @@ class Bridge {
     return $this->initApi($key);
   }
 
-  public function getAuthorizedEmailAddresses($type = 'authorized'): array {
-    $data = $this
+  public function getAuthorizedEmailAddresses(): ?array {
+    return $this
       ->getApi($this->settings->get(self::API_KEY_SETTING_NAME))
       ->getAuthorizedEmailAddresses();
-    if ($data && $type === 'all') {
-      return $data;
-    }
-    return isset($data[$type]) ? $data[$type] : [];
   }
 
   /**
@@ -161,6 +168,9 @@ class Bridge {
 
     $allSenderDomains = [];
     $data = $this->getRawSenderDomainData();
+    if ($data === null) {
+      return [];
+    }
 
     foreach ($data as $subarray) {
       if (isset($subarray['domain'])) {
@@ -176,11 +186,10 @@ class Bridge {
     return $allSenderDomains;
   }
 
-  public function getRawSenderDomainData(): array {
-    $data = $this
+  public function getRawSenderDomainData(): ?array {
+    return $this
       ->getApi($this->settings->get(self::API_KEY_SETTING_NAME))
       ->getAuthorizedSenderDomains();
-    return $data ?? [];
   }
 
   /**
@@ -344,8 +353,8 @@ class Bridge {
     $key = $this->settings->get(self::API_KEY_SETTING_NAME);
     $this->storeMSSKeyAndState($key, $this->buildKeyState(
       self::KEY_INVALID,
-      [ 'code' => API::RESPONSE_CODE_KEY_INVALID ],
-      null)
-    );
+      ['code' => API::RESPONSE_CODE_KEY_INVALID],
+      null
+    ));
   }
 }

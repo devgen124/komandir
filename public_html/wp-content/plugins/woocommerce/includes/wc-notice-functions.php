@@ -29,14 +29,16 @@ function wc_notice_count( $notice_type = '' ) {
 	$notice_count = 0;
 	$all_notices  = WC()->session->get( 'wc_notices', array() );
 
-	if ( isset( $all_notices[ $notice_type ] ) ) {
+	if ( isset( $all_notices[ $notice_type ] ) && is_array( $all_notices[ $notice_type ] ) ) {
 
 		$notice_count = count( $all_notices[ $notice_type ] );
 
 	} elseif ( empty( $notice_type ) ) {
 
 		foreach ( $all_notices as $notices ) {
-			$notice_count += count( $notices );
+			if ( is_countable( $notices ) ) {
+				$notice_count += count( $notices );
+			}
 		}
 	}
 
@@ -108,7 +110,7 @@ function wc_set_notices( $notices ) {
 		return;
 	}
 
-	WC()->session->set( 'wc_notices', $notices );
+	WC()->session->set( 'wc_notices', empty( $notices ) ? null : $notices );
 }
 
 /**
@@ -235,14 +237,17 @@ function wc_get_notices( $notice_type = '' ) {
 		return;
 	}
 
+	$notices = array();
+	if ( ! WC()->session ) {
+		return $notices;
+	}
+
 	$all_notices = WC()->session->get( 'wc_notices', array() );
 
 	if ( empty( $notice_type ) ) {
 		$notices = $all_notices;
 	} elseif ( isset( $all_notices[ $notice_type ] ) ) {
 		$notices = $all_notices[ $notice_type ];
-	} else {
-		$notices = array();
 	}
 
 	return $notices;

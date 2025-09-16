@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Util\DBCollationChecker;
-use MailPoetVendor\Doctrine\DBAL\Connection;
+use MailPoetVendor\Doctrine\DBAL\ArrayParameterType;
 use MailPoetVendor\Doctrine\DBAL\Query\QueryBuilder;
 
 class WooFilterHelper {
@@ -24,8 +24,8 @@ class WooFilterHelper {
     $this->filterHelper = $filterHelper;
   }
 
-  public function defaultIncludedStatuses(): array {
-    return ['wc-processing', 'wc-completed'];
+  public function defaultExcludedStatuses(): array {
+    return ['wc-pending', 'wc-on-hold', 'wc-cancelled', 'wc-refunded', 'wc-failed'];
   }
 
   /**
@@ -65,25 +65,30 @@ class WooFilterHelper {
       $customerAlias,
       $this->orderStatsTable(),
       $orderStatsAlias,
-      "$customerAlias.customer_id = $orderStatsAlias.customer_id");
+      "$customerAlias.customer_id = $orderStatsAlias.customer_id"
+    );
 
     return $orderStatsAlias;
   }
 
   /**
    * @param QueryBuilder $queryBuilder
-   * @param array|null $allowedStatuses
+   * @param array|null $excludedStatuses
    * @return string - The alias of the joined order stats table
    */
-  public function applyOrderStatusFilter(QueryBuilder $queryBuilder, array $allowedStatuses = null): string {
-    if (is_null($allowedStatuses)) {
-      $allowedStatuses = $this->defaultIncludedStatuses();
+  public function applyOrderStatusFilter(QueryBuilder $queryBuilder, ?array $excludedStatuses = null): string {
+    if (is_null($excludedStatuses)) {
+      $excludedStatuses = $this->defaultExcludedStatuses();
     }
 
-    $statusParam = $this->filterHelper->getUniqueParameterName('status');
     $orderStatsAlias = $this->applyCustomerOrderJoin($queryBuilder);
-    $queryBuilder->andWhere("$orderStatsAlias.status IN (:$statusParam)");
-    $queryBuilder->setParameter($statusParam, $allowedStatuses, Connection::PARAM_STR_ARRAY);
+
+    if (!empty($excludedStatuses)) {
+      $statusParam = $this->filterHelper->getUniqueParameterName('status');
+      $queryBuilder->andWhere("$orderStatsAlias.status NOT IN (:$statusParam)");
+      $queryBuilder->setParameter($statusParam, $excludedStatuses, ArrayParameterType::STRING);
+    }
+
     return $orderStatsAlias;
   }
 

@@ -1,6 +1,7 @@
 <?php
 namespace MailPoetVendor\Carbon;
 if (!defined('ABSPATH')) exit;
+use MailPoetVendor\Carbon\MessageFormatter\MessageFormatterMapper;
 use Closure;
 use ReflectionException;
 use ReflectionFunction;
@@ -29,7 +30,7 @@ abstract class AbstractTranslator extends Translation\Translator
  $this->initializing = \true;
  $this->directories = [__DIR__ . '/Lang'];
  $this->addLoader('array', new ArrayLoader());
- parent::__construct($locale, $formatter, $cacheDir, $debug);
+ parent::__construct($locale, new MessageFormatterMapper($formatter), $cacheDir, $debug);
  $this->initializing = \false;
  }
  public function getDirectories() : array
@@ -59,6 +60,7 @@ abstract class AbstractTranslator extends Translation\Translator
  $this->messages = [];
  return \true;
  }
+ $this->assertValidLocale($locale);
  foreach ($this->getDirectories() as $directory) {
  $data = @(include \sprintf('%s/%s.php', \rtrim($directory, '\\/'), $locale));
  if ($data !== \false) {

@@ -47,7 +47,7 @@ class ContextFactory {
    */
   private function getPostTypes(): array {
     /** @var \WP_Post_Type[] $postTypes */
-    $postTypes = $this->wp->getPostTypes([], 'object');
+    $postTypes = $this->wp->getPostTypes([], 'objects');
     return array_values(array_map(function(\WP_Post_Type $type): array {
 
       $supports = ['comments' => false];
@@ -68,8 +68,7 @@ class ContextFactory {
         'public' => $type->public,
       ];
     },
-    $postTypes
-    ));
+    $postTypes));
   }
 
   /**
@@ -78,7 +77,7 @@ class ContextFactory {
   private function getTaxonomies(): array {
     /** @var \WP_Taxonomy[] $taxonomies */
     $taxonomies = array_filter(
-      $this->wp->getTaxonomies([], 'object'),
+      $this->wp->getTaxonomies([], 'objects'),
       function($object): bool {
         return $object instanceof \WP_Taxonomy;
       }

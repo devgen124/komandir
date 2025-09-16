@@ -51,13 +51,13 @@ class Checkbox {
       $hiddenValue = $isFieldRequired ? '1' : '0'; // Mandatory Fields can not be Empty
       $html .= '<input type="hidden" value="' . $hiddenValue . '"  name="' . $fieldName . '" />';
 
-      $html .= '<label class="mailpoet_checkbox_label" '
+      $id = $this->wp->wpUniqueId('mailpoet_checkbox_');
+      $html .= '<label class="mailpoet_checkbox_label" for="' . $id . '" '
         . $this->rendererHelper->renderFontStyle($formSettings) . '>';
 
       $html .= '<input type="checkbox" class="mailpoet_checkbox" ';
-
+      $html .= 'id="' . $id . '" ';
       $html .= 'name="' . $fieldName . '" ';
-
       $html .= 'value="1" ';
 
       $html .= (
@@ -77,7 +77,7 @@ class Checkbox {
 
     $html .= '</fieldset>';
 
-    $html .= '<span class="mailpoet_error_' . $this->wp->escAttr($block['id']) . ($formId ? '_' . $formId : '') . '"></span>';
+    $html .= $this->rendererHelper->renderErrorsContainer($block, $formId);
 
     return $this->wrapper->render($block, $html);
   }

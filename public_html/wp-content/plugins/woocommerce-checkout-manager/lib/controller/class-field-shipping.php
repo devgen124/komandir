@@ -2,8 +2,8 @@
 
 namespace QuadLayers\WOOCCM\Controller;
 
-use QuadLayers\WOOCCM\Controller\Field as Field;
-use QuadLayers\WOOCCM\Plugin as Plugin;
+use QuadLayers\WOOCCM\Controller\Field;
+use QuadLayers\WOOCCM\Plugin;
 use QuadLayers\WOOCCM\Model\Field_Shipping as Field_Shipping_Model;
 
 /**
@@ -57,10 +57,10 @@ class Field_Shipping extends Field {
 
 			$product_types = wc_get_product_types();
 
-			// This type can not setted because it is not added to to cart
+			// This type cannot setted because it is not added to to cart
 			unset( $product_types['external'] );
 
-			// This type can not setted because it is not added to to cart. It add every child to cart as simple product
+			// This type cannot setted because it is not added to to cart. It add every child to cart as simple product
 			unset( $product_types['grouped'] );
 
 			$product_subtypes_options = array(
@@ -101,13 +101,13 @@ class Field_Shipping extends Field {
 				$field['type'] = 'text';
 			}
 
-			$shipping_fields[ $field['name'] ]          = $field;
-			$shipping_fields[ $field['name'] ]['id']    = sprintf( '_%s', (string) $field['key'] );
-			$shipping_fields[ $field['name'] ]['label'] = $field['label'];
-			$shipping_fields[ $field['name'] ]['name']  = $field['key'];
-			$shipping_fields[ $field['name'] ]['value'] = null;
-			$shipping_fields[ $field['name'] ]['class'] = join( ' ', $field['class'] );
-			// $shipping_fields[$field['name']]['wrapper_class'] = 'wooccm-premium-field';
+			$shipping_fields[ $field['name'] ]                  = $field;
+			$shipping_fields[ $field['name'] ]['id']            = sprintf( '_%s', (string) $field['key'] );
+			$shipping_fields[ $field['name'] ]['label']         = $field['label'];
+			$shipping_fields[ $field['name'] ]['name']          = $field['key'];
+			$shipping_fields[ $field['name'] ]['value']         = null;
+			$shipping_fields[ $field['name'] ]['class']         = join( ' ', $field['class'] );
+			$shipping_fields[ $field['name'] ]['wrapper_class'] = 'wooccm-premium-field';
 		}
 
 		return $shipping_fields;

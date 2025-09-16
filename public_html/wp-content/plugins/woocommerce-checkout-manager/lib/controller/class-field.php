@@ -2,19 +2,19 @@
 
 namespace QuadLayers\WOOCCM\Controller;
 
-use QuadLayers\WOOCCM\Plugin as Plugin;
-use QuadLayers\WOOCCM\Controller\Controller as Controller;
-use QuadLayers\WOOCCM\Controller\Field_Billing as Field_Billing;
-use QuadLayers\WOOCCM\Controller\Field_Shipping as Field_Shipping;
-use QuadLayers\WOOCCM\Controller\Field_Additional as Field_Additional;
-use QuadLayers\WOOCCM\View\Frontend\Fields_Handler as Fields_Handler;
-use QuadLayers\WOOCCM\View\Frontend\Fields_I18n as Fields_I18n;
-use QuadLayers\WOOCCM\View\Frontend\Fields_Register as Fields_Register;
-use QuadLayers\WOOCCM\View\Frontend\Fields_Additional as Fields_Additional;
-use QuadLayers\WOOCCM\View\Frontend\Fields_Disable as Fields_Disable;
-use QuadLayers\WOOCCM\View\Frontend\Fields_Conditional as Fields_Conditional;
-use QuadLayers\WOOCCM\View\Frontend\Fields_Filter as Fields_Filter;
-use QuadLayers\WOOCCM\View\Frontend\Fields_Validation as Fields_Validation;
+use QuadLayers\WOOCCM\Plugin;
+use QuadLayers\WOOCCM\Controller\Controller;
+use QuadLayers\WOOCCM\Controller\Field_Billing;
+use QuadLayers\WOOCCM\Controller\Field_Shipping;
+use QuadLayers\WOOCCM\Controller\Field_Additional;
+use QuadLayers\WOOCCM\View\Frontend\Fields_Handler;
+use QuadLayers\WOOCCM\View\Frontend\Fields_I18n;
+use QuadLayers\WOOCCM\View\Frontend\Fields_Register;
+use QuadLayers\WOOCCM\View\Frontend\Fields_Additional;
+use QuadLayers\WOOCCM\View\Frontend\Fields_Disable;
+use QuadLayers\WOOCCM\View\Frontend\Fields_Conditional;
+use QuadLayers\WOOCCM\View\Frontend\Fields_Filter;
+use QuadLayers\WOOCCM\View\Frontend\Fields_Validation;
 
 /**
  * Field Class
@@ -93,10 +93,24 @@ class Field extends Controller {
 			'orderby'    => 'id',
 			'order'      => 'ASC',
 			'hide_empty' => true,
-			'fields'     => 'all',
+			'fields'     => 'id=>name',
 		);
 
-		return get_terms( $args );
+		$terms = get_terms( $args );
+
+		if ( is_wp_error( $terms ) || empty( $terms ) ) {
+			return array();
+		}
+
+		$categories = array();
+		foreach ( $terms as $term_id => $name ) {
+			$categories[] = (object) array(
+				'term_id' => $term_id,
+				'name'    => $name,
+			);
+		}
+
+		return $categories;
 	}
 
 	// Ajax
@@ -177,6 +191,7 @@ class Field extends Controller {
 			$field_data           = json_decode( wp_unslash( $_REQUEST['field_data'] ), true );
 			$field_data_sanitized = wc_clean( $field_data );
 
+			$field_data_sanitized['label']       = wp_kses_post( $field_data['label'] );
 			$field_data_sanitized['description'] = wp_kses_post( $field_data['description'] );
 
 			if ( is_array( $field_data_sanitized ) ) {
@@ -416,7 +431,7 @@ class Field extends Controller {
 
 									$fields[ $field_id ]['order'] = $loop;
 
-									$loop++;
+									++$loop;
 								}
 							}
 

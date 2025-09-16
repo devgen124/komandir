@@ -103,6 +103,9 @@ class PaymentMethodType extends AbstractEnum
     const SBP            = 'sbp';
     /** Прием оплаты с использованием Кредита от СберБанка */
     const SBER_LOAN = 'sber_loan';
+    /** Оплата через сервис «Плати частями» */
+    const SBER_BNPL = 'sber_bnpl';
+
     /**
      * Для неизвестных методов оплаты
      * @deprecated Не используется для реальных платежей
@@ -127,6 +130,7 @@ class PaymentMethodType extends AbstractEnum
         self::WECHAT         => false,
         self::SBP            => true,
         self::SBER_LOAN      => true,
+        self::SBER_BNPL      => true,
         self::UNKNOWN        => false,
     );
 }

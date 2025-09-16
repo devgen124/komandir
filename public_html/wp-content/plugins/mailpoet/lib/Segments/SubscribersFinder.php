@@ -11,7 +11,7 @@ use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\SubscriberSegmentEntity;
 use MailPoet\InvalidStateException;
-use MailPoetVendor\Doctrine\DBAL\Connection;
+use MailPoetVendor\Doctrine\DBAL\ArrayParameterType;
 use MailPoetVendor\Doctrine\DBAL\ParameterType;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 
@@ -71,15 +71,15 @@ class SubscribersFinder {
    * @param ScheduledTaskEntity $task
    * @param array<int>    $segmentIds
    *
-   * @return float|int
+   * @return void
    */
-  public function addSubscribersToTaskFromSegments(ScheduledTaskEntity $task, array $segmentIds, ?int $filterSegmentId = null) {
+  public function addSubscribersToTaskFromSegments(ScheduledTaskEntity $task, array $segmentIds, ?int $filterSegmentId = null): void {
     // Prepare subscribers on the DB side for performance reasons
     if (is_int($filterSegmentId)) {
       try {
         $this->segmentsRepository->verifyDynamicSegmentExists($filterSegmentId);
       } catch (InvalidStateException $exception) {
-        return 0;
+        return;
       }
     }
     $staticSegmentIds = [];
@@ -104,7 +104,6 @@ class SubscribersFinder {
     if ($count > 0) {
       $this->entityManager->refresh($task);
     }
-    return $count;
   }
 
   /**
@@ -132,13 +131,13 @@ class SubscribersFinder {
       ->setParameter('processed', ScheduledTaskSubscriberEntity::STATUS_UNPROCESSED, ParameterType::INTEGER)
       ->setParameter('subscribers_status', SubscriberEntity::STATUS_SUBSCRIBED, ParameterType::STRING)
       ->setParameter('relation_status', SubscriberEntity::STATUS_SUBSCRIBED, ParameterType::STRING)
-      ->setParameter('segment_ids', $segmentIds, Connection::PARAM_INT_ARRAY);
+      ->setParameter('segment_ids', $segmentIds, ArrayParameterType::INTEGER);
 
     if ($filterSegmentId) {
       $filterSegmentSubscriberIds = $this->segmentSubscriberRepository->findSubscribersIdsInSegment($filterSegmentId);
       $selectQueryBuilder
         ->andWhere($selectQueryBuilder->expr()->in('subscribers.id', ':filterSegmentSubscriberIds'))
-        ->setParameter('filterSegmentSubscriberIds', $filterSegmentSubscriberIds, Connection::PARAM_INT_ARRAY);
+        ->setParameter('filterSegmentSubscriberIds', $filterSegmentSubscriberIds, ArrayParameterType::INTEGER);
     }
 
     // queryBuilder doesn't support INSERT IGNORE directly
@@ -201,7 +200,7 @@ class SubscribersFinder {
         ParameterType::INTEGER,
         ParameterType::INTEGER,
         ParameterType::STRING,
-        Connection::PARAM_INT_ARRAY,
+        ArrayParameterType::INTEGER,
       ]
     );
 

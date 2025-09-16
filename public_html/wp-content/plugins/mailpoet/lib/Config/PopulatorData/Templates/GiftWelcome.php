@@ -1,10 +1,8 @@
 <?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
+
 namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
-
-
-use MailPoet\WP\Functions as WPFunctions;
 
 
 class GiftWelcome {
@@ -12,7 +10,9 @@ class GiftWelcome {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/gift';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -32,7 +32,7 @@ class GiftWelcome {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
          [
           'type' => 'container',
@@ -260,7 +260,7 @@ class GiftWelcome {
                               4 =>
                                  [
                                   'type' => 'social',
-                                  'iconSet' => 'grey',
+                                  'iconSet' => 'official',
                                   'icons' =>
                                      [
                                       0 =>
@@ -268,7 +268,7 @@ class GiftWelcome {
                                           'type' => 'socialIcon',
                                           'iconType' => 'facebook',
                                           'link' => 'http://www.facebook.com',
-                                          'image' => $this->social_icon_url . '/02-grey/Facebook.png',
+                                          'image' => $this->social_icon_url . '/11-official/Facebook.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Facebook',
@@ -278,7 +278,7 @@ class GiftWelcome {
                                           'type' => 'socialIcon',
                                           'iconType' => 'twitter',
                                           'link' => 'http://www.twitter.com',
-                                          'image' => $this->social_icon_url . '/02-grey/Twitter.png',
+                                          'image' => $this->social_icon_url . '/11-official/X.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Twitter',
@@ -288,7 +288,7 @@ class GiftWelcome {
                                           'type' => 'socialIcon',
                                           'iconType' => 'instagram',
                                           'link' => 'http://instagram.com',
-                                          'image' => $this->social_icon_url . '/02-grey/Instagram.png',
+                                          'image' => $this->social_icon_url . '/11-official/Instagram.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Instagram',
@@ -298,7 +298,7 @@ class GiftWelcome {
                               5 =>
                                  [
                                   'type' => 'text',
-                                  'text' => '<p style="text-align: center; font-size: 11px;"><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a><span>&nbsp;|&nbsp;</span><a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a></p>',
+                                  'text' => '<p style="text-align: center; font-size: 11px;"><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a><span>&nbsp;|&nbsp;</span><a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a></p>',
                                  ],
                              ],
                          ],
@@ -348,6 +348,4 @@ class GiftWelcome {
          ],
     ];
   }
-
-
 }

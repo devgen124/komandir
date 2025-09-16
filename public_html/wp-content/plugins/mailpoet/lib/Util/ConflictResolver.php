@@ -16,14 +16,14 @@ class ConflictResolver {
       '^/wp-includes',
       // CDN
       'googleapis.com/ajax/libs',
-      'wp.com',
+      '\bwp\.com\b',
       // third-party
       'jetpack',
       'query-monitor',
       'wpt-tx-updater-network',
       // WP.com
       '^/_static',
-      'atomic-plugins/debug-bar/css',
+      'mu-host-plugins/debug-bar/css',
       'woocommerce-payments/',
       'automatewoo/',
       'full-site-editing',
@@ -38,10 +38,11 @@ class ConflictResolver {
       '^/wp-includes',
       // CDN
       'googleapis.com/ajax/libs',
-      'wp.com',
+      '\bwp\.com\b',
       // third-party
       'query-monitor',
       'wpt-tx-updater-network',
+      'polylang',
       // WP.com
       'full-site-editing',
       'wpcomsh',

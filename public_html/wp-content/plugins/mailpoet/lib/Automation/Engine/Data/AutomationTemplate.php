@@ -7,7 +7,6 @@ if (!defined('ABSPATH')) exit;
 
 class AutomationTemplate {
   public const TYPE_DEFAULT = 'default';
-  public const TYPE_FREE_ONLY = 'free-only';
   public const TYPE_PREMIUM = 'premium';
   public const TYPE_COMING_SOON = 'coming-soon';
 
@@ -23,19 +22,26 @@ class AutomationTemplate {
   /** @var string */
   private $description;
 
-  /** @var callable(): Automation */
+  /** @var callable(bool $preview=): Automation */
   private $automationFactory;
+
+  /** @var array<string, int|bool> */
+  private $requiredCapabilities;
 
   /** @var string */
   private $type;
 
-  /** @param callable(): Automation $automationFactory */
+  /**
+   * @param callable(bool $preview=): Automation $automationFactory
+   * @param array<string, int|bool> $requiredCapabilities
+   */
   public function __construct(
     string $slug,
     string $category,
     string $name,
     string $description,
     callable $automationFactory,
+    array $requiredCapabilities = [],
     string $type = self::TYPE_DEFAULT
   ) {
     $this->slug = $slug;
@@ -43,6 +49,7 @@ class AutomationTemplate {
     $this->name = $name;
     $this->description = $description;
     $this->automationFactory = $automationFactory;
+    $this->requiredCapabilities = $requiredCapabilities;
     $this->type = $type;
   }
 
@@ -66,8 +73,13 @@ class AutomationTemplate {
     return $this->description;
   }
 
-  public function createAutomation(): Automation {
-    return ($this->automationFactory)();
+  /** @return array<string, int|bool> */
+  public function getRequiredCapabilities(): array {
+    return $this->requiredCapabilities;
+  }
+
+  public function createAutomation(bool $preview = false): Automation {
+    return ($this->automationFactory)($preview);
   }
 
   public function toArray(): array {
@@ -76,6 +88,7 @@ class AutomationTemplate {
       'name' => $this->getName(),
       'category' => $this->getCategory(),
       'type' => $this->getType(),
+      'required_capabilities' => $this->getRequiredCapabilities(),
       'description' => $this->getDescription(),
     ];
   }

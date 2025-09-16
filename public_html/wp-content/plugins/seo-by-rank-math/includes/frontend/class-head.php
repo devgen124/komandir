@@ -32,6 +32,15 @@ class Head {
 	use Hooker;
 
 	/**
+	 * Keeps the buffer level.
+	 *
+	 * @since 1.0.252
+	 *
+	 * @var int
+	 */
+	private $buffer_level = 0;
+
+	/**
 	 * The Constructor.
 	 */
 	public function __construct() {
@@ -121,7 +130,15 @@ class Head {
 				continue;
 			}
 
-			echo $custom_webmaster_tag . "\n";
+			echo wp_kses(
+				$custom_webmaster_tag,
+				[
+					'meta' => [
+						'name'    => [],
+						'content' => [],
+					],
+				]
+			) . "\n";
 		}
 	}
 
@@ -148,7 +165,7 @@ class Head {
 		$old_wp_query = null;
 		if ( ! $wp_query->is_main_query() ) {
 			$old_wp_query = $wp_query;
-			wp_reset_query();
+			wp_reset_query(); //phpcs:ignore -- This function is needed here to reset the query before running the head code.
 		}
 
 		$this->credits();
@@ -201,7 +218,7 @@ class Head {
 		$generated = Paper::get()->get_description();
 
 		if ( Str::is_non_empty( $generated ) ) {
-			echo '<meta name="description" content="' . $generated . '"/>', "\n";
+			echo '<meta name="description" content="' . esc_attr( $generated ) . '"/>', "\n";
 		}
 	}
 
@@ -362,7 +379,13 @@ class Head {
 		 */
 		$link = $this->do_filter( "frontend/{$rel}_rel_link", '<link rel="' . esc_attr( $rel ) . '" href="' . esc_url( $url ) . "\" />\n" );
 		if ( Str::is_non_empty( $link ) ) {
-			echo $link;
+			$allowed_tags = [
+				'link' => [
+					'href' => [],
+					'rel'  => [],
+				],
+			];
+			echo wp_kses( $link, $allowed_tags );
 		}
 	}
 
@@ -414,25 +437,30 @@ class Head {
 	 */
 	public function start_ob() {
 		ob_start();
+		$this->buffer_level = ob_get_level();
 	}
 
 	/**
 	 * Use output buffering to force rewrite the title tag.
 	 */
 	public function rewrite_title() {
+		if ( ob_get_level() !== $this->buffer_level ) {
+			return;
+		}
+
 		global $wp_query;
 
 		// Check if we're in the main query.
 		$old_wp_query = null;
 		if ( ! $wp_query->is_main_query() ) {
 			$old_wp_query = $wp_query;
-			wp_reset_query();
+			wp_reset_query(); //phpcs:ignore -- This function is needed here to reset the query before running the head code.
 		}
 
 		$content = ob_get_clean();
 		$title   = Paper::get()->get_title();
 		if ( empty( $title ) ) {
-			echo $content;
+			echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- This is the output buffer, escaping is unnecessary.
 		}
 
 		// Find all title tags, remove them, and add the new one.
@@ -442,6 +470,6 @@ class Head {
 			$GLOBALS['wp_query'] = $old_wp_query;
 		}
 
-		echo $content;
+		echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- This is the output buffer, escaping is unnecessary.
 	}
 }

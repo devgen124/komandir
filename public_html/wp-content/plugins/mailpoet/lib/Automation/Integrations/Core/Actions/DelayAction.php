@@ -15,8 +15,10 @@ use MailPoet\Validator\Builder;
 use MailPoet\Validator\Schema\ObjectSchema;
 
 class DelayAction implements Action {
+  public const KEY = 'core:delay';
+
   public function getKey(): string {
-    return 'core:delay';
+    return self::KEY;
   }
 
   public function getName(): string {
@@ -49,11 +51,16 @@ class DelayAction implements Action {
 
   public function run(StepRunArgs $args, StepRunController $controller): void {
     if ($args->isFirstRun()) {
-      $controller->scheduleProgress(time() + $this->calculateSeconds($args->getStep()));
+      $controller->scheduleProgress(time() + self::calculateSeconds($args->getStep()));
     }
   }
 
-  private function calculateSeconds(Step $step): int {
+  public function onDuplicate(Step $step): Step {
+    // Intentionally left empty for now
+    return $step;
+  }
+
+  public static function calculateSeconds(Step $step): int {
     $delay = (int)($step->getArgs()['delay'] ?? null);
     switch ($step->getArgs()['delay_type']) {
       case "MINUTES":

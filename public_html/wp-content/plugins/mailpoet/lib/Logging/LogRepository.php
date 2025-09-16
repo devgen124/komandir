@@ -10,26 +10,13 @@ use MailPoet\Entities\LogEntity;
 use MailPoet\Entities\NewsletterEntity;
 use MailPoet\InvalidStateException;
 use MailPoet\Util\Helpers;
-use MailPoet\WP\Functions;
 use MailPoetVendor\Carbon\Carbon;
-use MailPoetVendor\Doctrine\DBAL\Driver\PDO\Connection;
-use MailPoetVendor\Doctrine\ORM\EntityManager;
+use MailPoetVendor\Doctrine\DBAL\ParameterType;
 
 /**
  * @extends Repository<LogEntity>
  */
 class LogRepository extends Repository {
-  /** @var Functions */
-  private $wp;
-
-  public function __construct(
-    EntityManager $entityManager,
-    Functions $wp
-  ) {
-    parent::__construct($entityManager);
-    $this->wp = $wp;
-  }
-
   public function saveLog(LogEntity $log): void {
     // Save log entity using DBAL to avoid calling "flush()" on the entity manager.
     // Calling "flush()" can have unintended side effects, such as saving unwanted
@@ -43,7 +30,7 @@ class LogRepository extends Repository {
         'raw_message' => $log->getRawMessage(),
         'context' => json_encode($log->getContext()),
         'created_at' => (
-          $log->getCreatedAt() ?? Carbon::createFromTimestamp($this->wp->currentTime('timestamp'))
+          $log->getCreatedAt() ?? Carbon::now()->millisecond(0)
         )->format('Y-m-d H:i:s'),
       ],
     );
@@ -66,11 +53,11 @@ class LogRepository extends Repository {
    * @return LogEntity[]
    */
   public function getLogs(
-    \DateTimeInterface $dateFrom = null,
-    \DateTimeInterface $dateTo = null,
-    string $search = null,
-    string $offset = null,
-    string $limit = null
+    ?\DateTimeInterface $dateFrom = null,
+    ?\DateTimeInterface $dateTo = null,
+    ?string $search = null,
+    ?string $offset = null,
+    ?string $limit = null
   ): array {
     $query = $this->doctrineRepository->createQueryBuilder('l')
       ->select('l');
@@ -106,20 +93,26 @@ class LogRepository extends Repository {
     return $query->getQuery()->getResult();
   }
 
-  public function purgeOldLogs(int $daysToKeepLogs, int $limit = 1000) {
+  public function purgeOldLogs(int $daysToKeepLogs, int $limit = 1000): int {
     $logsTable = $this->entityManager->getClassMetadata(LogEntity::class)->getTableName();
-    $this->entityManager->getConnection()->executeStatement("
-      DELETE FROM $logsTable
+    $result = $this->entityManager->getConnection()->executeStatement(
+      "
+      DELETE FROM `{$logsTable}`
       WHERE `created_at` < :date
-      ORDER BY `id` ASC LIMIT :limit
-    ", [
+      ORDER BY `created_at` ASC, `id` ASC
+      LIMIT :limit
+    ",
+      [
       'date' => Carbon::now()->subDays($daysToKeepLogs)->toDateTimeString(),
       'limit' => $limit,
-    ],
-    [
-      'date' => Connection::PARAM_STR,
-      'limit' => Connection::PARAM_INT,
-    ]);
+      ],
+      [
+      'date' => ParameterType::STRING,
+      'limit' => ParameterType::INTEGER,
+      ]
+    );
+
+    return (int)$result;
   }
 
   public function getRawMessagesForNewsletter(NewsletterEntity $newsletter, string $topic): array {

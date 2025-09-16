@@ -8,9 +8,12 @@ if (!defined('ABSPATH')) exit;
 use MailPoet\Automation\Engine\Data\Automation;
 use MailPoet\Automation\Engine\Data\Step;
 use MailPoet\Automation\Engine\Storage\AutomationStorage;
+use MailPoet\Captcha\CaptchaConstants;
 use MailPoet\Config\ServicesChecker;
 use MailPoet\Cron\CronTrigger;
 use MailPoet\Entities\DynamicSegmentFilterData;
+use MailPoet\Entities\FormEntity;
+use MailPoet\Form\FormsRepository;
 use MailPoet\Listing\ListingDefinition;
 use MailPoet\Newsletter\NewslettersRepository;
 use MailPoet\Segments\DynamicSegments\DynamicSegmentFilterRepository;
@@ -36,9 +39,12 @@ use MailPoet\Segments\DynamicSegments\Filters\WooCommerceFirstOrder;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceMembership;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceNumberOfOrders;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceNumberOfReviews;
+use MailPoet\Segments\DynamicSegments\Filters\WooCommerceProduct;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommercePurchaseDate;
+use MailPoet\Segments\DynamicSegments\Filters\WooCommercePurchasedWithAttribute;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceSingleOrderValue;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceSubscription;
+use MailPoet\Segments\DynamicSegments\Filters\WooCommerceTag;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceTotalSpent;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceUsedCouponCode;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceUsedPaymentMethod;
@@ -54,6 +60,7 @@ use MailPoet\Subscribers\SubscriberListingRepository;
 use MailPoet\Tags\TagRepository;
 use MailPoet\Util\License\Features\Subscribers as SubscribersFeature;
 use MailPoet\WooCommerce\Helper as WooCommerceHelper;
+use MailPoet\WooCommerce\Subscription;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoet\WPCOM\DotcomHelperFunctions;
 use MailPoetVendor\Carbon\Carbon;
@@ -101,6 +108,12 @@ class Reporter {
   /*** @var DotcomHelperFunctions */
   private $dotcomHelperFunctions;
 
+  /*** @var ReporterCampaignData */
+  private $reporterCampaignData;
+
+  /** @var FormsRepository */
+  private $formsRepository;
+
   public function __construct(
     NewslettersRepository $newslettersRepository,
     SegmentsRepository $segmentsRepository,
@@ -115,7 +128,9 @@ class Reporter {
     SubscriberListingRepository $subscriberListingRepository,
     AutomationStorage $automationStorage,
     UnsubscribeReporter $unsubscribeReporter,
-    DotcomHelperFunctions $dotcomHelperFunctions
+    DotcomHelperFunctions $dotcomHelperFunctions,
+    ReporterCampaignData $reporterCampaignData,
+    FormsRepository $formsRepository
   ) {
     $this->newslettersRepository = $newslettersRepository;
     $this->segmentsRepository = $segmentsRepository;
@@ -131,6 +146,8 @@ class Reporter {
     $this->automationStorage = $automationStorage;
     $this->unsubscribeReporter = $unsubscribeReporter;
     $this->dotcomHelperFunctions = $dotcomHelperFunctions;
+    $this->reporterCampaignData = $reporterCampaignData;
+    $this->formsRepository = $formsRepository;
   }
 
   public function getData() {
@@ -143,6 +160,7 @@ class Reporter {
     $hasWc = $this->woocommerceHelper->isWooCommerceActive();
     $inactiveSubscribersMonths = (int)round((int)$this->settings->get('deactivate_subscriber_after_inactive_days') / 30);
     $inactiveSubscribersStatus = $inactiveSubscribersMonths === 0 ? 'never' : "$inactiveSubscribersMonths months";
+    $activeFormCounts = $this->formsRepository->getActiveFormsCountByType();
 
     $result = [
       'PHP version' => PHP_VERSION,
@@ -154,11 +172,10 @@ class Reporter {
       'WP_MAX_MEMORY_LIMIT' => WP_MAX_MEMORY_LIMIT,
       'PHP memory_limit' => ini_get('memory_limit'),
       'PHP max_execution_time' => ini_get('max_execution_time'),
-      'users_can_register' => $this->wp->getOption('users_can_register') ? 'yes' : 'no',
       'MailPoet Free version' => MAILPOET_VERSION,
       'MailPoet Premium version' => (defined('MAILPOET_PREMIUM_VERSION')) ? MAILPOET_PREMIUM_VERSION : 'N/A',
       'Total number of subscribers' => $this->subscribersFeature->getSubscribersCount(),
-      'Sending Method' => isset($mta['method']) ? $mta['method'] : null,
+      'Sending Method' => $mta['method'] ?? null,
       "Send all site's emails with" => $this->settings->get('send_transactional_emails') ? 'current sending method' : 'default WordPress sending method',
       'Date of plugin installation' => $this->settings->get('installed_at'),
       'Subscribe in comments' => (boolean)$this->settings->get('subscribe.on_comment.enabled', false),
@@ -171,17 +188,23 @@ class Reporter {
       'Newsletter task scheduler (cron)' => $isCronTriggerMethodWP ? 'visitors' : 'script',
       'Open and click tracking' => $this->trackingConfig->isEmailTrackingEnabled(),
       'Tracking level' => $this->settings->get('tracking.level', TrackingConfig::LEVEL_FULL),
+      'Logging level' => $this->settings->get('logging', 'errors'),
       'Premium key valid' => $this->servicesChecker->isPremiumKeyValid(),
       'New subscriber notifications' => NewSubscriberNotificationMailer::isDisabled($this->settings->get(NewSubscriberNotificationMailer::SETTINGS_KEY)),
-      'Number of standard newsletters sent in last 3 months' => $newsletters['sent_newsletters_3_months'],
-      'Number of standard newsletters sent in last 30 days' => $newsletters['sent_newsletters_30_days'],
       'Number of active post notifications' => $newsletters['notifications_count'],
       'Number of active welcome emails' => $newsletters['welcome_newsletters_count'],
       'Total number of standard newsletters sent' => $newsletters['sent_newsletters_count'],
+      'Total number of block editor gutenberg newsletters' => $newsletters['total_gutenberg_newsletter_count'],
+      'Number of block editor gutenberg newsletters sent' => $newsletters['sent_gutenberg_newsletter_count'],
       'Number of segments' => isset($segments['dynamic']) ? (int)$segments['dynamic'] : 0,
       'Number of lists' => isset($segments['default']) ? (int)$segments['default'] : 0,
       'Number of subscriber tags' => $this->tagRepository->countBy([]),
+      'Site is using block theme' => $this->wp->wpIsBlockTheme(),
       'Stop sending to inactive subscribers' => $inactiveSubscribersStatus,
+      'CAPTCHA setting' => $this->settings->get(CaptchaConstants::TYPE_SETTING_NAME, '') ?: 'disabled',
+      'Is CAPTCHA on register forms enabled' => $this->settings->get(CaptchaConstants::ON_REGISTER_FORMS_SETTING_NAME, false) ? 'yes' : 'no',
+      'users_can_register' => $this->wp->getOption('users_can_register') ? 'yes' : 'no',
+      'Is WooCommerce account creation on "My account" enabled' => $this->wp->getOption('woocommerce_enable_myaccount_registration') ?? 'no',
       'Plugin > MailPoet Premium' => $this->wp->isPluginActive('mailpoet-premium/mailpoet-premium.php'),
       'Plugin > bounce add-on' => $this->wp->isPluginActive('mailpoet-bounce-handler/mailpoet-bounce-handler.php'),
       'Plugin > Bloom' => $this->wp->isPluginActive('bloom-for-publishers/bloom.php'),
@@ -219,7 +242,8 @@ class Reporter {
       'Segment > is in country' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceCountry::ACTION_CUSTOMER_COUNTRY),
       'Segment > MailPoet custom field' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_USER_ROLE, MailPoetCustomFields::TYPE),
       'Segment > purchased in category' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceCategory::ACTION_CATEGORY),
-      'Segment > purchased product' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceCategory::ACTION_PRODUCT),
+      'Segment > purchased product' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceProduct::ACTION_PRODUCT),
+      'Segment > purchased with tag' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceTag::ACTION),
       'Segment > subscribed date' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_USER_ROLE, SubscriberDateField::SUBSCRIBED_DATE),
       'Segment > total spent' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceTotalSpent::ACTION_TOTAL_SPENT),
       'Segment > first order' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceFirstOrder::ACTION),
@@ -240,6 +264,7 @@ class Reporter {
       'Segment > email' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_USER_ROLE, SubscriberTextField::EMAIL),
       'Segment > city' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceCustomerTextField::CITY),
       'Segment > postal code' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceCustomerTextField::POSTAL_CODE),
+      'Segment > purchased with attribute' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommercePurchasedWithAttribute::ACTION),
       'Segment > used payment method' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceUsedPaymentMethod::ACTION),
       'Segment > used shipping method' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceUsedShippingMethod::ACTION),
       'Segment > number of reviews' => $this->isFilterTypeActive(DynamicSegmentFilterData::TYPE_WOOCOMMERCE, WooCommerceNumberOfReviews::ACTION),
@@ -256,18 +281,32 @@ class Reporter {
       'Sign-up confirmation: Confirmation Template > using html email editor template' => (boolean)$this->settings->get(ConfirmationEmailCustomizer::SETTING_ENABLE_EMAIL_CUSTOMIZER, false),
       'Is WordPress.com' => $this->dotcomHelperFunctions->isDotcom() ? 'yes' : 'no',
       'WordPress.com plan' => $this->dotcomHelperFunctions->getDotcomPlan(),
+      'Forms > Number of active forms' => $activeFormCounts['all'],
+      'Forms > Number of active Below pages forms' => $activeFormCounts[FormEntity::DISPLAY_TYPE_BELOW_POST],
+      'Forms > Number of active Fixed bar forms' => $activeFormCounts[FormEntity::DISPLAY_TYPE_FIXED_BAR],
+      'Forms > Number of active Pop-up forms' => $activeFormCounts[FormEntity::DISPLAY_TYPE_POPUP],
+      'Forms > Number of active Slide–in forms' => $activeFormCounts[FormEntity::DISPLAY_TYPE_SLIDE_IN],
+      'Forms > Number of active Others (widget) forms' => $activeFormCounts[FormEntity::DISPLAY_TYPE_OTHERS],
+      'Forms > Number of active forms with first name' => $activeFormCounts['with_first_name'],
+      'Forms > Number of active forms with last name' => $activeFormCounts['with_last_name'],
+      'Forms > Number of active forms with custom fields' => $activeFormCounts['with_custom_fields'],
+      'Forms > Min custom fields' => $activeFormCounts['min_custom_fields'],
+      'Forms > Max custom fields' => $activeFormCounts['max_custom_fields'],
+      'Forms > Average custom fields' => $activeFormCounts['average_custom_fields'],
     ];
 
     $result = array_merge(
       $result,
       $this->subscriberProperties(),
       $this->automationProperties(),
+      $this->reporterCampaignData->getCampaignAnalyticsProperties(),
       $this->unsubscribeReporter->getProperties()
     );
     if ($hasWc) {
       $result['WooCommerce version'] = $woocommerce->version;
       $result['Number of WooCommerce subscribers'] = isset($segments['woocommerce_users']) ? (int)$segments['woocommerce_users'] : 0;
-      $result['WooCommerce: opt-in on checkout is active'] = $this->settings->get('woocommerce.optin_on_checkout.enabled') ?: false;
+      $result['WooCommerce: opt-in on checkout is active'] = $this->settings->get(Subscription::OPTIN_ENABLED_SETTING_NAME) ?: false;
+      $result['WooCommerce: opt-in on checkout position'] = $this->settings->get(Subscription::OPTIN_POSITION_SETTING_NAME) ?: '';
       $result['WooCommerce: set old customers as subscribed'] = $this->settings->get('mailpoet_subscribe_old_woocommerce_customers.enabled') ?: false;
       $result['WooCommerce email customizer is active'] = $this->settings->get('woocommerce.use_mailpoet_editor') ?: false;
 
@@ -402,11 +441,15 @@ class Reporter {
   }
 
   public function getTrackingData() {
+    global $wp_version, $woocommerce; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
     $newsletters = $this->newslettersRepository->getAnalytics();
     $segments = $this->segmentsRepository->getCountsPerType();
     $mta = $this->settings->get('mta', []);
     $installedAt = new Carbon($this->settings->get('installed_at'));
-    return [
+    $theme = $this->wp->wpGetTheme();
+    $result = [
+      'WordPressVersion' => $wp_version, // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+      'pluginGutenberg' => $this->wp->isPluginActive('gutenberg/gutenberg.php'),
       'installedAtIso' => $installedAt->format(Carbon::ISO8601),
       'newslettersSent' => $newsletters['sent_newsletters_count'],
       'welcomeEmails' => $newsletters['welcome_newsletters_count'],
@@ -414,9 +457,19 @@ class Reporter {
       'woocommerceEmails' => $newsletters['automatic_emails_count'],
       'subscribers' => $this->subscribersFeature->getSubscribersCount(),
       'lists' => isset($segments['default']) ? (int)$segments['default'] : 0,
-      'sendingMethod' => isset($mta['method']) ? $mta['method'] : null,
+      'sendingMethod' => $mta['method'] ?? null,
       'woocommerceIsInstalled' => $this->woocommerceHelper->isWooCommerceActive(),
+      'blockTheme' => $this->wp->wpIsBlockTheme(),
+      'theme' => $theme->Name, // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+      'themeVersion' => $theme->Version, // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
     ];
+    if (defined('GUTENBERG_VERSION')) {
+      $result['gutenbergVersion'] = GUTENBERG_VERSION;
+    }
+    if ($this->woocommerceHelper->isWooCommerceActive()) {
+      $result['wooCommerceVersion'] = $woocommerce->version;
+    }
+    return $result;
   }
 
   private function isFilterTypeActive(string $filterType, string $action): bool {

@@ -5,6 +5,11 @@ namespace MailPoet\Subscribers;
 if (!defined('ABSPATH')) exit;
 
 
+use MailPoet\Captcha\CaptchaConstants;
+use MailPoet\Captcha\CaptchaSession;
+use MailPoet\Captcha\Validator\CaptchaValidator;
+use MailPoet\Captcha\Validator\RecaptchaValidator;
+use MailPoet\Captcha\Validator\ValidationError;
 use MailPoet\Entities\FormEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\SubscriberTagEntity;
@@ -14,11 +19,6 @@ use MailPoet\NotFoundException;
 use MailPoet\Segments\SubscribersFinder;
 use MailPoet\Settings\SettingsController;
 use MailPoet\Statistics\StatisticsFormsRepository;
-use MailPoet\Subscription\Captcha\CaptchaConstants;
-use MailPoet\Subscription\Captcha\CaptchaSession;
-use MailPoet\Subscription\Captcha\Validator\BuiltInCaptchaValidator;
-use MailPoet\Subscription\Captcha\Validator\RecaptchaValidator;
-use MailPoet\Subscription\Captcha\Validator\ValidationError;
 use MailPoet\Subscription\Throttling as SubscriptionThrottling;
 use MailPoet\Tags\TagRepository;
 use MailPoet\UnexpectedValueException;
@@ -60,7 +60,7 @@ class SubscriberSubscribeController {
 
   /** @var SubscriberTagRepository */
   private $subscriberTagRepository;
-  /** @var BuiltInCaptchaValidator  */
+  /** @var CaptchaValidator  */
   private $builtInCaptchaValidator;
 
   /** @var RecaptchaValidator  */
@@ -79,7 +79,7 @@ class SubscriberSubscribeController {
     TagRepository $tagRepository,
     SubscriberTagRepository $subscriberTagRepository,
     WPFunctions $wp,
-    BuiltInCaptchaValidator $builtInCaptchaValidator,
+    CaptchaValidator $builtInCaptchaValidator,
     RecaptchaValidator $recaptchaValidator
   ) {
     $this->formsRepository = $formsRepository;
@@ -156,9 +156,9 @@ class SubscriberSubscribeController {
 
     [$subscriber, $subscriptionMeta] = $this->subscriberActions->subscribe($data, $segmentIds);
 
-    if (!empty($captchaSettings['type']) && $captchaSettings['type'] === CaptchaConstants::TYPE_BUILTIN) {
+    if (!empty($captchaSettings['type']) && $captchaSettings['type'] === CaptchaConstants::TYPE_BUILTIN && isset($data['captcha_session_id'])) {
       // Captcha has been verified, invalidate the session vars
-      $this->captchaSession->reset();
+      $this->captchaSession->reset($data['captcha_session_id']);
     }
 
     // record form statistics
@@ -195,7 +195,7 @@ class SubscriberSubscribeController {
    * @return bool True if the subscriber is subscribed to any of the segments in the form
    */
   public function isSubscribedToAnyFormSegments(FormEntity $form, SubscriberEntity $subscriber): bool {
-    $formSegments = array_merge( $form->getSegmentBlocksSegmentIds(), $form->getSettingsSegmentIds());
+    $formSegments = array_merge($form->getSegmentBlocksSegmentIds(), $form->getSettingsSegmentIds());
 
     $subscribersFound = $this->subscribersFinder->findSubscribersInSegments([$subscriber->getId()], $formSegments);
     if (!empty($subscribersFound)) return true;
@@ -216,14 +216,18 @@ class SubscriberSubscribeController {
       return $data;
     }
 
-    $captchaSessionId = isset($data['captcha_session_id']) ? $data['captcha_session_id'] : null;
-    $this->captchaSession->init($captchaSessionId);
+    // When serving the built-in CAPTCHA for the first time, generate a new session ID.
+    if (!isset($data['captcha_session_id'])) {
+      $data['captcha_session_id'] = $this->captchaSession->generateSessionId();
+    }
+    $sessionId = $data['captcha_session_id'];
+
     if (!isset($data['captcha'])) {
       // Save form data to session
-      $this->captchaSession->setFormData(array_merge($data, ['form_id' => $form->getId()]));
-    } elseif ($this->captchaSession->getFormData()) {
+      $this->captchaSession->setFormData($sessionId, array_merge($data, ['form_id' => $form->getId()]));
+    } elseif ($this->captchaSession->getFormData($sessionId)) {
       // Restore form data from session
-      $data = array_merge($this->captchaSession->getFormData(), ['captcha' => $data['captcha']]);
+      $data = array_merge($this->captchaSession->getFormData($sessionId), ['captcha' => $data['captcha']]);
     }
     return $data;
   }
@@ -286,6 +290,7 @@ class SubscriberSubscribeController {
         $subscriber->getSubscriberTags()->add($subscriberTag);
         $this->subscriberTagRepository->persist($subscriberTag);
         $this->subscriberTagRepository->flush();
+        $this->wp->doAction('mailpoet_subscriber_tag_added', $subscriberTag);
       }
     }
   }

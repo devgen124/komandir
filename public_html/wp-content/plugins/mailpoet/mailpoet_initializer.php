@@ -3,6 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 
+use Automattic\WooCommerce\EmailEditor\Email_Editor_Container;
 use MailPoet\Config\Env;
 use MailPoet\Config\RequirementsChecker;
 use Tracy\Debugger;
@@ -48,7 +49,7 @@ if (WP_DEBUG && PHP_VERSION_ID >= 70100 && file_exists($tracyPath)) {
       $tracyScriptHtml .= "<script>window.TracyMaxAjaxRows = $maxAjaxRows;</script>\n";
 
       // just minor adjustments to Debugger::renderLoader() output
-      // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPressDotOrg.sniffs.OutputEscaping.UnescapedOutputParameter
+      // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
       echo $tracyScriptHtml;
     }
 
@@ -77,7 +78,6 @@ Env::init(
 $requirements = new RequirementsChecker();
 $requirementsCheckResults = $requirements->checkAllRequirements();
 if (
-  !$requirementsCheckResults[RequirementsChecker::TEST_PDO_EXTENSION] ||
   !$requirementsCheckResults[RequirementsChecker::TEST_VENDOR_SOURCE]
 ) {
   return;
@@ -85,6 +85,9 @@ if (
 
 // Ensure functions like get_plugins, etc.
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+
+// Initialize the Email Editor container to allow getting its instances in MailPoet constructors.
+Email_Editor_Container::init();
 
 $initializer = MailPoet\DI\ContainerWrapper::getInstance()->get(MailPoet\Config\Initializer::class);
 $initializer->init();

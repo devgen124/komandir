@@ -13,6 +13,7 @@
 /** @var array $wcOrderStatuses */
 /** @var bool $isSelfEmployed */
 /** @var string $yookassaNonce */
+/** @var string $isMarkingEnabled */
 ?>
 <form id="yoomoney-form-4" class="yoomoney-form">
     <div class="col-md-12">
@@ -176,6 +177,21 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-7 form-group">
+                        <div class="custom-control custom-switch qa-marking-control">
+                            <input type="hidden" name="yookassa_marking_enabled" value="0">
+                            <input <?= ($isMarkingEnabled && $isSecondReceiptEnabled) ? ' checked' : ''; ?> type="checkbox" class="custom-control-input" id="yookassa_marking_enabled" name="yookassa_marking_enabled" value="1">
+                            <label class="custom-control-label" for="yookassa_marking_enabled">
+                                <?= __('Указывать маркировку товара', 'yookassa'); ?>
+                            </label>
+                        </div>
+                        <p class="help-block text-muted qa-marking-control-info">
+                            <?= __('Актуальный список товарных категорий, которые нужно маркировать, можно посмотреть на сайте <a href="https://честныйзнак.рф/" target="_blank">Честного знака</a>.', 'yookassa');?>
+                        </p>
+                    </div>
+                </div>
+
                 <div class="qa-second-receipt">
                     <div class="row">
                         <div class="col-md-7 form-group">
@@ -188,7 +204,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div id="receipt-collapsible" class="in collapse<?=($isSecondReceiptEnabled) ? ' show' : ''; ?>">
                         <div class="row">
                             <div class="col-md-6">

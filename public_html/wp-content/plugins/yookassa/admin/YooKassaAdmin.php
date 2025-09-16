@@ -211,6 +211,7 @@ class YooKassaAdmin
         register_setting('woocommerce-yookassa', 'yookassa_access_token');
         register_setting('woocommerce-yookassa', 'yookassa_save_card');
         register_setting('woocommerce-yookassa', 'yookassa_self_employed');
+        register_setting('woocommerce-yookassa', 'yookassa_marking_enabled');
 
         update_option(
             'yookassa_sbbol_tax_rates_enum',
@@ -255,7 +256,7 @@ class YooKassaAdmin
 
     private function get_all_settings()
     {
-        $shopInfo               = $this->getShopInfo();
+        $shopInfo               = self::getShopInfo();
         $wcTaxes                = $this->getAllTaxes();
         $wcCalcTaxes            = get_option('woocommerce_calc_taxes');
         $ymTaxRatesEnum         = get_option('yookassa_tax_rates_enum');
@@ -268,6 +269,7 @@ class YooKassaAdmin
             __('Оплата заказа №%order_number%', 'yookassa'));
         $isReceiptEnabled       = get_option('yookassa_enable_receipt');
         $isSecondReceiptEnabled = get_option('yookassa_enable_second_receipt');
+        $isMarkingEnabled       = get_option('yookassa_marking_enabled');
         $orderStatusReceipt     = get_option('yookassa_second_receipt_order_status', 'wc-completed');
         $isDebugEnabled         = (bool)get_option('yookassa_debug_enabled', '0');
         $forceClearCart         = (bool)get_option('yookassa_force_clear_cart', '0');
@@ -358,6 +360,7 @@ class YooKassaAdmin
             'descriptionTemplate'    => $descriptionTemplate,
             'isReceiptEnabled'       => $isReceiptEnabled,
             'isSecondReceiptEnabled' => $isSecondReceiptEnabled,
+            'isMarkingEnabled'       => $isMarkingEnabled,
             'orderStatusReceipt'     => $orderStatusReceipt,
             'testMode'               => $testMode,
             'isDebugEnabled'         => $isDebugEnabled,
@@ -635,7 +638,7 @@ class YooKassaAdmin
     /**
      * @return array|void|null
      */
-    private function getShopInfo()
+    public static function getShopInfo()
     {
         YooKassaLogger::sendHeka(array('oauth.get-shop.init'));
         try {
@@ -662,7 +665,7 @@ class YooKassaAdmin
      */
     private function saveShopIdByOauth()
     {
-        $shopInfo = $this->getShopInfo();
+        $shopInfo = self::getShopInfo();
 
         if (!isset($shopInfo['account_id'])) {
             throw new \Exception('Failed to save shop id');
@@ -855,6 +858,7 @@ class YooKassaAdmin
                 ->setDefaultPaymentMode($settings['defaultPaymentMode'])
                 ->setDefaultShippingPaymentSubject($settings['defaultShippingPaymentSubject'])
                 ->setDefaultShippingPaymentMode($settings['defaultShippingPaymentMode'])
+                ->setMarkingEnabled($settings['isMarkingEnabled'])
                 ->setSecondReceiptEnabled($settings['isSecondReceiptEnabled'])
                 ->setSecondReceiptOrderStatus($settings['orderStatusReceipt'])
             );

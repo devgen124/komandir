@@ -1,28 +1,48 @@
 <?php
 /**
- * Plugin name: Woo Discount Rules
+ * Plugin name: Discount Rules for WooCommerce
  * Plugin URI: https://www.flycart.org
  * Description: Simple to complex discount rules for your WooCommerce store. Core package.
  * Author: Flycart
  * Author URI: https://www.flycart.org
- * Version: 2.6.0
+ * Version: 2.6.11
  * Slug: woo-discount-rules
  * Text Domain: woo-discount-rules
  * Domain Path: /i18n/languages/
  * Requires at least: 4.6.1
  * WC requires at least: 3.0
- * WC tested up to: 7.6
+ * WC tested up to: 10.0
+ * License: GPLv2 or later
+ * Requires Plugins: woocommerce
  */
 if (!defined('ABSPATH')) {
     exit;
 }
 
 /**
+ * To set plugin is compatible for WC Custom Order Table (HPOS) feature.
+ */
+add_action('before_woocommerce_init', function() {
+	if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+	}
+});
+
+
+/**
  * Current version of our app
  */
 if (!defined('WDR_VERSION')) {
-    define('WDR_VERSION', '2.6.0');
+    define('WDR_VERSION', '2.6.11');
 }
+
+/**
+ * Check discount rule v2 installed.
+ */
+if (class_exists('\WDR\Pro\Route')) {
+	return;
+}
+
 
 global $awdr_load_version;
 
@@ -161,8 +181,9 @@ if ($awdr_load_version == "v2") {
     register_deactivation_hook(__FILE__, function () {
         \Wdr\App\Helpers\Schedule::stopRebuildOnSaleIndex();
     });
-
+	//phpcs:ignore WordPress.Security.NonceVerification.Recommended
     if (isset($_GET['awdr_switch_plugin_to']) && in_array($_GET['awdr_switch_plugin_to'], array('v1', 'v2'))) {
+	    //phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if(is_admin() && $_GET['awdr_switch_plugin_to'] === "v2"){
             awdr_create_required_tables();
         }
@@ -190,12 +211,3 @@ if ($awdr_load_version == "v2") {
     }
     include_once(__DIR__ . "/v1/index.php");
 }
-
-/**
- * To set plugin is compatible for WC Custom Order Table (HPOS) feature.
- */
-add_action('before_woocommerce_init', function() {
-    if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
-    }
-});

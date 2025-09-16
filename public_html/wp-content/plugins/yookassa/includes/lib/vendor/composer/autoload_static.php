@@ -7,30 +7,30 @@ namespace Composer\Autoload;
 class ComposerStaticInitafdabb32fee35944c79b17f536ef7b64
 {
     public static $prefixLengthsPsr4 = array (
-        'Y' => 
+        'Y' =>
         array (
             'YooKassa\\' => 9,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
         ),
-        'C' => 
+        'C' =>
         array (
             'Cmssdk\\Metrics\\' => 15,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'YooKassa\\' => 
+        'YooKassa\\' =>
         array (
             0 => __DIR__ . '/..' . '/yoomoney/yookassa-sdk-php/lib',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Cmssdk\\Metrics\\' => 
+        'Cmssdk\\Metrics\\' =>
         array (
             0 => __DIR__ . '/..' . '/yoomoney/metrics/src',
         ),

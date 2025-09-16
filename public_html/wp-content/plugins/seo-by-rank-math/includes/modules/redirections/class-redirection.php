@@ -13,6 +13,7 @@ namespace RankMath\Redirections;
 use RankMath\Helper;
 use RankMath\Helpers\Url;
 use RankMath\Helpers\Param;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -158,7 +159,7 @@ class Redirection {
 
 	/**
 	 * Set item status.
-	 * 
+	 *
 	 * @param string $status Item status.
 	 */
 	public function set_status( $status ) {
@@ -224,7 +225,6 @@ class Redirection {
 				return true;
 			}
 		}
-		
 		return false;
 	}
 
@@ -357,8 +357,8 @@ class Redirection {
 			'https://www.' . $domain,
 			'www.' . $domain,
 		];
-		$url    = str_replace( $search, '', $url );
-		$url    = preg_replace( '/^' . preg_quote( $domain, '/' ) . '/s', '', $url );
+		$url      = str_replace( $search, '', $url );
+		$url      = preg_replace( '/^' . preg_quote( $domain, '/' ) . '/s', '', $url );
 
 		// Empty url.
 		// External domain.
@@ -417,7 +417,7 @@ class Redirection {
 		}
 
 		// Check for term.
-		$terms = $wpdb->get_results( $wpdb->prepare( "SELECT term_id FROM $wpdb->terms WHERE slug = %s", $slug ) );
+		$terms = DB_Helper::get_results( $wpdb->prepare( "SELECT term_id FROM $wpdb->terms WHERE slug = %s", $slug ) );
 		if ( $terms ) {
 			foreach ( $terms as $term ) {
 				$this->cache[] = [

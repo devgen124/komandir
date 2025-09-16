@@ -25,6 +25,18 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	public const PER_PAGE_USER_OPTION_KEY = 'woocommerce_status_log_items_per_page';
 
 	/**
+	 * The key for the option that stores the list of unique sources that exist in the log table.
+	 *
+	 * @const string
+	 */
+	public const SOURCE_CACHE_OPTION_KEY = 'woocommerce_status_log_db_sources';
+
+	/**
+	 * If the number of log entries is over this number, cache the query that gets the total count.
+	 */
+	private const ITEM_COUNT_CACHE_THRESHOLD = 100000;
+
+	/**
 	 * Initialize the log table list.
 	 */
 	public function __construct() {
@@ -43,40 +55,19 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	 * @global wpdb $wpdb
 	 */
 	public function level_dropdown() {
+		$labels = WC_Log_Levels::get_all_level_labels();
 
-		$levels = array(
-			array(
-				'value' => WC_Log_Levels::EMERGENCY,
-				'label' => __( 'Emergency', 'woocommerce' ),
-			),
-			array(
-				'value' => WC_Log_Levels::ALERT,
-				'label' => __( 'Alert', 'woocommerce' ),
-			),
-			array(
-				'value' => WC_Log_Levels::CRITICAL,
-				'label' => __( 'Critical', 'woocommerce' ),
-			),
-			array(
-				'value' => WC_Log_Levels::ERROR,
-				'label' => __( 'Error', 'woocommerce' ),
-			),
-			array(
-				'value' => WC_Log_Levels::WARNING,
-				'label' => __( 'Warning', 'woocommerce' ),
-			),
-			array(
-				'value' => WC_Log_Levels::NOTICE,
-				'label' => __( 'Notice', 'woocommerce' ),
-			),
-			array(
-				'value' => WC_Log_Levels::INFO,
-				'label' => __( 'Info', 'woocommerce' ),
-			),
-			array(
-				'value' => WC_Log_Levels::DEBUG,
-				'label' => __( 'Debug', 'woocommerce' ),
-			),
+		$levels = array_reduce(
+			array_keys( $labels ),
+			function( $carry, $item ) use ( $labels ) {
+				$carry[] = array(
+					'value' => $item,
+					'label' => $labels[ $item ],
+				);
+
+				return $carry;
+			},
+			array()
 		);
 
 		$selected_level = isset( $_REQUEST['level'] ) ? $_REQUEST['level'] : '';
@@ -181,16 +172,7 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	 */
 	public function column_level( $log ) {
 		$level_key = WC_Log_Levels::get_severity_level( $log['level'] );
-		$levels    = array(
-			'emergency' => __( 'Emergency', 'woocommerce' ),
-			'alert'     => __( 'Alert', 'woocommerce' ),
-			'critical'  => __( 'Critical', 'woocommerce' ),
-			'error'     => __( 'Error', 'woocommerce' ),
-			'warning'   => __( 'Warning', 'woocommerce' ),
-			'notice'    => __( 'Notice', 'woocommerce' ),
-			'info'      => __( 'Info', 'woocommerce' ),
-			'debug'     => __( 'Debug', 'woocommerce' ),
-		);
+		$levels    = WC_Log_Levels::get_all_level_labels();
 
 		if ( ! isset( $levels[ $level_key ] ) ) {
 			return '';
@@ -299,14 +281,7 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	 * @global wpdb $wpdb
 	 */
 	protected function source_dropdown() {
-		global $wpdb;
-
-		$sources = $wpdb->get_col(
-			"SELECT DISTINCT source
-			FROM {$wpdb->prefix}woocommerce_log
-			WHERE source != ''
-			ORDER BY source ASC"
-		);
+		$sources = $this->get_sources();
 
 		if ( ! empty( $sources ) ) {
 			$selected_source = isset( $_REQUEST['source'] ) ? $_REQUEST['source'] : '';
@@ -327,6 +302,39 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 				</select>
 			<?php
 		}
+	}
+
+	/**
+	 * Get the list of unique sources in the log table.
+	 *
+	 * The query in this method can be slow when there are a high number of log entries. The list of sources also
+	 * most likely doesn't change that often. So this indefinitely caches the list into the WP options table. The
+	 * cache will get cleared by the log handler if a new source is being added. See WC_Log_Handler_DB::handle().
+	 *
+	 * @return array
+	 */
+	protected function get_sources() {
+		global $wpdb;
+
+		$sources = get_option( self::SOURCE_CACHE_OPTION_KEY, null );
+		if ( is_array( $sources ) ) {
+			return $sources;
+		}
+
+		$sql = "
+			SELECT DISTINCT source
+			FROM {$wpdb->prefix}woocommerce_log
+			WHERE source != ''
+			ORDER BY source ASC
+		";
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Not necessary.
+		$sources = $wpdb->get_col( $sql );
+
+		// Autoload this option so that the log handler doesn't have to run another query when checking the source list.
+		update_option( self::SOURCE_CACHE_OPTION_KEY, $sources, true );
+
+		return $sources;
 	}
 
 	/**
@@ -355,10 +363,9 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 			{$where} {$order} {$limit} {$offset}
 		";
 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- The query parts are prepared in their respective methods.
 		$this->items = $wpdb->get_results( $query_items, ARRAY_A );
-
-		$query_count = "SELECT COUNT(log_id) FROM {$wpdb->prefix}woocommerce_log {$where}";
-		$total_items = $wpdb->get_var( $query_count );
+		$total_items = $this->get_total_items_count();
 
 		$this->set_pagination_args(
 			array(
@@ -367,6 +374,52 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 				'total_pages' => ceil( $total_items / $per_page ),
 			)
 		);
+	}
+
+	/**
+	 * Get the total count of log entries in the database.
+	 *
+	 * The query in this method can be slow if there are a large (100k+) rows in the database table, so this
+	 * uses a transient to cache the count for 10 minutes if the count is over that threshold.
+	 *
+	 * @return int
+	 */
+	protected function get_total_items_count() {
+		global $wpdb;
+
+		$where         = $this->get_items_query_where();
+		$version       = \WC_Cache_Helper::get_transient_version( 'logs-db' );
+		$transient_key = 'wc-log-total-items-count-' . md5( $where );
+		$transient     = get_transient( $transient_key );
+		if (
+			false !== $transient
+			&& isset( $transient['value'], $transient['version'] )
+			&& $transient['version'] === $version
+		) {
+			return $transient['value'];
+		}
+
+		$count_query = "
+			SELECT COUNT(*)
+			FROM {$wpdb->prefix}woocommerce_log
+			{$where}
+		";
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- The where clause is prepared in a separate method.
+		$count = intval( $wpdb->get_var( $count_query ) );
+
+		if ( $count > self::ITEM_COUNT_CACHE_THRESHOLD ) {
+			$transient = array(
+				'value'   => $count,
+				'version' => \WC_Cache_Helper::get_transient_version( 'logs-db', true ),
+			);
+
+			set_transient( $transient_key, $transient, 10 * MINUTE_IN_SECONDS );
+		} else {
+			delete_transient( $transient_key );
+		}
+
+		return $count;
 	}
 
 	/**
@@ -421,7 +474,7 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 		if ( ! empty( $_REQUEST['orderby'] ) && in_array( $_REQUEST['orderby'], $valid_orders ) ) {
 			$by = wc_clean( $_REQUEST['orderby'] );
 		} else {
-			$by = 'timestamp';
+			$by = 'log_id';
 		}
 		$by = esc_sql( $by );
 
@@ -431,7 +484,12 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 			$order = 'DESC';
 		}
 
-		return "ORDER BY {$by} {$order}, log_id {$order}";
+		$orderby = "ORDER BY {$by} {$order}";
+		if ( 'log_id' !== $by ) {
+			$orderby .= ", log_id {$order}";
+		}
+
+		return $orderby;
 	}
 
 	/**

@@ -127,6 +127,17 @@ class FiscalizationTest extends TestCase
         $this->assertEquals($data['tax_rates'], $sbbol->getTaxRates());
     }
 
+    /**
+     * @dataProvider dataProvider
+     * @param $data
+     * @return void
+     */
+    public function testSetAndGetMarkingEnabled($data)
+    {
+        $fiscalization = new Fiscalization();
+        $fiscalization->setMarkingEnabled($data['marking_enabled']);
+        $this->assertEquals($data['marking_enabled'], $fiscalization->getMarkingEnabled());
+    }
 
     /**
      * @dataProvider dataProvider
@@ -165,6 +176,7 @@ class FiscalizationTest extends TestCase
         $this->assertEquals($data['ffd'], $fiscalization->getFfd());
         $this->assertEquals($data['default_tax_rate'], $fiscalization->getDefaultTaxRate());
         $this->assertEquals($data['default_tax_system_code'], $fiscalization->getDefaultTaxSystemCode());
+        $this->assertEquals($data['marking_enabled'], $fiscalization->getMarkingEnabled());
         $this->assertEquals($data['second_receipt_enabled'], $fiscalization->getSecondReceiptEnabled());
 
         if (!empty($data['tax_rates'])) {
@@ -191,6 +203,7 @@ class FiscalizationTest extends TestCase
                         '1' => 'untaxed',
                         '2' => 'mixed',
                     ),
+                    'marking_enabled'=> true,
                     'second_receipt_enabled'=> true,
                     'second_receipt_order_status'=> 'wc-completed',
                 )
@@ -210,6 +223,7 @@ class FiscalizationTest extends TestCase
                         '1' => 'untaxed',
                         '2' => 'calculated',
                     ),
+                    'marking_enabled'=> false,
                     'second_receipt_enabled'=> true,
                     'second_receipt_order_status'=> 'wc-completed',
                 )
@@ -226,6 +240,7 @@ class FiscalizationTest extends TestCase
                     'default_shipping_payment_subject'=> 'service',
                     'default_shipping_payment_mode'=> 'full_payment',
                     'tax_rates' => false,
+                    'marking_enabled'=> true,
                     'second_receipt_enabled'=> true,
                     'second_receipt_order_status'=> 'wc-completed',
                 )

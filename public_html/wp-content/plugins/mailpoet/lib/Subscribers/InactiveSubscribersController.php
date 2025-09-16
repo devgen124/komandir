@@ -10,7 +10,8 @@ use MailPoet\Entities\ScheduledTaskSubscriberEntity;
 use MailPoet\Entities\SendingQueueEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoetVendor\Carbon\Carbon;
-use MailPoetVendor\Doctrine\DBAL\Connection;
+use MailPoetVendor\Doctrine\DBAL\ArrayParameterType;
+use MailPoetVendor\Doctrine\DBAL\ParameterType;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 
 class InactiveSubscribersController {
@@ -92,7 +93,8 @@ class InactiveSubscribersController {
     $endId = $startId + $batchSize;
     $lifetimeEmailsThreshold = self::LIFETIME_EMAILS_THRESHOLD;
     $inactiveSubscriberIdsTmpTable = 'inactive_subscriber_ids';
-    $connection->executeQuery("
+    $connection->executeQuery(
+      "
       CREATE TEMPORARY TABLE IF NOT EXISTS {$inactiveSubscriberIdsTmpTable}
       (UNIQUE subscriber_id (id), PRIMARY KEY (`id`))
       SELECT s.id FROM {$subscribersTable} as s
@@ -112,7 +114,8 @@ class InactiveSubscribersController {
         'startId' => $startId,
         'endId' => $endId,
         'unopenedEmailsThreshold' => $unopenedEmails,
-    ]);
+      ]
+    );
 
     $result = $connection->executeQuery("
       SELECT isi.id FROM {$inactiveSubscriberIdsTmpTable} isi
@@ -141,7 +144,7 @@ class InactiveSubscribersController {
     $connection->executeQuery("UPDATE {$subscribersTable} SET status = :statusInactive WHERE id IN (:idsToDeactivate)", [
       'statusInactive' => SubscriberEntity::STATUS_INACTIVE,
       'idsToDeactivate' => $idsToDeactivate,
-    ], ['idsToDeactivate' => Connection::PARAM_INT_ARRAY]);
+    ], ['idsToDeactivate' => ArrayParameterType::INTEGER]);
     return count($idsToDeactivate);
   }
 
@@ -166,12 +169,13 @@ class InactiveSubscribersController {
       'thresholdDate' => $thresholdDate,
       'statusInactive' => SubscriberEntity::STATUS_INACTIVE,
       'batchSize' => $batchSize,
-    ], ['batchSize' => \PDO::PARAM_INT])->fetchAllAssociative();
+    ], ['batchSize' => ParameterType::INTEGER])->fetchAllAssociative();
 
     $idsToActivate = array_map(
       function($id) {
         return (int)$id['id'];
-      }, $idsToActivate
+      },
+      $idsToActivate
     );
     if (!count($idsToActivate)) {
       return 0;
@@ -179,7 +183,7 @@ class InactiveSubscribersController {
     $connection->executeQuery("UPDATE {$subscribersTable} SET status = :statusSubscribed WHERE id IN (:idsToActivate)", [
       'statusSubscribed' => SubscriberEntity::STATUS_SUBSCRIBED,
       'idsToActivate' => $idsToActivate,
-    ], ['idsToActivate' => Connection::PARAM_INT_ARRAY]);
+    ], ['idsToActivate' => ArrayParameterType::INTEGER]);
     return count($idsToActivate);
   }
 }

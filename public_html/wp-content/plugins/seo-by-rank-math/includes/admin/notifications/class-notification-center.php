@@ -57,12 +57,12 @@ class Notification_Center {
 	 */
 	public function __construct( $storage_key = 'mythemeshop_notifications' ) {
 		$this->storage_key = $storage_key;
-		add_action( 'plugins_loaded', array( $this, 'get_from_storage' ), 5 );
-		add_action( 'all_admin_notices', array( $this, 'display' ) );
-		add_action( 'shutdown', array( $this, 'update_storage' ) );
-		add_action( 'admin_footer', array( $this, 'print_javascript' ) );
+		add_action( 'plugins_loaded', [ $this, 'get_from_storage' ], 5 );
+		add_action( 'all_admin_notices', [ $this, 'display' ] );
+		add_action( 'shutdown', [ $this, 'update_storage' ] );
+		add_action( 'admin_footer', [ $this, 'print_javascript' ] );
 
-		add_action( 'wp_ajax_wp_helpers_notice_dismissible', array( $this, 'notice_dismissible' ) );
+		add_action( 'wp_ajax_wp_helpers_notice_dismissible', [ $this, 'notice_dismissible' ] );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class Notification_Center {
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @return array Notification[] Notifications
+	 * @return void
 	 */
 	public function get_from_storage() {
 		if ( $this->retrieved ) {
@@ -115,7 +115,7 @@ class Notification_Center {
 
 		foreach ( $notifications as $notification ) {
 			if ( $notification->can_display() && ! in_array( (string) $notification, $this->displayed_notifications, true ) ) {
-				echo $notification;
+				echo wp_kses_post( $notification );
 				$this->displayed_notifications[] = (string) $notification;
 			}
 		}
@@ -193,7 +193,8 @@ class Notification_Center {
 		/**
 		 * Filter: 'wp_helpers_notification_dismissed' - Allows developer to perform action after dismissed.
 		 *
-		 * @param Notification[] $notifications
+		 * @param string  $notification_id
+		 * @param Notification $notifications
 		 */
 		do_action( 'wp_helpers_notification_dismissed', $notification_id, $notification );
 	}

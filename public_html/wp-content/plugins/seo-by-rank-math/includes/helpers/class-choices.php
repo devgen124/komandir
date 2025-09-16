@@ -12,6 +12,7 @@ namespace RankMath\Helpers;
 
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
+use RankMath\Helpers\DB as DB_Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -84,23 +85,16 @@ trait Choices {
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @param  string $current Currently saved separator if any.
 	 * @return array
 	 */
-	public static function choices_separator( $current = '' ) {
-		$defaults = [ '-', '&ndash;', '&mdash;', '&raquo;', '|', '&bull;' ];
-		if ( ! $current || in_array( $current, $defaults, true ) ) {
-			$current = '';
-		}
-
+	public static function choices_separator() {
 		return [
 			'-'       => '-',
-			'&ndash;' => '&ndash;',
-			'&mdash;' => '&mdash;',
-			'&raquo;' => '&raquo;',
+			'&ndash;' => '–',
+			'&mdash;' => '—',
+			'&raquo;' => '»',
 			'|'       => '|',
-			'&bull;'  => '&bull;',
-			$current  => '<span class="custom-sep" contenteditable>' . $current . '</span>',
+			'&bull;'  => '•',
 		];
 	}
 
@@ -109,15 +103,17 @@ trait Choices {
 	 *
 	 * @codeCoverageIgnore
 	 *
+	 * @param boolean $force_refresh Whether to force a fresh call to get_post_types() even if the value is cached. Default false.
+	 *
 	 * @return array
 	 */
-	public static function choices_post_types() {
+	public static function choices_post_types( $force_refresh = false ) {
 		static $choices_post_types;
 
-		if ( ! isset( $choices_post_types ) ) {
+		if ( ! isset( $choices_post_types ) || $force_refresh ) {
 			$choices_post_types = Helper::get_accessible_post_types();
 			$choices_post_types = \array_map(
-				function( $post_type ) {
+				function ( $post_type ) {
 					$object = get_post_type_object( $post_type );
 					return $object->label;
 				},
@@ -583,7 +579,7 @@ trait Choices {
 		);
 
 		$meta_query = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
-		$posts = $wpdb->get_col( "SELECT {$wpdb->posts}.ID FROM $wpdb->posts {$meta_query['join']} WHERE 1=1 {$meta_query['where']} AND ({$wpdb->posts}.post_status = 'publish')" ); // phpcs:ignore
+		$posts      = DB_Helper::get_col( "SELECT {$wpdb->posts}.ID FROM $wpdb->posts {$meta_query['join']} WHERE 1=1 {$meta_query['where']} AND ({$wpdb->posts}.post_status = 'publish')" );
 
 		if ( 0 === count( $posts ) ) {
 			update_option( 'rank_math_review_posts_converted', true );
@@ -613,6 +609,26 @@ trait Choices {
 			'baggage tracking'    => esc_html__( 'Baggage Tracking', 'rank-math' ),
 			'roadside assistance' => esc_html__( 'Roadside Assistance', 'rank-math' ),
 			'package tracking'    => esc_html__( 'Package Tracking', 'rank-math' ),
+		];
+	}
+
+	/**
+	 * Additional Organization details for schema.
+	 *
+	 * @return array
+	 */
+	public static function choices_additional_organization_info() {
+		return [
+			'legalName'            => esc_html__( 'Legal Name', 'rank-math' ),
+			'foundingDate'         => esc_html__( 'Founding Date', 'rank-math' ),
+			'iso6523Code'          => esc_html__( 'ISO 6523 Code', 'rank-math' ),
+			'duns'                 => esc_html__( 'DUNS', 'rank-math' ),
+			'leiCode'              => esc_html__( 'LEI Code', 'rank-math' ),
+			'naics'                => esc_html__( 'NAICS Code', 'rank-math' ),
+			'globalLocationNumber' => esc_html__( 'Global Location Number', 'rank-math' ),
+			'vatID'                => esc_html__( 'VAT ID', 'rank-math' ),
+			'taxID'                => esc_html__( 'Tax ID', 'rank-math' ),
+			'numberOfEmployees'    => esc_html__( 'Number of Employees', 'rank-math' ),
 		];
 	}
 

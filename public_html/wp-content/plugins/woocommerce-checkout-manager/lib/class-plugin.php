@@ -20,16 +20,16 @@ final class Plugin {
 	private function __construct() {
 
 		/**
-		 * Load plugin textdomain.
+		 * Load plugin textdomain
 		 */
-		load_plugin_textdomain( 'woocommerce-checkout-manager', false, WOOCCM_PLUGIN_DIR . '/languages/' );
+		add_action( 'init', array( $this, 'load_textdomain' ) );
 
 		/**
 		 * Load plugin on woocommerce_init
 		 */
 		add_action(
 			'woocommerce_init',
-			function() {
+			function () {
 
 			$this->init_session();
 
@@ -42,6 +42,7 @@ final class Plugin {
 			Controller\Advanced::instance();
 			Controller\Premium::instance();
 			Controller\Suggestions::instance();
+			Controller\My_Account::instance();
 
 			/**
 			 * Load checkout fields models
@@ -55,7 +56,6 @@ final class Plugin {
 			 */
 			add_action( 'admin_footer', array( __CLASS__, 'add_premium_css' ) );
 			do_action( 'wooccm_init' );
-
 			}
 		);
 
@@ -63,6 +63,10 @@ final class Plugin {
 		 * Clear session on checkout order processed
 		 */
 		add_action( 'woocommerce_checkout_order_processed', array( $this, 'clear_session' ), 150 );
+	}
+
+	public function load_textdomain() {
+		load_plugin_textdomain( 'woocommerce-checkout-manager', false, WOOCCM_PLUGIN_DIR . '/languages/' );
 	}
 
 	public function register_scripts() {
@@ -118,7 +122,6 @@ final class Plugin {
 		);
 
 		wp_register_script( 'farbtastic', admin_url( 'js/farbtastic.js' ), array( 'jquery' ), $wp_version );
-
 	}
 
 	public function clear_session() {

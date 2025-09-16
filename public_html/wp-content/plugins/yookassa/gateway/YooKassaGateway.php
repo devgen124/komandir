@@ -367,8 +367,8 @@ class YooKassaGateway extends WC_Payment_Gateway
                 YooKassaHandler::checkConditionForSelfEmployed($order);
             } catch (Exception $e) {
                 YooKassaLogger::warning(sprintf(__('Не удалось создать платеж. Для заказа %1$s', 'yookassa'), $order_id) . ' ' . strip_tags($e->getMessage()));
-                wc_add_notice($e->getMessage(), 'error');
-                return array('result' => 'fail', 'redirect' => '');
+                YooKassaNotice::front_notice_error($e->getMessage());
+                return array('result' => 'failure', 'redirect' => '');
             }
         }
 
@@ -391,10 +391,9 @@ class YooKassaGateway extends WC_Payment_Gateway
         $result = $this->createPayment($order);
         if ($result) {
             if (is_wp_error($result)) {
-                wc_add_notice(__('Платеж не прошел. Попробуйте еще или выберите другой способ оплаты',
-                    'yookassa'), 'error');
+                YooKassaNotice::front_notice_error(__('Платеж не прошел. Попробуйте еще или выберите другой способ оплаты', 'yookassa'));
 
-                return array('result' => 'fail', 'redirect' => $order->get_view_order_url());
+                return array('result' => 'failure', 'redirect' => $order->get_view_order_url());
             } else {
                 $order->set_transaction_id($result->getId());
                 $this->savePaymentData($result, $order);
@@ -402,7 +401,8 @@ class YooKassaGateway extends WC_Payment_Gateway
                 if ($this->subscribe) {
                     $subscriptions = wcs_get_subscriptions_for_order($order);
                     foreach ($subscriptions as $subscription) {
-                        update_post_meta( $subscription->get_id(), '_yookassa_saved_payment_id', $result->getId());
+                        $subscription->update_meta_data('_yookassa_saved_payment_id', $result->getId());
+                        $subscription->save();
                         YooKassaLogger::info(
                             'Subscription id = '. $subscription->get_id() . 'succeeded created. Token = '. $result->getId()
                         );
@@ -411,7 +411,7 @@ class YooKassaGateway extends WC_Payment_Gateway
 
                 if ($result->status == PaymentStatus::PENDING) {
                     $order->update_status('wc-pending');
-                    if (get_option('yookassa_force_clear_cart') == '1') {
+                    if (get_option('yookassa_force_clear_cart') == '1' && !empty($woocommerce->cart)) {
                         $woocommerce->cart->empty_cart();
                     }
                     if ($result->confirmation->type == ConfirmationType::EXTERNAL) {
@@ -434,20 +434,18 @@ class YooKassaGateway extends WC_Payment_Gateway
                 } else {
                     YooKassaLogger::warning(sprintf(__('Не удалось создать платеж. Для заказа %1$s',
                         'yookassa'), $order_id));
-                    wc_add_notice(__('Платеж не прошел. Попробуйте еще или выберите другой способ оплаты',
-                        'yookassa'), 'error');
+                    YooKassaNotice::front_notice_error(__('Платеж не прошел. Попробуйте еще или выберите другой способ оплаты', 'yookassa'));
                     $order->update_status('wc-cancelled');
 
-                    return array('result' => 'fail', 'redirect' => '');
+                    return array('result' => 'failure', 'redirect' => '');
                 }
             }
         } else {
             YooKassaLogger::warning(sprintf(__('Не удалось создать платеж. Для заказа %1$s', 'yookassa'),
                 $order_id));
-            wc_add_notice(__('Платеж не прошел. Попробуйте еще или выберите другой способ оплаты', 'yookassa'),
-                'error');
+            YooKassaNotice::front_notice_error(__('Платеж не прошел. Попробуйте еще или выберите другой способ оплаты', 'yookassa'));
 
-            return array('result' => 'fail', 'redirect' => '');
+            return array('result' => 'failure', 'redirect' => '');
         }
     }
 

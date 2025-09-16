@@ -33,7 +33,8 @@
 							<input class="check" type="checkbox" <# if(index==0) { #> disabled="disabled" <# } #>/>
 						</td>
 						<td>
-							<input type="text" class="label" name="options[{{index}}][label]" value="{{option.label}}">
+							<# let decodedOptionLabel = _.decodeString(option.label)#>
+							<input type="text" class="label" name="options[{{index}}][label]" value="{{decodedOptionLabel}}">
 						</td>
 						<td class="wooccm-premium-field">
 							<input type="number" class="add-price" name="options[{{index}}][add_price_total]" step="0.01" value="{{option.add_price_total}}" min="0">

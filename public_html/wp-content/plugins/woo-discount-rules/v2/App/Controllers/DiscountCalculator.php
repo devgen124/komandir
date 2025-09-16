@@ -110,22 +110,12 @@ class DiscountCalculator extends Base
                                         continue;
                                     } else {
                                         $discount_price = $rule->calculator($discount_type, $product_price, $range->value);
-                                        if( $calculate_discount_from != 'sale_price' && Woocommerce::productTypeIs($product, array('variable')) && $discount_type == 'flat'){
-                                            $discount_price = $this->mayHaveTax($product, $discount_price);
-                                        }
                                         $discounted_price = floatval($product_price) - floatval($discount_price);
                                         if ($discounted_price < 0) {
                                             $discounted_price = 0;
                                         }
 
-                                        if($calculate_discount_from != 'sale_price' && Woocommerce::productTypeIs($product, array('variable'))) {
-                                            /*Process lowest regular price of variant*/
-                                            if($discount_type == 'fixed_price'){
-                                                $discounted_price = $this->mayHaveTax($product, $discounted_price);
-                                            }
-                                        }else{
-                                            $discounted_price = $this->mayHaveTax($product, $discounted_price);
-                                        }
+                                        $discounted_price = $this->mayHaveTax($product, $discounted_price);
                                         $rule_title = isset($range->label) && !empty($range->label) ? $range->label : $rule->getTitle();
                                         $discount_value = $range->value;
                                         $discount_method = 'bulk';
@@ -193,7 +183,7 @@ class DiscountCalculator extends Base
             'discount_value' => $discount_value,
             'discount_price' => $discount_price,
             'discounted_price' => $discounted_price,
-            'rule_title' => __($rule_title, 'woo-discount-rules')
+            'rule_title' => __($rule_title, 'woo-discount-rules') // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
         );
     }
 
@@ -709,7 +699,7 @@ class DiscountCalculator extends Base
                                                 $price_as_cart_discount[$rule_id][$product_id] = array(
                                                     'discount_type' => 'wdr_bulk_discount',
                                                     'apply_type' => isset($product_bulk_discount['discount_type']) ? $product_bulk_discount['discount_type'] : '',
-                                                    'discount_label' => wp_unslash($bulk_discount->cart_label),
+                                                    'discount_label' => apply_filters('advanced_woo_discount_customize_bulk_discount_label', wp_unslash($bulk_discount->cart_label),$discount_type, $bulk_discount,$quantity),
                                                     'discount_value' => isset($product_bulk_discount['discount_value']) ? $product_bulk_discount['discount_value'] : 0,
                                                     'discounted_price' => $cart_discounted_price,
                                                     'rule_name' => $rule->getTitle(),
@@ -1045,6 +1035,9 @@ class DiscountCalculator extends Base
                 if (!$rule->isEnabled()) {
                     continue;
                 }
+	            if (apply_filters('wdr_is_stop_sale_price_strickout',false, $rule, $product, $sale_badge)) {
+		            continue;
+	            }
                 $chosen_languages = $rule->getLanguages();
                 if (!empty($chosen_languages)) {
                     $current_language = $language_helper_object::getCurrentLanguage();

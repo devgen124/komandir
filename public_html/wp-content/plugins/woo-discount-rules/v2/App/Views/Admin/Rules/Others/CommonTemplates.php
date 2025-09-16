@@ -39,7 +39,7 @@ if (!defined('ABSPATH')) {
                             ?>
                              <?php if ($key == 'products') {
                                 echo 'selected';
-                            } ?>><?php _e($value['label'], 'woo-discount-rules'); ?></option><?php
+                            } ?>><?php esc_html_e($value['label'], 'woo-discount-rules');//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText  ?></option><?php
                         } ?>
                         </optgroup><?php
                     }
@@ -50,7 +50,31 @@ if (!defined('ABSPATH')) {
     <?php $wdr_product_filter_templates = $base->getFilterTemplatesContent();
     if (isset($wdr_product_filter_templates) && !empty($wdr_product_filter_templates)) {
         foreach ($wdr_product_filter_templates as $wdr_filter_template) {
-            echo $wdr_filter_template;
+            echo wp_kses($wdr_filter_template,[
+               'div' => [
+                    'class' => [],
+                    'id' => [],
+                ],
+                'span' => [
+                    'class' => [],
+                ],
+                'select' => [
+                    'name' => [],
+                    'class' => [],
+                    'multiple' => [],
+                    'data-placeholder' => [],
+                    'data-action' => [],
+                    'tabindex' => [],
+                    'style' => [],
+                    'data-list' => [],
+                    'data-field' => [],
+                    'data-taxonomy' => [],
+                ],
+                'option' => [
+                    'value' => [],
+                    'selected' => [],
+                ],
+            ]);
         }
     }
     $wdr_product_conditions = $base->getProductConditionsTypes();
@@ -78,19 +102,64 @@ if (!defined('ABSPATH')) {
                             ?>
                              <?php if ($key == 'products') {
                                 echo 'selected';
-                            } ?>><?php _e($value['label'], 'woo-discount-rules'); ?></option><?php
+                            } ?>><?php esc_html_e($value['label'], 'woo-discount-rules');//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?></option><?php
                         } ?>
                         </optgroup><?php
                     }
                 } ?>
             </select>
-            <span class="wdr_desc_text awdr-clear-both"><?php _e('Condition Type', 'woo-discount-rules'); ?></span>
+            <span class="wdr_desc_text awdr-clear-both"><?php esc_html_e('Condition Type', 'woo-discount-rules'); ?></span>
         </div>
     </div>
     <?php $wdr_product_conditions_templates = $base->getConditionsTemplatesContent();
     if (isset($wdr_product_conditions_templates) && !empty($wdr_product_conditions_templates)) {
         foreach ($wdr_product_conditions_templates as $wdr_conditions_template) {
-            echo $wdr_conditions_template;
+            echo wp_kses($wdr_conditions_template,[
+		        'div' => [
+			        'class' => [],
+			        'id' => [],
+                    'style' => [],
+		        ],
+		        'span' => [
+			        'class' => [],
+			        'style' => [],
+		        ],
+		        'select' => [
+			        'name' => [],
+			        'class' => [],
+                    'id' => [],
+                    'aria-hidden'=>[],
+			        'multiple' => [],
+			        'data-placeholder' => [],
+			        'data-action' => [],
+			        'tabindex' => [],
+			        'style' => [],
+			        'data-list' => [],
+			        'data-field' => [],
+			        'data-taxonomy' => [],
+		        ],
+		        'option' => [
+			        'style' => [],
+			        'value' => [],
+			        'selected' => [],
+		        ],
+                'input' => [
+                    'name' => [],
+                    'type' => [],
+                    'class' => [],
+                    'value' => [],
+                    'placeholder' => [],
+                    'min' => [],
+                    'max' => [],
+                    'autocomplete' => [],
+                    'data-class' => [],
+                    'data-field' => [],
+                    'style' => [],
+                ],
+                'optgroup' => [
+                    'label' => []
+                ]
+	        ]);
         }
     }
     $render_saved_condition = false;

@@ -23,7 +23,7 @@ abstract class Base extends BaseController
      * ajax call
      */
     public function ajax() {
-        $method = isset( $_REQUEST['method'] ) ? $_REQUEST['method'] : '';
+        $method = isset( $_REQUEST['method'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['method'] ) ) : ''; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $method = "ajax_{$method}";
 
         if ( method_exists( $this, $method ) ) {

@@ -468,6 +468,20 @@ class Woocommerce
         return self::$custom_taxonomies;
     }
 
+	public static function changeCustomTaxonomyLabel(array $custom_taxonomies): array {
+		foreach ($custom_taxonomies as $customTaxonomy => $taxonomy) {
+			if (!is_object($taxonomy) && !($taxonomy instanceof WP_Taxonomy)) {
+				continue;
+			}
+			if ($customTaxonomy === 'pwb-brand' && isset($taxonomy->labels->menu_name)) {
+				$custom_taxonomies[$customTaxonomy]->labels->menu_name = 'Perfect Brands';
+			} elseif ($customTaxonomy === 'product_brand' && isset($taxonomy->labels->menu_name)) {
+				$custom_taxonomies[$customTaxonomy]->labels->menu_name = 'Woocommerce Brands';
+			}
+		}
+		return $custom_taxonomies;
+	}
+
     /**
      * Format the sale price
      * @param $price1
@@ -605,7 +619,7 @@ class Woocommerce
      */
     static function get_shipping_packages()
     {
-        if (function_exists('WC')) {
+        if (apply_filters('advanced_woo_discount_rules_recalculate_shipping_package',true) && function_exists('WC')) {
             if(isset(WC()->cart) && WC()->cart != null) {
                 if (is_object(WC()->cart) && method_exists(WC()->cart, 'get_shipping_packages')) {
                     return WC()->cart->get_shipping_packages();
@@ -871,7 +885,7 @@ class Woocommerce
                     }, 10, 3);
                 }
                 $fee = apply_filters('advanced_discount_rules_discount_fee_amount', $fee, $name, $cart);
-                $name = __($name, 'woo-discount-rules');
+                $name = __($name, 'woo-discount-rules');//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
                 return $cart->add_fee($name, $fee);
             }
         }
@@ -1782,7 +1796,7 @@ class Woocommerce
         if (function_exists('wp_strip_all_tags')) {
             $html = wp_strip_all_tags($html);
         }else{
-            $html = strip_tags($html);
+            $html = strip_tags($html);//phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags
         }
         return $html;
     }
@@ -1931,6 +1945,9 @@ class Woocommerce
      * @return bool
      */
     static function checkProductIsPurchasable($product) {
+	    if(!apply_filters('wlr_is_purchasable_need_to_check',true)){
+		    return true;
+	    }
         if(is_object($product) && method_exists($product, 'is_purchasable')) {
             return $product->is_purchasable();
         }

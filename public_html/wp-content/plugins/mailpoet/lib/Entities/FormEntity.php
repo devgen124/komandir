@@ -46,6 +46,14 @@ class FormEntity {
   const COLUMNS_BLOCK_TYPE = 'columns';
   const COLUMN_BLOCK_TYPE = 'column';
 
+  public const FORM_DISPLAY_TYPES = [
+    self::DISPLAY_TYPE_BELOW_POST,
+    self::DISPLAY_TYPE_FIXED_BAR,
+    self::DISPLAY_TYPE_POPUP,
+    self::DISPLAY_TYPE_SLIDE_IN,
+    self::DISPLAY_TYPE_OTHERS,
+  ];
+
   public const FORM_FIELD_TYPES = [
     self::CHECKBOX_BLOCK_TYPE,
     self::RADIO_BLOCK_TYPE,
@@ -177,7 +185,7 @@ class FormEntity {
     ];
   }
 
-  public function getBlocksByTypes(array $types, array $blocks = null): array {
+  public function getBlocksByTypes(array $types, ?array $blocks = null): array {
     $found = [];
     if ($blocks === null) {
       $blocks = $this->getBody() ?? [];
@@ -199,7 +207,8 @@ class FormEntity {
     foreach ($listSelectionBlocks as $listSelectionBlock) {
       $listSelection = array_unique(
         array_merge(
-          $listSelection, array_column($listSelectionBlock['params']['values'] ?? [], 'id')
+          $listSelection,
+          array_column($listSelectionBlock['params']['values'] ?? [], 'id')
         )
       );
     }

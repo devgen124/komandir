@@ -18,7 +18,6 @@ class Upload {
 		add_action( 'wp_ajax_wooccm_checkout_attachment_upload', array( $this, 'ajax_checkout_attachment_upload' ) );
 		add_action( 'wp_ajax_nopriv_wooccm_checkout_attachment_upload', array( $this, 'ajax_checkout_attachment_upload' ) );
 		add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'update_attachment_ids' ), 99 );
-		// }
 	}
 
 	public static function instance() {
@@ -142,15 +141,14 @@ class Upload {
 	}
 
 	public function ajax_checkout_attachment_upload() {
-
 		if ( check_admin_referer( 'wooccm_upload', 'nonce' ) && isset( $_FILES['wooccm_checkout_attachment_upload'] ) ) {
 
-			// It can not be wp_unslash becouse it has images paths
+			// It cannot be wp_unslash becouse it has images paths
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$files = wc_clean( $_FILES['wooccm_checkout_attachment_upload'] );
 
 			if ( empty( $files ) ) {
-				wc_add_notice( esc_html__( 'No uploads were recognised. Files were not uploaded.', 'woocommerce-checkout-manager' ), 'error' );
+				wc_add_notice( esc_html__( 'No uploads were recognized. Files were not uploaded.', 'woocommerce-checkout-manager' ), 'error' );
 				wp_send_json_error();
 			}
 
@@ -159,7 +157,7 @@ class Upload {
 			if ( count( $attachment_ids ) ) {
 				wp_send_json_success( $attachment_ids );
 			}
-			wc_add_notice( esc_html__( 'Unknow error.', 'woocommerce-checkout-manager' ), 'error' );
+			wc_add_notice( esc_html__( 'Unknown error.', 'woocommerce-checkout-manager' ), 'error' );
 			wp_send_json_error();
 		}
 	}

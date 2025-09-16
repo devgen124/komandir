@@ -99,6 +99,10 @@ class DynamicSegments {
    */
   public function render() {
     $data = [];
+    $data['dynamic_segment_count'] = $this->segmentsRepository->countBy([
+      'deletedAt' => null,
+      'type' => SegmentEntity::TYPE_DYNAMIC,
+    ]);
     $data['items_per_page'] = $this->listingPageLimit->getLimitPerPage('segments');
 
     $customFields = $this->customFieldsRepository->findBy([], ['name' => 'asc']);
@@ -129,7 +133,42 @@ class DynamicSegments {
       ];
     }
 
+    $data['product_attributes'] = [];
+    if ($this->woocommerceHelper->isWooCommerceActive()) {
+      $productAttributes = $this->woocommerceHelper->wcGetAttributeTaxonomies();
+
+      foreach ($productAttributes as $attribute) {
+        $taxonomy = 'pa_' . $attribute->attribute_name;// phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+        $attributeTerms = $this->wp->getTerms(
+          [
+            'taxonomy' => $taxonomy,
+            'hide_empty' => false,
+          ]
+        );
+
+        if ((!$attributeTerms instanceof \WP_Error) && !isset($attributeTerms['errors'])) {
+          $data['product_attributes'][$taxonomy] = [ // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+            'id' => $attribute->attribute_id, // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+            'label' => $attribute->attribute_label, // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+            'terms' => $attributeTerms,
+            'taxonomy' => $taxonomy,
+          ];
+        }
+      }
+
+      // Fetch local attributes used for product variations
+      $data['local_product_attributes'] = [];
+      $localAttributes = $this->getLocalAttributesUsedInProductVariations();
+      foreach ($localAttributes as $localAttribute => $values) {
+        $data['local_product_attributes'][$localAttribute] = [
+          'name' => $localAttribute,
+          'values' => $values,
+        ];
+      }
+    }
+
     $data['product_categories'] = $this->wpPostListLoader->getWooCommerceCategories();
+    $data['product_tags'] = $this->wpPostListLoader->getWooCommerceTags();
 
     $data['products'] = $this->wpPostListLoader->getProducts();
     $data['membership_plans'] = $this->wpPostListLoader->getMembershipPlans();
@@ -148,7 +187,7 @@ class DynamicSegments {
       DynamicSegmentFilterData::TYPE_WOOCOMMERCE_SUBSCRIPTION
     );
     $wooCurrencySymbol = $this->woocommerceHelper->isWooCommerceActive() ? $this->woocommerceHelper->getWoocommerceCurrencySymbol() : '';
-    $data['woocommerce_currency_symbol'] = html_entity_decode($wooCurrencySymbol);
+    $data['woocommerce_currency_symbol'] = html_entity_decode($wooCurrencySymbol, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401);
     $data['signup_forms'] = array_map(function(FormEntity $form) {
       return [
         'id' => $form->getId(),
@@ -181,6 +220,34 @@ class DynamicSegments {
 
     $this->assetsController->setupDynamicSegmentsDependencies();
     $this->pageRenderer->displayPage('segments/dynamic.html', $data);
+  }
+
+  private function getLocalAttributesUsedInProductVariations(): array {
+    $attributes = [];
+
+    if (!$this->woocommerceHelper->isWooCommerceActive()) {
+      return $attributes;
+    }
+    global $wpdb;
+
+    $results = $wpdb->get_results($wpdb->prepare("
+      SELECT DISTINCT pm.meta_key, pm.meta_value
+      FROM %i pm
+      INNER JOIN %i p ON pm.post_id = p.ID
+      WHERE pm.meta_key LIKE %s
+      AND p.post_type = 'product_variation'
+      GROUP BY pm.meta_key, pm.meta_value
+    ", $wpdb->postmeta, $wpdb->posts, 'attribute_%'), ARRAY_A);
+
+    foreach ($results as $result) {
+      $attribute = substr($result['meta_key'], 10);
+      if (!isset($attributes[$attribute])) {
+        $attributes[$attribute] = [];
+      }
+      $attributes[$attribute][] = $result['meta_value'];
+    }
+
+    return $attributes;
   }
 
   private function getNewslettersList(): array {

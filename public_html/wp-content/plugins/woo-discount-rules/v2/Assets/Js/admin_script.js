@@ -1187,6 +1187,15 @@ jQuery(document).ready(function ($) {
                         } else {
                             $(element).find('.select2-selection').css("border", "1px solid #7e8993");
                         }
+                    } else if (bxgy_type == 'bxgy_collection') {
+                        let collections = $(element).find('.bxgy-collection-selector').val();
+                        if (collections.length == 0) {
+                            discount_array.push("fails");
+                            $(element).find('.select2-selection').css("border", "1px solid red");
+                            $(element).find('.select2-selection').focus();
+                        } else {
+                            $(element).find('.select2-selection').css("border", "1px solid #7e8993");
+                        }
                     } else if (bxgy_type == '0' || !bxgy_type) {
                         discount_array.push("fails");
                         $('.select_bxgy_type').css("border", "1px solid red");
@@ -1523,6 +1532,42 @@ jQuery(document).ready(function ($) {
                         } else {
                             $(element).find('.wdr-from-time').css("border", "1px solid #7e8993");
                             $(element).find('.wdr-to-time').css("border", "1px solid #7e8993");
+                        }
+                        break;
+                    case 'wdr_cart_item_pwb-brand':
+                        let perfect_brands = $(element).find('.wdr-product-tax-selector select').val();
+                        let perfect_category_quantity = $(element).find('.wdr-product_filter_qty input').val();
+                        if (perfect_brands == '') {
+                            condition_array.push("fails");
+                            $(element).find('.wdr-product-tax-selector span.select2-selection').css("border", "1px solid red");
+                            $(element).find('.wdr-product-tax-selector select').select2('focus');
+                        } else {
+                            $(element).find('.wdr-product-tax-selector span.select2-selection').css("border", "1px solid #7e8993");
+                        }
+                        if (perfect_category_quantity == '' || perfect_category_quantity <= 0) {
+                            condition_array.push("fails");
+                            $(element).find('.wdr-product_filter_qty input').css("border", "1px solid red");
+                            $(element).find('.wdr-product_filter_qty input').focus();
+                        } else {
+                            $(element).find('.wdr-product_filter_qty input').css("border", "1px solid #7e8993");
+                        }
+                        break;
+                    case 'wdr_cart_item_product_brand':
+                        let woo_brands = $(element).find('.wdr-product-tax-selector select').val();
+                        let woo_category_quantity = $(element).find('.wdr-product_filter_qty input').val();
+                        if (woo_brands == '') {
+                            condition_array.push("fails");
+                            $(element).find('.wdr-product-tax-selector span.select2-selection').css("border", "1px solid red");
+                            $(element).find('.wdr-product-tax-selector select').select2('focus');
+                        } else {
+                            $(element).find('.wdr-product-tax-selector span.select2-selection').css("border", "1px solid #7e8993");
+                        }
+                        if (woo_category_quantity == '' || woo_category_quantity <= 0) {
+                            condition_array.push("fails");
+                            $(element).find('.wdr-product_filter_qty input').css("border", "1px solid red");
+                            $(element).find('.wdr-product_filter_qty input').focus();
+                        } else {
+                            $(element).find('.wdr-product_filter_qty input').css("border", "1px solid #7e8993");
                         }
                         break;
                     case 'purchase_last_order':
@@ -1963,7 +2008,8 @@ jQuery(document).ready(function ($) {
     $(document).on('click', '#awdr_re_order', function (e) {
         e.preventDefault();
         var params = new URLSearchParams(window.location.search).get('re_order');
-        if (params == null){
+        var default_sort = $('#page_sort').val();
+        if (params == 0 && default_sort == 0 || params == null && default_sort == 0){
             redirectParams({re_order: 1});
         } else {
             redirectParams({re_order: 0});
@@ -1984,7 +2030,7 @@ jQuery(document).ready(function ($) {
      */
     function redirectParams(args = {}){
         var params = new URLSearchParams(window.location.search);
-        ['re_order','name','page_no','limit'].forEach(function (key){
+        ['name','page_no','limit'].forEach(function (key){
             if (key in args) {
                 if (!args[key]) {
                     delete args[key];
@@ -2241,7 +2287,8 @@ jQuery(document).ready(function ($) {
 
     function sortableRuleTable(){
         var sort = new URLSearchParams(window.location.search).get('re_order');
-        if (sort == 1){
+        var default_sort = $('#page_sort').val();
+        if (sort == 1 || default_sort == 1){
             desktopDrogAndDrop();
             $( "#sortable" ).sortable("enable");
             $(".dashicons-menu").css({'color':'black'});

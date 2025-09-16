@@ -154,25 +154,25 @@ class Helper
      */
     public static function ruleConditionDescription()
     {
-        return $content = "<p>" . __('Include additional conditions (if necessary)', 'woo-discount-rules') . "</p>
-        <b>" . __('Popular conditions:', 'woo-discount-rules') . "</b>
+        return "<p>" . esc_html__('Include additional conditions (if necessary)', 'woo-discount-rules') . "</p>
+        <b>" . esc_html__('Popular conditions:', 'woo-discount-rules') . "</b>
         <span style='width: 100%; display: flex;'>
             <span style='width: 45%; padding-right: 5px;'>
                 <ul  class='awdr-bullet-style'>
-                    <li ><a href='https://docs.flycart.org/en/articles/3977542-subtotal-based-free-product-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=subtotal_documentation' target='_blank'>" . __('Subtotal', 'woo-discount-rules') . "</a></li>
-                    <li ><a href='https://docs.flycart.org/en/articles/4203313-user-role-based-discount-rules-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=user_role_documentation' target='_blank'>" . __('User role', 'woo-discount-rules') . "</a></li>
-                    <li >" . __('Days & Time', 'woo-discount-rules') . "</li>
-                    <li ><a href='https://docs.flycart.org/en/articles/4206683-how-to-provide-first-order-discount-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=purchase_history' target='_blank'>" . __('Purchase History', 'woo-discount-rules') . "</a></li>
-                    <li ><a href='https://docs.flycart.org/en/articles/5207088-discount-based-on-the-payment-method?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=payment_menthod' target='_blank'>" . __('Payment Method', 'woo-discount-rules') . "</a></li>
+                    <li ><a href='https://docs.flycart.org/en/articles/3977542-subtotal-based-free-product?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=subtotal_documentation' target='_blank'>" . esc_html__('Subtotal', 'woo-discount-rules') . "</a></li>
+                    <li ><a href='https://docs.flycart.org/en/articles/4203313-discount-based-on-user-role?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=user_role_documentation' target='_blank'>" . esc_html__('User role', 'woo-discount-rules') . "</a></li>
+                    <li >" . esc_html__('Days & Time', 'woo-discount-rules') . "</li>
+                    <li ><a href='https://docs.flycart.org/en/articles/4206683-discount-based-on-first-order?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=purchase_history' target='_blank'>" . esc_html__('Purchase History', 'woo-discount-rules') . "</a></li>
+                    <li ><a href='https://docs.flycart.org/en/articles/5207088-discount-based-on-the-payment-method?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=payment_menthod' target='_blank'>" . esc_html__('Payment Method', 'woo-discount-rules') . "</a></li>
                 </ul>
             </span>
             <span style='width: 45%;'>
                 <ul  class='awdr-bullet-style'>
-                    <li ><a href='https://docs.flycart.org/en/articles/4268595-activate-discount-rule-using-a-coupon-code-in-woocommerce-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=coupon_documentation' target='_blank'>" . __('Coupon', 'woo-discount-rules') . "</a></li>
-                    <li ><a href='https://docs.flycart.org/en/articles/4214869-customer-shipping-address-based-discount-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=shipping_address_documentation' target='_blank'>" . __('Shipping Address', 'woo-discount-rules') . "</a></li>
-                    <li><a href='https://docs.flycart.org/en/articles/4279899-category-combination-get-discount-only-when-category-a-b-c-are-in-the-cart-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=category_combination' target='_blank'>" . __('Category Combination', 'woo-discount-rules') . "</a></li>
-                    <li><a href='https://docs.flycart.org/en/articles/4164153-buy-product-a-b-and-get-discount-in-product-c-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=product_combination' target='_blank'>" . __('Product Combination', 'woo-discount-rules') . "</a></li>
-                    <li ><a href='https://docs.flycart.org/en/articles/4280177-discounts-based-on-cart-line-items?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=quantity_or_line_items' target='_blank'>" . __('Quantities/Line items', 'woo-discount-rules') . "</a></li>
+                    <li ><a href='https://docs.flycart.org/en/articles/4268595-activate-discount-rule-using-a-coupon-code-in-woocommerce?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=coupon_documentation' target='_blank'>" . esc_html__('Coupon', 'woo-discount-rules') . "</a></li>
+                    <li ><a href='https://docs.flycart.org/en/articles/4214869-discount-based-on-customer-shipping-address?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=shipping_address_documentation' target='_blank'>" . esc_html__('Shipping Address', 'woo-discount-rules') . "</a></li>
+                    <li><a href='https://docs.flycart.org/en/articles/4279899-category-combination-get-discount-only-when-category-a-b-c-are-in-the-cart?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=category_combination' target='_blank'>" . esc_html__('Category Combination', 'woo-discount-rules') . "</a></li>
+                    <li><a href='https://docs.flycart.org/en/articles/4164153-buy-product-a-b-and-get-discount-in-product-c?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=product_combination' target='_blank'>" . esc_html__('Product Combination', 'woo-discount-rules') . "</a></li>
+                    <li ><a href='https://docs.flycart.org/en/articles/4280177-discounts-based-on-cart-line-item-count?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=quantity_or_line_items' target='_blank'>" . esc_html__('Quantities/Line items', 'woo-discount-rules') . "</a></li>
                     
                     
                 </ul>
@@ -312,17 +312,18 @@ class Helper
     public static function validateRequest($method, $awdr_nonce = null)
     {
         if ($awdr_nonce === null) {
-            if (isset($_REQUEST['awdr_nonce']) && !empty($_REQUEST['awdr_nonce'])) {
-                if (self::verify_nonce(wp_unslash($_REQUEST['awdr_nonce']), $method)) {
+            $awdr_nonce = isset($_REQUEST['awdr_nonce']) && !empty($_REQUEST['awdr_nonce']) ? sanitize_text_field(wp_unslash($_REQUEST['awdr_nonce'])) : '';//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if (!empty($awdr_nonce)) {
+                if (self::verify_nonce($awdr_nonce, $method)) {
                     return true;
                 }
             }
         } else {
-            if (self::verify_nonce(wp_unslash($awdr_nonce), $method)) {
+            if (self::verify_nonce(sanitize_text_field(wp_unslash($awdr_nonce)), $method)) {
                 return true;
             }
         }
-        die(__('Invalid token', 'woo-discount-rules'));
+        die(esc_html__('Invalid token', 'woo-discount-rules'));
     }
 
     public static function filterSelect2SearchQuery($query)
@@ -332,16 +333,18 @@ class Helper
 
     public static function displayCompatibleCheckMessages()
     {
-        if (version_compare(WDR_VERSION, '2.6.0', '>=')) {
+        if (version_compare(WDR_VERSION, '2.6.1', '>=')) {
             if (defined('WDR_PRO_VERSION')) {
-                if (version_compare(WDR_PRO_VERSION, '2.6.0', '<')) {
+                if (version_compare(WDR_PRO_VERSION, '2.6.1', '<')) {
                     $url = esc_url(admin_url() . "plugins.php");
                     $plugin_page = '<a target="_blank" href="' . $url . '">' . __('Update now', 'woo-discount-rules') . '</a>';
                     ?>
                     <br>
                     <div class="notice inline notice notice-warning notice-alt awdr-rule-limit-disabled">
                         <p class="rule_limit_msg_future">
-                            <?php echo sprintf(__('You are using a lower version of our <b>Woo Discount Rules PRO 2.0</b> plugin. Please update the plugin to latest version to run smoothly. %s', 'woo-discount-rules'), $plugin_page); ?>
+                            <?php
+                            /* translators: %s used to display update now link*/
+                            echo wp_kses_post(sprintf(__('You are using a lower version of our <b>Woo Discount Rules PRO 2.0</b> plugin. Please update the plugin to latest version to run smoothly. %s', 'woo-discount-rules'), $plugin_page)); ?>
                         </p>
                     </div>
                     <?php

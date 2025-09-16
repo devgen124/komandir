@@ -4,14 +4,15 @@ namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
 
-use MailPoet\WP\Functions as WPFunctions;
 
 class RetroComputingMagazine {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/retro_computing_magazine';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -31,7 +32,7 @@ class RetroComputingMagazine {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
          [
           'type' => 'container',
@@ -163,7 +164,7 @@ class RetroComputingMagazine {
                               0 =>
                                  [
                                   'type' => 'header',
-                                  'text' => '<p><span style="color: #ffffff;"><a href="[link:newsletter_view_in_browser_url]" style="color: #ffffff;">'.__("View this in your browser.", 'mailpoet').'</a></span></p>',
+                                  'text' => '<p><span style="color: #ffffff;"><a href="[link:newsletter_view_in_browser_url]" style="color: #ffffff;">' . __("View this in your browser.", 'mailpoet') . '</a></span></p>',
                                   'styles' =>
                                      [
                                       'block' =>
@@ -544,7 +545,7 @@ class RetroComputingMagazine {
                               2 =>
                                  [
                                   'type' => 'social',
-                                  'iconSet' => 'grey',
+                                  'iconSet' => 'official',
                                   'icons' =>
                                      [
                                       0 =>
@@ -552,7 +553,7 @@ class RetroComputingMagazine {
                                           'type' => 'socialIcon',
                                           'iconType' => 'facebook',
                                           'link' => 'http://www.facebook.com',
-                                          'image' => $this->social_icon_url . '/02-grey/Facebook.png',
+                                          'image' => $this->social_icon_url . '/11-official/Facebook.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Facebook',
@@ -562,7 +563,7 @@ class RetroComputingMagazine {
                                           'type' => 'socialIcon',
                                           'iconType' => 'twitter',
                                           'link' => 'http://www.twitter.com',
-                                          'image' => $this->social_icon_url . '/02-grey/Twitter.png',
+                                          'image' => $this->social_icon_url . '/11-official/X.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Twitter',
@@ -572,7 +573,7 @@ class RetroComputingMagazine {
                                           'type' => 'socialIcon',
                                           'iconType' => 'youtube',
                                           'link' => 'http://www.youtube.com',
-                                          'image' => $this->social_icon_url . '/02-grey/Youtube.png',
+                                          'image' => $this->social_icon_url . '/11-official/Youtube.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Youtube',
@@ -582,7 +583,7 @@ class RetroComputingMagazine {
                                           'type' => 'socialIcon',
                                           'iconType' => 'email',
                                           'link' => '',
-                                          'image' => $this->social_icon_url . '/02-grey/Email.png',
+                                          'image' => $this->social_icon_url . '/11-official/Email.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Email',
@@ -592,7 +593,7 @@ class RetroComputingMagazine {
                               3 =>
                                  [
                                   'type' => 'footer',
-                                  'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+                                  'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
                                   'styles' =>
                                      [
                                       'block' =>
@@ -661,6 +662,4 @@ class RetroComputingMagazine {
          ],
     ];
   }
-
-
 }

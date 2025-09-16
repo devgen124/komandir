@@ -35,7 +35,7 @@ class Statistics extends Base
             $rule_title = $rule->getTitle();
             $this->rule_details[$rule_id] = array(
                 'handler' => new Reports\RuleNameDiscount($rule),
-                'label'   => __( $rule_title , 'woo-discount-rules' ),
+                'label'   => __( $rule_title , 'woo-discount-rules' ),//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
                 'group'   => __( 'Rule Name', 'woo-discount-rules' ),
                 'rule_id'   => $rule_id,
             );
@@ -100,7 +100,11 @@ class Statistics extends Base
      * Get chart data for analytics
      */
     protected function ajax_get_chart_data() {
-        parse_str( $_POST['params'], $params );
+		$query_params = isset($_POST['params']) ? $_POST['params'] : '';//phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( empty($query_params) ) {
+			wp_send_json_error();
+		}
+        parse_str( $query_params, $params );
         $awdr_nonce = isset($params['awdr_nonce'])? $params['awdr_nonce']: '';
         Helper::validateRequest('wdr_ajax_report', $awdr_nonce);
         if(Helper::hasAdminPrivilege()){
@@ -134,7 +138,7 @@ class Statistics extends Base
                 }
             }
         } else {
-            die(__('Authentication required', 'woo-discount-rules'));
+            die(esc_html__('Authentication required', 'woo-discount-rules'));
         }
     }
 
@@ -143,7 +147,8 @@ class Statistics extends Base
      */
     protected function ajax_get_coupon_data()
     {
-        parse_str( $_POST['params'], $params );
+	    $query_params = isset($_POST['params']) ? $_POST['params'] : '';//phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        parse_str( $query_params, $params );
         $awdr_nonce = isset($params['awdr_nonce'])? $params['awdr_nonce']: '';
         Helper::validateRequest('wdr_ajax_report', $awdr_nonce);
         if(Helper::hasAdminPrivilege()) {
@@ -163,7 +168,7 @@ class Statistics extends Base
             }
             wp_send_json_success($results);
         } else {
-            die(__('Authentication required', 'woo-discount-rules'));
+            die(esc_html__('Authentication required', 'woo-discount-rules'));
         }
     }
 }

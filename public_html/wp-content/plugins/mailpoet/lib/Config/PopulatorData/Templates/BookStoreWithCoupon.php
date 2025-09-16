@@ -1,10 +1,8 @@
 <?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
+
 namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
-
-
-use MailPoet\WP\Functions as WPFunctions;
 
 
 class BookStoreWithCoupon {
@@ -12,7 +10,9 @@ class BookStoreWithCoupon {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/book-store-with-coupon';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -32,7 +32,7 @@ class BookStoreWithCoupon {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
        [
         'type' => 'container',
@@ -603,7 +603,7 @@ class BookStoreWithCoupon {
                   0 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-black',
+                    'iconSet' => 'official',
                     'icons' =>
                      [
                       0 =>
@@ -611,7 +611,7 @@ class BookStoreWithCoupon {
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -642,7 +642,7 @@ class BookStoreWithCoupon {
                   0 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-black',
+                    'iconSet' => 'official',
                     'icons' =>
                      [
                       0 =>
@@ -650,7 +650,7 @@ class BookStoreWithCoupon {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -681,7 +681,7 @@ class BookStoreWithCoupon {
                   0 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-black',
+                    'iconSet' => 'official',
                     'icons' =>
                      [
                       0 =>
@@ -689,7 +689,7 @@ class BookStoreWithCoupon {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -812,7 +812,7 @@ class BookStoreWithCoupon {
                   1 =>
                    [
                     'type' => 'footer',
-                    'text' => '<p><span style="color: #cdc391;"><a href="[link:subscription_unsubscribe_url]" style="color: #cdc391;">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]" style="color: #cdc391;">'.__("Manage your subscription", 'mailpoet').'</a></span><br /><span style="color: #ffffff;">'.__("Add your postal address here!", 'mailpoet').'</span></p>',
+                    'text' => '<p><span style="color: #cdc391;"><a href="[link:subscription_unsubscribe_url]" style="color: #cdc391;">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]" style="color: #cdc391;">' . __("Manage your subscription", 'mailpoet') . '</a></span><br /><span style="color: #ffffff;">' . __("Add your postal address here!", 'mailpoet') . '</span></p>',
                     'styles' =>
                      [
                       'block' =>
@@ -836,7 +836,7 @@ class BookStoreWithCoupon {
                   2 =>
                    [
                     'type' => 'header',
-                    'text' => '<p><span style="color: #ffffff;"><a href="[link:newsletter_view_in_browser_url]" style="color: #ffffff;">'.__("View this in your browser.", 'mailpoet').'</a></span></p>',
+                    'text' => '<p><span style="color: #ffffff;"><a href="[link:newsletter_view_in_browser_url]" style="color: #ffffff;">' . __("View this in your browser.", 'mailpoet') . '</a></span></p>',
                     'styles' =>
                      [
                       'block' =>
@@ -1046,7 +1046,7 @@ class BookStoreWithCoupon {
          ],
         'footer' =>
          [
-          'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+          'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
           'styles' =>
            [
             'block' =>
@@ -1133,7 +1133,7 @@ class BookStoreWithCoupon {
          ],
         'social' =>
          [
-          'iconSet' => 'full-symbol-black',
+          'iconSet' => 'official',
           'icons' =>
            [
             0 =>
@@ -1141,7 +1141,7 @@ class BookStoreWithCoupon {
               'type' => 'socialIcon',
               'iconType' => 'instagram',
               'link' => 'http://instagram.com',
-              'image' => $this->social_icon_url . '/07-full-symbol-black/Instagram.png',
+              'image' => $this->social_icon_url . '/11-official/Instagram.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Instagram',
@@ -1163,7 +1163,7 @@ class BookStoreWithCoupon {
          ],
         'header' =>
          [
-          'text' => '<a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a>',
+          'text' => '<a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a>',
           'styles' =>
            [
             'block' =>
@@ -1188,5 +1188,4 @@ class BookStoreWithCoupon {
        ],
     ];
   }
-
 }

@@ -1,10 +1,8 @@
 <?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
+
 namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
-
-
-use MailPoet\WP\Functions as WPFunctions;
 
 
 class WelcomeBlank1Column {
@@ -14,7 +12,9 @@ class WelcomeBlank1Column {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->assets_url = $assets_url;
     $this->external_template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/welcome-email-blank-1-column';
     $this->template_image_url = $this->assets_url . '/img/blank_templates';
@@ -62,7 +62,7 @@ class WelcomeBlank1Column {
                 "blocks" => [
                   [
                     "type" => "header",
-                    "text" => '<a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a>',
+                    "text" => '<a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a>',
                     "styles" => [
                       "block" => [
                         "backgroundColor" => "transparent",
@@ -170,7 +170,7 @@ class WelcomeBlank1Column {
                         "type" => "socialIcon",
                         "iconType" => "facebook",
                         "link" => "https://www.facebook.com",
-                        "image" => $this->social_icon_url . "/02-grey/Facebook.png",
+                        "image" => $this->social_icon_url . "/11-official/Facebook.png",
                         "height" => "32px",
                         "width" => "32px",
                         "text" => "Facebook",
@@ -179,7 +179,7 @@ class WelcomeBlank1Column {
                         "type" => "socialIcon",
                         "iconType" => "twitter",
                         "link" => "https://www.twitter.com",
-                        "image" => $this->social_icon_url . "/02-grey/Twitter.png",
+                        "image" => $this->social_icon_url . "/11-official/X.png",
                         "height" => "32px",
                         "width" => "32px",
                         "text" => "Twitter",
@@ -200,7 +200,7 @@ class WelcomeBlank1Column {
                   ],
                   [
                     "type" => "footer",
-                    "text" => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+                    "text" => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
                     "styles" => [
                       "block" => [
                         "backgroundColor" => "transparent",
@@ -261,5 +261,4 @@ class WelcomeBlank1Column {
   private function getThumbnail() {
     return $this->external_template_image_url . '/thumbnail.20190411-1500.jpg';
   }
-
 }

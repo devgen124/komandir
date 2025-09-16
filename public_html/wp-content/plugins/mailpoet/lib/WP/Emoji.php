@@ -5,6 +5,9 @@ namespace MailPoet\WP;
 if (!defined('ABSPATH')) exit;
 
 
+use MailPoet\DI\ContainerWrapper;
+use MailPoet\Form\FormsRepository;
+use MailPoet\Newsletter\Sending\SendingQueuesRepository;
 use MailPoet\WP\Functions as WPFunctions;
 
 class Emoji {
@@ -12,7 +15,7 @@ class Emoji {
   private $wp;
 
   public function __construct(
-    WPFunctions $wp = null
+    ?WPFunctions $wp = null
   ) {
     if ($wp === null) {
       $wp = new WPFunctions();
@@ -35,14 +38,16 @@ class Emoji {
   }
 
   public function sanitizeEmojisInFormBody(array $body): array {
+    $formsTableName = ContainerWrapper::getInstance()->get(FormsRepository::class)->getTableName();
     $bodyJson = json_encode($body, JSON_UNESCAPED_UNICODE);
-    $fixedJson = $this->encodeForUTF8Column(MP_FORMS_TABLE, 'body', $bodyJson);
+    $fixedJson = $this->encodeForUTF8Column($formsTableName, 'body', $bodyJson);
     return json_decode($fixedJson, true);
   }
 
   private function encodeRenderedBodyForUTF8Column($value) {
+    $sendingQueuesTableName = ContainerWrapper::getInstance()->get(SendingQueuesRepository::class)->getTableName();
     return $this->encodeForUTF8Column(
-      MP_SENDING_QUEUES_TABLE,
+      $sendingQueuesTableName,
       'newsletter_rendered_body',
       $value
     );
@@ -51,7 +56,9 @@ class Emoji {
   public function encodeForUTF8Column($table, $field, $value) {
     global $wpdb;
     $charset = $wpdb->get_col_charset($table, $field);
-    if ($charset === 'utf8') {
+    // utf8 doesn't support emojis, so we need to encode them
+    // utf8 was an alias for utf8mb3, but it was dropped in MySQL 8.0.28 so we need to check both
+    if ($charset === 'utf8' || $charset === 'utf8mb3') {
       $value = $this->wp->wpEncodeEmoji($value);
     }
     return $value;

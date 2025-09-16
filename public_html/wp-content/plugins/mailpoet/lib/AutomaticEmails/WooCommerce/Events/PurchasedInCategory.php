@@ -37,7 +37,7 @@ class PurchasedInCategory {
   private $subscribersRepository;
 
   public function __construct(
-    WCHelper $woocommerceHelper = null
+    ?WCHelper $woocommerceHelper = null
   ) {
     if ($woocommerceHelper === null) {
       $woocommerceHelper = ContainerWrapper::getInstance()->get(WCHelper::class);
@@ -176,7 +176,8 @@ class PurchasedInCategory {
     };
 
     $this->loggerFactory->getLogger(self::SLUG)->info(
-      'Email scheduled', [
+      'Email scheduled',
+      [
         'order_id' => $orderId,
         'customer_email' => $customerEmail,
         'subscriber_id' => $subscriber->getId(),

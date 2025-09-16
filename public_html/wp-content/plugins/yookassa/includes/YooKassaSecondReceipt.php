@@ -12,6 +12,7 @@ use YooKassa\Common\Exceptions\UnauthorizedException;
 use YooKassa\Model\Receipt\PaymentMode;
 use YooKassa\Model\ReceiptCustomer;
 use YooKassa\Model\ReceiptItem;
+use YooKassa\Model\ReceiptItemInterface;
 use YooKassa\Model\ReceiptType;
 use YooKassa\Model\Settlement;
 use YooKassa\Request\Receipts\CreatePostReceiptRequest;
@@ -23,6 +24,9 @@ use YooKassa\Request\Receipts\ReceiptResponseItemInterface;
  */
 class YooKassaSecondReceipt
 {
+    /** @var string|null Тип кассовой системы */
+    private $provider;
+
     /**
      * @var Client
      */
@@ -108,6 +112,7 @@ class YooKassaSecondReceipt
      * @param WC_Order $order
      *
      * @return CreatePostReceiptRequest|null
+     * @throws Exception
      */
     private function buildSecondReceipt($lastReceipt, $paymentId, $order)
     {
@@ -118,7 +123,7 @@ class YooKassaSecondReceipt
                 return null;
             }
 
-            $resendItems = $this->getResendItems($lastReceipt->getItems());
+            $resendItems = $this->getResendItems($lastReceipt->getItems(), $order);
 
             if (count($resendItems['items']) < 1) {
                 YooKassaLogger::info('Second receipt is not required');
@@ -194,10 +199,6 @@ class YooKassaSecondReceipt
             $customerData['phone'] = preg_replace('/[^\d]/', '', $order->get_billing_phone());
         }
 
-        if (!empty($order->get_formatted_billing_full_name())) {
-            $customerData['full_name'] = $order->get_formatted_billing_full_name();
-        }
-
         return new ReceiptCustomer($customerData);
     }
 
@@ -220,25 +221,149 @@ class YooKassaSecondReceipt
      * @param ReceiptResponseItemInterface[] $items
      *
      * @return array
+     * @throws Exception
      */
-    private function getResendItems($items)
+    private function getResendItems($items, WC_Order $order)
     {
+        $orderId = $order->get_id();
+        $itemsCount = count($items);
+        $markingEnabled = get_option('yookassa_marking_enabled') && $this->provider !== null;
+
+        YooKassaLogger::info(sprintf(
+            '[Order #%d] Starting items processing. Items: %d, Marking enabled: %s',
+            $orderId,
+            $itemsCount,
+            $markingEnabled ? 'yes' : 'no'
+        ));
+
         $result = array(
             'items'  => array(),
             'amount' => 0,
         );
 
+        if (empty($items)) {
+            YooKassaLogger::info(sprintf(
+                '[Order #%d] No items to process',
+                $orderId
+            ));
+            return $result;
+        }
+
+        $orderItems = $order->get_items();
+
         foreach ($items as $item) {
-            if ( $this->isNeedResendItem($item->getPaymentMode()) ) {
-                $item->setPaymentMode(PaymentMode::FULL_PAYMENT);
-                $result['items'][] = new ReceiptItem($item->jsonSerialize());
+            if (!$this->isNeedResendItem($item->getPaymentMode())) {
+                continue;
+            }
+
+            $item->setPaymentMode(PaymentMode::FULL_PAYMENT);
+            try {
+                if ($markingEnabled) {
+                    $processedItems = $this->processItem($item, $orderItems, new YooKassaMarkingCodeHandler($this->provider));
+                    $result['items'] = array_merge($result['items'], $processedItems);
+                } else {
+                    $result['items'][] = new ReceiptItem($item->jsonSerialize());
+                }
                 $result['amount'] += $item->getAmount() / 100.0;
+            } catch (Exception $e) {
+                YooKassaLogger::error(sprintf(
+                    'Error processing item "%s": %s.',
+                    $item->getDescription(),
+                    $e->getMessage()
+                ));
+                throw $e;
             }
         }
 
         return $result;
     }
 
+    /**
+     * Обрабатывает один товар, включая маркировку
+     *
+     * @param ReceiptResponseItemInterface $item
+     * @param WC_Order_Item[] $orderItems
+     * @param YooKassaMarkingCodeHandler $markingCodeHandler
+     * @return array
+     * @throws Exception
+     */
+    private function processItem($item, $orderItems, $markingCodeHandler)
+    {
+        $productName = $item->getDescription();
+        $productQuantity = (int)$item->getQuantity();
+        $productPrice = $item->getAmount() / 100.0;
+
+        YooKassaLogger::info(sprintf(
+            'Processing item: Name="%s", Quantity=%d, Price=%.2f',
+            $productName,
+            $productQuantity,
+            $productPrice
+        ));
+
+        foreach ($orderItems as $orderItem) {
+            $itemData = $orderItem->get_data();
+            $orderItemTotal = (int)$orderItem->get_total() + (int)$orderItem->get_total_tax();
+            $orderItemName = mb_substr($itemData['name'], 0, ReceiptItem::DESCRIPTION_MAX_LENGTH);
+
+            // Проверка соответствия товара
+            if ($orderItemName !== $productName
+                || (int)$productPrice !== $orderItemTotal
+                || $productQuantity !== $itemData['quantity']
+            ) {
+                continue;
+            }
+
+            // Получаем оставшееся количество товаров после возвратов, если они были
+            $productQuantity = YooKassaMarkingOrder::getRemainingQuantity($orderItem);
+            $item->setQuantity($productQuantity);
+            if ($productQuantity <= 0) {
+                YooKassaLogger::info(sprintf(
+                    'Item "%s" refunded, skipping receipt generation',
+                    $productName
+                ));
+                continue;
+            }
+
+            // Получение и проверка продукта
+            $productId = isset($itemData['product_id']) ? $itemData['product_id'] : null;
+            if ($productId === null) {
+                $error = sprintf('Product ID not found in order item data: %s', json_encode($itemData));
+                YooKassaLogger::error($error);
+                throw new Exception($error);
+            }
+
+            $product = wc_get_product($productId);
+            if (!$product) {
+                $error = sprintf('Product not found for ID: %d', $productId);
+                YooKassaLogger::error($error);
+                throw new Exception($error);
+            }
+
+            // Настройка маркировки
+            $markingFields = wc_get_order_item_meta(
+                $orderItem->get_id(),
+                YooKassaMarkingOrder::MARKING_FIELD_META_KEY
+            );
+
+            YooKassaLogger::info(sprintf(
+                'Setting marking for product ID %d. Marking fields exist: %s',
+                $productId,
+                $markingFields !== false ? 'yes' : 'no'
+            ));
+
+            $markingCodeHandler
+                ->setQuantity($productQuantity)
+                ->setCategory($product->get_meta(YooKassaMarkingProduct::CATEGORY_KEY))
+                ->setMeasure($product->get_meta(YooKassaMarkingProduct::MEASURE_KEY))
+                ->setDenominator($product->get_meta(YooKassaMarkingProduct::DENOMINATOR_KEY))
+                ->setMarkCodeInfo($product->get_meta(YooKassaMarkingProduct::MARK_CODE_INFO_KEY))
+                ->setMarkingFields($markingFields !== false ? $markingFields : array());
+
+            break; // Прерываем после нахождения совпадения
+        }
+
+        return $markingCodeHandler->splitProductsByCode($item);
+    }
 
     /**
      * @param string $status
@@ -361,37 +486,17 @@ class YooKassaSecondReceipt
         YooKassaLogger::info($type . ' PaymentId: ' . $paymentId);
 
         try {
-
-            if ($lastReceipt = $this->getLastReceipt($paymentId)) {
-                YooKassaLogger::info($type . ' LastReceipt:' . PHP_EOL . json_encode($lastReceipt->jsonSerialize()));
-            } else {
+            if (!($lastReceipt = $this->getLastReceipt($paymentId))) {
                 YooKassaLogger::info($type . ' LastReceipt is empty!');
                 YooKassaLogger::sendHeka(array('second-receipt.webhook.fail'));
                 return;
             }
 
-            if ($receiptRequest = $this->buildSecondReceipt($lastReceipt, $paymentId, $order)) {
-                YooKassaLogger::sendHeka(array('second-receipt.send.init'));
-                YooKassaLogger::info("Second receipt request data: " . PHP_EOL . json_encode($receiptRequest->jsonSerialize()));
-                /** if merchant wants to change */
-                $receiptRequest = apply_filters( 'woocommerce_yookassa_second_receipt_request', $receiptRequest );
-                try {
-                    $response = $this->getApiClient()->createReceipt($receiptRequest);
-                    YooKassaLogger::sendHeka(array('second-receipt.send.success'));
-                } catch (Exception $e) {
-                    YooKassaLogger::error('Request second receipt error: ' . $e->getMessage());
-                    YooKassaLogger::sendAlertLog('Request second receipt error', array(
-                        'methodid' => 'POST/changeOrderStatus',
-                        'exception' => $e,
-                    ), array('second-receipt.send.fail'));
-                    return;
-                }
+            YooKassaLogger::info($type . ' LastReceipt:' . PHP_EOL . json_encode($lastReceipt->jsonSerialize()));
 
-                $amount = $this->getSettlementsAmountSum($response);
-                $comment = sprintf(__('Отправлен второй чек. Сумма %s рублей.', 'yookassa'), $amount);
-                $order->add_order_note($comment, 0, false);
-                YooKassaLogger::info('Request second receipt result: ' . PHP_EOL . json_encode($response->jsonSerialize()));
-                YooKassaLogger::sendHeka(array('second-receipt.webhook.success'));
+            $this->provider = $this->getProvider();
+            if ($receiptRequest = $this->buildSecondReceipt($lastReceipt, $paymentId, $order)) {
+                $this->processReceiptSending($receiptRequest, $order);
             } else {
                 YooKassaLogger::sendHeka(array('second-receipt.webhook.fail'));
             }
@@ -415,5 +520,215 @@ class YooKassaSecondReceipt
         YooKassaLogger::info('Check PaymentMethod: ' . $wcPaymentMethod);
 
         return (strpos($wcPaymentMethod, 'yookassa_') !== false);
+    }
+
+    /**
+     * Получение провайдера
+     *
+     * @return string|null
+     */
+    private function getProvider()
+    {
+        $shopInfo = YooKassaAdmin::getShopInfo();
+        return isset($shopInfo['fiscalization']['provider']) ? $shopInfo['fiscalization']['provider'] : null;
+    }
+
+    /**
+     * Обработка отправки чека с учетом лимитов
+     *
+     * @param CreatePostReceiptRequest $receiptRequest
+     * @param WC_Order $order
+     */
+    protected function processReceiptSending($receiptRequest, $order)
+    {
+        $items = $receiptRequest->getItems();
+        $limit = ($this->provider === 'avanpost') ? 80 : 100;
+
+        if (count($items) <= $limit) {
+            $this->sendSingleReceipt($receiptRequest, $order);
+            return;
+        }
+
+        $this->sendSplitReceipts($receiptRequest, $order, $limit);
+    }
+
+    /**
+     * Отправка единого чека
+     *
+     * @param CreatePostReceiptRequest $receipt
+     * @param WC_Order $order
+     */
+    private function sendSingleReceipt($receipt, $order)
+    {
+        $orderId = $order->get_id();
+        YooKassaLogger::sendHeka(array('second-receipt.send.init'));
+        YooKassaLogger::info(sprintf(
+            'Starting single receipt for order #%d. Receipt data: %s',
+            $orderId,
+            json_encode($receipt->jsonSerialize())
+        ));
+
+        try {
+            $receipt = apply_filters('woocommerce_yookassa_second_receipt_request', $receipt);
+            $response = $this->getApiClient()->createReceipt($receipt);
+
+            if ($response === null) {
+                $error = sprintf('Failed to create receipt (null response) for order #%d', $orderId);
+                YooKassaLogger::error($error);
+                throw new Exception($error);
+            }
+
+            $amount = $this->getSettlementsAmountSum($response);
+            $order->add_order_note(
+                sprintf(__('Отправлен второй чек. Сумма %s рублей.', 'yookassa'), $amount)
+            );
+
+            YooKassaLogger::info(sprintf(
+                'Successfully sent single receipt for order #%d. Amount: %.2f RUB',
+                $orderId,
+                $amount
+            ));
+            YooKassaLogger::sendHeka(array('second-receipt.send.success', 'second-receipt.webhook.success'));
+        } catch (Exception $e) {
+            YooKassaLogger::error(sprintf(
+                'Error sending single receipt for order #%d: %s.',
+                $orderId,
+                $e->getMessage()
+            ));
+            YooKassaLogger::sendAlertLog(
+                sprintf('Request second receipt error for order #%d', $orderId),
+                array(
+                    'methodid' => 'POST/changeOrderStatus',
+                    'exception' => $e,
+                ),
+                array('second-receipt.send.fail')
+            );
+        }
+    }
+
+    /**
+     * Отправка разделенных чеков
+     *
+     * @param CreatePostReceiptRequest $originalReceipt
+     * @param WC_Order $order
+     * @param int $limit
+     */
+    private function sendSplitReceipts($originalReceipt, $order, $limit)
+    {
+        $orderId = $order->get_id();
+        $items = $originalReceipt->getItems();
+        $itemParts = array_chunk($items, $limit);
+        $totalParts = count($itemParts);
+
+        YooKassaLogger::info(sprintf(
+            'Starting split receipts for order #%d. Total items: %d, parts: %d, limit per part: %d',
+            $orderId,
+            count($items),
+            $totalParts,
+            $limit
+        ));
+        YooKassaLogger::sendHeka(array('second-receipt.send.init'));
+
+        foreach ($itemParts as $index => $parts) {
+            $partNumber = $index + 1;
+
+            try {
+                // Подготовка части чека
+                $receiptPart = clone $originalReceipt;
+                $receiptPart->setItems($parts);
+
+                // Получение суммы для части
+                $partAmount = $this->calculateTotalAmount($receiptPart->getItems());
+
+                $receiptPart->setSettlements(array(
+                    new Settlement(array(
+                        'type' => 'prepayment',
+                        'amount' => array(
+                            'value' => $partAmount,
+                            'currency' => 'RUB',
+                        ),
+                    ))
+                ));
+
+                // Применение фильтров
+                $receiptPart = apply_filters('woocommerce_yookassa_second_receipt_request', $receiptPart);
+
+                // Отправка части
+                YooKassaLogger::info(sprintf(
+                    'Sending receipt part %d/%d for order #%d. Items count: %d, amount: %.2f RUB',
+                    $partNumber,
+                    $totalParts,
+                    $orderId,
+                    count($parts),
+                    $partAmount
+                ));
+                $response = $this->getApiClient()->createReceipt($receiptPart);
+
+                if ($response === null) {
+                    $error = sprintf(
+                        'Failed to create receipt part %d/%d for order #%d (null response)',
+                        $partNumber,
+                        $totalParts,
+                        $orderId
+                    );
+                    YooKassaLogger::error($error);
+                    throw new Exception($error);
+                }
+
+                // Получаем сумму из ответа
+                $partAmount = $this->getSettlementsAmountSum($response);
+
+                // Логирование успеха
+                $order->add_order_note(
+                    sprintf(__('Отправлен второй чек (часть %d/%d). Сумма %s рублей.', 'yookassa'),
+                        $partNumber,
+                        $totalParts,
+                        $partAmount
+                    )
+                );
+
+                YooKassaLogger::info(sprintf(
+                    'Successfully sent receipt part %d/%d for order #%d. Amount: %.2f RUB. Response: %s',
+                    $partNumber,
+                    $totalParts,
+                    $orderId,
+                    $partAmount,
+                    json_encode($response->jsonSerialize())
+                ));
+                YooKassaLogger::sendHeka(array('second-receipt.send.success'));
+            } catch (Exception $e) {
+                YooKassaLogger::error(sprintf(
+                    'Error sending receipt part %d/%d for order #%d: %s.',
+                    $partNumber,
+                    $totalParts,
+                    $orderId,
+                    $e->getMessage()
+                ));
+                YooKassaLogger::sendAlertLog(
+                    sprintf('Receipt part %d/%d error for order #%d', $partNumber, $totalParts, $orderId),
+                    array(
+                        'part' => $partNumber,
+                        'total' => $totalParts,
+                        'exception' => $e
+                    ),
+                    array('second-receipt.send.fail')
+                );
+            }
+        }
+
+        YooKassaLogger::sendHeka(array('second-receipt.webhook.success'));
+    }
+
+    /**
+     * Вычисляет общую сумму из массива товаров
+     *
+     * @param ReceiptItemInterface[] $items
+     * @return float
+     */
+    private function calculateTotalAmount($items)
+    {
+        return array_reduce($items, static function($total, $item) {
+            return $total + $item->getPrice()->getValue() * $item->getQuantity();
+        }, 0);
     }
 }

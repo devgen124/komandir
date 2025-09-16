@@ -4,14 +4,15 @@ namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
 
-use MailPoet\WP\Functions as WPFunctions;
 
 class HealthyFoodBlog {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/healthy-food-blog';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -31,7 +32,7 @@ class HealthyFoodBlog {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
        [
         'type' => 'container',
@@ -338,7 +339,7 @@ class HealthyFoodBlog {
                   1 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'circles',
+                    'iconSet' => 'official',
                     'icons' =>
                      [
                       0 =>
@@ -346,7 +347,7 @@ class HealthyFoodBlog {
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/03-circles/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -356,7 +357,7 @@ class HealthyFoodBlog {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/03-circles/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -366,7 +367,7 @@ class HealthyFoodBlog {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/03-circles/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -376,7 +377,7 @@ class HealthyFoodBlog {
                         'type' => 'socialIcon',
                         'iconType' => 'youtube',
                         'link' => 'http://www.youtube.com',
-                        'image' => $this->social_icon_url . '/03-circles/Youtube.png',
+                        'image' => $this->social_icon_url . '/11-official/Youtube.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Youtube',
@@ -1817,7 +1818,7 @@ class HealthyFoodBlog {
                   1 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'circles',
+                    'iconSet' => 'official',
                     'icons' =>
                      [
                       0 =>
@@ -1825,7 +1826,7 @@ class HealthyFoodBlog {
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/03-circles/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -1835,7 +1836,7 @@ class HealthyFoodBlog {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/03-circles/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -1845,7 +1846,7 @@ class HealthyFoodBlog {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/03-circles/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -1855,7 +1856,7 @@ class HealthyFoodBlog {
                         'type' => 'socialIcon',
                         'iconType' => 'youtube',
                         'link' => 'http://www.youtube.com',
-                        'image' => $this->social_icon_url . '/03-circles/Youtube.png',
+                        'image' => $this->social_icon_url . '/11-official/Youtube.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Youtube',
@@ -2068,7 +2069,7 @@ class HealthyFoodBlog {
                   0 =>
                    [
                     'type' => 'footer',
-                    'text' => '<p><span style="color: #ed682a;"><a href="[link:subscription_unsubscribe_url]" style="color: #ed682a;">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]" style="color: #ed682a;">'.__("Manage your subscription", 'mailpoet').'</a></span><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+                    'text' => '<p><span style="color: #ed682a;"><a href="[link:subscription_unsubscribe_url]" style="color: #ed682a;">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]" style="color: #ed682a;">' . __("Manage your subscription", 'mailpoet') . '</a></span><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
                     'styles' =>
                      [
                       'block' =>
@@ -2302,7 +2303,7 @@ class HealthyFoodBlog {
          ],
         'footer' =>
          [
-          'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+          'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
           'styles' =>
            [
             'block' =>
@@ -2389,7 +2390,7 @@ class HealthyFoodBlog {
          ],
         'social' =>
          [
-          'iconSet' => 'circles',
+          'iconSet' => 'official',
           'icons' =>
            [
             0 =>
@@ -2397,7 +2398,7 @@ class HealthyFoodBlog {
               'type' => 'socialIcon',
               'iconType' => 'facebook',
               'link' => 'http://www.facebook.com',
-              'image' => $this->social_icon_url . '/03-circles/Facebook.png',
+              'image' => $this->social_icon_url . '/11-official/Facebook.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Facebook',
@@ -2407,7 +2408,7 @@ class HealthyFoodBlog {
               'type' => 'socialIcon',
               'iconType' => 'twitter',
               'link' => 'http://www.twitter.com',
-              'image' => $this->social_icon_url . '/03-circles/Twitter.png',
+              'image' => $this->social_icon_url . '/11-official/X.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Twitter',
@@ -2417,7 +2418,7 @@ class HealthyFoodBlog {
               'type' => 'socialIcon',
               'iconType' => 'instagram',
               'link' => 'http://instagram.com',
-              'image' => $this->social_icon_url . '/03-circles/Instagram.png',
+              'image' => $this->social_icon_url . '/11-official/Instagram.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Instagram',
@@ -2427,7 +2428,7 @@ class HealthyFoodBlog {
               'type' => 'socialIcon',
               'iconType' => 'youtube',
               'link' => 'http://www.youtube.com',
-              'image' => $this->social_icon_url . '/03-circles/Youtube.png',
+              'image' => $this->social_icon_url . '/11-official/Youtube.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Youtube',
@@ -2449,7 +2450,7 @@ class HealthyFoodBlog {
          ],
         'header' =>
          [
-          'text' => '<a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a>',
+          'text' => '<a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a>',
           'styles' =>
            [
             'block' =>
@@ -2474,5 +2475,4 @@ class HealthyFoodBlog {
        ],
     ];
   }
-
 }

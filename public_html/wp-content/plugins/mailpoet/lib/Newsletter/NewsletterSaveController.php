@@ -126,7 +126,8 @@ class NewsletterSaveController {
     }
 
     if (!empty($data['body'])) {
-      $body = $this->emoji->encodeForUTF8Column(MP_NEWSLETTERS_TABLE, 'body', $data['body']);
+      $newslettersTableName = $this->newslettersRepository->getTableName();
+      $body = $this->emoji->encodeForUTF8Column($newslettersTableName, 'body', $data['body']);
       $body = $this->dataSanitizer->sanitizeBody(json_decode($body, true));
       $data['body'] = json_encode($body);
     }
@@ -155,10 +156,27 @@ class NewsletterSaveController {
     $this->rescheduleIfNeeded($newsletter);
     $this->updateQueue($newsletter, $data['options'] ?? []);
     $this->authorizedEmailsController->onNewsletterSenderAddressUpdate($newsletter, $oldSenderAddress);
-    if (isset($data['new_editor']) && $data['new_editor']) {
+    if ($this->isNewEditor($data)) {
       $this->ensureWpPost($newsletter);
     }
     return $newsletter;
+  }
+
+  private function isNewEditor(array $data): bool {
+    if (!isset($data['new_editor'])) {
+      return false;
+    }
+
+    $value = $data['new_editor'];
+
+    if (is_bool($value)) return $value;
+    if (is_int($value)) return $value === 1;
+    if (is_string($value)) {
+      $norm = strtolower(trim($value));
+      if (in_array($norm, ['1', 'true', 'yes', 'on'], true)) return true;
+      if (in_array($norm, ['0', 'false', 'no', 'off', ''], true)) return false;
+    }
+    return (bool)$value;
   }
 
   private function sanitizeAutomationEmailData(array $data, NewsletterEntity $newsletter): array {
@@ -173,7 +191,7 @@ class NewsletterSaveController {
     $duplicate = clone $newsletter;
 
     // reset timestamps
-    $createdAt = Carbon::createFromTimestamp($this->wp->currentTime('timestamp'));
+    $createdAt = Carbon::now()->millisecond(0);
     $duplicate->setCreatedAt($createdAt);
     $duplicate->setUpdatedAt($createdAt);
     $duplicate->setDeletedAt(null);
@@ -197,7 +215,7 @@ class NewsletterSaveController {
     $this->newslettersRepository->flush();
 
     // duplicate wp post data
-    $post = $this->wp->getPost($newsletter->getWpPostId());
+    $post = !is_null($newsletter->getWpPostId()) ? $this->wp->getPost($newsletter->getWpPostId()) : null;
     if ($post instanceof \WP_Post) {
       $newPostId = $this->wp->wpInsertPost([
         'post_status' => NewsletterEntity::STATUS_DRAFT,
@@ -207,6 +225,18 @@ class NewsletterSaveController {
         // translators: %s is the campaign name of the mail which has been copied.
         'post_title' => sprintf(__('Copy of %s', 'mailpoet'), $post->post_title), // @phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
       ]);
+      // Post meta duplication
+      $originalPostMeta = $this->wp->getPostMeta($post->ID);
+      foreach ($originalPostMeta as $key => $values) {
+        foreach ($values as $value) {
+          // Unserialize the value if it was serialized to avoid invalid data format
+          if (is_string($value) && is_serialized($value)) {
+            $value = unserialize($value);
+          }
+          update_post_meta($newPostId, $key, $value);
+        }
+      }
+
       $duplicate->setWpPost($this->entityManager->getReference(WpPostEntity::class, $newPostId));
     }
 
@@ -317,7 +347,7 @@ class NewsletterSaveController {
     }
 
     if ($newsletter->getStatus() === NewsletterEntity::STATUS_CORRUPT) {
-      $newsletter->setStatus(NewsletterEntity::STATUS_SENDING);
+      $newsletter->setStatus($newsletter->canBeSetActive() ? NewsletterEntity::STATUS_ACTIVE : NewsletterEntity::STATUS_SENDING);
     }
   }
 

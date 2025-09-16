@@ -74,10 +74,10 @@ class ShortCodeManager extends ManageDiscount
         }
         if (!empty($on_sale_products) && $on_sale_products == 'not_in_list' ) {
             if(isset($query_arguments['post__not_in']) && !empty($query_arguments['post__not_in'])){
-               $query_arguments['post__not_in'] = array_merge($query_arguments['post__not_in'],$product_ids_on_sale);
-                $query_arguments['post__not_in'] = array_unique($query_arguments['post__not_in']);
+               $query_arguments['post__not_in'] = array_merge($query_arguments['post__not_in'],$product_ids_on_sale); // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
+                $query_arguments['post__not_in'] = array_unique($query_arguments['post__not_in']); // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
             }else{
-                $query_arguments['post__not_in'] = $product_ids_on_sale;
+                $query_arguments['post__not_in'] = $product_ids_on_sale; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
             }
         }
     }
@@ -101,7 +101,7 @@ class ShortCodeManager extends ManageDiscount
             $query_arguments['post__in'] = $products;
         }
         if (!empty($exclude_products)) {
-            $query_arguments['post__not_in'] = $exclude_products;
+            $query_arguments['post__not_in'] = $exclude_products; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
         }
     }
 
@@ -317,7 +317,7 @@ class ShortCodeManager extends ManageDiscount
         $query_arguments['orderby'] = $order_by;
         $query_arguments['order'] = $order;
         if (!empty($meta_key)) {
-            $query_arguments['meta_key'] = $meta_key;
+            $query_arguments['meta_key'] = $meta_key; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
         }
     }
 
@@ -330,13 +330,7 @@ class ShortCodeManager extends ManageDiscount
     {
         if (!empty(self::$available_rules)) {
             global $woocommerce_loop;
-            $short_code_attributes = shortcode_atts(array(
-                'per_page' => 12,
-                'columns' => 3,
-                'orderby' => 'title',
-                'do_pagination' => 1,
-                'order' => 'asc'
-            ), $short_code_attributes);
+            $short_code_attributes = shortcode_atts( apply_filters('advanced_woo_discount_rules_sale_page_list_attributes', ['per_page' => 12, 'columns' => 3, 'orderby' => 'title', 'do_pagination' => 1, 'order' => 'asc']), $short_code_attributes);
             $paged = $this->input->get('product-page', 1);
             $order_by = $this->input->get('orderby', 'title');
 
@@ -353,7 +347,7 @@ class ShortCodeManager extends ManageDiscount
                 );
                 if($onsale_list['has_store_wide']){
                     if (!empty($onsale_list['list'])) {
-                        $query_arguments['post__not_in'] = $onsale_list['list'];
+                        $query_arguments['post__not_in'] = $onsale_list['list']; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
                     }
                 } else {
                     if (!empty($onsale_list['list'])) {
@@ -363,16 +357,7 @@ class ShortCodeManager extends ManageDiscount
                 // Exclude_out_of_stock_products_for_on_sale_page
                 $exclude_out_of_stock_products_for_on_sale_page = self::$config->getConfig('exclude_out_of_stock_products_for_on_sale_page', apply_filters('advanced_woo_discount_rules_exclude_out_of_stock_product_on_sale_page', 0));
                 if(!empty($exclude_out_of_stock_products_for_on_sale_page)){
-                    $exclude_out_of_stock = array('meta_query' => array(
-                        array(
-                            'key' => '_stock_status',
-                            'value' => 'instock'
-                        ),
-                        array(
-                            'key' => '_backorders',
-                            'value' => 'no'
-                        ),
-                    ));
+                    $exclude_out_of_stock = array('meta_query' => array( array( 'key' => '_stock_status', 'value' => 'instock' ), array( 'key' => '_backorders', 'value' => 'no' ), ));  // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                     $query_arguments = array_merge($query_arguments, $exclude_out_of_stock);
                 }
             } else {

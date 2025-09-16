@@ -1,10 +1,8 @@
 <?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
+
 namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
-
-
-use MailPoet\WP\Functions as WPFunctions;
 
 
 class Drone {
@@ -12,7 +10,9 @@ class Drone {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/drone';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -32,7 +32,7 @@ class Drone {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
          [
           'type' => 'container',
@@ -531,7 +531,7 @@ class Drone {
                               5 =>
                                  [
                                   'type' => 'social',
-                                  'iconSet' => 'full-symbol-grey',
+                                  'iconSet' => 'official-white',
                                   'icons' =>
                                      [
                                       0 =>
@@ -539,7 +539,7 @@ class Drone {
                                           'type' => 'socialIcon',
                                           'iconType' => 'facebook',
                                           'link' => 'http://www.facebook.com',
-                                          'image' => $this->social_icon_url . '/08-full-symbol-grey/Facebook.png',
+                                          'image' => $this->social_icon_url . '/12-official-white/Facebook.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Facebook',
@@ -549,7 +549,7 @@ class Drone {
                                           'type' => 'socialIcon',
                                           'iconType' => 'twitter',
                                           'link' => 'http://www.twitter.com',
-                                          'image' => $this->social_icon_url . '/08-full-symbol-grey/Twitter.png',
+                                          'image' => $this->social_icon_url . '/12-official-white/X.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Twitter',
@@ -559,7 +559,7 @@ class Drone {
                                           'type' => 'socialIcon',
                                           'iconType' => 'instagram',
                                           'link' => 'http://instagram.com',
-                                          'image' => $this->social_icon_url . '/08-full-symbol-grey/Instagram.png',
+                                          'image' => $this->social_icon_url . '/12-official-white/Instagram.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Instagram',
@@ -569,7 +569,7 @@ class Drone {
                                           'type' => 'socialIcon',
                                           'iconType' => 'youtube',
                                           'link' => 'http://www.youtube.com',
-                                          'image' => $this->social_icon_url . '/08-full-symbol-grey/Youtube.png',
+                                          'image' => $this->social_icon_url . '/12-official-white/Youtube.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Youtube',
@@ -812,7 +812,7 @@ class Drone {
                               1 =>
                                  [
                                   'type' => 'footer',
-                                  'text' => '<p><span style="color: #ffffff;"><a href="[link:subscription_unsubscribe_url]" style="color: #ffffff;">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]" style="color: #ffffff;">'.__("Manage your subscription", 'mailpoet').'</a></span></p>',
+                                  'text' => '<p><span style="color: #ffffff;"><a href="[link:subscription_unsubscribe_url]" style="color: #ffffff;">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]" style="color: #ffffff;">' . __("Manage your subscription", 'mailpoet') . '</a></span></p>',
                                   'styles' =>
                                      [
                                       'block' =>
@@ -1044,7 +1044,7 @@ class Drone {
              ],
           'footer' =>
              [
-              'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+              'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
               'styles' =>
                  [
                   'block' =>
@@ -1130,7 +1130,7 @@ class Drone {
              ],
           'social' =>
              [
-              'iconSet' => 'default',
+              'iconSet' => 'official',
               'icons' =>
                  [
                   0 =>
@@ -1138,7 +1138,7 @@ class Drone {
                       'type' => 'socialIcon',
                       'iconType' => 'facebook',
                       'link' => 'http://www.facebook.com',
-                      'image' => $this->social_icon_url . '/01-social/Facebook.png',
+                      'image' => $this->social_icon_url . '/11-official/Facebook.png',
                       'height' => '32px',
                       'width' => '32px',
                       'text' => 'Facebook',
@@ -1148,7 +1148,7 @@ class Drone {
                       'type' => 'socialIcon',
                       'iconType' => 'twitter',
                       'link' => 'http://www.twitter.com',
-                      'image' => $this->social_icon_url . '/01-social/Twitter.png',
+                      'image' => $this->social_icon_url . '/11-official/X.png',
                       'height' => '32px',
                       'width' => '32px',
                       'text' => 'Twitter',
@@ -1169,7 +1169,7 @@ class Drone {
              ],
           'header' =>
              [
-              'text' => '<a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a>',
+              'text' => '<a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a>',
               'styles' =>
                  [
                   'block' =>
@@ -1193,5 +1193,4 @@ class Drone {
          ],
     ];
   }
-
 }

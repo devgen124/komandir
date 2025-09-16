@@ -12,6 +12,7 @@ namespace RankMath\Schema;
 
 use WP_Block_Type_Registry;
 use RankMath\Helper;
+use RankMath\Helpers\Param;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -63,7 +64,16 @@ class Block_TOC extends Block {
 		$this->filter( 'rank_math/schema/block/toc-block', 'add_graph', 10, 2 );
 		$this->filter( 'render_block_rank-math/toc-block', 'render_toc_block_content', 10, 2 );
 		$this->filter( 'rank_math/metabox/post/values', 'block_settings_metadata' );
+		$this->action( 'admin_enqueue_scripts', 'add_json_data' );
 		register_block_type( RANK_MATH_PATH . 'includes/modules/schema/blocks/toc/block.json' );
+		$this->action( 'wp_enqueue_scripts', 'register_block_style' );
+	}
+
+	/**
+	 * Register block style.
+	 */
+	public function register_block_style() {
+		wp_register_style( 'rank-math-toc-block', rank_math()->plugin_url() . 'includes/modules/schema/blocks/toc/assets/css/toc_list_style.css', [], rank_math()->version );
 	}
 
 	/**
@@ -82,6 +92,21 @@ class Block_TOC extends Block {
 	}
 
 	/**
+	 * Add default Block values on FSE Template page.
+	 *
+	 * @return void
+	 */
+	public function add_json_data() {
+		if ( Param::get( 'postType' ) !== 'wp_template' ) {
+			return;
+		}
+
+		Helper::add_json( 'tocTitle', Helper::get_settings( 'general.toc_block_title' ) );
+		Helper::add_json( 'tocExcludeHeadings', Helper::get_settings( 'general.toc_block_exclude_headings', [] ) );
+		Helper::add_json( 'listStyle', Helper::get_settings( 'general.toc_block_list_style', 'ul' ) );
+	}
+
+	/**
 	 * Add default TOC title.
 	 *
 	 * @param string $block_content Block content.
@@ -90,6 +115,7 @@ class Block_TOC extends Block {
 	 * @return string
 	 */
 	public function render_toc_block_content( $block_content, $parsed_block ) {
+		wp_enqueue_style( 'rank-math-toc-block' );
 		if ( isset( $parsed_block['attrs']['title'] ) ) {
 			return $block_content;
 		}
@@ -99,11 +125,12 @@ class Block_TOC extends Block {
 			return $block_content;
 		}
 
-		$title_wrapper = $parsed_block['attrs']['titleWrapper'] ?? 'h2';
+		$allowed_tags  = [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div' ];
+		$title_wrapper = isset( $parsed_block['attrs']['titleWrapper'] ) && in_array( $parsed_block['attrs']['titleWrapper'], $allowed_tags, true ) ? $parsed_block['attrs']['titleWrapper'] : 'h2';
 
 		$block_content = preg_replace_callback(
 			'/(<div class=".*?wp-block-rank-math-toc-block.*?"\>)/i',
-			function( $value ) use ( $title, $block_content, $title_wrapper ) {
+			function ( $value ) use ( $title, $block_content, $title_wrapper ) {
 				if ( ! isset( $value[0] ) ) {
 					return $block_content;
 				}
@@ -113,8 +140,14 @@ class Block_TOC extends Block {
 			},
 			$block_content
 		);
+		$block_content = str_replace( 'class=""', '', $block_content );
 
-		return str_replace( 'class=""', '', $block_content );
+		return apply_filters(
+			'rank_math/schema/block/toc/content',
+			wp_kses_post( $block_content ),
+			$block_content,
+			$parsed_block['attrs'],
+		);
 	}
 
 	/**
@@ -145,8 +178,8 @@ class Block_TOC extends Block {
 				'@context' => 'https://schema.org',
 				'@type'    => 'SiteNavigationElement',
 				'@id'      => '#rank-math-toc',
-				'name'     => $heading['content'],
-				'url'      => get_permalink() . $heading['link'],
+				'name'     => esc_html( $heading['content'] ),
+				'url'      => esc_url( get_permalink() . $heading['link'] ),
 			];
 		}
 

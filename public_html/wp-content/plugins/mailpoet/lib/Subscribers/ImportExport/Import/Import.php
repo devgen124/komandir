@@ -111,8 +111,8 @@ class Import {
       array_keys($data['columns'])
     );
     $this->subscribersCount = (reset($this->subscribersData) === false) ? 0 : count(reset($this->subscribersData));
-    $this->createdAt = Carbon::createFromTimestamp(WPFunctions::get()->currentTime('timestamp'));
-    $this->updatedAt = Carbon::createFromTimestamp(WPFunctions::get()->currentTime('timestamp') + 1);
+    $this->createdAt = Carbon::now()->millisecond(0);
+    $this->updatedAt = Carbon::createFromTimestamp(WPFunctions::get()->currentTime('timestamp', true) + 1);
     $this->requiredSubscribersFields = [
       'status' => SubscriberEntity::STATUS_SUBSCRIBED,
       'first_name' => '',
@@ -252,7 +252,9 @@ class Import {
               $invalidRecords[] = $index;
             }
             return strtolower($email);
-          }, array_keys($data), $data
+          },
+          array_keys($data),
+          $data
         );
       }
       if (in_array($column, ['created_at', 'confirmed_at'], true)) {
@@ -266,7 +268,9 @@ class Import {
               return null;
             }
             return $ip;
-          }, array_keys($data), $data
+          },
+          array_keys($data),
+          $data
         );
       }
       // if this is a custom column
@@ -306,7 +310,9 @@ class Import {
           $invalidRecords[] = $index;
         }
         return $date;
-      }, array_keys($data), $data
+      },
+      array_keys($data),
+      $data
     );
   }
 
@@ -441,7 +447,6 @@ class Import {
       0,
       $subscribersCount,
       $fieldValue
-
     );
     $subscribers['fields'][] = $fieldName;
 
@@ -482,7 +487,8 @@ class Import {
     $subscribersData['data']['link_token'] = array_map(
       function () {
         return Security::generateRandomString(SubscriberEntity::LINK_TOKEN_LENGTH);
-      }, array_fill(0, $subscribersCount, null)
+      },
+      array_fill(0, $subscribersCount, null)
     );
     return $subscribersData;
   }

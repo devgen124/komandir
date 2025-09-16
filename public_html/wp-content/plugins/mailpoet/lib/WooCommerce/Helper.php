@@ -5,7 +5,7 @@ namespace MailPoet\WooCommerce;
 if (!defined('ABSPATH')) exit;
 
 
-use Automattic\WooCommerce\Admin\API\Reports\Customers\Stats\Query;
+use Automattic\WooCommerce\Admin\API\Reports\Customers\Stats\DataStore;
 use MailPoet\DI\ContainerWrapper;
 use MailPoet\RuntimeException;
 use MailPoet\WP\Functions as WPFunctions;
@@ -25,7 +25,7 @@ class Helper {
   }
 
   public function getWooCommerceVersion() {
-    return $this->isWooCommerceActive() ? get_plugin_data(WP_PLUGIN_DIR . '/woocommerce/woocommerce.php')['Version'] : null;
+    return $this->isWooCommerceActive() ? get_plugin_data(WP_PLUGIN_DIR . '/woocommerce/woocommerce.php', false, false)['Version'] : null;
   }
 
   public function getPurchaseStates(): array {
@@ -86,6 +86,10 @@ class Helper {
     return wc_get_product($theProduct);
   }
 
+  public function wcGetProducts(array $args) {
+    return wc_get_products($args);
+  }
+
   public function wcGetPageId(string $page): ?int {
     if ($this->isWooCommerceActive()) {
       return (int)wc_get_page_id($page);
@@ -143,7 +147,7 @@ class Helper {
 
   public function getRawPrice($price, array $args = []) {
     $htmlPrice = $this->wcPrice($price, $args);
-    return html_entity_decode(strip_tags($htmlPrice));
+    return html_entity_decode(strip_tags($htmlPrice), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401);
   }
 
   public function getAllowedCountries(): array {
@@ -151,14 +155,14 @@ class Helper {
   }
 
   public function getCustomersCount(): int {
-    if (!$this->isWooCommerceActive() || !class_exists(Query::class)) {
+    if (!$this->isWooCommerceActive() || !class_exists(DataStore::class)) {
       return 0;
     }
-    $query = new Query([
+
+    $dataStore = new DataStore();
+    $result = (array)$dataStore->get_data([
       'fields' => ['customers_count'],
     ]);
-    // Query::get_data declares it returns array but the underlying DataStore returns stdClass
-    $result = (array)$query->get_data();
     return isset($result['customers_count']) ? intval($result['customers_count']) : 0;
   }
 
@@ -308,6 +312,10 @@ class Helper {
     return $keyedZones;
   }
 
+  public function wcGetAttributeTaxonomies(): array {
+    return wc_get_attribute_taxonomies();
+  }
+
   protected function formatShippingMethods(array $shippingMethods, string $shippingZoneName): array {
     $formattedShippingMethods = [];
 
@@ -338,5 +346,17 @@ class Helper {
       && (strpos($requestUri, 'wc/store/checkout') !== false || strpos($requestUri, 'wc/store/v1/checkout') !== false);
 
     return $isRegularCheckout || $isBlockCheckout;
+  }
+
+  public function isWooCommerceEmailImprovementsEnabled(): bool {
+    if (!class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
+      return false;
+    }
+    // By this point, the feature should be enabled by default for everyone
+    $wcVersion = $this->getWooCommerceVersion();
+    if (version_compare($wcVersion, '10.0.0', '>')) {
+      return true;
+    }
+    return \Automattic\WooCommerce\Utilities\FeaturesUtil::feature_is_enabled('email_improvements');
   }
 }

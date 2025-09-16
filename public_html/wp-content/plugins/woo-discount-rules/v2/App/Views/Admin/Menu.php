@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
             $target = '';
             $link = admin_url('admin.php?' . http_build_query($params));
             // if ($tab_key === 'help') {
-            //$link = 'https://docs.flycart.org/en/collections/2195266-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=documentation';
+            //$link = 'https://docs.flycart.org/en/collections/806883-discount-rules-for-woocommerce';
             //  $target = 'target="_blank"';
             //  }
             ?>
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
                style="<?php echo ($tab_key === 'help') ? 'background: cornflowerblue;color: white;' : ''; ?>"
                href="<?php echo esc_url($link); ?>" <?php echo esc_attr($target); ?>><?php echo esc_html($tab_handler->title); ?></a>
         <?php } ?>
-        <span class="awdr_version_text"> <?php echo 'v' . (defined('WDR_VERSION') ? WDR_VERSION : '2.0.0 + ') . ' '; ?> </span>
+        <span class="awdr_version_text"> <?php echo esc_html('v' . (defined('WDR_VERSION') ? WDR_VERSION : '2.0.0 + ') . ' '); ?> </span>
         <?php
         if (isset($on_sale_page_rebuild['available']) && $on_sale_page_rebuild['available']) {
             $additional_class_for_rebuild = '';

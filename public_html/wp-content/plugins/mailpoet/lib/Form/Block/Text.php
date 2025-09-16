@@ -34,7 +34,7 @@ class Text {
     $this->wp = $wp;
   }
 
-  public function render(array $block, array $formSettings): string {
+  public function render(array $block, array $formSettings, ?int $formId = null): string {
     $type = 'text';
     $automationId = ' ';
     $id = '';
@@ -71,7 +71,7 @@ class Text {
 
     $html .= 'name="data[' . $name . ']" ';
 
-    $html .= 'title="' . $this->rendererHelper->getFieldLabel($block) . '" ';
+    $html .= 'title="' . $this->wp->escAttr($this->rendererHelper->getFieldLabel($block)) . '" ';
 
     $html .= 'value="' . $this->rendererHelper->getFieldValue($block) . '" ';
 
@@ -88,6 +88,8 @@ class Text {
     $html .= $this->rendererHelper->getInputModifiers($block);
 
     $html .= '/>';
+
+    $html .= $this->rendererHelper->renderErrorsContainer($block, $formId);
 
     return $this->wrapper->render($block, $html);
   }

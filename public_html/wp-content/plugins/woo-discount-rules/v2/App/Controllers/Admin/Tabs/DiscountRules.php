@@ -14,6 +14,7 @@ class DiscountRules extends Base
     public $priority = 10;
     protected $tab = 'rules';
     public static $available_rules = array();
+    protected $page_limit = 20;
 
     /**
      * DiscountRules constructor.
@@ -33,6 +34,7 @@ class DiscountRules extends Base
     {
         $rule_helper = new Rule();
         $available_conditions = $this->getAvailableConditions();
+		$recommended_addon = $this->getRecommendedAddon();
         $params = array();
         //$params['configuration'] = new Configuration();
         $params['base'] = $this;
@@ -47,33 +49,71 @@ class DiscountRules extends Base
             $params['page'] = $page;
             $params['product_filters'] = $this->getProductFilterTypes();
             $params['on_sale_page_rebuild'] = OnSaleShortCode::getOnPageReBuildOption($id);
+            $params['current_page'] = (int)$this->input->get('page_no', 1);
             self::$template_helper->setPath(WDR_PLUGIN_PATH . 'App/Views/Admin/Rules/Manage.php' )->setData($params)->display();
         } else {
             $params['has_migration'] = $this->isMigrationAvailable();
             if($params['has_migration']){
                 $params['migration_rule_count'] =$this->getV1RuleCount();
             }
+            $current_user = get_current_user_id();
+            $default_filter = get_user_meta($current_user, 'awdr_filters', true);
+            $set_limit = !empty($default_filter['limit']) ? $default_filter['limit'] : $this->page_limit;
+            $default_limit = apply_filters('advanced_woo_discount_rules_pagination_limit', $this->input->get('limit', $set_limit));
+            $limit = $default_limit == 'all' ? $default_limit : (int)$default_limit;
+            $params['limit'] = !empty($limit) ? $limit :  $this->page_limit;
+            $sort = !empty($default_filter['reorder']) ? $default_filter['reorder'] : 0 ;
             $params['name'] = stripslashes(sanitize_text_field($this->input->get('name', '')));
-            $params['limit']= (int)$this->input->get('limit', 20);
-            $params['sort'] = (int)$this->input->get('re_order', 0);
+            $params['sort'] = (int)$this->input->get('re_order', $sort);
             $params['current_page'] = (int)$this->input->get('page_no', 1);
-            $offset = ( $params['current_page'] - 1 ) *  $params['limit'];
+            if ($params['limit'] == 'all'){
+                $offset = 0;
+            } else {
+                $offset = ( $params['current_page'] - 1 ) *  $params['limit'];
+            }
             $data = $rule_helper->adminPagination($available_conditions, $params['limit'],$offset,$params['sort'],$params['name']);
             $params['rules'] = $params['rule_count'] = $params['total_count'] = array();
-           if (!empty($data) && isset($data['result']) && isset($data['count']) && $params['limit'] > 1){
+           if (!empty($data) && isset($data['result']) && isset($data['count'])){
                $params['rules'] = $data['result'];
                $params['rule_count'] = $data['count'];
-               $params['total_count'] = ceil($params['rule_count'] /  $params['limit']);
+               if ($params['limit'] != 'all' && is_numeric($params['limit']) && $params['limit'] >= 1){
+                   $params['total_count'] = ceil($params['rule_count'] /  $params['limit']);
                if ($params['total_count'] < $params['current_page'] && $params['rule_count'] > 1){
                    $redirect_url = remove_query_arg('page_no');
                    wp_redirect($redirect_url);
                    exit();
                }
+               }
            }
             $params['input'] = $this->input;
+	        $params['recommended_addon'] = $recommended_addon;
             self::$template_helper->setPath(WDR_PLUGIN_PATH . 'App/Views/Admin/Tabs/DiscountRule.php')->setData($params)->display();
         }
     }
+
+	public function getRecommendedAddon(){
+		$site_name = isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : '';
+		return  [
+			"wployalty" => [
+				"name" => "WPLoyalty - Loyalty Points, Rewards & Referrals",
+				"author" => "WPLoyalty",
+				"description" => "Best Loyalty Points, Rewards & Referral plugin for WooCommerce. 10x your repeat sales by rewarding customers with points for purchases, sign-ups, reviews, referrals, social shares, birthdays, and more",
+				"icon_url" => "https://static.flycart.net/recommendation/icons/wployalty.png",
+				"plugin_url" => str_replace('{site-name}', $site_name,"https://wployalty.net/?utm_campaign=rule&utm_source=woo-discount-rules&utm_medium={site-name}"),
+				"banner_image" => "https://static.flycart.net/recommendation/image/wployalty.png",
+				"primary_color" => "#5C54EC",
+			],
+			"upsellwp" => [
+				"name" => "UpsellWP - Upsells, Cross-sells, Order bumps",
+				"author" => "UpsellWP",
+				"description" => "Increase average order value with the all-in-one upsell plugin. Effortlessly create one-click upsells, order bumps, frequently bought together offers, post purchase upsells, cart upsells, thank you page upsells, and added-to-cart popup product recommendations.",
+				"icon_url" => "https://static.flycart.net/recommendation/icons/upsellwp.png",
+				"plugin_url" => str_replace('{site-name}', $site_name,"https://upsellwp.com/?utm_campaign=rule&utm_source=woo-discount-rules&utm_medium={site-name}"),
+				"banner_image" => "https://static.flycart.net/recommendation/image/upsellwp.png",
+				"primary_color" => "#012359",
+			],
+		];
+	}
 
     /**
      * Load welcome content

@@ -118,11 +118,11 @@ class Input
     /**
      * Input constructor.
      */
-    function __construct()
+    /*function __construct()
     {
         // Sanitize global arrays
         $this->_sanitize_globals();
-    }
+    }*/
 
     /**
      * Sanitize Globals
@@ -132,14 +132,14 @@ class Input
         // Is $_GET data allowed? If not we'll set the $_GET to an empty array
         if ($this->_allow_get_array === FALSE) {
             $_GET = array();
-        } elseif (is_array($_GET)) {
-            foreach ($_GET as $key => $val) {
+        } elseif (is_array($_GET)) {//phpcs:ignore WordPress.Security.NonceVerification.Recommended,
+            foreach ($_GET as $key => $val) {//phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 $_GET[$this->_clean_input_keys($key)] = $this->_clean_input_data($val);
             }
         }
         // Clean $_POST Data
-        if (is_array($_POST)) {
-            foreach ($_POST as $key => $val) {
+        if (is_array($_POST)) {//phpcs:ignore WordPress.Security.NonceVerification.Missing
+            foreach ($_POST as $key => $val) {//phpcs:ignore WordPress.Security.NonceVerification.Missing
                 $_POST[$this->_clean_input_keys($key)] = $this->_clean_input_data($val);
             }
         }
@@ -163,8 +163,9 @@ class Input
                 }
             }
         }
+
         // Sanitize PHP_SELF
-        $_SERVER['PHP_SELF'] = strip_tags($_SERVER['PHP_SELF']);
+        $_SERVER['PHP_SELF'] = isset($_SERVER['PHP_SELF']) && !empty($_SERVER['PHP_SELF']) ? wp_strip_all_tags(wp_unslash($_SERVER['PHP_SELF'])) : '';
     }
 
     /**
@@ -249,8 +250,9 @@ class Input
                 $text = $stati[$code];
             }
         }
+
         $server_protocol = (isset($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], array('HTTP/1.0', 'HTTP/1.1', 'HTTP/2'), TRUE))
-            ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
+            ? sanitize_text_field(wp_unslash($_SERVER['SERVER_PROTOCOL'])) : 'HTTP/1.1';
         header($server_protocol . ' ' . $code . ' ' . $text, TRUE, $code);
     }
 
@@ -336,9 +338,8 @@ class Input
      */
     function post_get($index, $default = NULL, $xss_clean = NULL)
     {
-        return isset($_POST[$index])
-            ? $this->post($index, $default, $xss_clean)
-            : $this->get($index, $default, $xss_clean);
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+        return isset($_POST[$index]) ? $this->post($index, $default, $xss_clean) : $this->get($index, $default, $xss_clean);
     }
 
     /**
@@ -350,6 +351,7 @@ class Input
      */
     function post($index = NULL, $default = NULL, $xss_clean = NULL)
     {
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
         return $this->_fetch_from_array($_POST, $index, $default, $xss_clean);
     }
 
@@ -615,6 +617,7 @@ class Input
      */
     function get($index = NULL, $default = NULL, $xss_clean = NULL)
     {
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
         return $this->_fetch_from_array($_GET, $index, $default, $xss_clean);
     }
 
@@ -627,9 +630,8 @@ class Input
      */
     function get_post($index, $default = NULL, $xss_clean = NULL)
     {
-        return isset($_GET[$index])
-            ? $this->get($index, $default, $xss_clean)
-            : $this->post($index, $default, $xss_clean);
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        return isset($_GET[$index]) ? $this->get($index, $default, $xss_clean) : $this->post($index, $default, $xss_clean);
     }
 
     /**
@@ -713,26 +715,17 @@ class Input
         if (function_exists('apache_request_headers')) {
             $this->headers = apache_request_headers();
         } else {
-            isset($_SERVER['CONTENT_TYPE']) && $this->headers['Content-Type'] = $_SERVER['CONTENT_TYPE'];
+            isset($_SERVER['CONTENT_TYPE']) && $this->headers['Content-Type'] = sanitize_text_field(wp_unslash($_SERVER['CONTENT_TYPE']));
             foreach ($_SERVER as $key => $val) {
                 if (sscanf($key, 'HTTP_%s', $header) === 1) {
                     // take SOME_HEADER and turn it into Some-Header
                     $header = str_replace('_', ' ', strtolower($header));
                     $header = str_replace(' ', '-', ucwords($header));
-                    $this->headers[$header] = $_SERVER[$key];
+                    $this->headers[$header] = $_SERVER[$key];//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
                 }
             }
         }
         return $this->_fetch_from_array($this->headers, NULL, NULL, $xss_clean);
-    }
-
-    /**
-     * Is AJAX request?
-     * @return bool
-     */
-    function is_ajax_request()
-    {
-        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest');
     }
 
     /**
@@ -819,7 +812,7 @@ class Input
         if ($this->_xss_hash === NULL) {
             $rand = $this->get_random_bytes(16);
             $this->_xss_hash = ($rand === FALSE)
-                ? md5(uniqid(mt_rand(), TRUE))
+                ? md5(uniqid(wp_rand(), TRUE))
                 : bin2hex($rand);
         }
         return $this->_xss_hash;
@@ -833,6 +826,12 @@ class Input
      */
     function get_random_bytes($length)
     {
+        global $wp_filesystem;
+        if (empty($wp_filesystem)) {
+            require_once ABSPATH . '/wp-admin/includes/file.php';
+            WP_Filesystem();
+        }
+
         if (empty($length) OR !ctype_digit((string)$length)) {
             return FALSE;
         }
@@ -846,12 +845,9 @@ class Input
                 return FALSE;
             }
         }
-        if (is_readable('/dev/urandom') && ($fp = fopen('/dev/urandom', 'rb')) !== FALSE) {
-            // Try not to waste entropy ...
-            $this->is_php('5.4') && stream_set_chunk_size($fp, $length);
-            $output = fread($fp, $length);
-            fclose($fp);
-            if ($output !== FALSE) {
+        if ($wp_filesystem->exists('/dev/urandom')) {
+            $output = $wp_filesystem->get_contents('/dev/urandom', false, $length);
+            if ($output !== false) {
                 return $output;
             }
         }

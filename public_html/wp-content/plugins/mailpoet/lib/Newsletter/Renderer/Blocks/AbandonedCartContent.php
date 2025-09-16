@@ -25,35 +25,37 @@ class AbandonedCartContent {
     NewsletterEntity $newsletter,
     array $args,
     bool $preview = false,
-    SendingQueueEntity $sendingQueue = null
+    ?SendingQueueEntity $sendingQueue = null
   ): array {
     if (
       !in_array(
-      $newsletter->getType(),
-      [
+        $newsletter->getType(),
+        [
         NewsletterEntity::TYPE_AUTOMATIC,
         NewsletterEntity::TYPE_AUTOMATION_TRANSACTIONAL,
         NewsletterEntity::TYPE_AUTOMATION,
-      ],
-      true
+        ],
+        true
       )
     ) {
       // Do not display the block if not an automatic email
       return [];
     }
-    $groupOption = $newsletter->getOptions()->filter(function (NewsletterOptionEntity $newsletterOption = null) {
+    $groupOption = $newsletter->getOptions()->filter(function (?NewsletterOptionEntity $newsletterOption = null) {
       if (!$newsletterOption) return false;
       $optionField = $newsletterOption->getOptionField();
       return $optionField && $optionField->getName() === 'group';
     })->first();
-    $eventOption = $newsletter->getOptions()->filter(function (NewsletterOptionEntity $newsletterOption = null) {
+    $eventOption = $newsletter->getOptions()->filter(function (?NewsletterOptionEntity $newsletterOption = null) {
       if (!$newsletterOption) return false;
       $optionField = $newsletterOption->getOptionField();
       return $optionField && $optionField->getName() === 'event';
     })->first();
     if (
-      ($groupOption instanceof NewsletterOptionEntity && $groupOption->getValue() !== WooCommerceEmail::SLUG)
-      || ($eventOption instanceof NewsletterOptionEntity && $eventOption->getValue() !== AbandonedCart::SLUG)
+      !$groupOption
+      || $groupOption->getValue() !== WooCommerceEmail::SLUG
+      || !$eventOption
+      || $eventOption->getValue() !== AbandonedCart::SLUG
     ) {
       // Do not display the block if not an AbandonedCart email
       return [];

@@ -1,10 +1,8 @@
 <?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
+
 namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
-
-
-use MailPoet\WP\Functions as WPFunctions;
 
 
 class NewspaperTraditional {
@@ -12,7 +10,9 @@ class NewspaperTraditional {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/newspaper-traditional';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -32,7 +32,7 @@ class NewspaperTraditional {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
        [
         'type' => 'container',
@@ -143,7 +143,7 @@ class NewspaperTraditional {
                   1 =>
                    [
                     'type' => 'header',
-                    'text' => '<p><span style="color: #008080;"><a href="[link:newsletter_view_in_browser_url]" style="color: #008080;">'.__("View this in your browser.", 'mailpoet').'</a></span></p>',
+                    'text' => '<p><span style="color: #008080;"><a href="[link:newsletter_view_in_browser_url]" style="color: #008080;">' . __("View this in your browser.", 'mailpoet') . '</a></span></p>',
                     'styles' =>
                      [
                       'block' =>
@@ -247,7 +247,7 @@ class NewspaperTraditional {
                   0 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-black',
+                    'iconSet' => 'official',
                     'icons' =>
                      [
                       0 =>
@@ -255,7 +255,7 @@ class NewspaperTraditional {
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -265,7 +265,7 @@ class NewspaperTraditional {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -275,7 +275,7 @@ class NewspaperTraditional {
                         'type' => 'socialIcon',
                         'iconType' => 'website',
                         'link' => '',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Website.png',
+                        'image' => $this->social_icon_url . '/11-official/Website.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Website',
@@ -285,7 +285,7 @@ class NewspaperTraditional {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -722,7 +722,7 @@ class NewspaperTraditional {
                   0 =>
                    [
                     'type' => 'footer',
-                    'text' => '<p><span style="color: #458687;"><a href="[link:subscription_unsubscribe_url]" style="color: #458687;">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]" style="color: #458687;">'.__("Manage your subscription", 'mailpoet').'</a></span><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+                    'text' => '<p><span style="color: #458687;"><a href="[link:subscription_unsubscribe_url]" style="color: #458687;">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]" style="color: #458687;">' . __("Manage your subscription", 'mailpoet') . '</a></span><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
                     'styles' =>
                      [
                       'block' =>
@@ -746,7 +746,7 @@ class NewspaperTraditional {
                   1 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-black',
+                    'iconSet' => 'official',
                     'icons' =>
                      [
                       0 =>
@@ -754,7 +754,7 @@ class NewspaperTraditional {
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -764,7 +764,7 @@ class NewspaperTraditional {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -774,7 +774,7 @@ class NewspaperTraditional {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -784,7 +784,7 @@ class NewspaperTraditional {
                         'type' => 'socialIcon',
                         'iconType' => 'email',
                         'link' => '',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Email.png',
+                        'image' => $this->social_icon_url . '/11-official/Email.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Email',
@@ -1064,7 +1064,7 @@ class NewspaperTraditional {
          ],
         'footer' =>
          [
-          'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+          'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
           'styles' =>
            [
             'block' =>
@@ -1151,7 +1151,7 @@ class NewspaperTraditional {
          ],
         'social' =>
          [
-          'iconSet' => 'full-symbol-black',
+          'iconSet' => 'official',
           'icons' =>
            [
             0 =>
@@ -1159,7 +1159,7 @@ class NewspaperTraditional {
               'type' => 'socialIcon',
               'iconType' => 'facebook',
               'link' => 'http://www.facebook.com',
-              'image' => $this->social_icon_url . '/07-full-symbol-black/Facebook.png',
+              'image' => $this->social_icon_url . '/11-official/Facebook.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Facebook',
@@ -1169,7 +1169,7 @@ class NewspaperTraditional {
               'type' => 'socialIcon',
               'iconType' => 'twitter',
               'link' => 'http://www.twitter.com',
-              'image' => $this->social_icon_url . '/07-full-symbol-black/Twitter.png',
+              'image' => $this->social_icon_url . '/11-official/X.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Twitter',
@@ -1179,7 +1179,7 @@ class NewspaperTraditional {
               'type' => 'socialIcon',
               'iconType' => 'instagram',
               'link' => 'http://instagram.com',
-              'image' => $this->social_icon_url . '/07-full-symbol-black/Instagram.png',
+              'image' => $this->social_icon_url . '/11-official/Instagram.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Instagram',
@@ -1189,7 +1189,7 @@ class NewspaperTraditional {
               'type' => 'socialIcon',
               'iconType' => 'email',
               'link' => '',
-              'image' => $this->social_icon_url . '/07-full-symbol-black/Email.png',
+              'image' => $this->social_icon_url . '/11-official/Email.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Email',
@@ -1211,7 +1211,7 @@ class NewspaperTraditional {
          ],
         'header' =>
          [
-          'text' => '<a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a>',
+          'text' => '<a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a>',
           'styles' =>
            [
             'block' =>
@@ -1236,5 +1236,4 @@ class NewspaperTraditional {
        ],
     ];
   }
-
 }

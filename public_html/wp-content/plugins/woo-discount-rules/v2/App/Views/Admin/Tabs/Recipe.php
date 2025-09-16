@@ -11,27 +11,27 @@ $template_helper = new Template();
     <?php if($is_pro) { ?>
         <div class="awdr-header_text_recipe">
             <p>
-                <?php _e('Use the sample recipes below to create discount rules easily. These are example rules for some of the popular discount scenarios. You can use these recipes to get started quickly.', 'woo-discount-rules'); ?>
+                <?php esc_html_e('Use the sample recipes below to create discount rules easily. These are example rules for some of the popular discount scenarios. You can use these recipes to get started quickly.', 'woo-discount-rules'); ?>
             </p>
         </div>
         <div class="awdr_recipe_container">
             <div class="awdr_recipe_left">
                 <div class="awdr_recipe_main_card" data-recipe-group="awdr_product_adjustment_card_group">
                     <div class="awdr_product_adjustment_card_container" >
-                        <h4><b> <?php _e('Simple Discount', 'woo-discount-rules');?></b></h4>
-                        <p><?php _e('Product adjustment ', 'woo-discount-rules');?></p>
+                        <h4><b> <?php esc_html_e('Simple Discount', 'woo-discount-rules');?></b></h4>
+                        <p><?php esc_html_e('Product adjustment ', 'woo-discount-rules');?></p>
                     </div>
                 </div>
                 <div class="awdr_recipe_main_card" data-recipe-group="awdr_set_adjustment_card_group">
                     <div class="awdr_set_adjustment_card_container">
-                        <h4><b><?php _e('Bundle(set) Discount', 'woo-discount-rules');?></b></h4>
-                        <p><?php _e('Bundle(set) Adjustment', 'woo-discount-rules');?></p>
+                        <h4><b><?php esc_html_e('Bundle(set) Discount', 'woo-discount-rules');?></b></h4>
+                        <p><?php esc_html_e('Bundle(set) Adjustment', 'woo-discount-rules');?></p>
                     </div>
                 </div>
                 <div class="awdr_recipe_main_card" data-recipe-group="awdr_bogo_adjustment_card_group">
                     <div class="awdr_bogo_adjustment_card_container">
-                        <h4><b><?php _e('BOGO Discount', 'woo-discount-rules');?></b></h4>
-                        <p><?php _e('BOGO Adjustment', 'woo-discount-rules');?></p>
+                        <h4><b><?php esc_html_e('BOGO Discount', 'woo-discount-rules');?></b></h4>
+                        <p><?php esc_html_e('BOGO Adjustment', 'woo-discount-rules');?></p>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@ $template_helper = new Template();
         </div>
         <?php
     }else{ ?>
-       <p> <?php  _e("Unlock this feature by <a href='https://www.flycart.org/products/wordpress/woocommerce-discount-rules?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=unlock_pro' target='_blank'>Upgrading to Pro</a>", 'woo-discount-rules'); ?></p>
+       <p> <?php  echo wp_kses_post(__("Unlock this feature by <a href='https://www.flycart.org/products/wordpress/woocommerce-discount-rules?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=unlock_pro' target='_blank'>Upgrading to Pro</a>", 'woo-discount-rules')); ?></p>
     <?php } ?>
 </div>
 

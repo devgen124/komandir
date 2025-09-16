@@ -3,6 +3,7 @@
 namespace Wdr\App\Controllers\Admin;
 
 use Wdr\App\Controllers\Admin\Tabs\Addons;
+use Wdr\App\Controllers\Admin\Tabs\Recommendations;
 use Wdr\App\Controllers\Admin\Tabs\Compatible;
 use Wdr\App\Controllers\Admin\Tabs\DiscountRules;
 use Wdr\App\Controllers\Admin\Tabs\Help;
@@ -15,7 +16,6 @@ use Wdr\App\Controllers\OnSaleShortCode;
 use Wdr\App\Helpers\Language;
 use Wdr\App\Helpers\Helper;
 use Wdr\App\Helpers\Migration;
-use Wdr\App\Helpers\SurveyForm;
 use Wdr\App\Controllers\Configuration;
 
 if (!defined('ABSPATH')) exit;
@@ -43,8 +43,8 @@ class Settings extends Base
         if (isset($submenu['woocommerce'])) {
             add_submenu_page(
                 'woocommerce',
-                __('Woo Discount Rules', 'woo-discount-rules'),
-                __('Woo Discount Rules', 'woo-discount-rules'),
+                __('Discount Rules', 'woo-discount-rules'),
+                __('Discount Rules', 'woo-discount-rules'),
                 'manage_woocommerce', WDR_SLUG,
                 array($this, 'adminTabs')
             );
@@ -59,7 +59,7 @@ class Settings extends Base
         if (isset($_GET['activate_addon'])) {
             $activated = 0;
             $nonce = $this->input->get('nonce');
-            $addon = sanitize_text_field($this->input->get('activate_addon'));
+            $addon = sanitize_text_field(wp_unslash($this->input->get('activate_addon')));
             if ($nonce && wp_verify_nonce($nonce,'awdr_addon_activate')) {
                 $addons = self::getAvailableAddons();
                 if (isset($addons[$addon]) && !empty($addons[$addon]['plugin_file'])) {
@@ -73,7 +73,7 @@ class Settings extends Base
         } elseif (isset($_GET['deactivate_addon'])) {
             $deactivated = 0;
             $nonce = $this->input->get('nonce');
-            $addon = sanitize_text_field($this->input->get('deactivate_addon'));
+            $addon = sanitize_text_field(wp_unslash($this->input->get('deactivate_addon')));
             if ($nonce && wp_verify_nonce($nonce,'awdr_addon_deactivate')) {
                 $addons = self::getAvailableAddons();
                 if (isset($addons[$addon]) && !empty($addons[$addon]['plugin_file'])) {
@@ -85,15 +85,6 @@ class Settings extends Base
             wp_redirect(add_query_arg('addon_deactivated', $deactivated, $redirect_url));
             exit;
         }
-    }
-
-    /**
-     * Show up the survey form
-     */
-    function setupSurveyForm()
-    {
-        $survey = new SurveyForm();
-        $survey->init('woo-discount-rules', 'Discount Rules for WooCommerce', 'woo-discount-rules');
     }
 
     /**
@@ -198,6 +189,7 @@ class Settings extends Base
             'help' => new Help(),
             'recipe' => new Recipe(),
             'addons' => new Addons(),
+	        'recommendations' => new Recommendations()
         ));
         uasort($tabs, function ($tab1, $tab2) {
             $priority1 = (int)isset($tab1->priority) ? $tab1->priority : 1000;
@@ -289,7 +281,7 @@ class Settings extends Base
     function adminNotices()
     {
         if (defined('WOO_DISCOUNT_VERSION')) {
-            echo '<div class="notice notice-warning is-dismissible"><p>' . __("We found that your were using our old \"Woo discount rules\" plugin, Please disable it!", 'woo-discount-rules') . '</p></div>';
+            echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html__("We found that your were using our old \"Woo discount rules\" plugin, Please disable it!", 'woo-discount-rules') . '</p></div>';
         }
     }
 
@@ -299,6 +291,7 @@ class Settings extends Base
      */
     public function adminScripts()
     {
+	    //phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if ( !isset($_GET['page']) || $_GET['page'] != WDR_SLUG) {
             return;
         }
@@ -313,18 +306,22 @@ class Settings extends Base
          */
         wp_enqueue_style(WDR_SLUG . '-datetimepickercss', WDR_PLUGIN_URL . 'Assets/Css/jquery.datetimepicker.min.css', array(), WDR_VERSION);
         wp_enqueue_style(WDR_SLUG . '-admin', WDR_PLUGIN_URL . 'Assets/Css/admin_style'.$minified_text.'.css', array(), WDR_VERSION);
-        wp_enqueue_style(WDR_SLUG . '-jquery-ui-css', WDR_PLUGIN_URL . 'Assets/Js/Jquery-ui/jquery-ui.min.css', array(), WDR_VERSION);
+       // wp_enqueue_style(WDR_SLUG . '-jquery-ui-css', WDR_PLUGIN_URL . 'Assets/Js/Jquery-ui/jquery-ui.min.css', array(), WDR_VERSION);
         wp_enqueue_style(WDR_SLUG . '-dragable-ui-css', WDR_PLUGIN_URL . 'Assets/Css/dragtable'.$minified_text.'.css', array(), WDR_VERSION);
         /**
          * Enqueue js
          */
         if(apply_filters('advanced_woo_discount_rules_load_select_js', true)){
+            //phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
             wp_enqueue_script('wdr-select2-js', self::$woocommerce_helper->getWooPluginUrl() . '/assets/js/select2/select2.full.min.js', array('jquery'), WDR_VERSION);
+	        //phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
             wp_enqueue_script(WDR_SLUG . '-rulebuilder', WDR_PLUGIN_URL . 'Assets/Js/rulebuilder'.$minified_text.'.js', array('jquery', 'wdr-select2-js', WDR_SLUG . '-datetimepickerjs'), WDR_VERSION);
         } else {
+	        //phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
             wp_enqueue_script(WDR_SLUG . '-rulebuilder', WDR_PLUGIN_URL . 'Assets/Js/rulebuilder'.$minified_text.'.js', array('jquery', WDR_SLUG . '-datetimepickerjs'), WDR_VERSION);
         }
         if(version_compare(getAWDRWooVersion(), '3.2.0', '<')){
+			//phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
             wp_enqueue_script('selectWoo', WDR_PLUGIN_URL . 'Assets/Js/selectWoo.full.min.js', array('jquery'), WDR_VERSION);
         }
         wp_enqueue_style('wdr-select2-js', self::$woocommerce_helper->getWooPluginUrl() . '/assets/css/select2.css', array(), WDR_VERSION);
@@ -332,21 +329,29 @@ class Settings extends Base
         wp_enqueue_script( 'wc-enhanced-select' );
         //To load woocommerce product select
         wp_enqueue_style( 'woocommerce_admin_styles' );
-
-        wp_enqueue_script(WDR_SLUG . '-jquery-ui', WDR_PLUGIN_URL . 'Assets/Js/Jquery-ui/jquery-ui.min.js', array('jquery'), WDR_VERSION);
+		wp_enqueue_script('jquery-ui-core');
+		//phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
+        //wp_enqueue_script(WDR_SLUG . '-jquery-ui', WDR_PLUGIN_URL . 'Assets/Js/Jquery-ui/jquery-ui.min.js', array('jquery'), WDR_VERSION);
+	    //phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
         wp_enqueue_script(WDR_SLUG . '-datetimepickerjs', WDR_PLUGIN_URL . 'Assets/Js/jquery.datetimepicker.full.min.js', array('jquery'), WDR_VERSION);
-        wp_enqueue_script(WDR_SLUG . '-moment', WDR_PLUGIN_URL . 'Assets/Js/moment.min.js', array('jquery'), WDR_VERSION);
+		//phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
+        //wp_enqueue_script(WDR_SLUG . '-moment', WDR_PLUGIN_URL . 'Assets/Js/moment.min.js', array('jquery'), WDR_VERSION);
+	    //phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
         wp_register_script(WDR_SLUG . '-admin', WDR_PLUGIN_URL . 'Assets/Js/admin_script'.$minified_text.'.js', array(), WDR_VERSION);
+		//phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
         wp_register_script(WDR_SLUG . '-recipe', WDR_PLUGIN_URL . 'Assets/Js/awdr_recipe'.$minified_text.'.js', array(), WDR_VERSION);
         wp_enqueue_script(WDR_SLUG . '-admin');
         wp_enqueue_script(WDR_SLUG . '-recipe');
+	    //phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
         wp_enqueue_script(WDR_SLUG . '-dragndraop-js', WDR_PLUGIN_URL . 'Assets/Js/jquery.dragtable'.$minified_text.'.js', array(), WDR_VERSION);
 
-        if ( isset( $_REQUEST['tab'] ) AND $_REQUEST['tab'] == 'statistics' ) {
-            wp_enqueue_script( 'google-charts-loader', 'https://www.gstatic.com/charts/loader.js', array(), WDR_VERSION );
-
+	    //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if ( isset( $_REQUEST['tab'] ) && sanitize_text_field(wp_unslash($_REQUEST['tab'])) == 'statistics' ) {
+			//phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent,WordPress.WP.EnqueuedResourceParameters.NotInFooter
+            wp_enqueue_script( 'google-charts-loader', 'https://www.gstatic.com/charts/loader.js', array(), WDR_VERSION);
+			//phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter
             wp_enqueue_script( WDR_SLUG.'-statistics',
-                WDR_PLUGIN_URL . 'Assets/Js/admin-statistics'.$minified_text.'.js', array( 'jquery' ), WDR_VERSION );
+                WDR_PLUGIN_URL . 'Assets/Js/admin-statistics'.$minified_text.'.js', array( 'jquery' ), WDR_VERSION);
         }
         $preloaded_lists = array(
             'payment_methods' => $this->getPaymentMethod(),
@@ -586,14 +591,14 @@ class Settings extends Base
             'buyx_getx_percentage' => esc_html__('Discount percentage', 'woo-discount-rules'),
             'bogo_buyx_gety_filter_heading' => esc_html__('Filter (Buy)', 'woo-discount-rules'),
             'common_filter_heading' => esc_html__('Filter', 'woo-discount-rules'),
-            'common_filter_description' => __('<p>Choose <b>what gets discount</b> (products/categories/attributes/SKU and so on )</p>
-<p>Note : You can also exclude products/categories.</p>', 'woo-discount-rules'),
+            'common_filter_description' => '<p>' . __('Choose <b>what gets discount</b> (products/categories/attributes/SKU and so on)', 'woo-discount-rules') . '</p>' .
+                '<p>' . __('Note: You can also exclude products/categories.', 'woo-discount-rules') . '</p>',
             'common_discount_heading' => esc_html__('Discount', 'woo-discount-rules'),
-            'two_column_bulk_discount_heading' => __('Discount - <a href="https://docs.flycart.org/en/articles/3914904-bulk-discounts-tiered-pricing-discounts-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bulk_documentation" style="font-size: 12px;" target="_blank">Read Docs</a>', 'woo-discount-rules'),
-            'two_column_set_discount_heading' => __('Discount - <a href="https://docs.flycart.org/en/articles/3809899-bundle-set-discount-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bundle_set" style="font-size: 12px;" target="_blank">Read Docs</a>', 'woo-discount-rules'),
-            'two_column_bxgy_discount_heading' => __('Discount - <a href="https://docs.flycart.org/en/articles/3810570-buy-x-get-y-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bxgy" style="font-size: 12px;" target="_blank">Read Docs</a>', 'woo-discount-rules'),
-            'two_column_bxgx_discount_heading' => __('Discount - <a href="https://docs.flycart.org/en/articles/3810071-buy-one-get-one-free-buy-x-get-x-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bxgx" style="font-size: 12px;" target="_blank">Read Docs</a>', 'woo-discount-rules'),
-            'common_discount_description' => __('<p>Select discount type and its value (percentage/price/fixed price)</p>', 'woo-discount-rules'),
+            'two_column_bulk_discount_heading' => __('Discount - <a href="https://docs.flycart.org/en/articles/3807208-bulk-discounts-or-tiered-pricing" style="font-size: 12px;" target="_blank">Read Docs</a>', 'woo-discount-rules'),
+            'two_column_set_discount_heading' => __('Discount - <a href="https://docs.flycart.org/en/articles/3809899-bundle-set-discount?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bundle_set" style="font-size: 12px;" target="_blank">Read Docs</a>', 'woo-discount-rules'),
+            'two_column_bxgy_discount_heading' => __('Discount - <a href="https://docs.flycart.org/en/articles/3810570-buy-x-get-y?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bxgy" style="font-size: 12px;" target="_blank">Read Docs</a>', 'woo-discount-rules'),
+            'two_column_bxgx_discount_heading' => __('Discount - <a href="https://docs.flycart.org/en/articles/3810071-buy-one-get-one-free-buy-x-get-x?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=bxgx" style="font-size: 12px;" target="_blank">Read Docs</a>', 'woo-discount-rules'),
+            'common_discount_description' => '<p>'.__('Select discount type and its value (percentage/price/fixed price)', 'woo-discount-rules').'</p>',
             'bulk_filter_together_discount_description' => __('<p>Select discount type and its value (percentage/price/fixed price)</p> <div class="awdr-count-by-description"><b>Filter set above :</b><p> This will count the quantities of products set in the “Filter” section.</p>
 <p><b>Example:</b> If you selected a few categories there, it will count the quantities of products in those categories added in cart. If you selected a few products in the filters section, then it will count the quantities together.</p>
 <p><b>Example:</b> Let’s say, you wanted to offer a Bulk Quantity discount for Category A and chosen Category A in the filters. So when a customer adds 1 quantity each of X, Y and Z from Category A, then the count here is 3.</p></div>', 'woo-discount-rules'),
@@ -613,31 +618,56 @@ If a customer buys  2 of Product A - Small,  4 of Product A - Medium,  6 of Prod
 </p></div>', 'woo-discount-rules'),
             'bulk_variants_discount_description_tool_tip' => Helper::bogoToolTipDescriptionForvariants(),
             'common_rules_heading' => esc_html__('Rules (optional)', 'woo-discount-rules'),
-            'common_rules_description' => Helper::ruleConditionDescription(),
-            'bogo_buyx_gety_filter_description' => __('<p>Choose Buy Products. (products/categories/attributes/tags/sku) Example : For Buy X get Y scenarios, choose X here.</p>', 'woo-discount-rules'),
-            'bogo_buyx_getx_filter_description' => __('<p>Choose on which products the discount should be applied (This can be products/categories/SKU)</p>', 'woo-discount-rules'),
+            'common_rules_description' => wp_kses_post(Helper::ruleConditionDescription()),
+            'bogo_buyx_gety_filter_description' => '<p>'.__('Choose Buy Products. (products/categories/attributes/tags/sku) Example : For Buy X get Y scenarios, choose X here.', 'woo-discount-rules').'</p>',
+            'bogo_buyx_getx_filter_description' => '<p>' . __('Choose on which products the discount should be applied (This can be products/categories/SKU).', 'woo-discount-rules') . '</p>',
             'bogo_buyx_getx_discount_heading' => esc_html__('Get Discount', 'woo-discount-rules'),
-            'bogo_buyx_getx_discount_content' => __('<p>Enter the min/max ranges and choose free item quantity.</p><p>Note : Enable recursive checkbox if the discounts should be applied in sequential ranges. </p><p>Example : Buy 1 get 1, Buy 2 get 2, Buy 3 get 3 and so on..</p>', 'woo-discount-rules'),
+            'bogo_buyx_getx_discount_content' => '<p>' .
+                __('Enter the min/max ranges and choose free item quantity.', 'woo-discount-rules') . '</p><p>' .
+                __('Note: Enable recursive checkbox if the discounts should be applied in sequential ranges.', 'woo-discount-rules') . '</p><p>' .
+                __('Example: Buy 1 get 1, Buy 2 get 2, Buy 3 get 3 and so on.', 'woo-discount-rules') . '</p>',
             'bogo_buyx_gety_discount_heading' => esc_html__('Get Discount', 'woo-discount-rules'),
-            'bogo_buyx_gety_discount_content' => __('<p>Choose the adjustment type to which the discount should be applied. You can choose from products/categories/all products.</p><p>Note : Enable recursive checkbox if the discounts should be applied in sequential ranges. </p>', 'woo-discount-rules'),
-            'bogo_buyx_gety_discount_content_for_product' => __('<p>Discount will be applied <b>only the selected products (based on mode of apply)</b></p><p>Note : Enable recursive checkbox if the discounts should be applied in sequential ranges. </p>', 'woo-discount-rules'),
-            'bogo_buyx_gety_discount_content_for_category' => __('<p>Discount will be applied <b>only the selected categories (based on mode of apply)</b></p><p>Note : Enable recursive checkbox if the discounts should be applied in sequential ranges. </p><p>Example ranges:</p><p>Buy 2, get 1 free (a.k.a: Buy 1 get 1 free)</p><table><tbody><tr><td>Min quantity</td><td>Max quantity</td><td>Free quantity</td></tr><tr><td>2</td><td>3</td><td>1</td></tr></tr><tr><td>4</td><td>5</td><td>2</td></tr></tbody></table>', 'woo-discount-rules'),
-            'bogo_buyx_gety_discount_content_for_all' => __('<p>Discount applies on the cheapest/highest priced <b>product IN CART</b>.</p><p>Note : Enable recursive checkbox if the discounts should be applied in sequential ranges. </p><p>Example ranges:</p><p>Buy 2, get 1 free (a.k.a: Buy 1 get 1 free)</p><table><tbody><tr><td>Min quantity</td><td>Max quantity</td><td>Free quantity</td></tr><tr><td>2</td><td>3</td><td>1</td></tr></tr><tr><td>4</td><td>5</td><td>2</td></tr></tbody></table>', 'woo-discount-rules'),
+            'bogo_buyx_gety_discount_content' => '<p>' .
+                __('Choose the adjustment type to which the discount should be applied. You can choose from products/categories/all products.', 'woo-discount-rules') .
+                '</p><p>' . __('Note: Enable recursive checkbox if the discounts should be applied in sequential ranges.', 'woo-discount-rules') . '</p>',
+
+            'bogo_buyx_gety_discount_content_for_product' => '<p>' .
+                __('Discount will be applied <b>only the selected products (based on mode of apply)</b>.', 'woo-discount-rules') .
+                '</p><p>' . __('Note: Enable recursive checkbox if the discounts should be applied in sequential ranges.', 'woo-discount-rules') . '</p>',
+
+            'bogo_buyx_gety_discount_content_for_category' => '<p>' .
+                __('Discount will be applied <b>only the selected categories (based on mode of apply)</b>.', 'woo-discount-rules') .
+                '</p><p>' . __('Note: Enable recursive checkbox if the discounts should be applied in sequential ranges.', 'woo-discount-rules') . '</p><p>' .
+                __('Example ranges:', 'woo-discount-rules') . '</p><p>' .
+                __('Buy 2, get 1 free (a.k.a: Buy 1 get 1 free)', 'woo-discount-rules') . '</p>' .
+                '<table><tbody><tr><td>' . __('Min quantity', 'woo-discount-rules') . '</td><td>' .
+                __('Max quantity', 'woo-discount-rules') . '</td><td>' .
+                __('Free quantity', 'woo-discount-rules') . '</td></tr><tr><td>2</td><td>3</td><td>1</td></tr><tr><td>4</td><td>5</td><td>2</td></tr></tbody></table>',
+
+            'bogo_buyx_gety_discount_content_for_all' => '<p>' .
+                __('Discount applies on the cheapest/highest priced <b>product IN CART</b>.', 'woo-discount-rules') .
+                '</p><p>' . __('Note: Enable recursive checkbox if the discounts should be applied in sequential ranges.', 'woo-discount-rules') . '</p><p>' .
+                __('Example ranges:', 'woo-discount-rules') . '</p><p>' .
+                __('Buy 2, get 1 free (a.k.a: Buy 1 get 1 free)', 'woo-discount-rules') . '</p>' .
+                '<table><tbody><tr><td>' . __('Min quantity', 'woo-discount-rules') . '</td><td>' .
+                __('Max quantity', 'woo-discount-rules') . '</td><td>' .
+                __('Free quantity', 'woo-discount-rules') . '</td></tr><tr><td>2</td><td>3</td><td>1</td></tr><tr><td>4</td><td>5</td><td>2</td></tr></tbody></table>',
+
             /*'bogo_buyx_getx_rules_description' => Helper::ruleConditionDescription(),
             'bogo_buyx_gety_rules_description' => Helper::ruleConditionDescription(),*/
-            'processing_migration_text' => __('<p>Processing migration, please wait...</p>', 'woo-discount-rules'),
-            'processing_migration_success_message' => __('<p>Migration completed.</p>', 'woo-discount-rules'),
-            'skip_migration_success_message' => __('<p>Migration skipped.</p>', 'woo-discount-rules'),
-            'skip_migration_text' => __('<p>Skipping migration, please wait...</p>', 'woo-discount-rules'),
-            'mode_variation_cumulative_example' => __('<span><b>Example:</b> Product A - Small and Product A - Medium will be counted as 2 quantity</span>', 'woo-discount-rules'),
-            'filter_all_products' => __('<span>Discount applies to all eligible products in the store</span>', 'woo-discount-rules'),
-            'filter_products' => __('<span>Choose products that get the discount using "In List". If you want to exclude a few products, choose "Not In List" and select the products you wanted to exclude from discount. (You can add multiple filters)</span>', 'woo-discount-rules'),
-            'filter_Category' => __('<span>Choose categories that get the discount using "In List". If you want to exclude a few categories, choose "Not In List" and select the categories you wanted to exclude from discount. (You can add multiple filters of same type)</span>', 'woo-discount-rules'),
-            'filter_Attributes' => __('<span> Choose attributes that get the discount using "In List". If you want to exclude a few attributes, choose "Not In List" and select the attributes you wanted to exclude from discount. (You can add multiple filters of same type)</span>', 'woo-discount-rules'),
-            'filter_Tags' => __('<span>Choose tags that get the discount using "In List". If you want to exclude a few tags, choose "Not In List" and select the tags you wanted to exclude from discount. (You can add multiple filters of same type)</span>', 'woo-discount-rules'),
-            'filter_SKUs' => __('<span>Choose SKUs that get the discount using "In List". If you want to exclude a few SKUs, choose "Not In List" and select the SKUs you wanted to exclude from discount. (You can add multiple filters of same type)</span>', 'woo-discount-rules'),
-            'filter_On_sale_products' => __('<span>Choose whether you want to include (or exclude) products on sale (those having a sale price) for the discount </span>', 'woo-discount-rules'),
-            'filter_custom_taxonomies' => __('<span>Discount applies to custom taxonomy</span>', 'woo-discount-rules'),
+            'processing_migration_text' => '<p>'.__('Processing migration, please wait...', 'woo-discount-rules').'</p>',
+            'processing_migration_success_message' => '<p>'.__('Migration completed.', 'woo-discount-rules').'</p>',
+            'skip_migration_success_message' => '<p>'.__('Migration skipped.', 'woo-discount-rules').'</p>',
+            'skip_migration_text' => '</p>'.__('Skipping migration, please wait...', 'woo-discount-rules').'</p>',
+            'mode_variation_cumulative_example' => '<span><b>' . __('Example:', 'woo-discount-rules') . '</b> ' . __('Product A - Small and Product A - Medium will be counted as 2 quantity.', 'woo-discount-rules') . '</span>',
+            'filter_all_products' => '<span>'.__('Discount applies to all eligible products in the store', 'woo-discount-rules').'</span>',
+            'filter_products' => '<span>'.__('Choose products that get the discount using "In List". If you want to exclude a few products, choose "Not In List" and select the products you wanted to exclude from discount. (You can add multiple filters)', 'woo-discount-rules').'</span>',
+            'filter_Category' => '<span>' . __('Choose categories that get the discount using "In List". If you want to exclude a few categories, choose "Not In List" and select the categories you wanted to exclude from discount. (You can add multiple filters of same type)', 'woo-discount-rules') . '</span>',
+            'filter_Attributes' => '<span>' . __('Choose attributes that get the discount using "In List". If you want to exclude a few attributes, choose "Not In List" and select the attributes you wanted to exclude from discount. (You can add multiple filters of same type)', 'woo-discount-rules') . '</span>',
+            'filter_Tags' => '<span>' . __('Choose tags that get the discount using "In List". If you want to exclude a few tags, choose "Not In List" and select the tags you wanted to exclude from discount. (You can add multiple filters of same type)', 'woo-discount-rules') . '</span>',
+            'filter_SKUs' => '<span>' . __('Choose SKUs that get the discount using "In List". If you want to exclude a few SKUs, choose "Not In List" and select the SKUs you wanted to exclude from discount. (You can add multiple filters of same type)', 'woo-discount-rules') . '</span>',
+            'filter_On_sale_products' => '<span>' . __('Choose whether you want to include (or exclude) products on sale (those having a sale price) for the discount.', 'woo-discount-rules') . '</span>',
+            'filter_custom_taxonomies' => '<span>' . __('Discount applies to custom taxonomy.', 'woo-discount-rules') . '</span>',
             'rebuild_on_sale_list_build_text' => __('Rebuild index', 'woo-discount-rules'),
             'rebuild_on_sale_list_processing_text' => __('Processing please wait..', 'woo-discount-rules'),
             'rebuild_on_sale_list_processed_text' => __('Rebuild index processed', 'woo-discount-rules'),

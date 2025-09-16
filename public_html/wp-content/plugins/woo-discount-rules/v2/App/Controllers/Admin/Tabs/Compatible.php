@@ -83,10 +83,11 @@ class Compatible extends Base
      * */
     protected function saveCompatibilitySettings(){
         if(Helper::hasAdminPrivilege()){
-            if(isset($_POST['awdr_compatibility_submit'])){
-                $awdr_compatibility_submit = intval($_POST['awdr_compatibility_submit']);
+            if(isset($_POST['awdr_compatibility_submit']) && isset($_POST['awdr_compatibility_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['awdr_compatibility_nonce'])),'awdr_compatibility_nonce')) {
+                $awdr_compatibility_submit = intval(sanitize_text_field(wp_unslash($_POST['awdr_compatibility_submit'])));
                 if($awdr_compatibility_submit == 1){
-                    $wdrc = isset($_POST['wdrc'])? $_POST['wdrc']: array();
+                    //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                    $wdrc = isset($_POST['wdrc']) ? wp_unslash($_POST['wdrc']) : array();
                     if(!empty($wdrc)){
                         $wdrc = array_map('absint', $wdrc);
                     }

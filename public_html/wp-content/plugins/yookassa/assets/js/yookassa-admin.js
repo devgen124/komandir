@@ -238,4 +238,43 @@
         $('div.content').hide().filter('.'+$(this).data('target')).show();
     });
 
+    /**
+     * Раздел с включением маркировки и второго чека
+     * При включении маркировки автоматически включается второй чек
+     * При выключении второго чека выключается маркировка
+     */
+    function openReceiptSection() {
+        $('#receipt-collapsible').addClass('show').removeClass('collapse');
+    }
+
+    function closeReceiptSection() {
+        $('#receipt-collapsible').removeClass('show').addClass('collapse');
+    }
+
+    function updateReceiptSection() {
+        if ($('#yookassa_marking_enabled').is(':checked')) {
+            $('#yookassa_enable_second_receipt').prop('checked', true);
+            openReceiptSection();
+        }
+
+        if ($('#yookassa_enable_second_receipt').is(':checked')) {
+            openReceiptSection();
+        } else {
+            closeReceiptSection();
+        }
+    }
+
+    $(document).on('click', '#yookassa_marking_enabled', function() {
+        updateReceiptSection();
+    });
+
+    $(document).on('click', '#yookassa_enable_second_receipt', function() {
+        if (!$(this).is(':checked')) {
+            $('#yookassa_marking_enabled').prop('checked', false);
+        }
+        updateReceiptSection();
+    });
+
+    // Инициализация состояния
+    updateReceiptSection();
 })(jQuery);

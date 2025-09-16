@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Cron\Workers\WorkersFactory;
 use MailPoet\Logging\LoggerFactory;
+use MailPoet\Util\Helpers;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 
 class Daemon {
@@ -48,6 +49,11 @@ class Daemon {
 
     $errors = [];
     foreach ($this->getWorkers() as $worker) {
+      if (wp_is_maintenance_mode()) {
+        // stop execution when in maintenance mode
+        break;
+      }
+
       try {
         // Clear the entity manager memory for every cron run.
         // This avoids using stale data and prevents memory leaks.
@@ -59,6 +65,8 @@ class Daemon {
           $worker->process($this->timer); // BC for workers not implementing CronWorkerInterface
         }
       } catch (\Exception $e) {
+        Helpers::mySqlGoneAwayExceptionHandler($e);
+
         $workerClassNameParts = explode('\\', get_class($worker));
         $workerName = end($workerClassNameParts);
         $errors[] = [
@@ -91,7 +99,7 @@ class Daemon {
     yield $this->workersFactory->createSubscribersStatsReportWorker();
     yield $this->workersFactory->createBounceWorker();
     yield $this->workersFactory->createExportFilesCleanupWorker();
-    yield $this->workersFactory->createBeamerkWorker();
+    yield $this->workersFactory->createLogCleanupWorker();
     yield $this->workersFactory->createSubscribersEmailCountsWorker();
     yield $this->workersFactory->createInactiveSubscribersWorker();
     yield $this->workersFactory->createUnsubscribeTokensWorker();

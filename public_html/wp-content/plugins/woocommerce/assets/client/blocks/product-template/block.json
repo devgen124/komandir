@@ -1,28 +1,30 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "woocommerce/product-template",
 	"title": "Product Template",
 	"category": "woocommerce",
 	"description": "Contains the block elements used to render a product.",
 	"keywords": [ "WooCommerce" ],
-    "textdomain": "woocommerce",
+	"textdomain": "woocommerce",
 	"usesContext": [
 		"queryId",
 		"query",
 		"queryContext",
 		"displayLayout",
-		"templateSlug"
+		"templateSlug",
+		"postId",
+		"queryContextIncludes",
+		"collection",
+		"__privateProductCollectionPreviewState"
 	],
 	"supports": {
+		"interactivity": true,
 		"inserter": false,
 		"reusable": false,
 		"html": false,
 		"align": [ "wide", "full" ],
 		"anchor": true,
-		"__experimentalLayout": {
-			"allowEditing": false
-		},
 		"color": {
 			"gradients": true,
 			"link": true,
@@ -43,6 +45,15 @@
 			"__experimentalDefaultControls": {
 				"fontSize": true
 			}
+		},
+		"layout": {
+			"allowEditing": false,
+			"allowSwitching": false,
+			"allowInheriting": false,
+			"allowSizingOnChildren": false,
+			"allowVerticalAlignment": false
 		}
-	}
+	},
+	"editorStyle": "file:../woocommerce/product-template-editor.css",
+	"style": "file:../woocommerce/product-template-style.css"
 }

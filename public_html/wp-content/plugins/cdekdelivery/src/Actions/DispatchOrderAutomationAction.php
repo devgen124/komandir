@@ -1,52 +1,70 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cdek\Actions;
 
 use Cdek\Config;
-use Cdek\Exceptions\ShippingMethodNotFoundException;
-use Cdek\Helper;
-use Cdek\Helpers\CheckoutHelper;
+use Cdek\CoreApi;
+use Cdek\Helpers\ScheduleLocker;
+use Cdek\Model\Order;
+use Cdek\Note;
+use Throwable;
 use WC_Order;
 
 class DispatchOrderAutomationAction
 {
 
     /**
-     * @param  int|WC_Order  $orderId
+     * @throws \Cdek\Exceptions\External\ApiException
+     * @throws \Cdek\Exceptions\CacheException
+     * @throws \Cdek\Exceptions\OrderNotFoundException
      */
     public function __invoke($orderId, $postedData = null, ?WC_Order $originalOrder = null): void
     {
-        $order = $originalOrder ?? (is_int($orderId) ? wc_get_order($orderId) : $orderId);
+        $order = new Order($originalOrder ?? $orderId);
 
-        assert($order instanceof WC_Order, 'Order must be instance of WC_Order');
+        $shipping = $order->getShipping();
 
-        try {
-            $shipping = CheckoutHelper::getOrderShippingMethod($order);
-        } catch (ShippingMethodNotFoundException $exception) {
+        if ($shipping === null) {
             return;
         }
 
-        if ($shipping->get_method_id() !== Config::DELIVERY_NAME) {
+        if ($order->number !== null) {
             return;
         }
 
-        $actualShippingMethod = Helper::getActualShippingMethod($shipping->get_instance_id());
+        $actualShippingMethod = $shipping->getMethod();
 
-        if ($actualShippingMethod->get_option('automate_orders') !== 'yes') {
+        if (!$actualShippingMethod->automate_orders) {
             return;
         }
 
-        $awaitingGateways = $actualShippingMethod->get_option('automate_wait_gateways', []);
+        $awaitingGateways = $actualShippingMethod->automate_wait_gateways;
 
         if (!empty($awaitingGateways) &&
-            in_array($order->get_payment_method(), $awaitingGateways, true) &&
-            !$order->is_paid()) {
+            in_array($order->payment_method, $awaitingGateways, true) &&
+            !$order->isPaid()) {
             return;
         }
 
-        as_schedule_single_action(time() + 60 * 5, Config::ORDER_AUTOMATION_HOOK_NAME, [
-            $order->get_id(),
-            1,
-        ],                        'cdekdelivery');
+        if($order->isCancelled()){
+            return;
+        }
+
+        if (!ScheduleLocker::instance()->set($order->id)) {
+            return;
+        }
+
+        try {
+            (new CoreApi)->orderGet($order->id);
+        } catch (Throwable $e) {
+            if (as_schedule_single_action(time() + 60 * 5, Config::ORDER_AUTOMATION_HOOK_NAME, [
+                $order->id,
+                1,
+            ], 'cdekdelivery')) {
+                Note::send($order->id, esc_html__('Created order automation task', 'cdekdelivery'));
+            }
+        }
     }
 }

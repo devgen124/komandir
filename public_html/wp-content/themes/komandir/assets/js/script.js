@@ -14342,19 +14342,21 @@ function customizeSelects() {
 
 		if (selects.length) {
 			selects.forEach((el) => {
-				const select = new select_custom__WEBPACK_IMPORTED_MODULE_0__(el, {
-					optionBuilder: undefined,
-					panelItem: {position: '', item: '', className: ''},
-					changeOpenerText: true,
-					multipleSelectionOnSingleClick: false,
-					multipleSelectOpenerText: {labels: false, array: false},
-					allowPanelClick: false,
-					openOnHover: false,
-					closeOnMouseleave: false,
-					wrapDataAttributes: false,
-					openerLabel: false,
-				});
-				select.init();
+				if (!el.parentElement.classList.contains('custom-select')) {
+					const select = new select_custom__WEBPACK_IMPORTED_MODULE_0__(el, {
+						optionBuilder: undefined,
+						panelItem: {position: '', item: '', className: ''},
+						changeOpenerText: true,
+						multipleSelectionOnSingleClick: false,
+						multipleSelectOpenerText: {labels: false, array: false},
+						allowPanelClick: false,
+						openOnHover: false,
+						closeOnMouseleave: false,
+						wrapDataAttributes: false,
+						openerLabel: false,
+					});
+					select.init();
+				}
 			});
 		}
 	}

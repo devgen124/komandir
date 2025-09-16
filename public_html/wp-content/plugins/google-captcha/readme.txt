@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: anti-spam security, antispam, recaptcha, captcha, captha, Invisible reCaptcha, Invisible captcha, Invisibl reCaptcha, comment, cpatcha, google catcha, Invisible re captcha, recaptcha version3
 Requires at least: 5.6
-Tested up to: 6.4.2
-Stable tag: 1.74
+Tested up to: 6.8
+Stable tag: 1.84
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -30,6 +30,7 @@ http://www.youtube.com/watch?v=L2BziEOL3Fg
 	* Comments form
 	* [Contact Form](https://bestwebsoft.com/products/wordpress/plugins/contact-form/?k=56575444122cff9ab3ee3e640efb001a)
 	* [Testimonials](https://bestwebsoft.com/products/wordpress/plugins/testimonials/)
+	* [Login & Register Form](https://wordpress.org/plugins/bws-login-register)
 	* Custom form
 * Hide reCaptcha for the allowlisted IP addresses
 * Disable the submit button
@@ -49,6 +50,7 @@ http://www.youtube.com/watch?v=L2BziEOL3Fg
 * Incredibly simple settings for fast setup without modifying code
 * Detailed step-by-step documentation and videos
 * Multilingual and RTL ready
+* Edit error message
 
 > **Pro Features**
 >
@@ -68,6 +70,8 @@ http://www.youtube.com/watch?v=L2BziEOL3Fg
 > 	* Elementor Pro Contact Forms
 > 	* LearnDash Registration Page
 > 	* BuddyBoss
+> 	* Formidable Forms
+> 	* Forminator Forms
 > * Compatible with WooCommerce:
 > 	* Login form
 > 	* Register form
@@ -93,9 +97,15 @@ http://www.youtube.com/watch?v=L2BziEOL3Fg
 > 	* Login form
 > 	* Registration form
 > 	* Profile form
+> * Compatible with BWS Login Register Form:
+> 	* Login form
+> 	* Registration form
+> 	* Forgot Password form
 > * Select reCaptcha language manually
+> * Activate reCaptcha on certain Weekdays and Hours
 > * Change size: normal or compact (for version 2)
 > * Configure all subsites on the network
+> * Block disposable emails
 > * Get answer to your support question within one business day ([Support Policy](https://bestwebsoft.com/support-policy/))
 >
 > [Upgrade to Pro Now](https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=c4f2e3054fdbaca8a2b61554cbb9638c)
@@ -285,6 +295,41 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 8. reCaptcha Allow List page.
 
 == Changelog ==
+
+= V1.84 - 26.08.2025 =
+* Pro : The Block disposable emails functionality has been added.
+* NEW : The new compatibility with BWS Login Register Form has been added.
+* Update : BWS Panel section was updated.
+
+= V1.83 - 13.07.2025 =
+* Bugfix : Fixed small bug with plugin activation.
+
+= V1.82 - 11.07.2025 =
+* Update : All functionality was updated for WordPress 6.8.
+* Pro : The new compatibility with Forminator forms has been added.
+* Update : BWS Panel section was updated.
+* Bugfix : Minor bugs fixed.
+* NEW : Ability to change the reCaptcha error message has been added.
+
+= V1.80 - 06.02.2025 =
+* Update : All functionality was updated for WordPress 6.7.
+* Pro : New option Weekdays and Hours.
+* Pro : The new compatibility with Formidable forms.
+
+= V1.79 - 26.12.2024 =
+* Update : All functionality was updated for WordPress 6.5.
+* Bugfix : Vulnerability fixes.
+
+= V1.78 - 17.09.2024 =
+* Update : All functionality was updated for WordPress 6.5.
+* Update : Check keys reminder added .
+
+= V1.75 - 28.05.2024 =
+* Update : All functionality was updated for WordPress 6.5.
+* Update : BWS Panel section was updated.
+* Pro : The new compatibility with MemberPress forms has been added.
+* Pro : The new compatibility with Flatsome WooCommerce popup login/register forms has been added.
+* Bugfix : Minor bugs fixed.
 
 = V1.74 - 25.12.2023 =
 * Update : All functionality was updated for WordPress 6.4.2
@@ -629,6 +674,35 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Ability to add Google Captcha (reCAPTCHA) into standard forms was added.
 
 == Upgrade Notice ==
+
+= V1.84 =
+* The compatibility with new WordPress version updated.
+* New features added.
+
+= V1.83 =
+* Bugs fixed.
+
+= V1.82 =
+* The compatibility with new WordPress version updated.
+* New features added.
+
+= V1.80 =
+* The compatibility with new WordPress version updated.
+* New features added.
+
+= V1.79 =
+* The compatibility with new WordPress version updated.
+* Bugs fixed.
+
+= V1.78 =
+* Plugin optimization completed.
+* Usability improved.
+
+= V1.75 =
+* The compatibility with new WordPress version updated.
+* Plugin optimization completed.
+* New features added.
+* Bugs fixed.
 
 = V1.74 =
 * The compatibility with new WordPress version updated.

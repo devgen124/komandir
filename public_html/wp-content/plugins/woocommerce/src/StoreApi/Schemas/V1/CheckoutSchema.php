@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Automattic\WooCommerce\StoreApi\Schemas\V1;
 
 use Automattic\WooCommerce\StoreApi\SchemaController;
@@ -6,6 +8,8 @@ use Automattic\WooCommerce\StoreApi\Payments\PaymentResult;
 use Automattic\WooCommerce\StoreApi\Schemas\ExtendSchema;
 use Automattic\WooCommerce\Blocks\Domain\Services\CheckoutFields;
 use Automattic\WooCommerce\Blocks\Package;
+use Automattic\WooCommerce\StoreApi\Utilities\SanitizationUtils;
+use Automattic\WooCommerce\StoreApi\Schemas\V1\CartSchema;
 
 /**
  * CheckoutSchema class.
@@ -47,6 +51,13 @@ class CheckoutSchema extends AbstractSchema {
 	protected $image_attachment_schema;
 
 	/**
+	 * Cart schema instance.
+	 *
+	 * @var CartSchema
+	 */
+	protected $cart_schema;
+
+	/**
 	 * Additional fields controller.
 	 *
 	 * @var CheckoutFields
@@ -64,6 +75,7 @@ class CheckoutSchema extends AbstractSchema {
 		$this->billing_address_schema       = $this->controller->get( BillingAddressSchema::IDENTIFIER );
 		$this->shipping_address_schema      = $this->controller->get( ShippingAddressSchema::IDENTIFIER );
 		$this->image_attachment_schema      = $this->controller->get( ImageAttachmentSchema::IDENTIFIER );
+		$this->cart_schema                  = $this->controller->get( CartSchema::IDENTIFIER );
 		$this->additional_fields_controller = Package::container()->get( CheckoutFields::class );
 	}
 
@@ -73,6 +85,7 @@ class CheckoutSchema extends AbstractSchema {
 	 * @return array
 	 */
 	public function get_properties() {
+		$additional_field_schema = $this->get_additional_fields_schema();
 		return [
 			'order_id'          => [
 				'description' => __( 'The order ID to process during checkout.', 'woocommerce' ),
@@ -136,7 +149,7 @@ class CheckoutSchema extends AbstractSchema {
 				'context'     => [ 'view', 'edit' ],
 				// Validation may be based on cart contents which is not available here; this returns all enabled
 				// gateways. Further validation occurs during the request.
-				'enum'        => array_values( WC()->payment_gateways->get_payment_gateway_ids() ),
+				'enum'        => array_merge( [ '' ], array_values( WC()->payment_gateways->get_payment_gateway_ids() ) ),
 			],
 			'create_account'    => [
 				'description' => __( 'Whether to create a new user account as part of order processing.', 'woocommerce' ),
@@ -144,8 +157,8 @@ class CheckoutSchema extends AbstractSchema {
 				'context'     => [ 'view', 'edit' ],
 			],
 			'payment_result'    => [
-				'description' => __( 'Result of payment processing, or false if not yet processed.', 'woocommerce' ),
-				'type'        => 'object',
+				'description' => __( 'Result of payment processing, or null if not yet processed.', 'woocommerce' ),
+				'type'        => [ 'object', 'null' ],
 				'context'     => [ 'view', 'edit' ],
 				'readonly'    => true,
 				'properties'  => [
@@ -181,7 +194,12 @@ class CheckoutSchema extends AbstractSchema {
 				'description' => __( 'Additional fields to be persisted on the order.', 'woocommerce' ),
 				'type'        => 'object',
 				'context'     => [ 'view', 'edit' ],
-				'properties'  => $this->get_additional_fields_schema(),
+				'properties'  => $additional_field_schema,
+				'arg_options' => [
+					'sanitize_callback' => [ $this, 'sanitize_additional_fields' ],
+					'validate_callback' => [ $this, 'validate_additional_fields' ],
+				],
+				'required'    => $this->schema_has_required_property( $additional_field_schema ),
 			],
 			self::EXTENDING_KEY => $this->get_extended_schema( self::IDENTIFIER ),
 		];
@@ -194,34 +212,40 @@ class CheckoutSchema extends AbstractSchema {
 	 * @return array
 	 */
 	public function get_item_response( $item ) {
-		return $this->get_checkout_response( $item->order, $item->payment_result );
+		$cart           = property_exists( $item, 'cart' ) ? $item->cart : null;
+		$payment_result = property_exists( $item, 'payment_result' ) ? $item->payment_result : null;
+		return $this->get_checkout_response( $item->order, $payment_result, $cart );
 	}
 
 	/**
 	 * Get the checkout response based on the current order and any payments.
 	 *
-	 * @param \WC_Order     $order Order object.
-	 * @param PaymentResult $payment_result Payment result object.
+	 * @param \WC_Order          $order          Order object.
+	 * @param PaymentResult|null $payment_result Payment result object.
+	 * @param \WC_Cart|null      $cart           Cart object.
 	 * @return array
 	 */
-	protected function get_checkout_response( \WC_Order $order, PaymentResult $payment_result = null ) {
+	protected function get_checkout_response( \WC_Order $order, ?PaymentResult $payment_result = null, ?\WC_Cart $cart = null ) {
+		$payment_result = $payment_result ? [
+			'payment_status'  => $payment_result->status,
+			'payment_details' => $this->prepare_payment_details_for_response( $payment_result->payment_details ),
+			'redirect_url'    => $payment_result->redirect_url,
+		] : null;
+
 		return [
-			'order_id'          => $order->get_id(),
-			'status'            => $order->get_status(),
-			'order_key'         => $order->get_order_key(),
-			'order_number'      => $order->get_order_number(),
-			'customer_note'     => $order->get_customer_note(),
-			'customer_id'       => $order->get_customer_id(),
-			'billing_address'   => (object) $this->billing_address_schema->get_item_response( $order ),
-			'shipping_address'  => (object) $this->shipping_address_schema->get_item_response( $order ),
-			'payment_method'    => $order->get_payment_method(),
-			'payment_result'    => [
-				'payment_status'  => $payment_result->status,
-				'payment_details' => $this->prepare_payment_details_for_response( $payment_result->payment_details ),
-				'redirect_url'    => $payment_result->redirect_url,
-			],
-			'additional_fields' => $this->get_additional_fields_response( $order ),
-			self::EXTENDING_KEY => $this->get_extended_data( self::IDENTIFIER ),
+			'order_id'           => $order->get_id(),
+			'status'             => $order->get_status(),
+			'order_key'          => $order->get_order_key(),
+			'order_number'       => $order->get_order_number(),
+			'customer_note'      => $order->get_customer_note(),
+			'customer_id'        => $order->get_customer_id(),
+			'billing_address'    => (object) $this->billing_address_schema->get_item_response( $order ),
+			'shipping_address'   => (object) $this->shipping_address_schema->get_item_response( $order ),
+			'payment_method'     => $order->get_payment_method(),
+			'payment_result'     => $payment_result,
+			'additional_fields'  => (object) $this->get_additional_fields_response( $order ),
+			'__experimentalCart' => $cart ? (object) $this->cart_schema->get_item_response( $cart ) : null,
+			self::EXTENDING_KEY  => $this->get_extended_data( self::IDENTIFIER ),
 		];
 	}
 
@@ -236,7 +260,7 @@ class CheckoutSchema extends AbstractSchema {
 	 */
 	protected function prepare_payment_details_for_response( array $payment_details ) {
 		return array_map(
-			function( $key, $value ) {
+			function ( $key, $value ) {
 				return (object) [
 					'key'   => $key,
 					'value' => $value,
@@ -254,17 +278,26 @@ class CheckoutSchema extends AbstractSchema {
 	 * @return array
 	 */
 	protected function get_additional_fields_response( \WC_Order $order ) {
-		$fields   = $this->additional_fields_controller->get_all_fields_from_order( $order );
-		$response = [];
+		$fields = wp_parse_args(
+			$this->additional_fields_controller->get_all_fields_from_object( $order, 'other' ),
+			$this->additional_fields_controller->get_all_fields_from_object( wc()->customer, 'other' )
+		);
 
+		$additional_field_schema = $this->get_additional_fields_schema();
 		foreach ( $fields as $key => $value ) {
-			if ( 0 === strpos( $key, '/billing/' ) || 0 === strpos( $key, '/shipping/' ) ) {
+			if ( ! isset( $additional_field_schema[ $key ] ) ) {
+				unset( $fields[ $key ] );
 				continue;
 			}
-			$response[ $key ] = $value;
+			// This makes sure we're casting checkboxes from "1" and "0" to boolean. In the frontend, "0" is treated as truthy.
+			if ( isset( $additional_field_schema[ $key ]['type'] ) && 'boolean' === $additional_field_schema[ $key ]['type'] ) {
+				$fields[ $key ] = (bool) $value;
+			} else {
+				$fields[ $key ] = $this->prepare_html_response( $value );
+			}
 		}
 
-		return $response;
+		return (object) $fields;
 	}
 
 	/**
@@ -273,27 +306,144 @@ class CheckoutSchema extends AbstractSchema {
 	 * @return array
 	 */
 	protected function get_additional_fields_schema() {
-		$additional_fields_keys = $this->additional_fields_controller->get_additional_fields_keys();
-
-		$fields = $this->additional_fields_controller->get_additional_fields();
-
-		$additional_fields = array_filter(
-			$fields,
-			function( $key ) use ( $additional_fields_keys ) {
-				return in_array( $key, $additional_fields_keys, true );
-			},
-			ARRAY_FILTER_USE_KEY
+		return $this->generate_additional_fields_schema(
+			$this->additional_fields_controller->get_fields_for_location( 'contact' ),
+			$this->additional_fields_controller->get_fields_for_location( 'order' )
 		);
+	}
 
-		$schema = [];
+	/**
+	 * Generate the schema for additional fields.
+	 *
+	 * @param array[] ...$args One or more arrays of additional fields.
+	 * @return array
+	 */
+	protected function generate_additional_fields_schema( ...$args ) {
+		$additional_fields = array_merge( ...$args );
+		$schema            = [];
 		foreach ( $additional_fields as $key => $field ) {
-			$schema[ $key ] = [
+			$field_schema = [
 				'description' => $field['label'],
 				'type'        => 'string',
 				'context'     => [ 'view', 'edit' ],
-				'required'    => true,
+				'required'    => $this->additional_fields_controller->is_conditional_field( $field ) ? false : true === $field['required'],
 			];
+
+			if ( 'select' === $field['type'] ) {
+				$field_schema['enum'] = array_map(
+					function ( $option ) {
+						return $option['value'];
+					},
+					$field['options']
+				);
+				if ( true !== $field['required'] || $this->additional_fields_controller->is_conditional_field( $field ) ) {
+					$field_schema['enum'][] = '';
+				}
+			}
+
+			if ( 'checkbox' === $field['type'] ) {
+				$field_schema['type'] = 'boolean';
+			}
+
+			if ( 'checkbox' === $field['type'] && true === $field['required'] ) {
+				$field_schema['enum'][] = true;
+			}
+
+			$schema[ $key ] = $field_schema;
 		}
 		return $schema;
+	}
+
+	/**
+	 * Check if any additional field is required, so that the parent item is required as well.
+	 *
+	 * @param array $additional_fields_schema Additional fields schema.
+	 * @return bool
+	 */
+	protected function schema_has_required_property( $additional_fields_schema ) {
+		return array_reduce(
+			array_keys( $additional_fields_schema ),
+			function ( $carry, $key ) use ( $additional_fields_schema ) {
+				return $carry || true === $additional_fields_schema[ $key ]['required'];
+			},
+			false
+		);
+	}
+
+	/**
+	 * Sanitize and format additional fields object.
+	 *
+	 * @param array $fields Values being sanitized.
+	 * @return array
+	 */
+	public function sanitize_additional_fields( $fields ) {
+		$properties         = $this->get_additional_fields_schema();
+		$sanitization_utils = new SanitizationUtils();
+		$fields             = $sanitization_utils->wp_kses_array(
+			array_reduce(
+				array_keys( $fields ),
+				function ( $carry, $key ) use ( $fields, $properties ) {
+					if ( ! isset( $properties[ $key ] ) ) {
+						return $carry;
+					}
+					$field_schema   = $properties[ $key ];
+					$rest_sanitized = rest_sanitize_value_from_schema( wp_unslash( $fields[ $key ] ), $field_schema, $key );
+					$rest_sanitized = $this->additional_fields_controller->sanitize_field( $key, $rest_sanitized );
+					$carry[ $key ]  = $rest_sanitized;
+					return $carry;
+				},
+				[]
+			)
+		);
+
+		return $sanitization_utils->wp_kses_array( $fields );
+	}
+
+	/**
+	 * Validate additional fields object. This does not validate required fields nor customer validation rules because
+	 * this may be a partial request. That will happen later when the full request is processed during POST. This only
+	 * validates against the schema.
+	 *
+	 * @see rest_validate_value_from_schema
+	 *
+	 * @param array            $fields Value being sanitized.
+	 * @param \WP_REST_Request $request The Request.
+	 * @return true|\WP_Error
+	 */
+	public function validate_additional_fields( $fields, $request ) {
+		$errors                  = new \WP_Error();
+		$fields                  = $this->sanitize_additional_fields( $fields );
+		$additional_field_schema = $this->get_additional_fields_schema();
+
+		// for PUT requests, we only want to validate the fields that are being updated.
+		if ( $request->get_method() === 'PUT' ) {
+			$additional_field_schema = array_intersect_key( $additional_field_schema, $fields );
+		}
+
+		// on POST, loop over the schema instead of the fields. This is to ensure missing fields are validated.
+		foreach ( $additional_field_schema as $key => $schema ) {
+			if ( ! isset( $fields[ $key ] ) && true !== $schema['required'] ) {
+				// Optional fields can go missing.
+				continue;
+			}
+
+			$result = rest_validate_value_from_schema( $fields[ $key ] ?? null, $schema, $key );
+
+			if ( is_wp_error( $result ) && $result->has_errors() ) {
+				$location = $this->additional_fields_controller->get_field_location( $key );
+				foreach ( $result->get_error_codes() as $code ) {
+					$result->add_data(
+						array(
+							'location' => $location,
+							'key'      => $key,
+						),
+						$code
+					);
+				}
+				$errors->merge_from( $result );
+			}
+		}
+
+		return $errors->has_errors() ? $errors : true;
 	}
 }

@@ -10,6 +10,7 @@ use MailPoet\Doctrine\EntityTraits\AutoincrementedIdTrait;
 use MailPoet\Doctrine\EntityTraits\CreatedAtTrait;
 use MailPoet\Doctrine\EntityTraits\DeletedAtTrait;
 use MailPoet\Doctrine\EntityTraits\UpdatedAtTrait;
+use MailPoet\Doctrine\EntityTraits\ValidationGroupsTrait;
 use MailPoet\Util\Helpers;
 use MailPoetVendor\Doctrine\Common\Collections\ArrayCollection;
 use MailPoetVendor\Doctrine\Common\Collections\Collection;
@@ -47,6 +48,7 @@ class SubscriberEntity {
   use CreatedAtTrait;
   use UpdatedAtTrait;
   use DeletedAtTrait;
+  use ValidationGroupsTrait;
 
   /**
    * @ORM\Column(type="bigint", nullable=true)
@@ -74,7 +76,7 @@ class SubscriberEntity {
 
   /**
    * @ORM\Column(type="string")
-   * @Assert\Email()
+   * @Assert\Email(groups={"Saving"})
    * @Assert\NotBlank()
    * @var string
    */
@@ -233,12 +235,18 @@ class SubscriberEntity {
 
   /**
    * @deprecated This is here only for backward compatibility with custom shortcodes https://kb.mailpoet.com/article/160-create-a-custom-shortcode
-   * This can be removed after 2021-08-01
+   * This can be removed after 2026-01-01
    */
   public function __get($key) {
     $getterName = 'get' . Helpers::underscoreToCamelCase($key, $capitaliseFirstChar = true);
     $callable = [$this, $getterName];
     if (is_callable($callable)) {
+      // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Intended for deprecation warnings
+      trigger_error(
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- if the function is callable, it's safe to output
+        "Direct access to \$subscriber->{$key} is deprecated and will be removed after 2026-01-01. Use \$subscriber->{$getterName}() instead.",
+        E_USER_DEPRECATED
+      );
       return call_user_func($callable);
     }
   }
@@ -499,7 +507,7 @@ class SubscriberEntity {
 
   /** * @return Collection<int, SegmentEntity> */
   public function getSegments() {
-    return $this->subscriberSegments->map(function (SubscriberSegmentEntity $subscriberSegment = null) {
+    return $this->subscriberSegments->map(function (?SubscriberSegmentEntity $subscriberSegment = null) {
       if (!$subscriberSegment) return null;
       return $subscriberSegment->getSegment();
     })->filter(function (?SegmentEntity $segment = null) {
@@ -630,7 +638,7 @@ class SubscriberEntity {
   /** @ORM\PreFlush */
   public function cleanupSubscriberSegments(): void {
     // Delete old orphan SubscriberSegments to avoid errors on update
-    $this->subscriberSegments->map(function (SubscriberSegmentEntity $subscriberSegment = null) {
+    $this->subscriberSegments->map(function (?SubscriberSegmentEntity $subscriberSegment = null) {
       if (!$subscriberSegment) return null;
       if ($subscriberSegment->getSegment() === null) {
         $this->subscriberSegments->removeElement($subscriberSegment);

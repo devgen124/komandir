@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Checkout Form
  *
@@ -67,10 +66,4 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 </form>
 
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
-
-<!--<script>-->
-<!--	$(document.body).on('updated_checkout', function (e, data) {-->
-<!--		console.log(e, data)-->
-<!--	})-->
-<!--</script>-->
 

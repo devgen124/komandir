@@ -9,8 +9,11 @@ use MailPoet\Newsletter\Renderer\EscapeHelper as EHelper;
 
 class Renderer {
   public function render($contentBlock, $columnsData) {
-    if (is_null($contentBlock['blocks']) && isset($contentBlock['type'])) {
-      return "<!-- Skipped unsupported block type: {$contentBlock['type']} -->";
+    if (!isset($contentBlock['blocks']) || !is_countable($contentBlock['blocks']) || !is_iterable($contentBlock['blocks'])) {
+      if (isset($contentBlock['type'])) {
+        return "<!-- Skipped unsupported block type: {$contentBlock['type']} -->";
+      }
+      return "<!-- Skipped unsupported block -->";
     }
 
     $columnsCount = count($contentBlock['blocks']);
@@ -119,7 +122,14 @@ class Renderer {
       $size = $image['display'] === 'scale' ? 'cover' : 'contain';
       $style = sprintf(
         'background: %s url(%s) %s center/%s;background-color: %s;background-image: url(%s);background-repeat: %s;background-position: center;background-size: %s;',
-        $backgroundColor, $image['src'], $repeat, $size, $backgroundColor, $image['src'], $repeat, $size
+        $backgroundColor,
+        $image['src'],
+        $repeat,
+        $size,
+        $backgroundColor,
+        $image['src'],
+        $repeat,
+        $size
       );
       return EHelper::escapeHtmlStyleAttr($style);
     } else {

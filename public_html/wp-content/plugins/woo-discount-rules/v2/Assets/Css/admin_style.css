@@ -1,3 +1,7 @@
+:root {
+    --wp-admin-theme-color: #0073AA;
+}
+
 .btn {
     display: inline-block;
     padding: 6px 12px;
@@ -1574,4 +1578,68 @@ div.awdr_recipe_main_card{
 
 .displaying-num {
     margin-left: 100px
+}
+.awdr-promotion-banner{
+    display: flex;
+    flex-direction: column;
+    gap: 12px
+}
+.awdr-pro-content-header{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.awdr-pro-content-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+.awdr-pro-content-card .btn.btn-dark-blue {
+    background: #022966;
+    color: #fff;
+    padding: 12px 15px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    align-items: center;
+    gap: 5px;
+
+}
+.awdr-pro-content-card.card{
+    padding: 12px 15px;
+}
+
+.awdr-pro-content-card{
+    border: 2px solid #000;
+    border-radius: 12px;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 1);
+    transition: transform 0.2s ease-in-out;
+    margin-left: 10px;
+}
+
+.awdr-pro-content-card:hover {
+    border: 2px solid #000;
+    border-radius: 12px;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 1);
+    transform: translateY(-5px);
+}
+@media (min-width:1350px) {
+    .awdr-pro-content-card.card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+@media (max-width: 1349px) {
+    .awdr-pro-content-card.card {
+        width: max-content ;
+    }
+}
+.awdr-pro-content-card-list{
+    display: flex;
+    flex-direction: column;
 }

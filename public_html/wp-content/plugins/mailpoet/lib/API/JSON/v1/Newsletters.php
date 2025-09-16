@@ -14,6 +14,7 @@ use MailPoet\Cron\CronHelper;
 use MailPoet\Doctrine\Validator\ValidationException;
 use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\NewsletterOptionFieldEntity;
+use MailPoet\Entities\ScheduledTaskEntity;
 use MailPoet\Entities\SendingQueueEntity;
 use MailPoet\InvalidStateException;
 use MailPoet\Listing;
@@ -215,6 +216,17 @@ class Newsletters extends APIEndpoint {
     $this->newslettersRepository->prefetchOptions([$newsletter]);
     $newsletter->setStatus($status);
 
+    // if there are paused tasks unpause them
+    if ($newsletter->getStatus() === NewsletterEntity::STATUS_ACTIVE) {
+      $queues = $newsletter->getUnfinishedQueues();
+      foreach ($queues as $queue) {
+        $task = $queue->getTask();
+        if ($task && $task->getStatus() === ScheduledTaskEntity::STATUS_PAUSED) {
+          $task->setStatus(ScheduledTaskEntity::STATUS_SCHEDULED);
+        }
+      }
+    }
+
     // if there are past due notifications, reschedule them for the next send date
     if ($newsletter->getType() === NewsletterEntity::TYPE_NOTIFICATION && $status === NewsletterEntity::STATUS_ACTIVE) {
       $scheduleOption = $newsletter->getOption(NewsletterOptionFieldEntity::NAME_SCHEDULE);
@@ -229,7 +241,7 @@ class Newsletters extends APIEndpoint {
         $task = $queue->getTask();
         if (
           $task &&
-          $task->getScheduledAt() <= Carbon::createFromTimestamp($this->wp->currentTime('timestamp')) &&
+          $task->getScheduledAt() <= Carbon::now()->millisecond(0) &&
           $task->getStatus() === SendingQueueEntity::STATUS_SCHEDULED
         ) {
           $nextRunDate = $nextRunDate ? Carbon::createFromFormat('Y-m-d H:i:s', $nextRunDate) : null;
@@ -326,8 +338,9 @@ class Newsletters extends APIEndpoint {
       ]);
     }
 
+    $newslettersTableName = $this->newslettersRepository->getTableName();
     $newsletter->setBody(
-      json_decode($this->emoji->encodeForUTF8Column(MP_NEWSLETTERS_TABLE, 'body', $data['body']), true)
+      json_decode($this->emoji->encodeForUTF8Column($newslettersTableName, 'body', $data['body']), true)
     );
     $this->newslettersRepository->flush();
 

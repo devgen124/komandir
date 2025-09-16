@@ -141,7 +141,7 @@ class Worker {
     ];
   }
 
-  private function prepareContext(NewsletterEntity $newsletter, SendingQueueEntity $sendingQueue, NewsletterLinkEntity $link = null) {
+  private function prepareContext(NewsletterEntity $newsletter, SendingQueueEntity $sendingQueue, ?NewsletterLinkEntity $link = null) {
     $statistics = $this->newsletterStatisticsRepository->getStatistics($newsletter);
     $clicked = ($statistics->getClickCount() * 100) / $statistics->getTotalSentCount();
     $opened = ($statistics->getOpenCount() * 100) / $statistics->getTotalSentCount();
@@ -153,9 +153,13 @@ class Worker {
     $hasValidApiKey = $this->subscribersFeature->hasValidApiKey();
     $context = [
       'subject' => $subject,
-      // translators: %1$s is the percentage of clicks, %2$s the percentage of opens and %3$s the number of unsubscribes.
-      'preheader' => sprintf(_x(
-        '%1$s%% clicks, %2$s%% opens, %3$s%% unsubscribes in a nutshell.', 'newsletter open rate, click rate and unsubscribe rate', 'mailpoet'),
+      'preheader' => sprintf(
+        // translators: %1$s is the percentage of clicks, %2$s the percentage of opens and %3$s the number of unsubscribes.
+        _x(
+          '%1$s%% clicks, %2$s%% opens, %3$s%% unsubscribes in a nutshell.',
+          'newsletter open rate, click rate and unsubscribe rate',
+          'mailpoet'
+        ),
         number_format($clicked, 2),
         number_format($opened, 2),
         number_format($unsubscribed, 2)
@@ -185,7 +189,7 @@ class Worker {
 
   private function markTaskAsFinished(ScheduledTaskEntity $task) {
     $task->setStatus(ScheduledTaskEntity::STATUS_COMPLETED);
-    $task->setProcessedAt(Carbon::createFromTimestamp(WPFunctions::get()->currentTime('timestamp')));
+    $task->setProcessedAt(Carbon::now()->millisecond(0));
     $task->setScheduledAt(null);
     $this->entityManager->flush();
   }

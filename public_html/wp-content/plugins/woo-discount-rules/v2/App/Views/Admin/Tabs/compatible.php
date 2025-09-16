@@ -9,7 +9,7 @@
         <div class="awdr-compatible-form">
             <form name="compatible_form" id="compatible-form" method="post">
                 <?php $has_compatibility_plugin = false; ?>
-                <h1><?php _e('Compatibility for Woo Discount Rules', 'woo-discount-rules') ?></h1>
+                <h1><?php esc_html_e('Plugins Compatible with Discount Rules', 'woo-discount-rules') ?></h1>
                 <div class="awdr-compatible-field-container">
                     <?php
                         $base->loadFields($has_compatibility_plugin);
@@ -20,6 +20,8 @@
                     ?>
                     <div class="save-configuration">
                         <p class="submit">
+                            <input type="hidden" name="awdr_compatibility_nonce" id="awdr_compatibility_nonce"
+                                   value="<?php echo esc_html(wp_create_nonce('awdr_compatibility_nonce')); ?>"/>
                             <button type="submit" name="awdr_compatibility_submit" id="submit" class="button button-primary save-compatibility-submit"
                                     value="1"><?php esc_html_e('Save Changes', 'woo-discount-rules'); ?></button></p>
                     </div>

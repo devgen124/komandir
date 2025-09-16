@@ -10,7 +10,6 @@ use Wdr\App\Controllers\Admin\Tabs;
 use Wdr\App\Controllers\ManageDiscount;
 use Wdr\App\Controllers\OnSaleShortCode;
 use Wdr\App\Controllers\ShortCodeManager;
-
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class Router
@@ -40,6 +39,10 @@ class Router
      */
     function init()
     {
+	    add_filter( 'safe_style_css', function( $styles ) {
+		    $styles[] = 'display';
+		    return $styles;
+	    } );
         $compatibility = Tabs\Compatible::getInstance();
         $compatibility->runCompatibilityScripts();
         //admin ajax requests
@@ -60,12 +63,12 @@ class Router
                 return $screen_ids;
             });
         }
-        add_action('admin_init', array(self::$admin, 'setupSurveyForm'), 10);
         /**
          * All hooks needed for both admin and site
          */
         $manage_discount_class = self::$manage_discount = (!empty(self::$manage_discount)) ? self::$manage_discount : new ManageDiscount();
         add_filter('advanced_woo_discount_rules_get_product_discount_price_from_custom_price', array(self::$manage_discount, 'calculateProductDiscountPrice'), 100, 7);
+        add_filter('advanced_woo_discount_rules_get_custom_taxonomies', array( self::$manage_discount, 'changeCustomTaxonomyLabel'), 100);
 
         // Filter hooks since v2.6.0
         add_filter('advanced_woo_discount_rules_get_product_discount_price', array(self::$manage_discount, 'getDiscountPriceOfAProduct'), 10, 4);
@@ -143,7 +146,7 @@ class Router
             add_filter('woocommerce_variable_price_html', array(self::$manage_discount, 'getVariablePriceHtml'), 100, 2);
 
 			// Apply url coupons
-	        add_action('wp_loaded', array(self::$manage_discount, 'applyUrlCoupon'));
+	        add_action('wp_loaded', array(self::$manage_discount, 'applyUrlCoupon'), 15);
 
             add_filter('woocommerce_coupon_message', array(self::$manage_discount, 'removeAppliedMessageOfThirdPartyCoupon'), 10, 3);
 
@@ -189,6 +192,7 @@ class Router
             }
             //After place order button clicked
             add_action('woocommerce_checkout_update_order_meta', array(self::$manage_discount, 'orderItemsSaved'), 10, 2);
+            add_action('woocommerce_store_api_checkout_update_order_meta', array(self::$manage_discount, 'blockCheckoutOrderItemsSaved'), 10, 1);
             //Showing the bulk table
             $show_bulk_table = $manage_discount_class::$config->getConfig('show_bulk_table', 0);
             $position_to_show_bulk_table = $manage_discount_class::$config->getConfig('position_to_show_bulk_table', 'woocommerce_before_add_to_cart_form');

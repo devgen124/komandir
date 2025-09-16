@@ -1,27 +1,134 @@
 .wpcf7-form {
-  input {
-    &[type="text"],
-    &[type="email"],
-    &[type="number"] {
-      padding: 7px;
-      background: $white;
-      color: $black-alter-color;
-      border: 1px solid #bfbfbf;
-      border-radius: 3px;
-    }
-  }
+	input {
+		&[type="text"],
+		&[type="email"],
+		&[type="number"] {
+			padding: 7px;
+			background: $white;
+			color: $black-alter-color;
+			border: 1px solid #bfbfbf;
+			border-radius: 3px;
+		}
+	}
 
-  .wpcf7-acceptance {
-    a {
-      position: relative;
-      color: #000;
-      box-shadow: 0 1px #b9b9b9;
-      transition: 0.3s;
+	.wpcf7-acceptance {
+		a {
+			position: relative;
+			color: #000;
+			box-shadow: 0 1px #b9b9b9;
+			transition: 0.3s;
 
-      &:hover {
-        color: $accent-color;
-        box-shadow: 0 1px $accent-color;
-      }
-    }
-  }
+			&:hover {
+				color: $accent-color;
+				box-shadow: 0 1px $accent-color;
+			}
+		}
+
+		label {
+			position: relative;
+			padding-left: 27px;
+			font-size: 14px;
+			line-height: 14px;
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			input[type="checkbox"] {
+				position: absolute;
+				visibility: hidden;
+				width: 1px;
+				height: 1px;
+				top: 0;
+				left: 0;
+
+				&:checked + span::after {
+					opacity: 1;
+				}
+			}
+
+			span {
+				&::before {
+					content: "";
+					position: absolute;
+					top: -5px;
+					left: 0;
+					width: 21px;
+					height: 21px;
+					background: url("../images/checkbox.svg") no-repeat left bottom;
+					transition: 0.3s;
+				}
+
+				&::after {
+					content: "";
+					position: absolute;
+					z-index: 2;
+					top: -5px;
+					left: 2px;
+					width: 22px;
+					height: 20px;
+					background: url("../images/check.svg") no-repeat left bottom;
+					opacity: 0;
+					transition: 0.3s;
+				}
+			}
+		}
+	}
+
+	.wpcf7-list-item {
+		margin-left: 0;
+	}
+}
+
+.footer-subscribe {
+	.wpcf7-form {
+		.subscribe-desc {
+			margin-bottom: 20px;
+		}
+
+		p:has(.wpcf7-form-control-wrap) {
+			margin-top: 20px;
+			display: flex;
+			gap: 17px;
+
+			@include media-breakpoint-down(sm) {
+				flex-wrap: wrap;
+			}
+		}
+
+		.wpcf7-form-control-wrap {
+			flex-grow: 1;
+
+			input {
+				width: 100%;
+			}
+		}
+
+		input[type="submit"] {
+			padding: 11px 21px;
+			font-weight: 700;
+			color: $white;
+			background-color: $accent-color;
+			border: none;
+			border-radius: 3px;
+			transition: 0.3s;
+
+			&:hover {
+				background-color: $accent-color-hover;
+			}
+		}
+
+		p {
+			margin-bottom: 0;
+		}
+	}
+
+	.wpcf7-spinner {
+		display: none;
+	}
+
+	.subscribe-acceptance {
+		display: block;
+		margin-top: 26px;
+	}
 }

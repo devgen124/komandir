@@ -100,7 +100,7 @@ class Segments {
       throw new APIException(
         str_replace(
           '%1$s',
-          "'" . join("', '", $activelyUsedNewslettersSubjects[$listId] ) . "'",
+          "'" . join("', '", $activelyUsedNewslettersSubjects[$listId]) . "'",
           // translators: %1$s is a comma-seperated list of emails for which the segment is used.
           _x('List cannot be deleted because it’s used for %1$s email', 'Alert shown when trying to delete segment, which is assigned to any automatic emails.', 'mailpoet')
         ),
@@ -113,7 +113,7 @@ class Segments {
       throw new APIException(
         str_replace(
           '%1$s',
-          "'" . join("', '", $activelyUsedFormNames[$listId] ) . "'",
+          "'" . join("', '", $activelyUsedFormNames[$listId]) . "'",
           // translators: %1$s is a comma-seperated list of forms for which the segment is used.
           _nx(
             'List cannot be deleted because it’s used for %1$s form',
@@ -166,7 +166,8 @@ class Segments {
       );
     }
 
-    if (!$this->segmentsRepository->isNameUnique($data['name'], null)) {
+    $segmentId = isset($data['id']) ? (int)$data['id'] : null;
+    if (!$this->segmentsRepository->isNameUnique($data['name'], $segmentId)) {
       throw new APIException(
         __('This list already exists.', 'mailpoet'),
         APIException::LIST_EXISTS
@@ -200,7 +201,7 @@ class Segments {
       'type' => $segment->getType(),
       'description' => $segment->getDescription(),
       'created_at' => ($createdAt = $segment->getCreatedAt()) ? $createdAt->format(self::DATE_FORMAT) : null,
-      'updated_at' => $segment->getUpdatedAt()->format(self::DATE_FORMAT),
+      'updated_at' => ($updatedAt = $segment->getUpdatedAt()) ? $updatedAt->format(self::DATE_FORMAT) : null,
       'deleted_at' => ($deletedAt = $segment->getDeletedAt()) ? $deletedAt->format(self::DATE_FORMAT) : null,
     ];
   }

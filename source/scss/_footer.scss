@@ -1,167 +1,75 @@
 .location-content {
-  display: none;
+	display: none;
 }
 
 .site-footer {
-  margin-top: 84px;
-  font-size: 14px;
-  line-height: 1;
-  color: $black;
-  overflow-x: hidden;
-  background-color: $footer-color;
+	margin-top: 84px;
+	font-size: 14px;
+	line-height: 1;
+	color: $black;
+	overflow-x: hidden;
+	background-color: $footer-color;
 
-  @include media-breakpoint-down(lg) {
-    margin-bottom: 63px;
-  }
+	@include media-breakpoint-down(lg) {
+		margin-bottom: 63px;
+	}
 }
 
 .footer-row {
-  padding: 40px 0;
+	padding: 40px 0;
 
-  &:not(:last-of-type) {
-    border-bottom: 1px solid #dbdbdb;
-  }
+	&:not(:last-of-type) {
+		border-bottom: 1px solid #dbdbdb;
+	}
 }
 
 .footer-links-list {
-  li:not(:last-child) {
-    margin-bottom: 26px;
-  }
+	li:not(:last-child) {
+		margin-bottom: 26px;
+	}
 
-  a {
-    color: #000;
-    transition: 0.3s;
+	a {
+		color: #000;
+		transition: 0.3s;
 
-    &:hover {
-      color: $accent-color;
-    }
-  }
+		&:hover {
+			color: $accent-color;
+		}
+	}
 }
 
 .footer-social,
 .footer-payment {
-  h3 {
-    margin-bottom: 26px;
-    font-size: 14px;
-    line-height: 1;
-    font-weight: 400;
-  }
+	h3 {
+		margin-bottom: 26px;
+		font-size: 14px;
+		line-height: 1;
+		font-weight: 400;
+	}
 }
 
 .footer-social {
-  margin-bottom: 40px;
+	margin-bottom: 40px;
 }
 
 .footer-social-list {
-  margin: 0 -17px -17px 0;
-  display: flex;
-  flex-wrap: wrap;
+	margin: 0 -17px -17px 0;
+	display: flex;
+	flex-wrap: wrap;
 
 
-
-  li {
-    margin: 0 17px 17px 0;
-  }
+	li {
+		margin: 0 17px 17px 0;
+	}
 }
 
 .footer-payment-list {
-  margin: 0 -17px -17px 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+	margin: 0 -17px -17px 0;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 
-  li {
-    margin: 0 17px 17px 0;
-  }
-}
-
-.footer-subscribe {
-  .wpcf7-form {
-    input[type="email"] {
-      margin-right: 17px;
-      width: calc(100% - 17px);
-    }
-
-    input[type="submit"] {
-      padding: 11px 21px;
-      font-weight: 700;
-      color: $white;
-      background-color: $accent-color;
-      border: none;
-      border-radius: 3px;
-      transition: 0.3s;
-
-      &:hover {
-        background-color: $accent-color-hover;
-      }
-    }
-
-    p {
-      margin-bottom: 0;
-    }
-  }
-
-  .wpcf7-spinner {
-    display: none;
-  }
-
-  .subscribe-acceptance {
-    display: block;
-    margin-top: 26px;
-  }
-
-  .wpcf7-acceptance {
-
-    .wpcf7-list-item {
-      margin-left: 0;
-    }
-  
-    label {
-      position: relative;
-      padding-left: 27px;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      input[type="checkbox"] {
-        position: absolute;
-        visibility: hidden;
-        width: 1px;
-        height: 1px;
-        top: 0;
-        left: 0;
-
-          &:checked + span::after {
-              opacity: 1;
-          }
-      }
-
-      span {
-        &::before {
-          content: "";
-          position: absolute;
-          top: -5px;
-          left: 0;
-          width: 21px;
-          height: 21px;
-          background: url("../images/checkbox.svg") no-repeat left bottom;
-          transition: 0.3s;
-        }
-
-        &::after {
-          content: "";
-          position: absolute;
-          z-index: 2;
-          top: -5px;
-          left: 2px;
-          width: 22px;
-          height: 20px;
-          background: url("../images/check.svg") no-repeat left bottom;
-          opacity: 0;
-          transition: 0.3s;
-        }
-      }
-    }
-  }
+	li {
+		margin: 0 17px 17px 0;
+	}
 }

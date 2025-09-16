@@ -12,14 +12,17 @@ class Email extends Constraint
  public const VALIDATION_MODE_STRICT = 'strict';
  public const VALIDATION_MODE_LOOSE = 'loose';
  public const INVALID_FORMAT_ERROR = 'bd79c0ab-ddba-46cc-a703-a7a4b08de310';
- protected static $errorNames = [self::INVALID_FORMAT_ERROR => 'STRICT_CHECK_FAILED_ERROR'];
+ protected static $errorNames = [self::INVALID_FORMAT_ERROR => 'INVALID_FORMAT_ERROR'];
  public static $validationModes = [self::VALIDATION_MODE_HTML5, self::VALIDATION_MODE_STRICT, self::VALIDATION_MODE_LOOSE];
  public $message = 'This value is not a valid email address.';
  public $mode;
  public $normalizer;
- public function __construct(array $options = null, string $message = null, string $mode = null, callable $normalizer = null, array $groups = null, $payload = null)
+ public function __construct(?array $options = null, ?string $message = null, ?string $mode = null, ?callable $normalizer = null, ?array $groups = null, $payload = null)
  {
  if (\is_array($options) && \array_key_exists('mode', $options) && !\in_array($options['mode'], self::$validationModes, \true)) {
+ throw new InvalidArgumentException('The "mode" parameter value is not valid.');
+ }
+ if (null !== $mode && !\in_array($mode, self::$validationModes, \true)) {
  throw new InvalidArgumentException('The "mode" parameter value is not valid.');
  }
  parent::__construct($options, $groups, $payload);

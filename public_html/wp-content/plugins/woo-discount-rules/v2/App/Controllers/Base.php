@@ -159,7 +159,7 @@ class Base
         }
         foreach ($ruleConditionsTypes as $key => $options){
             if(!empty($options) && is_array($options)) {
-                if ($key == "Cart" || $key == __("Cart", 'woo-discount-rules') || $key == __("Cart", 'woo-discount-rules-pro')) {
+                if ($key == "Cart" || $key == __("Cart", 'woo-discount-rules') || $key == __("Cart", 'woo-discount-rules')) {
                     $sortedOptions = $lastOption = [];
                     if (isset($options['cart_subtotal'])) {
                         $sortedOptions['cart_subtotal'] = $options['cart_subtotal'];
@@ -178,9 +178,9 @@ class Base
                         unset($options['cart_line_items_count']);
                     }
                     $cart_item_condition[$key] = $sortedOptions + $options + $lastOption;
-                } elseif ($key == "Billing" || $key == __("Billing", 'woo-discount-rules') || $key == __("Billing", 'woo-discount-rules-pro')) {
+                } elseif ($key == "Billing" || $key == __("Billing", 'woo-discount-rules') || $key == __("Billing", 'woo-discount-rules')) {
                     $billing[$key] = $options;
-                } elseif ($key == "Customer" || $key == __("Customer", 'woo-discount-rules') || $key == __("Customer", 'woo-discount-rules-pro')) {
+                } elseif ($key == "Customer" || $key == __("Customer", 'woo-discount-rules') || $key == __("Customer", 'woo-discount-rules')) {
                     $customer[$key] = $options;
                 } else {
                     $sortedConditionsTypes[$key] = $options;

@@ -2,6 +2,7 @@
 
 namespace Wdr\App\Conditions;
 
+use Wdr\App\Controllers\Configuration;
 use Wdr\App\Helpers\Filter;
 use Wdr\App\Helpers\Helper;
 use Wdr\App\Helpers\Input;
@@ -12,7 +13,7 @@ if (!defined('ABSPATH')) exit;
 abstract class Base
 {
     public static $woocommerce_helper, $filter;
-    public $name = NULL, $rule = null, $label = NULL, $group = NULL, $template = NULL, $input, $extra_params = array('render_saved_condition' => false);
+    public $config, $name = NULL, $rule = null, $label = NULL, $group = NULL, $template = NULL, $input, $extra_params = array('render_saved_condition' => false);
 
     function __construct()
     {
@@ -414,7 +415,8 @@ abstract class Base
                         if(isset(Woocommerce::$product_taxonomy_terms[$product_id]) && isset(Woocommerce::$product_taxonomy_terms[$product_id][$type])){
                             $term_ids = Woocommerce::$product_taxonomy_terms[$product_id][$type];
                         } else {
-                            $term_ids = Woocommerce::$product_taxonomy_terms[$product_id][$type] = wp_get_post_terms($product_id, $type, array("fields" => "ids"));
+                            $post_term = wp_get_post_terms($product_id, $type, array("fields" => "ids"));
+                            $term_ids = Woocommerce::$product_taxonomy_terms[$product_id][$type] = !is_wp_error($post_term) ? $post_term : [];
                         }
                         $not_in_list_product = count(array_intersect($term_ids, $comparision_value)) > 0;
                     }

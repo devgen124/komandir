@@ -94,7 +94,7 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 </script>
 <div class="woo_discount_loader_outer">
     <div class="wdr-main">
-        <h2 style="font-size: 18px;"><?php _e('Woo Discount Rules', 'woo-discount-rules'); ?></h2>
+        <h2 style="font-size: 18px;"><?php esc_html_e('Discount Rules', 'woo-discount-rules'); ?></h2>
         <?php do_action('advanced_woo_discount_rules_on_settings_head'); ?>
     </div>
 </div>

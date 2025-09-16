@@ -27,6 +27,7 @@
 namespace YooKassa\Client;
 
 use Exception;
+use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use YooKassa\Common\Exceptions\ApiConnectionException;
 use YooKassa\Common\Exceptions\ApiException;
@@ -152,8 +153,14 @@ class BaseClient
      * @param ApiClientInterface|null $apiClient
      * @param ConfigurationLoaderInterface|null $configLoader
      */
-    public function __construct(ApiClientInterface $apiClient = null, ConfigurationLoaderInterface $configLoader = null)
+    public function __construct($apiClient = null, $configLoader = null)
     {
+        if ($apiClient !== null && !$apiClient instanceof ApiClientInterface) {
+            throw new InvalidArgumentException('Expected instance of ApiClientInterface or null');
+        }
+        if ($configLoader !== null && !$configLoader instanceof ConfigurationLoaderInterface) {
+            throw new InvalidArgumentException('Expected instance of ConfigurationLoaderInterface or null');
+        }
         if ($apiClient === null) {
             $apiClient = new CurlClient();
         }

@@ -39,7 +39,7 @@ class FirstPurchase {
   private $subscribersRepository;
 
   public function __construct(
-    WCHelper $helper = null
+    ?WCHelper $helper = null
   ) {
     if ($helper === null) {
       $helper = ContainerWrapper::getInstance()->get(WCHelper::class);
@@ -128,16 +128,18 @@ class FirstPurchase {
         $meta = $queue->getMeta();
         $result = (!empty($meta['order_date'])) ? WPFunctions::get()->dateI18n(get_option('date_format'), $meta['order_date']) : $defaultValue;
       }
+
+      $this->loggerFactory->getLogger(self::SLUG)->info(
+        'handleOrderDateShortcode called',
+        [
+          'newsletter_id' => ($newsletter instanceof NewsletterEntity) ? $newsletter->getId() : null,
+          'subscriber_id' => ($subscriber instanceof SubscriberEntity) ? $subscriber->getId() : null,
+          'task_id' => ($queue instanceof SendingQueueEntity) ? (($task = $queue->getTask()) ? $task->getId() : null) : null,
+          'shortcode' => $shortcode,
+          'result' => $result,
+        ]
+      );
     }
-    $this->loggerFactory->getLogger(self::SLUG)->info(
-      'handleOrderDateShortcode called', [
-        'newsletter_id' => ($newsletter instanceof NewsletterEntity) ? $newsletter->getId() : null,
-        'subscriber_id' => ($subscriber instanceof SubscriberEntity) ? $subscriber->getId() : null,
-        'task_id' => ($queue instanceof SendingQueueEntity) ? (($task = $queue->getTask()) ? $task->getId() : null) : null,
-        'shortcode' => $shortcode,
-        'result' => $result,
-      ]
-    );
     return $result;
   }
 
@@ -151,16 +153,18 @@ class FirstPurchase {
         $meta = $queue->getMeta();
         $result = (!empty($meta['order_amount'])) ? $this->helper->wcPrice($meta['order_amount']) : $defaultValue;
       }
+
+      $this->loggerFactory->getLogger(self::SLUG)->info(
+        'handleOrderTotalShortcode called',
+        [
+          'newsletter_id' => ($newsletter instanceof NewsletterEntity) ? $newsletter->getId() : null,
+          'subscriber_id' => ($subscriber instanceof SubscriberEntity) ? $subscriber->getId() : null,
+          'task_id' => ($queue instanceof SendingQueueEntity) ? (($task = $queue->getTask()) ? $task->getId() : null) : null,
+          'shortcode' => $shortcode,
+          'result' => $result,
+        ]
+      );
     }
-    $this->loggerFactory->getLogger(self::SLUG)->info(
-      'handleOrderTotalShortcode called', [
-        'newsletter_id' => ($newsletter instanceof NewsletterEntity) ? $newsletter->getId() : null,
-        'subscriber_id' => ($subscriber instanceof SubscriberEntity) ? $subscriber->getId() : null,
-        'task_id' => ($queue instanceof SendingQueueEntity) ? (($task = $queue->getTask()) ? $task->getId() : null) : null,
-        'shortcode' => $shortcode,
-        'result' => $result,
-      ]
-    );
     return $result;
   }
 
@@ -178,7 +182,8 @@ class FirstPurchase {
     $customerOrderCount = $this->getCustomerOrderCount($customerEmail);
     if ($customerOrderCount > 1) {
       $this->loggerFactory->getLogger(self::SLUG)->info(
-        'Email not scheduled because this is not the first order of the customer', [
+        'Email not scheduled because this is not the first order of the customer',
+        [
           'order_id' => $orderId,
           'customer_email' => $customerEmail,
           'order_count' => $customerOrderCount,
@@ -208,7 +213,8 @@ class FirstPurchase {
     };
 
     $this->loggerFactory->getLogger(self::SLUG)->info(
-      'Email scheduled', [
+      'Email scheduled',
+      [
         'order_id' => $orderId,
         'customer_email' => $customerEmail,
         'subscriber_id' => $subscriber->getId(),

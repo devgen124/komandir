@@ -27,6 +27,8 @@ class Fiscalization extends AbstractObject
     /** @var array<string, string>|null */
     private $taxRates;
     /** @var bool|null */
+    private $markingEnabled;
+    /** @var bool|null */
     private $secondReceiptEnabled;
     /** @var string|null */
     private $secondReceiptOrderStatus;
@@ -106,6 +108,14 @@ class Fiscalization extends AbstractObject
     public function getTaxRates()
     {
         return $this->taxRates;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getMarkingEnabled()
+    {
+        return $this->markingEnabled;
     }
 
     /**
@@ -231,6 +241,16 @@ class Fiscalization extends AbstractObject
     public function setSecondReceiptEnabled($value = null)
     {
         $this->secondReceiptEnabled = (bool) $value;
+        return $this;
+    }
+
+    /**
+     * @param bool|null $value
+     * @return self
+     */
+    public function setMarkingEnabled($value = null)
+    {
+        $this->markingEnabled = (bool) $value;
         return $this;
     }
 

@@ -117,8 +117,8 @@ $is_pro = Wdr\App\Helpers\Helper::hasPro();
 <div id="wpbody-content" class="awdr-container">
     <div>
         <ul id="wdr-statistics-tabs">
-            <li><a id="chart-tab" class="active" data-target="#chart-panel"><?php _e('Rule statistics', 'woo-discount-rules'); ?></a> | </li>
-            <li><a id="coupon-tab" data-target="#coupon-panel"><?php _e('Coupon Statistics', 'woo-discount-rules'); ?></a></li>
+            <li><a id="chart-tab" class="active" data-target="#chart-panel"><?php esc_html_e('Rule statistics', 'woo-discount-rules'); ?></a> | </li>
+            <li><a id="coupon-tab" data-target="#coupon-panel"><?php esc_html_e('Coupon Statistics', 'woo-discount-rules'); ?></a></li>
         </ul>
     </div>
     <div class="clear"></div>
@@ -127,9 +127,9 @@ $is_pro = Wdr\App\Helpers\Helper::hasPro();
             <div class="wdr-rule-statistics">
                 <div class="statistics_date_range">
                     <select name="period" class="chart-period" style="height: 33px">
-                        <option value="this_week"><?php _e('This Week', 'woo-discount-rules'); ?></option>
-                        <option value="this_month"><?php _e('This Month', 'woo-discount-rules'); ?></option>
-                        <option value="custom"><?php _e('Custom Range', 'woo-discount-rules'); ?></option>
+                        <option value="this_week"><?php esc_html_e('This Week', 'woo-discount-rules'); ?></option>
+                        <option value="this_month"><?php esc_html_e('This Month', 'woo-discount-rules'); ?></option>
+                        <option value="custom"><?php esc_html_e('Custom Range', 'woo-discount-rules'); ?></option>
                     </select>
                 </div>
                 <div class="wdr-dateandtime-value">
@@ -146,7 +146,7 @@ $is_pro = Wdr\App\Helpers\Helper::hasPro();
                     <input type="text"
                            name="to"
                            class="wdr-condition-date wdr-title chart-period-end" data-class="end_dateonly"
-                           placeholder="<?php _e('To: yyyy/mm/dd', 'woo-discount-rules'); ?>"
+                           placeholder="<?php esc_html_e('To: yyyy/mm/dd', 'woo-discount-rules'); ?>"
                            data-field="date" autocomplete="off"
                            id="rule_datetime_to" value="<?php if (isset($date[1]) && !empty($date[1])) {
                         echo esc_attr($date[1]);
@@ -164,8 +164,8 @@ $is_pro = Wdr\App\Helpers\Helper::hasPro();
                     </select>
                 </div>
                 <div>
-                    <input type="hidden" name="awdr_nonce" value="<?php echo esc_attr(\Wdr\App\Helpers\Helper::create_nonce('wdr_ajax_report')); ?>">
-                    <button type="submit" class="update-chart btn btn-success"><?php _e('Update', 'woo-discount-rules'); ?></button>
+                    <input type="hidden" name="awdr_nonce" value="<?php echo esc_html(\Wdr\App\Helpers\Helper::create_nonce('wdr_ajax_report')); ?>">
+                    <button type="submit" class="update-chart btn btn-success"><?php esc_html_e('Update', 'woo-discount-rules'); ?></button>
                 </div>
             </div>
         </form>
@@ -197,9 +197,9 @@ $is_pro = Wdr\App\Helpers\Helper::hasPro();
             <div class="wdr-rule-statistics">
                 <div class="statistics_date_range">
                     <select name="period" class="chart-period" style="height: 33px">
-                        <option value="this_week"><?php _e('This Week', 'woo-discount-rules'); ?></option>
-                        <option value="this_month"><?php _e('This Month', 'woo-discount-rules'); ?></option>
-                        <option value="custom"><?php _e('Custom Range', 'woo-discount-rules'); ?></option>
+                        <option value="this_week"><?php esc_html_e('This Week', 'woo-discount-rules'); ?></option>
+                        <option value="this_month"><?php esc_html_e('This Month', 'woo-discount-rules'); ?></option>
+                        <option value="custom"><?php esc_html_e('Custom Range', 'woo-discount-rules'); ?></option>
                     </select>
                 </div>
                 <div class="wdr-dateandtime-value">
@@ -216,7 +216,7 @@ $is_pro = Wdr\App\Helpers\Helper::hasPro();
                     <input type="text"
                            name="to"
                            class="wdr-condition-date wdr-title chart-period-end" data-class="end_dateonly"
-                           placeholder="<?php _e('To: yyyy/mm/dd', 'woo-discount-rules'); ?>"
+                           placeholder="<?php esc_html_e('To: yyyy/mm/dd', 'woo-discount-rules'); ?>"
                            data-field="date" autocomplete="off"
                            id="rule_datetime_to" value="<?php if (isset($date[1]) && !empty($date[1])) {
                         echo esc_attr($date[1]);
@@ -236,7 +236,7 @@ $is_pro = Wdr\App\Helpers\Helper::hasPro();
                 </div>
                 <div>
                     <input type="hidden" name="awdr_nonce" value="<?php echo esc_attr(\Wdr\App\Helpers\Helper::create_nonce('wdr_ajax_report')); ?>">
-                    <button type="submit" class="update-chart btn btn-success"><?php _e('Update', 'woo-discount-rules'); ?></button>
+                    <button type="submit" class="update-chart btn btn-success"><?php esc_html_e('Update', 'woo-discount-rules'); ?></button>
                 </div>
             </div>
         </form>

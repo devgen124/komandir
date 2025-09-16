@@ -32,11 +32,8 @@ class Heading {
   }
 
   private function renderTag(array $block): string {
-    $tag = 'h2';
-    if (isset($block['params']['level'])) {
-      $tag = 'h' . $block['params']['level'];
-    }
-    return $tag;
+    $level = isset($block['params']['level']) ? (int)$block['params']['level'] : 2;
+    return ($level < 1 || $level > 6) ? 'h2' : 'h' . $level;
   }
 
   private function renderAttributes(array $block): array {
@@ -68,7 +65,7 @@ class Heading {
       $classes[] = $block['params']['class_name'];
     }
 
-    if (!empty($block['params']['background_color'])) {
+    if (!empty($block['params']['background_color']) || !empty($block['params']['gradient'])) {
       $classes[] = 'mailpoet-has-background-color';
     }
 
@@ -83,7 +80,7 @@ class Heading {
 
   private function renderAnchor(array $block): string {
     return 'id="'
-      . $block['params']['anchor']
+      . $this->wp->escAttr($block['params']['anchor'])
       . '"';
   }
 
@@ -103,6 +100,16 @@ class Heading {
     }
     if (!empty($block['params']['background_color'])) {
       $styles[] = 'background-color: ' . $block['params']['background_color'];
+    }
+    if (!empty($block['params']['gradient'])) {
+      $styles[] = "background: {$block['params']['gradient']};";
+    }
+    if (!empty($block['params']['padding']) && is_array($block['params']['padding'])) {
+      $top = $block['params']['padding']['top'] ?? 0;
+      $right = $block['params']['padding']['right'] ?? 0;
+      $bottom = $block['params']['padding']['bottom'] ?? 0;
+      $left = $block['params']['padding']['left'] ?? 0;
+      $styles[] = "padding:{$top} {$right} {$bottom} {$left};";
     }
     if (empty($styles)) {
       return '';

@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('wc-price-format', 'wc-settings', 'wp-api-fetch', 'wp-i18n', 'wp-polyfill'), 'version' => '7f4b55b97a7cb539b252');
+<?php return array('dependencies' => array('wc-cart-checkout-base', 'wc-cart-checkout-vendors', 'wc-blocks-data-store', 'wc-price-format', 'wc-settings', 'wc-types', 'wp-data', 'wp-i18n', 'wp-polyfill'), 'version' => 'f7403ae8c18597571632');

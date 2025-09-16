@@ -17,6 +17,7 @@ use MailPoet\Entities\StatisticsUnsubscribeEntity;
 use MailPoet\Entities\StatisticsWooCommercePurchaseEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\UserAgentEntity;
+use MailPoet\Settings\TrackingConfig;
 use MailPoet\WooCommerce\Helper as WCHelper;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 use MailPoetVendor\Doctrine\ORM\Query\Expr\Join;
@@ -31,12 +32,17 @@ class NewsletterStatisticsRepository extends Repository {
   /** @var WCHelper */
   private $wcHelper;
 
+  /** @var TrackingConfig */
+  private $trackingConfig;
+
   public function __construct(
     EntityManager $entityManager,
-    WCHelper $wcHelper
+    WCHelper $wcHelper,
+    TrackingConfig $trackingConfig
   ) {
     parent::__construct($entityManager);
     $this->wcHelper = $wcHelper;
+    $this->trackingConfig = $trackingConfig;
   }
 
   protected function getEntityClassName() {
@@ -62,8 +68,8 @@ class NewsletterStatisticsRepository extends Repository {
    */
   public function getBatchStatistics(
     array $newsletters,
-    \DateTimeImmutable $from = null,
-    \DateTimeImmutable $to = null,
+    ?\DateTimeImmutable $from = null,
+    ?\DateTimeImmutable $to = null,
     array $include = [
       'totals',
       StatisticsClickEntity::class,
@@ -130,8 +136,8 @@ class NewsletterStatisticsRepository extends Repository {
    */
   public function getAllForSubscriber(
     SubscriberEntity $subscriber,
-    int $limit = null,
-    int $offset = null
+    ?int $limit = null,
+    ?int $offset = null
   ): array {
     return $this->entityManager->createQueryBuilder()
       ->select('IDENTITY(statistics.newsletter) AS newsletter_id')
@@ -139,7 +145,7 @@ class NewsletterStatisticsRepository extends Repository {
       ->addSelect('queue.newsletterRenderedSubject AS newsletter_rendered_subject')
       ->addSelect('statistics.sentAt AS sent_at')
       ->from(StatisticsNewsletterEntity::class, 'statistics')
-      ->join(SendingQueueEntity::class, 'queue', Join::WITH, 'statistics.queue = queue' )
+      ->join(SendingQueueEntity::class, 'queue', Join::WITH, 'statistics.queue = queue')
       ->leftJoin(
         StatisticsOpenEntity::class,
         'opens',
@@ -189,7 +195,7 @@ class NewsletterStatisticsRepository extends Repository {
     }
   }
 
-  private function getTotalSentCounts(array $newsletters, \DateTimeImmutable $from = null, \DateTimeImmutable $to = null): array {
+  private function getTotalSentCounts(array $newsletters, ?\DateTimeImmutable $from = null, ?\DateTimeImmutable $to = null): array {
     $query = $this->doctrineRepository
       ->createQueryBuilder('n')
       ->select('n.id, SUM(q.countProcessed) AS cnt')
@@ -223,9 +229,12 @@ class NewsletterStatisticsRepository extends Repository {
     return $counts;
   }
 
-  private function getStatisticCounts(string $statisticsEntityName, array $newsletters, \DateTimeImmutable $from = null, \DateTimeImmutable $to = null): array {
+  private function getStatisticCounts(string $statisticsEntityName, array $newsletters, ?\DateTimeImmutable $from = null, ?\DateTimeImmutable $to = null): array {
     $qb = $this->getStatisticsQuery($statisticsEntityName, $newsletters);
-    if (in_array($statisticsEntityName, [StatisticsOpenEntity::class, StatisticsClickEntity::class], true)) {
+    if (
+      $statisticsEntityName === StatisticsClickEntity::class
+      || ($statisticsEntityName === StatisticsOpenEntity::class && $this->trackingConfig->areOpensSeparated())
+    ) {
       $qb->andWhere('(stats.userAgentType = :userAgentType) OR (stats.userAgentType IS NULL)')
         ->setParameter('userAgentType', UserAgentEntity::USER_AGENT_TYPE_HUMAN);
     }
@@ -261,7 +270,7 @@ class NewsletterStatisticsRepository extends Repository {
       ->setParameter('newsletters', $newsletters);
   }
 
-  private function getWooCommerceRevenues(array $newsletters, \DateTimeImmutable $from = null, \DateTimeImmutable $to = null) {
+  private function getWooCommerceRevenues(array $newsletters, ?\DateTimeImmutable $from = null, ?\DateTimeImmutable $to = null) {
     if (!$this->wcHelper->isWooCommerceActive()) {
       return null;
     }

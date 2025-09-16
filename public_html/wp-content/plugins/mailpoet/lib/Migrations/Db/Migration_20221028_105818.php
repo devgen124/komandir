@@ -661,13 +661,11 @@ class Migration_20221028_105818 extends DbMigration {
     if (version_compare($this->getDbVersion('3.47.6'), '3.47.6', '>')) {
       return false;
     }
-    $table = esc_sql("{$this->prefix}statistics_unsubscribes");
-    $query = "
-    ALTER TABLE `{$table}`
+    $wpdb->query($wpdb->prepare("
+      ALTER TABLE %i
       CHANGE `newsletter_id` `newsletter_id` int(11) unsigned NULL,
       CHANGE `queue_id` `queue_id` int(11) unsigned NULL;
-    ";
-    $wpdb->query($query);
+    ", "{$this->prefix}statistics_unsubscribes"));
     return true;
   }
 
@@ -685,26 +683,21 @@ class Migration_20221028_105818 extends DbMigration {
     }
 
     global $wpdb;
-    $scheduledTasksSubscribersTable = esc_sql("{$this->prefix}scheduled_task_subscribers");
+    $scheduledTasksSubscribersTable = "{$this->prefix}scheduled_task_subscribers";
     // Remove default CURRENT_TIMESTAMP from created_at
-    $updateCreatedAtQuery = "
-      ALTER TABLE `$scheduledTasksSubscribersTable`
+    $wpdb->query($wpdb->prepare("
+      ALTER TABLE %i
       CHANGE `created_at` `created_at` timestamp NULL;
-    ";
-    $wpdb->query($updateCreatedAtQuery);
+    ", $scheduledTasksSubscribersTable));
 
     // Add updated_at column in case it doesn't exist
-    $updatedAtColumnExists = $wpdb->get_results($wpdb->prepare("
-      SELECT COLUMN_NAME
-      FROM INFORMATION_SCHEMA.COLUMNS
-      WHERE table_name = %s AND column_name = 'updated_at';
-     ", $scheduledTasksSubscribersTable));
+
+    $updatedAtColumnExists = $this->columnExists($scheduledTasksSubscribersTable, 'updated_at');
     if (empty($updatedAtColumnExists)) {
-      $addUpdatedAtQuery = "
-        ALTER TABLE `$scheduledTasksSubscribersTable`
+      $wpdb->query($wpdb->prepare("
+        ALTER TABLE %i
         ADD `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
-      ";
-      $wpdb->query($addUpdatedAtQuery);
+      ", $scheduledTasksSubscribersTable));
     }
     return true;
   }
@@ -712,7 +705,7 @@ class Migration_20221028_105818 extends DbMigration {
   private function removeDeprecatedStatisticsIndexes(): bool {
     global $wpdb;
     // skip the migration if the DB version is higher than 3.67.1 or is not set (a new install)
-    if (version_compare($this->getDbVersion( '3.67.1'), '3.67.1', '>')) {
+    if (version_compare($this->getDbVersion('3.67.1'), '3.67.1', '>')) {
       return false;
     }
 
@@ -722,19 +715,12 @@ class Migration_20221028_105818 extends DbMigration {
       esc_sql("{$this->prefix}statistics_opens"),
     ];
     foreach ($statisticsTables as $statisticsTable) {
-      $oldStatisticsIndexExists = $wpdb->get_results($wpdb->prepare("
-      SELECT DISTINCT INDEX_NAME
-      FROM INFORMATION_SCHEMA.STATISTICS
-      WHERE TABLE_SCHEMA = %s
-        AND TABLE_NAME = %s
-        AND INDEX_NAME='newsletter_id_subscriber_id'
-     ", $dbName, $statisticsTable));
+      $oldStatisticsIndexExists = $this->indexExists($statisticsTable, 'newsletter_id_subscriber_id');
       if (!empty($oldStatisticsIndexExists)) {
-        $dropIndexQuery = "
-        ALTER TABLE `{$statisticsTable}`
+        $wpdb->query($wpdb->prepare("
+          ALTER TABLE %i
           DROP INDEX `newsletter_id_subscriber_id`
-      ";
-        $wpdb->query($dropIndexQuery);
+        ", $statisticsTable));
       }
     }
 
@@ -744,15 +730,15 @@ class Migration_20221028_105818 extends DbMigration {
   private function migrateSerializedFilterDataToNewColumns(): bool {
     global $wpdb;
     // skip the migration if the DB version is higher than 3.73.1 or is not set (a new install)
-    if (version_compare($this->getDbVersion( '3.73.1'), '3.73.0', '>')) {
+    if (version_compare($this->getDbVersion('3.73.1'), '3.73.0', '>')) {
       return false;
     }
 
     $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
-    $dynamicSegmentFilters = $wpdb->get_results("
+    $dynamicSegmentFilters = $wpdb->get_results($wpdb->prepare("
       SELECT id, filter_data, filter_type, `action`
-      FROM {$dynamicSegmentFiltersTable}
-    ", ARRAY_A);
+      FROM %i
+    ", $dynamicSegmentFiltersTable), ARRAY_A);
     foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
       if ($dynamicSegmentFilter['filter_type'] && $dynamicSegmentFilter['action']) {
         continue;
@@ -775,19 +761,20 @@ class Migration_20221028_105818 extends DbMigration {
   private function migratePurchasedProductDynamicFilters(): bool {
     global $wpdb;
     // skip the migration if the DB version is higher than 3.74.3 or is not set (a new install)
-    if (version_compare($this->getDbVersion( '3.74.3'), '3.74.2', '>')) {
+    if (version_compare($this->getDbVersion('3.74.3'), '3.74.2', '>')) {
       return false;
     }
 
     $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
     $filterType = DynamicSegmentFilterData::TYPE_WOOCOMMERCE;
     $action = WooCommerceProduct::ACTION_PRODUCT;
-    $dynamicSegmentFilters = $wpdb->get_results("
+
+    $dynamicSegmentFilters = $wpdb->get_results($wpdb->prepare("
       SELECT `id`, `filter_data`, `filter_type`, `action`
-      FROM {$dynamicSegmentFiltersTable}
-      WHERE `filter_type` = '{$filterType}'
-        AND `action` = '{$action}'
-    ", ARRAY_A);
+      FROM %i
+      WHERE `filter_type` = %s
+        AND `action` = %s
+    ", $dynamicSegmentFiltersTable, $filterType, $action), ARRAY_A);
 
     foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
       /** @var array $filterData */
@@ -816,19 +803,20 @@ class Migration_20221028_105818 extends DbMigration {
   private function migratePurchasedInCategoryDynamicFilters(): bool {
     global $wpdb;
     // skip the migration if the DB version is higher than 3.75.1 or is not set (a new install)
-    if (version_compare($this->getDbVersion( '3.76.0'), '3.75.1', '>')) {
+    if (version_compare($this->getDbVersion('3.76.0'), '3.75.1', '>')) {
       return false;
     }
 
-    $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
+    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
     $filterType = DynamicSegmentFilterData::TYPE_WOOCOMMERCE;
     $action = WooCommerceCategory::ACTION_CATEGORY;
+
     $dynamicSegmentFilters = $wpdb->get_results($wpdb->prepare("
       SELECT `id`, `filter_data`, `filter_type`, `action`
-      FROM {$dynamicSegmentFiltersTable}
+      FROM %i
       WHERE `filter_type` = %s
         AND `action` = %s
-    ", $filterType, $action), ARRAY_A);
+    ", $dynamicSegmentFiltersTable, $filterType, $action), ARRAY_A);
 
     foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
       /** @var array $filterData */
@@ -857,19 +845,20 @@ class Migration_20221028_105818 extends DbMigration {
   private function migrateWooSubscriptionsDynamicFilters(): bool {
     global $wpdb;
     // skip the migration if the DB version is higher than 3.75.1 or is not set (a new installation)
-    if (version_compare($this->getDbVersion( '3.76.0'), '3.75.1', '>')) {
+    if (version_compare($this->getDbVersion('3.76.0'), '3.75.1', '>')) {
       return false;
     }
 
-    $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
+    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
     $filterType = DynamicSegmentFilterData::TYPE_WOOCOMMERCE_SUBSCRIPTION;
     $action = WooCommerceSubscription::ACTION_HAS_ACTIVE;
+
     $dynamicSegmentFilters = $wpdb->get_results($wpdb->prepare("
       SELECT `id`, `filter_data`, `filter_type`, `action`
-      FROM {$dynamicSegmentFiltersTable}
+      FROM %i
       WHERE `filter_type` = %s
         AND `action` = %s
-    ", $filterType, $action), ARRAY_A);
+    ", $dynamicSegmentFiltersTable, $filterType, $action), ARRAY_A);
 
     foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
       /** @var array $filterData */
@@ -897,17 +886,18 @@ class Migration_20221028_105818 extends DbMigration {
   private function migrateEmailActionsFilters(): bool {
     global $wpdb;
     // skip the migration if the DB version is higher than 3.77.1 or is not set (a new installation)
-    if (version_compare($this->getDbVersion( '3.77.2'), '3.77.1', '>')) {
+    if (version_compare($this->getDbVersion('3.77.2'), '3.77.1', '>')) {
       return false;
     }
 
-    $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
+    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
     $filterType = DynamicSegmentFilterData::TYPE_EMAIL;
-    $dynamicSegmentFilters = $wpdb->get_results("
+
+    $dynamicSegmentFilters = $wpdb->get_results($wpdb->prepare("
       SELECT `id`, `filter_data`, `filter_type`, `action`
-      FROM {$dynamicSegmentFiltersTable}
-      WHERE `filter_type` = '{$filterType}'
-    ", ARRAY_A);
+      FROM %i
+      WHERE `filter_type` = %s
+    ", $dynamicSegmentFiltersTable, $filterType), ARRAY_A);
 
     foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
       if (!is_array($dynamicSegmentFilter)) {
@@ -971,7 +961,7 @@ class Migration_20221028_105818 extends DbMigration {
   private function updateMetaFields() {
     global $wpdb;
     // perform once for versions below or equal to 3.26.0
-    if (version_compare($this->getDbVersion( '3.26.1'), '3.26.0', '>')) {
+    if (version_compare($this->getDbVersion('3.26.1'), '3.26.0', '>')) {
       return false;
     }
     $scheduledTaskTable = $this->getTableName(ScheduledTaskEntity::class);
@@ -988,16 +978,17 @@ class Migration_20221028_105818 extends DbMigration {
       return;
     }
     global $wpdb;
-    $table = esc_sql($this->getTableName(NewsletterLinkEntity::class));
+
     $wpdb->query($wpdb->prepare(
-      "UPDATE `$table` SET `url` = %s WHERE `url` = %s;",
+      "UPDATE %i SET `url` = %s WHERE `url` = %s",
+      $this->getTableName(NewsletterLinkEntity::class),
       NewsletterLinkEntity::INSTANT_UNSUBSCRIBE_LINK_SHORT_CODE,
       NewsletterLinkEntity::UNSUBSCRIBE_LINK_SHORT_CODE
     ));
   }
 
   private function pauseTasksForPausedNewsletters() {
-    if (version_compare($this->getDbVersion( '3.60.5'), '3.60.4', '>')) {
+    if (version_compare($this->getDbVersion('3.60.5'), '3.60.4', '>')) {
       return;
     }
 
@@ -1026,26 +1017,19 @@ class Migration_20221028_105818 extends DbMigration {
 
   private function moveGoogleAnalyticsFromPremium() {
     global $wpdb;
-    if (version_compare($this->getDbVersion( '3.38.2'), '3.38.1', '>')) {
+    if (version_compare($this->getDbVersion('3.38.2'), '3.38.1', '>')) {
       return;
     }
+
     $premiumTableName = $wpdb->prefix . 'mailpoet_premium_newsletter_extra_data';
-    $premiumTableExists = (int)$wpdb->get_var(
-      $wpdb->prepare(
-        "SELECT COUNT(1) FROM information_schema.tables WHERE table_schema=%s AND table_name=%s;",
-        $wpdb->dbname,
-        $premiumTableName
-      )
-    );
+    $premiumTableExists = $this->tableExists($premiumTableName);
     if ($premiumTableExists) {
-      $table = esc_sql($this->getTableName(NewsletterEntity::class));
-      $query = "
+      $wpdb->query($wpdb->prepare("
         UPDATE
-          `{$table}` as n
-        JOIN `$premiumTableName` as ped ON n.id=ped.newsletter_id
+          %i as n
+        JOIN %i as ped ON n.id=ped.newsletter_id
           SET n.ga_campaign = ped.ga_campaign
-      ";
-      $wpdb->query($query);
+      ", $this->getTableName(NewsletterEntity::class), $premiumTableName));
     }
     return true;
   }
@@ -1053,33 +1037,32 @@ class Migration_20221028_105818 extends DbMigration {
   private function updateLastSubscribedAt() {
     global $wpdb;
     // perform once for versions below or equal to 3.42.0
-    if (version_compare($this->getDbVersion( '3.42.1'), '3.42.0', '>')) {
+    if (version_compare($this->getDbVersion('3.42.1'), '3.42.0', '>')) {
       return false;
     }
-    $table = esc_sql($this->getTableName(SubscriberEntity::class));
-    $query = $wpdb->prepare(
-      "UPDATE `{$table}` SET last_subscribed_at = GREATEST(COALESCE(confirmed_at, 0), COALESCE(created_at, 0)) WHERE status != %s AND last_subscribed_at IS NULL;",
+
+    $wpdb->query($wpdb->prepare(
+      "UPDATE %i SET last_subscribed_at = GREATEST(COALESCE(confirmed_at, 0), COALESCE(created_at, 0)) WHERE status != %s AND last_subscribed_at IS NULL",
+      $this->getTableName(SubscriberEntity::class),
       SubscriberEntity::STATUS_UNCONFIRMED
-    );
-    $wpdb->query($query);
+    ));
     return true;
   }
 
   private function moveNewsletterTemplatesThumbnailData() {
-    if (version_compare($this->getDbVersion( '3.73.3'), '3.73.2', '>')) {
+    if (version_compare($this->getDbVersion('3.73.3'), '3.73.2', '>')) {
       return;
     }
     $newsletterTemplatesTable = $this->getTableName(NewsletterTemplateEntity::class);
     $this->connection->executeQuery("
       UPDATE " . $newsletterTemplatesTable . "
       SET thumbnail_data = thumbnail, thumbnail = NULL
-      WHERE thumbnail LIKE 'data:image%';"
-    );
+      WHERE thumbnail LIKE 'data:image%';");
   }
 
   private function fixNotificationHistoryRecordsStuckAtSending() {
     // perform once for versions below or equal to 3.99.0
-    if (version_compare($this->getDbVersion( '3.99.1'), '3.99.0', '>')) {
+    if (version_compare($this->getDbVersion('3.99.1'), '3.99.0', '>')) {
       return false;
     }
 

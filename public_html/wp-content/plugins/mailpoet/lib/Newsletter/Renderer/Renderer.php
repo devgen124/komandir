@@ -5,20 +5,20 @@ namespace MailPoet\Newsletter\Renderer;
 if (!defined('ABSPATH')) exit;
 
 
+use Automattic\WooCommerce\EmailEditor\Email_Editor_Container;
+use Automattic\WooCommerce\EmailEditor\Engine\Renderer\Html2Text;
+use Automattic\WooCommerce\EmailEditor\Engine\Renderer\Renderer as GuntenbergRenderer;
 use MailPoet\Config\Env;
-use MailPoet\Config\ServicesChecker;
-use MailPoet\EmailEditor\Engine\Renderer\Renderer as GuntenbergRenderer;
 use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\SendingQueueEntity;
-use MailPoet\Features\FeaturesController;
 use MailPoet\Logging\LoggerFactory;
 use MailPoet\Newsletter\NewslettersRepository;
 use MailPoet\Newsletter\Renderer\EscapeHelper as EHelper;
 use MailPoet\Newsletter\Sending\SendingQueuesRepository;
 use MailPoet\NewsletterProcessingException;
+use MailPoet\Util\License\Features\CapabilitiesManager;
 use MailPoet\Util\pQuery\DomNode;
 use MailPoet\WP\Functions as WPFunctions;
-use MailPoetVendor\Html2Text\Html2Text;
 
 class Renderer {
   const NEWSLETTER_TEMPLATE = 'Template.html';
@@ -36,9 +36,6 @@ class Renderer {
   /** @var \MailPoetVendor\CSS */
   private $cSSInliner;
 
-  /** @var ServicesChecker */
-  private $servicesChecker;
-
   /** @var WPFunctions */
   private $wp;
 
@@ -51,34 +48,30 @@ class Renderer {
   /*** @var SendingQueuesRepository */
   private $sendingQueuesRepository;
 
-  /** @var FeaturesController */
-  private $featuresController;
+  private CapabilitiesManager $capabilitiesManager;
 
   public function __construct(
     BodyRenderer $bodyRenderer,
-    GuntenbergRenderer $guntenbergRenderer,
     Preprocessor $preprocessor,
     \MailPoetVendor\CSS $cSSInliner,
-    ServicesChecker $servicesChecker,
     WPFunctions $wp,
     LoggerFactory $loggerFactory,
     NewslettersRepository $newslettersRepository,
     SendingQueuesRepository $sendingQueuesRepository,
-    FeaturesController $featuresController
+    CapabilitiesManager $capabilitiesManager
   ) {
     $this->bodyRenderer = $bodyRenderer;
-    $this->guntenbergRenderer = $guntenbergRenderer;
+    $this->guntenbergRenderer = Email_Editor_Container::container()->get(GuntenbergRenderer::class);
     $this->preprocessor = $preprocessor;
     $this->cSSInliner = $cSSInliner;
-    $this->servicesChecker = $servicesChecker;
     $this->wp = $wp;
     $this->loggerFactory = $loggerFactory;
     $this->newslettersRepository = $newslettersRepository;
     $this->sendingQueuesRepository = $sendingQueuesRepository;
-    $this->featuresController = $featuresController;
+    $this->capabilitiesManager = $capabilitiesManager;
   }
 
-  public function render(NewsletterEntity $newsletter, SendingQueueEntity $sendingQueue = null, $type = false) {
+  public function render(NewsletterEntity $newsletter, ?SendingQueueEntity $sendingQueue = null, $type = false) {
     return $this->_render($newsletter, $sendingQueue, $type);
   }
 
@@ -86,13 +79,13 @@ class Renderer {
     return $this->_render($newsletter, null, $type, true, $subject);
   }
 
-  private function _render(NewsletterEntity $newsletter, SendingQueueEntity $sendingQueue = null, $type = false, $preview = false, $subject = null) {
+  private function _render(NewsletterEntity $newsletter, ?SendingQueueEntity $sendingQueue = null, $type = false, $preview = false, $subject = null) {
     $language = $this->wp->getBloginfo('language');
     $metaRobots = $preview ? '<meta name="robots" content="noindex, nofollow" />' : '';
     $subject = $subject ?: $newsletter->getSubject();
     $wpPostEntity = $newsletter->getWpPost();
     $wpPost = $wpPostEntity ? $wpPostEntity->getWpPostInstance() : null;
-    if ($this->featuresController->isSupported(FeaturesController::GUTENBERG_EMAIL_EDITOR) && $wpPost instanceof \WP_Post) {
+    if ($wpPost instanceof \WP_Post) {
       $renderedNewsletter = $this->guntenbergRenderer->render($wpPost, $subject, $newsletter->getPreheader(), $language, $metaRobots);
     } else {
       $body = (is_array($newsletter->getBody()))
@@ -105,8 +98,9 @@ class Renderer {
         ? $body['globalStyles']
         : [];
 
+      $mailPoetLogoInEmails = $this->capabilitiesManager->getCapability('mailpoetLogoInEmails');
       if (
-        !$this->servicesChecker->isUserActivelyPaying() && !$preview
+        (isset($mailPoetLogoInEmails) && $mailPoetLogoInEmails->isRestricted) && !$preview
       ) {
         $content = $this->addMailpoetLogoContentBlock($content, $styles);
       }
@@ -133,7 +127,7 @@ class Renderer {
         [
           $language,
           $metaRobots,
-          htmlspecialchars($subject),
+          htmlspecialchars($subject, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401),
           $renderedStyles,
           $customFontsLinks,
           EHelper::escapeHtmlText($newsletter->getPreheader()),
@@ -225,9 +219,16 @@ class Renderer {
     foreach ($templateDom->query('img') as $image) {
       $image->src = str_replace(' ', '%20', $image->src);
     }
-    // because tburry/pquery contains a bug and replaces the opening non mso condition incorrectly we have to replace the opening tag with correct value
+    foreach ($templateDom->query('a') as $anchor) {
+      // Fix for a TinyMCE bug in smart paste which encodes & as &amp; which is then additionally encoded to &amp;amp;
+      // when saving the text block content in the editor
+      $href = str_replace('&amp;amp;', '&amp;', $anchor->href);
+      // Replace &amp; with & in the href attributes of anchors. URLs are encoded when TinyMCE extracts Text block content via content.innerHTML.
+      // Links containing &amp; work when placed in an anchor tag in a browser, but they don't work when we redirect to them for example in tracking.
+      $href = str_replace('&amp;', '&', $href);
+      $anchor->href = $href;
+    }
     $template = $templateDom->__toString();
-    $template = str_replace('<!--[if !mso]><![endif]-->', '<!--[if !mso]><!-- -->', $template);
     $template = $this->wp->applyFilters(
       self::FILTER_POST_PROCESS,
       $template

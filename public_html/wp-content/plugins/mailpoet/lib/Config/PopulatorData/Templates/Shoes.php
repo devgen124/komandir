@@ -4,14 +4,15 @@ namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
 
-use MailPoet\WP\Functions as WPFunctions;
 
 class Shoes {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
      $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/shoes';
      $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -454,13 +455,13 @@ class Shoes {
                   ],
                   3 => [
                     'type' => 'social',
-                    'iconSet' => 'grey',
+                    'iconSet' => 'official',
                     'icons' => [
                       0 => [
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/02-grey/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -469,7 +470,7 @@ class Shoes {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/02-grey/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -478,7 +479,7 @@ class Shoes {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/02-grey/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -509,7 +510,7 @@ class Shoes {
                 'blocks' => [
                   0 => [
                     'type' => 'footer',
-                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a></p>',
+                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a></p>',
                     'styles' => [
                       'block' => [
                         'backgroundColor' => 'transparent',
@@ -579,5 +580,4 @@ class Shoes {
   private function getThumbnail() {
     return $this->template_image_url . '/thumbnail.20190411-1500.jpg';
   }
-
 }

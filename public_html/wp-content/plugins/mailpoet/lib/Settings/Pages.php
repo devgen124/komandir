@@ -9,14 +9,18 @@ use MailPoet\Subscription;
 use MailPoet\WP\Functions as WPFunctions;
 
 class Pages {
+  const PAGE_SUBSCRIPTIONS = 'subscriptions';
+  const PAGE_CAPTCHA = 'captcha';
+  const PAGE_TITLE = 'MailPoet Page';
+
   public function __construct() {
   }
 
   public function init() {
     WPFunctions::get()->registerPostType('mailpoet_page', [
       'labels' => [
-        'name' => __('MailPoet Page', 'mailpoet'),
-        'singular_name' => __('MailPoet Page', 'mailpoet'),
+        'name' => self::PAGE_TITLE,
+        'singular_name' => self::PAGE_TITLE,
       ],
       'public' => true,
       'has_archive' => false,
@@ -27,10 +31,21 @@ class Pages {
       'can_export' => false,
       'publicly_queryable' => true,
       'exclude_from_search' => true,
+      'capability_type' => 'page',
     ]);
+
+    WPFunctions::get()->addFilter('next_post_link', [$this, 'disableNavigationLinks']);
+    WPFunctions::get()->addFilter('previous_post_link', [$this, 'disableNavigationLinks']);
   }
 
-  public static function createMailPoetPage() {
+  public function disableNavigationLinks($output) {
+    if (is_singular('mailpoet_page')) {
+      return ''; // Return an empty string to remove navigation links
+    }
+    return $output;
+  }
+
+  public static function createMailPoetPage($postName) {
     WPFunctions::get()->removeAllActions('pre_post_update');
     WPFunctions::get()->removeAllActions('save_post');
     WPFunctions::get()->removeAllActions('wp_insert_post');
@@ -40,20 +55,21 @@ class Pages {
       'post_type' => 'mailpoet_page',
       'post_author' => 1,
       'post_content' => '[mailpoet_page]',
-      'post_title' => __('MailPoet Page', 'mailpoet'),
-      'post_name' => 'subscriptions',
+      'post_title' => self::PAGE_TITLE,
+      'post_name' => $postName,
     ]);
 
     return ((int)$id > 0) ? (int)$id : false;
   }
 
-  public static function getDefaultMailPoetPage() {
+  public static function getMailPoetPage($postName) {
     $wp = WPFunctions::get();
     $pages = $wp->getPosts([
       'posts_per_page' => 1,
       'orderby' => 'date',
       'order' => 'DESC',
       'post_type' => 'mailpoet_page',
+      'post_name__in' => [$postName],
     ]);
 
     $page = null;
@@ -69,6 +85,7 @@ class Pages {
   public static function getMailPoetPages() {
     return WPFunctions::get()->getPosts([
       'post_type' => 'mailpoet_page',
+      'post_name__in' => [self::PAGE_SUBSCRIPTIONS],
     ]);
   }
 

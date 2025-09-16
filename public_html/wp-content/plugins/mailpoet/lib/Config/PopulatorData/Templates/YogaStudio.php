@@ -4,14 +4,15 @@ namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
 
-use MailPoet\WP\Functions as WPFunctions;
 
 class YogaStudio {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
      $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/yoga_studio';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -626,13 +627,13 @@ class YogaStudio {
                   ],
                   1 => [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-black',
+                    'iconSet' => 'official',
                     'icons' => [
                       0 => [
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -641,7 +642,7 @@ class YogaStudio {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -650,7 +651,7 @@ class YogaStudio {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -659,7 +660,7 @@ class YogaStudio {
                         'type' => 'socialIcon',
                         'iconType' => 'youtube',
                         'link' => 'http://www.youtube.com',
-                        'image' => $this->social_icon_url . '/07-full-symbol-black/Youtube.png',
+                        'image' => $this->social_icon_url . '/11-official/Youtube.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Youtube',
@@ -698,7 +699,7 @@ class YogaStudio {
                 'blocks' => [
                   0 => [
                     'type' => 'footer',
-                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a></p><p><a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a></p>',
+                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a></p><p><a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a></p>',
                     'styles' => [
                       'block' => [
                         'backgroundColor' => 'transparent',
@@ -793,5 +794,4 @@ class YogaStudio {
   private function getThumbnail() {
     return $this->template_image_url . '/thumbnail.20190411-1500.jpg';
   }
-
 }

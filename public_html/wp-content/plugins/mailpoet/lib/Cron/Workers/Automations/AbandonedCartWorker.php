@@ -12,21 +12,23 @@ use MailPoet\Entities\ScheduledTaskEntity;
 use MailPoet\WP\Functions as WPFunctions;
 
 class AbandonedCartWorker extends SimpleWorker {
-    const TASK_TYPE = 'automation_abandoned_cart';
+  const TASK_TYPE = 'automation_abandoned_cart';
 
-    const ACTION = 'abandoned_cart';
+  const ACTION = 'abandoned_cart';
 
-    const AUTOMATIC_SCHEDULING = false;
-    const BATCH_SIZE = 1000;
+  const AUTOMATIC_SCHEDULING = false;
+  const BATCH_SIZE = 1000;
 
-    private $automationStorage;
+  private AutomationStorage $automationStorage;
+  private WPFunctions $wp;
 
   public function __construct(
     AutomationStorage $automationStorage,
-    WPFunctions $wp = null
+    WPFunctions $wp
   ) {
-    parent::__construct($wp);
+    parent::__construct();
     $this->automationStorage = $automationStorage;
+    $this->wp = $wp;
   }
 
   public function checkProcessingRequirements() {
@@ -46,16 +48,16 @@ class AbandonedCartWorker extends SimpleWorker {
 
     $subscribers = $task->getSubscribers();
     if ($subscribers->count() !== 1) {
-      return false;
+      return true;
     }
     $subscriber = isset($subscribers[0]) ? $subscribers[0]->getSubscriber() : null;
     if (!$subscriber) {
-      return false;
+      return true;
     }
 
     $automation = $this->automationStorage->getAutomation((int)$automationId, (int)$automationVersion);
     if (!$automation || $automation->getStatus() !== Automation::STATUS_ACTIVE) {
-      return false;
+      return true;
     }
 
     $this->wp->doAction(

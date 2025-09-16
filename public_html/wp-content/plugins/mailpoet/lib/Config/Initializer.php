@@ -5,6 +5,9 @@ namespace MailPoet\Config;
 if (!defined('ABSPATH')) exit;
 
 
+use Automattic\WooCommerce\EmailEditor\Bootstrap as EmailEditorBootstrap;
+use Automattic\WooCommerce\EmailEditor\Email_Editor_Container;
+use Automattic\WooCommerce\EmailEditor\Engine\Logger\Email_Editor_Logger;
 use MailPoet\API\JSON\API;
 use MailPoet\API\REST\API as RestApi;
 use MailPoet\AutomaticEmails\AutomaticEmails;
@@ -14,10 +17,9 @@ use MailPoet\Automation\Integrations\MailPoet\MailPoetIntegration;
 use MailPoet\Automation\Integrations\WooCommerce\WooCommerceIntegration;
 use MailPoet\Cron\CronTrigger;
 use MailPoet\Cron\DaemonActionSchedulerRunner;
-use MailPoet\EmailEditor\Engine\EmailEditor;
-use MailPoet\EmailEditor\Integrations\Core\Initializer as CoreEmailEditorIntegration;
+use MailPoet\EmailEditor\Integrations\MailPoet\Blocks\BlockTypesController;
 use MailPoet\EmailEditor\Integrations\MailPoet\EmailEditor as MailpoetEmailEditorIntegration;
-use MailPoet\Features\FeaturesController;
+use MailPoet\EmailEditor\Integrations\MailPoet\Logger;
 use MailPoet\InvalidStateException;
 use MailPoet\Migrator\Cli as MigratorCli;
 use MailPoet\PostEditorBlocks\PostEditorBlock;
@@ -26,7 +28,7 @@ use MailPoet\Router;
 use MailPoet\Settings\SettingsController;
 use MailPoet\Statistics\Track\SubscriberActivityTracker;
 use MailPoet\Util\ConflictResolver;
-use MailPoet\Util\Helpers;
+use MailPoet\Util\LegacyDatabase;
 use MailPoet\Util\Notices\PermanentNotices;
 use MailPoet\Util\Url;
 use MailPoet\WooCommerce\Helper as WooCommerceHelper;
@@ -80,9 +82,6 @@ class Initializer {
   /** @var Shortcodes */
   private $shortcodes;
 
-  /** @var DatabaseInitializer */
-  private $databaseInitializer;
-
   /** @var WCTransactionalEmails */
   private $wcTransactionalEmails;
 
@@ -125,20 +124,18 @@ class Initializer {
   /** @var DaemonActionSchedulerRunner */
   private $actionSchedulerRunner;
 
-  /** @var EmailEditor */
-  private $emailEditor;
-
   /** @var MailpoetEmailEditorIntegration */
   private $mailpoetEmailEditorIntegration;
 
-  /** @var CoreEmailEditorIntegration */
-  private $coreEmailEditorIntegration;
-
-  /** @var FeaturesController */
-  private $featureController;
+  /** @var BlockTypesController */
+  private $blockTypesController;
 
   /** @var Url */
   private $urlHelper;
+
+  private EmailEditorBootstrap $emailEditorBootstrap;
+
+  private Email_Editor_Logger $emailEditorLogger;
 
   const INITIALIZED = 'MAILPOET_INITIALIZED';
 
@@ -159,7 +156,6 @@ class Initializer {
     CronTrigger $cronTrigger,
     PermanentNotices $permanentNotices,
     Shortcodes $shortcodes,
-    DatabaseInitializer $databaseInitializer,
     WCTransactionalEmails $wcTransactionalEmails,
     PostEditorBlock $postEditorBlock,
     WooCommerceBlocksIntegration $woocommerceBlocksIntegration,
@@ -174,10 +170,8 @@ class Initializer {
     WooCommerceIntegration $woocommerceIntegration,
     PersonalDataExporters $personalDataExporters,
     DaemonActionSchedulerRunner $actionSchedulerRunner,
-    EmailEditor $emailEditor,
+    BlockTypesController $blockTypesController,
     MailpoetEmailEditorIntegration $mailpoetEmailEditorIntegration,
-    CoreEmailEditorIntegration $coreEmailEditorIntegration,
-    FeaturesController $featureController,
     Url $urlHelper
   ) {
     $this->rendererFactory = $rendererFactory;
@@ -194,7 +188,6 @@ class Initializer {
     $this->cronTrigger = $cronTrigger;
     $this->permanentNotices = $permanentNotices;
     $this->shortcodes = $shortcodes;
-    $this->databaseInitializer = $databaseInitializer;
     $this->wcTransactionalEmails = $wcTransactionalEmails;
     $this->wcHelper = $wcHelper;
     $this->postEditorBlock = $postEditorBlock;
@@ -209,31 +202,24 @@ class Initializer {
     $this->woocommerceIntegration = $woocommerceIntegration;
     $this->personalDataExporters = $personalDataExporters;
     $this->actionSchedulerRunner = $actionSchedulerRunner;
-    $this->emailEditor = $emailEditor;
     $this->mailpoetEmailEditorIntegration = $mailpoetEmailEditorIntegration;
-    $this->coreEmailEditorIntegration = $coreEmailEditorIntegration;
-    $this->featureController = $featureController;
+    $this->blockTypesController = $blockTypesController;
     $this->urlHelper = $urlHelper;
+
+    $emailEditorContainer = Email_Editor_Container::container();
+    $this->emailEditorBootstrap = $emailEditorContainer->get(EmailEditorBootstrap::class);
+    $this->emailEditorLogger = $emailEditorContainer->get(Email_Editor_Logger::class);
   }
 
   public function init() {
     // Initialize Action Scheduler. It needs to be called early because it hooks into `plugins_loaded`.
     require_once __DIR__ . '/../../vendor/woocommerce/action-scheduler/action-scheduler.php';
 
+    // define legacy constants for DB tables - for back compatibility
+    LegacyDatabase::defineTableConstants();
+
     // load translations and setup translations update/download
     $this->setupLocalizer();
-
-    try {
-      $this->databaseInitializer->initializeConnection();
-    } catch (\Exception $e) {
-      return WPNotice::displayError(Helpers::replaceLinkTags(
-        __('Unable to connect to the database (the database is unable to open a file or folder), the connection is likely not configured correctly. Please read our [link] Knowledge Base article [/link] for steps how to resolve it.', 'mailpoet'),
-        'https://kb.mailpoet.com/article/200-solving-database-connection-issues',
-        [
-          'target' => '_blank',
-        ]
-      ));
-    }
 
     // activation function
     $this->wpFunctions->registerActivationHook(
@@ -253,10 +239,17 @@ class Initializer {
       ]
     );
 
+    $this->emailEditorBootstrap->init();
+
     $this->wpFunctions->addAction('activated_plugin', [
       new PluginActivatedHook(new DeferredAdminNotices),
       'action',
     ], 10, 2);
+
+    $this->wpFunctions->addAction('plugins_loaded', [
+      $this,
+      'pluginsLoaded',
+    ], 0);
 
     $this->wpFunctions->addAction('init', [
       $this,
@@ -294,7 +287,7 @@ class Initializer {
       'multisiteDropTables',
     ]);
 
-    $this->wpFunctions->addFilter('mailpoet_email_editor_initialized', [
+    $this->wpFunctions->addFilter('woocommerce_email_editor_initialized', [
       $this,
       'setupEmailEditorIntegrations',
     ]);
@@ -327,13 +320,17 @@ class Initializer {
     }
   }
 
+  public function pluginsLoaded() {
+    $this->hooks->init();
+  }
+
   public function preInitialize() {
     try {
       $this->renderer = $this->rendererFactory->getRenderer();
       $this->setupWidget();
-      $this->hooks->init();
       $this->setupWoocommerceTransactionalEmails();
       $this->assetsLoader->loadStyles();
+      $this->emailEditorLogger->set_logger(new Logger());
     } catch (\Exception $e) {
       $this->handleFailedInitialization($e);
     }
@@ -369,9 +366,7 @@ class Initializer {
       $this->subscriberActivityTracker->trackActivity();
       $this->postEditorBlock->init();
       $this->automationEngine->initialize();
-      if ($this->featureController->isSupported(FeaturesController::GUTENBERG_EMAIL_EDITOR)) {
-        $this->emailEditor->initialize();
-      }
+      $this->blockTypesController->initialize();
       $this->wpFunctions->doAction('mailpoet_initialized', MAILPOET_VERSION);
     } catch (InvalidStateException $e) {
       return $this->handleRunningMigration($e);
@@ -559,7 +554,6 @@ class Initializer {
 
   public function setupEmailEditorIntegrations() {
     $this->mailpoetEmailEditorIntegration->initialize();
-    $this->coreEmailEditorIntegration->initialize();
   }
 
   public function runDeactivation() {

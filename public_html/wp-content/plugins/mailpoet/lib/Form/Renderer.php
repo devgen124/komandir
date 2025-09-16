@@ -5,12 +5,12 @@ namespace MailPoet\Form;
 if (!defined('ABSPATH')) exit;
 
 
+use MailPoet\Captcha\CaptchaConstants;
 use MailPoet\Entities\FormEntity;
 use MailPoet\Form\Templates\FormTemplate;
 use MailPoet\Form\Util\CustomFonts;
 use MailPoet\Form\Util\Styles;
 use MailPoet\Settings\SettingsController;
-use MailPoet\Subscription\Captcha\CaptchaConstants;
 
 class Renderer {
   /** @var Styles */
@@ -44,14 +44,14 @@ class Renderer {
     return $html;
   }
 
-  public function renderHTML(FormEntity $form = null): string {
+  public function renderHTML(?FormEntity $form = null): string {
     if (($form instanceof FormEntity) && !empty($form->getBody()) && is_array($form->getSettings())) {
       return $this->renderBlocks($form->getBody(), $form->getSettings() ?? [], $form->getId());
     }
     return '';
   }
 
-  public function getCustomStyles(FormEntity $form = null): string {
+  public function getCustomStyles(?FormEntity $form = null): string {
     if (($form instanceof FormEntity) && (strlen(trim($form->getStyles() ?? '')) > 0)) {
       return strip_tags($form->getStyles() ?? '');
     } else {
@@ -117,6 +117,9 @@ class Renderer {
       </noscript>
       <input class="mailpoet_recaptcha_field" type="hidden" name="recaptchaWidgetId">
     </div>';
+    if ($size !== 'invisible') {
+      $html .= '<div class="parsley-errors-list parsley-required mailpoet_error_recaptcha">' . __('This field is required.', 'mailpoet') . '</div>';
+    }
 
     return $html;
   }

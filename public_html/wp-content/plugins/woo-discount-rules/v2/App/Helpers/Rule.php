@@ -332,7 +332,7 @@ class Rule
         if ($time_stamp) {
             return strtotime($date);
         }
-        return date($format, $date);
+        return gmdate($format, $date);
     }
 
     /**
@@ -586,7 +586,7 @@ class Rule
         if ($this->hasAdvancedDiscountMessage()) {
             $badge_settings = json_decode($this->rule->advanced_discount_message);
             if ($key == 'badge_text' && isset($badge_settings->badge_text) && !empty($badge_settings->badge_text)) {
-                return htmlspecialchars_decode(__($badge_settings->badge_text, 'woo-discount-rules'));
+                return htmlspecialchars_decode(__($badge_settings->badge_text, 'woo-discount-rules'));//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
             }
             if (isset($badge_settings->$key) && !empty($badge_settings->$key)) {
                 return $badge_settings->$key;
@@ -639,7 +639,7 @@ class Rule
         );
 
         $discounts = apply_filters('advanced_woo_discount_rules_discounts_of_each_rule', $discounts, $rule, $product_price, $quantity, $product, $ajax_price, $cart_item, $price_display_condition, $is_cart, $manual_request);
-
+        $discounts = array_filter($discounts, 'is_numeric');
         $total_discount = array_sum($discounts);
         if ($total_discount <= 0) {
             return false;
@@ -1224,14 +1224,14 @@ class Rule
         if (empty($product_price)) {
             return $discounts;
         }
-        $rule_title = is_null($this->getTitle()) ? __('Discount', 'woo-discount-rules') : __($this->getTitle(), 'woo-discount-rules');
+        $rule_title = is_null($this->getTitle()) ? esc_html_e('Discount', 'woo-discount-rules') : __($this->getTitle(), 'woo-discount-rules');//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
         if ($adjustment = $this->getCartAdjustments()) {
             if (!empty($adjustment)) {
                 $type = isset($adjustment->type) ? $adjustment->type : 'flat';
                 $value = isset($adjustment->value) ? $adjustment->value : 0;
                 if (in_array($type, array('flat', 'percentage'))) {
                     if (!empty($value)) {
-                        $label = (isset($adjustment->label) && !empty($adjustment->label)) ? $adjustment->label : __($rule_title, 'woo-discount-rules');
+                        $label = (isset($adjustment->label) && !empty($adjustment->label)) ? $adjustment->label : __($rule_title, 'woo-discount-rules');//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
                         $discounts[] = array(
                             'free_shipping' => 0,
                             'discount' => $value,
@@ -1242,7 +1242,7 @@ class Rule
                     }
                 } elseif($type == 'flat_in_subtotal'){
                     if (!empty($value)) {
-                        $label = (isset($adjustment->label) && !empty($adjustment->label)) ? $adjustment->label : __($rule_title, 'woo-discount-rules');
+                        $label = (isset($adjustment->label) && !empty($adjustment->label)) ? $adjustment->label : __($rule_title, 'woo-discount-rules');//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
                         $discounts[] = array(
                             'free_shipping' => 0,
                             'discount' => $value,
@@ -1298,7 +1298,7 @@ class Rule
         $current_date_time = '';
         if (function_exists('current_time')) {
             $current_time = current_time('timestamp');
-            $current_date_time = date('Y-m-d H:i:s', $current_time);
+            $current_date_time = gmdate('Y-m-d H:i:s', $current_time);
         }
         $current_user = get_current_user_id();
         $rule_id = intval($this->getFromArray($post, 'edit_rule', NULL));
@@ -1385,13 +1385,11 @@ class Rule
         $rule_language = $this->getFromArray($post, 'rule_language', array());
         $discount_badge = $this->getFromArray($post, 'discount_badge', array());
         $discount_type = $this->getFromArray($post, 'discount_type', NULL);
-        if (isset($_POST['discount_badge'])) {
-            $discount_badge_text = (isset($_POST['discount_badge']['badge_text'])) ? $_POST['discount_badge']['badge_text'] : '';
-            if (!empty($discount_badge_text)) {
-                $discount_badge_text = stripslashes($discount_badge_text);
-                $discount_badge['badge_text'] = self::validateHtmlBeforeSave($discount_badge_text);
-            }
-        }
+	    $discount_badge_text = isset($_POST['discount_badge']['badge_text']) ? stripslashes($_POST['discount_badge']['badge_text']): '';//phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	    if (!empty($discount_badge_text)) {
+		    $discount_badge['badge_text'] = self::validateHtmlBeforeSave($discount_badge_text);
+	    }
+
 
         if(!empty($awdr_coupon_names)){
             $awdr_coupon_names = array_unique($awdr_coupon_names);
@@ -1595,13 +1593,10 @@ class Rule
         if (!empty($product_ids)) {
             foreach ($product_ids as $product_id) {
                $parent_id = Woocommerce::getProductParentId((int)$product_id);
-               if(!empty($parent_id)) {
-                   $variants = array_merge($variants, array($parent_id));
-               }
+                if(!empty($parent_id) && !in_array($parent_id ,$variants)) {
+                    $variants[] = $parent_id;
+                }
             }
-        }
-        if(!empty($variants)){
-            $variants = array_unique($variants);
         }
         return $variants;
     }

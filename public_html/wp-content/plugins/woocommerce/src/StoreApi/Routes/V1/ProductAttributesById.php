@@ -27,6 +27,15 @@ class ProductAttributesById extends AbstractRoute {
 	 * @return string
 	 */
 	public function get_path() {
+		return self::get_path_regex();
+	}
+
+	/**
+	 * Get the path of this rest route.
+	 *
+	 * @return string
+	 */
+	public static function get_path_regex() {
 		return '/products/attributes/(?P<id>[\d]+)';
 	}
 
@@ -54,6 +63,7 @@ class ProductAttributesById extends AbstractRoute {
 						)
 					),
 				),
+				'allow_batch'         => [ 'v1' => true ],
 			],
 			'schema' => [ $this->schema, 'get_public_item_schema' ],
 		];

@@ -49,6 +49,7 @@ class CartSubTotal extends Base
         if (isset($options->operator) && $options->value) {
             $operator = sanitize_text_field($options->operator);
             $value = self::$woocommerce_helper->getConvertedFixedPrice($options->value, 'subtotal_condition');
+	        $cart_sub_total = apply_filters('advanced_woo_discount_rules_converted_cart_subtotal_value', $cart_sub_total, 'subtotal_condition',$cart,$options);
             $status = $this->doComparisionOperation($operator, $cart_sub_total, $value);
             if(!$status){
                 $config = new Configuration();
@@ -72,7 +73,7 @@ class CartSubTotal extends Base
                 if($options->subtotal_promotion_from <= $cart_sub_total){
                     $difference_amount = $min_value - $cart_sub_total;
                     if($difference_amount > 0){
-                        $message = __($options->subtotal_promotion_message, 'woo-discount-rules');
+                        $message = __($options->subtotal_promotion_message, 'woo-discount-rules');//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
                         $difference_amount = Woocommerce::formatPrice($difference_amount);
                         $message = apply_filters('advanced_woo_discount_rules_cart_subtotal_promotion_message', $message, $this->rule->rule, $options->subtotal_promotion_from, $cart_sub_total, $min_value);
                         $message = str_replace('{{difference_amount}}', $difference_amount, $message);

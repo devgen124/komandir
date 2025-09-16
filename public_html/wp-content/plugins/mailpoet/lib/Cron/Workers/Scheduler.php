@@ -26,7 +26,6 @@ use MailPoet\Segments\SubscribersFinder;
 use MailPoet\Subscribers\SubscriberSegmentRepository;
 use MailPoet\Subscribers\SubscribersRepository;
 use MailPoet\Util\Security;
-use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Carbon\Carbon;
 use MailPoetVendor\Doctrine\ORM\EntityNotFoundException;
 
@@ -63,9 +62,6 @@ class Scheduler {
   /** @var NewsletterSegmentRepository */
   private $newsletterSegmentRepository;
 
-  /** @var WPFunctions */
-  private $wp;
-
   /** @var Security */
   private $security;
 
@@ -89,7 +85,6 @@ class Scheduler {
     NewslettersRepository $newslettersRepository,
     SegmentsRepository $segmentsRepository,
     NewsletterSegmentRepository $newsletterSegmentRepository,
-    WPFunctions $wp,
     Security $security,
     NewsletterScheduler $scheduler,
     SubscriberSegmentRepository $subscriberSegmentRepository,
@@ -105,7 +100,6 @@ class Scheduler {
     $this->newslettersRepository = $newslettersRepository;
     $this->segmentsRepository = $segmentsRepository;
     $this->newsletterSegmentRepository = $newsletterSegmentRepository;
-    $this->wp = $wp;
     $this->security = $security;
     $this->scheduler = $scheduler;
     $this->subscriberSegmentRepository = $subscriberSegmentRepository;
@@ -132,6 +126,8 @@ class Scheduler {
         if (!$newsletter instanceof NewsletterEntity || $newsletter->getDeletedAt() !== null) {
           $this->deleteByTask($task);
         } elseif ($newsletter->getStatus() !== NewsletterEntity::STATUS_ACTIVE && $newsletter->getStatus() !== NewsletterEntity::STATUS_SCHEDULED) {
+          $task->setStatus(ScheduledTaskEntity::STATUS_PAUSED);
+          $this->scheduledTasksRepository->flush();
           continue;
         } elseif ($newsletter->getType() === NewsletterEntity::TYPE_WELCOME) {
           $this->processWelcomeNewsletter($newsletter, $task);
@@ -200,7 +196,8 @@ class Scheduler {
     }
 
     // ensure that subscribers are in segments
-    $subscribersCount = $this->subscribersFinder->addSubscribersToTaskFromSegments($task, $segments, $newsletter->getFilterSegmentId());
+    $this->subscribersFinder->addSubscribersToTaskFromSegments($task, $segments, $newsletter->getFilterSegmentId());
+    $subscribersCount = $task->getSubscribers()->count();
     if (empty($subscribersCount)) {
       $this->loggerFactory->getLogger(LoggerFactory::TOPIC_POST_NOTIFICATIONS)->info(
         'post notification no subscribers',
@@ -246,9 +243,8 @@ class Scheduler {
     if ($newsletter->getOptionValue('sendTo') === 'segment') {
       $segment = $this->segmentsRepository->findOneById($newsletter->getOptionValue('segment'));
       if ($segment instanceof SegmentEntity) {
-        $result = $this->subscribersFinder->addSubscribersToTaskFromSegments($task, [(int)$segment->getId()]);
-
-        if (empty($result)) {
+        $this->subscribersFinder->addSubscribersToTaskFromSegments($task, [(int)$segment->getId()]);
+        if (!$task->getSubscribers()->count()) {
           $this->deleteByTask($task);
           return false;
         }
@@ -366,7 +362,7 @@ class Scheduler {
   public function verifySubscriber(SubscriberEntity $subscriber, ScheduledTaskEntity $task): bool {
     $queue = $task->getSendingQueue();
     $newsletter = $queue ? $queue->getNewsletter() : null;
-    if ($newsletter && $newsletter->getType() === NewsletterEntity::TYPE_AUTOMATION_TRANSACTIONAL) {
+    if ($newsletter && $newsletter->isTransactional()) {
       return $subscriber->getStatus() !== SubscriberEntity::STATUS_BOUNCED;
     }
     if ($subscriber->getStatus() === SubscriberEntity::STATUS_UNCONFIRMED) {
@@ -403,7 +399,7 @@ class Scheduler {
     $notificationHistory->setUnsubscribeToken($this->security->generateUnsubscribeTokenByEntity($notificationHistory));
 
     // reset timestamps
-    $createdAt = Carbon::createFromTimestamp($this->wp->currentTime('timestamp'));
+    $createdAt = Carbon::now()->millisecond(0);
     $notificationHistory->setCreatedAt($createdAt);
     $notificationHistory->setUpdatedAt($createdAt);
     $notificationHistory->setDeletedAt(null);

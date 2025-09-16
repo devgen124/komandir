@@ -36,7 +36,11 @@ class Helper {
     if (!function_exists('wcs_get_subscription_period_strings')) {
       return [];
     }
-    return wcs_get_subscription_period_strings();
+    $strings = wcs_get_subscription_period_strings();
+    if (!is_array($strings)) {
+      return [];
+    }
+    return $strings;
   }
 
   public function wcsGetSubscriptionTrialPeriodStrings(): array {
@@ -55,5 +59,20 @@ class Helper {
       return false;
     }
     return wcs_get_subscription($id);
+  }
+
+  /**
+   * @param array<string, mixed> $args
+   * @return \WC_Subscription[]
+   */
+  public function wcsGetSubscriptions(array $args = []): array {
+    if (!function_exists('wcs_get_subscriptions')) {
+      return [];
+    }
+    $subscriptions = wcs_get_subscriptions($args);
+    if (!is_array($subscriptions)) {
+      return [];
+    }
+    return $subscriptions;
   }
 }

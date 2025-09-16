@@ -59,6 +59,7 @@ class Bulk_Actions implements Runner {
 		$post_types = Helper::get_allowed_post_types();
 		foreach ( $post_types as $post_type ) {
 			$this->filter( "bulk_actions-edit-{$post_type}", 'post_bulk_actions' );
+			$this->filter( "handle_bulk_actions-edit-{$post_type}", 'handle_bulk_actions', 10, 3 );
 		}
 
 		$taxonomies = Helper::get_accessible_taxonomies();
@@ -102,11 +103,45 @@ class Bulk_Actions implements Runner {
 			}
 		}
 
+		if ( Helper::has_cap( 'onpage_general' ) && Helper::should_determine_search_intent() ) {
+			$new_actions['rank_math_bulk_determine_search_intent'] = __( 'Determine Search Intent', 'rank-math' );
+		}
+
 		if ( is_array( $actions ) && count( $new_actions ) > 1 ) {
 			return array_merge( $actions, $new_actions );
 		}
 
 		return $actions;
+	}
+
+	/**
+	 * Handle bulk actions for applicable posts, pages, CPTs.
+	 *
+	 * @param  string $redirect   Redirect URL.
+	 * @param  string $doaction   Performed action.
+	 * @param  array  $object_ids Post IDs.
+	 *
+	 * @return string New redirect URL.
+	 */
+	public function handle_bulk_actions( $redirect, $doaction, $object_ids ) {
+		if (
+			$doaction === 'rank_math_bulk_determine_search_intent' &&
+			(
+				defined( 'RANK_MATH_PRO_VERSION' ) &&
+				version_compare( RANK_MATH_PRO_VERSION, '3.0.83-beta', '<' )
+			)
+		) {
+			Helper::add_notification(
+				esc_html__( 'Your current plugin version does not support this feature. Please update Rank Math PRO to version 3.0.83 or later to unlock full functionality.', 'rank-math' ),
+				[
+					'type'    => 'error',
+					'id'      => 'rank_math_search_intent_error',
+					'classes' => 'rank-math-notice',
+				]
+			);
+		}
+
+		return $redirect;
 	}
 
 	/**
@@ -122,9 +157,14 @@ class Bulk_Actions implements Runner {
 		}
 
 		wp_enqueue_script( 'rank-math-post-bulk-edit', rank_math()->plugin_url() . 'assets/admin/js/post-list.js', [ 'lodash', 'wp-element', 'wp-components' ], rank_math()->version, true );
-		Helper::add_json( 'isUserRegistered', Helper::is_site_connected() );
-		Helper::add_json( 'contentAICredits', Helper::get_content_ai_credits() );
-		Helper::add_json( 'contentAIPlan', Helper::get_content_ai_plan() );
+		Helper::add_json(
+			'contentAI',
+			[
+				'isUserRegistered' => Helper::is_site_connected(),
+				'credits'          => Helper::get_content_ai_credits(),
+				'plan'             => Helper::get_content_ai_plan(),
+			]
+		);
 		Helper::add_json( 'isProActive', defined( 'RANK_MATH_PRO_FILE' ) );
 		Helper::add_json( 'connectSiteUrl', Admin_Helper::get_activate_url( Url::get_current_url() ) );
 	}
@@ -138,7 +178,7 @@ class Bulk_Actions implements Runner {
 			return Helper::get_settings( 'titles.tax_' . Param::get( 'taxonomy' ) . '_add_meta_box' );
 		}
 
-		if ( Admin_Helper::is_post_list() ) {
+		if ( Admin_Helper::is_post_list() || Admin_Helper::is_media_library() ) {
 			$screen = get_current_screen();
 
 			$allowed_post_types   = Helper::get_allowed_post_types();

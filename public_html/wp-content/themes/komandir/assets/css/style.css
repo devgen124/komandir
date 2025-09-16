@@ -13945,6 +13945,93 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
   color: #00a9b4;
   box-shadow: 0 1px #00a9b4;
 }
+.wpcf7-form .wpcf7-acceptance label {
+  position: relative;
+  padding-left: 27px;
+  font-size: 14px;
+  line-height: 14px;
+}
+.wpcf7-form .wpcf7-acceptance label:hover {
+  cursor: pointer;
+}
+.wpcf7-form .wpcf7-acceptance label input[type=checkbox] {
+  position: absolute;
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
+}
+.wpcf7-form .wpcf7-acceptance label input[type=checkbox]:checked + span::after {
+  opacity: 1;
+}
+.wpcf7-form .wpcf7-acceptance label span::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 21px;
+  height: 21px;
+  background: url("../images/checkbox.svg") no-repeat left bottom;
+  transition: 0.3s;
+}
+.wpcf7-form .wpcf7-acceptance label span::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: -5px;
+  left: 2px;
+  width: 22px;
+  height: 20px;
+  background: url("../images/check.svg") no-repeat left bottom;
+  opacity: 0;
+  transition: 0.3s;
+}
+.wpcf7-form .wpcf7-list-item {
+  margin-left: 0;
+}
+
+.footer-subscribe .wpcf7-form .subscribe-desc {
+  margin-bottom: 20px;
+}
+.footer-subscribe .wpcf7-form p:has(.wpcf7-form-control-wrap) {
+  margin-top: 20px;
+  display: flex;
+  gap: 17px;
+}
+@media (max-width: 575.98px) {
+  .footer-subscribe .wpcf7-form p:has(.wpcf7-form-control-wrap) {
+    flex-wrap: wrap;
+  }
+}
+.footer-subscribe .wpcf7-form .wpcf7-form-control-wrap {
+  flex-grow: 1;
+}
+.footer-subscribe .wpcf7-form .wpcf7-form-control-wrap input {
+  width: 100%;
+}
+.footer-subscribe .wpcf7-form input[type=submit] {
+  padding: 11px 21px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #00a9b4;
+  border: none;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+.footer-subscribe .wpcf7-form input[type=submit]:hover {
+  background-color: #008790;
+}
+.footer-subscribe .wpcf7-form p {
+  margin-bottom: 0;
+}
+.footer-subscribe .wpcf7-spinner {
+  display: none;
+}
+.footer-subscribe .subscribe-acceptance {
+  display: block;
+  margin-top: 26px;
+}
 
 .location-content {
   display: none;
@@ -14012,76 +14099,6 @@ div.product div.images .wpgs-image .zoomtoo-container img:first-child {
 }
 .footer-payment-list li {
   margin: 0 17px 17px 0;
-}
-
-.footer-subscribe .wpcf7-form input[type=email] {
-  margin-right: 17px;
-  width: calc(100% - 17px);
-}
-.footer-subscribe .wpcf7-form input[type=submit] {
-  padding: 11px 21px;
-  font-weight: 700;
-  color: #fff;
-  background-color: #00a9b4;
-  border: none;
-  border-radius: 3px;
-  transition: 0.3s;
-}
-.footer-subscribe .wpcf7-form input[type=submit]:hover {
-  background-color: #008790;
-}
-.footer-subscribe .wpcf7-form p {
-  margin-bottom: 0;
-}
-.footer-subscribe .wpcf7-spinner {
-  display: none;
-}
-.footer-subscribe .subscribe-acceptance {
-  display: block;
-  margin-top: 26px;
-}
-.footer-subscribe .wpcf7-acceptance .wpcf7-list-item {
-  margin-left: 0;
-}
-.footer-subscribe .wpcf7-acceptance label {
-  position: relative;
-  padding-left: 27px;
-}
-.footer-subscribe .wpcf7-acceptance label:hover {
-  cursor: pointer;
-}
-.footer-subscribe .wpcf7-acceptance label input[type=checkbox] {
-  position: absolute;
-  visibility: hidden;
-  width: 1px;
-  height: 1px;
-  top: 0;
-  left: 0;
-}
-.footer-subscribe .wpcf7-acceptance label input[type=checkbox]:checked + span::after {
-  opacity: 1;
-}
-.footer-subscribe .wpcf7-acceptance label span::before {
-  content: "";
-  position: absolute;
-  top: -5px;
-  left: 0;
-  width: 21px;
-  height: 21px;
-  background: url("../images/checkbox.svg") no-repeat left bottom;
-  transition: 0.3s;
-}
-.footer-subscribe .wpcf7-acceptance label span::after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  top: -5px;
-  left: 2px;
-  width: 22px;
-  height: 20px;
-  background: url("../images/check.svg") no-repeat left bottom;
-  opacity: 0;
-  transition: 0.3s;
 }
 
 @media (max-width: 991.98px) {

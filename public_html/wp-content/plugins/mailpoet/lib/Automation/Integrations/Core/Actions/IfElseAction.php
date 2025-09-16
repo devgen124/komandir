@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) exit;
 use MailPoet\Automation\Engine\Control\FilterHandler;
 use MailPoet\Automation\Engine\Control\StepRunController;
 use MailPoet\Automation\Engine\Data\FilterGroup;
+use MailPoet\Automation\Engine\Data\Step;
 use MailPoet\Automation\Engine\Data\StepRunArgs;
 use MailPoet\Automation\Engine\Data\StepValidationArgs;
 use MailPoet\Automation\Engine\Integration\Action;
@@ -16,6 +17,8 @@ use MailPoet\Validator\Builder;
 use MailPoet\Validator\Schema\ObjectSchema;
 
 class IfElseAction implements Action {
+  public const KEY = 'core:if-else';
+
   /** @var FilterHandler */
   private $filterHandler;
 
@@ -26,7 +29,7 @@ class IfElseAction implements Action {
   }
 
   public function getKey(): string {
-    return 'core:if-else';
+    return self::KEY;
   }
 
   public function getName(): string {
@@ -71,5 +74,10 @@ class IfElseAction implements Action {
   public function run(StepRunArgs $args, StepRunController $controller): void {
     $matches = $this->filterHandler->matchesFilters($args);
     $controller->scheduleNextStepByIndex($matches ? 0 : 1);
+  }
+
+  public function onDuplicate(Step $step): Step {
+    // Intentionally left empty for now, this cannot be duplicated
+    return $step;
   }
 }

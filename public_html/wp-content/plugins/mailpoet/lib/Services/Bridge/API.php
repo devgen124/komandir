@@ -34,7 +34,7 @@ class API {
   public const ERROR_MESSAGE_INVALID_FROM = 'The email address is not authorized';
   public const ERROR_MESSAGE_PENDING_APPROVAL = 'Key is valid, but not approved yet; you can send only to authorized email addresses at the moment';
   public const ERROR_MESSAGE_DMRAC = "Email violates Sender Domain's DMARC policy. Please set up sender authentication.";
-  public const ERROR_MESSAGE_BULK_EMAIL_FORBIDDEN = 'Bulk email are forbidden for the sender address';
+  public const ERROR_MESSAGE_BULK_EMAIL_FORBIDDEN = 'Please update the plugin and add/update your sender domain (refer to https://account.mailpoet.com/sender_domains)';
   // Bridge message from https://github.com/mailpoet/services-bridge/blob/master/extensions/authentication/basic_strategy.rb
   public const ERROR_MESSAGE_UNAUTHORIZED = 'No valid API key provided';
   public const ERROR_MESSAGE_INSUFFICIENT_PRIVILEGES = 'Insufficient privileges';
@@ -425,12 +425,17 @@ class API {
   }
 
   private function logKeyCheckError(int $code, string $keyType): void {
+    $topic = LoggerFactory::TOPIC_MSS;
+    if ($keyType === self::KEY_CHECK_TYPE_PREMIUM) {
+      $topic = LoggerFactory::TOPIC_PREMIUM;
+    }
+
     $logData = [
       'http_code' => $code,
       'home_url' => $this->wp->homeUrl(),
       'key_type' => $keyType,
     ];
-    $this->loggerFactory->getLogger(LoggerFactory::TOPIC_MSS)->error('key-validation.failed', $logData);
+    $this->loggerFactory->getLogger($topic)->info('key-validation.failed', $logData);
   }
 
   private function logInvalidDataFormat(string $method, ?string $response = null): void {

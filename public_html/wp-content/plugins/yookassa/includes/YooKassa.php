@@ -54,7 +54,7 @@ class YooKassa
     public function __construct()
     {
         $this->plugin_name = 'yookassa';
-        $this->version     = '2.11.0';
+        $this->version     = '2.12.3';
         self::$pluginUrl   = plugin_dir_url(dirname(__FILE__));
         self::$pluginPath  = plugin_dir_path(dirname(__FILE__));
 
@@ -64,6 +64,10 @@ class YooKassa
         $this->definePaymentHooks();
         $this->defineChangeOrderStatuses();
 
+        if (get_option('yookassa_marking_enabled') && get_option('yookassa_enable_second_receipt')) {
+            $this->defineMarkingProductHooks();
+            $this->defineMarkingOrderHooks();
+        }
     }
 
     /**
@@ -105,6 +109,8 @@ class YooKassa
         require_once self::$pluginPath . 'admin/YooKassaAdmin.php';
         require_once self::$pluginPath . 'admin/YooKassaTransactionsListTable.php';
         require_once self::$pluginPath . 'admin/YooKassaPaymentChargeDispatcher.php';
+        require_once self::$pluginPath . 'admin/YooKassaMarkingProduct.php';
+        require_once self::$pluginPath . 'admin/YooKassaMarkingOrder.php';
 
         /**
          * The class responsible for defining all actions that occur in the payment-facing
@@ -124,6 +130,8 @@ class YooKassa
         require_once self::$pluginPath . 'includes/PaymentsTableModel.php';
         require_once self::$pluginPath . 'includes/CaptureNotificationChecker.php';
         require_once self::$pluginPath . 'includes/SucceededNotificationChecker.php';
+        require_once self::$pluginPath . 'includes/YooKassaMarkingCodeHandler.php';
+        require_once self::$pluginPath . 'includes/YooKassaNotice.php';
 
         $this->loader = new YooKassaLoader();
     }
@@ -161,6 +169,28 @@ class YooKassa
         $this->loader->addAction('admin_init', $plugin_admin, 'registerSettings');
         $this->loader->addAction('wp_ajax_vote_nps', $plugin_admin, 'voteNps');
         $this->loader->addAction('admin_head', $plugin_admin, 'addGatewaysScripts');
+    }
+
+    private function defineMarkingProductHooks()
+    {
+        $plugin_admin = new YooKassaMarkingProduct($this->getPluginName(), $this->getVersion());
+
+        $this->loader->addAction('woocommerce_product_data_tabs', $plugin_admin, 'addMarkingProductTab');
+        $this->loader->addAction('woocommerce_product_data_panels', $plugin_admin, 'markingProductTabContent');
+        $this->loader->addAction('woocommerce_process_product_meta', $plugin_admin, 'saveMarkingProductFields');
+    }
+
+    private function defineMarkingOrderHooks()
+    {
+        $plugin_admin = new YooKassaMarkingOrder($this->getPluginName(), $this->getVersion());
+
+        $this->loader->addAction('woocommerce_admin_order_item_headers', $plugin_admin, 'addMarkingProductHeadersTab');
+        $this->loader->addAction('woocommerce_admin_order_item_values', $plugin_admin, 'addMarkingProductValuesTab', 10, 3);
+        $this->loader->addAction('admin_footer', $plugin_admin, 'addMarkingProductPopup');
+        $this->loader->addAction('wp_ajax_save_marking_meta', $plugin_admin, 'saveMarkingMetaCallback');
+        $this->loader->addAction('wp_ajax_woocommerce_get_oder_item_meta', $plugin_admin, 'getOderItemMetaCallback');
+        $this->loader->addAction('admin_notices', $plugin_admin, 'displayOrderWarning');
+        $this->loader->addAction('woocommerce_order_refunded', $plugin_admin, 'deleteMarkingAfterRefund', 10, 2);
     }
 
     /**

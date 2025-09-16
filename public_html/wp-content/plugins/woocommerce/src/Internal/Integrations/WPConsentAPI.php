@@ -16,6 +16,14 @@ class WPConsentAPI {
 
 	use ScriptDebug;
 
+
+	/**
+	 * Identifier of the consent category used for order attribution.
+	 *
+	 * @var string
+	 */
+	public static $consent_category = 'marketing';
+
 	/**
 	 * Register the consent API.
 	 *
@@ -23,19 +31,20 @@ class WPConsentAPI {
 	 */
 	public function register() {
 		add_action(
-			'plugins_loaded',
+			'init',
 			function() {
-				$this->on_plugins_loaded();
-			}
+				$this->on_init();
+			},
+			20 // After OrderAttributionController.
 		);
 	}
 
 	/**
-	 * Register our hooks on plugins_loaded.
+	 * Register our hooks on init.
 	 *
 	 * @return void
 	 */
-	protected function on_plugins_loaded() {
+	protected function on_init() {
 		// Include integration to WP Consent Level API if available.
 		if ( ! $this->is_wp_consent_api_active() ) {
 			return;
@@ -53,13 +62,13 @@ class WPConsentAPI {
 		/**
 		 * Modify the "allowTracking" flag consent if the user has consented to marketing.
 		 *
-		 * Wp-consent-api will initialize the modules on "plugins_loaded" with priority 9,
+		 * Wp-consent-api will initialize the modules on "init" with priority 9,
 		 * So this code needs to be run after that.
 		 */
 		add_filter(
 			'wc_order_attribution_allow_tracking',
 			function() {
-				return function_exists( 'wp_has_consent' ) && wp_has_consent( 'marketing' );
+				return function_exists( 'wp_has_consent' ) && wp_has_consent( self::$consent_category );
 			}
 		);
 	}
@@ -80,14 +89,25 @@ class WPConsentAPI {
 	 */
 	private function enqueue_consent_api_scripts() {
 		wp_enqueue_script(
-			'wp-consent-api-integration-js',
+			'wp-consent-api-integration',
 			plugins_url(
 				"assets/js/frontend/wp-consent-api-integration{$this->get_script_suffix()}.js",
 				WC_PLUGIN_FILE
 			),
-			array( 'jquery', 'wp-consent-api' ),
+			array( 'wp-consent-api', 'wc-order-attribution' ),
 			Constants::get_constant( 'WC_VERSION' ),
 			true
+		);
+
+		// Add data for the script above. `wp_enqueue_script` API does not allow data attributes,
+		// so we need a separate script tag and pollute the global scope.
+		wp_add_inline_script(
+			'wp-consent-api-integration',
+			sprintf(
+				'window.wc_order_attribution.params.consentCategory = %s;',
+				wp_json_encode( self::$consent_category )
+			),
+			'before'
 		);
 	}
 }

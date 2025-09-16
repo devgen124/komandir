@@ -1,10 +1,10 @@
 === WC City Select ===
-Contributors: mantish, rwky, jonaskirch
+Contributors: mantish, rwky
 Donate link: mailto:paypal@8manos.com
-Tags: woocommerce, cities, city, city select, cities select, city dropdown, cities dropdown, woocommerce city, woocommerce cities
+Tags: woocommerce, city select, cities select, city dropdown, cities dropdown
 Requires at least: 4.0
-Tested up to: 6.5
-Stable tag: 1.0.8
+Tested up to: 6.8
+Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,13 @@ City Select for WooCommerce. Show a dropdown select as the cities input.
 WooCommerce uses a text input for the customers to enter the city or town. With this plugin you can provide a list of cities to be shown as a select dropdown.
 
 This will be shown in checkout pages, edit addresses pages and shipping calculator if it's configured that way.
+
+### WooCommerce Cart and Checkout Blocks
+
+This plugin is not yet compatible with Blocks.
+It works using the legacy shortcodes: `[woocommerce_cart]` and `[woocommerce_checkout]`.
+
+To make this plugin work, you can use these shortcodes instead of the blocks for your Cart and Checkout pages.
 
 ### How to add cities
 
@@ -61,6 +68,13 @@ function my_cities( $cities ) {
 Source code and contributions at [github](https://github.com/8manos/wc-city-select)
 
 == Changelog ==
+
+= 1.0.10 =
+* Update Romanian cities
+
+= 1.0.9 =
+* Load select with only the correct cities for the Country / State
+* Declare Blocks (in)compatibility
 
 = 1.0.8 =
 * Fix issue in Egypt cities file (EGDK missing)

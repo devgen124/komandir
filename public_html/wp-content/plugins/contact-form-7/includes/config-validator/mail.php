@@ -5,14 +5,14 @@ trait WPCF7_ConfigValidator_Mail {
 	/**
 	 * Replaces all mail-tags in the given content.
 	 */
-	public function replace_mail_tags( $content, $args = '' ) {
-		$args = wp_parse_args( $args, array(
+	public function replace_mail_tags( $content, $options = '' ) {
+		$options = wp_parse_args( $options, array(
 			'html' => false,
 			'callback' =>
 				array( $this, 'replace_mail_tags_with_minimum_input_callback' ),
 		) );
 
-		$content = new WPCF7_MailTaggedText( $content, $args );
+		$content = new WPCF7_MailTaggedText( $content, $options );
 
 		return $content->replace_tags();
 	}
@@ -24,7 +24,7 @@ trait WPCF7_ConfigValidator_Mail {
 	 */
 	public function replace_mail_tags_with_minimum_input_callback( $matches ) {
 		// allow [[foo]] syntax for escaping a tag
-		if ( $matches[1] === '[' and $matches[4] === ']' ) {
+		if ( '[' === $matches[1] and ']' === $matches[4] ) {
 			return substr( $matches[0], 1, -1 );
 		}
 
@@ -39,74 +39,49 @@ trait WPCF7_ConfigValidator_Mail {
 		$example_text = 'example';
 		$example_blank = '';
 
-		$form_tags = $this->contact_form->scan_form_tags(
-			array( 'name' => $field_name )
-		);
+		// for back-compat
+		$field_name = preg_replace( '/^wpcf7\./', '_', $field_name );
 
-		if ( $form_tags ) {
-			$form_tag = new WPCF7_FormTag( $form_tags[0] );
+		if ( '_site_admin_email' === $field_name ) {
+			return get_bloginfo( 'admin_email', 'raw' );
 
-			$is_required = $form_tag->is_required() || 'radio' === $form_tag->type;
+		} elseif ( '_user_agent' === $field_name ) {
+			return $example_text;
 
-			if ( ! $is_required ) {
-				return $example_blank;
-			}
+		} elseif ( '_user_email' === $field_name ) {
+			return $this->contact_form->is_true( 'subscribers_only' )
+				? $example_email
+				: $example_blank;
 
-			if ( wpcf7_form_tag_supports( $form_tag->type, 'selectable-values' ) ) {
-				if ( $form_tag->pipes instanceof WPCF7_Pipes ) {
-					if ( $mail_tag->get_option( 'do_not_heat' ) ) {
-						$before_pipes = $form_tag->pipes->collect_befores();
-						$last_item = array_pop( $before_pipes );
-					} else {
-						$after_pipes = $form_tag->pipes->collect_afters();
-						$last_item = array_pop( $after_pipes );
-					}
-				} else {
-					$last_item = array_pop( $form_tag->values );
-				}
+		} elseif ( str_starts_with( $field_name, '_user_' ) ) {
+			return $this->contact_form->is_true( 'subscribers_only' )
+				? $example_text
+				: $example_blank;
 
-				if ( $last_item and wpcf7_is_mailbox_list( $last_item ) ) {
-					return $example_email;
-				} else {
-					return $example_text;
-				}
-			}
+		} elseif ( str_starts_with( $field_name, '_' ) ) {
+			return str_ends_with( $field_name, '_email' )
+				? $example_email
+				: $example_text;
 
-			if ( 'email' === $form_tag->basetype ) {
-				return $example_email;
-			} else {
-				return $example_text;
-			}
-
-		} else { // maybe special mail tag
-			// for back-compat
-			$field_name = preg_replace( '/^wpcf7\./', '_', $field_name );
-
-			if ( '_site_admin_email' === $field_name ) {
-				return get_bloginfo( 'admin_email', 'raw' );
-
-			} elseif ( '_user_agent' === $field_name ) {
-				return $example_text;
-
-			} elseif ( '_user_email' === $field_name ) {
-				return $this->contact_form->is_true( 'subscribers_only' )
-					? $example_email
-					: $example_blank;
-
-			} elseif ( str_starts_with( $field_name, '_user_' ) ) {
-				return $this->contact_form->is_true( 'subscribers_only' )
-					? $example_text
-					: $example_blank;
-
-			} elseif ( str_starts_with( $field_name, '_' ) ) {
-				return str_ends_with( $field_name, '_email' )
-					? $example_email
-					: $example_text;
-
-			}
 		}
 
-		return $tag;
+		static $opcalcset = array();
+
+		if ( ! isset( $opcalcset[$this->contact_form->id()] ) ) {
+			$opcalcset[$this->contact_form->id()] =
+				new WPCF7_MailTag_OutputCalculator( $this->contact_form );
+		}
+
+		$opcalc = $opcalcset[$this->contact_form->id()];
+		$op = $opcalc->calc_output( $mail_tag );
+
+		if ( WPCF7_MailTag_OutputCalculator::email === $op ) {
+			return $example_email;
+		} elseif ( ! ( WPCF7_MailTag_OutputCalculator::blank & $op ) ) {
+			return $example_text;
+		} else {
+			return $example_blank;
+		}
 	}
 
 
@@ -182,7 +157,7 @@ trait WPCF7_ConfigValidator_Mail {
 			if ( $this->detect_maybe_empty( $section, $content ) ) {
 				$this->add_error( $section, 'maybe_empty',
 					array(
-						'message' => __( "There is a possible empty field.", 'contact-form-7' ),
+						'message' => __( 'There is a possible empty field.', 'contact-form-7' ),
 					)
 				);
 			} else {
@@ -202,7 +177,7 @@ trait WPCF7_ConfigValidator_Mail {
 			if ( $this->detect_invalid_mailbox_syntax( $section, $content ) ) {
 				$this->add_error( $section, 'invalid_mailbox_syntax',
 					array(
-						'message' => __( "Invalid mailbox syntax is used.", 'contact-form-7' ),
+						'message' => __( 'Invalid mailbox syntax is used.', 'contact-form-7' ),
 					)
 				);
 			} else {
@@ -220,7 +195,7 @@ trait WPCF7_ConfigValidator_Mail {
 				if ( ! wpcf7_is_email_in_site_domain( $sender ) ) {
 					$this->add_error( $section, 'email_not_in_site_domain',
 						array(
-							'message' => __( "Sender email address does not belong to the site domain.", 'contact-form-7' ),
+							'message' => __( 'Sender email address does not belong to the site domain.', 'contact-form-7' ),
 						)
 					);
 				}
@@ -239,7 +214,7 @@ trait WPCF7_ConfigValidator_Mail {
 			if ( $this->detect_invalid_mailbox_syntax( $section, $content ) ) {
 				$this->add_error( $section, 'invalid_mailbox_syntax',
 					array(
-						'message' => __( "Invalid mailbox syntax is used.", 'contact-form-7' ),
+						'message' => __( 'Invalid mailbox syntax is used.', 'contact-form-7' ),
 					)
 				);
 			} else {
@@ -256,7 +231,7 @@ trait WPCF7_ConfigValidator_Mail {
 				) {
 					$this->add_error( $section, 'unsafe_email_without_protection',
 						array(
-							'message' => __( "Unsafe email config is used without sufficient protection.", 'contact-form-7' ),
+							'message' => __( 'Unsafe email config is used without sufficient protection.', 'contact-form-7' ),
 						)
 					);
 				}
@@ -298,7 +273,7 @@ trait WPCF7_ConfigValidator_Mail {
 
 			if (
 				in_array(
-					strtolower( $header_name ), array( 'reply-to', 'cc', 'bcc' )
+					strtolower( $header_name ), array( 'reply-to', 'cc', 'bcc' ), true
 				) and
 				'' !== $header_value and
 				$this->detect_invalid_mailbox_syntax( $section, $header_value )
@@ -308,7 +283,7 @@ trait WPCF7_ConfigValidator_Mail {
 			}
 
 			if (
-				in_array( strtolower( $header_name ), array( 'cc', 'bcc' ) ) and
+				in_array( strtolower( $header_name ), array( 'cc', 'bcc' ), true ) and
 				$this->detect_unsafe_email_without_protection( $section, $header_value )
 			) {
 				$unsafe_email_fields[] = $header_name;
@@ -319,7 +294,7 @@ trait WPCF7_ConfigValidator_Mail {
 			if ( ! empty( $invalid_mail_headers ) ) {
 				$this->add_error( $section, 'invalid_mail_header',
 					array(
-						'message' => __( "There are invalid mail header fields.", 'contact-form-7' ),
+						'message' => __( 'There are invalid mail header fields.', 'contact-form-7' ),
 					)
 				);
 			} else {
@@ -332,7 +307,7 @@ trait WPCF7_ConfigValidator_Mail {
 				foreach ( $invalid_mailbox_fields as $header_name ) {
 					$this->add_error( $section, 'invalid_mailbox_syntax',
 						array(
-							'message' => __( "Invalid mailbox syntax is used in the %name% field.", 'contact-form-7' ),
+							'message' => __( 'Invalid mailbox syntax is used in the %name% field.', 'contact-form-7' ),
 							'params' => array( 'name' => $header_name ),
 						)
 					);
@@ -346,7 +321,7 @@ trait WPCF7_ConfigValidator_Mail {
 			if ( ! empty( $unsafe_email_fields ) ) {
 				$this->add_error( $section, 'unsafe_email_without_protection',
 					array(
-						'message' => __( "Unsafe email config is used without sufficient protection.", 'contact-form-7' ),
+						'message' => __( 'Unsafe email config is used without sufficient protection.', 'contact-form-7' ),
 					)
 				);
 			} else {
@@ -366,7 +341,7 @@ trait WPCF7_ConfigValidator_Mail {
 			if ( $this->detect_maybe_empty( $section, $content ) ) {
 				$this->add_error( $section, 'maybe_empty',
 					array(
-						'message' => __( "There is a possible empty field.", 'contact-form-7' ),
+						'message' => __( 'There is a possible empty field.', 'contact-form-7' ),
 					)
 				);
 			} else {
@@ -421,7 +396,7 @@ trait WPCF7_ConfigValidator_Mail {
 				} elseif ( $this->detect_file_not_in_content_dir( $section, $line ) ) {
 					$files_out_of_content[] = $line;
 				} else {
-					$total_size += (int) @filesize( $path );
+					$total_size += (int) @filesize( path_join( WP_CONTENT_DIR, $line ) );
 				}
 			}
 		}
@@ -431,7 +406,7 @@ trait WPCF7_ConfigValidator_Mail {
 				foreach ( $files_not_found as $line ) {
 					$this->add_error( $section, 'file_not_found',
 						array(
-							'message' => __( "Attachment file does not exist at %path%.", 'contact-form-7' ),
+							'message' => __( 'Attachment file does not exist at %path%.', 'contact-form-7' ),
 							'params' => array( 'path' => $line ),
 						)
 					);
@@ -445,7 +420,7 @@ trait WPCF7_ConfigValidator_Mail {
 			if ( ! empty( $files_out_of_content ) ) {
 				$this->add_error( $section, 'file_not_in_content_dir',
 					array(
-						'message' => __( "It is not allowed to use files outside the wp-content directory.", 'contact-form-7' ),
+						'message' => __( 'It is not allowed to use files outside the wp-content directory.', 'contact-form-7' ),
 					)
 				);
 			} else {
@@ -459,7 +434,7 @@ trait WPCF7_ConfigValidator_Mail {
 			if ( $max < $total_size ) {
 				$this->add_error( $section, 'attachments_overweight',
 					array(
-						'message' => __( "The total size of attachment files is too large.", 'contact-form-7' ),
+						'message' => __( 'The total size of attachment files is too large.', 'contact-form-7' ),
 					)
 				);
 			} else {
@@ -542,16 +517,21 @@ trait WPCF7_ConfigValidator_Mail {
 	 * @link https://contactform7.com/configuration-errors/unsafe-email-without-protection/
 	 */
 	public function detect_unsafe_email_without_protection( $section, $content ) {
-		static $is_recaptcha_active = null;
+		if ( $this->contact_form->is_true( 'subscribers_only' ) ) {
+			return false;
+		}
 
-		if ( null === $is_recaptcha_active ) {
-			$is_recaptcha_active = call_user_func( function () {
-				$service = WPCF7_RECAPTCHA::get_instance();
-				return $service->is_active();
+		static $is_captcha_active = null;
+
+		if ( null === $is_captcha_active ) {
+			$is_captcha_active = call_user_func( static function () {
+				$recaptcha = WPCF7_RECAPTCHA::get_instance();
+				$turnstile = WPCF7_Turnstile::get_instance();
+				return $recaptcha->is_active() || $turnstile->is_active();
 			} );
 		}
 
-		if ( $is_recaptcha_active ) {
+		if ( $is_captcha_active ) {
 			return false;
 		}
 
@@ -561,7 +541,7 @@ trait WPCF7_ConfigValidator_Mail {
 		$content = $this->replace_mail_tags( $content, array(
 			'callback' => function ( $matches ) use ( $example_email ) {
 				// allow [[foo]] syntax for escaping a tag
-				if ( $matches[1] === '[' and $matches[4] === ']' ) {
+				if ( '[' === $matches[1] and ']' === $matches[4] ) {
 					return substr( $matches[0], 1, -1 );
 				}
 

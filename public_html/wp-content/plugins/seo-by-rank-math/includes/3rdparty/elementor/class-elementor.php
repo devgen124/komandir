@@ -100,6 +100,7 @@ class Elementor {
 		$output  = \ob_get_clean();
 		$search  = '/(<(div|button) class="elementor-component-tab elementor-panel-navigation-tab" data-tab="global">.*<\/(div|button)>)/m';
 		$replace = '${1}<${2} class="elementor-component-tab elementor-panel-navigation-tab" data-tab="rank-math">SEO</${2}>';
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- This comes from the output buffer, escaping it would break the output.
 		echo \preg_replace(
 			$search,
 			$replace,
@@ -125,6 +126,10 @@ class Elementor {
 			'elementor-common-modules',
 			'rank-math-app',
 		];
+
+		if ( wp_script_is( 'elementor-v2-editor-app-bar', 'registered' ) ) {
+			$deps[] = 'elementor-v2-editor-app-bar';
+		}
 
 		$mode = \Elementor\Core\Settings\Manager::get_settings_managers( 'editorPreferences' )->get_model()->get_settings( 'ui_theme' );
 		wp_deregister_style( 'rank-math-editor' );
@@ -187,7 +192,7 @@ class Elementor {
 			return false;
 		}
 
-		$post_type = isset( $_GET['post'] ) ? get_post_type( $_GET['post'] ) : '';
+		$post_type = isset( $_GET['post'] ) ? get_post_type( absint( $_GET['post'] ) ) : '';
 		if ( $post_type && ! Helper::get_settings( 'titles.pt_' . $post_type . '_add_meta_box' ) ) {
 			return false;
 		}

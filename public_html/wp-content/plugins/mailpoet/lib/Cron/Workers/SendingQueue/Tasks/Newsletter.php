@@ -5,6 +5,8 @@ namespace MailPoet\Cron\Workers\SendingQueue\Tasks;
 if (!defined('ABSPATH')) exit;
 
 
+use Automattic\WooCommerce\EmailEditor\Email_Editor_Container;
+use Automattic\WooCommerce\EmailEditor\Engine\Personalizer;
 use MailPoet\Cron\Workers\SendingQueue\Tasks\Links as LinksTask;
 use MailPoet\Cron\Workers\SendingQueue\Tasks\Posts as PostsTask;
 use MailPoet\Cron\Workers\SendingQueue\Tasks\Shortcodes as ShortcodesTask;
@@ -77,11 +79,14 @@ class Newsletter {
   /** @var ScheduledTasksRepository */
   private $scheduledTasksRepository;
 
+  /** @var Personalizer */
+  private $personalizer;
+
   public function __construct(
-    WPFunctions $wp = null,
-    PostsTask $postsTask = null,
-    GATracking $gaTracking = null,
-    Emoji $emoji = null
+    ?WPFunctions $wp = null,
+    ?PostsTask $postsTask = null,
+    ?GATracking $gaTracking = null,
+    ?Emoji $emoji = null
   ) {
     $trackingConfig = ContainerWrapper::getInstance()->get(TrackingConfig::class);
     $this->trackingEnabled = $trackingConfig->isEmailTrackingEnabled();
@@ -110,6 +115,7 @@ class Newsletter {
     $this->sendingQueuesRepository = ContainerWrapper::getInstance()->get(SendingQueuesRepository::class);
     $this->segmentsRepository = ContainerWrapper::getInstance()->get(SegmentsRepository::class);
     $this->scheduledTasksRepository = ContainerWrapper::getInstance()->get(ScheduledTasksRepository::class);
+    $this->personalizer = Email_Editor_Container::container()->get(Personalizer::class);
   }
 
   public function getNewsletterFromQueue(ScheduledTaskEntity $task): ?NewsletterEntity {
@@ -286,6 +292,16 @@ class Newsletter {
       );
     }
     $preparedNewsletter = Helpers::splitObject($preparedNewsletter);
+    if ($newsletter->getWpPostId() !== null) {
+      $this->personalizer->set_context([
+        'recipient_email' => $subscriber->getEmail(),
+        'newsletter_id' => $newsletter->getId(),
+        'queue_id' => $queue->getId(),
+      ]);
+      foreach ($preparedNewsletter as $key => $content) {
+        $preparedNewsletter[$key] = $this->personalizer->personalize_content($content);
+      }
+    }
     return [
       'id' => $newsletter->getId(),
       'subject' => $preparedNewsletter[0],
@@ -303,7 +319,7 @@ class Newsletter {
        $newsletter->getType() === NewsletterEntity::TYPE_NOTIFICATION_HISTORY
     ) {
       $newsletter->setStatus(NewsletterEntity::STATUS_SENT);
-      $newsletter->setSentAt(Carbon::createFromTimestamp(WPFunctions::get()->currentTime('timestamp')));
+      $newsletter->setSentAt(Carbon::now()->millisecond(0));
       $this->newslettersRepository->persist($newsletter);
       $this->newslettersRepository->flush();
     }

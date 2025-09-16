@@ -45,7 +45,7 @@ class StepRunLogger {
     string $stepId,
     string $stepType,
     int $runNumber,
-    bool $isWpDebug = null
+    ?bool $isWpDebug = null
   ) {
     $this->automationRunLogStorage = $automationRunLogStorage;
     $this->hooks = $hooks;
@@ -67,7 +67,10 @@ class StepRunLogger {
   }
 
   public function logStart(): void {
-    $this->getLog();
+    $log = $this->getLog();
+    $log->setStatus(AutomationRunLog::STATUS_RUNNING);
+    $log->setUpdatedAt(new DateTimeImmutable());
+    $this->automationRunLogStorage->updateAutomationRunLog($log);
   }
 
   public function logStepData(Step $step): void {
@@ -100,7 +103,15 @@ class StepRunLogger {
     $this->automationRunLogStorage->updateAutomationRunLog($log);
   }
 
-  private function getLog(): AutomationRunLog {
+  public function saveLogData(array $data): void {
+    $log = $this->getLog();
+    foreach ($data as $key => $value) {
+      $log->setData($key, $value);
+    }
+    $this->automationRunLogStorage->updateAutomationRunLog($log);
+  }
+
+  public function getLog(): AutomationRunLog {
     if (!$this->log) {
       $this->log = $this->automationRunLogStorage->getAutomationRunLogByRunAndStepId($this->runId, $this->stepId);
     }

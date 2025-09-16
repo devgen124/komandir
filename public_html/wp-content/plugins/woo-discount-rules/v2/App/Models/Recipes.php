@@ -128,7 +128,7 @@ class Recipes
         $current_date_time = '';
         if (function_exists('current_time')) {
             $current_time = current_time('timestamp');
-            $current_date_time = date('Y-m-d H:i:s', $current_time);
+            $current_date_time = gmdate('Y-m-d H:i:s', $current_time);
         }
         $current_user = get_current_user_id();
         $rule_id = NULL;

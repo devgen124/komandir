@@ -5,14 +5,14 @@ namespace MailPoet\Config\PopulatorData\Templates;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\WP\Functions as WPFunctions;
-
 class Coffee {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/coffee';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -32,7 +32,7 @@ class Coffee {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
          [
           'type' => 'container',
@@ -129,7 +129,7 @@ class Coffee {
                               1 =>
                                  [
                                   'type' => 'social',
-                                  'iconSet' => 'full-symbol-black',
+                                  'iconSet' => 'official',
                                   'icons' =>
                                      [
                                       0 =>
@@ -137,7 +137,7 @@ class Coffee {
                                           'type' => 'socialIcon',
                                           'iconType' => 'facebook',
                                           'link' => 'http://www.facebook.com',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Facebook.png',
+                                          'image' => $this->social_icon_url . '/11-official/Facebook.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Facebook',
@@ -147,7 +147,7 @@ class Coffee {
                                           'type' => 'socialIcon',
                                           'iconType' => 'twitter',
                                           'link' => 'http://www.twitter.com',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Twitter.png',
+                                          'image' => $this->social_icon_url . '/11-official/X.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Twitter',
@@ -157,7 +157,7 @@ class Coffee {
                                           'type' => 'socialIcon',
                                           'iconType' => 'instagram',
                                           'link' => 'http://instagram.com',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Instagram.png',
+                                          'image' => $this->social_icon_url . '/11-official/Instagram.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Instagram',
@@ -896,7 +896,7 @@ class Coffee {
                               2 =>
                                  [
                                   'type' => 'social',
-                                  'iconSet' => 'full-symbol-black',
+                                  'iconSet' => 'official',
                                   'icons' =>
                                      [
                                       0 =>
@@ -904,7 +904,7 @@ class Coffee {
                                           'type' => 'socialIcon',
                                           'iconType' => 'facebook',
                                           'link' => 'http://www.facebook.com',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Facebook.png',
+                                          'image' => $this->social_icon_url . '/11-official/Facebook.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Facebook',
@@ -914,7 +914,7 @@ class Coffee {
                                           'type' => 'socialIcon',
                                           'iconType' => 'twitter',
                                           'link' => 'http://www.twitter.com',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Twitter.png',
+                                          'image' => $this->social_icon_url . '/11-official/X.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Twitter',
@@ -924,7 +924,7 @@ class Coffee {
                                           'type' => 'socialIcon',
                                           'iconType' => 'instagram',
                                           'link' => 'http://instagram.com',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Instagram.png',
+                                          'image' => $this->social_icon_url . '/11-official/Instagram.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Instagram',

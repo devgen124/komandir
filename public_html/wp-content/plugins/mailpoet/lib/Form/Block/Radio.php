@@ -46,12 +46,13 @@ class Radio {
     $selectedValue = $this->rendererHelper->getFieldValue($block);
 
     foreach ($options as $option) {
-      $html .= '<label class="mailpoet_radio_label" '
+      $id = $this->wp->wpUniqueId('mailpoet_radio_');
+      $html .= '<label class="mailpoet_radio_label" for="' . $id . '" '
         . $this->rendererHelper->renderFontStyle($formSettings)
         . '>';
 
       $html .= '<input type="radio" class="mailpoet_radio" ';
-
+      $html .= 'id="' . $id . '" ';
       $html .= 'name="' . $fieldName . '" ';
 
       if (is_array($option['value'])) {
@@ -79,7 +80,7 @@ class Radio {
 
     $html .= '</fieldset>';
 
-    $html .= '<span class="mailpoet_error_' . $block['id'] . ($formId ? '_' . $formId : '') . '"></span>';
+    $html .= $this->rendererHelper->renderErrorsContainer($block, $formId);
 
     return $this->wrapper->render($block, $html);
   }

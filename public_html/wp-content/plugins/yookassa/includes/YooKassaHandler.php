@@ -98,7 +98,7 @@ class YooKassaHandler
 
         if (count($shipping)) {
             $shippingData = array_shift($shipping);
-            if (self::isSelfEmployed() && $shippingData['total'] > 0) {
+            if (self::isSelfEmployed() && (float)$shippingData['total'] > 0) {
                 $builder->addReceiptShipping(
                     __('Доставка', 'yookassa'),
                     $shippingData['total'],
@@ -107,7 +107,7 @@ class YooKassaHandler
             }
 
             if (self::isLegalEntity()) {
-                $amount = YooKassaOrderHelper::getAmountByCurrency($shippingData['total'] + $shippingData['total_tax']);
+                $amount = YooKassaOrderHelper::getAmountByCurrency((float)$shippingData['total'] + (float)$shippingData['total_tax']);
                 $taxes = $shippingData->get_taxes();
                 $builder->addReceiptShipping(
                     __('Доставка', 'yookassa'),

@@ -1,10 +1,8 @@
 <?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
+
 namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
-
-
-use MailPoet\WP\Functions as WPFunctions;
 
 
 class Phone {
@@ -12,7 +10,9 @@ class Phone {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/phone';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -32,7 +32,7 @@ class Phone {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
          [
           'type' => 'container',
@@ -348,7 +348,7 @@ class Phone {
                               1 =>
                                  [
                                   'type' => 'social',
-                                  'iconSet' => 'full-symbol-grey',
+                                  'iconSet' => 'official-white',
                                   'icons' =>
                                      [
                                       0 =>
@@ -356,7 +356,7 @@ class Phone {
                                           'type' => 'socialIcon',
                                           'iconType' => 'facebook',
                                           'link' => 'http://www.facebook.com',
-                                          'image' => $this->social_icon_url . '/08-full-symbol-grey/Facebook.png',
+                                          'image' => $this->social_icon_url . '/12-official-white/Facebook.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Facebook',
@@ -366,7 +366,7 @@ class Phone {
                                           'type' => 'socialIcon',
                                           'iconType' => 'twitter',
                                           'link' => 'http://www.twitter.com',
-                                          'image' => $this->social_icon_url . '/08-full-symbol-grey/Twitter.png',
+                                          'image' => $this->social_icon_url . '/12-official-white/X.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Twitter',
@@ -376,7 +376,7 @@ class Phone {
                                           'type' => 'socialIcon',
                                           'iconType' => 'pinterest',
                                           'link' => 'http://www.pinterest.com',
-                                          'image' => $this->social_icon_url . '/08-full-symbol-grey/Pinterest.png',
+                                          'image' => $this->social_icon_url . '/12-official-white/Pinterest.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Pinterest',
@@ -386,7 +386,7 @@ class Phone {
                                           'type' => 'socialIcon',
                                           'iconType' => 'linkedin',
                                           'link' => 'http://www.linkedin.com',
-                                          'image' => $this->social_icon_url . '/08-full-symbol-grey/LinkedIn.png',
+                                          'image' => $this->social_icon_url . '/12-official-white/Linkedin.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'LinkedIn',
@@ -416,8 +416,8 @@ class Phone {
                               0 =>
                                  [
                                   'type' => 'text',
-                                  'text' => '<p style="text-align: right; font-size: 11px;"><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a></p>
-<p style="text-align: right; font-size: 11px;"><a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a></p>',
+                                  'text' => '<p style="text-align: right; font-size: 11px;"><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a></p>
+<p style="text-align: right; font-size: 11px;"><a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a></p>',
                                  ],
                              ],
                          ],
@@ -630,7 +630,7 @@ class Phone {
              ],
           'footer' =>
              [
-              'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+              'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
               'styles' =>
                  [
                   'block' =>
@@ -716,7 +716,7 @@ class Phone {
              ],
           'social' =>
              [
-              'iconSet' => 'default',
+              'iconSet' => 'official',
               'icons' =>
                  [
                   0 =>
@@ -724,7 +724,7 @@ class Phone {
                       'type' => 'socialIcon',
                       'iconType' => 'facebook',
                       'link' => 'http://www.facebook.com',
-                      'image' => $this->social_icon_url . '/01-social/Facebook.png',
+                      'image' => $this->social_icon_url . '/11-official/Facebook.png',
                       'height' => '32px',
                       'width' => '32px',
                       'text' => 'Facebook',
@@ -734,7 +734,7 @@ class Phone {
                       'type' => 'socialIcon',
                       'iconType' => 'twitter',
                       'link' => 'http://www.twitter.com',
-                      'image' => $this->social_icon_url . '/01-social/Twitter.png',
+                      'image' => $this->social_icon_url . '/11-official/X.png',
                       'height' => '32px',
                       'width' => '32px',
                       'text' => 'Twitter',
@@ -754,7 +754,7 @@ class Phone {
              ],
           'header' =>
              [
-              'text' => '<a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a>',
+              'text' => '<a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a>',
               'styles' =>
                  [
                   'block' =>
@@ -778,6 +778,4 @@ class Phone {
          ],
     ];
   }
-
-
 }

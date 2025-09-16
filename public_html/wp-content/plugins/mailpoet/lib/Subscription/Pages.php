@@ -14,6 +14,7 @@ use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Form\AssetsController;
 use MailPoet\Newsletter\Scheduler\WelcomeScheduler;
 use MailPoet\Newsletter\Sending\SendingQueuesRepository;
+use MailPoet\Settings\Pages as SettingsPages;
 use MailPoet\Settings\TrackingConfig;
 use MailPoet\Statistics\StatisticsClicksRepository;
 use MailPoet\Statistics\Track\SubscriberHandler;
@@ -30,7 +31,6 @@ use MailPoetVendor\Doctrine\ORM\EntityManager;
 
 class Pages {
   const DEMO_EMAIL = 'demo@mailpoet.com';
-  const ACTION_CAPTCHA = 'captcha';
   const ACTION_CONFIRM = 'confirm';
   const ACTION_CONFIRM_UNSUBSCRIBE = 'confirm_unsubscribe';
   const ACTION_MANAGE = 'manage';
@@ -46,9 +46,6 @@ class Pages {
 
   /** @var WPFunctions */
   private $wp;
-
-  /** @var CaptchaFormRenderer */
-  private $captchaRenderer;
 
   /** @var WelcomeScheduler */
   private $welcomeScheduler;
@@ -101,7 +98,6 @@ class Pages {
   public function __construct(
     NewSubscriberNotificationMailer $newSubscriberNotificationSender,
     WPFunctions $wp,
-    CaptchaFormRenderer $captchaRenderer,
     WelcomeScheduler $welcomeScheduler,
     LinkTokens $linkTokens,
     SubscriptionUrlFactory $subscriptionUrlFactory,
@@ -121,7 +117,6 @@ class Pages {
   ) {
     $this->wp = $wp;
     $this->newSubscriberNotificationSender = $newSubscriberNotificationSender;
-    $this->captchaRenderer = $captchaRenderer;
     $this->welcomeScheduler = $welcomeScheduler;
     $this->linkTokens = $linkTokens;
     $this->subscriptionUrlFactory = $subscriptionUrlFactory;
@@ -154,10 +149,10 @@ class Pages {
   }
 
   public function initPageFilters() {
-    $this->wp->addFilter('wp_title', [$this,'setWindowTitle'], 10, 3);
-    $this->wp->addFilter('document_title_parts', [$this,'setWindowTitleParts'], 10, 1);
-    $this->wp->addFilter('the_title', [$this,'setPageTitle'], 10, 1);
-    $this->wp->addFilter('the_content', [$this,'setPageContent'], 10, 1);
+    $this->wp->addFilter('wp_title', [$this, 'setWindowTitle'], 10, 3);
+    $this->wp->addFilter('document_title_parts', [$this, 'setWindowTitleParts'], 10, 1);
+    $this->wp->addFilter('the_title', [$this, 'setPageTitle'], 10, 1);
+    $this->wp->addFilter('the_content', [$this, 'setPageContent'], 10, 1);
     $this->wp->removeAction('wp_head', 'noindex', 1);
     $this->wp->addAction('wp_head', [$this, 'setMetaRobots'], 1);
   }
@@ -197,8 +192,8 @@ class Pages {
 
     $this->subscriber->setStatus(SubscriberEntity::STATUS_SUBSCRIBED);
     $this->subscriber->setConfirmedIp(Helpers::getIP());
-    $this->subscriber->setConfirmedAt(Carbon::createFromTimestamp($this->wp->currentTime('timestamp')));
-    $this->subscriber->setLastSubscribedAt(Carbon::createFromTimestamp($this->wp->currentTime('timestamp')));
+    $this->subscriber->setConfirmedAt(Carbon::now()->millisecond(0));
+    $this->subscriber->setLastSubscribedAt(Carbon::now()->millisecond(0));
     $this->subscriber->setUnconfirmedData(null);
 
     try {
@@ -286,20 +281,17 @@ class Pages {
     if (
       (!isset($post))
       ||
-      ($post->post_title !== __('MailPoet Page', 'mailpoet')) // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+      ($post->post_title !== SettingsPages::PAGE_TITLE && $post->post_title !== __('MailPoet Page', 'mailpoet')) // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
       ||
       ($pageTitle !== $this->wp->singlePostTitle('', false))
     ) {
       // when it's a custom page, just return the original page title
       return $pageTitle;
-    } elseif ($this->action !== self::ACTION_CAPTCHA && $this->isPreview() === false && $this->subscriber === null) {
+    } elseif ($this->isPreview() === false && $this->subscriber === null) {
       return __("Hmmm... we don't have a record of you.", 'mailpoet');
     } else {
       // when it's our own page, generate page title based on requested action
       switch ($this->action) {
-        case self::ACTION_CAPTCHA:
-          return $this->captchaRenderer->getCaptchaPageTitle();
-
         case self::ACTION_CONFIRM:
           return $this->getConfirmTitle();
 
@@ -319,8 +311,7 @@ class Pages {
   }
 
   public function setPageContent($pageContent = '[mailpoet_page]') {
-    // if we're not in preview mode or captcha page and the subscriber does not exist
-    if ($this->action !== self::ACTION_CAPTCHA && $this->isPreview() === false && $this->subscriber === null) {
+    if ($this->isPreview() === false && $this->subscriber === null) {
       return __("Your email address doesn't appear in our lists anymore. Sign up again or contact us if this appears to be a mistake.", 'mailpoet');
     }
 
@@ -330,11 +321,6 @@ class Pages {
       $content = '';
 
       switch ($this->action) {
-        case self::ACTION_CAPTCHA:
-
-          $captchaSessionId = isset($this->data['captcha_session_id']) ? $this->data['captcha_session_id'] : null;
-          $content = $this->captchaRenderer->getCaptchaPageContent($captchaSessionId);
-          break;
         case self::ACTION_CONFIRM:
           $content = $this->getConfirmContent();
           break;
@@ -452,7 +438,7 @@ class Pages {
   private function getUnsubscribeContent() {
     $content = '';
     if ($this->isPreview() || $this->subscriber !== null) {
-      $content .= '<p>' . __('Accidentally unsubscribed?', 'mailpoet') . ' <strong>';
+      $content .= '<p class="mailpoet_unsubscribed_content">' . __('Accidentally unsubscribed?', 'mailpoet') . ' <strong>';
       $content .= '[mailpoet_manage]';
       $content .= '</strong></p>';
     }
@@ -473,13 +459,14 @@ class Pages {
     }
     $queueId = isset($this->data['queueId']) ? (int)$this->data['queueId'] : null;
     $unsubscribeUrl = $this->subscriptionUrlFactory->getUnsubscribeUrl($this->subscriber, $queueId);
+    $unsubscribeUrl = $unsubscribeUrl . (parse_url($unsubscribeUrl, PHP_URL_QUERY) ? '&' : '?') . 'request_method=POST';
     $templateData = [
       'unsubscribeUrl' => $unsubscribeUrl,
     ];
     return $this->wp->applyFilters(
       'mailpoet_unsubscribe_confirmation_page',
       $this->templateRenderer->render('subscription/confirm_unsubscribe.html', $templateData),
-      $unsubscribeUrl
+      $this->addTypeParamToUnsubscribeUrl($unsubscribeUrl)
     );
   }
 
@@ -491,11 +478,9 @@ class Pages {
     if (!$subscriber instanceof SubscriberEntity) return __('Link to subscription management page is only available to mailing lists subscribers.', 'mailpoet');
 
     // get label or display default label
-    $text = (
-      isset($params['text'])
-      ? htmlspecialchars($params['text'])
-      : __('Manage your subscription', 'mailpoet')
-    );
+    $text = isset($params['text'])
+      ? htmlspecialchars($params['text'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401)
+      : __('Manage your subscription', 'mailpoet');
 
     return '<a href="' . $this->subscriptionUrlFactory->getManageUrl($subscriber) . '">' . $text . '</a>';
   }
@@ -521,5 +506,13 @@ class Pages {
       );
       $this->statisticsClicksRepository->flush();
     }
+  }
+
+  private function addTypeParamToUnsubscribeUrl(string $unsubscribeUrl): string {
+    if (empty($unsubscribeUrl)) {
+        return $unsubscribeUrl;
+    }
+    // using the same value as mailpoet/views/subscription/confirm_unsubscribe.html#4
+    return $this->wp->addQueryArg('type', 'confirmation', $unsubscribeUrl);
   }
 }

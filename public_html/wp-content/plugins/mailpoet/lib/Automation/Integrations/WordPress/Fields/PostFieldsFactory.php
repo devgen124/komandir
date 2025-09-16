@@ -220,7 +220,8 @@ class PostFieldsFactory {
           'name' => $status,
         ];
       },
-      $statuses, array_keys($statuses)
+      $statuses,
+      array_keys($statuses)
     ));
   }
 
@@ -237,8 +238,9 @@ class PostFieldsFactory {
       array_filter(
         $postTypes,
         function(\WP_Post_Type $type): bool {
-          return $type->public;
-        })
+          return (bool)$type->public;
+        }
+      )
     ));
   }
 }

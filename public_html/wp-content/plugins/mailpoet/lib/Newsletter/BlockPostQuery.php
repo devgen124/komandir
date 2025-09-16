@@ -20,7 +20,8 @@ class BlockPostQuery {
    *     search?: string,
    *     sortBy?: 'newest' | 'DESC' | 'ASC',
    *     terms?: array{'taxonomy': string, 'id': int}[],
-   *     inclusionType?: 'include'|'exclude'
+   *     inclusionType?: 'include'|'exclude',
+   *     excludeOutOfStock?: bool,
    * } $args
    */
   public $args = [];
@@ -32,7 +33,7 @@ class BlockPostQuery {
   public $newsletterId = false;
 
   /***
-   * Translates to \WP_Query::date_query => array{'column': 'post_date', 'after': date string}
+   * Translates to \WP_Query::date_query => array{'column': 'post_date_gmt', 'after': date string}
    *
    * @var bool|DateTimeInterface|null
    */
@@ -46,6 +47,9 @@ class BlockPostQuery {
    */
   public $dynamic = true;
 
+  /** @var int[] product IDs to include */
+  public $includeProductIds = [];
+
   /**
    * @param array{
    *    args?: array{
@@ -57,12 +61,14 @@ class BlockPostQuery {
    *     search?: string,
    *     sortBy?: 'newest' | 'DESC' | 'ASC',
    *     terms?: array{'taxonomy': string, 'id': int}[],
-   *     inclusionType?: 'include'|'exclude'
+   *     inclusionType?: 'include'|'exclude',
+   *     excludeOutOfStock?: bool,
    *    },
    *    postsToExclude?: int[],
    *    newsletterId?: int|false|null,
    *    newerThanTimestamp?: bool|DateTimeInterface|null,
    *    dynamic?: bool,
+   *    includeProductIds?: int[],
    * } $query
    * @return void
    */
@@ -74,6 +80,7 @@ class BlockPostQuery {
     $this->newsletterId = $query['newsletterId'] ?? false;
     $this->newerThanTimestamp = $query['newerThanTimestamp'] ?? false;
     $this->dynamic = $query['dynamic'] ?? true;
+    $this->includeProductIds = $query['includeProductIds'] ?? [];
   }
 
   public function getPostType(): string {
@@ -159,6 +166,12 @@ class BlockPostQuery {
       $parameters['post__not_in'] = $this->postsToExclude;
     }
 
+    // If specific product IDs are provided, override post__in
+    if (!empty($this->includeProductIds)) {
+      $parameters['post__in'] = $this->includeProductIds;
+      // Keep the posts_per_page limit to ensure we don't return too many products
+    }
+
     // WP posts with the type attachment have always post_status `inherit`
     if ($parameters['post_type'] === 'attachment' && $parameters['post_status'] === 'publish') {
       $parameters['post_status'] = 'inherit';
@@ -171,10 +184,13 @@ class BlockPostQuery {
     $parameters['suppress_filters'] = false;
 
     if ($this->newerThanTimestamp instanceof DateTimeInterface) {
+      //Ensure UTC timezone
+      $after = new \DateTime('now', new \DateTimeZone('UTC'));
+      $after->setTimestamp($this->newerThanTimestamp->getTimestamp());
       $parameters['date_query'] = [
         [
-          'column' => 'post_date',
-          'after' => $this->newerThanTimestamp->format('Y-m-d H:i:s'),
+          'column' => 'post_date_gmt',
+          'after' => $after->format('Y-m-d H:i:s'),
         ],
       ];
     }

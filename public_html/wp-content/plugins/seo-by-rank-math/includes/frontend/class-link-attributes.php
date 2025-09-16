@@ -111,7 +111,12 @@ class Link_Attributes {
 	 * @return string
 	 */
 	public function add_link_attributes( $content ) {
-		preg_match_all( '/<(a\s[^>]+)>/', $content, $matches );
+		// Early bail if content is empty.
+		if ( empty( $content ) ) {
+			return $content;
+		}
+		$stripped_content = preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', $content );
+		preg_match_all( '/<(a\s[^>]+)>/', $stripped_content, $matches );
 		if ( empty( $matches ) || empty( $matches[0] ) ) {
 			return $content;
 		}
@@ -225,7 +230,7 @@ class Link_Attributes {
 			}
 		}
 
-		if ( $this->new_window_link && ! isset( $attrs['target'] ) ) {
+		if ( $this->new_window_link && ! isset( $attrs['target'] ) && $this->do_filter( 'target_blank/domain', Url::get_domain( $attrs['href'] ) ) ) {
 			$this->is_dirty  = true;
 			$attrs['target'] = '_blank';
 		}
@@ -291,7 +296,7 @@ class Link_Attributes {
 
 		// Strip off www. prefixes.
 		$domains = array_map(
-			function( $domain ) {
+			function ( $domain ) {
 				$domain = preg_replace( '#^http(s)?://#', '', trim( $domain, '/' ) );
 				return preg_replace( '/^www\./', '', $domain );
 			},

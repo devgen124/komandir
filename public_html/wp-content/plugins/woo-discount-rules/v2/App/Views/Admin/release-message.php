@@ -14,10 +14,10 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
     </div>
     <div>
         <div style="font-weight: 600;">
-            <?php _e('Heads up, Please backup before upgrade!','woo-discount-rules'); ?>
+            <?php esc_html_e('Heads up, Please backup before upgrade!','woo-discount-rules'); ?>
         </div>
         <div style=" margin: 10px;">
-            <?php _e('The latest update includes some substantial changes across different areas of the plugin. We highly recommend you backup your site before upgrading, and make sure you first update in a staging environment','woo-discount-rules'); ?>
+            <?php esc_html_e('The latest update includes some substantial changes across different areas of the plugin. We highly recommend you backup your site before upgrading, and make sure you first update in a staging environment','woo-discount-rules'); ?>
         </div>
     </div>
 </div>

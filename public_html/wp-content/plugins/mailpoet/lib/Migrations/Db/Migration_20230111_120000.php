@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) exit;
 use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SettingEntity;
 use MailPoet\Migrator\DbMigration;
-use MailPoetVendor\Doctrine\DBAL\Connection;
+use MailPoetVendor\Doctrine\DBAL\ArrayParameterType;
 
 class Migration_20230111_120000 extends DbMigration {
   public function run(): void {
@@ -28,8 +28,7 @@ class Migration_20230111_120000 extends DbMigration {
     $subscriptionSetting = $this->connection->fetchOne("
       SELECT value
       FROM {$settingsTable}
-      WHERE name = ?", ['subscription']
-    );
+      WHERE name = ?", ['subscription']);
     $subscriptionSetting = is_string($subscriptionSetting) ? unserialize($subscriptionSetting) : [];
     $subscriptionSetting = is_array($subscriptionSetting) ? $subscriptionSetting : [];
     $segmentIds = $subscriptionSetting['segments'] ?? [];
@@ -39,10 +38,11 @@ class Migration_20230111_120000 extends DbMigration {
         UPDATE {$segmentsTable}
         SET {$columnName} = 1
         WHERE id IN (?)
-      ", [$segmentIds], [Connection::PARAM_INT_ARRAY]);
+      ", [$segmentIds], [ArrayParameterType::INTEGER]);
 
       $subscriptionSetting['segments'] = [];
-      $this->connection->executeStatement("
+      $this->connection->executeStatement(
+        "
         UPDATE {$settingsTable}
         SET value = ?
         WHERE name = ?",

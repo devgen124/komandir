@@ -15,7 +15,7 @@ class NotCompromisedPasswordValidator extends ConstraintValidator
  private $charset;
  private $enabled;
  private $endpoint;
- public function __construct(HttpClientInterface $httpClient = null, string $charset = 'UTF-8', bool $enabled = \true, string $endpoint = null)
+ public function __construct(?HttpClientInterface $httpClient = null, string $charset = 'UTF-8', bool $enabled = \true, ?string $endpoint = null)
  {
  if (null === $httpClient && !\class_exists(HttpClient::class)) {
  throw new \LogicException(\sprintf('The "%s" class requires the "HttpClient" component. Try running "composer require symfony/http-client".', self::class));
@@ -55,6 +55,9 @@ class NotCompromisedPasswordValidator extends ConstraintValidator
  throw $e;
  }
  foreach (\explode("\r\n", $result) as $line) {
+ if (!\str_contains($line, ':')) {
+ continue;
+ }
  [$hashSuffix, $count] = \explode(':', $line);
  if ($hashPrefix . $hashSuffix === $hash && $constraint->threshold <= (int) $count) {
  $this->context->buildViolation($constraint->message)->setCode(NotCompromisedPassword::COMPROMISED_PASSWORD_ERROR)->addViolation();

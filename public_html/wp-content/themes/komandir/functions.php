@@ -114,6 +114,7 @@ add_action( 'after_setup_theme', 'komandir_setup' );
 function komandir_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'komandir_content_width', 640 );
 }
+
 add_action( 'after_setup_theme', 'komandir_content_width', 0 );
 
 /**
@@ -134,6 +135,7 @@ function komandir_widgets_init() {
 		)
 	);
 }
+
 add_action( 'widgets_init', 'komandir_widgets_init' );
 
 /**
@@ -147,21 +149,21 @@ function komandir_scripts() {
 	wp_enqueue_style( 'komandir-custom-style', get_template_directory_uri() . '/assets/css/style.css', _S_VERSION );
 
 	// jQuery
-	wp_deregister_script('jquery');
-	wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/vendor/js/jquery-3.6.0.min.js', array(), '3.6.0');
+	wp_deregister_script( 'jquery' );
+	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/assets/vendor/js/jquery-3.6.0.min.js', array(), '3.6.0' );
 
-  // magnific popup
+	// magnific popup
 
-  wp_enqueue_style( 'magnific-popup', get_template_directory_uri() . '/assets/vendor/css/magnific-popup.css', _S_VERSION );
-  wp_enqueue_script('magnific-popup', get_template_directory_uri() . '/assets/vendor/js/jquery.magnific-popup.min.js', array( 'jquery' ), _S_VERSION, true);
+	wp_enqueue_style( 'magnific-popup', get_template_directory_uri() . '/assets/vendor/css/magnific-popup.css', _S_VERSION );
+	wp_enqueue_script( 'magnific-popup', get_template_directory_uri() . '/assets/vendor/js/jquery.magnific-popup.min.js', array( 'jquery' ), _S_VERSION, true );
 
 	// custom script
 
-	wp_enqueue_script('komandir-script', get_template_directory_uri() . '/assets/js/script.js', array( 'jquery' ), _S_VERSION, true);
+	wp_enqueue_script( 'komandir-script', get_template_directory_uri() . '/assets/js/script.js', array( 'jquery' ), _S_VERSION, true );
 	wp_localize_script( 'komandir-script', 'dataObj', [
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
-		'nonce' => wp_create_nonce( 'komandir-nonce' )
-	]);
+		'nonce'   => wp_create_nonce( 'komandir-nonce' )
+	] );
 
 	// wp_enqueue_script( 'komandir-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
@@ -171,10 +173,11 @@ function komandir_scripts() {
 
 	// яндекс карты
 
-	if (is_page_template('shops.php')) {
-		wp_enqueue_script( 'yandex-maps', 'https://api-maps.yandex.ru/2.1/?apikey=83d10a3a-1811-4704-889b-1cfaf129615f&load=Map,Placemark&lang=ru_RU', array( 'jquery' ), _S_VERSION);
+	if ( is_page_template( 'shops.php' ) ) {
+		wp_enqueue_script( 'yandex-maps', 'https://api-maps.yandex.ru/2.1/?apikey=83d10a3a-1811-4704-889b-1cfaf129615f&load=Map,Placemark&lang=ru_RU', array( 'jquery' ), _S_VERSION );
 	}
 }
+
 add_action( 'wp_enqueue_scripts', 'komandir_scripts', 100 );
 
 /**
@@ -209,20 +212,20 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  */
 
 if ( class_exists( 'WooCommerce' ) ) {
-	require_once(get_template_directory() . '/woo-functions.php');
-    require_once(get_template_directory() . '/popup.php');
+	require_once( get_template_directory() . '/woo-functions.php' );
+	require_once( get_template_directory() . '/popup.php' );
 }
 
 /**
  * Mailpoet Customization
  */
 
-add_filter( 'mailpoet_manage_subscription_page_form_fields', 'komandir_remove_manage_fields', 10);
+add_filter( 'mailpoet_manage_subscription_page_form_fields', 'komandir_remove_manage_fields', 10 );
 function komandir_remove_manage_fields( $form ) {
 
-	unset($form[0]); // First Name
-	unset($form[1]); // Last Name
-    unset($form[3]); // Subscribe List
+	unset( $form[0] ); // First Name
+	unset( $form[1] ); // Last Name
+	unset( $form[3] ); // Subscribe List
 
 	return $form;
 }
@@ -230,29 +233,101 @@ function komandir_remove_manage_fields( $form ) {
 require 'helpers/svg-helper.php';
 
 $svg = new SVGHelper();
-$svg->init_sprite(get_template_directory_uri().'/assets/images/sprite.svg');
+$svg->init_sprite( get_template_directory_uri() . '/assets/images/sprite.svg' );
 
 // функция подбора окончания для количественного существительного
 
-function format_quantity_ending ($number, $nouns_array) {
+function format_quantity_ending( $number, $nouns_array ) {
 	$remainder = $number % 10;
-	if ($remainder === 1) {
+	if ( $remainder === 1 ) {
 		return "$number $nouns_array[0]";
-	} elseif ($remainder > 1 && $remainder < 5) {
+	} elseif ( $remainder > 1 && $remainder < 5 ) {
 		return "$number $nouns_array[1]";
 	} else {
 		return "$number $nouns_array[2]";
 	}
 }
 
-add_filter( 'wpcf7_spam', function( $spam ) {
+add_filter( 'wpcf7_spam', function ( $spam ) {
 	if ( $spam ) {
-	  return $spam;
+		return $spam;
 	}
 
 	if ( isset( $_POST['consult-phone'] ) && ! preg_match( '/\+7 \d{3} \d{3} \d{2} \d{2}/', $_POST['consult-phone'] ) ) {
-	  $spam = true;
+		$spam = true;
 	}
 
 	return $spam;
+}, 10, 1 );
+
+// Подписка в MailPoet ТОЛЬКО для одной формы CF7
+add_action( 'wpcf7_before_send_mail', function ( $contact_form ) {
+	// === НАСТРОЙКИ ===
+	$TARGET_FORM_ID   = "71e4e54";   // ID формы CF7
+	$MAILPOET_LIST_ID = 2;     // ID списка MailPoet "Клиенты WooCommerce"
+	$EMAIL_FIELD_NAME = 'subscribe-email';
+
+	// Обрабатываем только нужную форму
+	if ( $contact_form->id() !== $TARGET_FORM_ID ) {
+		return;
+	}
+
+	// Достаём данные отправки
+	$submission = WPCF7_Submission::get_instance();
+	if ( ! $submission ) {
+		return;
+	}
+
+	$data = $submission->get_posted_data();
+	if ( empty( $data[ $EMAIL_FIELD_NAME ] ) ) {
+		return;
+	}
+
+	$email = sanitize_email( $data[ $EMAIL_FIELD_NAME ] );
+	if ( ! is_email( $email ) ) {
+		return;
+	}
+
+	// (опционально) если есть чекбокс согласия, например [acceptance* agree], отменять подписку без него:
+	// if (empty($data['agree'])) { return; }
+
+	// Статус подписки:
+	// - 'unconfirmed' — если используешь Double Opt-in (рекомендуется)
+	// - 'subscribed'  — если хочешь сразу активную подписку без подтверждения
+	$status = 'unconfirmed';
+
+	// Подготовка данных подписчика
+	$subscriber_data = [
+		'email'  => $email,
+		'status' => $status,
+		'lists'  => [ (int) $MAILPOET_LIST_ID ],
+		// Можно добавить имя, если есть поле в форме:
+		// 'first_name' => !empty($data['your-name']) ? sanitize_text_field($data['your-name']) : '',
+		// Теги источника — удобно для сегментации:
+		// 'tags' => ['CF7', 'site-footer']
+	];
+
+	// Работаем через MailPoet API (v1 совместим с MailPoet 4.x)
+	try {
+		$api = \MailPoet\API\API::MP( 'v1' );
+
+		// Пытаемся создать подписчика (и сразу добавить в список).
+		$api->addSubscriber( $subscriber_data );
+
+	} catch ( \Exception $e ) {
+		// Если подписчик уже существует — добавим его в список (на всякий случай)
+		try {
+			$api      = \MailPoet\API\API::MP( 'v1' );
+			$existing = $api->getSubscriber( $email );
+			if ( ! empty( $existing['id'] ) ) {
+				// Подпишем в нужный список (без дублей)
+				$api->subscribeToList( $email, (int) $MAILPOET_LIST_ID );
+				// Обновим статус, если хочется перевести в 'unconfirmed' / 'subscribed'
+				// $api->updateSubscriber($existing['id'], ['status' => $status]);
+			}
+		} catch ( \Exception $e2 ) {
+			// На проде лучше писать в лог
+			error_log( 'MailPoet subscribe error: ' . $e2->getMessage() );
+		}
+	}
 }, 10, 1 );

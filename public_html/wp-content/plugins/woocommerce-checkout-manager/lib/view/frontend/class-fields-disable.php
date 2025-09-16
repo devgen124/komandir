@@ -10,7 +10,7 @@ class Fields_Disable {
 	protected static $_instance;
 
 	public function __construct() {
-		// Fix country
+		// // Fix country
 		add_filter( 'wooccm_checkout_field_filter', array( $this, 'fix_country' ) );
 		// Fix email
 		// make sure guest users include their email in order to download products
@@ -43,6 +43,42 @@ class Fields_Disable {
 			$field['class'] = array( 'wooccm-type-hidden' );
 		}
 
+		if ( 'state' == $field['type'] && true != $field['required'] ) {
+			$field['disabled'] = false;
+			$field['required'] = false;
+			$field['class']    = array( 'wooccm-type-hidden' );
+		} elseif ( 'state' == $field['type'] && true == $field['required'] ) {
+
+			$is_woocommerce_process_checkout_nonce = isset( $_POST['woocommerce-process-checkout-nonce'] ) && wp_verify_nonce( wc_clean( wp_unslash( $_POST['woocommerce-process-checkout-nonce'] ) ), 'woocommerce-process_checkout' );
+
+			$is_woocommerce_edit_address_nonce = isset( $_POST['woocommerce-edit-address-nonce'] ) && wp_verify_nonce( wc_clean( wp_unslash( $_POST['woocommerce-edit-address-nonce'] ) ), 'woocommerce-edit_address' );
+
+			if ( ! $is_woocommerce_process_checkout_nonce && ! $is_woocommerce_edit_address_nonce ) {
+				return $field;
+			}
+
+			$form = ( 'billing_state' === $field['key'] ) ? 'billing' : 'shipping';
+
+			$country = isset( $_POST[ $form . '_country' ] ) ? wc_clean( wp_unslash( $_POST[ $form . '_country' ] ) ) : '';
+
+			if ( ! empty( $country ) ) {
+				$countries_data = \Automattic\WooCommerce\Blocks\Utils\CartCheckoutUtils::get_country_data();
+
+				$state_required = isset( $countries_data[ $country ]['locale']['state']['required'] ) ? $countries_data[ $country ]['locale']['state']['required'] : true;
+
+				if ( $state_required ) {
+					$field['required']                           = true;
+					$field['custom_attributes']['data-required'] = (int) 1;
+					$field['input_class'][]                      = 'wooccm-required-field';
+
+				} else {
+					$field['required']                           = false;
+					$field['custom_attributes']['data-required'] = (int) 0;
+					$key = array_search( 'wooccm-required-field', $field['input_class'] ?? array(), true );
+					unset( $field['input_class'][ $key ] );
+				}
+			}
+		}
 		return $field;
 	}
 

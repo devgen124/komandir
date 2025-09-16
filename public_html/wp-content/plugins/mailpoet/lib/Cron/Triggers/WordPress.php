@@ -8,7 +8,6 @@ if (!defined('ABSPATH')) exit;
 use MailPoet\Config\ServicesChecker;
 use MailPoet\Cron\CronHelper;
 use MailPoet\Cron\Supervisor;
-use MailPoet\Cron\Workers\Beamer as BeamerWorker;
 use MailPoet\Cron\Workers\Bounce as BounceWorker;
 use MailPoet\Cron\Workers\KeyCheck\PremiumKeyCheck as PremiumKeyCheckWorker;
 use MailPoet\Cron\Workers\KeyCheck\SendingServiceKeyCheck as SendingServiceKeyCheckWorker;
@@ -21,6 +20,7 @@ use MailPoet\Mailer\MailerLog;
 use MailPoet\Newsletter\Sending\ScheduledTasksRepository;
 use MailPoet\Services\Bridge;
 use MailPoet\Settings\SettingsController;
+use MailPoet\Util\Helpers;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 
@@ -73,16 +73,24 @@ class WordPress {
   }
 
   public function run() {
-    if (!$this->checkRunInterval()) {
-      return false;
-    }
-    if (!$this->checkExecutionRequirements()) {
-      $this->stop();
-      return;
-    }
+    try {
+      if (!$this->checkRunInterval()) {
+        return false;
+      }
+      if (!$this->checkExecutionRequirements()) {
+        $this->stop();
+        return;
+      }
 
-    $this->supervisor->init();
-    return $this->supervisor->checkDaemon();
+      $this->supervisor->init();
+      return $this->supervisor->checkDaemon();
+    } catch (\Exception $e) {
+      $mySqlGoneAwayMessage = Helpers::mySqlGoneAwayExceptionHandler($e);
+      if ($mySqlGoneAwayMessage) {
+        throw new \Exception($mySqlGoneAwayMessage, 0, $e);
+      }
+      throw $e;
+    }
   }
 
   private function checkRunInterval(): bool {
@@ -105,6 +113,12 @@ class WordPress {
   }
 
   public function checkExecutionRequirements(): bool {
+    if ($this->wp->wpIsMaintenanceMode()) {
+      // Skip if WP is currently in maintenance mode
+      // The maintenance mode is activated when WP core or a plugin update is in progress
+      return false;
+    }
+
     $this->loadTasksCounts();
 
     // Because a lot of workers has the same pattern for check if it's active we can use a loop here
@@ -127,7 +141,6 @@ class WordPress {
       || $this->isSendingServiceKeyCheckActive()
       || $this->isPremiumKeyCheckActive()
       || $this->isSubscriberStatsReportActive()
-      || $this->isBeamerCheckActive()
       || $isSimpleWorkerActive
     );
   }
@@ -213,21 +226,6 @@ class WordPress {
     return ($validAccountKey && ($statsReportDueTasks || !$statsReportFutureTasks));
   }
 
-  private function isBeamerCheckActive(): bool {
-    $beamerDueChecks = $this->getTasksCount([
-      'type' => BeamerWorker::TASK_TYPE,
-      'scheduled_in' => [self::SCHEDULED_IN_THE_PAST],
-      'status' => ['null', ScheduledTaskEntity::STATUS_SCHEDULED],
-    ]);
-    $beamerFutureChecks = $this->getTasksCount([
-      'type' => BeamerWorker::TASK_TYPE,
-      'scheduled_in' => [self::SCHEDULED_IN_THE_FUTURE],
-      'status' => [ScheduledTaskEntity::STATUS_SCHEDULED],
-    ]);
-
-    return $beamerDueChecks || !$beamerFutureChecks;
-  }
-
   private function loadTasksCounts(): void {
     $scheduledTasksTableName = $this->entityManager->getClassMetadata(ScheduledTaskEntity::class)->getTableName();
     $sql = "
@@ -241,7 +239,7 @@ class WordPress {
       GROUP BY type, status, scheduled_in";
 
     $stmt = $this->entityManager->getConnection()->prepare($sql);
-    $stmt->bindValue('now', date('Y-m-d H:i:s', $this->wp->currentTime('timestamp')));
+    $stmt->bindValue('now', date('Y-m-d H:i:s', $this->wp->currentTime('timestamp', true)));
     $stmt->bindValue('past', self::SCHEDULED_IN_THE_PAST);
     $stmt->bindValue('future', self::SCHEDULED_IN_THE_FUTURE);
     $stmt->bindValue('statusCompleted', ScheduledTaskEntity::STATUS_COMPLETED);

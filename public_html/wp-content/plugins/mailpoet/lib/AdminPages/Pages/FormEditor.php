@@ -276,6 +276,8 @@ class FormEditor {
       'product_categories' => $this->wpPostListLoader->getWooCommerceCategories(),
       'product_tags' => $this->wpPostListLoader->getWooCommerceTags(),
       'is_administrator' => $this->wp->currentUserCan('administrator'),
+      'theme_support_widgets' => $this->wp->wpGetThemeSupport('widgets'),
+      'theme_support_fse' => $this->wp->wpGetTheme()->is_block_theme(),
     ];
     $this->wp->wpEnqueueMedia();
     $this->assetsController->setupFormEditorDependencies();
@@ -303,7 +305,7 @@ class FormEditor {
   }
 
   private function getPreviewPageUrl() {
-    $mailpoetPage = Pages::getDefaultMailPoetPage();
+    $mailpoetPage = Pages::getMailPoetPage(Pages::PAGE_SUBSCRIPTIONS);
     if (!$mailpoetPage) {
       return null;
     }
@@ -344,7 +346,7 @@ class FormEditor {
 
     $translations = [];
     foreach ($translationsToLoad as $translation) {
-      $file = WP_LANG_DIR . '/' . $locale . '-' . md5( $translation ) . '.json';
+      $file = WP_LANG_DIR . '/' . $locale . '-' . md5($translation) . '.json';
       if (!file_exists($file)) {
         continue;
       }

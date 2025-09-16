@@ -6,8 +6,14 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'libphonenumber\\' => array($vendorDir . '/giggsey/libphonenumber-for-php/src'),
-    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
-    'Giggsey\\Locale\\' => array($vendorDir . '/giggsey/locale/src'),
+    'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'ParagonIE\\Paseto\\' => array($vendorDir . '/paragonie/paseto/src'),
+    'ParagonIE\\Paserk\\' => array($vendorDir . '/paragonie/paserk/src'),
+    'ParagonIE\\HiddenString\\' => array($vendorDir . '/paragonie/hidden-string/src'),
+    'ParagonIE\\EasyECC\\' => array($vendorDir . '/paragonie/easy-ecc/src'),
+    'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
+    'Mdanter\\Ecc\\' => array($vendorDir . '/paragonie/ecc/src'),
+    'FG\\' => array($vendorDir . '/genkgo/php-asn1/lib'),
+    'Defuse\\Crypto\\' => array($vendorDir . '/defuse/php-encryption/src'),
     'Cdek\\' => array($baseDir . '/src'),
 );

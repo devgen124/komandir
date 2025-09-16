@@ -4,14 +4,15 @@ namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
 
-use MailPoet\WP\Functions as WPFunctions;
 
 class Sunglasses {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/sunglasses';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -31,7 +32,7 @@ class Sunglasses {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
          [
           'type' => 'container',
@@ -612,7 +613,7 @@ class Sunglasses {
                               0 =>
                                  [
                                   'type' => 'social',
-                                  'iconSet' => 'full-symbol-black',
+                                  'iconSet' => 'official',
                                   'icons' =>
                                      [
                                       0 =>
@@ -620,7 +621,7 @@ class Sunglasses {
                                           'type' => 'socialIcon',
                                           'iconType' => 'facebook',
                                           'link' => 'http://www.facebook.com',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Facebook.png',
+                                          'image' => $this->social_icon_url . '/11-official/Facebook.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Facebook',
@@ -630,7 +631,7 @@ class Sunglasses {
                                           'type' => 'socialIcon',
                                           'iconType' => 'twitter',
                                           'link' => 'http://www.twitter.com',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Twitter.png',
+                                          'image' => $this->social_icon_url . '/11-official/X.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Twitter',
@@ -640,7 +641,7 @@ class Sunglasses {
                                           'type' => 'socialIcon',
                                           'iconType' => 'instagram',
                                           'link' => 'http://instagram.com',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Instagram.png',
+                                          'image' => $this->social_icon_url . '/11-official/Instagram.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Instagram',
@@ -650,7 +651,7 @@ class Sunglasses {
                                           'type' => 'socialIcon',
                                           'iconType' => 'email',
                                           'link' => '',
-                                          'image' => $this->social_icon_url . '/07-full-symbol-black/Email.png',
+                                          'image' => $this->social_icon_url . '/11-official/Email.png',
                                           'height' => '32px',
                                           'width' => '32px',
                                           'text' => 'Email',
@@ -660,7 +661,7 @@ class Sunglasses {
                               1 =>
                                  [
                                   'type' => 'text',
-                                  'text' => '<p style="text-align: center; font-size: 11px;"><strong><span style="color: #808080;"><a href="[link:subscription_unsubscribe_url]" style="color: #808080;">'.__("Unsubscribe", 'mailpoet').'</a>&nbsp;|&nbsp;<a href="[link:subscription_manage_url]" style="color: #808080;">'.__("Manage your subscription", 'mailpoet').'</a></span></strong><br /><span style="color: #808080;">'.__("Add your postal address here!", 'mailpoet').'</span></p>',
+                                  'text' => '<p style="text-align: center; font-size: 11px;"><strong><span style="color: #808080;"><a href="[link:subscription_unsubscribe_url]" style="color: #808080;">' . __("Unsubscribe", 'mailpoet') . '</a>&nbsp;|&nbsp;<a href="[link:subscription_manage_url]" style="color: #808080;">' . __("Manage your subscription", 'mailpoet') . '</a></span></strong><br /><span style="color: #808080;">' . __("Add your postal address here!", 'mailpoet') . '</span></p>',
                                  ],
                              ],
                          ],
@@ -710,6 +711,4 @@ class Sunglasses {
          ],
     ];
   }
-
-
 }

@@ -15,11 +15,12 @@ use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\SubscriberSegmentEntity;
 use MailPoet\Entities\SubscriberTagEntity;
 use MailPoet\Entities\TagEntity;
+use MailPoet\Segments\SegmentsRepository;
 use MailPoet\Util\License\Features\Subscribers;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Carbon\Carbon;
-use MailPoetVendor\Carbon\CarbonImmutable;
-use MailPoetVendor\Doctrine\DBAL\Connection;
+use MailPoetVendor\Doctrine\DBAL\ArrayParameterType;
+use MailPoetVendor\Doctrine\DBAL\ParameterType;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 use MailPoetVendor\Doctrine\ORM\Query\Expr\Join;
 
@@ -41,14 +42,19 @@ class SubscribersRepository extends Repository {
   /** @var SubscriberChangesNotifier */
   private $changesNotifier;
 
+  /** @var SegmentsRepository */
+  private $segmentsRepository;
+
   public function __construct(
     EntityManager $entityManager,
     SubscriberChangesNotifier $changesNotifier,
-    WPFunctions $wp
+    WPFunctions $wp,
+    SegmentsRepository $segmentsRepository
   ) {
     $this->wp = $wp;
     parent::__construct($entityManager);
     $this->changesNotifier = $changesNotifier;
+    $this->segmentsRepository = $segmentsRepository;
   }
 
   protected function getEntityClassName() {
@@ -183,7 +189,7 @@ class SubscribersRepository extends Repository {
          WHERE scs.`subscriber_id` IN (:ids)
          AND s.`is_woocommerce_user` = false
          AND s.`wp_user_id` IS NULL
-      ", ['ids' => $ids], ['ids' => Connection::PARAM_INT_ARRAY]);
+      ", ['ids' => $ids], ['ids' => ArrayParameterType::INTEGER]);
 
       // Delete subscriber tags
       $subscriberTagTable = $entityManager->getClassMetadata(SubscriberTagEntity::class)->getTableName();
@@ -193,7 +199,7 @@ class SubscribersRepository extends Repository {
          WHERE st.`subscriber_id` IN (:ids)
          AND s.`is_woocommerce_user` = false
          AND s.`wp_user_id` IS NULL
-      ", ['ids' => $ids], ['ids' => Connection::PARAM_INT_ARRAY]);
+      ", ['ids' => $ids], ['ids' => ArrayParameterType::INTEGER]);
 
       $queryBuilder = $entityManager->createQueryBuilder();
       $count = $queryBuilder->delete(SubscriberEntity::class, 's')
@@ -222,7 +228,7 @@ class SubscribersRepository extends Repository {
        DELETE ss FROM $subscriberSegmentsTable ss
        WHERE ss.`subscriber_id` IN (:ids)
        AND ss.`segment_id` = :segment_id
-    ", ['ids' => $ids, 'segment_id' => $segment->getId()], ['ids' => Connection::PARAM_INT_ARRAY]);
+    ", ['ids' => $ids, 'segment_id' => $segment->getId()], ['ids' => ArrayParameterType::INTEGER]);
 
     $this->changesNotifier->subscribersUpdated($ids);
     return $count;
@@ -550,10 +556,40 @@ class SubscribersRepository extends Repository {
        DELETE st FROM $subscriberTagsTable st
        WHERE st.`subscriber_id` IN (:ids)
        AND st.`tag_id` = :tag_id
-    ", ['ids' => $ids, 'tag_id' => $tag->getId()], ['ids' => Connection::PARAM_INT_ARRAY]);
+    ", ['ids' => $ids, 'tag_id' => $tag->getId()], ['ids' => ArrayParameterType::INTEGER]);
 
     $this->changesNotifier->subscribersUpdated($ids);
     return $count;
+  }
+
+  public function removeOrphanedSubscribersFromWpSegment(): void {
+    global $wpdb;
+
+    $segmentId = $this->segmentsRepository->getWpUsersSegment()->getId();
+
+    $subscribersTable = $this->entityManager->getClassMetadata(SubscriberEntity::class)->getTableName();
+    $subscriberSegmentsTable = $this->entityManager->getClassMetadata(SubscriberSegmentEntity::class)->getTableName();
+
+    $this->entityManager->getConnection()->executeStatement(
+      "DELETE s
+       FROM {$subscribersTable} s
+       INNER JOIN {$subscriberSegmentsTable} ss ON s.id = ss.subscriber_id
+       LEFT JOIN {$wpdb->users} u ON s.wp_user_id = u.id
+       WHERE ss.segment_id = :segmentId AND (u.id IS NULL OR s.email = '')",
+      ['segmentId' => $segmentId],
+      ['segmentId' => ParameterType::INTEGER]
+    );
+  }
+
+  public function removeByWpUserIds(array $wpUserIds) {
+    $queryBuilder = $this->entityManager->createQueryBuilder();
+
+    $queryBuilder
+      ->delete(SubscriberEntity::class, 's')
+      ->where('s.wpUserId IN (:wpUserIds)')
+      ->setParameter('wpUserIds', $wpUserIds);
+
+    return $queryBuilder->getQuery()->execute();
   }
 
   /**
@@ -566,16 +602,29 @@ class SubscribersRepository extends Repository {
 
     $subscriberSegmentsTable = $this->entityManager->getClassMetadata(SubscriberSegmentEntity::class)->getTableName();
     $segmentsTable = $this->entityManager->getClassMetadata(SegmentEntity::class)->getTableName();
-    $count = (int)$this->entityManager->getConnection()->executeStatement("
+
+    // Count unique subscribers that will have segments removed
+    $uniqueSubscribersCount = $this->entityManager->getConnection()->executeQuery("
+       SELECT COUNT(DISTINCT subscriber_id)
+       FROM $subscriberSegmentsTable ss
+       JOIN $segmentsTable s ON s.id = ss.segment_id AND s.`type` = :typeDefault
+       WHERE ss.`subscriber_id` IN (:ids)
+    ", [
+      'ids' => $ids,
+      'typeDefault' => SegmentEntity::TYPE_DEFAULT,
+    ], ['ids' => ArrayParameterType::INTEGER])->fetchOne();
+
+    // Delete the segment relationships
+    $this->entityManager->getConnection()->executeStatement("
        DELETE ss FROM $subscriberSegmentsTable ss
        JOIN $segmentsTable s ON s.id = ss.segment_id AND s.`type` = :typeDefault
        WHERE ss.`subscriber_id` IN (:ids)
     ", [
       'ids' => $ids,
       'typeDefault' => SegmentEntity::TYPE_DEFAULT,
-    ], ['ids' => Connection::PARAM_INT_ARRAY]);
+    ], ['ids' => ArrayParameterType::INTEGER]);
 
-    return $count;
+    return is_numeric($uniqueSubscribersCount) ? (int)$uniqueSubscribersCount : 0;
   }
 
   /**
@@ -639,7 +688,7 @@ class SubscribersRepository extends Repository {
     return count($subscribers);
   }
 
-  private function getCurrentDateTime(): CarbonImmutable {
-    return CarbonImmutable::createFromTimestamp((int)$this->wp->currentTime('timestamp'));
+  private function getCurrentDateTime(): Carbon {
+    return Carbon::now()->setMilliseconds(0);
   }
 }

@@ -6,12 +6,13 @@ use MailPoetVendor\Egulias\EmailValidator\Validation\EmailValidation;
 use MailPoetVendor\Egulias\EmailValidator\Validation\NoRFCWarningsValidation;
 use MailPoetVendor\Symfony\Component\Validator\Constraint;
 use MailPoetVendor\Symfony\Component\Validator\ConstraintValidator;
+use MailPoetVendor\Symfony\Component\Validator\Exception\LogicException;
 use MailPoetVendor\Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use MailPoetVendor\Symfony\Component\Validator\Exception\UnexpectedValueException;
 class EmailValidator extends ConstraintValidator
 {
- private const PATTERN_HTML5 = '/^[a-zA-Z0-9.!#$%&\'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/';
- private const PATTERN_LOOSE = '/^.+\\@\\S+\\.\\S+$/';
+ private const PATTERN_HTML5 = '/^[a-zA-Z0-9.!#$%&\'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/D';
+ private const PATTERN_LOOSE = '/^.+\\@\\S+\\.\\S+$/D';
  private const EMAIL_PATTERNS = [Email::VALIDATION_MODE_LOOSE => self::PATTERN_LOOSE, Email::VALIDATION_MODE_HTML5 => self::PATTERN_HTML5];
  private $defaultMode;
  public function __construct(string $defaultMode = Email::VALIDATION_MODE_LOOSE)
@@ -40,6 +41,9 @@ class EmailValidator extends ConstraintValidator
  $value = ($constraint->normalizer)($value);
  }
  if (null === $constraint->mode) {
+ if (Email::VALIDATION_MODE_STRICT === $this->defaultMode && !\class_exists(EguliasEmailValidator::class)) {
+ throw new LogicException(\sprintf('The "egulias/email-validator" component is required to make the "%s" constraint default to strict mode.', Email::class));
+ }
  $constraint->mode = $this->defaultMode;
  }
  if (!\in_array($constraint->mode, Email::$validationModes, \true)) {

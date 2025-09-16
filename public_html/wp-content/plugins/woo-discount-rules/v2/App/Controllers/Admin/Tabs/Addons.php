@@ -35,6 +35,7 @@ class Addons extends Base
             $is_activatable = true;
             if (!empty($addon['requires_core']) && defined('WDR_VERSION')) {
                 if (version_compare(WDR_VERSION, $addon['requires_core'], '<')) {
+                    /* translators: %s is the required version of the Core plugin. */
                     $messages[] = sprintf(__("Requires at least v%s of Core plugin", 'woo-discount-rules'), $addon['requires_core']);
                     $is_activatable = false;
                 }
@@ -42,6 +43,7 @@ class Addons extends Base
             if (!empty($addon['requires_pro'])) {
                 if (defined('WDR_PRO_VERSION')) {
                     if (version_compare(WDR_PRO_VERSION, $addon['requires_pro'], '<')) {
+                        /* translators: %s is the required version of the PRO plugin. */
                         $messages[] = sprintf(__("Requires at least v%s of PRO plugin", 'woo-discount-rules'), $addon['requires_pro']);
                         $is_activatable = false;
                     }

@@ -27,6 +27,6 @@ class Upgrade {
     $data = [
       'current_wp_user' => $this->wp->wpGetCurrentUser()->to_array(),
     ];
-    $this->pageRenderer->displayPage('upgrade.html', $data);
+    $this->pageRenderer->displayPage('upgrade_tiers.html', $data);
   }
 }

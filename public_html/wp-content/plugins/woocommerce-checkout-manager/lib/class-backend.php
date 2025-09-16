@@ -76,7 +76,7 @@ class Backend {
 
 		wp_register_style( 'wooccm-admin-css', plugins_url( 'build/backend/css/style.css', WOOCCM_PLUGIN_FILE ), array(), WOOCCM_PLUGIN_VERSION, 'all' );
 
-		wp_register_script( 'jquery-serializejson', plugins_url( 'assets/backend/jquery-serializejson/jquery-serializejson' . Plugin::is_min() . '.js', WOOCCM_PLUGIN_FILE ), array( 'jquery' ), WOOCCM_PLUGIN_VERSION, true );
+		wp_register_script( 'jquery-serializejson', plugins_url( 'assets/backend/js/jquery-serializejson.min.js', WOOCCM_PLUGIN_FILE ), array( 'jquery' ), WOOCCM_PLUGIN_VERSION, true );
 
 		wp_register_script( 'wooccm-admin-js', plugins_url( 'build/backend/js/index.js', WOOCCM_PLUGIN_FILE ), $admin['dependencies'], $admin['version'], true );
 
@@ -92,7 +92,6 @@ class Backend {
 				)
 			);
 		}
-
 	}
 
 	public function add_tab( $settings_tabs ) {

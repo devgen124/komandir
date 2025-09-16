@@ -4,14 +4,15 @@ namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
 
-use MailPoet\WP\Functions as WPFunctions;
 
 class WorldCup {
 
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
      $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/world_cup';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -590,13 +591,13 @@ class WorldCup {
                 'blocks' => [
                   [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-grey',
+                    'iconSet' => 'official-white',
                     'icons' => [
                       [
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Facebook.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -605,7 +606,7 @@ class WorldCup {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Twitter.png',
+                        'image' => $this->social_icon_url . '/12-official-white/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -614,7 +615,7 @@ class WorldCup {
                         'type' => 'socialIcon',
                         'iconType' => 'youtube',
                         'link' => 'http://www.youtube.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Youtube.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Youtube.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Youtube',
@@ -623,7 +624,7 @@ class WorldCup {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/08-full-symbol-grey/Instagram.png',
+                        'image' => $this->social_icon_url . '/12-official-white/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -724,7 +725,7 @@ class WorldCup {
                   ],
                   [
                     'type' => 'footer',
-                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
                     'styles' => [
                       'block' => [
                         'backgroundColor' => 'transparent',
@@ -785,5 +786,4 @@ class WorldCup {
   private function getThumbnail() {
     return $this->template_image_url . '/thumbnail.20190411-1500.jpg';
   }
-
 }

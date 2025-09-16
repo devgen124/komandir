@@ -35,7 +35,7 @@ if (!empty($ranges) && !empty($woocommerce)) {
                 $current_rule_id = isset($badge_settings['rule_id'])? $badge_settings['rule_id'] : '';
                 $badge_bg_color = (!empty($badge_settings['badge_bg_color'])) ? $badge_settings['badge_bg_color'] : false;
                 $badge_text_color = (!empty($badge_settings['badge_text_color'])) ? $badge_settings['badge_text_color'] : false;
-                $badge_text = (!empty($badge_settings['badge_text'])) ? htmlspecialchars_decode($badge_settings['badge_text']) : false;
+                $badge_text = (!empty($badge_settings['badge_text'])) ? htmlspecialchars_decode($badge_settings['badge_text']) : '';
                 if($current_rule_id !== $existing_rule_id){
                     $tag_opened = true;
                     if($existing_rule_id !== 0){
@@ -55,7 +55,7 @@ if (!empty($ranges) && !empty($woocommerce)) {
                 }
                 ?>
                 <div class="awdr_discount_bar_content">
-                    <?php echo $badge_text; ?>
+                    <?php echo wp_kses_post($badge_text);?>
                 </div>
                 <?php
                 $i++;
@@ -96,7 +96,7 @@ if (!empty($ranges) && !empty($woocommerce)) {
                                 echo 'display:none';
                             }else{
                                 echo((!$base::$config->getConfig('table_title_column', 0)) ? 'display:none' : '');
-                            } ?>"><span><?php _e($tbl_title_text, 'woo-discount-rules') ?></span>
+                            } ?>"><span><?php esc_html_e($tbl_title_text, 'woo-discount-rules')//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?></span>
                             </th><?php
                         } elseif ($column == "tbl_discount") {
                             ?>
@@ -105,7 +105,7 @@ if (!empty($ranges) && !empty($woocommerce)) {
                                 echo 'display:none';
                             }else{
                                 echo((!$base::$config->getConfig('table_discount_column', 0)) ? 'display:none' : '');
-                            } ?>"><span><?php _e($tbl_discount_text, 'woo-discount-rules') ?></span>
+                            } ?>"><span><?php esc_html_e($tbl_discount_text, 'woo-discount-rules')//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?></span>
                             </th><?php
                         } else {
                             ?>
@@ -114,7 +114,7 @@ if (!empty($ranges) && !empty($woocommerce)) {
                                 echo 'display:none';
                             }else{
                                 echo((!$base::$config->getConfig('table_range_column', 0)) ? 'display:none' : '');
-                            }?>"><span><?php _e($tbl_range_text, 'woo-discount-rules') ?></span></th><?php
+                            }?>"><span><?php esc_html_e($tbl_range_text, 'woo-discount-rules')//phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?></span></th><?php
                         }
                     }?>
                 </tr>
@@ -189,11 +189,11 @@ if (!empty($ranges) && !empty($woocommerce)) {
                             } elseif ($column == "tbl_discount") {?>
                             <td class="wdr_bulk_table_td wdr_bulk_table_discount  col_index_<?php echo esc_attr($j);?>" data-colindex="<?php echo esc_attr($j);?>"
                                 style="<?php echo (!$base::$config->getConfig('table_discount_column', 0)) ? 'display:none' : '';?>">
-                                <span class="wdr_table_discounted_value" style="<?php echo ( !$base::$config->getConfig('table_discount_column_value', 0)) ? 'display: none' : '';?>"><?php echo $discount_value; ?></span>
-                                <span class="wdr_table_discounted_price" style="<?php echo ( $base::$config->getConfig('table_discount_column_value', 0)) ? 'display: none' : '';?>"><?php echo $discounted_price_for_customizer; ?></span>
+                                <span class="wdr_table_discounted_value" style="<?php echo ( !$base::$config->getConfig('table_discount_column_value', 0)) ? 'display: none' : '';?>"><?php echo wp_kses_post($discount_value); ?></span>
+                                <span class="wdr_table_discounted_price" style="<?php echo ( $base::$config->getConfig('table_discount_column_value', 0)) ? 'display: none' : '';?>"><?php echo wp_kses_post($discounted_price_for_customizer); ?></span>
                                 </td><?php
                             } else {?>
-                                <td class="wdr_bulk_table_td wdr_bulk_range  col_index_<?php echo $j;?>" data-colindex="<?php echo $j;?>"
+                                <td class="wdr_bulk_table_td wdr_bulk_range  col_index_<?php echo esc_attr($j);?>" data-colindex="<?php echo esc_attr($j);?>"
                                     style="<?php echo (!$base::$config->getConfig('table_range_column', 0) || isset($range['discount_method']) && in_array($range['discount_method'], array('product', 'cart'))) ? 'display:none':'';?>"><?php echo esc_html($discount_range); ?></td><?php
                             }
                             $j++;

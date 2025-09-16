@@ -23,7 +23,7 @@ class ProductAddOnsByWooCommerce extends Base
                 <script type="application/javascript">
                     (function ($) {
                         $(document).ready(function ($) {
-                            var currency_string = '<?php echo $currency_code; ?>';
+                            var currency_string = '<?php echo esc_js($currency_code); ?>';
                             var $form = jQuery('form.cart').first();
                             /**
                              * Strikeout for option title

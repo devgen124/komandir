@@ -522,8 +522,6 @@ class CurlClient implements ApiClientInterface
 
         $this->setCurlOption(CURLOPT_HEADER, true);
 
-        $this->setCurlOption(CURLOPT_BINARYTRANSFER, true);
-
         if ($this->proxy) {
             $this->setCurlOption(CURLOPT_PROXY, $this->proxy);
             $this->setCurlOption(CURLOPT_HTTPPROXYTUNNEL, true);

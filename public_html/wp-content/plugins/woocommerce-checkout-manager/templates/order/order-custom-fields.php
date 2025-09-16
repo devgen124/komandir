@@ -1,5 +1,5 @@
 <?php
-use QuadLayers\WOOCCM\Plugin as Plugin;
+use QuadLayers\WOOCCM\Plugin;
 $title = get_option( 'wooccm_order_custom_fields_title', esc_html__( 'Order extra', 'woocommerce-checkout-manager' ) );
 
 ?>
@@ -24,8 +24,8 @@ $title = get_option( 'wooccm_order_custom_fields_title', esc_html__( 'Order extr
 							if ( $value ) :
 								?>
 								<tr id="tr-<?php echo esc_attr( $key ); ?>">
-									<th><?php echo esc_html( $field['label'] ); ?></th>
-									<td><?php echo esc_html( $value ); ?></td>
+									<th><?php echo wp_kses_post( $field['label'] ); ?></th>
+									<td><?php echo nl2br( esc_html( $value ) ); ?></td>
 								</tr>
 							<?php endif; ?>
 						<?php endif; ?>

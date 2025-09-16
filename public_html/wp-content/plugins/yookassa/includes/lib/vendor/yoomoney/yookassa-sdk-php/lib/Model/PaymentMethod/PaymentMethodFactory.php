@@ -58,6 +58,7 @@ class PaymentMethodFactory
         PaymentMethodType::WECHAT         => 'PaymentMethodWechat',
         PaymentMethodType::SBP            => 'PaymentMethodSbp',
         PaymentMethodType::SBER_LOAN      => 'PaymentMethodSberLoan',
+        PaymentMethodType::SBER_BNPL      => 'PaymentMethodSberBnpl',
         PaymentMethodType::UNKNOWN        => 'PaymentMethodUnknown',
     );
 

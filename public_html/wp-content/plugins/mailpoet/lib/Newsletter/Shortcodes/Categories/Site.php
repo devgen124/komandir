@@ -22,15 +22,16 @@ class Site implements CategoryInterface {
 
   public function process(
     array $shortcodeDetails,
-    NewsletterEntity $newsletter = null,
-    SubscriberEntity $subscriber = null,
-    SendingQueueEntity $queue = null,
+    ?NewsletterEntity $newsletter = null,
+    ?SubscriberEntity $subscriber = null,
+    ?SendingQueueEntity $queue = null,
     string $content = '',
     bool $wpUserPreview = false
   ): ?string {
     switch ($shortcodeDetails['action']) {
       case 'title':
-        return $this->wp->getBloginfo('name');
+        // Decoding special characters such as &amp; to &, etc.
+        return htmlspecialchars_decode($this->wp->getBloginfo('name'), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401);
 
       case 'homepage_url':
         return $this->wp->getBloginfo('url');

@@ -1,10 +1,8 @@
 <?php // phpcs:ignore SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing
+
 namespace MailPoet\Config\PopulatorData\Templates;
 
 if (!defined('ABSPATH')) exit;
-
-
-use MailPoet\WP\Functions as WPFunctions;
 
 
 class FashionShop {
@@ -12,7 +10,9 @@ class FashionShop {
   private $template_image_url;
   private $social_icon_url;
 
-  public function __construct($assets_url) {
+  public function __construct(
+    $assets_url
+  ) {
     $this->template_image_url = 'https://ps.w.org/mailpoet/assets/newsletter-templates/fashion-shop';
     $this->social_icon_url = $assets_url . '/img/newsletter_editor/social-icons';
   }
@@ -32,7 +32,7 @@ class FashionShop {
   }
 
   private function getBody() {
-    return  [
+    return [
       'content' =>
        [
         'type' => 'container',
@@ -105,7 +105,7 @@ class FashionShop {
                   1 =>
                    [
                     'type' => 'header',
-                    'text' => '<p><a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a></p>',
+                    'text' => '<p><a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a></p>',
                     'styles' =>
                      [
                       'block' =>
@@ -549,7 +549,7 @@ class FashionShop {
                   1 =>
                    [
                     'type' => 'social',
-                    'iconSet' => 'full-symbol-color',
+                    'iconSet' => 'official',
                     'icons' =>
                      [
                       0 =>
@@ -557,7 +557,7 @@ class FashionShop {
                         'type' => 'socialIcon',
                         'iconType' => 'facebook',
                         'link' => 'http://www.facebook.com',
-                        'image' => $this->social_icon_url . '/06-full-symbol-color/Facebook.png',
+                        'image' => $this->social_icon_url . '/11-official/Facebook.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Facebook',
@@ -567,7 +567,7 @@ class FashionShop {
                         'type' => 'socialIcon',
                         'iconType' => 'twitter',
                         'link' => 'http://www.twitter.com',
-                        'image' => $this->social_icon_url . '/06-full-symbol-color/Twitter.png',
+                        'image' => $this->social_icon_url . '/11-official/X.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Twitter',
@@ -577,7 +577,7 @@ class FashionShop {
                         'type' => 'socialIcon',
                         'iconType' => 'instagram',
                         'link' => 'http://instagram.com',
-                        'image' => $this->social_icon_url . '/06-full-symbol-color/Instagram.png',
+                        'image' => $this->social_icon_url . '/11-official/Instagram.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Instagram',
@@ -587,7 +587,7 @@ class FashionShop {
                         'type' => 'socialIcon',
                         'iconType' => 'youtube',
                         'link' => 'http://www.youtube.com',
-                        'image' => $this->social_icon_url . '/06-full-symbol-color/Youtube.png',
+                        'image' => $this->social_icon_url . '/11-official/Youtube.png',
                         'height' => '32px',
                         'width' => '32px',
                         'text' => 'Youtube',
@@ -639,7 +639,7 @@ class FashionShop {
                   0 =>
                    [
                     'type' => 'footer',
-                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+                    'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
                     'styles' =>
                      [
                       'block' =>
@@ -871,7 +871,7 @@ class FashionShop {
          ],
         'footer' =>
          [
-          'text' => '<p><a href="[link:subscription_unsubscribe_url]">'.__("Unsubscribe", 'mailpoet').'</a> | <a href="[link:subscription_manage_url]">'.__("Manage your subscription", 'mailpoet').'</a><br />'.__("Add your postal address here!", 'mailpoet').'</p>',
+          'text' => '<p><a href="[link:subscription_unsubscribe_url]">' . __("Unsubscribe", 'mailpoet') . '</a> | <a href="[link:subscription_manage_url]">' . __("Manage your subscription", 'mailpoet') . '</a><br />' . __("Add your postal address here!", 'mailpoet') . '</p>',
           'styles' =>
            [
             'block' =>
@@ -958,7 +958,7 @@ class FashionShop {
          ],
         'social' =>
          [
-          'iconSet' => 'full-symbol-color',
+          'iconSet' => 'official',
           'icons' =>
            [
             0 =>
@@ -966,7 +966,7 @@ class FashionShop {
               'type' => 'socialIcon',
               'iconType' => 'facebook',
               'link' => 'http://www.facebook.com',
-              'image' => $this->social_icon_url . '/06-full-symbol-color/Facebook.png',
+              'image' => $this->social_icon_url . '/11-official/Facebook.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Facebook',
@@ -976,7 +976,7 @@ class FashionShop {
               'type' => 'socialIcon',
               'iconType' => 'twitter',
               'link' => 'http://www.twitter.com',
-              'image' => $this->social_icon_url . '/06-full-symbol-color/Twitter.png',
+              'image' => $this->social_icon_url . '/11-official/X.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Twitter',
@@ -986,7 +986,7 @@ class FashionShop {
               'type' => 'socialIcon',
               'iconType' => 'instagram',
               'link' => 'http://instagram.com',
-              'image' => $this->social_icon_url . '/06-full-symbol-color/Instagram.png',
+              'image' => $this->social_icon_url . '/11-official/Instagram.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Instagram',
@@ -996,7 +996,7 @@ class FashionShop {
               'type' => 'socialIcon',
               'iconType' => 'youtube',
               'link' => 'http://www.youtube.com',
-              'image' => $this->social_icon_url . '/06-full-symbol-color/Youtube.png',
+              'image' => $this->social_icon_url . '/11-official/Youtube.png',
               'height' => '32px',
               'width' => '32px',
               'text' => 'Youtube',
@@ -1018,7 +1018,7 @@ class FashionShop {
          ],
         'header' =>
          [
-          'text' => '<a href="[link:newsletter_view_in_browser_url]">'.__("View this in your browser.", 'mailpoet').'</a>',
+          'text' => '<a href="[link:newsletter_view_in_browser_url]">' . __("View this in your browser.", 'mailpoet') . '</a>',
           'styles' =>
            [
             'block' =>
@@ -1043,5 +1043,4 @@ class FashionShop {
        ],
     ];
   }
-
 }

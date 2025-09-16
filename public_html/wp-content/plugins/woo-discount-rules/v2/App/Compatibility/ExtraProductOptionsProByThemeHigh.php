@@ -18,7 +18,7 @@ class ExtraProductOptionsProByThemeHigh extends Base
         if($value){
             add_filter('thwepo_product_price_html', function($price_html, $product_id){
                 if(Woocommerce::is_ajax()){
-                    $price = trim(strip_tags($price_html));
+                    $price = trim(wp_strip_all_tags($price_html));
                     $replace_strings = array('&#36;', '&nbsp;');
                     if(function_exists('wc_get_product')){
                         $product = Woocommerce::getProduct($product_id);

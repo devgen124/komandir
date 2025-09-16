@@ -30,6 +30,7 @@ class LoggerFactory {
   const TOPIC_NEWSLETTERS = 'newsletters';
   const TOPIC_POST_NOTIFICATIONS = 'post-notifications';
   const TOPIC_MSS = 'mss';
+  const TOPIC_PREMIUM = 'premium';
   const TOPIC_BRIDGE = 'bridge-api';
   const TOPIC_SENDING = 'sending';
   const TOPIC_CRON = 'cron';
@@ -38,6 +39,7 @@ class LoggerFactory {
   const TOPIC_COUPONS = 'coupons';
   const TOPIC_PROVISIONING = 'provisioning';
   const TOPIC_SEGMENTS = 'segments';
+  const TOPIC_EMAIL_EDITOR = 'email-editor';
 
   /** @var LoggerFactory */
   private static $instance;
@@ -97,6 +99,10 @@ class LoggerFactory {
       );
     }
     return self::$instance;
+  }
+
+  public function clearLoggerInstances() {
+    $this->loggerInstances = [];
   }
 
   private function getDefaultLogLevel() {

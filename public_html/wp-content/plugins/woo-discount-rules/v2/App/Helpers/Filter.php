@@ -106,7 +106,7 @@ class Filter
                         $processing_result = $this->compareWithSku($product, $values, $method, $sale_badge);
                     } elseif ('product_on_sale' === $type) {
                         $processing_result = $this->compareWithOnSale($product, $method);
-                    } elseif (in_array($type, array_keys(Woocommerce::getCustomProductTaxonomies()))) {
+                    } elseif (in_array($type, array_keys(Woocommerce::getCustomProductTaxonomies()),true)) {
                         $parant_product_id = Woocommerce::getProductParentId($product);
                         if(!empty($parant_product_id)){
                             $product_id = $parant_product_id;
@@ -159,7 +159,8 @@ class Filter
         if(isset(Woocommerce::$product_taxonomy_terms[$product_id]) && isset(Woocommerce::$product_taxonomy_terms[$product_id][$taxonomy])){
             $term_ids = Woocommerce::$product_taxonomy_terms[$product_id][$taxonomy];
         } else {
-            $term_ids = Woocommerce::$product_taxonomy_terms[$product_id][$taxonomy] = wp_get_post_terms($product_id, $taxonomy, array("fields" => "ids"));
+            $post_terms = wp_get_post_terms($product_id, $taxonomy, array("fields" => "ids"));
+            $term_ids = Woocommerce::$product_taxonomy_terms[$product_id][$taxonomy] = !is_wp_error($post_terms) ? $post_terms : [];
         }
 
         $is_product_has_term = count(array_intersect($term_ids, $operation_values)) > 0;
@@ -385,10 +386,12 @@ class Filter
     function checkInList($product_id, $operation_method, $operation_values)
     {
         $result = false;
+        $operation_values = array_map('strval', $operation_values);
+        $product_id = (string)($product_id);
         if ('in_list' === $operation_method) {
-            $result = (in_array($product_id, $operation_values));
+            $result = (in_array($product_id, $operation_values, true));
         } elseif ('not_in_list' === $operation_method) {
-            $result = !(in_array($product_id, $operation_values));
+            $result = !(in_array($product_id, $operation_values,true));
         } elseif ('any' === $operation_method) {
             $result = true;
         }

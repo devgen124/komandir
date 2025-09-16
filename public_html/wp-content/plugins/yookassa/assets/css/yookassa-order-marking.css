@@ -1,0 +1,307 @@
+#yookassa-marking-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+#yookassa-marking-popup {
+    background: #fff;
+    max-width: 800px;
+    height: 80vh;
+    margin: 50px auto;
+    padding: 0;
+    position: relative;
+    border-radius: 4px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#yookassa-marking-popup-header {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ccc;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+#yookassa-marking-popup-title {
+    margin: 0;
+    font-size: 1.25em;
+}
+
+#yookassa-marking-close-btn {
+    position: static;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#yookassa-marking-popup-form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#yookassa-marking-popup-warning {
+    text-align: center;
+    background: orange;
+    margin: 0;
+    padding: 10px;
+    font-size: 15px;
+    color: black;
+}
+
+#yookassa-marking-popup-fields {
+    overflow-y: auto;
+    padding: 15px 20px;
+    flex-grow: 1;
+}
+
+#yookassa-marking-popup-fields input.red {
+    border: 1px solid red;
+}
+
+#yookassa-marking-popup-fields input.green {
+    border: 1px solid green;
+}
+
+#yookassa-marking-popup-fields input.gray {
+    border: 1px solid #8c8f94;
+}
+
+#yookassa-marking-popup-fields .clear-field {
+    position:absolute;
+    right:5px;
+    top:25%;
+    cursor:pointer;
+    color:#999;
+    font-size:18px;
+}
+
+#yookassa-marking-popup-fields .field-error {
+    color: red;
+}
+
+#yookassa-marking-popup-footer {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid #ccc;
+    padding: 10px 20px;
+}
+
+#yookassa-marking-popup-footer-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+#yookassa-marking-popup-footer p {
+    margin: 0;
+}
+
+#yookassa-marking-popup-footer button {
+    position: relative;
+    min-width: 80px;
+}
+
+#yookassa-marking-popup-footer .btn-loader {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border: 4px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    border-top-color: rgba(0, 0, 0, .3);
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+
+@keyframes spin {
+    to {
+        /* вращаем относительно центра и сохраняем смещение */
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Примерные стили для кнопок, можно заменить на свои */
+.button {
+    cursor: pointer;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.button-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.button-primary:hover {
+    background-color: #0056b3;
+}
+
+/** SPINNER CREATION **/
+.yookassa-preloader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    border: 10px solid rgba(0, 0, 0, .05);
+    border-radius: 50%;
+    border-top-color: rgba(0, 0, 0, .3);
+    animation: spin 1s linear infinite;
+    /* начальное центрирование с помощью transform */
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+
+@keyframes spin {
+    to {
+        /* вращаем относительно центра и сохраняем смещение */
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+#yookassa-marking-popup-footer .success {
+    color: green;
+}
+
+#yookassa-marking-popup-footer .error {
+    color: red;
+}
+
+/* Стили для кнопки с иконкой */
+.yookassa-marking-button {
+    outline: none;
+    cursor: pointer;
+}
+
+/* Базовые стили для иконки */
+.yookassa-mark-code-icon {
+    display: block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+/* Псевдоэлемент для иконки */
+.yookassa-mark-code-icon.new::before {
+    content: "+";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+/* Если не все поля заполнены - желтая иконка */
+.yookassa-mark-code-icon.not-filled {
+    content: "";
+    background-image: url('../images/cheznak.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent; /* Скрываем плюс */
+}
+
+.yookassa-mark-code-icon.not-filled::after {
+    content: "!";
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    box-shadow: 0 0 0 2px white;
+}
+
+/* Если все поля заполнены - зеленая иконка */
+.yookassa-mark-code-icon.filled {
+    content: "";
+    background-image: url('../images/cheznak-green.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent; /* Скрываем плюс */
+}
+
+.yookassa-error-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.yookassa-error-tooltip {
+    cursor: help;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.yookassa-error-icon {
+    font-size: 2em;
+    line-height: 1;
+}
+
+.yookassa-error-text,
+.yookassa-error-text-only {
+    font-size: 1em;
+}
+
+.yookassa-error-tooltip:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    transform: translateX(-105%);
+    background: #333;
+    color: white;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    z-index: 9999;
+    width: 260px;
+    white-space: normal;
+    word-wrap: break-word;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    line-height: 1.2;
+}
+
+.yookassa-error-tooltip:hover::before {
+    content: '';
+    position: absolute;
+    left: -18px;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #333;
+    pointer-events: none;
+}

@@ -21,9 +21,10 @@ class PostContentManager {
   private $wp;
 
   public function __construct(
-    WooCommerceHelper $woocommerceHelper = null
+    ?WooCommerceHelper $woocommerceHelper = null,
+    ?WPFunctions $wp = null
   ) {
-    $this->wp = new WPFunctions;
+    $this->wp = $wp ?: new WPFunctions;
     $this->maxExcerptLength = $this->wp->applyFilters('mailpoet_newsletter_post_excerpt_length', $this->maxExcerptLength);
     $this->woocommerceHelper = $woocommerceHelper ?: new WooCommerceHelper($this->wp);
   }
@@ -32,19 +33,37 @@ class PostContentManager {
     if ($displayType === 'titleOnly') {
       return '';
     }
-    if ($this->woocommerceHelper->isWooCommerceActive() && $this->wp->getPostType($post) === 'product') {
-      $product = $this->woocommerceHelper->wcGetProduct($post->ID);
-      if ($product) {
-        return $this->getContentForProduct($product, $displayType);
+
+
+
+    if ($this->woocommerceHelper->isWooCommerceActive()) {
+      if ($this->isWcProduct($post)) {
+        return $this->getContentForProduct($post, $displayType);
+      }
+      if ($this->wp->getPostType($post) === 'product') {
+        $product = $this->woocommerceHelper->wcGetProduct($post->ID);
+        if ($product) {
+          return $this->getContentForProduct($product, $displayType);
+        }
       }
     }
+
     if ($displayType === 'excerpt') {
       if ($this->wp->hasExcerpt($post)) {
-        return self::stripShortCodes($this->wp->getTheExcerpt($post));
+        $content = self::stripShortCodes($this->wp->getTheExcerpt($post));
+        return $this->fixAnchorLinks($content, $post);
       }
-      return $this->generateExcerpt($post->post_content); // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+      $content = self::stripShortCodes(
+        $this->wp->applyFilters(
+          'get_the_excerpt',
+          $this->generateExcerpt($post->post_content), // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+          $post
+        )
+      );
+      return $this->fixAnchorLinks($content, $post);
     }
-    return self::stripShortCodes($post->post_content); // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+    $content = self::stripShortCodes($post->post_content); // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
+    return $this->fixAnchorLinks($content, $post);
   }
 
   public function filterContent($content, $displayType, $withPostClass = true) {
@@ -152,6 +171,33 @@ class PostContentManager {
     $content = preg_replace(
       '#http://www.youtube.com/embed/([a-zA-Z0-9_-]*)#Ui',
       'http://www.youtube.com/watch?v=$1',
+      $content
+    );
+
+    return $content;
+  }
+
+  private function isWcProduct($post) {
+    return class_exists('\WC_Product') && $post instanceof \WC_Product;
+  }
+
+  private function fixAnchorLinks($content, $post) {
+    if (empty($content) || !$post) {
+      return $content;
+    }
+
+    // Get the post's permalink to use as base URL
+    $postUrl = $this->wp->getPermalink($post);
+    if (!$postUrl) {
+      return $content;
+    }
+
+    // Find and replace anchor-only links (href="#...") with full URLs
+    $content = preg_replace_callback(
+      '/(<a[^>]+href=["\'])#([^"\']*)(["\'])/i',
+      function($matches) use ($postUrl) {
+        return $matches[1] . $postUrl . '#' . $matches[2] . $matches[3];
+      },
       $content
     );
 

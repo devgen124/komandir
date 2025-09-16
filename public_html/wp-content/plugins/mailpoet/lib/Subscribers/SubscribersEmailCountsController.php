@@ -9,6 +9,7 @@ use MailPoet\Entities\ScheduledTaskEntity;
 use MailPoet\Entities\ScheduledTaskSubscriberEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoetVendor\Carbon\Carbon;
+use MailPoetVendor\Doctrine\DBAL\ParameterType;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 
 class SubscribersEmailCountsController {
@@ -63,7 +64,8 @@ class SubscribersEmailCountsController {
     $initUpdateValue = $dateLastProcessed ? 's.email_count' : '';
     $dateLastProcessedSql = $dateLastProcessed ? ' AND st.processed_at >= :dateFrom' : '';
 
-    $connection->executeQuery("
+    $connection->executeQuery(
+      "
       UPDATE {$this->subscribersTable} as s
       JOIN (
           SELECT s.id, COUNT(st.id) as email_count
@@ -94,7 +96,8 @@ class SubscribersEmailCountsController {
     $dayAgoIso = $dayAgo->subDay()->toDateTimeString();
     $queryParams['dayAgo'] = $dayAgoIso;
 
-    $result = $this->entityManager->getConnection()->executeQuery("
+    $result = $this->entityManager->getConnection()->executeQuery(
+      "
       SELECT count(id) FROM {$this->scheduledTasksTable}
       WHERE type = 'sending'
       AND processed_at IS NOT NULL
@@ -109,7 +112,8 @@ class SubscribersEmailCountsController {
   }
 
   private function countAndMaxOfSubscribersInRange(int $startId, int $batchSize): array {
-    $result = $this->entityManager->getConnection()->executeQuery("
+    $result = $this->entityManager->getConnection()->executeQuery(
+      "
       SELECT COUNT(ids.id) as count, COALESCE(MAX(ids.id), 0) as max FROM (
         SELECT s.id FROM {$this->subscribersTable} as s
         WHERE s.id >= :startId
@@ -122,8 +126,8 @@ class SubscribersEmailCountsController {
         'batchSize' => $batchSize,
       ],
       [
-        'startId' => \PDO::PARAM_INT,
-        'batchSize' => \PDO::PARAM_INT,
+        'startId' => ParameterType::INTEGER,
+        'batchSize' => ParameterType::INTEGER,
       ]
     );
 

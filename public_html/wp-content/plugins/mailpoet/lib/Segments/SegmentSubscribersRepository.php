@@ -11,12 +11,13 @@ use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\SubscriberSegmentEntity;
 use MailPoet\InvalidStateException;
+use MailPoet\Logging\LoggerFactory;
 use MailPoet\NotFoundException;
 use MailPoet\Segments\DynamicSegments\Exceptions\InvalidFilterException;
 use MailPoet\Segments\DynamicSegments\FilterHandler;
-use MailPoetVendor\Doctrine\DBAL\Connection;
-use MailPoetVendor\Doctrine\DBAL\Driver\Statement;
+use MailPoetVendor\Doctrine\DBAL\ArrayParameterType;
 use MailPoetVendor\Doctrine\DBAL\Query\QueryBuilder;
+use MailPoetVendor\Doctrine\DBAL\Result;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
 use MailPoetVendor\Doctrine\ORM\Query\Expr\Join;
 use MailPoetVendor\Doctrine\ORM\QueryBuilder as ORMQueryBuilder;
@@ -41,7 +42,7 @@ class SegmentSubscribersRepository {
     $this->segmentsRepository = $segmentsRepository;
   }
 
-  public function findSubscribersIdsInSegment(int $segmentId, array $candidateIds = null): array {
+  public function findSubscribersIdsInSegment(int $segmentId, ?array $candidateIds = null): array {
     return $this->loadSubscriberIdsInSegment($segmentId, $candidateIds);
   }
 
@@ -49,13 +50,13 @@ class SegmentSubscribersRepository {
     return $this->loadSubscriberIdsInSegment($segmentId);
   }
 
-  public function getSubscribersCount(int $segmentId, string $status = null): int {
+  public function getSubscribersCount(int $segmentId, ?string $status = null): int {
     $segment = $this->getSegment($segmentId);
     $result = $this->getSubscribersStatisticsCount($segment);
     return (int)$result[$status ?: 'all'];
   }
 
-  public function getSubscribersCountBySegmentIds(array $segmentIds, string $status = null, ?int $filterSegmentId = null): int {
+  public function getSubscribersCountBySegmentIds(array $segmentIds, ?string $status = null, ?int $filterSegmentId = null): int {
     $segmentRepository = $this->entityManager->getRepository(SegmentEntity::class);
     $segments = $segmentRepository->findBy(['id' => $segmentIds]);
     $subscribersTable = $this->entityManager->getClassMetadata(SubscriberEntity::class)->getTableName();
@@ -77,10 +78,9 @@ class SegmentSubscribersRepository {
         $segmentQb->getParameters(),
         $queryBuilder->getParameters()
       ), array_merge(
-          $segmentQb->getParameterTypes(),
-          $queryBuilder->getParameterTypes()
-        )
-      );
+        $segmentQb->getParameterTypes(),
+        $queryBuilder->getParameterTypes()
+      ));
       $subQueries[] = $segmentQb->getSQL();
     }
 
@@ -98,9 +98,12 @@ class SegmentSubscribersRepository {
         $filterSegmentQb->select("{$subscribersTable}.id AS filter_segment_subscriber_id");
         $filterSegmentQb = $this->filterSubscribersInDynamicSegment($filterSegmentQb, $filterSegment, $status);
         $queryBuilder->setParameters(array_merge($filterSegmentQb->getParameters(), $queryBuilder->getParameters()), array_merge($filterSegmentQb->getParameterTypes(), $queryBuilder->getParameterTypes()));
-        $queryBuilder->innerJoin($subscribersTable, sprintf('(%s)', $filterSegmentQb->getSQL()),
+        $queryBuilder->innerJoin(
+          $subscribersTable,
+          sprintf('(%s)', $filterSegmentQb->getSQL()),
           'filter_segment',
-          "filter_segment.filter_segment_subscriber_id = {$subscribersTable}.id");
+          "filter_segment.filter_segment_subscriber_id = {$subscribersTable}.id"
+        );
       }
     } catch (InvalidStateException $exception) {
       return 0;
@@ -108,7 +111,7 @@ class SegmentSubscribersRepository {
 
     $statement = $this->executeQuery($queryBuilder);
     /** @var string $result */
-    $result = $statement->fetchColumn();
+    $result = $statement->fetchOne();
     return (int)$result;
   }
 
@@ -125,8 +128,12 @@ class SegmentSubscribersRepository {
     $queryBuilder = $this->createDynamicStatisticsQueryBuilder();
     $queryBuilder = $this->filterSubscribersInDynamicSegment($queryBuilder, $segment, null);
     $statement = $this->executeQuery($queryBuilder);
-    /** @var array{all:string} $result */
     $result = $statement->fetch();
+
+    if (!is_array($result)) {
+      $result = $this->logErrorAndReturnEmptyResult(null, $queryBuilder, $result);
+    }
+
     return (int)$result['all'];
   }
 
@@ -324,7 +331,11 @@ class SegmentSubscribersRepository {
     $statement = $this->executeQuery($queryBuilder);
     $result = $statement->fetch();
 
-    return $result;
+    if (is_array($result)) {
+      return $result;
+    }
+
+    return $this->logErrorAndReturnEmptyResult(null, $queryBuilder, $result);
   }
 
   public function addConstraintsForSubscribersWithoutSegment(ORMQueryBuilder $queryBuilder): void {
@@ -334,12 +345,16 @@ class SegmentSubscribersRepository {
       ->where($deletedSegmentsQueryBuilder->expr()->isNotNull('sg.deletedAt'));
 
     $queryBuilder
-      ->leftJoin('s.subscriberSegments', 'ssg', Join::WITH,
+      ->leftJoin(
+        's.subscriberSegments',
+        'ssg',
+        Join::WITH,
         (string)$queryBuilder->expr()->andX(
           $queryBuilder->expr()->eq('ssg.subscriber', 's.id'),
           $queryBuilder->expr()->eq('ssg.status', ':statusSubscribed'),
           $queryBuilder->expr()->notIn('ssg.segment', $deletedSegmentsQueryBuilder->getDQL())
-        ))
+        )
+      )
       ->andWhere('ssg.id IS NULL')
       ->setParameter('statusSubscribed', SubscriberEntity::STATUS_SUBSCRIBED);
   }
@@ -352,17 +367,21 @@ class SegmentSubscribersRepository {
       ->where($deletedSegmentsQueryBuilder->expr()->isNotNull('sg.deletedAt'));
 
     $queryBuilder
-      ->leftJoin('s', $subscribersSegmentTable, 'ssg',
+      ->leftJoin(
+        's',
+        $subscribersSegmentTable,
+        'ssg',
         (string)$queryBuilder->expr()->and(
           $queryBuilder->expr()->eq('ssg.subscriber_id', 's.id'),
           $queryBuilder->expr()->eq('ssg.status', ':statusSubscribed'),
           $queryBuilder->expr()->notIn('ssg.segment_id', $deletedSegmentsQueryBuilder->getQuery()->getSQL())
-        ))
+        )
+      )
       ->andWhere('ssg.id IS NULL')
       ->setParameter('statusSubscribed', SubscriberEntity::STATUS_SUBSCRIBED);
   }
 
-  private function loadSubscriberIdsInSegment(int $segmentId, array $candidateIds = null): array {
+  private function loadSubscriberIdsInSegment(int $segmentId, ?array $candidateIds = null): array {
     $segment = $this->getSegment($segmentId);
     $subscribersTable = $this->entityManager->getClassMetadata(SubscriberEntity::class)->getTableName();
     $queryBuilder = $this->entityManager
@@ -379,7 +398,7 @@ class SegmentSubscribersRepository {
 
     if ($candidateIds) {
       $queryBuilder->andWhere("$subscribersTable.id IN (:candidateIds)")
-        ->setParameter('candidateIds', $candidateIds, Connection::PARAM_STR_ARRAY);
+        ->setParameter('candidateIds', $candidateIds, ArrayParameterType::STRING);
     }
 
     $statement = $this->executeQuery($queryBuilder);
@@ -390,7 +409,7 @@ class SegmentSubscribersRepository {
   private function filterSubscribersInStaticSegment(
     QueryBuilder $queryBuilder,
     SegmentEntity $segment,
-    string $status = null
+    ?string $status = null
   ): QueryBuilder {
     $subscribersSegmentsTable = $this->entityManager->getClassMetadata(SubscriberSegmentEntity::class)->getTableName();
     $subscribersTable = $this->entityManager->getClassMetadata(SubscriberEntity::class)->getTableName();
@@ -413,7 +432,7 @@ class SegmentSubscribersRepository {
   private function filterSubscribersInDynamicSegment(
     QueryBuilder $queryBuilder,
     SegmentEntity $segment,
-    string $status = null
+    ?string $status = null
   ): QueryBuilder {
     $filters = [];
     $dynamicFilters = $segment->getDynamicFilters();
@@ -451,13 +470,13 @@ class SegmentSubscribersRepository {
     return $segment;
   }
 
-  private function executeQuery(QueryBuilder $queryBuilder): Statement {
-    $statement = $queryBuilder->execute();
+  private function executeQuery(QueryBuilder $queryBuilder): Result {
+    $result = $queryBuilder->execute();
     // Execute for select always returns statement but PHP Stan doesn't know that :(
-    if (!$statement instanceof Statement) {
+    if (!$result instanceof Result) {
       throw new InvalidStateException('Invalid query.');
     }
-    return $statement;
+    return $result;
   }
 
   public function getSubscribersGlobalStatusStatisticsCount(SegmentEntity $segment): array {
@@ -469,7 +488,12 @@ class SegmentSubscribersRepository {
     }
 
     $statement = $this->executeQuery($queryBuilder);
-    return $statement->fetch();
+    $result = $statement->fetch();
+    if (is_array($result)) {
+      return $result;
+    }
+
+    return $this->logErrorAndReturnEmptyResult($segment, $queryBuilder, $result);
   }
 
   public function getSubscribersStatisticsCount(SegmentEntity $segment): array {
@@ -481,6 +505,36 @@ class SegmentSubscribersRepository {
     }
 
     $statement = $this->executeQuery($queryBuilder);
-    return $statement->fetch();
+    $result = $statement->fetch();
+    if (is_array($result)) {
+      return $result;
+    }
+
+    return $this->logErrorAndReturnEmptyResult($segment, $queryBuilder, $result);
+  }
+
+  /**
+   * @param null|SegmentEntity $segment
+   * @param QueryBuilder $queryBuilder
+   * @param mixed $result
+   * @return int[]
+   */
+  private function logErrorAndReturnEmptyResult(?SegmentEntity $segment, QueryBuilder $queryBuilder, $result): array {
+    $logger = LoggerFactory::getInstance()->getLogger(LoggerFactory::TOPIC_SEGMENTS);
+    $logger->error('Invalid result for segment statistics count', [
+      'segment_id' => $segment ? $segment->getId() : null,
+      'result' => $result,
+      'query' => $queryBuilder->getSQL(),
+    ]);
+
+    return [
+      'all' => 0,
+      'trash' => 0,
+      'subscribed' => 0,
+      'unsubscribed' => 0,
+      'inactive' => 0,
+      'unconfirmed' => 0,
+      'bounced' => 0,
+    ];
   }
 }

@@ -3,6 +3,7 @@ namespace MailPoetVendor\Symfony\Component\Validator\Constraints;
 if (!defined('ABSPATH')) exit;
 use MailPoetVendor\Symfony\Component\Intl\Countries;
 use MailPoetVendor\Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
+use MailPoetVendor\Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException;
 use MailPoetVendor\Symfony\Component\PropertyAccess\PropertyAccess;
 use MailPoetVendor\Symfony\Component\PropertyAccess\PropertyAccessor;
 use MailPoetVendor\Symfony\Component\Validator\Constraint;
@@ -13,8 +14,9 @@ use MailPoetVendor\Symfony\Component\Validator\Exception\UnexpectedTypeException
 use MailPoetVendor\Symfony\Component\Validator\Exception\UnexpectedValueException;
 class BicValidator extends ConstraintValidator
 {
+ // Reference: https://www.iban.com/structure
  private const BIC_COUNTRY_TO_IBAN_COUNTRY_MAP = [
- // Reference: https://www.ecbs.org/iban/france-bank-account-number.html
+ // FR includes:
  'GF' => 'FR',
  // French Guiana
  'PF' => 'FR',
@@ -31,11 +33,15 @@ class BicValidator extends ConstraintValidator
  // New Caledonia
  'RE' => 'FR',
  // Reunion
+ 'BL' => 'FR',
+ // Saint Barthelemy
+ 'MF' => 'FR',
+ // Saint Martin (French part)
  'PM' => 'FR',
  // Saint Pierre and Miquelon
  'WF' => 'FR',
  // Wallis and Futuna Islands
- // Reference: https://www.ecbs.org/iban/united-kingdom-uk-bank-account-number.html
+ // GB includes:
  'JE' => 'GB',
  // Jersey
  'IM' => 'GB',
@@ -43,9 +49,17 @@ class BicValidator extends ConstraintValidator
  'GG' => 'GB',
  // Guernsey
  'VG' => 'GB',
+ // British Virgin Islands
+ // FI includes:
+ 'AX' => 'FI',
+ // Aland Islands
+ // ES includes:
+ 'IC' => 'ES',
+ // Canary Islands
+ 'EA' => 'ES',
  ];
  private $propertyAccessor;
- public function __construct(PropertyAccessor $propertyAccessor = null)
+ public function __construct(?PropertyAccessor $propertyAccessor = null)
  {
  $this->propertyAccessor = $propertyAccessor;
  }
@@ -71,12 +85,8 @@ class BicValidator extends ConstraintValidator
  $this->context->buildViolation($constraint->message)->setParameter('{{ value }}', $this->formatValue($value))->setCode(Bic::INVALID_CHARACTERS_ERROR)->addViolation();
  return;
  }
- // first 4 letters must be alphabetic (bank code)
- if (!\ctype_alpha(\substr($canonicalize, 0, 4))) {
- $this->context->buildViolation($constraint->message)->setParameter('{{ value }}', $this->formatValue($value))->setCode(Bic::INVALID_BANK_CODE_ERROR)->addViolation();
- return;
- }
- if (!Countries::exists(\substr($canonicalize, 4, 2))) {
+ $bicCountryCode = \substr($canonicalize, 4, 2);
+ if (!isset(self::BIC_COUNTRY_TO_IBAN_COUNTRY_MAP[$bicCountryCode]) && !Countries::exists($bicCountryCode)) {
  $this->context->buildViolation($constraint->message)->setParameter('{{ value }}', $this->formatValue($value))->setCode(Bic::INVALID_COUNTRY_CODE_ERROR)->addViolation();
  return;
  }
@@ -93,13 +103,15 @@ class BicValidator extends ConstraintValidator
  $iban = $this->getPropertyAccessor()->getValue($object, $path);
  } catch (NoSuchPropertyException $e) {
  throw new ConstraintDefinitionException(\sprintf('Invalid property path "%s" provided to "%s" constraint: ', $path, \get_debug_type($constraint)) . $e->getMessage(), 0, $e);
+ } catch (UninitializedPropertyException $e) {
+ $iban = null;
  }
  }
  if (!$iban) {
  return;
  }
  $ibanCountryCode = \substr($iban, 0, 2);
- if (\ctype_alpha($ibanCountryCode) && !$this->bicAndIbanCountriesMatch(\substr($canonicalize, 4, 2), $ibanCountryCode)) {
+ if (\ctype_alpha($ibanCountryCode) && !$this->bicAndIbanCountriesMatch($bicCountryCode, $ibanCountryCode)) {
  $this->context->buildViolation($constraint->ibanMessage)->setParameter('{{ value }}', $this->formatValue($value))->setParameter('{{ iban }}', $iban)->setCode(Bic::INVALID_IBAN_COUNTRY_CODE_ERROR)->addViolation();
  }
  }

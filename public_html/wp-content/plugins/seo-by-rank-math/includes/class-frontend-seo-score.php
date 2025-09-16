@@ -23,7 +23,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Frontend_SEO_Score {
 
-	use Hooker, Shortcode;
+	use Hooker;
+	use Shortcode;
 
 	/**
 	 * SEO Score.
@@ -157,10 +158,12 @@ class Frontend_SEO_Score {
 					<div class="backlink">
 						<span class="poweredby">
 							<?php
-							printf(
-								/* translators: %s is a Rank Math link. */
-								__( 'Powered by %s', 'rank-math' ),
-								$this->do_filter( 'frontend/seo_score/backlink', $backlink )
+							echo wp_kses_post(
+								sprintf(
+									/* translators: %s is a Rank Math link. */
+									__( 'Powered by %s', 'rank-math' ),
+									$this->do_filter( 'frontend/seo_score/backlink', $backlink )
+								)
 							);
 							?>
 						</span>
@@ -168,7 +171,7 @@ class Frontend_SEO_Score {
 				<?php endif; ?>
 
 				<span class="label">
-					<?php esc_html__( 'SEO Score', 'rank-math' ); ?>
+					<?php echo esc_html__( 'SEO Score', 'rank-math' ); ?>
 				</span>
 
 			</div>
@@ -222,10 +225,9 @@ class Frontend_SEO_Score {
 	/**
 	 * Show field check callback.
 	 *
-	 * @param  CMB2_Field $field The current field.
 	 * @return boolean
 	 */
-	public static function show_on( $field = [] ) {
+	public static function show_on() {
 		// Early Bail if is sttic homepage.
 		if ( Admin_Helper::is_home_page() ) {
 			return false;

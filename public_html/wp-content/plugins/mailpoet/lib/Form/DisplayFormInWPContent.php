@@ -133,15 +133,29 @@ class DisplayFormInWPContent {
    * @return void
    */
   public function maybeRenderFormsInFooter(): void {
-    if ($this->wp->isArchive() || $this->wp->isFrontPage() || $this->wp->isHome()) {
+    if ($this->wp->isArchive() || $this->wp->isFrontPage() || $this->wp->isHome() || $this->isWooProductPageWithoutContent()) {
       $formMarkup = $this->getFormMarkup();
       if (!empty($formMarkup)) {
         $this->assetsController->setupFrontEndDependencies();
         // We are in control of the template and the data can be considered safe at this point
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPressDotOrg.sniffs.OutputEscaping.UnescapedOutputParameter
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo $formMarkup;
       }
     }
+  }
+
+  /**
+   * @return bool
+   */
+  public function isWooProductPageWithoutContent(): bool {
+    if (
+      !$this->wp->isSingular('product')
+      || !$this->wp->didAction('wp_footer')
+    ) {
+      return false;
+    }
+
+    return $this->wp->getTheContent() === '';
   }
 
   private function shouldDisplay(): bool {
