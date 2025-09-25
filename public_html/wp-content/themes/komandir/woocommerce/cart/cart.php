@@ -110,10 +110,45 @@ do_action( 'woocommerce_before_cart' ); ?>
 							<button class="product-quantity-btn product-quantity-plus" aria-label="Увеличить">+</button>
 						</div>
 
+						<?php
+						// Текущий subtotal (строка уже отформатирована WooCommerce, с учётом НДС/НП)
+						$subtotal_current_html = apply_filters(
+							'woocommerce_cart_item_subtotal',
+							WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ),
+							$cart_item,
+							$cart_item_key
+						);
+
+						// "Сырые" цены (без сторонних фильтров)
+						$regular_raw = $_product->get_regular_price( 'edit' );
+						$current_raw = $_product->get_price( 'edit' );
+
+						// Преобразуем к виду витрины (с/без налогов — как в настройках WC)
+						$has_sale     = false;
+						$regular_unit = null;
+						$current_unit = null;
+
+						if ( $regular_raw !== '' && $current_raw !== '' ) {
+							$regular_unit = wc_get_price_to_display( $_product, [ 'price' => (float) $regular_raw ] );
+							$current_unit = wc_get_price_to_display( $_product, [ 'price' => (float) $current_raw ] );
+							$has_sale     = $current_unit < $regular_unit; // скидка есть, если текущая меньше обычной
+						}
+
+						$qty              = (int) $cart_item['quantity'];
+						$regular_subtotal = $has_sale ? $regular_unit * $qty : null;
+						?>
+
 						<div class="product-subtotal" data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>">
-							<?php
-							echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
-							?>
+							<?php if ( $has_sale && $regular_subtotal !== null ) : ?>
+								<span class="subtotal">
+									<span
+										class="custom-crossed-price"><?php echo wp_kses_post( wc_price( $regular_subtotal ) ); ?></span>
+									<span
+										class="subtotal-sale"><?php echo wp_kses_post( $subtotal_current_html ); ?></span>
+								</span>
+							<?php else : ?>
+								<?php echo wp_kses_post( $subtotal_current_html ); ?>
+							<?php endif; ?>
 						</div>
 
 						<?php

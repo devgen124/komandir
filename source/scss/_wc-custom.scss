@@ -94,6 +94,9 @@
 }
 
 .custom-main-price {
+	display: flex;
+	align-items: center;
+	gap: 1em;
     color: $black;
     font: 700 32px/45px $font-family-main;
 
@@ -101,6 +104,24 @@
         font-size: 16px;
         line-height: 20px;
     }
+
+	@include media-breakpoint-down(md) {
+		display: block;
+		position: relative;
+	}
+
+	small {
+		font: 700 16px/20px $font-family-main;
+
+		@include media-breakpoint-down(md) {
+			position: absolute;
+			top: 28px;
+			right: 0;
+			width: 90vw;
+			font-size: 12px;
+			line-height: 16px;
+		}
+	}
 }
 
 .woocommerce {

@@ -152,6 +152,7 @@ function komandir_get_template_price() {
 				</div>
 				<span class="custom-main-price">
 					<?php echo wc_price( $sale_price ); ?>
+					<small>* Акционная цена действует только при онлайн-оплате заказа</small>
 				</span>
 			<?php else : ?>
 				<span class="custom-main-price">
@@ -1078,4 +1079,92 @@ add_filter( 'woocommerce_yookassa_create_payment_request', function ( $paymentRe
 
 	return $paymentRequest;
 } );
+
+/**
+ * Считаем, что акционная цена разрешена только для способов оплаты YooKassa.
+ * Любой gateway, чей ID начинается с 'yookassa'.
+ */
+function my_is_yookassa_selected(): bool {
+	if ( ! function_exists( 'WC' ) || ! WC()->session ) {
+		return false;
+	}
+	$chosen = WC()->session->get( 'chosen_payment_method' );
+
+	if ( ! $chosen ) {
+		return false;
+	}
+
+	// Разрешаем только YooKassa. Пример ID: 'yookassa', 'yookassa_bank_card', ...
+	return strpos( $chosen, 'yookassa' ) === 0;
+}
+
+/** Применяем только на странице оформления заказа на витрине. */
+function my_sale_scope_checkout(): bool {
+	return function_exists( 'is_checkout' ) && is_checkout() && ! is_admin();
+}
+
+/**
+ * Управляем значением sale_price: показываем его только при YooKassa, иначе скрываем.
+ */
+add_filter( 'woocommerce_product_get_sale_price', function ( $sale_price, $product ) {
+	if ( ! my_sale_scope_checkout() ) {
+		return $sale_price;
+	}
+	if ( $sale_price === '' || $sale_price === null ) {
+		return $sale_price;
+	}
+
+	return my_is_yookassa_selected() ? $sale_price : '';
+}, 9999, 2 );
+
+/**
+ * Подправим get_price, чтобы итоговая цена на чекауте была корректной.
+ * Если YooKassa не выбрана — используем regular_price вместо sale.
+ */
+add_filter( 'woocommerce_product_get_price', function ( $price, $product ) {
+	if ( ! my_sale_scope_checkout() ) {
+		return $price;
+	}
+
+	$regular = $product->get_regular_price( 'edit' );
+	$sale    = $product->get_sale_price( 'edit' );
+
+	if ( $sale === '' || $sale === null ) {
+		return $price;
+	}
+
+	return my_is_yookassa_selected() ? $sale : $regular;
+}, 9999, 2 );
+
+/**
+ * Исправляем флаг "товар со скидкой" на чекауте, чтобы не путать шаблоны.
+ */
+add_filter( 'woocommerce_product_is_on_sale', function ( $is_on_sale, $product ) {
+	if ( ! my_sale_scope_checkout() ) {
+		return $is_on_sale;
+	}
+
+	$has_sale = (string) $product->get_sale_price( 'edit' ) !== '';
+	if ( ! $has_sale ) {
+		return false;
+	}
+
+	return my_is_yookassa_selected();
+}, 9999, 2 );
+
+/**
+ * Обеспечим пересчёт тоталов при смене способа оплаты.
+ */
+add_action( 'wp_footer', function () {
+	if ( ! function_exists( 'is_checkout' ) || ! is_checkout() || is_order_received_page() ) {
+		return;
+	} ?>
+	<script>
+		jQuery(function ($) {
+			$(document.body).on('change', 'input[name="payment_method"]', function () {
+				$(document.body).trigger('update_checkout');
+			});
+		});
+	</script>
+<?php } );
 

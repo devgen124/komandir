@@ -32,7 +32,9 @@ defined( 'ABSPATH' ) || exit;
 			<th>
 				<?php esc_html_e( 'Subtotal', 'woocommerce' ); ?>
 			</th>
-			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php wc_cart_totals_subtotal_html(); ?>
+			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>">
+				<?php wc_cart_totals_subtotal_html(); ?>
+				<small class="subtotal-note">(акционная цена действует только при онлайн оплате!)</small>
 			</td>
 		</tr>
 
@@ -76,7 +78,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php
 		if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() ) {
 			$taxable_address = WC()->customer->get_taxable_address();
-			$estimated_text = '';
+			$estimated_text  = '';
 
 			if ( WC()->customer->is_customer_outside_base() && ! WC()->customer->has_calculated_shipping() ) {
 				/* translators: %s location. */
