@@ -137,6 +137,9 @@ function komandir_get_template_price() {
 	$sale_price    = $product->get_sale_price();
 	$regular_price = $product->get_regular_price();
 
+	// Сноску выводим только в основном блоке товара на single (этот хук не используется в "Похожих").
+	$show_note = ( current_filter() === 'woocommerce_single_product_summary' );
+
 	if ( $product->get_price() ) : ?>
 		<div class="custom-price">
 			<?php if ( $product->is_on_sale() ) : ?>
@@ -152,7 +155,9 @@ function komandir_get_template_price() {
 				</div>
 				<span class="custom-main-price">
 					<?php echo wc_price( $sale_price ); ?>
-					<small>* Акционная цена действует только при онлайн-оплате заказа</small>
+					<?php if ( $show_note ) : ?>
+						<small>* Акционная цена действует только при онлайн-оплате заказа</small>
+					<?php endif; ?>
 				</span>
 			<?php else : ?>
 				<span class="custom-main-price">
